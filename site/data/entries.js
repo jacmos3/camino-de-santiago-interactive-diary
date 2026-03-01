@@ -12916,36 +12916,6 @@ window.__CAMMINO_ENTRIES__ = {
           "gpsInferred": false
         },
         {
-          "id": "aead4ef7da77",
-          "type": "image",
-          "date": "2019-07-07",
-          "time": "09:07",
-          "src": "assets/img/img_aead4ef7da77.jpg",
-          "thumb": "assets/thumb/thumb_aead4ef7da77.jpg",
-          "poster": null,
-          "mime": "image/jpeg",
-          "size": null,
-          "orig": "2019-07-07_0_0.jpg",
-          "whatsappShared": true,
-          "carouselKey": "wa_2019-07-07_0",
-          "carouselOrder": 0
-        },
-        {
-          "id": "acab06d19699",
-          "type": "image",
-          "date": "2019-07-07",
-          "time": "09:07",
-          "src": "assets/img/img_acab06d19699.jpg",
-          "thumb": "assets/thumb/thumb_acab06d19699.jpg",
-          "poster": null,
-          "mime": "image/jpeg",
-          "size": null,
-          "orig": "2019-07-07_0_1.jpg",
-          "whatsappShared": true,
-          "carouselKey": "wa_2019-07-07_0",
-          "carouselOrder": 1
-        },
-        {
           "id": "a2f8d34e31b8",
           "type": "video",
           "date": "2019-07-07",
@@ -13047,20 +13017,6 @@ window.__CAMMINO_ENTRIES__ = {
           "gpsInferred": false,
           "carouselKey": "wa_2019-07-07_1",
           "carouselOrder": 0
-        },
-        {
-          "id": "3d9bb41b99fc",
-          "type": "image",
-          "date": "2019-07-07",
-          "time": "11:27",
-          "src": "assets/img/img_3d9bb41b99fc.jpg",
-          "thumb": "assets/thumb/thumb_3d9bb41b99fc.jpg",
-          "poster": null,
-          "mime": "image/jpeg",
-          "size": null,
-          "orig": "2019-07-07_1_0.jpg",
-          "carouselKey": "wa_2019-07-07_1",
-          "carouselOrder": 1
         },
         {
           "id": "ba2211e707e5",
@@ -18529,7 +18485,7 @@ window.__CAMMINO_ENTRIES__ = {
     }
   ],
   "counts": {
-    "images": 877,
+    "images": 874,
     "videos": 209,
     "live": 0
   },
