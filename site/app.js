@@ -959,6 +959,7 @@ let modalItems = [];
 let modalIndexById = new Map();
 let modalGroupByItemId = new Map();
 let modalIndex = -1;
+const MODAL_GROUP_LAYOUT_CLASS = 'modal__body--with-group';
 
 const getModalPreviewSrc = (item) => {
   if (!item) return '';
@@ -966,10 +967,21 @@ const getModalPreviewSrc = (item) => {
   return toRootAssetUrl(item.thumb || item.src || '');
 };
 
+const setModalGroupLayout = (enabled) => {
+  if (!modalBody) return;
+  modalBody.classList.toggle(MODAL_GROUP_LAYOUT_CLASS, Boolean(enabled));
+};
+
 const appendModalGroupPanel = (currentItem) => {
-  if (!currentItem || !currentItem.id) return;
+  if (!currentItem || !currentItem.id) {
+    setModalGroupLayout(false);
+    return;
+  }
   const group = modalGroupByItemId.get(String(currentItem.id));
-  if (!group || group.length < 2) return;
+  if (!group || group.length < 2) {
+    setModalGroupLayout(false);
+    return;
+  }
 
   const panel = document.createElement('div');
   panel.className = 'modal__group-panel';
@@ -1037,6 +1049,7 @@ const appendModalGroupPanel = (currentItem) => {
 
   panel.appendChild(list);
   modalBody.appendChild(panel);
+  setModalGroupLayout(true);
 };
 
 const attachImageZoom = (image, controls = null) => {
@@ -1197,6 +1210,7 @@ const openImageModal = (item, itemIndex = null) => {
     : (item.id ? modalIndexById.get(item.id) : -1);
   modalIndex = Number.isInteger(resolvedIndex) ? resolvedIndex : -1;
   modalBody.innerHTML = '';
+  setModalGroupLayout(false);
   const whereRef = pickGroupWhereRef(getGroupContextItems(item), item);
   const whereLabel = buildItemWhereLabel(item);
   if (whereLabel) {
@@ -1347,6 +1361,7 @@ const openVideoModal = (item, itemIndex = null) => {
     : (item.id ? modalIndexById.get(item.id) : -1);
   modalIndex = Number.isInteger(resolvedIndex) ? resolvedIndex : -1;
   modalBody.innerHTML = '';
+  setModalGroupLayout(false);
   const whereRef = pickGroupWhereRef(getGroupContextItems(item), item);
   const whereLabel = buildItemWhereLabel(item);
   if (whereLabel) {
@@ -1416,6 +1431,7 @@ const closeModal = () => {
   modal.classList.remove('open');
   modal.setAttribute('aria-hidden', 'true');
   modalBody.innerHTML = '';
+  setModalGroupLayout(false);
   modalIndex = -1;
 };
 

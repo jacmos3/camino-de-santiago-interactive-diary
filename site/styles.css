@@ -241,6 +241,8 @@ h1, h2, h3 {
   flex: 0 0 auto;
   display: inline-flex;
   align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
 }
 
 .timeline-nav__actions .manage-btn {
@@ -1190,6 +1192,21 @@ h1, h2, h3 {
   border-radius: 12px;
 }
 
+#live-modal-body.modal__body--with-group {
+  position: relative;
+  padding-right: 112px;
+}
+
+#live-modal-body.modal__body--with-group .modal__image,
+#live-modal-body.modal__body--with-group video {
+  max-width: min(calc(92vw - 112px), 1200px);
+}
+
+#live-modal-body.modal__body--with-group .modal__where,
+#live-modal-body.modal__body--with-group .modal__source {
+  margin-right: 112px;
+}
+
 .modal__zoom-controls {
   position: absolute;
   top: 10px;
@@ -1321,7 +1338,7 @@ h1, h2, h3 {
 .modal__group-panel {
   position: absolute;
   top: 56px;
-  right: 22px;
+  right: 14px;
   width: 84px;
   z-index: 4;
   background: rgba(31, 26, 22, 0.64);
@@ -1560,7 +1577,10 @@ h1, h2, h3 {
   .content { padding: 20px 12px 90px; }
   .timeline-nav__inner { display: none; }
   .timeline-nav__wrap { flex-wrap: wrap; }
-  .timeline-nav__actions { width: 100%; }
+  .timeline-nav__actions {
+    width: 100%;
+    justify-content: space-between;
+  }
   .day__header {
     position: sticky;
     top: 56px;
@@ -1605,6 +1625,17 @@ h1, h2, h3 {
   .modal__where {
     margin-right: 90px;
     font-size: 0.74rem;
+  }
+  #live-modal-body.modal__body--with-group {
+    padding-right: 84px;
+  }
+  #live-modal-body.modal__body--with-group .modal__image,
+  #live-modal-body.modal__body--with-group video {
+    max-width: min(calc(92vw - 84px), 1200px);
+  }
+  #live-modal-body.modal__body--with-group .modal__where,
+  #live-modal-body.modal__body--with-group .modal__source {
+    margin-right: 84px;
   }
   .modal__group-panel {
     right: 12px;
