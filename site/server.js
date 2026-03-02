@@ -10,6 +10,22 @@ const crypto = require('crypto');
 const ROOT = path.resolve(__dirname);
 const PORT = Number(process.env.PORT || 4173);
 const HOST = process.env.HOST || '127.0.0.1';
+const SUPPORTED_LANGS = new Set(['it', 'en']);
+const ENTRY_LANGS = ['it', 'en'];
+const ENTRIES_PATH_BY_LANG = {
+  it: path.join(ROOT, 'data', 'entries.it.json'),
+  en: path.join(ROOT, 'data', 'entries.en.json')
+};
+const SEO_BY_LANG = {
+  it: {
+    title: 'Cammino di Santiago — Diario Visivo',
+    description: 'Diario visivo del Cammino di Santiago con foto, video, tracce GPS e racconti giornalieri.'
+  },
+  en: {
+    title: 'Camino de Santiago — Visual Diary',
+    description: 'Visual Camino de Santiago diary with photos, videos, GPS tracks, and day-by-day storytelling.'
+  }
+};
 
 function loadDotEnv(rootDir) {
   try {
@@ -85,6 +101,72 @@ function toFsPath(urlPath) {
     return null;
   }
   return resolved;
+}
+
+function escapeHtml(value) {
+  return String(value || '')
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#39;');
+}
+
+function getRequestOrigin(req) {
+  const protoHeader = String(req.headers['x-forwarded-proto'] || '').split(',')[0].trim();
+  const hostHeader = String(req.headers['x-forwarded-host'] || req.headers.host || '').split(',')[0].trim();
+  const proto = protoHeader || (ADMIN_COOKIE_SECURE ? 'https' : 'http');
+  const host = hostHeader || `${HOST}:${PORT}`;
+  return `${proto}://${host}`;
+}
+
+function parseLocaleFromPath(pathname) {
+  const pathValue = String(pathname || '/');
+  const match = pathValue.match(/^\/(it|en)(\/|$)/i);
+  if (!match) {
+    return {
+      locale: '',
+      strippedPath: pathValue || '/',
+      needsTrailingSlashRedirect: false
+    };
+  }
+  const locale = String(match[1] || '').toLowerCase();
+  const needsTrailingSlashRedirect = pathValue === `/${locale}`;
+  let strippedPath = pathValue.slice(locale.length + 1);
+  if (!strippedPath) strippedPath = '/';
+  if (!strippedPath.startsWith('/')) strippedPath = `/${strippedPath}`;
+  return {
+    locale: SUPPORTED_LANGS.has(locale) ? locale : '',
+    strippedPath,
+    needsTrailingSlashRedirect
+  };
+}
+
+function localizeIndexHtml(rawHtml, locale, req) {
+  const lang = SUPPORTED_LANGS.has(String(locale || '').toLowerCase())
+    ? String(locale).toLowerCase()
+    : 'it';
+  const seo = SEO_BY_LANG[lang] || SEO_BY_LANG.it;
+  const origin = getRequestOrigin(req);
+  const canonical = `${origin}/${lang}/`;
+  const altIt = `${origin}/it/`;
+  const altEn = `${origin}/en/`;
+
+  let out = String(rawHtml || '');
+  out = out.replace(/<html lang="[^"]*">/i, `<html lang="${lang}">`);
+  out = out.replace(/<title>[\s\S]*?<\/title>/i, `<title>${escapeHtml(seo.title)}</title>`);
+  out = out.replace(
+    /(<meta[^>]*id="meta-description"[^>]*content=")[^"]*(")/i,
+    `$1${escapeHtml(seo.description)}$2`
+  );
+  out = out.replace(/(<link[^>]*id="seo-canonical"[^>]*href=")[^"]*(")/i, `$1${escapeHtml(canonical)}$2`);
+  out = out.replace(/(<link[^>]*id="seo-alt-it"[^>]*href=")[^"]*(")/i, `$1${escapeHtml(altIt)}$2`);
+  out = out.replace(/(<link[^>]*id="seo-alt-en"[^>]*href=")[^"]*(")/i, `$1${escapeHtml(altEn)}$2`);
+  out = out.replace(
+    /(<link[^>]*id="seo-alt-default"[^>]*href=")[^"]*(")/i,
+    `$1${escapeHtml(altIt)}$2`
+  );
+  return out;
 }
 
 async function readJson(filePath, fallback) {
@@ -457,7 +539,6 @@ async function safeRotateFile(filePath, degrees) {
 function normalizeDays(days) {
   return days
     .map((day) => ({ ...day, items: Array.isArray(day.items) ? day.items : [] }))
-    .filter((day) => day.items.length > 0)
     .sort((a, b) => String(a.date).localeCompare(String(b.date)));
 }
 
@@ -473,10 +554,14 @@ function rebuildCounts(days) {
   return counts;
 }
 
-async function rewriteEntriesJs(entries) {
-  const entriesJsPath = path.join(ROOT, 'data', 'entries.js');
-  const js = `window.__CAMMINO_ENTRIES__ = ${JSON.stringify(entries, null, 2)};\n`;
-  await fs.writeFile(entriesJsPath, js, 'utf8');
+async function readEntriesByLang(lang) {
+  const pathForLang = ENTRIES_PATH_BY_LANG[lang];
+  return readJson(pathForLang);
+}
+
+async function writeEntriesByLang(lang, entries) {
+  const pathForLang = ENTRIES_PATH_BY_LANG[lang];
+  await writeJson(pathForLang, entries);
 }
 
 function removeTrackFileRefs(trackPoints, removedOrigSet) {
@@ -526,92 +611,104 @@ async function handleDelete(req, res) {
   try {
     deleteInFlight = true;
     const payload = await parseJsonBody(req);
-      const ids = Array.isArray(payload.ids) ? payload.ids.map((v) => String(v)) : [];
-      if (!ids.length) {
-        sendJson(res, 400, { error: 'No ids provided' });
-        return;
+    const ids = Array.isArray(payload.ids) ? payload.ids.map((v) => String(v)) : [];
+    if (!ids.length) {
+      sendJson(res, 400, { error: 'No ids provided' });
+      return;
+    }
+
+    const trackPointsPath = path.join(ROOT, 'data', 'track_points.json');
+    const trackByDayPath = path.join(ROOT, 'data', 'track_by_day.json');
+    const trackGeoJsonPath = path.join(ROOT, 'data', 'track.geojson');
+    const idSet = new Set(ids);
+
+    const entriesByLang = {};
+    for (const lang of ENTRY_LANGS) {
+      entriesByLang[lang] = await readEntriesByLang(lang);
+    }
+
+    const primaryEntries = entriesByLang.it || entriesByLang.en;
+    const primaryDays = Array.isArray(primaryEntries.days) ? primaryEntries.days : [];
+    const removedItems = [];
+    const nextPrimaryDays = primaryDays.map((day) => {
+      const keepItems = [];
+      for (const item of day.items || []) {
+        if (item.id && idSet.has(String(item.id))) removedItems.push(item);
+        else keepItems.push(item);
       }
+      return { ...day, items: keepItems };
+    });
 
-      const entriesPath = path.join(ROOT, 'data', 'entries.json');
-      const trackPointsPath = path.join(ROOT, 'data', 'track_points.json');
-      const trackByDayPath = path.join(ROOT, 'data', 'track_by_day.json');
-      const trackGeoJsonPath = path.join(ROOT, 'data', 'track.geojson');
-
-      const entries = await readJson(entriesPath);
-      const days = Array.isArray(entries.days) ? entries.days : [];
-      const idSet = new Set(ids);
-      const removedItems = [];
-
-      const nextDays = days.map((day) => {
-        const keepItems = [];
-        for (const item of day.items || []) {
-          if (item.id && idSet.has(String(item.id))) {
-            removedItems.push(item);
-          } else {
-            keepItems.push(item);
-          }
-        }
-        return { ...day, items: keepItems };
+    if (!removedItems.length) {
+      sendJson(res, 200, {
+        removed: 0,
+        files_deleted: 0,
+        data: entriesByLang.it || entriesByLang.en
       });
+      return;
+    }
 
-      if (!removedItems.length) {
-        sendJson(res, 200, {
-          removed: 0,
-          files_deleted: 0,
-          data: entries
-        });
-        return;
-      }
+    const removedOrigSet = new Set(
+      removedItems
+        .map((item) => String(item.orig || '').trim())
+        .filter(Boolean)
+    );
 
-      const removedOrigSet = new Set(
-        removedItems
-          .map((item) => String(item.orig || '').trim())
-          .filter(Boolean)
-      );
-
-      const filesToDelete = new Set();
-      for (const item of removedItems) {
-        for (const key of ['src', 'thumb', 'poster']) {
-          const file = item[key];
-          if (typeof file === 'string' && file.trim()) {
-            filesToDelete.add(path.resolve(ROOT, file));
-          }
+    const filesToDelete = new Set();
+    for (const item of removedItems) {
+      for (const key of ['src', 'thumb', 'poster']) {
+        const file = item[key];
+        if (typeof file === 'string' && file.trim()) {
+          filesToDelete.add(path.resolve(ROOT, file));
         }
-        const orig = String(item.orig || '').trim();
-        if (orig) filesToDelete.add(path.join(ROOT, 'new', orig));
       }
+      const orig = String(item.orig || '').trim();
+      if (orig) filesToDelete.add(path.join(ROOT, 'new', orig));
+    }
 
-      let filesDeleted = 0;
-      for (const filePath of filesToDelete) {
-        const withinRoot = filePath.startsWith(ROOT + path.sep) || filePath === ROOT;
-        if (!withinRoot) continue;
-        const ok = await safeUnlink(filePath);
-        if (ok) filesDeleted += 1;
-      }
+    let filesDeleted = 0;
+    for (const filePath of filesToDelete) {
+      const withinRoot = filePath.startsWith(ROOT + path.sep) || filePath === ROOT;
+      if (!withinRoot) continue;
+      const ok = await safeUnlink(filePath);
+      if (ok) filesDeleted += 1;
+    }
 
+    const updatedEntriesByLang = {};
+    for (const lang of ENTRY_LANGS) {
+      const entries = entriesByLang[lang];
+      const days = Array.isArray(entries.days) ? entries.days : [];
+      const nextDays = lang === 'it'
+        ? nextPrimaryDays
+        : days.map((day) => {
+          const keepItems = (day.items || []).filter((item) => !(item.id && idSet.has(String(item.id))));
+          return { ...day, items: keepItems };
+        });
       const normalizedDays = normalizeDays(nextDays);
-      const updatedEntries = {
+      updatedEntriesByLang[lang] = {
         ...entries,
         generated_at: new Date().toISOString(),
         days: normalizedDays,
         counts: rebuildCounts(normalizedDays)
       };
+    }
 
-      const trackPoints = await readJson(trackPointsPath, []);
-      const filteredTrackPoints = removeTrackFileRefs(trackPoints, removedOrigSet);
-      const rebuiltTrackByDay = rebuildTrackByDay(filteredTrackPoints);
-      const rebuiltTrackGeo = rebuildTrackGeoJson(filteredTrackPoints);
+    const trackPoints = await readJson(trackPointsPath, []);
+    const filteredTrackPoints = removeTrackFileRefs(trackPoints, removedOrigSet);
+    const rebuiltTrackByDay = rebuildTrackByDay(filteredTrackPoints);
+    const rebuiltTrackGeo = rebuildTrackGeoJson(filteredTrackPoints);
 
-      await writeJson(entriesPath, updatedEntries);
-      await rewriteEntriesJs(updatedEntries);
-      await writeJson(trackPointsPath, filteredTrackPoints);
-      await writeJson(trackByDayPath, rebuiltTrackByDay);
-      await writeJson(trackGeoJsonPath, rebuiltTrackGeo);
+    for (const lang of ENTRY_LANGS) {
+      await writeEntriesByLang(lang, updatedEntriesByLang[lang]);
+    }
+    await writeJson(trackPointsPath, filteredTrackPoints);
+    await writeJson(trackByDayPath, rebuiltTrackByDay);
+    await writeJson(trackGeoJsonPath, rebuiltTrackGeo);
 
     sendJson(res, 200, {
       removed: removedItems.length,
       files_deleted: filesDeleted,
-      data: updatedEntries
+      data: updatedEntriesByLang.it || updatedEntriesByLang.en
     });
   } catch (err) {
     sendJson(res, 500, { error: err.message || String(err) });
@@ -642,8 +739,11 @@ async function handleRotate(req, res) {
       return;
     }
 
-    const entriesPath = path.join(ROOT, 'data', 'entries.json');
-    const entries = await readJson(entriesPath);
+    const entriesByLang = {};
+    for (const lang of ENTRY_LANGS) {
+      entriesByLang[lang] = await readEntriesByLang(lang);
+    }
+    const entries = entriesByLang.it || entriesByLang.en;
     const allItems = (entries.days || []).flatMap((day) => day.items || []);
     const item = allItems.find((x) => String(x.id || '') === id);
     if (!item) {
@@ -678,12 +778,14 @@ async function handleRotate(req, res) {
       return;
     }
 
-    const updatedEntries = {
-      ...entries,
-      generated_at: new Date().toISOString()
-    };
-    await writeJson(entriesPath, updatedEntries);
-    await rewriteEntriesJs(updatedEntries);
+    for (const lang of ENTRY_LANGS) {
+      const current = entriesByLang[lang];
+      const updatedEntries = {
+        ...current,
+        generated_at: new Date().toISOString()
+      };
+      await writeEntriesByLang(lang, updatedEntries);
+    }
     sendJson(res, 200, {
       ok: true,
       rotated_files: rotatedFiles,
@@ -696,8 +798,8 @@ async function handleRotate(req, res) {
   }
 }
 
-async function serveStatic(req, res) {
-  const fsPath = toFsPath(req.url || '/');
+async function serveStatic(req, res, requestPath = null, locale = '') {
+  const fsPath = toFsPath(requestPath || req.url || '/');
   if (!fsPath) {
     res.writeHead(403);
     res.end('Forbidden');
@@ -718,10 +820,33 @@ async function serveStatic(req, res) {
   const type = MIME[ext] || 'application/octet-stream';
   const noCacheExt = new Set(['.html', '.json', '.js']);
 
+  if (ext === '.html' && finalPath === path.join(ROOT, 'index.html') && locale) {
+    try {
+      const raw = await fs.readFile(finalPath, 'utf8');
+      const html = localizeIndexHtml(raw, locale, req);
+      res.writeHead(200, {
+        'Content-Type': type,
+        'Cache-Control': 'no-cache'
+      });
+      if (req.method === 'HEAD') {
+        res.end();
+      } else {
+        res.end(html);
+      }
+      return;
+    } catch {
+      // Fallback to standard static stream.
+    }
+  }
+
   res.writeHead(200, {
     'Content-Type': type,
     'Cache-Control': noCacheExt.has(ext) ? 'no-cache' : 'public, max-age=3600'
   });
+  if (req.method === 'HEAD') {
+    res.end();
+    return;
+  }
   createReadStream(finalPath).pipe(res);
 }
 
@@ -789,7 +914,25 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
-  await serveStatic(req, res);
+  const urlObj = new URL(req.url || '/', `http://${HOST}:${PORT}`);
+  if (urlObj.pathname === '/') {
+    const target = `/it/${urlObj.search || ''}`;
+    res.writeHead(302, { Location: target });
+    res.end();
+    return;
+  }
+
+  const localeInfo = parseLocaleFromPath(urlObj.pathname);
+  if (localeInfo.locale && localeInfo.needsTrailingSlashRedirect) {
+    res.writeHead(301, { Location: `/${localeInfo.locale}/${urlObj.search || ''}` });
+    res.end();
+    return;
+  }
+
+  const staticPath = localeInfo.locale
+    ? `${localeInfo.strippedPath}${urlObj.search || ''}`
+    : req.url;
+  await serveStatic(req, res, staticPath, localeInfo.locale);
 });
 
 server.listen(PORT, HOST, () => {

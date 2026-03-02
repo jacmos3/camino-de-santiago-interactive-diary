@@ -126,41 +126,153 @@ const I18N = {
 };
 
 let currentLang = 'it';
+const SUPPORTED_LANGS = new Set(['it', 'en']);
+const SEO_META = {
+  it: {
+    title: 'Cammino di Santiago — Diario Visivo',
+    description: 'Diario visivo del Cammino di Santiago con foto, video, tracce GPS e racconti giornalieri.'
+  },
+  en: {
+    title: 'Camino de Santiago — Visual Diary',
+    description: 'Visual Camino de Santiago diary with photos, videos, GPS tracks, and day-by-day storytelling.'
+  }
+};
 
-const setLang = (lang) => {
-  currentLang = lang;
-  document.documentElement.lang = lang;
+const normalizeLang = (value) => {
+  const lang = String(value || '').trim().toLowerCase();
+  return SUPPORTED_LANGS.has(lang) ? lang : '';
+};
+
+const getEntriesDataPath = (lang = currentLang) => {
+  const normalized = normalizeLang(lang) || 'it';
+  return `/data/entries.${normalized}.json`;
+};
+
+const getLangFromPathname = (pathnameValue = '') => {
+  const match = String(pathnameValue || '').match(/^\/(it|en)(?:\/|$)/i);
+  return match ? normalizeLang(match[1]) : '';
+};
+
+const buildLocalizedPath = (lang, pathnameValue = '') => {
+  const targetLang = normalizeLang(lang) || 'it';
+  let pathValue = String(pathnameValue || '/');
+  if (!pathValue.startsWith('/')) pathValue = `/${pathValue}`;
+  pathValue = pathValue.replace(/^\/(it|en)(?=\/|$)/i, '');
+  if (!pathValue) pathValue = '/';
+  if (!pathValue.startsWith('/')) pathValue = `/${pathValue}`;
+  if (pathValue === '/index.html') pathValue = '/';
+  return `/${targetLang}${pathValue === '/' ? '/' : pathValue}`;
+};
+
+const syncLanguagePath = (lang) => {
+  if (typeof window === 'undefined' || !window.history || typeof window.history.replaceState !== 'function') return;
+  const nextPath = buildLocalizedPath(lang, window.location.pathname);
+  if (!nextPath || nextPath === window.location.pathname) return;
+  const nextUrl = `${nextPath}${window.location.search}${window.location.hash}`;
+  window.history.replaceState(null, '', nextUrl);
+};
+
+const ensureMetaTag = (id, attrs) => {
+  let tag = document.getElementById(id);
+  if (!tag) {
+    tag = document.createElement('meta');
+    tag.id = id;
+    Object.entries(attrs || {}).forEach(([k, v]) => tag.setAttribute(k, v));
+    document.head.appendChild(tag);
+  }
+  return tag;
+};
+
+const ensureLinkTag = (id, attrs) => {
+  let tag = document.getElementById(id);
+  if (!tag) {
+    tag = document.createElement('link');
+    tag.id = id;
+    Object.entries(attrs || {}).forEach(([k, v]) => tag.setAttribute(k, v));
+    document.head.appendChild(tag);
+  }
+  return tag;
+};
+
+const updateSeoForLang = (lang) => {
+  const normalized = normalizeLang(lang) || 'it';
+  const seo = SEO_META[normalized] || SEO_META.it;
+  const origin = window.location.origin || '';
+  const canonical = `${origin}/${normalized}/`;
+  const altIt = `${origin}/it/`;
+  const altEn = `${origin}/en/`;
+  document.title = seo.title;
+  const descriptionTag = ensureMetaTag('meta-description', { name: 'description' });
+  descriptionTag.setAttribute('content', seo.description);
+  const canonicalTag = ensureLinkTag('seo-canonical', { rel: 'canonical' });
+  canonicalTag.setAttribute('href', canonical);
+  const altItTag = ensureLinkTag('seo-alt-it', { rel: 'alternate', hreflang: 'it' });
+  altItTag.setAttribute('href', altIt);
+  const altEnTag = ensureLinkTag('seo-alt-en', { rel: 'alternate', hreflang: 'en' });
+  altEnTag.setAttribute('href', altEn);
+  const altDefaultTag = ensureLinkTag('seo-alt-default', { rel: 'alternate', hreflang: 'x-default' });
+  altDefaultTag.setAttribute('href', altIt);
+};
+
+const getInitialLanguage = () => {
+  const queryLang = normalizeLang(new URLSearchParams(window.location.search).get('lang'));
+  if (queryLang) return queryLang;
+  const pathLang = getLangFromPathname(window.location.pathname);
+  if (pathLang) return pathLang;
+  try {
+    const stored = normalizeLang(window.localStorage.getItem('cammino_lang'));
+    if (stored) return stored;
+  } catch {
+    // ignore storage errors
+  }
+  const htmlLang = normalizeLang(document.documentElement.lang);
+  return htmlLang || 'it';
+};
+
+const setLang = (lang, options = {}) => {
+  const normalized = normalizeLang(lang) || 'it';
+  const syncPath = options.syncPath !== false;
+  const renderExisting = options.renderExisting !== false;
+  currentLang = normalized;
+  document.documentElement.lang = normalized;
+  if (syncPath) syncLanguagePath(normalized);
+  updateSeoForLang(normalized);
+  try {
+    window.localStorage.setItem('cammino_lang', normalized);
+  } catch {
+    // ignore storage errors
+  }
   document.querySelectorAll('[data-i18n]').forEach((el) => {
     const key = el.getAttribute('data-i18n');
-    if (I18N[lang][key]) {
-      el.textContent = I18N[lang][key];
+    if (I18N[normalized][key]) {
+      el.textContent = I18N[normalized][key];
     }
   });
   document.querySelectorAll('.lang__btn').forEach((btn) => {
-    btn.classList.toggle('active', btn.dataset.lang === lang);
+    btn.classList.toggle('active', btn.dataset.lang === normalized);
   });
   document.querySelectorAll('[data-share-btn]').forEach((btn) => {
     if (btn.dataset.copied === '1') btn.textContent = '✓';
     else btn.innerHTML = getShareIconMarkup();
-    btn.setAttribute('aria-label', I18N[lang].share);
-    btn.setAttribute('title', I18N[lang].share);
+    btn.setAttribute('aria-label', I18N[normalized].share);
+    btn.setAttribute('title', I18N[normalized].share);
   });
   document.querySelectorAll('[data-comment-target]').forEach((btn) => {
-    btn.setAttribute('aria-label', I18N[lang].comments_open);
-    btn.setAttribute('title', I18N[lang].comments_open);
+    btn.setAttribute('aria-label', I18N[normalized].comments_open);
+    btn.setAttribute('title', I18N[normalized].comments_open);
     const count = Number((btn.querySelector('[data-comment-count]') || {}).textContent || 0);
     btn.innerHTML = `${getCommentIconMarkup()}<span class="comment-count${count > 0 ? ' is-visible' : ''}" data-comment-count>${count > 0 ? count : ''}</span>`;
   });
-  if (commentsAuthorInput) commentsAuthorInput.placeholder = I18N[lang].comments_name;
-  if (commentsTextInput) commentsTextInput.placeholder = I18N[lang].comments_text;
+  if (commentsAuthorInput) commentsAuthorInput.placeholder = I18N[normalized].comments_name;
+  if (commentsTextInput) commentsTextInput.placeholder = I18N[normalized].comments_text;
   if (commentsModalTitle && commentsModalTarget) {
     commentsModalTitle.textContent = getCommentTargetTitle(commentsModalTarget);
   }
   if (commentsForm) {
     const submit = commentsForm.querySelector('button[type="submit"]');
-    if (submit) submit.textContent = I18N[lang].comments_send;
+    if (submit) submit.textContent = I18N[normalized].comments_send;
   }
-  if (dataCache) {
+  if (dataCache && renderExisting) {
     renderView();
   } else {
     renderDates();
@@ -175,6 +287,7 @@ let miniMap = null;
 let miniLayer = null;
 let dayMapRegistry = new Map();
 let cleanupSectionSync = null;
+let timelineWheelBound = false;
 let renderedDayOrder = [];
 let modalZoomCleanup = null;
 let lazyMediaObserver = null;
@@ -186,6 +299,7 @@ const commentThreads = new Map();
 let commentsModalTarget = '';
 let adminAuthenticated = false;
 let miniMapCollapsed = false;
+let initRequestToken = 0;
 let dayPickerOpen = false;
 const MINI_MAP_COLLAPSED_KEY = 'cammino_minimap_collapsed_v1';
 const dayDistanceKmByDate = new Map();
@@ -231,6 +345,15 @@ const withCacheBust = (url, token) => {
   if (!url) return url;
   const sep = url.includes('?') ? '&' : '?';
   return `${url}${sep}v=${encodeURIComponent(String(token))}`;
+};
+
+const toRootAssetUrl = (value) => {
+  const raw = String(value || '').trim();
+  if (!raw) return '';
+  if (/^(?:[a-z]+:)?\/\//i.test(raw)) return raw;
+  if (raw.startsWith('data:') || raw.startsWith('blob:')) return raw;
+  if (raw.startsWith('/')) return raw;
+  return `/${raw.replace(/^\.?\//, '')}`;
 };
 
 const API_BASE_CANDIDATES = [
@@ -557,7 +680,7 @@ const buildPrologueNarrative = (lang = 'it') => {
       'June 2 and 3 were the approach days: from Perugia to Bergamo, then an evening flight to Lourdes.',
       '',
       '**Key scene**',
-      'The Camino started before the trail. On June 2 I did Perugia-Milan by BlaBlaCar and Milan-Orio by train to reach friends who would host me for one night. On the morning of June 3, in Bergamo, I took a bike ride on a bike lent to me: light air, slow rhythm, and even an encounter with donkeys along the way. In the evening the flight came: from that point on, it was no longer preparation, it was the real start.',
+      'The Camino started before the trail. On June 2 I went from Perugia to Milan with a friend who was heading to Milan that same day; along the way we had picked up other people through BlaBlaCar, and the trip passed quickly through interesting conversations. Then I continued from Milan to Orio by train to reach friends who would host me for one night. For the Camino I had considered bringing a tent, but in the hours right before departure, while I was packing my backpack, I realized it would be too bulky and heavy for the backpack balance, so I did not bring it and kept only the sleeping bag in my backpack. On the morning of June 3, in Bergamo, I went for a bike ride: light air, slow pace, and at the end of a path, near a stagnant stretch of the Brembo River, I encountered donkeys. In the evening I took the flight: I landed in Lourdes late and had not organized accommodation. I could not find a place to sleep, and every place I reached was already closed or had no reception. It was objectively worrying because I really had nowhere to stay for the night, but I was not anxious at all: I had the sleeping bag and had no problem sleeping outside, homeless style. From that point on, it was no longer preparation, it was the real start.',
       '',
       '**What I understood**',
       'The first step of the Camino does not coincide with the first kilometer on foot: it begins in logistical choices, in waiting, and in the way you prepare yourself for the journey.',
@@ -574,7 +697,7 @@ const buildPrologueNarrative = (lang = 'it') => {
     'Il 2 e il 3 giugno sono stati i giorni di avvicinamento: da Perugia a Bergamo, poi volo serale verso Lourdes.',
     '',
     '**Scena chiave**',
-    'Il cammino è iniziato prima del sentiero. Il 2 giugno ho fatto Perugia-Milano in BlaBlaCar e Milano-Orio in treno per raggiungere amici che mi avrebbero ospitato una notte. Il 3 mattina, a Bergamo, ho fatto un giro in bici con una bicicletta prestatami: aria leggera, ritmo lento, anche incontro con degli asini lungo il percorso. In serata è arrivato il volo: da lì in poi non era più preparazione, era inizio vero.',
+    'Il cammino è iniziato prima del sentiero. Il 2 giugno ho fatto Perugia-Milano con un mio amico che andava a Milano proprio quel giorno; lungo il viaggio avevamo caricato altre persone su BlaBlaCar e il tragitto è passato veloce tra chiacchiere interessanti. Poi ho proseguito da Milano a Orio in treno per raggiungere amici che mi avrebbero ospitato una notte. Per il cammino avevo considerato di portare la tenda, ma nelle ore precedenti alla partenza, proprio mentre stavo preparando lo zaino, ho capito che sarebbe stata troppo ingombrante e pesante per l’equilibrio dello zaino, quindi non l’ho portata, tenendo nello zaino solo il sacco a pelo. Il 3 mattina, a Bergamo, ho fatto un giro in bici: aria leggera, ritmo lento, e alla fine di un sentiero, vicino a un ristagnamento del fiume Brembo, ho incontrato degli asini. In serata ho preso il volo: sono atterrato a Lourdes tardi e non avevo organizzato l’alloggio. Non riuscivo a trovare posto per dormire e i posti che trovavo, una volta arrivato lì, erano già tutti chiusi o senza reception. Era una cosa preoccupante, perché non avevo realmente un posto dove stare la notte, ma non ero per nulla in ansia: avevo il sacco a pelo e non avevo alcun problema a dormire fuori, homeless style. Da lì in poi non era più preparazione, era inizio vero.',
     '',
     '**Una cosa che ho capito**',
     'Il primo passo del cammino non coincide con il primo chilometro a piedi: comincia nelle scelte logistiche, nell’attesa e nel modo in cui ti predisponi al viaggio.',
@@ -722,7 +845,7 @@ const isNearViewport = (el, margin = 700) => {
 const hydrateLazyMedia = (el) => {
   if (!el) return;
   if (el.tagName === 'IMG') {
-    const src = el.dataset.src;
+    const src = toRootAssetUrl(el.dataset.src);
     if (!src) return;
     if (el.dataset.lazyHydrating === '1') return;
     if (el.dataset.lazyLoaded === '1') {
@@ -750,12 +873,12 @@ const hydrateLazyMedia = (el) => {
     return;
   }
   if (el.tagName === 'VIDEO') {
-    const poster = el.dataset.poster;
+    const poster = toRootAssetUrl(el.dataset.poster);
     if (poster) {
       el.poster = poster;
       el.removeAttribute('data-poster');
     }
-    const videoSrc = el.dataset.src;
+    const videoSrc = toRootAssetUrl(el.dataset.src);
     if (videoSrc) {
       const source = el.querySelector('source');
       if (source && !source.src) {
@@ -839,8 +962,8 @@ let modalIndex = -1;
 
 const getModalPreviewSrc = (item) => {
   if (!item) return '';
-  if (item.type === 'video') return item.poster || item.thumb || item.src || '';
-  return item.thumb || item.src || '';
+  if (item.type === 'video') return toRootAssetUrl(item.poster || item.thumb || item.src || '');
+  return toRootAssetUrl(item.thumb || item.src || '');
 };
 
 const appendModalGroupPanel = (currentItem) => {
@@ -1085,10 +1208,11 @@ const openImageModal = (item, itemIndex = null) => {
   const shell = document.createElement('div');
   shell.className = 'modal__zoom-shell';
   const image = document.createElement('img');
-  image.src = item.src || item.thumb || IMG_PLACEHOLDER;
+  image.src = toRootAssetUrl(item.src || item.thumb) || IMG_PLACEHOLDER;
   image.addEventListener('error', () => {
-    if (item.thumb && image.src !== item.thumb) {
-      image.src = item.thumb;
+    const thumbSrc = toRootAssetUrl(item.thumb);
+    if (thumbSrc && image.src !== thumbSrc) {
+      image.src = thumbSrc;
       return;
     }
     image.src = IMG_PLACEHOLDER;
@@ -1170,12 +1294,12 @@ const openImageModal = (item, itemIndex = null) => {
     const doRotate = async () => {
       const { payload } = await postJsonWithApiFallback('/api/rotate', { id: String(item.id), degrees: 90 });
       const cacheBust = payload && payload.cache_bust ? payload.cache_bust : Date.now();
-      const modalBase = item.src || item.thumb || '';
+      const modalBase = toRootAssetUrl(item.src || item.thumb || '');
       if (modalBase) image.src = withCacheBust(modalBase, cacheBust);
       if (item.id) {
         document.querySelectorAll('img[data-item-id]').forEach((imgEl) => {
           if (imgEl.dataset.itemId !== String(item.id)) return;
-          const base = imgEl.dataset.src || item.thumb || item.src || '';
+          const base = toRootAssetUrl(imgEl.dataset.src || item.thumb || item.src || '');
           if (!base) return;
           const busted = withCacheBust(base, cacheBust);
           imgEl.dataset.src = busted;
@@ -1236,9 +1360,9 @@ const openVideoModal = (item, itemIndex = null) => {
   video.autoplay = true;
   video.playsInline = true;
   video.preload = 'metadata';
-  if (item.poster) video.poster = item.poster;
+  if (item.poster) video.poster = toRootAssetUrl(item.poster);
   const source = document.createElement('source');
-  source.src = item.src;
+  source.src = toRootAssetUrl(item.src);
   source.type = item.mime || 'video/mp4';
   video.appendChild(source);
   modalBody.appendChild(video);
@@ -1660,7 +1784,7 @@ const deleteItemsByIds = async (ids, options = {}) => {
     if (payload && payload.data) {
       dataCache = payload.data;
     } else {
-      const reload = await fetch(`data/entries.json?t=${Date.now()}`, { cache: 'no-store' });
+      const reload = await fetch(`${getEntriesDataPath()}?t=${Date.now()}`, { cache: 'no-store' });
       dataCache = await reload.json();
     }
     uniqueIds.forEach((id) => selectedIds.delete(id));
@@ -1739,13 +1863,20 @@ document.addEventListener('keydown', (e) => {
 });
 
 const getNote = (day) => {
-  const note = day.notes || {};
-  return (currentLang === 'it' ? note.it : note.en) || '';
+  const note = day ? day.notes : '';
+  if (typeof note === 'string') return note;
+  if (note && typeof note === 'object') {
+    return (currentLang === 'it' ? note.it : note.en) || '';
+  }
+  return '';
 };
 
 const getRecommendations = (day) => {
   const rec = day && day.recommendations ? day.recommendations : null;
   if (!rec) return [];
+  if (Array.isArray(rec)) {
+    return rec.map((item) => String(item || '').trim()).filter(Boolean);
+  }
   const list = currentLang === 'it' ? rec.it : rec.en;
   if (!Array.isArray(list)) return [];
   return list.map((item) => String(item || '').trim()).filter(Boolean);
@@ -1850,8 +1981,8 @@ const groupDayItems = (items) => {
 
 const getGroupThumbSrc = (item) => {
   if (!item) return '';
-  if (item.type === 'video') return item.poster || item.thumb || '';
-  return item.thumb || item.src || '';
+  if (item.type === 'video') return toRootAssetUrl(item.poster || item.thumb || '');
+  return toRootAssetUrl(item.thumb || item.src || '');
 };
 
 const formatItemTimeLabel = (value) => {
@@ -2021,16 +2152,17 @@ const buildMediaCard = (groupItems) => {
     img.alt = item.orig;
     if (item.id) img.dataset.itemId = String(item.id);
     img.src = IMG_PLACEHOLDER;
-    img.dataset.src = item.thumb || item.src;
+    img.dataset.src = toRootAssetUrl(item.thumb || item.src);
     img.decoding = 'async';
     img.addEventListener('error', () => {
-      if (item.src && img.src !== item.src) {
-        img.src = item.src;
+      const srcFallback = toRootAssetUrl(item.src);
+      if (srcFallback && img.src !== srcFallback) {
+        img.src = srcFallback;
         return;
       }
       img.src = IMG_PLACEHOLDER;
       if (!img.dataset.src) {
-        const retrySrc = item.thumb || item.src;
+        const retrySrc = toRootAssetUrl(item.thumb || item.src);
         if (retrySrc) img.dataset.src = retrySrc;
       }
       window.setTimeout(() => registerLazyMedia(img), 250);
@@ -2052,12 +2184,12 @@ const buildMediaCard = (groupItems) => {
     posterImg.loading = 'lazy';
     posterImg.alt = item.orig || 'Video';
     posterImg.src = IMG_PLACEHOLDER;
-    posterImg.dataset.src = item.poster || item.thumb || item.src;
+    posterImg.dataset.src = toRootAssetUrl(item.poster || item.thumb || item.src);
     posterImg.decoding = 'async';
     posterImg.addEventListener('error', () => {
       posterImg.src = IMG_PLACEHOLDER;
       if (!posterImg.dataset.src) {
-        const retrySrc = item.poster || item.thumb || item.src;
+        const retrySrc = toRootAssetUrl(item.poster || item.thumb || item.src);
         if (retrySrc) posterImg.dataset.src = retrySrc;
       }
       window.setTimeout(() => registerLazyMedia(posterImg), 250);
@@ -2070,7 +2202,7 @@ const buildMediaCard = (groupItems) => {
 
     const probe = document.createElement('video');
     probe.preload = 'metadata';
-    probe.src = item.src;
+    probe.src = toRootAssetUrl(item.src);
     probe.addEventListener('loadedmetadata', () => {
       durationBadge.textContent = `video ${formatDuration(probe.duration)}`;
     }, { once: true });
@@ -2136,7 +2268,7 @@ const buildMediaCard = (groupItems) => {
       thumbImg.loading = 'lazy';
       thumbImg.decoding = 'async';
       thumbImg.alt = subItem.orig || '';
-      thumbImg.src = thumbSrc;
+      thumbImg.src = toRootAssetUrl(thumbSrc);
       thumbBtn.appendChild(thumbImg);
       thumbBtn.addEventListener('click', (event) => {
         event.preventDefault();
@@ -2194,6 +2326,7 @@ const buildDay = (day, idx) => {
   distance.textContent = '';
   distance.style.display = 'none';
 
+  const hasMedia = Array.isArray(day.uiGroups) && day.uiGroups.length > 0;
   const reloadDayBtn = document.createElement('button');
   reloadDayBtn.type = 'button';
   reloadDayBtn.className = 'day__reload';
@@ -2220,7 +2353,7 @@ const buildDay = (day, idx) => {
     });
     header.appendChild(stravaWrap);
   }
-  header.appendChild(reloadDayBtn);
+  if (hasMedia) header.appendChild(reloadDayBtn);
   
   const dayTrackCard = isPrologueDay(day) ? null : buildDayTrackCard(day.trackDate || day.date);
 
@@ -2316,14 +2449,16 @@ const buildDay = (day, idx) => {
   };
 
   const dayKey = day.date;
-  reloadDayBtn.addEventListener('click', () => {
-    unlockedDayKeys.add(dayKey);
-    refillGrid();
-    if (lockPanel.parentNode) lockPanel.remove();
-  });
-  if (unlockedDayKeys.has(dayKey)) {
+  if (hasMedia) {
+    reloadDayBtn.addEventListener('click', () => {
+      unlockedDayKeys.add(dayKey);
+      refillGrid();
+      if (lockPanel.parentNode) lockPanel.remove();
+    });
+  }
+  if (hasMedia && unlockedDayKeys.has(dayKey)) {
     fillGrid();
-  } else {
+  } else if (hasMedia) {
     unlockBtn.addEventListener('click', () => {
       unlockedDayKeys.add(dayKey);
       fillGrid();
@@ -2335,10 +2470,10 @@ const buildDay = (day, idx) => {
   if (dayTrackCard) section.appendChild(dayTrackCard);
   section.appendChild(notes);
   if (recommendations) section.appendChild(recommendations);
-  if (!unlockedDayKeys.has(dayKey)) {
+  if (hasMedia && !unlockedDayKeys.has(dayKey)) {
     section.appendChild(lockPanel);
   }
-  section.appendChild(grid);
+  if (hasMedia) section.appendChild(grid);
   return section;
 };
 
@@ -2568,7 +2703,7 @@ const buildDayTrackCard = (dayKey) => {
   label.textContent = I18N[currentLang].mini_map;
   const open = document.createElement('a');
   open.className = 'day-track__open';
-  open.href = `map.html?day=${encodeURIComponent(String(dayKey || ''))}`;
+  open.href = `/map.html?day=${encodeURIComponent(String(dayKey || ''))}`;
   open.textContent = I18N[currentLang].open_map;
   head.appendChild(label);
   head.appendChild(open);
@@ -2724,6 +2859,29 @@ const buildTimelineNav = (days) => {
   buildDayPicker(days);
 };
 
+const bindTimelineHorizontalWheel = () => {
+  if (timelineWheelBound) return;
+  const nav = document.getElementById('timeline-nav');
+  if (!nav) return;
+  nav.addEventListener('wheel', (event) => {
+    if (window.matchMedia && window.matchMedia('(max-width: 720px)').matches) return;
+    if (nav.scrollWidth <= nav.clientWidth) return;
+    const absY = Math.abs(event.deltaY || 0);
+    const absX = Math.abs(event.deltaX || 0);
+    const primaryDelta = absY >= absX ? (event.deltaY || 0) : (event.deltaX || 0);
+    if (!primaryDelta) return;
+
+    const before = nav.scrollLeft;
+    const maxLeft = Math.max(0, nav.scrollWidth - nav.clientWidth);
+    const next = Math.min(maxLeft, Math.max(0, before + primaryDelta));
+    if (next === before) return;
+
+    nav.scrollLeft = next;
+    event.preventDefault();
+  }, { passive: false });
+  timelineWheelBound = true;
+};
+
 const closeDayPicker = () => {
   const sheet = document.getElementById('day-picker-sheet');
   if (!sheet) return;
@@ -2817,7 +2975,7 @@ const renderMiniMap = (dayKey, dayIndex = null) => {
     const openLink = document.querySelector('.mini-map__open');
     if (dateEl) dateEl.textContent = formatDate(dayKey);
     if (openLink) {
-      openLink.href = `map.html?upto=${encodeURIComponent(String(dayKey || ''))}`;
+      openLink.href = `/map.html?upto=${encodeURIComponent(String(dayKey || ''))}`;
     }
 
     const hasIndex = Number.isInteger(dayIndex) && dayIndex >= 0 && dayIndex < renderedDayOrder.length;
@@ -3095,7 +3253,12 @@ const renderView = () => {
     if (dayA && dayB) {
       const mergeNoteField = (field) => {
         const parts = [dayA, dayB]
-          .map((d) => String(((d && d.notes) || {})[field] || '').trim())
+          .map((d) => {
+            const note = d ? d.notes : '';
+            if (typeof note === 'string') return note.trim();
+            if (note && typeof note === 'object') return String(note[field] || '').trim();
+            return '';
+          })
           .filter(Boolean);
         if (!parts.length) return '';
         if (field === 'it' || field === 'en') return buildPrologueNarrative(field);
@@ -3103,7 +3266,12 @@ const renderView = () => {
       };
       const mergeRecommendationsField = (field) => {
         const items = [dayA, dayB]
-          .flatMap((d) => (((d && d.recommendations) || {})[field] || []))
+          .flatMap((d) => {
+            const rec = d ? d.recommendations : null;
+            if (Array.isArray(rec)) return rec;
+            if (rec && typeof rec === 'object' && Array.isArray(rec[field])) return rec[field];
+            return [];
+          })
           .map((v) => String(v || '').trim())
           .filter(Boolean);
         return Array.from(new Set(items));
@@ -3189,42 +3357,49 @@ const renderView = () => {
 };
 
 const init = async () => {
+  const token = ++initRequestToken;
   const content = document.getElementById('content');
   const cacheBust = Date.now();
   const fail = (msg) => {
+    if (token !== initRequestToken) return;
     if (content) {
       content.innerHTML = `<div class="loading">${msg}</div>`;
     }
   };
   try {
     // Always load fresh JSON to avoid stale cached inline payloads.
-    const res = await fetch(withCacheBust('data/entries.json', cacheBust), {
+    const res = await fetch(withCacheBust(getEntriesDataPath(), cacheBust), {
       cache: 'no-store'
     });
-    let data = await res.json();
-    if (!data || !Array.isArray(data.days)) {
-      data = window.__CAMMINO_ENTRIES__ || data;
+    if (!res.ok) {
+      const raw = await res.text();
+      throw new Error(raw || `HTTP ${res.status}`);
     }
+    const data = await res.json();
+    if (token !== initRequestToken) return;
     try {
-      const resTrackPoints = await fetch(withCacheBust('data/track_points.json', cacheBust), {
+      const resTrackPoints = await fetch(withCacheBust('/data/track_points.json', cacheBust), {
         cache: 'no-store'
       });
       if (resTrackPoints.ok) {
         const trackPoints = await resTrackPoints.json();
+        if (token !== initRequestToken) return;
         enrichDataWithTrackPoints(data, trackPoints);
       }
     } catch {
       // Optional enrichment: keep rendering even if GPS file is unavailable.
     }
+    if (token !== initRequestToken) return;
     dataCache = data;
     refreshStats();
 
     renderView();
 
     // Load mini-map data asynchronously (should never block photos)
-    fetch(withCacheBust('data/track_by_day.json', cacheBust), { cache: 'no-store' })
+    fetch(withCacheBust('/data/track_by_day.json', cacheBust), { cache: 'no-store' })
       .then((res) => (res.ok ? res.json() : null))
       .then((json) => {
+        if (token !== initRequestToken) return;
         trackByDay = json || null;
         normalizedTrackByDay = normalizeTrackByDayForActivities(trackByDay);
         computeDayDistanceKmFromTrack(trackByDay);
@@ -3236,6 +3411,7 @@ const init = async () => {
         }
       })
       .catch(() => {
+        if (token !== initRequestToken) return;
         trackByDay = null;
         normalizedTrackByDay = null;
         dayDistanceKmByDate.clear();
@@ -3271,13 +3447,19 @@ window.addEventListener('DOMContentLoaded', () => {
       });
     }
     if (toggleSelectBtn) toggleSelectBtn.addEventListener('click', toggleSelectionMode);
+    bindTimelineHorizontalWheel();
     if (deleteSelectedBtn) {
       deleteSelectedBtn.addEventListener('click', () => {
         deleteSelectedItems().catch(() => {});
       });
     }
     document.querySelectorAll('.lang__btn').forEach((btn) => {
-      btn.addEventListener('click', () => setLang(btn.dataset.lang));
+      btn.addEventListener('click', () => {
+        const targetLang = normalizeLang(btn.dataset.lang);
+        if (!targetLang || targetLang === currentLang) return;
+        setLang(targetLang, { renderExisting: false });
+        init();
+      });
     });
     const miniMapToggle = document.getElementById('mini-map-toggle');
     if (miniMapToggle) {
@@ -3296,7 +3478,7 @@ window.addEventListener('DOMContentLoaded', () => {
         applyMiniMapCollapsed(window.innerWidth <= 720, false);
       }
     }
-    setLang('it');
+    setLang(getInitialLanguage());
     renderManageTools();
     window.addEventListener('hashchange', () => {
       focusHashAnchor(window.location.hash);
