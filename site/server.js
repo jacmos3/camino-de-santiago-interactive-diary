@@ -594,7 +594,6 @@ async function handleDelete(req, res) {
         ...entries,
         generated_at: new Date().toISOString(),
         days: normalizedDays,
-        portfolio: normalizedDays,
         counts: rebuildCounts(normalizedDays)
       };
 

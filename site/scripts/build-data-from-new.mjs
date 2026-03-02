@@ -189,17 +189,6 @@ const days = dayDates.map((date) => ({
   notes: notesByDate[date] || {},
 }));
 
-const portfolio = dayDates.map((date) => {
-  const dayItems = daysMap.get(date) || [];
-  const photos = dayItems.filter((it) => it.type === 'image').slice(0, 12);
-  const fallback = photos.length ? photos : dayItems.slice(0, 6);
-  return {
-    date,
-    items: fallback,
-    notes: notesByDate[date] || {},
-  };
-});
-
 const counts = {
   images: items.filter((it) => it.type === 'image').length,
   videos: items.filter((it) => it.type === 'video').length,
@@ -209,7 +198,6 @@ const counts = {
 const entries = {
   generated_at: new Date().toISOString(),
   days,
-  portfolio,
   counts,
 };
 

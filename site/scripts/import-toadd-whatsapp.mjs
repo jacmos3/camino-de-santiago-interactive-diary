@@ -175,14 +175,6 @@ const main = async () => {
       delete clean.__cardNum;
       return clean;
     })];
-
-    const portfolioDay = ensureDay(entries.portfolio || [], date);
-    portfolioDay.items = [...(portfolioDay.items || []), ...items.map((it) => {
-      const clean = { ...it };
-      delete clean.__carouselNum;
-      delete clean.__cardNum;
-      return clean;
-    })];
   });
 
   let images = 0;

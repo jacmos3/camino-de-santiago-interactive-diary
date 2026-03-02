@@ -156,17 +156,6 @@ for (const item of videoOrImage) {
   if (place) item.place = place;
 }
 
-if (Array.isArray(entries.portfolio)) {
-  for (const day of entries.portfolio) {
-    for (const item of day.items || []) {
-      const dayInMain = (entries.days || []).find((d) => d.date === day.date);
-      const srcItem = (dayInMain && dayInMain.items || []).find((x) => x.id && x.id === item.id);
-      if (srcItem && srcItem.place) item.place = srcItem.place;
-      else delete item.place;
-    }
-  }
-}
-
 await fs.writeFile(ENTRIES_JSON, `${JSON.stringify(entries, null, 2)}\n`, 'utf8');
 await fs.writeFile(ENTRIES_JS, `window.__CAMMINO_ENTRIES__ = ${JSON.stringify(entries, null, 2)};\n`, 'utf8');
 await fs.writeFile(CACHE_JSON, `${JSON.stringify(cache, null, 2)}\n`, 'utf8');

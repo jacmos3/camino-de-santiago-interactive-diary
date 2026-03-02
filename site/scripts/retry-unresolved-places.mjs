@@ -230,16 +230,6 @@ for (const item of unresolvedItems) {
   }
 }
 
-if (Array.isArray(entries.portfolio)) {
-  for (const day of entries.portfolio) {
-    const sourceDay = (entries.days || []).find((d) => d.date === day.date);
-    for (const item of day.items || []) {
-      const src = (sourceDay && sourceDay.items || []).find((x) => x.id === item.id);
-      if (src && src.place) item.place = src.place;
-    }
-  }
-}
-
 await fs.writeFile(ENTRIES_JSON, `${JSON.stringify(entries, null, 2)}\n`, 'utf8');
 await fs.writeFile(ENTRIES_JS, `window.__CAMMINO_ENTRIES__ = ${JSON.stringify(entries, null, 2)};\n`, 'utf8');
 await fs.writeFile(CACHE_JSON, `${JSON.stringify(cache, null, 2)}\n`, 'utf8');

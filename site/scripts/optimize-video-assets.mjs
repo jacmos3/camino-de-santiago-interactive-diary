@@ -120,14 +120,6 @@ for (const day of data.days || []) {
   }
 }
 
-for (const day of data.portfolio || []) {
-  for (const item of day.items || []) {
-    if (item.type !== 'video' || !item.id) continue;
-    item.src = srcById.get(item.id) || item.src;
-    item.mime = 'video/mp4';
-  }
-}
-
 await fs.writeFile(DATA_JSON, `${JSON.stringify(data, null, 2)}\n`);
 await fs.writeFile(DATA_JS, `window.__CAMMINO_ENTRIES__ = ${JSON.stringify(data, null, 2)};\n`);
 

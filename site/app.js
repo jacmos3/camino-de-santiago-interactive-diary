@@ -16,7 +16,6 @@ const I18N = {
     footer_note:
       'Il sito è stato creato nel 2026, molti anni dopo l’esperienza vissuta, ma è stato ricostruito in modo molto fedele unendo il tracking del percorso registrato sul momento tramite Runtastic, i metadata (incluse coordinate GPS) estratti dalle foto e dai video, e i testi su stati d’animo ed eventi recuperati da vecchie note, messaggi, chat WhatsApp, audio, contenuti social e ricordi.',
     view_diary: 'Diario',
-    view_portfolio: 'Portfolio',
     notes_label: 'Note del giorno',
     empty_note: 'Aggiungi un ricordo personale qui.',
     recommendations_label: 'Posti consigliati',
@@ -79,7 +78,6 @@ const I18N = {
     footer_note:
       'This site was created many years after the lived experience, but it was reconstructed very faithfully by combining route tracking recorded at the time with Runtastic, metadata (including GPS coordinates) extracted from photos and videos, and notes about emotions and events recovered from old notes, messages, audio, and memories.',
     view_diary: 'Diary',
-    view_portfolio: 'Portfolio',
     notes_label: 'Day notes',
     empty_note: 'Add a personal memory here.',
     recommendations_label: 'Recommended places',
@@ -518,7 +516,6 @@ const enrichDataWithTrackPoints = (data, points) => {
     });
   };
   applyToDays(data.days);
-  applyToDays(data.portfolio);
 };
 
 const formatDate = (dateStr) => {
@@ -554,19 +551,19 @@ const buildPrologueNarrative = (lang = 'it') => {
   if (lang === 'en') {
     return [
       '**Title**',
-      'Prologue: departure and approach.',
+      'Prologue: leaving before leaving.',
       '',
-      '**Where / stage**',
-      'June 2 and 3 were transition days: transfer from Perugia to Bergamo, then evening flight to Lourdes.',
+      '**Where I was / stage**',
+      'June 2 and 3 were the approach days: from Perugia to Bergamo, then an evening flight to Lourdes.',
       '',
       '**Key scene**',
-      'The journey started before the trail: BlaBlaCar from Perugia to Milan, then train to Orio to reach friends in Bergamo. The next morning I took a borrowed bike and rode around the city, crossed paths with donkeys, and used those hours to settle into the right mindset. In the evening, departure finally became real with the flight.',
+      'The Camino started before the trail. On June 2 I did Perugia-Milan by BlaBlaCar and Milan-Orio by train to reach friends who would host me for one night. On the morning of June 3, in Bergamo, I took a bike ride on a bike lent to me: light air, slow rhythm, and even an encounter with donkeys along the way. In the evening the flight came: from that point on, it was no longer preparation, it was the real start.',
       '',
-      '**What I realized**',
-      'The Camino does not begin at the first trail marker, but in the choices, transfers, and waiting that prepare your head and pace.',
+      '**What I understood**',
+      'The first step of the Camino does not coincide with the first kilometer on foot: it begins in logistical choices, in waiting, and in the way you prepare yourself for the journey.',
       '',
       '**Practical note**',
-      'Logistics day: Perugia-Milan by BlaBlaCar, Milan-Orio by train, one night hosted by friends in Bergamo, then evening flight on June 3.'
+      'Transfer Perugia-Milan by BlaBlaCar, Milan-Orio by train, night in Bergamo hosted by friends, then evening flight on June 3.'
     ].join('\n');
   }
   return [
@@ -2190,10 +2187,10 @@ const buildDay = (day, idx) => {
   count.textContent = `${day.items.length} ${I18N[currentLang].items_label}`;
   const distance = document.createElement('div');
   distance.className = 'day__meta';
-  distance.setAttribute(
-    'data-day-distance',
-    Array.isArray(day.distanceKeys) && day.distanceKeys.length ? day.distanceKeys.join(',') : day.date
-  );
+  const dayDistanceKeysAttr = Array.isArray(day.distanceKeys)
+    ? day.distanceKeys.join(',')
+    : day.date;
+  distance.setAttribute('data-day-distance', dayDistanceKeysAttr);
   distance.textContent = '';
   distance.style.display = 'none';
 

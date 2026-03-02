@@ -293,13 +293,6 @@ for (const item of items) {
 
 const daysSorted = [...byDay.keys()].sort();
 const days = daysSorted.map((date) => ({ date, items: byDay.get(date), notes: notesByDate[date] || {} }));
-const portfolio = daysSorted.map((date) => {
-  const all = byDay.get(date) || [];
-  const photos = all.filter((x) => x.type === 'image').slice(0, 12);
-  const videos = all.filter((x) => x.type === 'video').slice(0, 3);
-  const items = [...photos, ...videos];
-  return { date, items: items.length ? items : all.slice(0, 12), notes: notesByDate[date] || {} };
-});
 
 const counts = {
   images: items.filter((x) => x.type === 'image').length,
@@ -307,7 +300,7 @@ const counts = {
   live: livePhotoVideoTasks.length,
 };
 
-const entries = { generated_at: new Date().toISOString(), days, portfolio, counts };
+const entries = { generated_at: new Date().toISOString(), days, counts };
 
 const trackByDay = {};
 for (const p of gpsPoints) {
