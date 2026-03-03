@@ -3,6 +3,9 @@ const PHOTO_EXTENSIONS = new Set(['jpg', 'jpeg', 'png', 'heic', 'heif', 'webp'])
 const MAX_LINK_KM = 100;
 const selectedDay = new URLSearchParams(window.location.search).get('day') || '';
 const selectedUptoDay = new URLSearchParams(window.location.search).get('upto') || '';
+const MEDIA_DETAIL_MIN = 0;
+const MEDIA_DETAIL_MAX = 6;
+const MEDIA_DETAIL_DEFAULT = 0;
 
 const isPhotoFile = (name) => {
   const file = (name ? String(name) : '').trim().toLowerCase();
@@ -14,6 +17,111 @@ const isPhotoFile = (name) => {
 const parsePointTs = (point) => {
   const ts = Date.parse(String(point && point.time ? point.time : ''));
   return Number.isNaN(ts) ? Number.NEGATIVE_INFINITY : ts;
+};
+
+const toFiniteCoord = (value) => {
+  const num = Number(value);
+  return Number.isFinite(num) ? num : null;
+};
+
+const formatPointDateTime = (raw) => {
+  if (!raw) return '';
+  const d = new Date(String(raw));
+  if (Number.isNaN(d.getTime())) return '';
+  return d.toLocaleString('it-IT', {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit'
+  });
+};
+
+const assetUrl = (value) => (value ? String(value) : '');
+
+const flattenDayItems = (items) => {
+  const out = [];
+  const walk = (arr) => {
+    (arr || []).forEach((item) => {
+      if (!item) return;
+      if (item.type === 'group' && Array.isArray(item.items)) {
+        walk(item.items);
+        return;
+      }
+      out.push(item);
+    });
+  };
+  walk(items);
+  return out;
+};
+
+const parseMediaTs = (entry) => {
+  const date = String(entry && entry.date ? entry.date : '').slice(0, 10);
+  const time = String(entry && entry.time ? entry.time : '').slice(0, 5);
+  const iso = date && time ? `${date}T${time}:00` : '';
+  const ts = Date.parse(iso);
+  return Number.isNaN(ts) ? Number.NEGATIVE_INFINITY : ts;
+};
+
+const buildMediaPoints = (entriesData) => {
+  const days = Array.isArray(entriesData && entriesData.days) ? entriesData.days : [];
+  const points = [];
+  days.forEach((day) => {
+    flattenDayItems(day.items || []).forEach((item) => {
+      if (!item || (item.type !== 'image' && item.type !== 'video')) return;
+      const lat = toFiniteCoord(item.lat);
+      const lon = toFiniteCoord(item.lon);
+      if (lat === null || lon === null) return;
+      points.push({
+        id: item.id || '',
+        type: item.type,
+        date: String(item.date || '').slice(0, 10),
+        time: item.time || '',
+        place: item.place || '',
+        src: item.src || '',
+        thumb: item.thumb || '',
+        poster: item.poster || '',
+        orig: item.orig || '',
+        mime: item.mime || '',
+        lat,
+        lon,
+        ts: parseMediaTs(item)
+      });
+    });
+  });
+  return points.sort((a, b) => a.ts - b.ts);
+};
+
+const groupMediaPointsByPrecision = (points, precision) => {
+  const groups = new Map();
+  (points || []).forEach((p) => {
+    const key = `${p.lat.toFixed(precision)}|${p.lon.toFixed(precision)}`;
+    if (!groups.has(key)) groups.set(key, []);
+    groups.get(key).push(p);
+  });
+  const out = [];
+  groups.forEach((items) => {
+    const center = items.reduce((acc, p) => {
+      acc.lat += p.lat;
+      acc.lon += p.lon;
+      return acc;
+    }, { lat: 0, lon: 0 });
+    out.push({
+      lat: center.lat / items.length,
+      lon: center.lon / items.length,
+      items: items.slice().sort((a, b) => a.ts - b.ts)
+    });
+  });
+  return out;
+};
+
+const formatMediaPopupDateTime = (item) => {
+  const date = String(item && item.date ? item.date : '').slice(0, 10);
+  const time = String(item && item.time ? item.time : '').slice(0, 5);
+  if (!date && !time) return '';
+  if (!date) return time;
+  if (!time) return date;
+  return `${date} ${time}`;
 };
 
 const normalizeTrackPointsByActivityDay = (points) => {
@@ -151,11 +259,326 @@ const buildSegmentsFromFeatures = (features) => {
   return { lineSegments, flightSegments };
 };
 
+const buildMediaDetailControl = (onChange, initialPrecision) => {
+  const control = L.control({ position: 'topright' });
+  control.onAdd = () => {
+    const wrap = L.DomUtil.create('div', 'map-media-detail-control');
+    wrap.innerHTML = `
+      <div class="map-media-detail-control__title">Dettaglio media</div>
+      <input class="map-media-detail-control__range" type="range" min="${MEDIA_DETAIL_MIN}" max="${MEDIA_DETAIL_MAX}" step="1" value="${initialPrecision}">
+      <div class="map-media-detail-control__value">${initialPrecision} decimali</div>
+    `;
+    const input = wrap.querySelector('.map-media-detail-control__range');
+    const valueEl = wrap.querySelector('.map-media-detail-control__value');
+    const apply = () => {
+      const next = Number(input.value);
+      valueEl.textContent = `${next} decimali`;
+      onChange(next);
+    };
+    input.addEventListener('input', apply);
+    L.DomEvent.disableClickPropagation(wrap);
+    L.DomEvent.disableScrollPropagation(wrap);
+    return wrap;
+  };
+  return control;
+};
+
+const mapMediaModal = {
+  root: document.getElementById('map-media-modal'),
+  backdrop: document.getElementById('map-media-modal-backdrop'),
+  close: document.getElementById('map-media-modal-close'),
+  body: document.getElementById('map-media-modal-body'),
+  meta: document.getElementById('map-media-modal-meta')
+};
+
+let mapModalItems = [];
+let mapModalIndex = -1;
+let mapModalZoomCleanup = null;
+let mapModalGroupScrollTop = 0;
+
+const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
+
+const attachMapImageZoom = (image, controls = null) => {
+  let scale = 1;
+  let tx = 0;
+  let ty = 0;
+  let isDragging = false;
+  let dragStartX = 0;
+  let dragStartY = 0;
+  let startTx = 0;
+  let startTy = 0;
+  const ZOOM_STEP = 1.2;
+
+  const applyTransform = () => {
+    image.style.transform = `translate(${tx}px, ${ty}px) scale(${scale})`;
+    image.classList.toggle('is-zoomed', scale > 1.001);
+    if (controls) {
+      controls.zoomOut.disabled = scale <= 1.001;
+      controls.zoomIn.disabled = scale >= 4.999;
+    }
+  };
+
+  const zoomTo = (nextScale) => {
+    scale = clamp(nextScale, 1, 5);
+    if (scale <= 1.001) {
+      tx = 0;
+      ty = 0;
+    }
+    applyTransform();
+  };
+
+  const onWheel = (event) => {
+    event.preventDefault();
+    const factor = Math.exp(-event.deltaY * 0.0015);
+    zoomTo(scale * factor);
+  };
+  const onZoomIn = () => zoomTo(scale * ZOOM_STEP);
+  const onZoomOut = () => zoomTo(scale / ZOOM_STEP);
+  const onDoubleClick = (event) => {
+    event.preventDefault();
+    zoomTo(scale > 1.1 ? 1 : 2);
+  };
+  const onPointerDown = (event) => {
+    if (event.button !== 0) return;
+    if (scale <= 1.001) return;
+    isDragging = true;
+    dragStartX = event.clientX;
+    dragStartY = event.clientY;
+    startTx = tx;
+    startTy = ty;
+    image.setPointerCapture(event.pointerId);
+    image.classList.add('is-dragging');
+  };
+  const onPointerMove = (event) => {
+    if (!isDragging) return;
+    event.preventDefault();
+    tx = startTx + (event.clientX - dragStartX);
+    ty = startTy + (event.clientY - dragStartY);
+    applyTransform();
+  };
+  const onPointerUp = (event) => {
+    if (!isDragging) return;
+    isDragging = false;
+    image.classList.remove('is-dragging');
+    try {
+      image.releasePointerCapture(event.pointerId);
+    } catch {
+      // no-op
+    }
+  };
+
+  image.addEventListener('wheel', onWheel, { passive: false });
+  image.addEventListener('dblclick', onDoubleClick);
+  image.addEventListener('pointerdown', onPointerDown);
+  image.addEventListener('pointermove', onPointerMove);
+  image.addEventListener('pointerup', onPointerUp);
+  image.addEventListener('pointercancel', onPointerUp);
+  if (controls) {
+    controls.zoomIn.addEventListener('click', onZoomIn);
+    controls.zoomOut.addEventListener('click', onZoomOut);
+  }
+  applyTransform();
+
+  return () => {
+    image.removeEventListener('wheel', onWheel);
+    image.removeEventListener('dblclick', onDoubleClick);
+    image.removeEventListener('pointerdown', onPointerDown);
+    image.removeEventListener('pointermove', onPointerMove);
+    image.removeEventListener('pointerup', onPointerUp);
+    image.removeEventListener('pointercancel', onPointerUp);
+    if (controls) {
+      controls.zoomIn.removeEventListener('click', onZoomIn);
+      controls.zoomOut.removeEventListener('click', onZoomOut);
+    }
+  };
+};
+
+const closeMapMediaModal = () => {
+  if (!mapMediaModal.root) return;
+  if (mapModalZoomCleanup) {
+    mapModalZoomCleanup();
+    mapModalZoomCleanup = null;
+  }
+  mapMediaModal.root.classList.remove('open');
+  mapMediaModal.root.setAttribute('aria-hidden', 'true');
+  mapMediaModal.body.innerHTML = '';
+  mapMediaModal.body.classList.remove('modal__body--with-group');
+  mapModalItems = [];
+  mapModalIndex = -1;
+  mapModalGroupScrollTop = 0;
+};
+
+const renderMapMediaModal = () => {
+  if (!mapMediaModal.root || mapModalIndex < 0 || !mapModalItems.length) return;
+  if (mapModalZoomCleanup) {
+    mapModalZoomCleanup();
+    mapModalZoomCleanup = null;
+  }
+  const item = mapModalItems[mapModalIndex];
+  if (!item) return;
+  mapMediaModal.body.innerHTML = '';
+  mapMediaModal.body.classList.toggle('modal__body--with-group', mapModalItems.length > 1);
+  if (mapMediaModal.meta) {
+    const day = String(item.date || '').slice(0, 10);
+    const label = `${formatMediaPopupDateTime(item)}${item.place ? ` · ${item.place}` : ''}`;
+    mapMediaModal.meta.textContent = day ? `${label} - vai al giorno` : label;
+    mapMediaModal.meta.href = day ? `index.html#note-${encodeURIComponent(day)}` : '#';
+    mapMediaModal.meta.onclick = (event) => {
+      if (!day) {
+        event.preventDefault();
+        return;
+      }
+      event.preventDefault();
+      const ok = window.confirm(`Vuoi aprire il diario del ${day} per leggere i dettagli?`);
+      if (!ok) return;
+      window.location.href = mapMediaModal.meta.href;
+    };
+  }
+
+  if (item.type === 'video') {
+    const video = document.createElement('video');
+    video.controls = true;
+    video.autoplay = true;
+    video.playsInline = true;
+    video.preload = 'metadata';
+    if (item.poster) video.poster = assetUrl(item.poster);
+    const source = document.createElement('source');
+    source.src = assetUrl(item.src);
+    source.type = item.mime || 'video/mp4';
+    video.appendChild(source);
+    mapMediaModal.body.appendChild(video);
+  } else {
+    const zoomControls = document.createElement('div');
+    zoomControls.className = 'modal__zoom-controls';
+    const zoomOutBtn = document.createElement('button');
+    zoomOutBtn.type = 'button';
+    zoomOutBtn.className = 'modal__zoom-btn';
+    zoomOutBtn.textContent = '−';
+    const zoomInBtn = document.createElement('button');
+    zoomInBtn.type = 'button';
+    zoomInBtn.className = 'modal__zoom-btn';
+    zoomInBtn.textContent = '+';
+    zoomControls.appendChild(zoomOutBtn);
+    zoomControls.appendChild(zoomInBtn);
+    mapMediaModal.body.appendChild(zoomControls);
+
+    const shell = document.createElement('div');
+    shell.className = 'modal__zoom-shell';
+    const img = document.createElement('img');
+    img.className = 'modal__image';
+    img.src = assetUrl(item.src || item.thumb);
+    img.alt = item.orig || '';
+    shell.appendChild(img);
+    mapMediaModal.body.appendChild(shell);
+    mapModalZoomCleanup = attachMapImageZoom(img, { zoomIn: zoomInBtn, zoomOut: zoomOutBtn });
+  }
+
+  if (mapModalItems.length > 1) {
+    const nav = document.createElement('div');
+    nav.className = 'modal__nav';
+    const prevBtn = document.createElement('button');
+    prevBtn.type = 'button';
+    prevBtn.className = 'modal__nav-btn modal__nav-btn--prev';
+    prevBtn.setAttribute('aria-label', 'Elemento precedente');
+    prevBtn.textContent = '‹';
+    const nextBtn = document.createElement('button');
+    nextBtn.type = 'button';
+    nextBtn.className = 'modal__nav-btn modal__nav-btn--next';
+    nextBtn.setAttribute('aria-label', 'Elemento successivo');
+    nextBtn.textContent = '›';
+    prevBtn.addEventListener('click', () => {
+      mapModalIndex = (mapModalIndex - 1 + mapModalItems.length) % mapModalItems.length;
+      renderMapMediaModal();
+    });
+    nextBtn.addEventListener('click', () => {
+      mapModalIndex = (mapModalIndex + 1) % mapModalItems.length;
+      renderMapMediaModal();
+    });
+    nav.appendChild(prevBtn);
+    nav.appendChild(nextBtn);
+    mapMediaModal.body.appendChild(nav);
+
+    const panel = document.createElement('div');
+    panel.className = 'modal__group-panel';
+    const title = document.createElement('div');
+    title.className = 'modal__group-title';
+    title.textContent = 'Carosello';
+    panel.appendChild(title);
+
+    const list = document.createElement('div');
+    list.className = 'modal__group-list';
+    list.setAttribute('role', 'listbox');
+    list.scrollTop = mapModalGroupScrollTop;
+    list.addEventListener('scroll', () => {
+      mapModalGroupScrollTop = list.scrollTop;
+    });
+
+    mapModalItems.forEach((entry, idx) => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'modal__group-item';
+      btn.setAttribute('role', 'option');
+      btn.setAttribute('aria-label', entry.orig || 'Elemento');
+      if (idx === mapModalIndex) {
+        btn.classList.add('is-active');
+        btn.setAttribute('aria-selected', 'true');
+      } else {
+        btn.setAttribute('aria-selected', 'false');
+      }
+      const preview = document.createElement('img');
+      preview.className = 'modal__group-thumb';
+      preview.src = assetUrl(entry.poster || entry.thumb || entry.src);
+      preview.alt = entry.orig || '';
+      btn.appendChild(preview);
+      btn.addEventListener('click', () => {
+        mapModalIndex = idx;
+        renderMapMediaModal();
+      });
+      list.appendChild(btn);
+    });
+    panel.appendChild(list);
+    mapMediaModal.body.appendChild(panel);
+    window.requestAnimationFrame(() => {
+      list.scrollTop = mapModalGroupScrollTop;
+    });
+  }
+};
+
+const openMapMediaModal = (items, startIndex = 0) => {
+  if (!mapMediaModal.root) return;
+  mapModalItems = Array.isArray(items) ? items : [];
+  if (!mapModalItems.length) return;
+  mapModalIndex = Math.max(0, Math.min(startIndex, mapModalItems.length - 1));
+  renderMapMediaModal();
+  mapMediaModal.root.classList.add('open');
+  mapMediaModal.root.setAttribute('aria-hidden', 'false');
+};
+
+if (mapMediaModal.close) mapMediaModal.close.addEventListener('click', closeMapMediaModal);
+if (mapMediaModal.backdrop) mapMediaModal.backdrop.addEventListener('click', closeMapMediaModal);
+window.addEventListener('keydown', (event) => {
+  if (!mapMediaModal.root || !mapMediaModal.root.classList.contains('open')) return;
+  if (event.key === 'Escape') {
+    closeMapMediaModal();
+    return;
+  }
+  if (!mapModalItems.length) return;
+  if (event.key === 'ArrowLeft') {
+    mapModalIndex = (mapModalIndex - 1 + mapModalItems.length) % mapModalItems.length;
+    renderMapMediaModal();
+  } else if (event.key === 'ArrowRight') {
+    mapModalIndex = (mapModalIndex + 1) % mapModalItems.length;
+    renderMapMediaModal();
+  }
+});
+
 Promise.all([
-  fetch('data/track_points.json').then((res) => res.json()).catch(() => [])
+  fetch('data/track_points.json').then((res) => res.json()).catch(() => []),
+  fetch('data/entries.it.json').then((res) => res.json()).catch(() => ({ days: [] }))
 ])
-  .then(([trackPoints]) => {
+  .then(([trackPoints, entriesData]) => {
     const normalizedTrackPoints = normalizeTrackPointsByActivityDay(trackPoints);
+    const mediaPoints = buildMediaPoints(entriesData);
     const pointFeatures = normalizedTrackPoints
       .filter((p) => Number.isFinite(Number(p.lat)) && Number.isFinite(Number(p.lon)))
       .filter((p) => isPhotoFile(p.file))
@@ -276,20 +699,41 @@ Promise.all([
       }).addTo(map);
     });
 
-    const pointsLayer = L.geoJSON({ type: 'FeatureCollection', features: pointFeatures }, {
-      pointToLayer: (feature, latlng) => L.circleMarker(latlng, {
-        radius: 4,
-        color: '#1f5f5b',
-        weight: 1,
-        fillColor: '#1f5f5b',
-        fillOpacity: 0.72
-      }),
-      onEachFeature: (feature, layer) => {
-        const time = feature.properties && feature.properties.time ? feature.properties.time : '';
-        const file = feature.properties && feature.properties.file ? feature.properties.file : '';
-        if (time || file) layer.bindPopup(`${time}${time && file ? '<br>' : ''}${file}`);
-      }
-    }).addTo(map);
+    let mediaPinsLayer = L.featureGroup().addTo(map);
+    const renderMediaPins = (precision) => {
+      mediaPinsLayer.clearLayers();
+      const groups = groupMediaPointsByPrecision(mediaPoints, precision);
+      groups.forEach((group) => {
+        const count = group.items.length;
+        const imageCount = group.items.filter((it) => it.type === 'image').length;
+        const videoCount = group.items.filter((it) => it.type === 'video').length;
+        const first = group.items[0] || {};
+        const place = String(first.place || '').trim();
+        let popup = '';
+        if (count > 1) {
+          popup = `${count} media (${imageCount} foto, ${videoCount} video)`;
+          if (place) popup += `<br>${place}`;
+        } else {
+          const when = formatMediaPopupDateTime(first);
+          const typeLabel = first.type === 'video' ? 'video' : 'foto';
+          popup = `${when ? `${when} · ` : ''}${typeLabel}`;
+          if (place) popup += `<br>${place}`;
+        }
+        const marker = L.circleMarker([group.lat, group.lon], {
+          radius: count > 1 ? 6.5 : 4.5,
+          color: '#1d4f86',
+          weight: 2,
+          fillColor: '#78aee6',
+          fillOpacity: 0.9
+        });
+        if (popup) marker.bindPopup(popup);
+        marker.on('click', () => openMapMediaModal(group.items, 0));
+        marker.addTo(mediaPinsLayer);
+      });
+    };
+
+    renderMediaPins(MEDIA_DETAIL_DEFAULT);
+    buildMediaDetailControl(renderMediaPins, MEDIA_DETAIL_DEFAULT).addTo(map);
 
     const selectedPointsLayer = L.geoJSON({ type: 'FeatureCollection', features: selectedFeatures }, {
       pointToLayer: (feature, latlng) => L.circleMarker(latlng, {
@@ -313,7 +757,7 @@ Promise.all([
 
     const boundsCandidates = [];
     if (lineLayer && lineLayer.getBounds().isValid()) boundsCandidates.push(lineLayer.getBounds());
-    if (pointsLayer && pointsLayer.getBounds().isValid()) boundsCandidates.push(pointsLayer.getBounds());
+    if (mediaPinsLayer && mediaPinsLayer.getBounds && mediaPinsLayer.getBounds().isValid()) boundsCandidates.push(mediaPinsLayer.getBounds());
     if (selectedUptoLineLayer && selectedUptoLineLayer.getBounds().isValid()) boundsCandidates.unshift(selectedUptoLineLayer.getBounds());
     if (selectedUptoPointsLayer && selectedUptoPointsLayer.getBounds().isValid()) boundsCandidates.unshift(selectedUptoPointsLayer.getBounds());
     if (selectedLineLayer && selectedLineLayer.getBounds().isValid()) boundsCandidates.unshift(selectedLineLayer.getBounds());

@@ -31,6 +31,14 @@
   <main class="content">
     <div id="map" style="height: 70vh; border-radius: 18px; box-shadow: var(--shadow);"></div>
   </main>
+  <div id="map-media-modal" class="map-media-modal" aria-hidden="true">
+    <div class="map-media-modal__backdrop" id="map-media-modal-backdrop"></div>
+    <div class="map-media-modal__dialog" role="dialog" aria-modal="true" aria-label="Media">
+      <button type="button" class="map-media-modal__close" id="map-media-modal-close" aria-label="Chiudi">×</button>
+      <a class="map-media-modal__meta map-media-modal__meta--link" id="map-media-modal-meta" href="#"></a>
+      <div class="map-media-modal__body" id="map-media-modal-body"></div>
+    </div>
+  </div>
   <script
     src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
