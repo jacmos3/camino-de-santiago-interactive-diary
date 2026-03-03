@@ -956,8 +956,11 @@ const commentsForm = document.getElementById('comments-form');
 const commentsAuthorInput = document.getElementById('comments-author');
 const commentsTextInput = document.getElementById('comments-text');
 let modalItems = [];
+let allModalItems = [];
 let modalIndexById = new Map();
 let modalGroupByItemId = new Map();
+let modalContextGroupByItemId = new Map();
+let modalGroupPanelScrollByKey = new Map();
 let modalIndex = -1;
 const MODAL_GROUP_LAYOUT_CLASS = 'modal__body--with-group';
 
@@ -967,17 +970,63 @@ const getModalPreviewSrc = (item) => {
   return toRootAssetUrl(item.thumb || item.src || '');
 };
 
+const flattenItems = (items) => {
+  const out = [];
+  const walk = (arr) => {
+    (arr || []).forEach((item) => {
+      if (!item) return;
+      if (item.type === 'group' && Array.isArray(item.items)) {
+        walk(item.items);
+        return;
+      }
+      out.push(item);
+    });
+  };
+  walk(items);
+  return out;
+};
+
+const rebuildModalIndex = () => {
+  modalIndexById = new Map();
+  modalItems.forEach((item, idx) => {
+    if (item && item.id) modalIndexById.set(item.id, idx);
+  });
+};
+
+const setModalContext = (items, options = {}) => {
+  modalItems = Array.isArray(items) ? items : [];
+  rebuildModalIndex();
+  modalContextGroupByItemId = new Map();
+  const groupItems = Array.isArray(options.groupItems) ? options.groupItems : [];
+  if (groupItems.length > 1) {
+    groupItems.forEach((entry) => {
+      if (entry && entry.id) modalContextGroupByItemId.set(String(entry.id), groupItems);
+    });
+  }
+};
+
+const restoreDefaultModalContext = () => {
+  setModalContext(allModalItems);
+};
+
 const setModalGroupLayout = (enabled) => {
   if (!modalBody) return;
   modalBody.classList.toggle(MODAL_GROUP_LAYOUT_CLASS, Boolean(enabled));
 };
+
+const getModalGroupScrollKey = (group) =>
+  (Array.isArray(group) ? group : [])
+    .map((it) => String((it && it.id) || ''))
+    .filter(Boolean)
+    .join('|');
 
 const appendModalGroupPanel = (currentItem) => {
   if (!currentItem || !currentItem.id) {
     setModalGroupLayout(false);
     return;
   }
-  const group = modalGroupByItemId.get(String(currentItem.id));
+  const group = modalContextGroupByItemId.get(String(currentItem.id))
+    || modalGroupByItemId.get(String(currentItem.id));
   if (!group || group.length < 2) {
     setModalGroupLayout(false);
     return;
@@ -993,6 +1042,14 @@ const appendModalGroupPanel = (currentItem) => {
   const list = document.createElement('div');
   list.className = 'modal__group-list';
   list.setAttribute('role', 'listbox');
+  const scrollKey = getModalGroupScrollKey(group);
+  const savedScrollTop = scrollKey && modalGroupPanelScrollByKey.has(scrollKey)
+    ? modalGroupPanelScrollByKey.get(scrollKey)
+    : null;
+  list.addEventListener('scroll', () => {
+    if (!scrollKey) return;
+    modalGroupPanelScrollByKey.set(scrollKey, list.scrollTop);
+  });
   group.forEach((groupItem) => {
     const thumbSrc = getModalPreviewSrc(groupItem);
     if (!thumbSrc) return;
@@ -1016,6 +1073,7 @@ const appendModalGroupPanel = (currentItem) => {
     img.alt = groupItem.orig || '';
     btn.appendChild(img);
     btn.addEventListener('click', () => {
+      if (scrollKey) modalGroupPanelScrollByKey.set(scrollKey, list.scrollTop);
       list.querySelectorAll('.modal__group-item').forEach((el) => {
         el.classList.remove('is-active');
         el.setAttribute('aria-selected', 'false');
@@ -1049,6 +1107,16 @@ const appendModalGroupPanel = (currentItem) => {
 
   panel.appendChild(list);
   modalBody.appendChild(panel);
+  if (savedScrollTop !== null) {
+    const restore = () => {
+      list.scrollTop = savedScrollTop;
+    };
+    // Apply after layout/paint; thumbnails can change height once attached.
+    window.requestAnimationFrame(() => {
+      restore();
+      window.setTimeout(restore, 40);
+    });
+  }
   setModalGroupLayout(true);
 };
 
@@ -1372,6 +1440,7 @@ const closeModal = () => {
   modalBody.innerHTML = '';
   setModalGroupLayout(false);
   modalIndex = -1;
+  restoreDefaultModalContext();
 };
 
 const formatI18N = (key, vars = {}) => {
@@ -2042,7 +2111,8 @@ const buildModalWhereBadge = (whereLabel, item) => {
 
 const getGroupContextItems = (item) => {
   if (!item || !item.id) return [item];
-  const group = modalGroupByItemId.get(String(item.id));
+  const group = modalContextGroupByItemId.get(String(item.id))
+    || modalGroupByItemId.get(String(item.id));
   if (Array.isArray(group) && group.length) return group;
   return [item];
 };
@@ -2611,13 +2681,12 @@ const getDayMediaPinGroups = (dayKey) => {
   if (!day || !Array.isArray(day.items)) return [];
 
   const groups = new Map();
-  day.items.forEach((item) => {
-    // Requested pins for photos of the day.
-    if (!item || item.type !== 'image') return;
+  flattenItems(day.items).forEach((item) => {
+    if (!item || (item.type !== 'image' && item.type !== 'video')) return;
     const lat = toFiniteCoord(item.lat);
     const lon = toFiniteCoord(item.lon);
     if (lat === null || lon === null) return;
-    const key = `${lat.toFixed(5)}|${lon.toFixed(5)}`;
+    const key = `${lat.toFixed(3)}|${lon.toFixed(3)}`;
     if (!groups.has(key)) groups.set(key, []);
     groups.get(key).push(item);
   });
@@ -2753,6 +2822,8 @@ const initDayTrackMap = (mapEl) => {
     const pinGroups = getDayMediaPinGroups(dayKey);
     pinGroups.forEach((group) => {
       const count = group.items.length;
+      const imageCount = group.items.filter((it) => it && it.type === 'image').length;
+      const videoCount = group.items.filter((it) => it && it.type === 'video').length;
       const pin = L.circleMarker([group.lat, group.lon], {
         radius: count > 1 ? 6 : 4.5,
         color: '#153d70',
@@ -2762,13 +2833,20 @@ const initDayTrackMap = (mapEl) => {
       }).addTo(map);
       const first = group.items[0] || {};
       const place = first.place ? `<br>${first.place}` : '';
-      const title = count > 1
-        ? `${count} foto${place}`
-        : `${first.time || ''}${place}`;
+      let title = `${first.time || ''}${place}`;
+      if (count > 1) {
+        title = `${count} media (${imageCount} foto, ${videoCount} video)${place}`;
+      } else if (first.type === 'video') {
+        title = `${first.time || ''} · video${place}`;
+      }
       pin.bindPopup(title);
       pin.on('click', () => {
         const target = group.items[0];
         if (!target) return;
+        const subset = group.items
+          .slice()
+          .sort((a, b) => String(a.time || '').localeCompare(String(b.time || '')));
+        setModalContext(subset, { groupItems: subset });
         const idx = target.id ? modalIndexById.get(target.id) : -1;
         openModalItem(target, idx);
       });
@@ -3272,13 +3350,10 @@ const renderView = () => {
   }
   renderedDayOrder = list.map((day) => day.date);
   recomputeCumulativeDayDistanceKm(renderedDayOrder);
-  modalItems = list.flatMap((day) => (day.items || []));
+  allModalItems = list.flatMap((day) => flattenItems(day.items || []));
+  setModalContext(allModalItems);
   syncSelectedIdsWithCurrentData();
-  modalIndexById = new Map();
   modalGroupByItemId = new Map();
-  modalItems.forEach((item, idx) => {
-    if (item.id) modalIndexById.set(item.id, idx);
-  });
   list.forEach((day) => {
     (day.uiGroups || []).forEach((group) => {
       if (!group || group.length < 2) return;

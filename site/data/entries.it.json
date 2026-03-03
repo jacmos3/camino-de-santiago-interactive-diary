@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-03-02T19:14:48.601Z",
+  "generated_at": "2026-03-03T19:34:59.130Z",
   "days": [
     {
       "date": "2019-06-02",
@@ -814,23 +814,6 @@
           "place": "Précilhon, France",
           "lat": 43.1866,
           "lon": -0.5748,
-          "gpsInferred": false,
-          "locationEstimated": true
-        },
-        {
-          "id": "829f9ca02aa7",
-          "type": "video",
-          "date": "2019-06-06",
-          "time": "16:26",
-          "src": "assets/video_resized/vid_829f9ca02aa7.mp4",
-          "thumb": null,
-          "poster": "assets/poster/poster_829f9ca02aa7.jpg",
-          "mime": "video/mp4",
-          "size": null,
-          "orig": "IMG_2953.MOV",
-          "place": "Précilhon, France",
-          "lat": 43.1879,
-          "lon": -0.5778,
           "gpsInferred": false,
           "locationEstimated": true
         },
@@ -12262,6 +12245,22 @@
           "gpsInferred": false
         },
         {
+          "id": "c6c6e2891fb8",
+          "type": "image",
+          "date": "2019-07-07",
+          "time": "07:55",
+          "src": "assets/img/img_c6c6e2891fb8.jpg",
+          "thumb": "assets/thumb/thumb_c6c6e2891fb8.jpg",
+          "poster": null,
+          "mime": "image/jpeg",
+          "size": null,
+          "orig": "IMG_3982.HEIC",
+          "place": "Santa Colomba de Somoza, España",
+          "lat": 42.4890055555556,
+          "lon": -6.36133055555556,
+          "gpsInferred": false
+        },
+        {
           "id": "e9a930df10ff",
           "type": "image",
           "date": "2019-07-07",
@@ -12291,22 +12290,6 @@
           "place": "Santa Colomba de Somoza, España",
           "lat": 42.4890583333333,
           "lon": -6.36128611111111,
-          "gpsInferred": false
-        },
-        {
-          "id": "c6c6e2891fb8",
-          "type": "image",
-          "date": "2019-07-07",
-          "time": "07:55",
-          "src": "assets/img/img_c6c6e2891fb8.jpg",
-          "thumb": "assets/thumb/thumb_c6c6e2891fb8.jpg",
-          "poster": null,
-          "mime": "image/jpeg",
-          "size": null,
-          "orig": "IMG_3982.HEIC",
-          "place": "Santa Colomba de Somoza, España",
-          "lat": 42.4890055555556,
-          "lon": -6.36133055555556,
           "gpsInferred": false
         },
         {
@@ -17543,7 +17526,7 @@
   ],
   "counts": {
     "images": 834,
-    "videos": 200,
+    "videos": 199,
     "live": 0
   }
 }
