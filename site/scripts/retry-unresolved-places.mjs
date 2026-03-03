@@ -3,8 +3,8 @@ import { promises as fs } from 'node:fs';
 import path from 'node:path';
 
 const ROOT = process.cwd();
-const ENTRIES_JSON = path.join(ROOT, 'data', 'entries.json');
-const ENTRIES_JS = path.join(ROOT, 'data', 'entries.js');
+const ENTRIES_IT_JSON = path.join(ROOT, 'data', 'entries.it.json');
+const ENTRIES_EN_JSON = path.join(ROOT, 'data', 'entries.en.json');
 const TRACK_POINTS_JSON = path.join(ROOT, 'data', 'track_points.json');
 const CACHE_JSON = path.join(ROOT, 'data', 'geocode_cache.json');
 
@@ -158,7 +158,7 @@ const reverseGeocodeBigDataCloud = async (lat, lon) => {
   return res.json();
 };
 
-const entries = await readJson(ENTRIES_JSON);
+const entries = await readJson(ENTRIES_IT_JSON);
 const trackPoints = await readJson(TRACK_POINTS_JSON, []);
 const cache = await readJson(CACHE_JSON, {});
 
@@ -230,8 +230,28 @@ for (const item of unresolvedItems) {
   }
 }
 
-await fs.writeFile(ENTRIES_JSON, `${JSON.stringify(entries, null, 2)}\n`, 'utf8');
-await fs.writeFile(ENTRIES_JS, `window.__CAMMINO_ENTRIES__ = ${JSON.stringify(entries, null, 2)};\n`, 'utf8');
+const placeById = new Map(
+  (entries.days || [])
+    .flatMap((d) => d.items || [])
+    .filter((it) => it && it.id)
+    .map((it) => [String(it.id), String(it.place || '').trim()])
+);
+
+const syncPlaces = (payload) => {
+  for (const day of payload.days || []) {
+    for (const item of day.items || []) {
+      const id = String(item && item.id ? item.id : '');
+      if (!id) continue;
+      const place = String(placeById.get(id) || '').trim();
+      if (place) item.place = place;
+    }
+  }
+  return payload;
+};
+
+const entriesEn = syncPlaces(await readJson(ENTRIES_EN_JSON));
+await fs.writeFile(ENTRIES_IT_JSON, `${JSON.stringify(entries, null, 2)}\n`, 'utf8');
+await fs.writeFile(ENTRIES_EN_JSON, `${JSON.stringify(entriesEn, null, 2)}\n`, 'utf8');
 await fs.writeFile(CACHE_JSON, `${JSON.stringify(cache, null, 2)}\n`, 'utf8');
 
 console.log(`Unresolved before retry: ${total}`);

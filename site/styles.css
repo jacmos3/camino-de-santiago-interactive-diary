@@ -1207,6 +1207,10 @@ h1, h2, h3 {
   margin-right: 112px;
 }
 
+#live-modal-body.modal__body--with-group .modal__nav {
+  inset: 50% 122px auto 10px;
+}
+
 .modal__zoom-controls {
   position: absolute;
   top: 10px;
@@ -1636,6 +1640,9 @@ h1, h2, h3 {
   #live-modal-body.modal__body--with-group .modal__where,
   #live-modal-body.modal__body--with-group .modal__source {
     margin-right: 84px;
+  }
+  #live-modal-body.modal__body--with-group .modal__nav {
+    inset: 50% 92px auto 10px;
   }
   .modal__group-panel {
     right: 12px;

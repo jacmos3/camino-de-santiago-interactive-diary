@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-03-02T17:10:33.304Z",
+  "generated_at": "2026-03-02T19:14:48.602Z",
   "days": [
     {
       "date": "2019-06-02",
@@ -882,10 +882,11 @@
           "size": null,
           "orig": "IMG_2956.MOV",
           "place": "Oloron-Sainte-Marie, France",
-          "lat": 43.17511749267578,
-          "lon": -0.5485977530479431,
+          "lat": 43.1941388888889,
+          "lon": -0.602630555555556,
           "gpsInferred": true,
-          "locationEstimated": true
+          "locationEstimated": true,
+          "gpsInferredNote": "Aligned to nearby photo IMG_2957.HEIC (dt 0 min, was 4.86 km away)"
         },
         {
           "id": "cf8a24b13309",
@@ -1048,7 +1049,7 @@
           "gpsInferred": false
         }
       ],
-      "notes": "**Title**\nToward Oloron, steps and stories.\n\n**Where I was / stage**\nAnother 23 km to do, direction Oloron-Sainte-Marie.\n\n**Key scene**\nOn June 6 as well, the day was a long walk in nature, alone. Arriving at the albergue, however, the atmosphere changed completely: it was still the same four of us from the previous day, and a Korean guy was added too.\n\n**Sensory detail**\nThese are beautiful days precisely for this contrast: hours walking alone, then in the evening we always meet again to chat a bit, joke at dinner, and drink a beer. The Korean guy told very funny stories and had us dying with laughter.\n\n**What I understood**\nThe French guy Thomas has an incredible story: I will tell it later.\n\n**Practical note**\nArudy-Oloron-Sainte-Marie stage: 23 km. Evening group: the usual four plus a new Korean arrival.",
+      "notes": "**Title**\nToward Oloron, steps and stories.\n\n**Where I was / stage**\nAnother 23 km to do, direction Oloron-Sainte-Marie.\n\n**Key scene**\nOn June 6 as well, the day was a long walk in nature, alone. Arriving at the albergue, however, the atmosphere changed completely: it was still the same four of us from the previous day, and a Korean guy was added too.\n\n**Sensory detail**\nThese are beautiful days precisely for this contrast: hours walking alone, then in the evening we always meet again to chat a bit, joke at dinner, and drink a beer. That Korean guy had arrived late at the albergue and told us the story that brought him there: instead of a normal 20/25 km stage, he had taken a wrong direction and ended up doing more than 40 km, effectively skipping one full stage. He had started together with a friend, but at some point they split: the other person wanted to call a taxi, while he kept saying, \"no no no, I'm going on foot.\" So he kept walking all the way to Arudy. He told it in such a funny way that we could really feel his struggle, and we laughed a lot. All of this happened during a gloomy day of nonstop rain, which only eased in the late afternoon.\n\n**What I understood**\nThe French guy Thomas has an incredible story: I will tell it later.\n\n**Practical note**\nArudy-Oloron-Sainte-Marie stage: 23 km. Evening group: the usual four plus a new Korean arrival.",
       "strava": [
         "https://www.strava.com/activities/8362629491"
       ],
@@ -1561,7 +1562,8 @@
           "place": "Aren, France",
           "lat": 43.2404222222222,
           "lon": -0.754422222222222,
-          "gpsInferred": false
+          "gpsInferred": false,
+          "carouselKey": "merge_09456bedd694"
         },
         {
           "id": "a4878a9d456c",
@@ -1577,7 +1579,8 @@
           "place": "L'Hôpital-Saint-Blaise, France",
           "lat": 43.2517277777778,
           "lon": -0.766830555555556,
-          "gpsInferred": false
+          "gpsInferred": false,
+          "carouselKey": "merge_09456bedd694"
         },
         {
           "id": "4b0bb3eab248",
@@ -1593,7 +1596,8 @@
           "place": "L'Hôpital-Saint-Blaise, France",
           "lat": 43.2518194444444,
           "lon": -0.766822222222222,
-          "gpsInferred": false
+          "gpsInferred": false,
+          "carouselKey": "merge_09456bedd694"
         },
         {
           "id": "449e1bacce96",
@@ -1609,7 +1613,8 @@
           "place": "L'Hôpital-Saint-Blaise, France",
           "lat": 43.2518111111111,
           "lon": -0.766830555555556,
-          "gpsInferred": false
+          "gpsInferred": false,
+          "carouselKey": "merge_09456bedd694"
         },
         {
           "id": "fe1b6adcdf8d",
@@ -1625,7 +1630,8 @@
           "place": "L'Hôpital-Saint-Blaise, France",
           "lat": 43.2517916666667,
           "lon": -0.767097222222222,
-          "gpsInferred": false
+          "gpsInferred": false,
+          "carouselKey": "merge_09456bedd694"
         },
         {
           "id": "1cd73fd12ac3",
@@ -1641,7 +1647,8 @@
           "place": "L'Hôpital-Saint-Blaise, France",
           "lat": 43.2518194444444,
           "lon": -0.766836111111111,
-          "gpsInferred": false
+          "gpsInferred": false,
+          "carouselKey": "merge_09456bedd694"
         },
         {
           "id": "8e3768328ac6",
@@ -1657,7 +1664,8 @@
           "place": "L'Hôpital-Saint-Blaise, France",
           "lat": 43.2518361111111,
           "lon": -0.766816666666667,
-          "gpsInferred": false
+          "gpsInferred": false,
+          "carouselKey": "merge_09456bedd694"
         },
         {
           "id": "57440f311a5d",
@@ -1673,10 +1681,11 @@
           "place": "L'Hôpital-Saint-Blaise, France",
           "lat": 43.2518194444444,
           "lon": -0.766827777777778,
-          "gpsInferred": false
+          "gpsInferred": false,
+          "carouselKey": "merge_09456bedd694"
         }
       ],
-      "notes": "**Title**\nThree steps, three rhythms, same evening destination.\n\n**Where I was / stage**\nStage of June 7: 24 km toward Hôpital-Saint-Blaise.\n\n**Key scene**\nThe three of us started: me, Maria, and Thomas. Talia and the Korean guy stayed behind. We walked at different paces, as always happens on the Camino, but in the evening we met again in the same tiny village: few houses, really around twenty in total, no restaurant, no bar, no ATM, no supermarket. Only the albergue, with access through a code to collect at the church.\n\n**Sensory detail**\nThat is where survival mode started. Near the albergue there was only a vending machine that accepted neither cards nor banknotes: only coins. Maria and I emptied all our pockets to pool every coin possible and get the best dinner we could afford, balancing quality and quantity. Thomas instead went from doorbell to doorbell to collect something to eat for himself.\n\n**What I understood**\nThat evening we shared everything: what we had bought with spare change and what Thomas had collected. In such a small and isolated place, the value was not what you had, but the fact that no one was left alone. It was one of those moments when the Camino teaches you that community can be born from very little.\n\n**Practical note**\nOloron-Sainte-Marie → Hôpital-Saint-Blaise: 24 km. Strong recommendation: if you stop there, arrive with **coins** (not banknotes), because there are no ATMs, restaurants, or real alternatives besides the vending machines.",
+      "notes": "**Title**\nThree steps, three rhythms, same evening destination.\n\n**Where I was / stage**\nStage of June 7: 24 km toward Hôpital-Saint-Blaise.\n\n**Key scene**\nThe three of us started: me, Maria, and Thomas. Talia and the Korean guy had stayed behind. Since I had met him only for one evening, and we split already the next morning, we never had the chance to exchange contacts, and unfortunately I don't even remember his name: I would have really liked to share more moments with him. That morning he had decided to stay one extra night at the albergue to wait for the friend he had started the Camino with, because after separating they had ended up in two different towns.\n\nTalia had stayed there for the same reason: she was tired and wanted to recover energy before moving on. I fully agree with that philosophy: the Camino is best lived at your own pace, not according to return deadlines decided at home when you calculate kilometers and days from the couch. When you are there, the present moment decides: you continue if you feel able, you stop if you need to. If Talia did not feel like getting back on the road that morning, she absolutely did the right thing by listening to herself and taking a full rest day.\n\nWe walked at different paces, as always happens on the Camino, but in the evening we met again in the same tiny village: few houses, really around twenty in total, no restaurant, no bar, no ATM, no supermarket. Only the albergue, with access through a code to collect at the church.\n\n**Sensory detail**\nThat is where survival mode started. Near the albergue there was only a vending machine that accepted neither cards nor banknotes: only coins. Maria and I emptied all our pockets to pool every coin possible and get the best dinner we could afford, balancing quality and quantity. Thomas instead went from doorbell to doorbell, house by house, to collect something to eat for himself; then he added it to what we had bought, and in the end the three of us shared everything. It was a memorable dinner: three strangers joining forces and resources to create a convivial moment of real sharing.\n\n**What I understood**\nThat evening we shared everything: what we had bought with spare change and what Thomas had collected. In such a small and isolated place, the value was not what you had, but the fact that no one was left alone. It was one of those moments when the Camino teaches you that community can be born from very little.\n\n**Practical note**\nOloron-Sainte-Marie → Hôpital-Saint-Blaise: 24 km. Strong recommendation: if you stop there, arrive with **coins** (not banknotes), because there are no ATMs, restaurants, or real alternatives besides the vending machines.",
       "strava": [
         "https://www.strava.com/activities/8362629515"
       ],
@@ -1702,20 +1711,24 @@
           "gpsInferred": false
         },
         {
-          "id": "f01d263eeea3",
-          "type": "image",
+          "id": "477e2798ebf3",
+          "type": "video",
           "date": "2019-06-08",
-          "time": "07:26",
-          "src": "assets/img/img_f01d263eeea3.jpg",
-          "thumb": "assets/thumb/thumb_f01d263eeea3.jpg",
-          "poster": null,
-          "mime": "image/jpeg",
+          "time": "09:46",
+          "src": "assets/video_resized/vid_477e2798ebf3.mp4",
+          "thumb": null,
+          "poster": "assets/poster/poster_477e2798ebf3.jpg",
+          "mime": "video/mp4",
           "size": null,
-          "orig": "IMG_3020.HEIC",
-          "place": "L'Hôpital-Saint-Blaise, France",
-          "lat": 43.2518472222222,
-          "lon": -0.766847222222222,
-          "gpsInferred": false
+          "orig": "IMG_3029.MOV",
+          "place": "Chéraute, France",
+          "carouselKey": "manual_2019-06-08_09-46_triple_1",
+          "carouselOrder": 0,
+          "lat": 43.2161527777778,
+          "lon": -0.814180555555556,
+          "gpsInferred": true,
+          "locationEstimated": true,
+          "gpsInferredNote": "Aligned to nearby photo IMG_3030.HEIC (dt 2 min, was 5.01 km away)"
         },
         {
           "id": "6bed004fa817",
@@ -1754,20 +1767,22 @@
           "gpsInferred": false
         },
         {
-          "id": "397f962dae8d",
-          "type": "image",
+          "id": "929c68afcbee",
+          "type": "video",
           "date": "2019-06-08",
-          "time": "10:02",
-          "src": "assets/img/img_397f962dae8d.jpg",
-          "thumb": "assets/thumb/thumb_397f962dae8d.jpg",
-          "poster": null,
-          "mime": "image/jpeg",
+          "time": "09:50",
+          "src": "assets/video_resized/vid_929c68afcbee.mp4",
+          "thumb": null,
+          "poster": "assets/poster/poster_929c68afcbee.jpg",
+          "mime": "video/mp4",
           "size": null,
-          "orig": "IMG_3022.HEIC",
-          "place": "Préchacq-Josbaig, France",
-          "lat": 43.2409555555556,
-          "lon": -0.771191666666667,
-          "gpsInferred": false
+          "orig": "IMG_3032.MOV",
+          "place": "Chéraute, France",
+          "lat": 43.2161527777778,
+          "lon": -0.814180555555556,
+          "gpsInferred": true,
+          "locationEstimated": true,
+          "gpsInferredNote": "Aligned to nearby photo IMG_3030.HEIC (dt 2 min, was 4.78 km away)"
         },
         {
           "id": "6ca3ad939150",
@@ -1783,7 +1798,25 @@
           "place": "Préchacq-Josbaig, France",
           "lat": 43.2409388888889,
           "lon": -0.771208333333333,
-          "gpsInferred": false
+          "gpsInferred": false,
+          "carouselKey": "merge_397f962dae8d"
+        },
+        {
+          "id": "397f962dae8d",
+          "type": "image",
+          "date": "2019-06-08",
+          "time": "10:02",
+          "src": "assets/img/img_397f962dae8d.jpg",
+          "thumb": "assets/thumb/thumb_397f962dae8d.jpg",
+          "poster": null,
+          "mime": "image/jpeg",
+          "size": null,
+          "orig": "IMG_3022.HEIC",
+          "place": "Préchacq-Josbaig, France",
+          "lat": 43.2409555555556,
+          "lon": -0.771191666666667,
+          "gpsInferred": false,
+          "carouselKey": "merge_397f962dae8d"
         },
         {
           "id": "e1a1b519eb01",
@@ -1799,7 +1832,8 @@
           "place": "Préchacq-Josbaig, France",
           "lat": 43.2409527777778,
           "lon": -0.771144444444445,
-          "gpsInferred": false
+          "gpsInferred": false,
+          "carouselKey": "merge_397f962dae8d"
         },
         {
           "id": "84df7b257c11",
@@ -1815,7 +1849,26 @@
           "place": "Préchacq-Josbaig, France",
           "lat": 43.2410166666667,
           "lon": -0.771133333333333,
-          "gpsInferred": false
+          "gpsInferred": false,
+          "carouselKey": "merge_397f962dae8d"
+        },
+        {
+          "id": "d900d7d9f6f4",
+          "type": "video",
+          "date": "2019-06-08",
+          "time": "10:33",
+          "src": "assets/video_resized/vid_d900d7d9f6f4.mp4",
+          "thumb": null,
+          "poster": "assets/poster/poster_d900d7d9f6f4.jpg",
+          "mime": "video/mp4",
+          "size": null,
+          "orig": "IMG_3033.MOV",
+          "place": "Chéraute, France",
+          "lat": 43.2172277777778,
+          "lon": -0.829730555555556,
+          "gpsInferred": true,
+          "locationEstimated": true,
+          "gpsInferredNote": "Aligned to nearby photo IMG_3034.HEIC (dt 3 min, was 3.88 km away)"
         },
         {
           "id": "6b582ee9d733",
@@ -1850,6 +1903,41 @@
           "gpsInferred": false
         },
         {
+          "id": "09f2ba4c675b",
+          "type": "video",
+          "date": "2019-06-08",
+          "time": "10:36",
+          "src": "assets/video_resized/vid_09f2ba4c675b.mp4",
+          "thumb": null,
+          "poster": "assets/poster/poster_09f2ba4c675b.jpg",
+          "mime": "video/mp4",
+          "size": null,
+          "orig": "IMG_3037.MOV",
+          "place": "Chéraute, France",
+          "lat": 43.2172277777778,
+          "lon": -0.829730555555556,
+          "gpsInferred": true,
+          "locationEstimated": true,
+          "gpsInferredNote": "Aligned to nearby photo IMG_3034.HEIC (dt 0 min, was 3.67 km away)"
+        },
+        {
+          "id": "b9a3f35acd55",
+          "type": "video",
+          "date": "2019-06-08",
+          "time": "10:45",
+          "src": "assets/video_resized/vid_b9a3f35acd55.mp4",
+          "thumb": null,
+          "poster": "assets/poster/poster_b9a3f35acd55.jpg",
+          "mime": "video/mp4",
+          "size": null,
+          "orig": "IMG_3039.MOV",
+          "place": "Chéraute, France",
+          "lat": 43.229549407958984,
+          "lon": -0.7927836775779724,
+          "gpsInferred": true,
+          "locationEstimated": true
+        },
+        {
           "id": "febf1d71b5aa",
           "type": "image",
           "date": "2019-06-08",
@@ -1866,6 +1954,128 @@
           "lat": 43.2169083333333,
           "lon": -0.829672222222222,
           "gpsInferred": false
+        },
+        {
+          "id": "05fe2f8dd93c",
+          "type": "video",
+          "date": "2019-06-08",
+          "time": "10:52",
+          "src": "assets/video_resized/vid_05fe2f8dd93c.mp4",
+          "thumb": null,
+          "poster": "assets/poster/poster_05fe2f8dd93c.jpg",
+          "mime": "video/mp4",
+          "size": null,
+          "orig": "IMG_3041.MOV",
+          "place": "Chéraute, France",
+          "carouselKey": "manual_2019-06-08_10-52_pair_1",
+          "carouselOrder": 1,
+          "lat": 43.2169083333333,
+          "lon": -0.829672222222222,
+          "gpsInferred": true,
+          "locationEstimated": true,
+          "gpsInferredNote": "Aligned to nearby photo IMG_3040.HEIC (dt 0 min, was 2.83 km away)"
+        },
+        {
+          "id": "04f3b1c1cf2d",
+          "type": "video",
+          "date": "2019-06-08",
+          "time": "11:01",
+          "src": "assets/video_resized/vid_04f3b1c1cf2d.mp4",
+          "thumb": null,
+          "poster": "assets/poster/poster_04f3b1c1cf2d.jpg",
+          "mime": "video/mp4",
+          "size": null,
+          "orig": "IMG_3042.MOV",
+          "place": "Chéraute, France",
+          "lat": 43.22146987915039,
+          "lon": -0.7995888590812683,
+          "gpsInferred": true,
+          "locationEstimated": true
+        },
+        {
+          "id": "511b243b4a5c",
+          "type": "video",
+          "date": "2019-06-08",
+          "time": "11:02",
+          "src": "assets/video_resized/vid_511b243b4a5c.mp4",
+          "thumb": null,
+          "poster": "assets/poster/poster_511b243b4a5c.jpg",
+          "mime": "video/mp4",
+          "size": null,
+          "orig": "IMG_3043.MOV",
+          "place": "Chéraute, France",
+          "lat": 43.221473693847656,
+          "lon": -0.7998220324516296,
+          "gpsInferred": true,
+          "locationEstimated": true
+        },
+        {
+          "id": "91b836b2961e",
+          "type": "video",
+          "date": "2019-06-08",
+          "time": "11:04",
+          "src": "assets/video_resized/vid_91b836b2961e.mp4",
+          "thumb": null,
+          "poster": "assets/poster/poster_91b836b2961e.jpg",
+          "mime": "video/mp4",
+          "size": null,
+          "orig": "IMG_3044.MOV",
+          "place": "Chéraute, France",
+          "lat": 43.22145462036133,
+          "lon": -0.8013253211975098,
+          "gpsInferred": true,
+          "locationEstimated": true
+        },
+        {
+          "id": "98c207eff95a",
+          "type": "video",
+          "date": "2019-06-08",
+          "time": "11:06",
+          "src": "assets/video_resized/vid_98c207eff95a.mp4",
+          "thumb": null,
+          "poster": "assets/poster/poster_98c207eff95a.jpg",
+          "mime": "video/mp4",
+          "size": null,
+          "orig": "IMG_3045.MOV",
+          "place": "Uhart-Cize, France",
+          "lat": 43.22146224975586,
+          "lon": -0.8029749989509583,
+          "gpsInferred": true,
+          "locationEstimated": true
+        },
+        {
+          "id": "73b80c8d330b",
+          "type": "video",
+          "date": "2019-06-08",
+          "time": "11:08",
+          "src": "assets/video_resized/vid_73b80c8d330b.mp4",
+          "thumb": null,
+          "poster": "assets/poster/poster_73b80c8d330b.jpg",
+          "mime": "video/mp4",
+          "size": null,
+          "orig": "IMG_3046.MOV",
+          "place": "Uhart-Cize, France",
+          "lat": 43.220611572265625,
+          "lon": -0.8039013743400574,
+          "gpsInferred": true,
+          "locationEstimated": true
+        },
+        {
+          "id": "26304939136f",
+          "type": "video",
+          "date": "2019-06-08",
+          "time": "11:22",
+          "src": "assets/video_resized/vid_26304939136f.mp4",
+          "thumb": null,
+          "poster": "assets/poster/poster_26304939136f.jpg",
+          "mime": "video/mp4",
+          "size": null,
+          "orig": "IMG_3047.MOV",
+          "place": "Chéraute, France",
+          "lat": 43.22256088256836,
+          "lon": -0.8088414669036865,
+          "gpsInferred": true,
+          "locationEstimated": true
         },
         {
           "id": "8a9c303e733a",
@@ -1900,218 +2110,10 @@
           "gpsInferred": false
         },
         {
-          "id": "477e2798ebf3",
-          "type": "video",
-          "date": "2019-06-08",
-          "time": "11:46",
-          "src": "assets/video_resized/vid_477e2798ebf3.mp4",
-          "thumb": null,
-          "poster": "assets/poster/poster_477e2798ebf3.jpg",
-          "mime": "video/mp4",
-          "size": null,
-          "orig": "IMG_3029.MOV",
-          "place": "Chéraute, France",
-          "carouselKey": "manual_2019-06-08_09-46_triple_1",
-          "carouselOrder": 0,
-          "lat": 43.24733352661133,
-          "lon": -0.7695677280426025,
-          "gpsInferred": true,
-          "locationEstimated": true
-        },
-        {
-          "id": "929c68afcbee",
-          "type": "video",
-          "date": "2019-06-08",
-          "time": "11:50",
-          "src": "assets/video_resized/vid_929c68afcbee.mp4",
-          "thumb": null,
-          "poster": "assets/poster/poster_929c68afcbee.jpg",
-          "mime": "video/mp4",
-          "size": null,
-          "orig": "IMG_3032.MOV",
-          "place": "Chéraute, France",
-          "lat": 43.2449951171875,
-          "lon": -0.7705009579658508,
-          "gpsInferred": true,
-          "locationEstimated": true
-        },
-        {
-          "id": "d900d7d9f6f4",
-          "type": "video",
-          "date": "2019-06-08",
-          "time": "12:33",
-          "src": "assets/video_resized/vid_d900d7d9f6f4.mp4",
-          "thumb": null,
-          "poster": "assets/poster/poster_d900d7d9f6f4.jpg",
-          "mime": "video/mp4",
-          "size": null,
-          "orig": "IMG_3033.MOV",
-          "place": "Chéraute, France",
-          "lat": 43.23216247558594,
-          "lon": -0.7864031791687012,
-          "gpsInferred": true,
-          "locationEstimated": true
-        },
-        {
-          "id": "09f2ba4c675b",
-          "type": "video",
-          "date": "2019-06-08",
-          "time": "12:36",
-          "src": "assets/video_resized/vid_09f2ba4c675b.mp4",
-          "thumb": null,
-          "poster": "assets/poster/poster_09f2ba4c675b.jpg",
-          "mime": "video/mp4",
-          "size": null,
-          "orig": "IMG_3037.MOV",
-          "place": "Chéraute, France",
-          "lat": 43.231502532958984,
-          "lon": -0.7888837456703186,
-          "gpsInferred": true,
-          "locationEstimated": true
-        },
-        {
-          "id": "b9a3f35acd55",
-          "type": "video",
-          "date": "2019-06-08",
-          "time": "12:45",
-          "src": "assets/video_resized/vid_b9a3f35acd55.mp4",
-          "thumb": null,
-          "poster": "assets/poster/poster_b9a3f35acd55.jpg",
-          "mime": "video/mp4",
-          "size": null,
-          "orig": "IMG_3039.MOV",
-          "place": "Chéraute, France",
-          "lat": 43.229549407958984,
-          "lon": -0.7927836775779724,
-          "gpsInferred": true,
-          "locationEstimated": true
-        },
-        {
-          "id": "05fe2f8dd93c",
-          "type": "video",
-          "date": "2019-06-08",
-          "time": "12:52",
-          "src": "assets/video_resized/vid_05fe2f8dd93c.mp4",
-          "thumb": null,
-          "poster": "assets/poster/poster_05fe2f8dd93c.jpg",
-          "mime": "video/mp4",
-          "size": null,
-          "orig": "IMG_3041.MOV",
-          "place": "Chéraute, France",
-          "carouselKey": "manual_2019-06-08_10-52_pair_1",
-          "carouselOrder": 1,
-          "lat": 43.22600555419922,
-          "lon": -0.7969996929168701,
-          "gpsInferred": true,
-          "locationEstimated": true
-        },
-        {
-          "id": "04f3b1c1cf2d",
-          "type": "video",
-          "date": "2019-06-08",
-          "time": "13:01",
-          "src": "assets/video_resized/vid_04f3b1c1cf2d.mp4",
-          "thumb": null,
-          "poster": "assets/poster/poster_04f3b1c1cf2d.jpg",
-          "mime": "video/mp4",
-          "size": null,
-          "orig": "IMG_3042.MOV",
-          "place": "Chéraute, France",
-          "lat": 43.22146987915039,
-          "lon": -0.7995888590812683,
-          "gpsInferred": true,
-          "locationEstimated": true
-        },
-        {
-          "id": "511b243b4a5c",
-          "type": "video",
-          "date": "2019-06-08",
-          "time": "13:02",
-          "src": "assets/video_resized/vid_511b243b4a5c.mp4",
-          "thumb": null,
-          "poster": "assets/poster/poster_511b243b4a5c.jpg",
-          "mime": "video/mp4",
-          "size": null,
-          "orig": "IMG_3043.MOV",
-          "place": "Chéraute, France",
-          "lat": 43.221473693847656,
-          "lon": -0.7998220324516296,
-          "gpsInferred": true,
-          "locationEstimated": true
-        },
-        {
-          "id": "91b836b2961e",
-          "type": "video",
-          "date": "2019-06-08",
-          "time": "13:04",
-          "src": "assets/video_resized/vid_91b836b2961e.mp4",
-          "thumb": null,
-          "poster": "assets/poster/poster_91b836b2961e.jpg",
-          "mime": "video/mp4",
-          "size": null,
-          "orig": "IMG_3044.MOV",
-          "place": "Chéraute, France",
-          "lat": 43.22145462036133,
-          "lon": -0.8013253211975098,
-          "gpsInferred": true,
-          "locationEstimated": true
-        },
-        {
-          "id": "98c207eff95a",
-          "type": "video",
-          "date": "2019-06-08",
-          "time": "13:06",
-          "src": "assets/video_resized/vid_98c207eff95a.mp4",
-          "thumb": null,
-          "poster": "assets/poster/poster_98c207eff95a.jpg",
-          "mime": "video/mp4",
-          "size": null,
-          "orig": "IMG_3045.MOV",
-          "place": "Uhart-Cize, France",
-          "lat": 43.22146224975586,
-          "lon": -0.8029749989509583,
-          "gpsInferred": true,
-          "locationEstimated": true
-        },
-        {
-          "id": "73b80c8d330b",
-          "type": "video",
-          "date": "2019-06-08",
-          "time": "13:08",
-          "src": "assets/video_resized/vid_73b80c8d330b.mp4",
-          "thumb": null,
-          "poster": "assets/poster/poster_73b80c8d330b.jpg",
-          "mime": "video/mp4",
-          "size": null,
-          "orig": "IMG_3046.MOV",
-          "place": "Uhart-Cize, France",
-          "lat": 43.220611572265625,
-          "lon": -0.8039013743400574,
-          "gpsInferred": true,
-          "locationEstimated": true
-        },
-        {
-          "id": "26304939136f",
-          "type": "video",
-          "date": "2019-06-08",
-          "time": "13:22",
-          "src": "assets/video_resized/vid_26304939136f.mp4",
-          "thumb": null,
-          "poster": "assets/poster/poster_26304939136f.jpg",
-          "mime": "video/mp4",
-          "size": null,
-          "orig": "IMG_3047.MOV",
-          "place": "Chéraute, France",
-          "lat": 43.22256088256836,
-          "lon": -0.8088414669036865,
-          "gpsInferred": true,
-          "locationEstimated": true
-        },
-        {
           "id": "5e51b2100d4a",
           "type": "video",
           "date": "2019-06-08",
-          "time": "14:56",
+          "time": "12:56",
           "src": "assets/video_resized/vid_5e51b2100d4a.mp4",
           "thumb": null,
           "poster": "assets/poster/poster_5e51b2100d4a.jpg",
@@ -2130,7 +2132,7 @@
           "id": "a2680f380695",
           "type": "video",
           "date": "2019-06-08",
-          "time": "14:56",
+          "time": "12:56",
           "src": "assets/video_resized/vid_a2680f380695.mp4",
           "thumb": null,
           "poster": "assets/poster/poster_a2680f380695.jpg",
@@ -2149,7 +2151,7 @@
           "id": "0cda4defa7ee",
           "type": "video",
           "date": "2019-06-08",
-          "time": "14:57",
+          "time": "12:57",
           "src": "assets/video_resized/vid_0cda4defa7ee.mp4",
           "thumb": null,
           "poster": "assets/poster/poster_0cda4defa7ee.jpg",
@@ -2168,7 +2170,7 @@
           "id": "910cc769e897",
           "type": "video",
           "date": "2019-06-08",
-          "time": "14:59",
+          "time": "12:59",
           "src": "assets/video_resized/vid_910cc769e897.mp4",
           "thumb": null,
           "poster": "assets/poster/poster_910cc769e897.jpg",
@@ -2187,7 +2189,7 @@
           "id": "c392f5ea0029",
           "type": "video",
           "date": "2019-06-08",
-          "time": "14:59",
+          "time": "12:59",
           "src": "assets/video_resized/vid_c392f5ea0029.mp4",
           "thumb": null,
           "poster": "assets/poster/poster_c392f5ea0029.jpg",
@@ -2206,7 +2208,7 @@
           "id": "4f812ded995c",
           "type": "video",
           "date": "2019-06-08",
-          "time": "15:02",
+          "time": "13:02",
           "src": "assets/video_resized/vid_4f812ded995c.mp4",
           "thumb": null,
           "poster": "assets/poster/poster_4f812ded995c.jpg",
@@ -2270,6 +2272,23 @@
           "gpsInferred": false
         },
         {
+          "id": "2a52446dd18f",
+          "type": "video",
+          "date": "2019-06-08",
+          "time": "17:24",
+          "src": "assets/video_resized/vid_2a52446dd18f.mp4",
+          "thumb": null,
+          "poster": "assets/poster/poster_2a52446dd18f.jpg",
+          "mime": "video/mp4",
+          "size": null,
+          "orig": "IMG_3065.MOV",
+          "place": "Mauléon-Licharre, France",
+          "lat": 43.212860107421875,
+          "lon": -0.9011803865432739,
+          "gpsInferred": true,
+          "locationEstimated": true
+        },
+        {
           "id": "1ca11cd35b7b",
           "type": "image",
           "date": "2019-06-08",
@@ -2316,26 +2335,9 @@
           "lat": 43.1862722222222,
           "lon": -0.943733333333333,
           "gpsInferred": false
-        },
-        {
-          "id": "2a52446dd18f",
-          "type": "video",
-          "date": "2019-06-08",
-          "time": "19:24",
-          "src": "assets/video_resized/vid_2a52446dd18f.mp4",
-          "thumb": null,
-          "poster": "assets/poster/poster_2a52446dd18f.jpg",
-          "mime": "video/mp4",
-          "size": null,
-          "orig": "IMG_3065.MOV",
-          "place": "Mauléon-Licharre, France",
-          "lat": 43.212860107421875,
-          "lon": -0.9011803865432739,
-          "gpsInferred": true,
-          "locationEstimated": true
         }
       ],
-      "notes": "**Title**\nShells, fire, and full happiness.\n\n**Where I was / stage**\nStage of June 8: about 25 km total, 20 km to Ordiarp and then another 5 km to Garáibie.\n\n**Key scene**\nThe goal of the day was clear: continue scattering the metal shells for Talia. Thomas and I started with a faster pace than Maria. But the strongest moment of the day actually came from what had happened the evening before: the family that had seen Thomas getting ready to leave, without him asking anything, gave him a bag with food for breakfast/lunch.\n\n**Sensory detail**\nBy chance Thomas and I met again later, in a meadow near a wood. I had my small pan; in Thomas's bag there were 4 perfect eggs for two people, meat pâté, and bruschette. We stopped near the stream, lit the fire with maximum care, small flame, everything under control, and put it out immediately as soon as we were done. We cooked and ate sitting on an improvised bench made of stones and logs. It was simple, but perfect.\n\n**What I understood**\nUp to that moment, it was the most beautiful experience of the Camino: we were happy, and we knew it. We enjoyed every minute, without hurry, until the moment to start walking again came naturally.\n\n**Practical note**\nIntense and full stage: shell mission, stretches done at different paces, safe cooked-food break in the woods, and finish between Ordiarp and Garáibie.",
+      "notes": "**Title**\nShells, fire, and full happiness.\n\n**Where I was / stage**\nStage of June 8: about 25 km total, 20 km to Ordiarp and then another 5 km to Garáibie.\n\n**Key scene**\nThe goal of the day was clear: keep scattering the metal shells for Talia. We had left the first one in the albergue, behind the kitchen door. The photos make it clear that around 10:00 we were leaving the second one, and all three of us were still together: me, Maria, and Thomas.\n\nOnly later, Thomas and I separated from Maria, who continued at her own pace. When we reached a small wooded area near a stream, we stopped to eat and lit a small fire. But the strongest moment of the day actually came from what happened between evening and morning: the family had given him food for dinner the night before; then in the morning, while we were leaving, they called him back and gave him another bag with more food for breakfast.\n\n**Sensory detail**\nI had my small pan; in Thomas's bag there were 4 perfect eggs for two people, meat pâté, and bruschette. We stopped near the stream, lit the fire with maximum care, small flame, everything under control, and put it out immediately as soon as we were done. We cooked and ate sitting on an improvised bench made of stones and logs. It was simple, but perfect.\n\n**What I understood**\nUp to that moment, it was the most beautiful experience of the Camino: we were happy, and we knew it. We enjoyed every minute, without hurry, until the moment to start walking again came naturally.\n\n**Practical note**\nIntense and full stage: shell mission, stretches done at different paces, safe cooked-food break in the woods, and finish between Ordiarp and Garáibie.",
       "strava": [
         "https://www.strava.com/activities/8362629566"
       ],
@@ -2378,6 +2380,25 @@
           "gpsInferred": false
         },
         {
+          "id": "1bef3de86f9f",
+          "type": "video",
+          "date": "2019-06-09",
+          "time": "10:27",
+          "src": "assets/video_resized/vid_1bef3de86f9f.mp4",
+          "thumb": null,
+          "poster": "assets/poster/poster_1bef3de86f9f.jpg",
+          "mime": "video/mp4",
+          "size": null,
+          "orig": "IMG_3071.MOV",
+          "place": "Saint-Just, France",
+          "lat": 43.1856611111111,
+          "lon": -1.05199722222222,
+          "gpsInferred": true,
+          "locationEstimated": true,
+          "carouselKey": "merge_1bef3de86f9f",
+          "gpsInferredNote": "Aligned to nearby photo IMG_3070.HEIC (dt 0 min, was 6.65 km away)"
+        },
+        {
           "id": "e4a269e5db09",
           "type": "image",
           "date": "2019-06-09",
@@ -2391,24 +2412,8 @@
           "place": "Saint-Just, France",
           "lat": 43.1856611111111,
           "lon": -1.05199722222222,
-          "gpsInferred": false
-        },
-        {
-          "id": "1bef3de86f9f",
-          "type": "video",
-          "date": "2019-06-09",
-          "time": "10:27",
-          "src": "assets/video_resized/vid_1bef3de86f9f.mp4",
-          "thumb": null,
-          "poster": "assets/poster/poster_1bef3de86f9f.jpg",
-          "mime": "video/mp4",
-          "size": null,
-          "orig": "IMG_3071.MOV",
-          "place": "Saint-Just, France",
-          "lat": 43.16117858886719,
-          "lon": -0.9772449731826782,
-          "gpsInferred": true,
-          "locationEstimated": true
+          "gpsInferred": false,
+          "carouselKey": "merge_1bef3de86f9f"
         },
         {
           "id": "dc4b2235d038",
@@ -2422,10 +2427,12 @@
           "size": null,
           "orig": "IMG_3072.MOV",
           "place": "Saint-Just, France",
-          "lat": 43.16078567504883,
-          "lon": -0.9778939485549927,
+          "lat": 43.1857083333333,
+          "lon": -1.05201111111111,
           "gpsInferred": true,
-          "locationEstimated": true
+          "locationEstimated": true,
+          "carouselKey": "merge_1bef3de86f9f",
+          "gpsInferredNote": "Aligned to nearby photo IMG_3073.HEIC (dt 0 min, was 6.62 km away)"
         },
         {
           "id": "781057b793c4",
@@ -2441,7 +2448,8 @@
           "place": "Saint-Just, France",
           "lat": 43.1857083333333,
           "lon": -1.05201111111111,
-          "gpsInferred": false
+          "gpsInferred": false,
+          "carouselKey": "merge_1bef3de86f9f"
         },
         {
           "id": "eda586033093",
@@ -2719,7 +2727,7 @@
           "gpsInferred": false
         }
       ],
-      "notes": "**Title**\nFinally Saint-Jean, between fatigue and a change of atmosphere.\n\n**Where I was / stage**\nStage of June 9: about 30 km, direction Saint-Jean-Pied-de-Port.\n\n**Key scene**\nIt was another long day in the middle of nature. Thomas and I also met some goats along the route, and we left another little shell for Talia. Around 17:30 I stopped in a village before Saint-Jean: I was tired, I needed to catch my breath, and I treated myself to a beer.\n\n**Sensory detail**\nArrival in Saint-Jean had a clear impact: compared with previous days, the town is much more touristy, full of little shops, small restaurants, and albergues. On the French section up to that point, pilgrims were very few; here instead the streets are full, and you immediately understand that many people arrive precisely to start from this point.\n\n**What I understood**\nIt is right here, in Saint-Jean, that I started to feel pain in my Achilles tendon: it was not a blocking pain, but it was the signal that I had to manage pace and recovery better.\n\n**Practical note**\nAbout 30 km total, evening arrival in Saint-Jean-Pied-de-Port with an afternoon recovery stop and the decision to organize the next stage in a calmer and more relaxing way, taking advantage of the bad weather that was expected to come.",
+      "notes": "**Title**\nFinally Saint-Jean, between fatigue and a change of atmosphere.\n\n**Where I was / stage**\nStage of June 9: about 30 km, direction Saint-Jean-Pied-de-Port.\n\n**Key scene**\nIt was another long day in the middle of nature. Thomas and I also met some goats along the route, and we left another little shell for Talia. Around 17:30 I stopped in a village before Saint-Jean: I was tired, I needed to catch my breath, and I treated myself to a beer.\n\nWhen I arrived in Saint-Jean, I learned that Thomas and Maria were already in town, but together in another albergue. I went into the first available albergue I found. In the dormitory I exchanged a few words with a girl from Québec: while we were chatting, I told her I was considering stopping for a day to rest my tendon, given the strong pain, and she pointed out that before Roncesvalles there was Orisson, only 8/9 km away.\n\n**Sensory detail**\nThat suggestion felt perfect: recover without staying completely still and, above all, split the Saint-Jean-Roncesvalles section into two parts. With the steep climb, muddy ground after rain, and very dense fog at altitude, it was a much smarter choice.\n\n**What I understood**\nIt is right here, in Saint-Jean, that I started to feel pain in my Achilles tendon: it was not a blocking pain, but it was the signal that I had to manage pace and recovery better, without necessarily chasing Thomas and Maria's timing.\n\n**Practical note**\nAbout 30 km total, evening arrival in Saint-Jean-Pied-de-Port with an afternoon recovery stop and the decision to organize the next stage in a calmer and more relaxing way, taking advantage of the bad weather that was expected to come.",
       "strava": [
         "https://www.strava.com/activities/8362629615"
       ],
@@ -2937,7 +2945,7 @@
           "gpsInferred": false
         }
       ],
-      "notes": "**Title**\nOrisson, few kilometers and smart management.\n\n**Where I was / stage**\nFrom Saint Jean to Orisson, about 8 km.\n\n**Key scene**\nThe Achilles tendon still hurt, so I decided not to force it: instead of the long stage to Roncesvalles, I split it and arrived at Orisson. When I arrived in Saint-Jean, in the dorm I had met the blonde girl from Québec: while talking with her, she advised me not to stay completely still but to do the short 8/9 km stage to Orisson. In this phase I started a precise routine: Voltaren three times a day and reduction of kilometers so as not to make things worse.\n\n**Sensory detail**\nAt Refuge Orisson, dinner was in an area that hosted 3 long tables: a very convivial atmosphere full of energy. Later, upstairs in the dormitory, Mark helped me concretely: he gave me some pills and a small ball to do stretching for foot/tendon.\n\n**What I understood**\nThat stage taught me that slowing down does not mean losing ground: it means protecting yourself so you can truly continue and also make the right connections.\n\n**Practical note**\nIn the afternoon and evening in Orisson I rested completely, without adding extra effort: it was part of the plan to settle the tendinitis.",
+      "notes": "**Title**\nOrisson, the right choice at the right moment.\n\n**Where I was / stage**\nFrom Saint-Jean-Pied-de-Port to Orisson, about 8 km.\n\n**Key scene**\nMy Achilles tendon was still hurting, so I chose a cautious approach: a short stage to Orisson, without forcing the full climb to Roncesvalles in a single day.\n\nThe first concrete thing I did was buy Voltaren and start applying it 3 times a day. From there I set a clear routine: fewer kilometers, more focus on recovery, steady rhythm without overpushing.\n\n**Sensory detail**\nThe day was gloomy, with muddy ground, a steep climb, and dense fog at altitude. During the ascent I met many Americans: I did not expect at all that the Camino was so well known in the United States.\n\nWhen I arrived at Refuge Orisson, dinner was organized in a big area with 2/3 long shared tables: a very convivial atmosphere. There I met Pamela, Andrius, Mark, Carla, Danielle, and Isabel. There was also the blonde girl from Québec and a Belgian girl next to her, with whom I still had never spoken, but who would soon become part of my Camino: Catherine.\n\n**What I understood**\nThat stage taught me that slowing down is not losing time: it is the choice that allows you to continue well. And often, it is exactly when you slow down that you make the most important connections.\n\n**Practical note**\nIn the afternoon and evening I rested completely. Later, in the upstairs dormitory, Mark helped me concretely: he gave me some pills and a small ball to do stretching for foot/tendon. Splitting the climb with Orisson was an excellent strategic choice.",
       "recommendations": [
         "Refuge Orisson (highly recommended): a perfect stop to split the climb toward Roncesvalles. Very friendly shared-dinner atmosphere and memorable mountain views."
       ],
@@ -3168,10 +3176,11 @@
           "size": null,
           "orig": "IMG_3132.MOV",
           "place": "Arnéguy, France",
-          "lat": 43.10890579223633,
-          "lon": -1.2392324209213257,
+          "lat": 43.0524166666667,
+          "lon": -1.26768611111111,
           "gpsInferred": true,
-          "locationEstimated": true
+          "locationEstimated": true,
+          "gpsInferredNote": "Aligned to nearby photo IMG_3129.HEIC (dt 4 min, was 6.69 km away)"
         },
         {
           "id": "47c0897d95d4",
@@ -3303,7 +3312,7 @@
           "gpsInferred": false
         }
       ],
-      "notes": "**Title**\nDifferent steps, same trail.\n\n**Where I was / stage**\nOn June 11 we set off again from Orisson, direction Roncesvalles.\n\n**Key scene**\nA gloomy but beautiful day: woods, trails, animals, and climbs that, despite the effort, flowed better thanks to the chats with the small group I had met at the refuge the evening before.\n\n**Sensory detail**\nIn this phase I also started a strict rule: drink water every 20 minutes of walking, even without thirst, because I wanted to do everything possible to help the tendon recover.\n\n**What I understood**\nOnce in Roncesvalles I rested again all afternoon and evening. There a Korean woman, who was sleeping near me in the huge dorm of the albergue, gave me a patch to put on the tendon: a simple but precious help.\n\n**Practical note**\nOrisson-Roncesvalles stage in a full day: about 20 km, with careful pain management and total focus on recovery, hydration, and pace.",
+      "notes": "**Title**\nDifferent steps, same trail.\n\n**Where I was / stage**\nOn June 11 I set off again from Orisson, direction Roncesvalles.\n\n**Key scene**\nGloomy day but beautiful: woods, trails, animals, and climbs that, despite the effort, flowed better thanks to the chats with the group I had met at the refuge the previous evening.\n\n**Sensory detail**\nIn this phase I also started a strict rule: drink water every 20 minutes of walking, even without thirst, because I wanted to do everything possible to help tendon recovery. On the same day the shell mission continued too: I left another one along the way, but in the meantime I had learned that the first one had not been found, and Thomas and I discussed how to close the game well with Talia.\n\n**What I understood**\nOnce in Roncesvalles I rested again for the whole afternoon and evening. There, a Korean lady who was sleeping near me in the huge dormitory gave me a patch to put on the tendon: a simple but precious help.\n\nMeanwhile Maria did only a few kilometers that day and arrived in Zubiri with other pilgrims she did not know. Her Camino would then end between Zubiri and Pamplona, before returning to Italy. Talia was still behind, and Thomas was already ahead: it was the first concrete sign that the group was changing. And this is also the Camino: you meet people, share parts of the road, then separate; sometimes you meet again, sometimes you do not.\n\n**Practical note**\nOrisson-Roncesvalles stage in a full day: about 20 km, with cautious pain management and full focus on recovery, hydration, and pace. With a large and crowded hostel, leaving the last shell effectively was not trivial: from there came the idea (applied the next day) to hide it and send photo clues.",
       "recommendations": [
         "Roncesvalles municipal albergue: it takes adaptability because it is a very large dormitory (around 40 beds), but it is full pilgrim spirit and I felt good there."
       ],
@@ -3536,10 +3545,11 @@
           "size": null,
           "orig": "IMG_3172.MOV",
           "place": "Esteribar, España",
-          "lat": 42.92863845825195,
-          "lon": -1.5023504495620728,
+          "lat": 42.8979083333333,
+          "lon": -1.54198333333333,
           "gpsInferred": true,
-          "locationEstimated": true
+          "locationEstimated": true,
+          "gpsInferredNote": "Aligned to nearby photo IMG_3170.HEIC (dt 0 min, was 4.70 km away)"
         },
         {
           "id": "053ed446233b",
@@ -3800,7 +3810,7 @@
           "gpsInferredFromPlace": true
         }
       ],
-      "notes": "**Title**\nPamplona calmly, between recovery and pilgrim spirit.\n\n**Where I was / stage**\nJune 13: short day, few kilometers to Pamplona.\n\n**Key scene**\nI chose a short stage to rest and not leave the others in the group too far behind, since they would also arrive in the city. Arriving early in Pamplona was perfect: a famous, lively city, with a particular energy, also because of the famous San Fermín festival.\n\n**Sensory detail**\nAs soon as I arrived, I stopped at Albergue turístico y de peregrinos \"Jesús y María\" to wash clothes and then go out. At the sinks I met Catherine, the Belgian girl I had already crossed paths with in Orisson, friend of the blonde girl from Québec. After laundry we said goodbye to go to our rooms and take a shower.\n\n**What I understood**\nIn those days I was managing tendinitis with a simple logic: walk in the morning and recover as much as possible in the afternoon. In Pamplona this choice worked well and allowed me to regain energy without stopping completely.\n\n**Practical note**\nShort recovery stage and early arrival in Pamplona, with the evening divided between new encounters and meeting again with the Orisson group.\n\n**Photo note**\nIn the last photo, from left to right: me, Carla, Danielle, Pam, Mark, Isabel, and Andrius.",
+      "notes": "**Title**\nPamplona calmly, between recovery and pilgrim spirit.\n\n**Where I was / stage**\nJune 13: short day, few kilometers to Pamplona.\n\n**Key scene**\nI chose a short stage to rest and not leave the others in the group too far behind, since they would also arrive in the city. Arriving early in Pamplona was perfect: a famous, lively city, with a particular energy, also because of the famous San Fermín festival.\n\n**Sensory detail**\nAs soon as I arrived, I stopped at Albergue turístico y de peregrinos \"Jesús y María\" to wash clothes and then go out. At the sinks I met Catherine, the Belgian girl I had already crossed paths with in Orisson, friend of the blonde girl from Québec. After laundry we said goodbye to go to our rooms and take a shower.\n\nLater we met again and went to have a beer together. In the evening I also met the Orisson group, who had taken an Airbnb and were all together.\n\n**What I understood**\nIn those days I was managing tendinitis with a simple logic: walk in the morning and recover as much as possible in the afternoon. In Pamplona this choice worked well and allowed me to regain energy without stopping completely.\n\nThat evening I also felt something else strongly: I prefer to live the Camino as a pilgrim, in shared dorms and simplicity. Airbnb is comfortable, but you lose part of that essential atmosphere of adaptation and adventure that, for me, is a central part of the experience.\n\n**Practical note**\nShort recovery stage and early arrival in Pamplona, with the evening divided between new encounters and meeting again with the Orisson group.\n\n**Photo note**\nIn the last photo, from left to right: me, Carla, Danielle, Pam, Mark, Isabel, and Andrius.",
       "recommendations": [
         "Albergue turístico y de peregrinos \"Jesús y María\" (Pamplona): I personally recommend it."
       ],
@@ -4119,10 +4129,11 @@
           "size": null,
           "orig": "IMG_3208.MOV",
           "place": "Cizur, España",
-          "lat": 42.74848556518555,
-          "lon": -1.7227184772491455,
+          "lat": 42.7360388888889,
+          "lon": -1.74122222222222,
           "gpsInferred": true,
-          "locationEstimated": true
+          "locationEstimated": true,
+          "gpsInferredNote": "Aligned to nearby photo IMG_3207.HEIC (dt 0 min, was 2.05 km away)"
         },
         {
           "id": "1b48a840bf90",
@@ -5705,10 +5716,11 @@
           "size": null,
           "orig": "bc98675f5d484f35bd58d2823639bb70.mov",
           "place": "Viana, España",
-          "lat": 42.52133560180664,
-          "lon": -2.3401715755462646,
+          "lat": 42.5155555555556,
+          "lon": -2.37166388888889,
           "gpsInferred": true,
-          "locationEstimated": true
+          "locationEstimated": true,
+          "gpsInferredNote": "Aligned to nearby photo IMG_3301.HEIC (dt 0 min, was 2.66 km away)"
         },
         {
           "id": "f1a757441d40",
@@ -5798,10 +5810,11 @@
           "size": null,
           "orig": "IMG_3306.MOV",
           "place": "Viana, España",
-          "lat": 42.51519775390625,
-          "lon": -2.3709323406219482,
+          "lat": 42.4907,
+          "lon": -2.41546944444444,
           "gpsInferred": true,
-          "locationEstimated": true
+          "locationEstimated": true,
+          "gpsInferredNote": "Aligned to nearby photo IMG_3305.HEIC (dt 5 min, was 4.56 km away)"
         },
         {
           "id": "e13911d95b8a",
@@ -6742,10 +6755,11 @@
           "size": null,
           "orig": "IMG_3393.MOV",
           "place": "Arlanzón, España",
-          "lat": 42.37737274169922,
-          "lon": -3.4130187034606934,
+          "lat": 42.3718416666667,
+          "lon": -3.46542222222222,
           "gpsInferred": true,
-          "locationEstimated": true
+          "locationEstimated": true,
+          "gpsInferredNote": "Aligned to nearby photo IMG_3392.HEIC (dt 1 min, was 4.35 km away)"
         },
         {
           "id": "21a6e22bc97b",
@@ -6828,7 +6842,7 @@
           "gpsInferred": false
         }
       ],
-      "notes": "**Title**\nAtapuerca, group crossings and plans that align.\n\n**Where I was / stage**\nJune 21: arrival in Atapuerca with accommodation at Albergue \"El Peregrino\".\n\n**Key scene**\nI arrived in Atapuerca and stopped at Albergue \"El Peregrino.\" Around 15:00 I exchanged a few words with Catherine: she told me she would go as far as Belorado. Then she told me she had spent the day with the Swiss guy and confirmed he was a very strange type: he had made her feel a bit under pressure because he wanted to stay with her all the time, and she had the impression he was hitting on her.\n\nAround 17:00 I contacted the Italian group to understand where they were. They told me they had stopped in Cardenuela, just before Burgos, and that they would arrive in Burgos the next morning, staying there all day and leaving again on Sunday the 23rd.\n\nFor me it was perfect: I was a little behind them and I would also arrive in Burgos the next morning. The Orisson group would also arrive in Belorado, in the same village as Catherine.\n\n**Sensory detail**\nI am liking walking on the trails more and more: wherever you look in the distance you see stretches of pure nature, interrupted only by small villages from time to time. They are like small oases that brighten the Camino, because you know there you can rely on refilling water bottles, buying something to eat, or stopping for a moment to rest in the shade. A day full of messages and arrangements: each person on a different stretch, but with the feeling that trajectories were coming closer again.\n\n**What I understood**\nOn the Camino it is not only where you are that matters, but also where others are: sometimes just a few kilometers of difference are enough to make someone seem very far away, while in reality you might see them again the next day.\n\n**Practical note**\nNight in Atapuerca at Albergue \"El Peregrino,\" with Burgos as the target for the following morning.",
+      "notes": "**Title**\nAtapuerca, group crossings and plans that align.\n\n**Where I was / stage**\nJune 21: arrival in Atapuerca with accommodation at Albergue \"El Peregrino\".\n\n**Key scene**\nI arrived in Atapuerca and stopped at Albergue \"El Peregrino.\" Around 15:00 I exchanged a few words with Catherine: she told me she would go as far as Belorado. Then she told me she had spent the day with the Swiss guy and confirmed he was a very strange type: he had made her feel a bit under pressure because he wanted to stay with her all the time, and she had the impression he was hitting on her.\n\nAround 17:00 I contacted the Italian group to understand where they were. They told me they had stopped in Cardenuela, just before Burgos, and that they would arrive in Burgos the next morning, staying there all day and leaving again on Sunday the 23rd.\n\nFor me it was perfect: I was a little behind them and I would also arrive in Burgos the next morning. The Orisson group would also arrive in Belorado, in the same village as Catherine.\n\n**Sensory detail**\nI am liking walking on the trails more and more: wherever you look in the distance you see stretches of pure nature, interrupted only by small villages from time to time. They are like small oases that brighten the Camino, because you know there you can refill water, buy something to eat, or stop for a moment in the shade.\n\nIt was also a very long day: I had done about 40 km and felt \"like a train.\" Exactly for that reason, I had already decided to stay two nights in Burgos.\n\n**What I understood**\nOn the Camino it is not only where you are that matters, but also where others are: sometimes just a few kilometers of difference are enough to make someone seem very far away, while in reality you might see them again the next day.\n\n**Practical note**\nNight in Atapuerca at Albergue \"El Peregrino,\" with Burgos as the target for the following morning.",
       "strava": [
         "https://www.strava.com/activities/8362690674"
       ],
@@ -7266,7 +7280,7 @@
           "gpsInferred": false
         }
       ],
-      "notes": "**Title**\nBurgos in celebration, reunions, and improvised bikes.\n\n**Where I was / stage**\nJune 22: departure at 7:00, direction Burgos.\n\n**Key scene**\nI left at 7:00 toward Burgos and arrived around 10:00. I found myself walking along Parque de Calistenia La Quinta, with a long pedestrian road that was very pleasant. Just before entering the city I saw the Italian group in front of me: Matteo, Stefano, Maddalena, Antonella, and the others. I quickened my pace and reached them.\n\nOnce together we walked around Burgos and took a photo in front of the statue in front of the cathedral. I had lunch at 100 Montaditos: a dive into the past from 5 years earlier, when during Erasmus in Barcelona I used to go there all the time. Then I went to Capilla y albergue de la Divina Pastora, queuing up because when I arrived there were already several people waiting for opening. In the meantime Catherine was in Ages, and Carla from the Orisson group would also arrive there.\n\nThe day also had a small personal note: at dawn I had written to Chris to wish him happy birthday. We immediately updated each other on timing and said we would meet again in Burgos the next day.\n\nMeanwhile I was also in contact on WhatsApp with Hongsuan (Ocean), the Chinese girl: she too would arrive in Burgos that day and had booked at Casa de Cubos. I wrote to her that at the tourist office I had rented a bike: they had 4 free ones for 2 hours and 30 minutes, fantastic. After a few hours she sent me a photo: she was on a bike too, taken at the same tourist office. We arranged to meet and rode around Burgos a bit by bike. It was fun.\n\nFor a couple of days I had really wanted to arrive in Burgos, because it was the first big city where I could find shoemakers: the sole of my boots was starting to come unstuck. It was perfect timing, because I would stay still for 2 nights and would have time to leave them there. The problem was that in all of Burgos there were only 3 shoemakers, and I found them all closed. Incredible: I realized right there how much the days of the week matter. I had arrived on Saturday and would stay until Monday morning, so a full weekend with that type of shop obviously closed.\n\n**Sensory detail**\nBurgos was in full celebration: music, people in the street, beer, and a continuous energy that carried you to stay out until midnight. Burgos is a very strange city: until 23:30 there is a lot of people around, everyone celebrating, everyone drinking, and just half an hour later the streets are deserted. You can clearly feel it is a city of pilgrims who get up early in the morning :).\n\n**What I understood**\nWhen you reach a big city after days on trails, the Camino changes rhythm but does not lose intensity: it becomes more social, more chaotic, but always full of encounters.\n\n**Practical note**\nAfter the city tour I returned to Divina Pastora; during the day I also did the bike tour thanks to the free tourist office rental (2h30). In the albergue where I stayed they did not accept people for more than one night: in fact the next day I had to leave and moved to Casa de Cubos, which was nearby.",
+      "notes": "**Title**\nBurgos in celebration, reunions, and improvised bikes.\n\n**Where I was / stage**\nJune 22: departure at 7:00, direction Burgos.\n\n**Key scene**\nI left at 7:00 toward Burgos and arrived around 10:00. I found myself walking along Parque de Calistenia La Quinta, with a long pedestrian road that was very pleasant. Just before entering the city I saw the Italian group in front of me: Matteo, Stefano, Maddalena, Antonella, and the others. I quickened my pace and reached them.\n\nOnce together we walked around Burgos and took a photo in front of the statue in front of the cathedral. I had lunch at 100 Montaditos: a dive into the past from 5 years earlier, when during Erasmus in Barcelona I used to go there all the time.\n\nThen I went to Capilla y albergue de la Divina Pastora, queuing up because when I arrived there were already several people waiting for opening. There I saw very strict management: several people were rejected without credential, arriving by bus/car, or considered \"too fresh\" to have arrived on foot.\n\nMeanwhile I was also in contact on WhatsApp with Hongsuan (Ocean), the Chinese girl: she too would arrive in Burgos that day and had booked at Casa de Cubos. I wrote to her that at the tourist office I had rented a bike: they had 4 free ones for 2 hours and 30 minutes, fantastic. After a few hours she sent me a photo: she was on a bike too, taken at the same tourist office. We arranged to meet and rode around Burgos a bit by bike. It was fun.\n\nFor a couple of days I had really wanted to arrive in Burgos, because it was the first big city where I could find shoemakers: the sole of my boots was starting to come unstuck. It was perfect timing, because I would stay still for 2 nights and would have time to leave them there. The problem was that in all of Burgos there were only 3 shoemakers, and I found them all closed. Incredible: I realized right there how much the days of the week matter. I had arrived on Saturday and would stay until Monday morning, so a full weekend with that type of shop obviously closed.\n\n**Sensory detail**\nBurgos was in full celebration: music, people in the street, beer, and a continuous energy that carried you to stay out until midnight. Burgos is a very strange city: until 23:30 there is a lot of people around, everyone celebrating, everyone drinking, and just half an hour later the streets are deserted. You can clearly feel it is a city of pilgrims who get up early in the morning :).\n\n**What I understood**\nWhen you reach a big city after days on trails, the Camino changes rhythm but does not lose intensity: it becomes more social, more chaotic, but always full of encounters.\n\n**Practical note**\nIn this phase I had also chosen a clear line on gear: no backpack shipping, I would carry it myself all the way to Santiago.\n\nAfter the city tour I returned to Divina Pastora; during the day I also did the bike tour thanks to the free tourist office rental (2h30). In the albergue where I stayed they did not accept people for more than one night: in fact the next day I had to leave and moved to Casa de Cubos, which was nearby.",
       "strava": [
         "https://www.strava.com/activities/8362690524"
       ],
@@ -8051,7 +8065,7 @@
           "gpsInferredFromPlace": true
         }
       ],
-      "notes": "**Title**\nBurgos, buffer day before setting off again.\n\n**Where I was / stage**\nI was still in Burgos: last full day in the city before getting back on the Camino.\n\n**Key scene**\nThe day was mostly logistics and meetups. In the morning I moved around the city for the boot issue, while in chats I coordinated meetups with several people.\n\nIn late morning I met Danielle (message: “i am with danielle just out of the door”). Then, in the afternoon, I wrote to Chris and Mark to understand where the group was and fit in the last meeting before leaving Burgos.\n\nToward evening the meetup became concrete: near the cathedral I met Giselle, Chris, Jessica, and Mark, already with a beer in hand. From there we moved for the evening; the idea was to eat together (between bars and 100 Montaditos) and say goodbye before my night departure.\n\nAt 23:30 I then resumed the Camino: from Burgos the mesetas began and I wanted to face them at night. Chris had lent me the headlamp, very useful to leave in the dark.\n\n**Sensory detail**\nLight-colored cathedral stone, glasses on outdoor tables, and the city full of voices before the night break-away.\n\n**What I understood**\nCity stops are not “empty breaks”: they are useful to solve practical problems and strengthen bonds before getting back on the road.",
+      "notes": "**Title**\nBurgos, buffer day before setting off again.\n\n**Where I was / stage**\nI was still in Burgos: last full day in the city before getting back on the road.\n\n**Key scene**\nThe day was mostly logistics and meetings. In the morning I moved around the city for the boot issue, while in chats I coordinated meetups with several people.\n\nIn late morning I met Danielle. Then in the afternoon I wrote to Chris and Mark to understand where the group was and fit in one last meeting before leaving Burgos.\n\nDuring the day I had also started asking pilgrims to write me a phrase or a thought on my walking stick: it was becoming a small living archive of the Camino, with signatures and messages collected along the way.\n\nToward evening the meetup became concrete: near the cathedral I met Giselle, Chris, Jessica, Catherine, and the Orisson group. We had dinner together and it was a very pleasant evening. In the photo where I make a funny “sad” face, I was joking, pretending I still had not been served my drink while everyone else had.\n\nAt 23:30 I set off again: from Burgos the mesetas were starting and I wanted to face them at night. Chris had lent me his headlamp, very useful to start in the dark (I would return it months later, when I went to the United States).\n\n**Sensory detail**\nLight stone of the cathedral, glasses on outdoor tables, and a city full of voices before the nighttime departure.\n\n**What I understood**\nStops in cities are not “empty pauses”: they are for solving practical issues and reinforcing bonds before getting back on the road.",
       "recommendations": []
     },
     {
@@ -8391,10 +8405,11 @@
           "size": null,
           "orig": "IMG_3568.MOV",
           "place": "Rabé de las Calzadas, España",
-          "lat": 42.348106384277344,
-          "lon": -3.8115811347961426,
+          "lat": 42.3422055555556,
+          "lon": -3.8849,
           "gpsInferred": true,
-          "locationEstimated": true
+          "locationEstimated": true,
+          "gpsInferredNote": "Aligned to nearby photo IMG_3566.HEIC (dt 0 min, was 6.06 km away)"
         },
         {
           "id": "bf3510a41f78",
@@ -8408,10 +8423,11 @@
           "size": null,
           "orig": "IMG_3569.MOV",
           "place": "Rabé de las Calzadas, España",
-          "lat": 42.348106384277344,
-          "lon": -3.8115811347961426,
+          "lat": 42.3422055555556,
+          "lon": -3.8849,
           "gpsInferred": true,
-          "locationEstimated": true
+          "locationEstimated": true,
+          "gpsInferredNote": "Aligned to nearby photo IMG_3566.HEIC (dt 0 min, was 6.06 km away)"
         },
         {
           "id": "d5c84a6853a3",
@@ -8833,7 +8849,7 @@
           "gpsInferred": false
         }
       ],
-      "notes": "**Title**\nNight on the Camino, sunrise, and communal evening in Sanbol.\n\n**Where I was / stage**\nNight departure from Burgos and day between Tardajos and Sanbol.\n\n**Key scene**\nDuring the night walk, around 2:00, very strong sleep hit me. Just before Tardajos I found an abandoned trailer, climbed onto it with my sleeping bag, and slept for about three hours.\n\nStarting again still in the dark, I saw sunrise while walking alone. Later I arrived in Sanbol, where I met two pilgrims from Los Angeles and exchanged a few words with them.\n\nThere I managed the day while waiting for the albergue opening: short pause, something to eat, and then return. In the meantime I was messaging with Catherine to understand where she was: she was in Hornillos and told me that the next day she would evaluate Castrojeriz.\n\nThe social part came in the evening: donative communal dinner in Sanbol, at the table with Giselle and Carla (and other pilgrims). On that day I also met Sara, Beatrice, Ananda, and Alicia.\n\n**Sensory detail**\nThe clear transition between the silence of the night, the light of sunrise, and the slow atmosphere of the albergue in the middle of nowhere.\n\n**What I understood**\nManaging sleep and timing well changes the quality of the stage: it is not only a matter of kilometers.",
+      "notes": "**Title**\nWalking at night, dawn, and a community evening in Sanbol.\n\n**Where I was / stage**\nNight departure from Burgos and a day between Tardajos and Sanbol.\n\n**Key scene**\nDuring the night walk, around 2:00, a huge sleepiness hit me. Just before Tardajos I found an abandoned trailer, climbed on it with my sleeping bag, and slept for about three hours.\n\nStarting again in the dark, I saw dawn while walking alone: beautiful colors, cool air, silent trail, and that full feeling of being exactly where I wanted to be.\n\nLater I arrived in Sanbol. The albergue was very out of the way, in the middle of the countryside, with lawn, outdoor tables, and a tiny icy pool. I even tried putting my foot in, but it was so cold I could not stay longer than a few seconds.\n\nThere was a practical constraint though: the albergue opened at 15:00 and I had arrived much earlier. I managed the day between short breaks, simple food, and waiting for opening, then went back in. That day I also met two pilgrims from Los Angeles and, in the evening, the company widened with people I already knew: Giselle, Carla, Sara, Beatrice, Ananda, and Alicia.\n\nThe communal donative dinner was one of the best moments: shared table, paella, and a very human atmosphere.\n\n**Sensory detail**\nThe sharp transition between night silence, dawn light, and the slow atmosphere of an albergue in the middle of nowhere.\n\n**What I understood**\nManaging sleep and timing well changes the quality of a stage: it is not only a matter of kilometers.",
       "strava": [
         "https://www.strava.com/activities/8362690590"
       ],
@@ -8934,10 +8950,11 @@
           "size": null,
           "orig": "IMG_3610.MOV",
           "place": "Castrojeriz, España",
-          "lat": 42.3128662109375,
-          "lon": -4.045860767364502,
+          "lat": 42.2924888888889,
+          "lon": -4.13158888888889,
           "gpsInferred": true,
-          "locationEstimated": true
+          "locationEstimated": true,
+          "gpsInferredNote": "Aligned to nearby photo IMG_3606.HEIC (dt 1 min, was 7.41 km away)"
         },
         {
           "id": "718d2816ce51",
@@ -8951,10 +8968,11 @@
           "size": null,
           "orig": "IMG_3611.MOV",
           "place": "Castrojeriz, España",
-          "lat": 42.3128662109375,
-          "lon": -4.045860767364502,
+          "lat": 42.2924888888889,
+          "lon": -4.13158888888889,
           "gpsInferred": true,
-          "locationEstimated": true
+          "locationEstimated": true,
+          "gpsInferredNote": "Aligned to nearby photo IMG_3606.HEIC (dt 1 min, was 7.41 km away)"
         },
         {
           "id": "21657ea26dea",
@@ -8968,10 +8986,11 @@
           "size": null,
           "orig": "IMG_3612.MOV",
           "place": "Castrojeriz, España",
-          "lat": 42.31333541870117,
-          "lon": -4.046683311462402,
+          "lat": 42.2924888888889,
+          "lon": -4.13158888888889,
           "gpsInferred": true,
-          "locationEstimated": true
+          "locationEstimated": true,
+          "gpsInferredNote": "Aligned to nearby photo IMG_3606.HEIC (dt 2 min, was 7.36 km away)"
         },
         {
           "id": "59b26e6be023",
@@ -9363,10 +9382,11 @@
           "size": null,
           "orig": "IMG_3641.MOV",
           "place": "Frómista, España",
-          "lat": 42.28790283203125,
-          "lon": -4.2575812339782715,
+          "lat": 42.2617305555556,
+          "lon": -4.38751944444444,
           "gpsInferred": true,
-          "locationEstimated": true
+          "locationEstimated": true,
+          "gpsInferredNote": "Aligned to nearby photo IMG_3640.HEIC (dt 0 min, was 11.08 km away)"
         },
         {
           "id": "e9cca86dc896",
@@ -9634,10 +9654,11 @@
           "size": null,
           "orig": "IMG_3662.MOV",
           "place": "Cervatos de la Cueza, España",
-          "lat": 42.336585998535156,
-          "lon": -4.729161739349365,
+          "lat": 42.3289805555556,
+          "lon": -4.80285,
           "gpsInferred": true,
-          "locationEstimated": true
+          "locationEstimated": true,
+          "gpsInferredNote": "Aligned to nearby photo IMG_3661.HEIC (dt 0 min, was 6.12 km away)"
         },
         {
           "id": "c92607ed3871",
@@ -9857,10 +9878,11 @@
           "size": null,
           "orig": "IMG_3683.MOV",
           "place": "Moratinos, España",
-          "lat": 42.350643157958984,
-          "lon": -4.8638997077941895,
+          "lat": 42.3649361111111,
+          "lon": -4.95928333333333,
           "gpsInferred": true,
-          "locationEstimated": true
+          "locationEstimated": true,
+          "gpsInferredNote": "Aligned to nearby photo IMG_3682.HEIC (dt 0 min, was 8.00 km away)"
         },
         {
           "id": "c3dc30d01af7",
@@ -11182,10 +11204,11 @@
           "size": null,
           "orig": "IMG_3875.MOV",
           "place": "Chozas de Abajo, España",
-          "lat": 42.55913162231445,
-          "lon": -5.658742904663086,
+          "lat": 42.485275,
+          "lon": -5.72416944444444,
           "gpsInferred": true,
-          "locationEstimated": true
+          "locationEstimated": true,
+          "gpsInferredNote": "Aligned to nearby photo IMG_3879.HEIC (dt 5 min, was 9.81 km away)"
         },
         {
           "id": "5d4a1bd6b6b6",
@@ -11445,11 +11468,12 @@
           "size": null,
           "orig": "IMG_3901.MOV",
           "place": "Chozas de Abajo, España",
-          "lat": 42.50151485400391,
-          "lon": -5.7093338743794755,
+          "lat": 42.4838333333333,
+          "lon": -5.72576388888889,
           "gpsInferred": true,
           "locationEstimated": true,
-          "gpsInferredFromPlace": true
+          "gpsInferredFromPlace": true,
+          "gpsInferredNote": "Aligned to nearby photo IMG_1897.HEIC (dt 5 min, was 2.38 km away)"
         },
         {
           "id": "56a69db6a136",
@@ -11620,10 +11644,11 @@
           "size": null,
           "orig": "IMG_3911.MOV",
           "place": "Hospital de Órbigo, España",
-          "lat": 42.47308349609375,
-          "lon": -5.7603278160095215,
+          "lat": 42.4640722222222,
+          "lon": -5.87885,
           "gpsInferred": true,
-          "locationEstimated": true
+          "locationEstimated": true,
+          "gpsInferredNote": "Aligned to nearby photo IMG_1905.HEIC (dt 1 min, was 9.77 km away)"
         },
         {
           "id": "74ee83d85492",
@@ -11702,10 +11727,11 @@
           "size": null,
           "orig": "IMG_3917.MOV",
           "place": "Villares de Órbigo, España",
-          "lat": 42.459835052490234,
-          "lon": -5.84576940536499,
+          "lat": 42.4645083333333,
+          "lon": -5.94140277777778,
           "gpsInferred": true,
-          "locationEstimated": true
+          "locationEstimated": true,
+          "gpsInferredNote": "Aligned to nearby photo IMG_3918.HEIC (dt 0 min, was 7.86 km away)"
         },
         {
           "id": "3fb2e6f7408b",
@@ -11800,10 +11826,11 @@
           "size": null,
           "orig": "IMG_3920.MOV",
           "place": "San Justo de la Vega, España",
-          "lat": 42.46723175048828,
-          "lon": -5.894598960876465,
+          "lat": 42.4539722222222,
+          "lon": -5.99973611111111,
           "gpsInferred": true,
-          "locationEstimated": true
+          "locationEstimated": true,
+          "gpsInferredNote": "Aligned to nearby photo IMG_1913.HEIC (dt 3 min, was 8.75 km away)"
         },
         {
           "id": "440ff678ac79",
@@ -12051,10 +12078,11 @@
           "size": null,
           "orig": "IMG_3958.MOV",
           "place": "Astorga, España",
-          "lat": 42.46584701538086,
-          "lon": -6.1131768226623535,
+          "lat": 42.4558,
+          "lon": -6.16356111111111,
           "gpsInferred": true,
-          "locationEstimated": true
+          "locationEstimated": true,
+          "gpsInferredNote": "Aligned to nearby photo IMG_3957.HEIC (dt 0 min, was 4.28 km away)"
         },
         {
           "id": "2f060a81f79e",
@@ -12238,11 +12266,12 @@
           "size": null,
           "orig": "IMG_3974.MOV",
           "place": "Santa Colomba de Somoza, España",
-          "lat": 42.48148298940776,
-          "lon": -6.347823620661982,
+          "lat": 42.4819194444444,
+          "lon": -6.28205,
           "gpsInferred": true,
           "locationEstimated": true,
-          "gpsInferredFromPlace": true
+          "gpsInferredFromPlace": true,
+          "gpsInferredNote": "Aligned to nearby photo IMG_3973.HEIC (dt 0 min, was 5.39 km away)"
         },
         {
           "id": "995b7e2b5b26",
@@ -12256,11 +12285,12 @@
           "size": null,
           "orig": "IMG_3975.MOV",
           "place": "Santa Colomba de Somoza, España",
-          "lat": 42.48148298940776,
-          "lon": -6.347823620661982,
+          "lat": 42.4819194444444,
+          "lon": -6.28205,
           "gpsInferred": true,
           "locationEstimated": true,
-          "gpsInferredFromPlace": true
+          "gpsInferredFromPlace": true,
+          "gpsInferredNote": "Aligned to nearby photo IMG_3973.HEIC (dt 0 min, was 5.39 km away)"
         }
       ],
       "notes": "",
@@ -12284,10 +12314,11 @@
           "size": null,
           "orig": "IMG_3977.MOV",
           "place": "Santa Colomba de Somoza, España",
-          "lat": 42.48186492919922,
-          "lon": -6.282467842102051,
+          "lat": 42.4890444444444,
+          "lon": -6.36106666666667,
           "gpsInferred": true,
-          "locationEstimated": true
+          "locationEstimated": true,
+          "gpsInferredNote": "Aligned to nearby photo IMG_3978.HEIC (dt 0 min, was 6.49 km away)"
         },
         {
           "id": "f6bc0bc8d4f6",
@@ -12509,10 +12540,11 @@
           "size": null,
           "orig": "IMG_3993.MOV",
           "place": "Santa Colomba de Somoza, España",
-          "lat": 42.4899787902832,
-          "lon": -6.3217644691467285,
+          "lat": 42.4521416666667,
+          "lon": -6.38313055555556,
           "gpsInferred": true,
-          "locationEstimated": true
+          "locationEstimated": true,
+          "gpsInferredNote": "Aligned to nearby photo IMG_3998.HEIC (dt 4 min, was 6.56 km away)"
         },
         {
           "id": "cf1eb2a8f82c",
@@ -12526,10 +12558,11 @@
           "size": null,
           "orig": "IMG_3996.MOV",
           "place": "Santa Colomba de Somoza, España",
-          "lat": 42.491127014160156,
-          "lon": -6.323170185089111,
+          "lat": 42.4521416666667,
+          "lon": -6.38313055555556,
           "gpsInferred": true,
-          "locationEstimated": true
+          "locationEstimated": true,
+          "gpsInferredNote": "Aligned to nearby photo IMG_3998.HEIC (dt 2 min, was 6.56 km away)"
         },
         {
           "id": "55bbdcca7c07",
@@ -12543,10 +12576,11 @@
           "size": null,
           "orig": "IMG_3997.MOV",
           "place": "Santa Colomba de Somoza, España",
-          "lat": 42.491519927978516,
-          "lon": -6.324182510375977,
+          "lat": 42.4521416666667,
+          "lon": -6.38313055555556,
           "gpsInferred": true,
-          "locationEstimated": true
+          "locationEstimated": true,
+          "gpsInferredNote": "Aligned to nearby photo IMG_3998.HEIC (dt 1 min, was 6.52 km away)"
         },
         {
           "id": "0565720bb736",
@@ -12761,10 +12795,11 @@
           "size": null,
           "orig": "IMG_4012.MOV",
           "place": "Molinaseca, España",
-          "lat": 42.489505767822266,
-          "lon": -6.426290988922119,
+          "lat": 42.4982222222222,
+          "lon": -6.45611944444444,
           "gpsInferred": true,
-          "locationEstimated": true
+          "locationEstimated": true,
+          "gpsInferredNote": "Aligned to nearby photo IMG_4011.HEIC (dt 0 min, was 2.63 km away)"
         },
         {
           "id": "d474572aa08d",
@@ -13362,11 +13397,12 @@
           "mime": "video/mp4",
           "size": null,
           "orig": "IMG_4068.MOV",
-          "place": "Vega de Valcarce, España",
-          "lat": 42.67572021484375,
-          "lon": -6.997751712799072,
+          "place": "Pedrafita do Cebreiro, España",
+          "lat": 42.7075305555556,
+          "lon": -7.04260833333333,
           "gpsInferred": true,
-          "locationEstimated": true
+          "locationEstimated": true,
+          "gpsInferredNote": "Aligned to nearby photo IMG_4072.HEIC (dt 3 min, was 5.09 km away)"
         },
         {
           "id": "dfb4885e4db9",
@@ -13427,11 +13463,12 @@
           "mime": "video/mp4",
           "size": null,
           "orig": "IMG_4076.MOV",
-          "place": "Vega de Valcarce, España",
-          "lat": 42.68010330200195,
-          "lon": -7.00401496887207,
+          "place": "Pedrafita do Cebreiro, España",
+          "lat": 42.7078138888889,
+          "lon": -7.0458,
           "gpsInferred": true,
-          "locationEstimated": true
+          "locationEstimated": true,
+          "gpsInferredNote": "Aligned to nearby photo IMG_4075.HEIC (dt 0 min, was 4.60 km away)"
         },
         {
           "id": "f83ae09d74f8",
@@ -13830,10 +13867,11 @@
           "size": null,
           "orig": "IMG_4132.MOV",
           "place": "Triacastela, España",
-          "lat": 42.71258544921875,
-          "lon": -7.126184463500977,
+          "lat": 42.755825,
+          "lon": -7.23059722222222,
           "gpsInferred": true,
-          "locationEstimated": true
+          "locationEstimated": true,
+          "gpsInferredNote": "Aligned to nearby photo IMG_4133.HEIC (dt 4 min, was 9.79 km away)"
         },
         {
           "id": "4c7d2c02c578",
@@ -14098,10 +14136,11 @@
           "size": null,
           "orig": "IMG_4155.MOV",
           "place": "Sarria, España",
-          "lat": 42.772342681884766,
-          "lon": -7.435403823852539,
+          "lat": 42.7791444444444,
+          "lon": -7.48898888888889,
           "gpsInferred": true,
-          "locationEstimated": true
+          "locationEstimated": true,
+          "gpsInferredNote": "Aligned to nearby photo IMG_4150.HEIC (dt 0 min, was 4.44 km away)"
         },
         {
           "id": "5b7c90a9a548",
@@ -14476,11 +14515,12 @@
           "size": null,
           "orig": "IMG_4197.MOV",
           "place": "Arzúa, España",
-          "lat": 42.92777756928943,
-          "lon": -8.194727549259246,
+          "lat": 42.9307972222222,
+          "lon": -8.13049444444444,
           "gpsInferred": true,
           "locationEstimated": true,
-          "gpsInferredFromPlace": true
+          "gpsInferredFromPlace": true,
+          "gpsInferredNote": "Aligned to nearby photo IMG_4198.HEIC (dt 2 min, was 5.24 km away)"
         },
         {
           "id": "a34a775dbf8a",
@@ -14517,10 +14557,11 @@
           "size": null,
           "orig": "IMG_4200.MOV",
           "place": "Arzúa, España",
-          "lat": 42.930850982666016,
-          "lon": -8.13373851776123,
+          "lat": 42.9285444444444,
+          "lon": -8.21464166666667,
           "gpsInferred": true,
-          "locationEstimated": true
+          "locationEstimated": true,
+          "gpsInferredNote": "Aligned to nearby photo IMG_4201.HEIC (dt 3 min, was 6.59 km away)"
         },
         {
           "id": "56f73af55f5b",
@@ -14808,10 +14849,11 @@
           "size": null,
           "orig": "IMG_4225.MOV",
           "place": "Santiago de Compostela, España",
-          "lat": 42.89043426513672,
-          "lon": -8.462824821472168,
+          "lat": 42.8865583333333,
+          "lon": -8.51205833333333,
           "gpsInferred": true,
-          "locationEstimated": true
+          "locationEstimated": true,
+          "gpsInferredNote": "Aligned to nearby photo IMG_4223.HEIC (dt 0 min, was 4.03 km away)"
         },
         {
           "id": "d3c14fd46481",
@@ -14841,10 +14883,11 @@
           "size": null,
           "orig": "IMG_4227.MOV",
           "place": "Santiago de Compostela, España",
-          "lat": 42.88639831542969,
-          "lon": -8.508426666259766,
+          "lat": 42.8812555555556,
+          "lon": -8.54426111111111,
           "gpsInferred": true,
-          "locationEstimated": true
+          "locationEstimated": true,
+          "gpsInferredNote": "Aligned to nearby photo IMG_4226.HEIC (dt 4 min, was 2.98 km away)"
         },
         {
           "id": "11046556b47e",
@@ -14906,10 +14949,11 @@
           "size": null,
           "orig": "IMG_4239.MOV",
           "place": "Santiago de Compostela, España",
-          "lat": 42.886539459228516,
-          "lon": -8.509515762329102,
+          "lat": 42.8804083333333,
+          "lon": -8.54584444444444,
           "gpsInferred": true,
-          "locationEstimated": true
+          "locationEstimated": true,
+          "gpsInferredNote": "Aligned to nearby photo IMG_4237.HEIC (dt 0 min, was 3.04 km away)"
         },
         {
           "id": "94d643e73cd7",
@@ -15638,10 +15682,11 @@
           "size": null,
           "orig": "c528ed69f35a4cec8fa49ced5d67ba61.mov",
           "place": "Santiago de Compostela, España",
-          "lat": 42.88539123535156,
-          "lon": -8.532660484313965,
+          "lat": 42.8785444444444,
+          "lon": -8.55569166666667,
           "gpsInferred": true,
-          "locationEstimated": true
+          "locationEstimated": true,
+          "gpsInferredNote": "Aligned to nearby photo IMG_4291.HEIC (dt 5 min, was 2.03 km away)"
         },
         {
           "id": "af2e301d65e7",
@@ -15738,10 +15783,11 @@
           "size": null,
           "orig": "IMG_4303.MOV",
           "place": "Ames, España",
-          "lat": 42.888919830322266,
-          "lon": -8.653313636779785,
+          "lat": 42.9052805555556,
+          "lon": -8.69481666666667,
           "gpsInferred": true,
-          "locationEstimated": true
+          "locationEstimated": true,
+          "gpsInferredNote": "Aligned to nearby photo IMG_4306.HEIC (dt 5 min, was 3.84 km away)"
         },
         {
           "id": "be0e8085402a",
@@ -15771,10 +15817,11 @@
           "size": null,
           "orig": "IMG_4308.MOV",
           "place": "Ames, España",
-          "lat": 42.888919830322266,
-          "lon": -8.653313636779785,
+          "lat": 42.9052805555556,
+          "lon": -8.69481666666667,
           "gpsInferred": true,
-          "locationEstimated": true
+          "locationEstimated": true,
+          "gpsInferredNote": "Aligned to nearby photo IMG_4306.HEIC (dt 2 min, was 3.84 km away)"
         },
         {
           "id": "2aca29dd144e",
@@ -16162,11 +16209,12 @@
           "mime": "video/mp4",
           "size": null,
           "orig": "IMG_4342.MOV",
-          "place": "Dumbría, España",
-          "lat": 43.011688232421875,
-          "lon": -9.118412971496582,
+          "place": "Muxía, España",
+          "lat": 43.0628583333333,
+          "lon": -9.19051944444444,
           "gpsInferred": true,
-          "locationEstimated": true
+          "locationEstimated": true,
+          "gpsInferredNote": "Aligned to nearby photo IMG_4341.HEIC (dt 1 min, was 8.17 km away)"
         },
         {
           "id": "726671151d71",
@@ -16179,11 +16227,12 @@
           "mime": "video/mp4",
           "size": null,
           "orig": "IMG_4343.MOV",
-          "place": "Dumbría, España",
-          "lat": 43.011688232421875,
-          "lon": -9.118412971496582,
+          "place": "Muxía, España",
+          "lat": 43.0628583333333,
+          "lon": -9.19051944444444,
           "gpsInferred": true,
-          "locationEstimated": true
+          "locationEstimated": true,
+          "gpsInferredNote": "Aligned to nearby photo IMG_4341.HEIC (dt 1 min, was 8.17 km away)"
         },
         {
           "id": "d49429b04834",
@@ -16196,11 +16245,12 @@
           "mime": "video/mp4",
           "size": null,
           "orig": "IMG_4344.MOV",
-          "place": "Dumbría, España",
-          "lat": 43.011688232421875,
-          "lon": -9.118412971496582,
+          "place": "Muxía, España",
+          "lat": 43.0628583333333,
+          "lon": -9.19051944444444,
           "gpsInferred": true,
-          "locationEstimated": true
+          "locationEstimated": true,
+          "gpsInferredNote": "Aligned to nearby photo IMG_4341.HEIC (dt 1 min, was 8.17 km away)"
         },
         {
           "id": "8de9f2e231f9",
@@ -16247,10 +16297,11 @@
           "size": null,
           "orig": "IMG_4351.MOV",
           "place": "Muxía, España",
-          "lat": 43.03705978393555,
-          "lon": -9.163996696472168,
+          "lat": 43.0915805555556,
+          "lon": -9.2209,
           "gpsInferred": true,
-          "locationEstimated": true
+          "locationEstimated": true,
+          "gpsInferredNote": "Aligned to nearby photo IMG_4353.HEIC (dt 1 min, was 7.62 km away)"
         },
         {
           "id": "b2c0af0967d3",
@@ -16328,10 +16379,11 @@
           "size": null,
           "orig": "IMG_4362.MOV",
           "place": "Muxía, España",
-          "lat": 43.072731018066406,
-          "lon": -9.199711799621582,
+          "lat": 43.1111416666667,
+          "lon": -9.21938055555556,
           "gpsInferred": true,
-          "locationEstimated": true
+          "locationEstimated": true,
+          "gpsInferredNote": "Aligned to nearby photo IMG_4361.HEIC (dt 0 min, was 4.56 km away)"
         },
         {
           "id": "09396c07b49f",
@@ -16377,10 +16429,11 @@
           "size": null,
           "orig": "IMG_4366.MOV",
           "place": "Muxía, España",
-          "lat": 43.075748443603516,
-          "lon": -9.201833724975586,
+          "lat": 43.1111222222222,
+          "lon": -9.21939166666667,
           "gpsInferred": true,
-          "locationEstimated": true
+          "locationEstimated": true,
+          "gpsInferredNote": "Aligned to nearby photo IMG_4363.HEIC (dt 0 min, was 4.18 km away)"
         },
         {
           "id": "6e4340864d48",
@@ -16394,10 +16447,11 @@
           "size": null,
           "orig": "IMG_4367.MOV",
           "place": "Muxía, España",
-          "lat": 43.075748443603516,
-          "lon": -9.201833724975586,
+          "lat": 43.1111222222222,
+          "lon": -9.21939166666667,
           "gpsInferred": true,
-          "locationEstimated": true
+          "locationEstimated": true,
+          "gpsInferredNote": "Aligned to nearby photo IMG_4363.HEIC (dt 0 min, was 4.18 km away)"
         },
         {
           "id": "f11ee8e89b6d",
@@ -16459,10 +16513,11 @@
           "size": null,
           "orig": "IMG_4376.MOV",
           "place": "Muxía, España",
-          "lat": 43.1026725769043,
-          "lon": -9.218098640441895,
+          "lat": 43.114125,
+          "lon": -9.21886666666667,
           "gpsInferred": true,
-          "locationEstimated": true
+          "locationEstimated": true,
+          "gpsInferredNote": "Aligned to nearby photo IMG_4380.HEIC (dt 4 min, was 1.27 km away)"
         },
         {
           "id": "789f4a5a2995",
@@ -16476,10 +16531,11 @@
           "size": null,
           "orig": "IMG_4379.MOV",
           "place": "Muxía, España",
-          "lat": 43.10334014892578,
-          "lon": -9.217633247375488,
+          "lat": 43.114125,
+          "lon": -9.21886666666667,
           "gpsInferred": true,
-          "locationEstimated": true
+          "locationEstimated": true,
+          "gpsInferredNote": "Aligned to nearby photo IMG_4380.HEIC (dt 3 min, was 1.20 km away)"
         },
         {
           "id": "750d55c09f52",
@@ -16827,11 +16883,12 @@
           "size": null,
           "orig": "IMG_4434.MOV",
           "place": "Muxía, España",
-          "lat": 43.09513509179409,
-          "lon": -9.210135942411734,
+          "lat": 43.108275,
+          "lon": -9.21850555555556,
           "gpsInferred": true,
           "locationEstimated": true,
-          "gpsInferredFromPlace": true
+          "gpsInferredFromPlace": true,
+          "gpsInferredNote": "Aligned to nearby photo IMG_4431.HEIC (dt 0 min, was 1.61 km away)"
         },
         {
           "id": "86604583e679",
@@ -16845,11 +16902,12 @@
           "size": null,
           "orig": "IMG_4435.MOV",
           "place": "Muxía, España",
-          "lat": 43.09513509179409,
-          "lon": -9.210135942411734,
+          "lat": 43.108275,
+          "lon": -9.21850555555556,
           "gpsInferred": true,
           "locationEstimated": true,
-          "gpsInferredFromPlace": true
+          "gpsInferredFromPlace": true,
+          "gpsInferredNote": "Aligned to nearby photo IMG_4431.HEIC (dt 2 min, was 1.61 km away)"
         },
         {
           "id": "e72f3876a6d3",
@@ -16879,11 +16937,12 @@
           "size": null,
           "orig": "IMG_4439.MOV",
           "place": "Muxía, España",
-          "lat": 43.09513509179409,
-          "lon": -9.210135942411734,
+          "lat": 43.1088555555556,
+          "lon": -9.21801111111111,
           "gpsInferred": true,
           "locationEstimated": true,
-          "gpsInferredFromPlace": true
+          "gpsInferredFromPlace": true,
+          "gpsInferredNote": "Aligned to nearby photo IMG_4437.HEIC (dt 0 min, was 1.65 km away)"
         },
         {
           "id": "d1c2276e5e8e",
@@ -17381,11 +17440,12 @@
           "size": null,
           "orig": "IMG_4502.MOV",
           "place": "Fisterra, España",
-          "lat": 42.90613910578309,
-          "lon": -9.260400200707927,
+          "lat": 42.8831972222222,
+          "lon": -9.27154166666667,
           "gpsInferred": true,
           "locationEstimated": true,
-          "gpsInferredFromPlace": true
+          "gpsInferredFromPlace": true,
+          "gpsInferredNote": "Aligned to nearby photo IMG_4503.HEIC (dt 1 min, was 2.71 km away)"
         },
         {
           "id": "b56f70b3b768",
@@ -17605,7 +17665,7 @@
     }
   ],
   "counts": {
-    "images": 835,
+    "images": 834,
     "videos": 200,
     "live": 0
   }

@@ -4,6 +4,15 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Cammino di Santiago — Diario Visivo</title>
+  <meta
+    id="meta-description"
+    name="description"
+    content="Diario visivo del Cammino di Santiago con foto, video, tracce GPS e racconti giornalieri."
+  />
+  <link id="seo-canonical" rel="canonical" href="/it/" />
+  <link id="seo-alt-it" rel="alternate" hreflang="it" href="/it/" />
+  <link id="seo-alt-en" rel="alternate" hreflang="en" href="/en/" />
+  <link id="seo-alt-default" rel="alternate" hreflang="x-default" href="/it/" />
   <link rel="stylesheet" href="styles.css" />
   <link
     rel="stylesheet"
@@ -22,13 +31,9 @@
           <p class="lead" data-i18n="subtitle">
             Un recap giorno per giorno tra foto, video e ricordi di strada.
           </p>
-          <p class="lead"><a class="map-link" href="map.html">Apri la mappa del percorso</a></p>
+          <p class="lead"><a class="map-link" href="/map.html">Apri la mappa del percorso</a></p>
         </div>
         <div class="controls">
-          <div class="lang">
-            <button class="lang__btn" data-lang="it">IT</button>
-            <button class="lang__btn" data-lang="en">EN</button>
-          </div>
           <div class="manage-tools">
             <button class="manage-btn" id="toggle-select" data-i18n="select_mode">Seleziona</button>
             <button class="manage-btn manage-btn--danger" id="delete-selected" disabled data-i18n="delete_selected">
@@ -57,7 +62,12 @@
   <section class="timeline-nav" aria-label="timeline">
     <div class="timeline-nav__wrap">
       <div class="timeline-nav__inner" id="timeline-nav"></div>
-      <div class="timeline-nav__actions" id="timeline-nav-actions"></div>
+      <div class="timeline-nav__actions" id="timeline-nav-actions">
+        <div class="lang">
+          <button class="lang__btn" data-lang="it">IT</button>
+          <button class="lang__btn" data-lang="en">EN</button>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -81,7 +91,7 @@
     <div class="mini-map__title">
       <span class="mini-map__date" id="mini-map-date"></span>
       <div class="mini-map__actions">
-        <a class="mini-map__open" href="map.html" data-i18n="open_short">Apri Mappa</a>
+        <a class="mini-map__open" href="/map.html" data-i18n="open_short">Apri Mappa</a>
         <button class="mini-map__toggle" id="mini-map-toggle" type="button" aria-label="Minimizza mappa">–</button>
       </div>
     </div>

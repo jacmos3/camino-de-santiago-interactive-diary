@@ -4,8 +4,8 @@ import { promises as fs } from 'node:fs';
 import path from 'node:path';
 
 const ROOT = process.cwd();
-const DATA_JSON = path.join(ROOT, 'data', 'entries.json');
-const DATA_JS = path.join(ROOT, 'data', 'entries.js');
+const DATA_IT_JSON = path.join(ROOT, 'data', 'entries.it.json');
+const DATA_EN_JSON = path.join(ROOT, 'data', 'entries.en.json');
 const VIDEO_DIR = path.join(ROOT, 'assets', 'video');
 
 const MAX_WIDTH = 1280;
@@ -45,7 +45,7 @@ const pLimit = (concurrency) => {
 
 const rel = (p) => p.split(path.sep).join('/');
 
-const data = JSON.parse(await fs.readFile(DATA_JSON, 'utf8'));
+const data = JSON.parse(await fs.readFile(DATA_IT_JSON, 'utf8'));
 
 const byId = new Map();
 for (const day of data.days || []) {
@@ -112,16 +112,22 @@ await Promise.all(videos.map((video, idx) => limit(async () => {
   }
 })));
 
-for (const day of data.days || []) {
-  for (const item of day.items || []) {
-    if (item.type !== 'video' || !item.id) continue;
-    item.src = srcById.get(item.id) || item.src;
-    item.mime = 'video/mp4';
+const applySources = (payload) => {
+  for (const day of payload.days || []) {
+    for (const item of day.items || []) {
+      if (item.type !== 'video' || !item.id) continue;
+      item.src = srcById.get(item.id) || item.src;
+      item.mime = 'video/mp4';
+    }
   }
-}
+  return payload;
+};
 
-await fs.writeFile(DATA_JSON, `${JSON.stringify(data, null, 2)}\n`);
-await fs.writeFile(DATA_JS, `window.__CAMMINO_ENTRIES__ = ${JSON.stringify(data, null, 2)};\n`);
+const dataIt = applySources(data);
+const dataEn = applySources(JSON.parse(await fs.readFile(DATA_EN_JSON, 'utf8')));
+
+await fs.writeFile(DATA_IT_JSON, `${JSON.stringify(dataIt, null, 2)}\n`);
+await fs.writeFile(DATA_EN_JSON, `${JSON.stringify(dataEn, null, 2)}\n`);
 
 const mb = (n) => (n / (1024 * 1024)).toFixed(1);
 console.log(`Completato. ok=${ok}, failed=${failed}`);

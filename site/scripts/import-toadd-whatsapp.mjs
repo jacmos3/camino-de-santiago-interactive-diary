@@ -8,8 +8,8 @@ const ROOT = process.cwd();
 const SRC_DIR = path.join(ROOT, 'assets', 'toAdd_');
 const IMG_DIR = path.join(ROOT, 'assets', 'img');
 const THUMB_DIR = path.join(ROOT, 'assets', 'thumb');
-const ENTRIES_JSON = path.join(ROOT, 'data', 'entries.json');
-const ENTRIES_JS = path.join(ROOT, 'data', 'entries.js');
+const ENTRIES_IT_JSON = path.join(ROOT, 'data', 'entries.it.json');
+const ENTRIES_EN_JSON = path.join(ROOT, 'data', 'entries.en.json');
 const REPORT = path.join(ROOT, 'data', 'toadd_whatsapp_import_report.json');
 
 const IMAGE_SIDE = 2048;
@@ -61,12 +61,13 @@ const parseFileName = (file) => {
 const ensureDay = (arr, date) => {
   let day = arr.find((d) => String(d.date) === String(date));
   if (!day) {
-    day = { date, items: [], notes: {} };
+    day = { date, items: [], notes: '', recommendations: [] };
     arr.push(day);
     arr.sort((a, b) => String(a.date).localeCompare(String(b.date)));
   }
   if (!Array.isArray(day.items)) day.items = [];
-  if (!day.notes || typeof day.notes !== 'object') day.notes = {};
+  if (typeof day.notes !== 'string') day.notes = '';
+  if (!Array.isArray(day.recommendations)) day.recommendations = [];
   return day;
 };
 
@@ -85,13 +86,14 @@ const main = async () => {
     throw new Error('assets/toAdd_ non trovata');
   }
 
-  const entries = JSON.parse(await fs.readFile(ENTRIES_JSON, 'utf8'));
+  const entriesIt = JSON.parse(await fs.readFile(ENTRIES_IT_JSON, 'utf8'));
+  const entriesEn = JSON.parse(await fs.readFile(ENTRIES_EN_JSON, 'utf8'));
   const files = (await fs.readdir(SRC_DIR))
     .filter((f) => /\.(jpe?g)$/i.test(f))
     .sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
 
   const existingOrig = new Set();
-  (entries.days || []).forEach((day) => {
+  (entriesIt.days || []).forEach((day) => {
     (day.items || []).forEach((item) => {
       const k = String(item && item.orig ? item.orig : '').toLowerCase();
       if (k) existingOrig.add(k);
@@ -168,8 +170,15 @@ const main = async () => {
 
   importedByDate.forEach((items, date) => {
     items.sort(compareImported);
-    const day = ensureDay(entries.days || [], date);
+    const day = ensureDay(entriesIt.days || [], date);
     day.items = [...(day.items || []), ...items.map((it) => {
+      const clean = { ...it };
+      delete clean.__carouselNum;
+      delete clean.__cardNum;
+      return clean;
+    })];
+    const dayEn = ensureDay(entriesEn.days || [], date);
+    dayEn.items = [...(dayEn.items || []), ...items.map((it) => {
       const clean = { ...it };
       delete clean.__carouselNum;
       delete clean.__cardNum;
@@ -180,7 +189,7 @@ const main = async () => {
   let images = 0;
   let videos = 0;
   let live = 0;
-  (entries.days || []).forEach((day) => {
+  (entriesIt.days || []).forEach((day) => {
     (day.items || []).forEach((item) => {
       if (item.type === 'video') videos += 1;
       else images += 1;
@@ -188,11 +197,14 @@ const main = async () => {
     });
   });
 
-  entries.generated_at = new Date().toISOString();
-  entries.counts = { images, videos, live };
+  const counts = { images, videos, live };
+  entriesIt.generated_at = new Date().toISOString();
+  entriesIt.counts = counts;
+  entriesEn.generated_at = entriesIt.generated_at;
+  entriesEn.counts = counts;
 
-  await fs.writeFile(ENTRIES_JSON, `${JSON.stringify(entries, null, 2)}\n`);
-  await fs.writeFile(ENTRIES_JS, `window.__CAMMINO_ENTRIES__ = ${JSON.stringify(entries, null, 2)};\n`);
+  await fs.writeFile(ENTRIES_IT_JSON, `${JSON.stringify(entriesIt, null, 2)}\n`);
+  await fs.writeFile(ENTRIES_EN_JSON, `${JSON.stringify(entriesEn, null, 2)}\n`);
 
   const report = {
     imported_count: imported.length,

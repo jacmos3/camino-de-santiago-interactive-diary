@@ -1114,9 +1114,6 @@ const attachImageZoom = (image, controls = null) => {
   };
   const onZoomInClick = () => zoomTo(scale * ZOOM_STEP);
   const onZoomOutClick = () => zoomTo(scale / ZOOM_STEP);
-  const onResetClick = () => {
-    zoomTo(1);
-  };
 
   const onPointerDown = (event) => {
     if (event.pointerType === 'mouse' && event.button !== 0) return;
@@ -1179,7 +1176,6 @@ const attachImageZoom = (image, controls = null) => {
   if (controls) {
     if (controls.zoomIn) controls.zoomIn.addEventListener('click', onZoomInClick);
     if (controls.zoomOut) controls.zoomOut.addEventListener('click', onZoomOutClick);
-    if (controls.reset) controls.reset.addEventListener('click', onResetClick);
   }
 
   applyTransform();
@@ -1194,7 +1190,6 @@ const attachImageZoom = (image, controls = null) => {
     if (controls) {
       if (controls.zoomIn) controls.zoomIn.removeEventListener('click', onZoomInClick);
       if (controls.zoomOut) controls.zoomOut.removeEventListener('click', onZoomOutClick);
-      if (controls.reset) controls.reset.removeEventListener('click', onResetClick);
     }
   };
 };
@@ -1244,20 +1239,8 @@ const openImageModal = (item, itemIndex = null) => {
   zoomInBtn.type = 'button';
   zoomInBtn.className = 'modal__zoom-btn';
   zoomInBtn.textContent = '+';
-  const zoomResetBtn = document.createElement('button');
-  zoomResetBtn.type = 'button';
-  zoomResetBtn.className = 'modal__zoom-btn';
-  zoomResetBtn.textContent = '100%';
-  const rotateBtn = document.createElement('button');
-  rotateBtn.type = 'button';
-  rotateBtn.className = 'modal__zoom-btn';
-  rotateBtn.textContent = '↻';
-  rotateBtn.setAttribute('aria-label', 'Ruota foto');
-  if (!item.id) rotateBtn.disabled = true;
   zoomControls.appendChild(zoomOutBtn);
   zoomControls.appendChild(zoomInBtn);
-  zoomControls.appendChild(zoomResetBtn);
-  zoomControls.appendChild(rotateBtn);
   modalBody.appendChild(zoomControls);
   const cleanupFns = [];
 
@@ -1299,52 +1282,8 @@ const openImageModal = (item, itemIndex = null) => {
   appendModalGroupPanel(item);
   cleanupFns.push(attachImageZoom(image, {
     zoomIn: zoomInBtn,
-    zoomOut: zoomOutBtn,
-    reset: zoomResetBtn
+    zoomOut: zoomOutBtn
   }));
-  const onRotate = async () => {
-    if (!item.id || rotateBtn.disabled) return;
-    rotateBtn.disabled = true;
-    const doRotate = async () => {
-      const { payload } = await postJsonWithApiFallback('/api/rotate', { id: String(item.id), degrees: 90 });
-      const cacheBust = payload && payload.cache_bust ? payload.cache_bust : Date.now();
-      const modalBase = toRootAssetUrl(item.src || item.thumb || '');
-      if (modalBase) image.src = withCacheBust(modalBase, cacheBust);
-      if (item.id) {
-        document.querySelectorAll('img[data-item-id]').forEach((imgEl) => {
-          if (imgEl.dataset.itemId !== String(item.id)) return;
-          const base = toRootAssetUrl(imgEl.dataset.src || item.thumb || item.src || '');
-          if (!base) return;
-          const busted = withCacheBust(base, cacheBust);
-          imgEl.dataset.src = busted;
-          imgEl.src = busted;
-        });
-      }
-    };
-    try {
-      await doRotate();
-    } catch (err) {
-      if (err && err.status === 401) {
-        const ok = await ensureAdminSessionInteractive();
-        if (ok) {
-          try {
-            await doRotate();
-            return;
-          } catch (retryErr) {
-            window.alert(`Errore rotazione: ${retryErr.message || retryErr}`);
-            return;
-          }
-        } else {
-          return;
-        }
-      }
-      window.alert(`Errore rotazione: ${err.message || err}`);
-    } finally {
-      rotateBtn.disabled = false;
-    }
-  };
-  rotateBtn.addEventListener('click', onRotate);
-  cleanupFns.push(() => rotateBtn.removeEventListener('click', onRotate));
   modalZoomCleanup = () => cleanupFns.forEach((fn) => fn && fn());
   modal.classList.add('open');
   modal.setAttribute('aria-hidden', 'false');

@@ -328,8 +328,27 @@ for (const p of gpsPoints) {
 const trackGeo = { type: 'FeatureCollection', features };
 const trackPoints = gpsPoints.map(({ _sortTs, ...rest }) => rest);
 
-await fs.writeFile(path.join(DATA_DIR, 'entries.json'), `${JSON.stringify(entries, null, 2)}\n`);
-await fs.writeFile(path.join(DATA_DIR, 'entries.js'), `window.__CAMMINO_ENTRIES__ = ${JSON.stringify(entries, null, 2)};\n`);
+const toLocalizedEntries = (base, lang) => ({
+  ...base,
+  days: (base.days || []).map((day) => {
+    const note = day && day.notes;
+    const rec = day && day.recommendations;
+    const localizedNote = (note && typeof note === 'object')
+      ? String(note[lang] || '').trim()
+      : String(note || '').trim();
+    const localizedRec = Array.isArray(rec)
+      ? rec
+      : (rec && typeof rec === 'object' && Array.isArray(rec[lang]) ? rec[lang] : []);
+    return {
+      ...day,
+      notes: localizedNote,
+      recommendations: localizedRec.map((v) => String(v || '').trim()).filter(Boolean)
+    };
+  })
+});
+
+await fs.writeFile(path.join(DATA_DIR, 'entries.it.json'), `${JSON.stringify(toLocalizedEntries(entries, 'it'), null, 2)}\n`);
+await fs.writeFile(path.join(DATA_DIR, 'entries.en.json'), `${JSON.stringify(toLocalizedEntries(entries, 'en'), null, 2)}\n`);
 await fs.writeFile(path.join(DATA_DIR, 'track_by_day.json'), `${JSON.stringify(trackByDay, null, 2)}\n`);
 await fs.writeFile(path.join(DATA_DIR, 'track_points.json'), `${JSON.stringify(trackPoints, null, 2)}\n`);
 await fs.writeFile(path.join(DATA_DIR, 'track.geojson'), `${JSON.stringify(trackGeo, null, 2)}\n`);
