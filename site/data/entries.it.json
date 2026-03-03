@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-03-03T19:34:59.130Z",
+  "generated_at": "2026-03-03T23:08:26.618Z",
   "days": [
     {
       "date": "2019-06-02",
@@ -6957,7 +6957,21 @@
           "place": "Burgos, España",
           "lat": 42.3400777777778,
           "lon": -3.70421388888889,
-          "gpsInferred": false
+          "gpsInferred": false,
+          "carouselKey": "manual-2019-06-22-afeecfae387c"
+        },
+        {
+          "id": "1b0e8a24a7c3",
+          "type": "image",
+          "date": "2019-06-22",
+          "time": "12:31",
+          "src": "assets/img/img_1b0e8a24a7c3.jpg",
+          "thumb": "assets/thumb/thumb_1b0e8a24a7c3.jpg",
+          "poster": null,
+          "mime": "image/jpeg",
+          "size": null,
+          "orig": "c623e860-643b-417a-947a-4a7b661bef95.JPG",
+          "carouselKey": "manual-2019-06-22-afeecfae387c"
         },
         {
           "id": "8c92ba58a3e0",
@@ -17471,67 +17485,48 @@
           "locationEstimated": true,
           "gpsInferredFromPlace": true,
           "gpsInferredNote": "Muxia Km 0 (manual)"
+        },
+        {
+          "id": "681c4d023ff7",
+          "type": "image",
+          "date": "2019-07-23",
+          "time": "21:34",
+          "src": "assets/img/img_681c4d023ff7.jpg",
+          "thumb": "assets/thumb/thumb_681c4d023ff7.jpg",
+          "poster": null,
+          "mime": "image/jpeg",
+          "size": null,
+          "orig": "PHOTO-2019-07-23-21-34-25.jpg"
         }
       ],
-      "notes": "**Titolo**\nRientro da Muxía e giornata di decompressione.\n\n**Dove ero / tappa**\n23 luglio: rientro a Santiago dopo Muxía, con pomeriggio di recupero fuori dal centro.\n\n**Scena chiave**\nIl 23 luglio è stato il vero giorno di “atterraggio” dopo lo sforzo finale. La mattina ho condiviso nel gruppo com'era andata la corsa fino a Muxía: arrivo tiratissimo, caldo forte, alternanza continua tra corsa e cammino, tanta acqua appena arrivato e poi passaggio al km 0 più tardi, al tramonto. Era una di quelle soddisfazioni in cui senti insieme euforia e stanchezza piena.\n\nUna volta rientrato a Santiago, però, la modalità è cambiata: stop completo. Ho preso un hotel con spa fuori dal centro, con l'idea di recuperare sul serio e non aggiungere altri chilometri inutili. Taxi invece che cammino, piscina e sauna come programma principale del pomeriggio. Dopo settimane di zaino e camerate, quella pausa ha avuto quasi il sapore di un passaggio di stato: dal ritmo del pellegrino a quello del ritorno.\n\nCon Catherine ci siamo sentiti durante tutta la giornata, tra messaggi leggeri, ironia e piccoli momenti di complicità. Nel frattempo guardavo già al giorno dopo: festa di San Giacomo in città, molta sicurezza in giro, e volo in partenza nel pomeriggio. Anche la logistica era chiara: dall'hotel bisognava rientrare prima a Santiago e poi prendere il bus per l'aeroporto.\n\nLa sera è passata in relax pieno, con la sensazione di essermi guadagnato quella lentezza. Non era più tempo di “spingere”: era tempo di lasciare depositare tutto.\n\n**Dettaglio sensoriale**\nAcqua della piscina, calore della sauna, lenzuola bianche e corpo finalmente fermo dopo giorni di fatica continua.\n\n**Una cosa che ho capito**\nAnche il recupero fa parte del cammino: non è una pausa dal percorso, è l'ultimo pezzo necessario per chiuderlo bene.",
-      "recommendations": []
+      "notes": "**Titolo**\nRientro da Muxía e giornata di decompressione.\n\n**Dove ero / tappa**\n23 luglio: rientro a Santiago dopo Muxía, con pomeriggio di recupero totale fuori dal centro.\n\n**Scena chiave**\nIl 23 luglio è stato il vero giorno di “atterraggio” dopo lo sforzo finale. La mattina ho condiviso nel gruppo com’era andata la corsa fino a Muxía: arrivo tiratissimo, caldo forte, alternanza continua tra corsa e camminata, perché ero stremato dal sole cocente e straassetato, tanta acqua appena arrivato e poi passaggio al km 0 più tardi, al tramonto. Era una di quelle soddisfazioni in cui senti insieme euforia e stanchezza piena.\n\nUna volta rientrato a Santiago, però, la modalità è cambiata: stop completo. Invece di restare in centro, ho scelto l’Hotel Congreso, che si trova a circa 5/6 km da Santiago. Ci sono arrivato in taxi proprio per non aggiungere altri chilometri inutili: quel giorno volevo solo recuperare.\n\nProgramma del pomeriggio: piscina e spa. In chat scrivevo a Catherine che avrei passato lì tutto il tempo, in modalità relax totale, e infatti è andata così. Anche quando ho scoperto che la spa apriva più tardi del previsto, ho comunque tenuto il ritmo lento: niente corse, niente tappe, solo recupero.\n\nDurante la giornata mi sono sentito con più persone, ma senza incastri operativi: Laura e Juan erano andati da un’altra parte, quindi ho scelto di andare diretto in hotel e restarci fino a sera. Con Catherine ci siamo scritti spesso tra ironia, complicità e messaggi leggeri. Intanto avevo già in testa la logistica del giorno dopo: festa di San Giacomo in città, molta sicurezza in giro, volo nel pomeriggio e rientro verso l’aeroporto con doppio bus (hotel → Santiago → aeroporto).\n\nLa sera è passata in relax pieno, con la sensazione di essermi guadagnato quella lentezza. Non era più tempo di “spingere”: era tempo di lasciare depositare tutto.\n\n**Dettaglio sensoriale**\nAcqua della piscina, calore della spa, lenzuola bianche e corpo finalmente fermo dopo giorni di fatica continua.\n\n**Una cosa che ho capito**\nAnche il recupero fa parte del cammino: non è una pausa dal percorso, è l’ultimo pezzo necessario per chiuderlo bene.",
+      "recommendations": [
+        "Hotel Congreso (Rúa das Mámoas de Montouto, Nº 4, 15894): molto utile se vuoi una giornata di recupero vero, con piscina/spa, fuori dal caos del centro. Link: https://maps.app.goo.gl/udKN6YJ71Lwxcx1X6?g_st=ic"
+      ]
     },
     {
       "date": "2019-07-24",
-      "items": [],
-      "notes": "**Titolo**\nEpilogo a Santiago: festa di San Giacomo e rientro.\n\n**Dove ero / tappa**\n24 luglio: giornata finale a Santiago, senza cammino tracciato.\n\n**Scena chiave**\nDopo il rientro dal tratto verso Muxía/Fisterra, il 24 è stato il giorno della chiusura vera. Santiago era in atmosfera di festa per San Giacomo, con la città piena e un'energia completamente diversa rispetto ai sentieri delle settimane precedenti.\n\nLa giornata è andata in modalità pratica e conclusiva: tempi da rispettare, ultimi spostamenti, preparazione del rientro e bus verso l'aeroporto. Dopo tanti giorni scanditi solo da passi, zaino e orari \"morbidi\", tornare a una logistica rigida ha avuto un impatto forte.\n\nÈ stato anche il momento in cui ho sentito in modo netto il passaggio: il Cammino non era più davanti, ma già dentro quello che mi portavo via.\n\n**Dettaglio sensoriale**\nRumore di città in festa, zaino più leggero sulle spalle e testa piena di immagini ancora fresche del percorso.\n\n**Una cosa che ho capito**\nL'ultimo giorno non è solo \"tornare\": è il momento in cui realizzi davvero quanto il cammino ti abbia cambiato.",
-      "recommendations": []
-    },
-    {
-      "date": "2026-02-21",
       "items": [
         {
-          "id": "1b0e8a24a7c3",
-          "type": "image",
-          "date": "2026-02-21",
-          "time": "12:31",
-          "src": "assets/img/img_1b0e8a24a7c3.jpg",
-          "thumb": "assets/thumb/thumb_1b0e8a24a7c3.jpg",
-          "poster": null,
-          "mime": "image/jpeg",
+          "id": "76a1b66f1563",
+          "type": "video",
+          "date": "2019-07-24",
+          "time": "",
+          "src": "assets/video_resized/vid_76a1b66f1563.mp4",
+          "thumb": null,
+          "poster": "assets/poster/poster_76a1b66f1563.jpg",
+          "mime": "video/mp4",
           "size": null,
-          "orig": "c623e860-643b-417a-947a-4a7b661bef95.JPG",
-          "carouselKey": "split_1b0e8a24a7c3"
-        },
-        {
-          "id": "f98bce6cb159",
-          "type": "image",
-          "date": "2026-02-21",
-          "time": "12:31",
-          "src": "assets/img/img_f98bce6cb159.jpg",
-          "thumb": "assets/thumb/thumb_f98bce6cb159.jpg",
-          "poster": null,
-          "mime": "image/jpeg",
-          "size": null,
-          "orig": "dee58e26-5d29-4df2-9e17-8b8e4cb40a91.jpg",
-          "carouselKey": "split_f98bce6cb159"
-        },
-        {
-          "id": "e60d8c8cf6d6",
-          "type": "image",
-          "date": "2026-02-21",
-          "time": "12:52",
-          "src": "assets/img/img_e60d8c8cf6d6.jpg",
-          "thumb": "assets/thumb/thumb_e60d8c8cf6d6.jpg",
-          "poster": null,
-          "mime": "image/jpeg",
-          "size": null,
-          "orig": "27535e22-467d-4de4-8c04-933e2d3e053e.JPG",
-          "carouselKey": "split_e60d8c8cf6d6"
+          "orig": "49a50bd2ffb046ab8f770b7e2f85b8fb.mp4"
         }
       ],
-      "notes": "",
+      "notes": "**Titolo**\nUltimo giorno: colazione lenta, ultimi timbri, rientro.\n\n**Dove ero / tappa**\n24 luglio: chiusura del viaggio, dall’hotel fuori Santiago al rientro via aeroporto.\n\n**Scena chiave**\nLa giornata è cominciata in hotel con una colazione vera, di quelle che ti godi senza fretta: sia dolce che salata. Dopo settimane di ritmi da pellegrino e pasti spartani, quel momento ha avuto un sapore diverso, quasi di passaggio ufficiale verso il rientro.\n\nAnche se avevo finalmente un letto comodo e potevo dormire di più, mi sono svegliato prestissimo lo stesso: alle 5, poi alle 6, poi alle 7. Ormai il corpo era ancora settato sul ritmo del cammino.\n\nDopo la colazione sono rientrato a Santiago e sono passato in ufficio per prendere l’ultimo sello. È stato un gesto semplice, ma simbolico: l’ultimo timbro, l’ultimo pezzo formale prima di chiudere davvero questa avventura.\n\nIl resto della giornata è stato più logistico: trasferimento in aeroporto, attesa, e poi partenza con ritardo. In chat ci siamo sentiti ancora, tra leggerezza e malinconia di fine percorso. Nel gruppo, intanto, passavano messaggi di saluto e quella sensazione condivisa che il cammino stesse finendo per tutti, ognuno a modo suo.\n\n**Dettaglio sensoriale**\nColazione abbondante, rumore dell’aeroporto, e quella strana calma sospesa di quando sai che stai lasciando un posto che ti è entrato dentro.\n\n**Una cosa che ho capito**\nL’ultimo giorno non chiude solo una tratta: mette ordine a tutto quello che hai vissuto, e ti fa capire cosa vuoi portarti davvero a casa.",
       "recommendations": []
     }
   ],
   "counts": {
-    "images": 834,
-    "videos": 199,
+    "images": 833,
+    "videos": 200,
     "live": 0
   }
 }

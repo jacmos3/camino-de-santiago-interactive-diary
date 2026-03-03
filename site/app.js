@@ -3,6 +3,8 @@ const I18N = {
     eyebrow: 'Diario di viaggio',
     title: 'Cammino di Santiago',
     subtitle: 'Un recap giorno per giorno tra foto, video e ricordi di strada.',
+    hero_intro:
+      'Sono Jacopo: nel 2019, dopo essermi dimesso, ho preso un anno sabbatico. È stato un anno pieno, fatto di viaggi itineranti e anche di gare, tra cui la mezza maratona sulla Muraglia Cinese e la maratona di New York. Guardandolo oggi, mi rendo conto di quanto sia stata una fortuna viverlo proprio in quel momento: pochi mesi dopo, con le difficoltà e le chiusure del 2020, quella stessa libertà sarebbe diventata impensabile. Questo diario racconta il mio Cammino di Santiago, ricostruito giorno per giorno tra tracce GPS, foto, video e memoria.',
     days: 'Giorni',
     photos: 'Foto',
     videos: 'Video',
@@ -14,7 +16,7 @@ const I18N = {
     photo_tag: 'Foto',
     video_tag: 'Video',
     footer_note:
-      'Il sito è stato creato nel 2026, molti anni dopo l’esperienza vissuta, ma è stato ricostruito in modo molto fedele unendo il tracking del percorso registrato sul momento tramite Runtastic, i metadata (incluse coordinate GPS) estratti dalle foto e dai video, e i testi su stati d’animo ed eventi recuperati da vecchie note, messaggi, chat WhatsApp, audio, contenuti social e ricordi.',
+      'Il sito è stato creato nel 2026, a distanza di anni dall’esperienza vissuta, ma è stato ricostruito in modo fedele unendo il tracciamento registrato sul momento tramite app di tracking, i metadata (incluse le coordinate GPS) estratti da foto e video, e i testi su stati d’animo ed eventi recuperati da vecchie note, messaggi, chat WhatsApp, audio, contenuti social e ricordi.',
     view_diary: 'Diario',
     notes_label: 'Note del giorno',
     empty_note: 'Aggiungi un ricordo personale qui.',
@@ -65,6 +67,8 @@ const I18N = {
     eyebrow: 'Travel diary',
     title: 'Camino de Santiago',
     subtitle: 'A day-by-day recap through photos, videos, and trail memories.',
+    hero_intro:
+      'I am Jacopo: in 2019, after resigning from my job, I took a sabbatical year. It was a full year, with long-form itinerant travel and races, including the Great Wall of China Half Marathon and the New York City Marathon. Looking back, I realize how lucky I was to live it right then: a few months later, with the difficulties and closures of 2020, that same freedom would have become unthinkable. This diary tells only my Camino de Santiago, reconstructed day by day through GPS tracks, photos, videos, and memory.',
     days: 'Days',
     photos: 'Photos',
     videos: 'Videos',
@@ -653,6 +657,17 @@ const formatDate = (dateStr) => {
   return fmt.format(date);
 };
 
+const formatDateNoWeekday = (dateStr) => {
+  const [y, m, d] = dateStr.split('-').map(Number);
+  const date = new Date(y, m - 1, d);
+  const fmt = new Intl.DateTimeFormat(currentLang, {
+    day: '2-digit',
+    month: 'long',
+    year: 'numeric'
+  });
+  return fmt.format(date);
+};
+
 const DAY_ZERO_DATE = '2019-06-04';
 const PROLOGUE_DATES = ['2019-06-02', '2019-06-03'];
 const PROLOGUE_TRACK_DATE = '2019-06-03';
@@ -1085,7 +1100,7 @@ const appendModalGroupPanel = (currentItem) => {
     });
     row.appendChild(btn);
 
-    if (groupItem.id) {
+    if (groupItem.id && adminAuthenticated) {
       const deleteBtn = document.createElement('button');
       deleteBtn.type = 'button';
       deleteBtn.className = 'modal__group-delete';
@@ -3006,7 +3021,7 @@ const renderMiniMap = (dayKey, dayIndex = null) => {
     const body = document.getElementById('mini-map-body');
     const dateEl = document.getElementById('mini-map-date');
     const openLink = document.querySelector('.mini-map__open');
-    if (dateEl) dateEl.textContent = formatDate(dayKey);
+    if (dateEl) dateEl.textContent = formatDateNoWeekday(dayKey);
     if (openLink) {
       openLink.href = `/map.html?upto=${encodeURIComponent(String(dayKey || ''))}`;
     }

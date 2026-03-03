@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-03-03T19:34:59.130Z",
+  "generated_at": "2026-03-03T23:08:26.618Z",
   "days": [
     {
       "date": "2019-06-02",
@@ -6957,7 +6957,21 @@
           "place": "Burgos, España",
           "lat": 42.3400777777778,
           "lon": -3.70421388888889,
-          "gpsInferred": false
+          "gpsInferred": false,
+          "carouselKey": "manual-2019-06-22-afeecfae387c"
+        },
+        {
+          "id": "1b0e8a24a7c3",
+          "type": "image",
+          "date": "2019-06-22",
+          "time": "12:31",
+          "src": "assets/img/img_1b0e8a24a7c3.jpg",
+          "thumb": "assets/thumb/thumb_1b0e8a24a7c3.jpg",
+          "poster": null,
+          "mime": "image/jpeg",
+          "size": null,
+          "orig": "c623e860-643b-417a-947a-4a7b661bef95.JPG",
+          "carouselKey": "manual-2019-06-22-afeecfae387c"
         },
         {
           "id": "8c92ba58a3e0",
@@ -17471,67 +17485,48 @@
           "locationEstimated": true,
           "gpsInferredFromPlace": true,
           "gpsInferredNote": "Muxia Km 0 (manual)"
+        },
+        {
+          "id": "681c4d023ff7",
+          "type": "image",
+          "date": "2019-07-23",
+          "time": "21:34",
+          "src": "assets/img/img_681c4d023ff7.jpg",
+          "thumb": "assets/thumb/thumb_681c4d023ff7.jpg",
+          "poster": null,
+          "mime": "image/jpeg",
+          "size": null,
+          "orig": "PHOTO-2019-07-23-21-34-25.jpg"
         }
       ],
-      "notes": "**Title**\nReturn from Muxía and decompression day.\n\n**Where I was / stage**\nJuly 23: return to Santiago after Muxía, with an afternoon of recovery outside the center.\n\n**Key scene**\nJuly 23 was the true “landing” day after the final effort. In the morning I shared in the group how the run to Muxía had gone: very tight arrival, strong heat, continuous alternation between running and walking, lots of water right after arrival, and then passage at km 0 later, at sunset. It was one of those satisfactions where you feel euphoria and full tiredness together.\n\nOnce back in Santiago, however, mode changed: full stop. I took a hotel with spa outside the center, with the idea of recovering seriously and not adding other unnecessary kilometers. Taxi instead of walking, pool and sauna as the main afternoon program. After weeks of backpack and dormitories, that pause almost felt like a state transition: from pilgrim rhythm to return rhythm.\n\nCatherine and I talked throughout the day, between light messages, irony, and small moments of complicity. Meanwhile I was already looking at the next day: St. James celebration in town, lots of security around, and flight departure in the afternoon. Logistics were clear too: from hotel you first had to return to Santiago and then take the bus to the airport.\n\nThe evening passed in full relaxation, with the sensation I had earned that slowness. It was no longer time to “push”: it was time to let everything settle.\n\n**Sensory detail**\nPool water, sauna heat, white sheets, and body finally still after days of continuous effort.\n\n**What I understood**\nRecovery is also part of the Camino: it is not a break from the route, it is the final necessary piece to close it well.",
-      "recommendations": []
+      "notes": "**Title**\nReturn from Muxía and decompression day.\n\n**Where I was / stage**\nJuly 23: return to Santiago after Muxía, with a full recovery afternoon outside the city center.\n\n**Key scene**\nJuly 23 was the true “landing” day after the final effort. In the morning I shared in the group how the run to Muxía had gone: very tight arrival, strong heat, continuous alternation between running and walking, because I was exhausted by the blazing sun and extremely thirsty, lots of water right after arrival, and then passage at km 0 later at sunset. It was one of those satisfactions where you feel euphoria and full tiredness together.\n\nOnce back in Santiago, however, mode changed: full stop. Instead of staying in the center, I chose Hotel Congreso, about 5/6 km from Santiago. I got there by taxi specifically to avoid adding unnecessary kilometers: that day I only wanted to recover.\n\nAfternoon plan: pool and spa. In chat I was telling Catherine I would spend the whole time there in total relax mode, and that is exactly what happened. Even when I found out the spa opened later than expected, I still kept the day slow: no pushing, no stages, just recovery.\n\nDuring the day I talked with several people, but without logistical meetups: Laura and Juan had gone elsewhere, so I decided to go straight to the hotel and stay there until evening. Catherine and I kept messaging a lot, with irony, complicity, and light moments. At the same time, I was already focused on next-day logistics: St. James celebration in town, heavy security around, afternoon flight, and airport transfer with two buses (hotel → Santiago → airport).\n\nThe evening stayed fully relaxed, with the feeling I had earned that slowness. It was no longer time to “push”: it was time to let everything settle.\n\n**Sensory detail**\nPool water, spa heat, white sheets, and body finally still after days of continuous effort.\n\n**What I understood**\nRecovery is also part of the Camino: it is not a break from the route, it is the final necessary piece to close it well.",
+      "recommendations": [
+        "Hotel Congreso (Rúa das Mámoas de Montouto, Nº 4, 15894): very useful if you want a real recovery day, with pool/spa, outside the city-center rush. Link: https://maps.app.goo.gl/udKN6YJ71Lwxcx1X6?g_st=ic"
+      ]
     },
     {
       "date": "2019-07-24",
-      "items": [],
-      "notes": "**Title**\nEpilogue in Santiago: St. James celebration and return.\n\n**Where I was / stage**\nJuly 24: final day in Santiago, with no tracked walking.\n\n**Key scene**\nAfter returning from the Muxía/Fisterra stretch, the 24th was the true closing day. Santiago was in St. James celebration atmosphere, with the city full and an energy completely different from the trails of the previous weeks.\n\nThe day moved in practical and conclusive mode: deadlines to respect, final movements, return preparation, and bus toward the airport. After many days marked only by steps, backpack, and “soft” timing, going back to rigid logistics had a strong impact.\n\nIt was also the moment when I felt the transition clearly: the Camino was no longer in front of me, but already inside what I was carrying away.\n\n**Sensory detail**\nNoise of a city in celebration, lighter backpack on shoulders, and head full of still-fresh images from the route.\n\n**What I understood**\nThe last day is not only “going back”: it is the moment when you truly realize how much the Camino changed you.",
-      "recommendations": []
-    },
-    {
-      "date": "2026-02-21",
       "items": [
         {
-          "id": "1b0e8a24a7c3",
-          "type": "image",
-          "date": "2026-02-21",
-          "time": "12:31",
-          "src": "assets/img/img_1b0e8a24a7c3.jpg",
-          "thumb": "assets/thumb/thumb_1b0e8a24a7c3.jpg",
-          "poster": null,
-          "mime": "image/jpeg",
+          "id": "76a1b66f1563",
+          "type": "video",
+          "date": "2019-07-24",
+          "time": "",
+          "src": "assets/video_resized/vid_76a1b66f1563.mp4",
+          "thumb": null,
+          "poster": "assets/poster/poster_76a1b66f1563.jpg",
+          "mime": "video/mp4",
           "size": null,
-          "orig": "c623e860-643b-417a-947a-4a7b661bef95.JPG",
-          "carouselKey": "split_1b0e8a24a7c3"
-        },
-        {
-          "id": "f98bce6cb159",
-          "type": "image",
-          "date": "2026-02-21",
-          "time": "12:31",
-          "src": "assets/img/img_f98bce6cb159.jpg",
-          "thumb": "assets/thumb/thumb_f98bce6cb159.jpg",
-          "poster": null,
-          "mime": "image/jpeg",
-          "size": null,
-          "orig": "dee58e26-5d29-4df2-9e17-8b8e4cb40a91.jpg",
-          "carouselKey": "split_f98bce6cb159"
-        },
-        {
-          "id": "e60d8c8cf6d6",
-          "type": "image",
-          "date": "2026-02-21",
-          "time": "12:52",
-          "src": "assets/img/img_e60d8c8cf6d6.jpg",
-          "thumb": "assets/thumb/thumb_e60d8c8cf6d6.jpg",
-          "poster": null,
-          "mime": "image/jpeg",
-          "size": null,
-          "orig": "27535e22-467d-4de4-8c04-933e2d3e053e.JPG",
-          "carouselKey": "split_e60d8c8cf6d6"
+          "orig": "49a50bd2ffb046ab8f770b7e2f85b8fb.mp4"
         }
       ],
-      "notes": "",
+      "notes": "**Title**\nLast day: slow breakfast, final stamps, return.\n\n**Where I was / stage**\nJuly 24: journey closing day, from the hotel outside Santiago to departure through the airport.\n\n**Key scene**\nThe day started at the hotel with a proper breakfast, the kind you enjoy without rushing: both sweet and savory. After weeks of pilgrim pace and basic meals, that moment felt different, almost like an official transition toward the return.\n\nEven though I finally had a comfortable bed and could sleep longer, I still woke up very early: at 5, then at 6, then at 7. My body was still tuned to Camino rhythm.\n\nAfter breakfast I went back to Santiago and stopped by the office to get the last sello. It was a simple gesture, but symbolic: the last stamp, the last formal piece before truly closing this adventure.\n\nThe rest of the day was mostly logistics: transfer to the airport, waiting, then departure with delay. We still exchanged messages in chat, with that mix of lightness and end-of-journey melancholy. In the group, farewell messages were passing around, with the shared feeling that the Camino was ending for everyone, each in their own way.\n\n**Sensory detail**\nA rich breakfast, airport noise, and that strange suspended calm when you know you are leaving a place that got inside you.\n\n**What I understood**\nThe last day does not just close a stage: it puts order into everything you lived, and makes you understand what you truly want to take home.",
       "recommendations": []
     }
   ],
   "counts": {
-    "images": 834,
-    "videos": 199,
+    "images": 833,
+    "videos": 200,
     "live": 0
   }
 }
