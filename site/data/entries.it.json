@@ -14104,6 +14104,19 @@
           "locationEstimated": true
         },
         {
+          "id": "0220098b37d8",
+          "type": "image",
+          "date": "2019-07-12",
+          "time": "12:52",
+          "src": "assets/img/img_0220098b37d8.jpg",
+          "thumb": "assets/thumb/thumb_0220098b37d8.jpg",
+          "poster": null,
+          "mime": "image/jpeg",
+          "size": null,
+          "orig": "8716DFD5-4DBA-40DC-AFC2-68EA3FE4B924.jpg",
+          "carouselKey": "manual-2019-07-12-497e1c91e458"
+        },
+        {
           "id": "f6a3419304c3",
           "type": "image",
           "date": "2019-07-12",
@@ -14117,7 +14130,8 @@
           "place": "Sarria, España",
           "lat": 42.7810333333333,
           "lon": -7.49,
-          "gpsInferred": false
+          "gpsInferred": false,
+          "carouselKey": "manual-2019-07-12-497e1c91e458"
         },
         {
           "id": "4af6a1aed247",
@@ -14133,7 +14147,8 @@
           "place": "Sarria, España",
           "lat": 42.7809611111111,
           "lon": -7.49009722222222,
-          "gpsInferred": false
+          "gpsInferred": false,
+          "carouselKey": "manual-2019-07-12-497e1c91e458"
         },
         {
           "id": "497e1c91e458",
@@ -14149,7 +14164,60 @@
           "place": "Sarria, España",
           "lat": 42.7808277777778,
           "lon": -7.48998333333333,
-          "gpsInferred": false
+          "gpsInferred": false,
+          "carouselKey": "manual-2019-07-12-497e1c91e458"
+        },
+        {
+          "id": "6f1ac4292d82",
+          "type": "image",
+          "date": "2019-07-12",
+          "time": "12:52",
+          "src": "assets/img/img_6f1ac4292d82.jpg",
+          "thumb": "assets/thumb/thumb_6f1ac4292d82.jpg",
+          "poster": null,
+          "mime": "image/jpeg",
+          "size": null,
+          "orig": "0864A1AA-25C2-4F0F-9D8B-524FF190593A.jpg",
+          "carouselKey": "manual-2019-07-12-497e1c91e458"
+        },
+        {
+          "id": "0cefcb3869bc",
+          "type": "image",
+          "date": "2019-07-12",
+          "time": "12:52",
+          "src": "assets/img/img_0cefcb3869bc.jpg",
+          "thumb": "assets/thumb/thumb_0cefcb3869bc.jpg",
+          "poster": null,
+          "mime": "image/jpeg",
+          "size": null,
+          "orig": "30881292-3B8D-417C-BF98-E785D1943162.jpg",
+          "carouselKey": "manual-2019-07-12-497e1c91e458"
+        },
+        {
+          "id": "5e2d43cb9658",
+          "type": "image",
+          "date": "2019-07-12",
+          "time": "12:52",
+          "src": "assets/img/img_5e2d43cb9658.jpg",
+          "thumb": "assets/thumb/thumb_5e2d43cb9658.jpg",
+          "poster": null,
+          "mime": "image/jpeg",
+          "size": null,
+          "orig": "37E20386-3F05-430F-BA73-359F6680F088.jpg",
+          "carouselKey": "manual-2019-07-12-497e1c91e458"
+        },
+        {
+          "id": "0a3df90116c0",
+          "type": "image",
+          "date": "2019-07-12",
+          "time": "12:52",
+          "src": "assets/img/img_0a3df90116c0.jpg",
+          "thumb": "assets/thumb/thumb_0a3df90116c0.jpg",
+          "poster": null,
+          "mime": "image/jpeg",
+          "size": null,
+          "orig": "F5880FDF-E686-4EA2-A8BD-5925E5144B95.jpg",
+          "carouselKey": "manual-2019-07-12-497e1c91e458"
         },
         {
           "id": "421c35877bab",
@@ -14165,7 +14233,8 @@
           "place": "Sarria, España",
           "lat": 42.7808194444444,
           "lon": -7.49001388888889,
-          "gpsInferred": false
+          "gpsInferred": false,
+          "carouselKey": "manual-2019-07-12-497e1c91e458"
         },
         {
           "id": "54b6e01ba72f",
@@ -14181,7 +14250,8 @@
           "place": "Sarria, España",
           "lat": 42.7808,
           "lon": -7.490075,
-          "gpsInferred": false
+          "gpsInferred": false,
+          "carouselKey": "manual-2019-07-12-497e1c91e458"
         },
         {
           "id": "b63a5a7df61a",
@@ -17442,19 +17512,6 @@
           "carouselKey": "split_f98bce6cb159"
         },
         {
-          "id": "6f1ac4292d82",
-          "type": "image",
-          "date": "2026-02-21",
-          "time": "12:52",
-          "src": "assets/img/img_6f1ac4292d82.jpg",
-          "thumb": "assets/thumb/thumb_6f1ac4292d82.jpg",
-          "poster": null,
-          "mime": "image/jpeg",
-          "size": null,
-          "orig": "0864A1AA-25C2-4F0F-9D8B-524FF190593A.jpg",
-          "carouselKey": "split_6f1ac4292d82"
-        },
-        {
           "id": "e60d8c8cf6d6",
           "type": "image",
           "date": "2026-02-21",
@@ -17466,58 +17523,6 @@
           "size": null,
           "orig": "27535e22-467d-4de4-8c04-933e2d3e053e.JPG",
           "carouselKey": "split_e60d8c8cf6d6"
-        },
-        {
-          "id": "0cefcb3869bc",
-          "type": "image",
-          "date": "2026-02-21",
-          "time": "12:52",
-          "src": "assets/img/img_0cefcb3869bc.jpg",
-          "thumb": "assets/thumb/thumb_0cefcb3869bc.jpg",
-          "poster": null,
-          "mime": "image/jpeg",
-          "size": null,
-          "orig": "30881292-3B8D-417C-BF98-E785D1943162.jpg",
-          "carouselKey": "split_0cefcb3869bc"
-        },
-        {
-          "id": "5e2d43cb9658",
-          "type": "image",
-          "date": "2026-02-21",
-          "time": "12:52",
-          "src": "assets/img/img_5e2d43cb9658.jpg",
-          "thumb": "assets/thumb/thumb_5e2d43cb9658.jpg",
-          "poster": null,
-          "mime": "image/jpeg",
-          "size": null,
-          "orig": "37E20386-3F05-430F-BA73-359F6680F088.jpg",
-          "carouselKey": "split_5e2d43cb9658"
-        },
-        {
-          "id": "0220098b37d8",
-          "type": "image",
-          "date": "2026-02-21",
-          "time": "12:52",
-          "src": "assets/img/img_0220098b37d8.jpg",
-          "thumb": "assets/thumb/thumb_0220098b37d8.jpg",
-          "poster": null,
-          "mime": "image/jpeg",
-          "size": null,
-          "orig": "8716DFD5-4DBA-40DC-AFC2-68EA3FE4B924.jpg",
-          "carouselKey": "split_0220098b37d8"
-        },
-        {
-          "id": "0a3df90116c0",
-          "type": "image",
-          "date": "2026-02-21",
-          "time": "12:52",
-          "src": "assets/img/img_0a3df90116c0.jpg",
-          "thumb": "assets/thumb/thumb_0a3df90116c0.jpg",
-          "poster": null,
-          "mime": "image/jpeg",
-          "size": null,
-          "orig": "F5880FDF-E686-4EA2-A8BD-5925E5144B95.jpg",
-          "carouselKey": "split_0a3df90116c0"
         }
       ],
       "notes": "",
