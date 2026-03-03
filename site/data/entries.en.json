@@ -21,7 +21,7 @@
           "gpsInferred": false
         }
       ],
-      "notes": "**Title**\nToward the Camino, with an unexpected stop.\n\n**Where I was / stage**\nFrom Perugia to Bergamo before the June 3 flight to Lourdes.\n\n**Key scene**\nI took a BlaBlaCar from Perugia to Milan, then a train from Milan to Orio to reach friends who hosted me for one night. The photo of the day was taken on the train: the moment the journey truly started, even before the first walking stage.\n\n**Sensory detail**\nTrain rhythm, backpack close by, mind already on the days ahead.\n\n**What I learned**\nThe Camino starts before the first trail step: in transfers, choices, and preparation.",
+      "notes": "**Title**\nToward the Camino, with an unexpected stop.\n\n**Where I was / stage**\nDeparture from Perugia to Bergamo, in view of the flight to Lourdes scheduled for June 3 in the afternoon/evening.\n\n**Key scene**\nFrom Perugia to Milan I used BlaBlaCar, then from Milan to Orio I took a train to reach my friends, who were hosting me for one night before the real departure. The photo of the day was taken on the train: the moment when the journey truly begins, even if the Camino itself has not started yet.\n\n**Sensory detail**\nRhythmic train noise, backpack close by, mind already projected to the next days.\n\n**What I understood**\nThe Camino starts before the first step on the trail, in transfers and preparatory choices: that evening I had also considered bringing a tent to sleep in the middle of nowhere, but I immediately understood it would be too bulky for my backpack balance.\n\n**Practical note**\nTransfer Perugia-Milan by BlaBlaCar, then train Milan-Orio and overnight in Bergamo hosted by friends.",
       "recommendations": []
     },
     {
@@ -38,12 +38,11 @@
           "mime": "video/mp4",
           "size": null,
           "orig": "IMG_2861.MOV",
-          "place": "Bergamo, Italia",
+          "place": "Ponte San Pietro, Italia",
           "lat": 45.6896,
-          "lon": 9.5906,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredNote": "Inferred from adjacent media with exact GPS (IMG_2860/2862)"
+          "lon": 9.590600000000002,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "30c63d014b78",
@@ -96,7 +95,7 @@
           "gpsInferredFromPlace": true
         }
       ],
-      "notes": "**Title**\nBergamo, active waiting.\n\n**Where I was / stage**\nBergamo, waiting for the afternoon/evening flight to Lourdes.\n\n**Key scene**\nIn the morning I rode a borrowed bike and found donkeys on the way: simple but memorable. In the evening I flew out, then had to find a place to sleep on arrival, with many options already closed.\n\n**Sensory detail**\nFresh air, slow city pace, pre-departure tension.\n\n**What I learned**\nA calm morning can mentally set up a long journey.",
+      "notes": "**Title**\nBergamo, active waiting.\n\n**Where I was / stage**\nI was in Bergamo, waiting for the flight to Lourdes scheduled for the afternoon/evening (departure at 19:55).\n\n**Key scene**\nIn the morning I went for a bike ride with a bike lent by my friends. During the ride I came across donkeys: a simple but memorable scene that brought lightness to the hours before departure. In the evening I took the flight; I landed in Lourdes late at night and did not go to a hostel. Once I arrived, I had to find a place to sleep, but all the places I found were already closed.\n\n**Sensory detail**\nMorning air on the bike, calm pace, city seen at a slow speed.\n\n**What I understood**\nBefore a long trip, even a slow, unhurried morning can help put your mind in order.\n\n**Practical note**\nTransition day in Bergamo with a bike outing, evening flight, and arrival with accommodation search in difficult conditions.",
       "strava": [
         "https://www.strava.com/activities/8362629398"
       ],
@@ -181,11 +180,10 @@
           "size": null,
           "orig": "IMG_2902.MOV",
           "place": "Lourdes, France",
-          "lat": 43.09781527777778,
-          "lon": -0.055885317460317455,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredFromPlace": true
+          "lat": 43.0975,
+          "lon": -0.05709999999999999,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "0bcc9f523035",
@@ -247,11 +245,10 @@
           "size": null,
           "orig": "IMG_2908.MOV",
           "place": "Lourdes, France",
-          "lat": 43.09781527777778,
-          "lon": -0.055885317460317455,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredFromPlace": true
+          "lat": 43.098099999999995,
+          "lon": -0.05969999999999999,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "c261872e1acf",
@@ -700,9 +697,9 @@
           "size": null,
           "orig": "IMG_2941.MOV",
           "place": "Ogeu-les-Bains, France",
-          "lat": 43.105411529541016,
-          "lon": -0.4291103780269623,
-          "gpsInferred": true,
+          "lat": 43.1442,
+          "lon": -0.4853,
+          "gpsInferred": false,
           "locationEstimated": true
         },
         {
@@ -748,10 +745,10 @@
           "mime": "video/mp4",
           "size": null,
           "orig": "IMG_2945.MOV",
-          "place": "Ogeu-les-Bains, France",
-          "lat": 43.14447021484375,
-          "lon": -0.48472219705581665,
-          "gpsInferred": true,
+          "place": "Buziet, France",
+          "lat": 43.143499999999996,
+          "lon": -0.48390000000000005,
+          "gpsInferred": false,
           "locationEstimated": true
         },
         {
@@ -798,9 +795,9 @@
           "size": null,
           "orig": "IMG_2949.MOV",
           "place": "Ogeu-les-Bains, France",
-          "lat": 43.14447021484375,
-          "lon": -0.48472219705581665,
-          "gpsInferred": true,
+          "lat": 43.15540000000001,
+          "lon": -0.514,
+          "gpsInferred": false,
           "locationEstimated": true
         },
         {
@@ -814,10 +811,10 @@
           "mime": "video/mp4",
           "size": null,
           "orig": "IMG_2952.MOV",
-          "place": "Oloron-Sainte-Marie, France",
-          "lat": 43.16234588623047,
-          "lon": -0.5263996124267578,
-          "gpsInferred": true,
+          "place": "Précilhon, France",
+          "lat": 43.1866,
+          "lon": -0.5748,
+          "gpsInferred": false,
           "locationEstimated": true
         },
         {
@@ -831,10 +828,10 @@
           "mime": "video/mp4",
           "size": null,
           "orig": "IMG_2953.MOV",
-          "place": "Oloron-Sainte-Marie, France",
-          "lat": 43.165306091308594,
-          "lon": -0.5288478136062622,
-          "gpsInferred": true,
+          "place": "Précilhon, France",
+          "lat": 43.1879,
+          "lon": -0.5778,
+          "gpsInferred": false,
           "locationEstimated": true
         },
         {
@@ -848,10 +845,10 @@
           "mime": "video/mp4",
           "size": null,
           "orig": "IMG_2954.MOV",
-          "place": "Oloron-Sainte-Marie, France",
-          "lat": 43.165306091308594,
-          "lon": -0.5288478136062622,
-          "gpsInferred": true,
+          "place": "Précilhon, France",
+          "lat": 43.187999999999995,
+          "lon": -0.5779,
+          "gpsInferred": false,
           "locationEstimated": true
         },
         {
@@ -882,11 +879,10 @@
           "size": null,
           "orig": "IMG_2956.MOV",
           "place": "Oloron-Sainte-Marie, France",
-          "lat": 43.1941388888889,
-          "lon": -0.602630555555556,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredNote": "Aligned to nearby photo IMG_2957.HEIC (dt 0 min, was 4.86 km away)"
+          "lat": 43.194199999999995,
+          "lon": -0.6026,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "cf8a24b13309",
@@ -1070,11 +1066,10 @@
           "size": null,
           "orig": "IMG_2971.MOV",
           "place": "Oloron-Sainte-Marie, France",
-          "lat": 43.1894098655007,
-          "lon": -0.5968786597110608,
-          "gpsInferred": true,
+          "lat": 43.1932,
+          "lon": -0.605,
+          "gpsInferred": false,
           "locationEstimated": true,
-          "gpsInferredFromPlace": true,
           "carouselKey": "manual_pair_316000728531_0a184428f20a"
         },
         {
@@ -1186,11 +1181,10 @@
           "size": null,
           "orig": "IMG_2984.MOV",
           "place": "Oloron-Sainte-Marie, France",
-          "lat": 43.1894098655007,
-          "lon": -0.5968786597110608,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredFromPlace": true
+          "lat": 43.1932,
+          "lon": -0.605,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "ae972498bf62",
@@ -1430,10 +1424,10 @@
           "mime": "video/mp4",
           "size": null,
           "orig": "IMG_3003.MOV",
-          "place": "Préchacq-Josbaig, France",
-          "lat": 43.2623176574707,
-          "lon": -0.7154170870780945,
-          "gpsInferred": true,
+          "place": "Aren, France",
+          "lat": 43.2403,
+          "lon": -0.7551,
+          "gpsInferred": false,
           "locationEstimated": true
         },
         {
@@ -1724,11 +1718,10 @@
           "place": "Chéraute, France",
           "carouselKey": "manual_2019-06-08_09-46_triple_1",
           "carouselOrder": 0,
-          "lat": 43.2161527777778,
-          "lon": -0.814180555555556,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredNote": "Aligned to nearby photo IMG_3030.HEIC (dt 2 min, was 5.01 km away)"
+          "lat": 43.2158,
+          "lon": -0.8137,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "6bed004fa817",
@@ -1778,11 +1771,10 @@
           "size": null,
           "orig": "IMG_3032.MOV",
           "place": "Chéraute, France",
-          "lat": 43.2161527777778,
-          "lon": -0.814180555555556,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredNote": "Aligned to nearby photo IMG_3030.HEIC (dt 2 min, was 4.78 km away)"
+          "lat": 43.2157,
+          "lon": -0.8154,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "6ca3ad939150",
@@ -1864,11 +1856,10 @@
           "size": null,
           "orig": "IMG_3033.MOV",
           "place": "Chéraute, France",
-          "lat": 43.2172277777778,
-          "lon": -0.829730555555556,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredNote": "Aligned to nearby photo IMG_3034.HEIC (dt 3 min, was 3.88 km away)"
+          "lat": 43.21770000000001,
+          "lon": -0.8298,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "6b582ee9d733",
@@ -1914,11 +1905,10 @@
           "size": null,
           "orig": "IMG_3037.MOV",
           "place": "Chéraute, France",
-          "lat": 43.2172277777778,
-          "lon": -0.829730555555556,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredNote": "Aligned to nearby photo IMG_3034.HEIC (dt 0 min, was 3.67 km away)"
+          "lat": 43.217299999999994,
+          "lon": -0.8297,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "b9a3f35acd55",
@@ -1932,9 +1922,9 @@
           "size": null,
           "orig": "IMG_3039.MOV",
           "place": "Chéraute, France",
-          "lat": 43.229549407958984,
-          "lon": -0.7927836775779724,
-          "gpsInferred": true,
+          "lat": 43.2176,
+          "lon": -0.8291999999999999,
+          "gpsInferred": false,
           "locationEstimated": true
         },
         {
@@ -1969,11 +1959,10 @@
           "place": "Chéraute, France",
           "carouselKey": "manual_2019-06-08_10-52_pair_1",
           "carouselOrder": 1,
-          "lat": 43.2169083333333,
-          "lon": -0.829672222222222,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredNote": "Aligned to nearby photo IMG_3040.HEIC (dt 0 min, was 2.83 km away)"
+          "lat": 43.216899999999995,
+          "lon": -0.8297,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "04f3b1c1cf2d",
@@ -1987,9 +1976,9 @@
           "size": null,
           "orig": "IMG_3042.MOV",
           "place": "Chéraute, France",
-          "lat": 43.22146987915039,
-          "lon": -0.7995888590812683,
-          "gpsInferred": true,
+          "lat": 43.217,
+          "lon": -0.8297,
+          "gpsInferred": false,
           "locationEstimated": true
         },
         {
@@ -2004,9 +1993,9 @@
           "size": null,
           "orig": "IMG_3043.MOV",
           "place": "Chéraute, France",
-          "lat": 43.221473693847656,
-          "lon": -0.7998220324516296,
-          "gpsInferred": true,
+          "lat": 43.217299999999994,
+          "lon": -0.8297,
+          "gpsInferred": false,
           "locationEstimated": true
         },
         {
@@ -2021,9 +2010,9 @@
           "size": null,
           "orig": "IMG_3044.MOV",
           "place": "Chéraute, France",
-          "lat": 43.22145462036133,
-          "lon": -0.8013253211975098,
-          "gpsInferred": true,
+          "lat": 43.217299999999994,
+          "lon": -0.8298,
+          "gpsInferred": false,
           "locationEstimated": true
         },
         {
@@ -2037,10 +2026,10 @@
           "mime": "video/mp4",
           "size": null,
           "orig": "IMG_3045.MOV",
-          "place": "Uhart-Cize, France",
-          "lat": 43.22146224975586,
-          "lon": -0.8029749989509583,
-          "gpsInferred": true,
+          "place": "Chéraute, France",
+          "lat": 43.217299999999994,
+          "lon": -0.8296,
+          "gpsInferred": false,
           "locationEstimated": true
         },
         {
@@ -2054,10 +2043,10 @@
           "mime": "video/mp4",
           "size": null,
           "orig": "IMG_3046.MOV",
-          "place": "Uhart-Cize, France",
-          "lat": 43.220611572265625,
-          "lon": -0.8039013743400574,
-          "gpsInferred": true,
+          "place": "Chéraute, France",
+          "lat": 43.217099999999995,
+          "lon": -0.8297,
+          "gpsInferred": false,
           "locationEstimated": true
         },
         {
@@ -2072,9 +2061,9 @@
           "size": null,
           "orig": "IMG_3047.MOV",
           "place": "Chéraute, France",
-          "lat": 43.22256088256836,
-          "lon": -0.8088414669036865,
-          "gpsInferred": true,
+          "lat": 43.2172,
+          "lon": -0.8297,
+          "gpsInferred": false,
           "locationEstimated": true
         },
         {
@@ -2123,9 +2112,9 @@
           "place": "Chéraute, France",
           "carouselKey": "manual_2019-06-08_cluster_c392f5ea0029",
           "carouselOrder": 1,
-          "lat": 43.21721649169922,
-          "lon": -0.8296879529953003,
-          "gpsInferred": true,
+          "lat": 43.2195,
+          "lon": -0.8685999999999999,
+          "gpsInferred": false,
           "locationEstimated": true
         },
         {
@@ -2142,9 +2131,9 @@
           "place": "Chéraute, France",
           "carouselKey": "manual_2019-06-08_cluster_c392f5ea0029",
           "carouselOrder": 2,
-          "lat": 43.21721649169922,
-          "lon": -0.8296879529953003,
-          "gpsInferred": true,
+          "lat": 43.2195,
+          "lon": -0.8685999999999999,
+          "gpsInferred": false,
           "locationEstimated": true
         },
         {
@@ -2161,9 +2150,9 @@
           "place": "Chéraute, France",
           "carouselKey": "manual_2019-06-08_cluster_c392f5ea0029",
           "carouselOrder": 3,
-          "lat": 43.21721649169922,
-          "lon": -0.8296879529953003,
-          "gpsInferred": true,
+          "lat": 43.2195,
+          "lon": -0.8685999999999999,
+          "gpsInferred": false,
           "locationEstimated": true
         },
         {
@@ -2180,9 +2169,9 @@
           "place": "Chéraute, France",
           "carouselKey": "manual_2019-06-08_cluster_c392f5ea0029",
           "carouselOrder": 4,
-          "lat": 43.21721649169922,
-          "lon": -0.8296879529953003,
-          "gpsInferred": true,
+          "lat": 43.2195,
+          "lon": -0.8684999999999999,
+          "gpsInferred": false,
           "locationEstimated": true
         },
         {
@@ -2199,9 +2188,9 @@
           "place": "Chéraute, France",
           "carouselKey": "manual_2019-06-08_cluster_c392f5ea0029",
           "carouselOrder": 5,
-          "lat": 43.21721649169922,
-          "lon": -0.8296879529953003,
-          "gpsInferred": true,
+          "lat": 43.2195,
+          "lon": -0.8684999999999999,
+          "gpsInferred": false,
           "locationEstimated": true
         },
         {
@@ -2218,9 +2207,9 @@
           "place": "Chéraute, France",
           "carouselKey": "manual_2019-06-08_cluster_c392f5ea0029",
           "carouselOrder": 6,
-          "lat": 43.21721649169922,
-          "lon": -0.8296879529953003,
-          "gpsInferred": true,
+          "lat": 43.2194,
+          "lon": -0.8684,
+          "gpsInferred": false,
           "locationEstimated": true
         },
         {
@@ -2282,10 +2271,10 @@
           "mime": "video/mp4",
           "size": null,
           "orig": "IMG_3065.MOV",
-          "place": "Mauléon-Licharre, France",
-          "lat": 43.212860107421875,
-          "lon": -0.9011803865432739,
-          "gpsInferred": true,
+          "place": "Ordiarp, France",
+          "lat": 43.1751,
+          "lon": -0.9511,
+          "gpsInferred": false,
           "locationEstimated": true
         },
         {
@@ -2357,10 +2346,10 @@
           "mime": "video/mp4",
           "size": null,
           "orig": "IMG_3066.MOV",
-          "place": "Saint-Just, France",
-          "lat": 43.1605339050293,
-          "lon": -0.9727263450622559,
-          "gpsInferred": true,
+          "place": "Musculdy, France",
+          "lat": 43.165800000000004,
+          "lon": -1.0158,
+          "gpsInferred": false,
           "locationEstimated": true
         },
         {
@@ -2391,12 +2380,11 @@
           "size": null,
           "orig": "IMG_3071.MOV",
           "place": "Saint-Just, France",
-          "lat": 43.1856611111111,
-          "lon": -1.05199722222222,
-          "gpsInferred": true,
+          "lat": 43.1857,
+          "lon": -1.052,
+          "gpsInferred": false,
           "locationEstimated": true,
-          "carouselKey": "merge_1bef3de86f9f",
-          "gpsInferredNote": "Aligned to nearby photo IMG_3070.HEIC (dt 0 min, was 6.65 km away)"
+          "carouselKey": "merge_1bef3de86f9f"
         },
         {
           "id": "e4a269e5db09",
@@ -2427,12 +2415,11 @@
           "size": null,
           "orig": "IMG_3072.MOV",
           "place": "Saint-Just, France",
-          "lat": 43.1857083333333,
-          "lon": -1.05201111111111,
-          "gpsInferred": true,
+          "lat": 43.1857,
+          "lon": -1.052,
+          "gpsInferred": false,
           "locationEstimated": true,
-          "carouselKey": "merge_1bef3de86f9f",
-          "gpsInferredNote": "Aligned to nearby photo IMG_3073.HEIC (dt 0 min, was 6.62 km away)"
+          "carouselKey": "merge_1bef3de86f9f"
         },
         {
           "id": "781057b793c4",
@@ -2462,10 +2449,10 @@
           "mime": "video/mp4",
           "size": null,
           "orig": "IMG_3074.MOV",
-          "place": "Saint-Just, France",
-          "lat": 43.19062042236328,
-          "lon": -1.0566960573196411,
-          "gpsInferred": true,
+          "place": "Ibarrolle, France",
+          "lat": 43.20700000000001,
+          "lon": -1.0986,
+          "gpsInferred": false,
           "locationEstimated": true
         },
         {
@@ -2479,10 +2466,10 @@
           "mime": "video/mp4",
           "size": null,
           "orig": "IMG_3076.MOV",
-          "place": "Saint-Just, France",
-          "lat": 43.20106887817383,
-          "lon": -1.0850454568862915,
-          "gpsInferred": true,
+          "place": "Larceveau, France",
+          "lat": 43.20830000000001,
+          "lon": -1.1141999999999999,
+          "gpsInferred": false,
           "locationEstimated": true
         },
         {
@@ -3175,12 +3162,11 @@
           "mime": "video/mp4",
           "size": null,
           "orig": "IMG_3132.MOV",
-          "place": "Arnéguy, France",
-          "lat": 43.0524166666667,
-          "lon": -1.26768611111111,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredNote": "Aligned to nearby photo IMG_3129.HEIC (dt 4 min, was 6.69 km away)"
+          "place": "Luzaide / Valcarlos, España",
+          "lat": 43.0499,
+          "lon": -1.2679000000000002,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "47c0897d95d4",
@@ -3193,10 +3179,10 @@
           "mime": "video/mp4",
           "size": null,
           "orig": "IMG_3135.MOV",
-          "place": "Uhart-Cize, France",
-          "lat": 43.10544204711914,
-          "lon": -1.2380189895629883,
-          "gpsInferred": true,
+          "place": "Luzaide / Valcarlos, España",
+          "lat": 43.042899999999996,
+          "lon": -1.2715999999999998,
+          "gpsInferred": false,
           "locationEstimated": true
         },
         {
@@ -3545,11 +3531,10 @@
           "size": null,
           "orig": "IMG_3172.MOV",
           "place": "Esteribar, España",
-          "lat": 42.8979083333333,
-          "lon": -1.54198333333333,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredNote": "Aligned to nearby photo IMG_3170.HEIC (dt 0 min, was 4.70 km away)"
+          "lat": 42.8979,
+          "lon": -1.542,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "053ed446233b",
@@ -3681,7 +3666,7 @@
           "gpsInferred": false
         }
       ],
-      "notes": "**Title**\nShells, distances, and stories that stay on the Camino.\n\n**Where I was / stage**\nOn June 12 I kept walking: arrival at the parish albergue of Zabaldika.\n\n**Key scene**\nI still had one last shell to leave for Talia, so the mission was not over yet: I hid it behind the removable stone of a column that supports the little church of Ermita de Santa Lucía, also known as Ermita de La Abadía, in Ilárraz, a small village in the Esteríbar valley in Navarra, Spain. In the meantime I walked much more than the small group met in Orisson: Carla, Isabel, Mark, Andrius, and three other guys stopped in Zubiri, in an Airbnb apartment, while I went on for another 10/15 km up to Zabaldika.\n\n**Sensory detail**\nThat evening I also still had a small open account with Carla: the day before she had lent me some coins because I had no change. Not knowing whether we would see each other again, I prepared a shell for her too and left her instructions to find it along the route.\n\n**What I understood**\nThis dynamic struck me: knowing you are ahead of someone who will pass on the same trail the next day. Even if you are far apart, you can still communicate and give something back. While I was explaining this kind of Hansel-and-Gretel game to let her find the euro, Carla sent me a voice message with another story: farther ahead there is the Cruz de Ferro, near León, one of the symbolic points of the Camino at about 1150 meters, and tradition says to carry a small stone for days and leave it right there. A simple gesture, but full of meaning: you walk with a weight, then choose the right moment to let it go.\n\n**Practical note**\nLong stage, beyond the pace of the Orisson group: they stopped in Zubiri, I went to Zabaldika, with the last shell for Talia and a new promise to keep at Cruz de Ferro.",
+      "notes": "**Title**\nShells, distances, and stories that stay on the Camino.\n\n**Where I was / stage**\nOn June 12 I kept walking: arrival at the parish albergue of Zabaldika.\n\n**Key scene**\nI still had one last shell to leave for Talia, so the mission was not over yet: I hid it behind the removable stone of a column that supports the little church of Ermita de Santa Lucía, also known as Ermita de La Abadía, in Ilárraz, a small village in the Esteríbar valley in Navarra, Spain. In the meantime I walked much more than the small group met in Orisson: Carla, Isabel, Mark, Andrius, and three other guys stopped in Zubiri, in an Airbnb apartment, while I went on for another 10/15 km up to Zabaldika.\n\n**Sensory detail**\nThat evening I also still had a small open account with Carla: the day before she had lent me some coins because I had no change. Not knowing whether we would see each other again, I prepared a shell for her too, to use it as a small saucer for the coin I was going to leave hidden in a very specific spot, and I left her instructions to find it along the route.\n\n**What I understood**\nThis dynamic struck me: knowing you are ahead of someone who will pass on the same trail the next day. Even if you are far apart, you can still communicate and give something back. While I was explaining this kind of Hansel-and-Gretel game to let her find the euro, Carla sent me a voice message with another story: farther ahead there is the Cruz de Ferro, near León, one of the symbolic points of the Camino at about 1150 meters, and tradition says to carry a small stone for days and leave it right there. A simple gesture, but full of meaning: you walk with a weight, then choose the right moment to let it go.\n\n**Practical note**\nLong stage, beyond the pace of the Orisson group: they stopped in Zubiri, I went to Zabaldika, with the last shell for Talia and a new promise to keep at Cruz de Ferro.",
       "recommendations": [
         "Zabaldika donativo albergue (highly recommended): authentic pilgrim atmosphere, strong sense of sharing, and communal dinner moments that reflect the Camino spirit."
       ],
@@ -3810,7 +3795,7 @@
           "gpsInferredFromPlace": true
         }
       ],
-      "notes": "**Title**\nPamplona calmly, between recovery and pilgrim spirit.\n\n**Where I was / stage**\nJune 13: short day, few kilometers to Pamplona.\n\n**Key scene**\nI chose a short stage to rest and not leave the others in the group too far behind, since they would also arrive in the city. Arriving early in Pamplona was perfect: a famous, lively city, with a particular energy, also because of the famous San Fermín festival.\n\n**Sensory detail**\nAs soon as I arrived, I stopped at Albergue turístico y de peregrinos \"Jesús y María\" to wash clothes and then go out. At the sinks I met Catherine, the Belgian girl I had already crossed paths with in Orisson, friend of the blonde girl from Québec. After laundry we said goodbye to go to our rooms and take a shower.\n\nLater we met again and went to have a beer together. In the evening I also met the Orisson group, who had taken an Airbnb and were all together.\n\n**What I understood**\nIn those days I was managing tendinitis with a simple logic: walk in the morning and recover as much as possible in the afternoon. In Pamplona this choice worked well and allowed me to regain energy without stopping completely.\n\nThat evening I also felt something else strongly: I prefer to live the Camino as a pilgrim, in shared dorms and simplicity. Airbnb is comfortable, but you lose part of that essential atmosphere of adaptation and adventure that, for me, is a central part of the experience.\n\n**Practical note**\nShort recovery stage and early arrival in Pamplona, with the evening divided between new encounters and meeting again with the Orisson group.\n\n**Photo note**\nIn the last photo, from left to right: me, Carla, Danielle, Pam, Mark, Isabel, and Andrius.",
+      "notes": "**Title**\nPamplona calmly, between recovery and pilgrim spirit.\n\n**Where I was / stage**\nJune 13: short day, few kilometers to Pamplona.\n\n**Key scene**\nI chose a short stage to rest and not leave the others in the group too far behind, since they would also arrive in the city. Arriving early in Pamplona was perfect: a famous, lively city, with a particular energy, also because of the famous San Fermín festival.\n\n**Sensory detail**\nAs soon as I arrived, I stopped at Albergue turístico y de peregrinos \"Jesús y María\" to wash clothes and then go out. At the sinks I met Catherine, the Belgian girl I had already crossed paths with in Orisson, friend of the blonde girl from Québec. Actually, after Orisson, where we still had never spoken, we had the chance to get to know each other along the route, a few days later, during a break: I had seen them sitting on a meadow and took the chance to sit near them and eat a KitKat. On that occasion I greeted the blonde girl from Québec, whom I already knew, and introduced myself to Catherine. While I was eating the KitKat, I offered them the first sticks, and they both accepted one. Shortly after, we stood up and got back on the road, each on our own way. Anyway, that was a few days earlier; coming back to the present moment of this day, after laundry we said goodbye and went to our rooms to take a shower.\n\nLater we met again and went to have a beer together. In the evening I also met the Orisson group to say hello to everyone, since they had booked an Airbnb and were all together there in a private house. When they were organizing to book the Airbnb, I had not stepped forward, because I like to live the pilgrim experience fully and I prefer shared albergue dorms. The comfort of a private apartment is not worth as much as being in the discomfort of shared dorms and common bathrooms :) I know many people will never understand this, but it is an experience I truly like.\n\n**What I understood**\nIn those days I was managing tendinitis with a simple logic: walk in the morning and recover as much as possible in the afternoon. In Pamplona this choice worked well and allowed me to regain energy without stopping completely.\n\nThat evening I also felt something else strongly: I prefer to live the Camino as a pilgrim, in shared dorms and simplicity. Airbnb is comfortable, but you lose part of that essential atmosphere of adaptation and adventure that, for me, is a central part of the experience.\n\n**Practical note**\nShort recovery stage and early arrival in Pamplona, with the evening divided between new encounters and meeting again with the Orisson group.\n\n**Photo note**\nIn the last photo, from left to right: me, Carla, Danielle, Pam, Mark, Isabel, and Andrius.",
       "recommendations": [
         "Albergue turístico y de peregrinos \"Jesús y María\" (Pamplona): I personally recommend it."
       ],
@@ -4129,11 +4114,10 @@
           "size": null,
           "orig": "IMG_3208.MOV",
           "place": "Cizur, España",
-          "lat": 42.7360388888889,
-          "lon": -1.74122222222222,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredNote": "Aligned to nearby photo IMG_3207.HEIC (dt 0 min, was 2.05 km away)"
+          "lat": 42.736,
+          "lon": -1.7411999999999999,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "1b48a840bf90",
@@ -5022,11 +5006,10 @@
           "size": null,
           "orig": "IMG_3241.MOV",
           "place": "Puente la Reina / Gares, España",
-          "lat": 42.671587177909906,
-          "lon": -1.8164512057248285,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredFromPlace": true
+          "lat": 42.672799999999995,
+          "lon": -1.8113999999999997,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "d05cb8940f49",
@@ -5248,10 +5231,10 @@
           "mime": "video/mp4",
           "size": null,
           "orig": "IMG_3271.MOV",
-          "place": "Villatuerta, España",
-          "lat": 42.669456481933594,
-          "lon": -2.0294995307922363,
-          "gpsInferred": true,
+          "place": "Estella-Lizarra, España",
+          "lat": 42.6701,
+          "lon": -2.0296,
+          "gpsInferred": false,
           "locationEstimated": true
         },
         {
@@ -5581,7 +5564,7 @@
           "gpsInferredFromPlace": true
         }
       ],
-      "notes": "**Title**\nWine, promises, and relief for the tendons.\n\n**Where I was / stage**\nJune 16: walking with Catherine, direction Los Arcos.\n\n**Key scene**\nCatherine and I started walking again and, along the route, we stopped at Bodegas Irache for the famous wine fountain. We refilled the bottle even though it is not allowed: important note, it should not be done, do not do it. Once in Los Arcos I immediately took a photo of the sign including Ginger's walking stick, to send it to her as promised. In the meantime Thomas had arrived in Nájera.\n\n**Sensory detail**\nThe day passed between shared steps and that typical Camino mix: intimate moments and then sudden openings toward new groups.\n\n**What I understood**\nThe day after the \"cherry dinner\" the tendons were finally much better, almost perfect. After almost a week of discomfort, it was huge relief.\n\n**Practical note**\nIn the evening I was invited by a group of Italian guys, Matteo, Stefano, Maddalena, Antonella, and others: a group formed on the Camino and that became very united over time. I asked if I could also bring Giselle and Catherine. I do not know whether Catherine really had fun: she is very reserved and does not always feel comfortable among so many people. But they were nice and it was a good evening.",
+      "notes": "**Title**\nWine, promises, and relief for the tendons.\n\n**Where I was / stage**\nJune 16: walking with Catherine, direction Los Arcos.\n\n**Key scene**\nCatherine and I started walking again and, along the route, we stopped at Bodegas Irache for the famous wine fountain. We refilled the bottle even though it is not allowed: important note, it should not be done, do not do it. Once in Los Arcos I immediately took a photo of the sign including Ginger's walking stick, to send it to her as promised. In the meantime Thomas had arrived in Nájera.\n\n**Sensory detail**\nThe day passed between shared steps and that typical Camino mix: intimate moments and then sudden openings toward new groups.\n\n**What I understood**\nThe day after the \"cherry dinner\" the tendons were finally much better, almost perfect. After almost a week of discomfort, it was a huge relief: could it be that the protein from all those tiny cherry worms had put me back on my feet?\n\n**Practical note**\nIn the evening I was invited by a group of Italian guys, Matteo, Stefano, Maddalena, Antonella, and others: a group formed on the Camino and that became very united over time. I asked if I could also bring Giselle and Catherine. I do not know whether Catherine really had fun: she is very reserved and does not always feel comfortable among so many people. But they were nice and it was a good evening.",
       "strava": [
         "https://www.strava.com/activities/8362690503"
       ],
@@ -5649,10 +5632,10 @@
           "mime": "video/mp4",
           "size": null,
           "orig": "IMG_3297.MOV",
-          "place": "Sansol, España",
-          "lat": 42.555763244628906,
-          "lon": -2.265766143798828,
-          "gpsInferred": true,
+          "place": "Viana, España",
+          "lat": 42.527899999999995,
+          "lon": -2.3242,
+          "gpsInferred": false,
           "locationEstimated": true
         },
         {
@@ -5809,12 +5792,11 @@
           "mime": "video/mp4",
           "size": null,
           "orig": "IMG_3306.MOV",
-          "place": "Viana, España",
-          "lat": 42.4907,
-          "lon": -2.41546944444444,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredNote": "Aligned to nearby photo IMG_3305.HEIC (dt 5 min, was 4.56 km away)"
+          "place": "Logroño, España",
+          "lat": 42.4891,
+          "lon": -2.4194,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "e13911d95b8a",
@@ -6061,7 +6043,7 @@
           "gpsInferredFromPlace": true
         }
       ],
-      "notes": "**Title**\nStarting again as a pair and a special mission.\n\n**Where I was / stage**\nJune 18: setting off again together, Catherine and me.\n\n**Key scene**\nWe walked together for practically the whole morning. That day, however, we also had a special mission: recover the package that Ginger had left for me at the reception of the hotel where she had stayed on the night of the 16th.\n\nWhile we were walking, Catherine and I also had another particular encounter: shortly before reaching Logroño, on the trail, we saw a guy alone sitting on a stone coming out of the embankment. We greeted him, exchanged a few words, then continued on our way leaving him behind.\n\nOnce in Logroño we went to Ginger's hotel: I collected the package and around one o'clock Catherine and I had lunch together.\n\nLogroño, however, was not our daily destination: that day we wanted to reach Navarrete. Once there we did groceries and then had dinner each in our own albergue.\n\nAt the albergue I found myself sharing a room with a strange guy: I remembered having crossed paths with him the previous morning while I was walking with Matteo, and he had stayed in my mind because he never greeted anyone.\n\nOne funny thing is that we had bought those eggs at the supermarket specifically to have dinner in our respective albergues (even though mine did not even have a kitchen, only a microwave oven). Catherine and I had bought two each, but when she opened hers she found a very bad surprise: one was empty, without yolk.\n\nEven more funny was when I opened mine: one egg had two yolks. In the end I found myself with 3 yolks using only 2 eggs. I completed dinner with 2 cans of lentils. I love meals made like this: for me they are worth much more than a dinner at a restaurant.\n\nThat evening I spent time preparing something for Catherine, because the next day was her birthday. I wanted to do something nice for her, something she could remember.\n\nThe plan was to do the Hansel-and-Gretel game again and leave her small gifts along the route of the next day. I spent the whole evening preparing new little shells by cutting beer cans, so that once put together they would form the words \"Happy Birthday.\"\n\nShortly after midnight everything was already ready and I sent her a message to explain my idea. I was in mission mode again. The next morning a fun day was waiting for me.\n\n**Sensory detail**\nA day lived with a shared pace and with a concrete objective to reach.\n\n**What I understood**\nWhen you walk with someone, even a small logistical mission can become part of the Camino story.\n\n**Practical note**\nMorning walk as a pair, with an organized detour to recover the package left by Ginger.",
+      "notes": "**Title**\nStarting again as a pair and a special mission.\n\n**Where I was / stage**\nJune 18: setting off again together, Catherine and me.\n\n**Key scene**\nWe walked together for practically the whole morning. That day, however, we also had a special mission: recover the package that Ginger had left for me at the reception of the hotel where she had stayed on the night of the 16th.\n\nWhile we were walking, Catherine and I also had another particular encounter: shortly before reaching Logroño, on the trail, we saw a guy alone sitting on a stone coming out of the embankment. We greeted him, exchanged a few words, then continued on our way leaving him behind.\n\nOnce in Logroño we went to Ginger's hotel: I collected the package and around one o'clock Catherine and I had lunch together.\n\nLogroño, however, was not our daily destination: that day we wanted to reach Navarrete. Once there we did groceries and then had dinner each in our own albergue.\n\nAt the albergue I found myself sharing a room with a strange guy: I remembered having crossed paths with him the previous morning while I was walking with Matteo, and he had stayed in my mind because he never greeted anyone.\n\nOne funny thing is that, for dinner, Catherine and I had bought eggs at the supermarket to cook them in our respective albergues (even though mine did not even have a kitchen, only a microwave oven). Catherine and I had bought two each, but when she opened hers she found a funny surprise: one was empty, without yolk.\n\nEven funnier was when I opened mine: one egg had two yolks. In the end I found myself with 3 yolks using only 2 eggs, as if I had done a little magic trick by taking one yolk from her eggs and adding it to mine xD. I completed dinner with 2 cans of lentils. I love meals made like this: for me they are worth much more than a dinner at a restaurant.\n\nThat evening I spent time preparing something for Catherine, because the next day was her birthday. I wanted to do something nice for her, something she could remember.\n\nThe plan was to do the Hansel-and-Gretel game again and leave her small gifts along the route of the next day. I spent the whole evening preparing new little shells by cutting beer cans, so that once put together they would form the words \"Happy Birthday.\"\n\nShortly after midnight everything was already ready and I sent her a message to explain my idea. I was in mission mode again. The next morning a fun day was waiting for me.\n\n**Sensory detail**\nA day lived with a shared pace and with a concrete objective to reach.\n\n**What I understood**\nWhen you walk with someone, even a small logistical mission can become part of the Camino story.\n\n**Practical note**\nMorning walk as a pair, with an organized detour to recover the package left by Ginger.",
       "strava": [
         "https://www.strava.com/activities/8362690464"
       ],
@@ -6573,7 +6555,7 @@
           "gpsInferred": false
         }
       ],
-      "notes": "**Title**\nWeather, encounters, and a donative evening in Viloria.\n\n**Where I was / stage**\nJune 20: departure at 6:30, evening arrival in Viloria de Rioja.\n\n**Key scene**\nThat day I started walking at 6:30. The plan was to leave early, have breakfast during the walk, then keep walking through the whole morning only, staying still in the afternoon, because from 16:00 heavy rain was expected and I did not want to walk in the rain.\n\nOnce there, while I was in a bar together with Francesco and Juan, at a certain point I heard someone shouting from behind: \"ooooohohhhhh.\" I turned around and saw a familiar face: it was the Korean guy I had met in France at the beginning of the Camino, with whom I had spent a beautiful evening together with Thomas and Talia listening to his stories told in a very funny way. We had not heard from each other or seen each other again, and it was beautiful to find him again like that, totally by chance, in the same bar. We took a photo and then said goodbye.\n\nAt 12:46 I wrote to Catherine that I had booked the albergue in Viloria de Rioja. She replied at 14:00 saying she had arrived in Santo Domingo and that her feet were destroyed by pain. I asked her if she had news of Giselle and she said the last time she had seen and heard from her was at the restaurant the evening before, when she had offered her dinner for her birthday.\n\nThen she wrote that she was going to have a beer with the Swiss guy we had met the day before. In the evening she told me she was getting bored there because she did not recognize any familiar face, and asked me whether I was alone or with someone I knew. I had also heard from the rest of the Orisson group, and they were all farther behind me. Isabel was in Santo Domingo like Catherine, but they did not know each other, while the rest of the group was even farther behind; same for Chris and Jessica. Catherine had started to lose hope that we could meet again, but in fact it was only a matter of time.\n\nI replied that I was with 3 Chinese and 1 Japanese person and that we were having dinner together at the albergue: that evening we were only the 4 of us in the whole albergue. It was a donative place, and dinner was included: they gave us paella.\n\n**Sensory detail**\nA strange but full day: weather plan respected, totally unexpected bar encounter, and then a simple evening.\n\n**What I understood**\nOn the Camino, even when plans change because of tiredness or pain, connections stay alive: sometimes in person, other times through messages, but the thread does not break.\n\n**Practical note**\nAccommodation at Albergue Parada Viloria (donative), with included dinner and a very intimate atmosphere.",
+      "notes": "**Title**\nWeather, encounters, and a donative evening in Viloria.\n\n**Where I was / stage**\nJune 20: departure at 6:30, evening arrival in Viloria de Rioja.\n\n**Key scene**\nThat day I started walking at 6:30. The plan was to leave early, have breakfast during the walk, then keep walking through the whole morning only, staying still in the afternoon, because from 16:00 heavy rain was expected and I did not want to walk in the rain.\n\nOnce there, while I was in a bar together with Francesco and Juan, at a certain point I heard someone shouting from behind: \"ooooohohhhhh.\" I turned around and saw a familiar face: it was the Korean guy I had met in France at the beginning of the Camino, with whom I had spent a beautiful evening together with Thomas and Talia listening to his stories told in a very funny way. We had not heard from each other or seen each other again, and it was beautiful to find him again like that, totally by chance, in the same bar. We took a photo and then said goodbye.\n\nAt 12:46 I wrote to Catherine that I had booked the albergue in Viloria de Rioja. She replied at 14:00 saying she had arrived in Santo Domingo and that her feet were destroyed by pain. I asked her if she had news of Giselle and she said the last time she had seen and heard from her was at the restaurant the evening before, when she had offered her dinner for her birthday.\n\nThen she wrote that she was going to have a beer with the Swiss guy we had met the day before. In the evening she told me she was getting bored there because she did not recognize any familiar face, and asked me whether I was alone or with someone I knew. I had also heard from the rest of the Orisson group, and they were all farther behind me. Isabel was in Santo Domingo like Catherine, but they did not know each other, while the rest of the group was even farther behind; same for Chris and Jessica. Catherine had started to lose hope that we could meet again, but in fact it was only a matter of time.\n\nI replied that I was with 3 Chinese and 1 Japanese person and that we were having dinner together at the albergue: that evening we were only the 4 of us in the whole albergue. It was a donative place, and dinner was included: they gave us paella.\n\n**Sensory detail**\nA strange but full day: weather plan respected, totally unexpected bar encounter, and then a simple evening.\n\n**What I understood**\nThat day a strong feeling came back to me: you change town every evening, but you always find familiar faces along the way. Some you barely know, others more deeply, yet a sense of home still forms even while you are constantly moving.\n\nOn the Camino, even when plans change because of tiredness or pain, connections stay alive: sometimes in person, other times through messages, but the thread does not break.\n\n**Practical note**\nAccommodation at Albergue Parada Viloria (donative), with included dinner and a very intimate atmosphere.",
       "strava": [
         "https://www.strava.com/activities/8362690528"
       ],
@@ -6755,11 +6737,10 @@
           "size": null,
           "orig": "IMG_3393.MOV",
           "place": "Arlanzón, España",
-          "lat": 42.3718416666667,
-          "lon": -3.46542222222222,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredNote": "Aligned to nearby photo IMG_3392.HEIC (dt 1 min, was 4.35 km away)"
+          "lat": 42.3719,
+          "lon": -3.4656,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "21a6e22bc97b",
@@ -7137,11 +7118,10 @@
           "size": null,
           "orig": "IMG_3448.MOV",
           "place": "Burgos, España",
-          "lat": 42.341667335938155,
-          "lon": -3.701760973302651,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredFromPlace": true
+          "lat": 42.3394,
+          "lon": -3.7017,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "223ce44a6fc4",
@@ -7155,11 +7135,10 @@
           "size": null,
           "orig": "IMG_3449.MOV",
           "place": "Burgos, España",
-          "lat": 42.341667335938155,
-          "lon": -3.701760973302651,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredFromPlace": true
+          "lat": 42.3387,
+          "lon": -3.7041,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "98db95498d98",
@@ -7173,11 +7152,10 @@
           "size": null,
           "orig": "IMG_3450.MOV",
           "place": "Burgos, España",
-          "lat": 42.341667335938155,
-          "lon": -3.701760973302651,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredFromPlace": true
+          "lat": 42.3422,
+          "lon": -3.7036999999999995,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "78fb72ca3c7b",
@@ -7191,11 +7169,10 @@
           "size": null,
           "orig": "IMG_3451.MOV",
           "place": "Burgos, España",
-          "lat": 42.341667335938155,
-          "lon": -3.701760973302651,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredFromPlace": true
+          "lat": 42.342099999999995,
+          "lon": -3.7036999999999995,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "03004e46d40d",
@@ -7499,11 +7476,10 @@
           "size": null,
           "orig": "IMG_3483.MOV",
           "place": "Burgos, España",
-          "lat": 42.341667335938155,
-          "lon": -3.701760973302651,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredFromPlace": true
+          "lat": 42.340199999999996,
+          "lon": -3.7039999999999997,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "825f33e91d0e",
@@ -8058,11 +8034,10 @@
           "size": null,
           "orig": "IMG_3536.MOV",
           "place": "Burgos, España",
-          "lat": 42.341667335938155,
-          "lon": -3.701760973302651,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredFromPlace": true
+          "lat": 42.343199999999996,
+          "lon": -3.7024,
+          "gpsInferred": false,
+          "locationEstimated": true
         }
       ],
       "notes": "**Title**\nBurgos, buffer day before setting off again.\n\n**Where I was / stage**\nI was still in Burgos: last full day in the city before getting back on the road.\n\n**Key scene**\nThe day was mostly logistics and meetings. In the morning I moved around the city for the boot issue, while in chats I coordinated meetups with several people.\n\nIn late morning I met Danielle. Then in the afternoon I wrote to Chris and Mark to understand where the group was and fit in one last meeting before leaving Burgos.\n\nDuring the day I had also started asking pilgrims to write me a phrase or a thought on my walking stick: it was becoming a small living archive of the Camino, with signatures and messages collected along the way.\n\nToward evening the meetup became concrete: near the cathedral I met Giselle, Chris, Jessica, Catherine, and the Orisson group. We had dinner together and it was a very pleasant evening. In the photo where I make a funny “sad” face, I was joking, pretending I still had not been served my drink while everyone else had.\n\nAt 23:30 I set off again: from Burgos the mesetas were starting and I wanted to face them at night. Chris had lent me his headlamp, very useful to start in the dark (I would return it months later, when I went to the United States).\n\n**Sensory detail**\nLight stone of the cathedral, glasses on outdoor tables, and a city full of voices before the nighttime departure.\n\n**What I understood**\nStops in cities are not “empty pauses”: they are for solving practical issues and reinforcing bonds before getting back on the road.",
@@ -8404,12 +8379,11 @@
           "mime": "video/mp4",
           "size": null,
           "orig": "IMG_3568.MOV",
-          "place": "Rabé de las Calzadas, España",
-          "lat": 42.3422055555556,
+          "place": "Hornillos del Camino, España",
+          "lat": 42.3422,
           "lon": -3.8849,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredNote": "Aligned to nearby photo IMG_3566.HEIC (dt 0 min, was 6.06 km away)"
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "bf3510a41f78",
@@ -8422,12 +8396,11 @@
           "mime": "video/mp4",
           "size": null,
           "orig": "IMG_3569.MOV",
-          "place": "Rabé de las Calzadas, España",
-          "lat": 42.3422055555556,
+          "place": "Hornillos del Camino, España",
+          "lat": 42.3422,
           "lon": -3.8849,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredNote": "Aligned to nearby photo IMG_3566.HEIC (dt 0 min, was 6.06 km away)"
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "d5c84a6853a3",
@@ -8950,11 +8923,10 @@
           "size": null,
           "orig": "IMG_3610.MOV",
           "place": "Castrojeriz, España",
-          "lat": 42.2924888888889,
-          "lon": -4.13158888888889,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredNote": "Aligned to nearby photo IMG_3606.HEIC (dt 1 min, was 7.41 km away)"
+          "lat": 42.292,
+          "lon": -4.132,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "718d2816ce51",
@@ -8968,11 +8940,10 @@
           "size": null,
           "orig": "IMG_3611.MOV",
           "place": "Castrojeriz, España",
-          "lat": 42.2924888888889,
-          "lon": -4.13158888888889,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredNote": "Aligned to nearby photo IMG_3606.HEIC (dt 1 min, was 7.41 km away)"
+          "lat": 42.292,
+          "lon": -4.132,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "21657ea26dea",
@@ -8986,11 +8957,10 @@
           "size": null,
           "orig": "IMG_3612.MOV",
           "place": "Castrojeriz, España",
-          "lat": 42.2924888888889,
-          "lon": -4.13158888888889,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredNote": "Aligned to nearby photo IMG_3606.HEIC (dt 2 min, was 7.36 km away)"
+          "lat": 42.2915,
+          "lon": -4.1323,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "59b26e6be023",
@@ -9200,11 +9170,10 @@
           "size": null,
           "orig": "IMG_3628.MOV",
           "place": "Itero del Castillo, España",
-          "lat": 42.27727611111112,
-          "lon": -4.233412222222222,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredFromPlace": true
+          "lat": 42.2765,
+          "lon": -4.2292,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "5b7395714d73",
@@ -9218,11 +9187,10 @@
           "size": null,
           "orig": "IMG_3629.MOV",
           "place": "Itero del Castillo, España",
-          "lat": 42.27727611111112,
-          "lon": -4.233412222222222,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredFromPlace": true
+          "lat": 42.2786,
+          "lon": -4.2431,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "fe7aee5b5337",
@@ -9236,11 +9204,10 @@
           "size": null,
           "orig": "IMG_3630.MOV",
           "place": "Itero del Castillo, España",
-          "lat": 42.27727611111112,
-          "lon": -4.233412222222222,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredFromPlace": true
+          "lat": 42.278999999999996,
+          "lon": -4.2431,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "5e712d873185",
@@ -9254,11 +9221,10 @@
           "size": null,
           "orig": "IMG_3631.MOV",
           "place": "Itero del Castillo, España",
-          "lat": 42.27727611111112,
-          "lon": -4.233412222222222,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredFromPlace": true
+          "lat": 42.2789,
+          "lon": -4.2431,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "d8834c445ec6",
@@ -9272,11 +9238,10 @@
           "size": null,
           "orig": "IMG_3632.MOV",
           "place": "Itero del Castillo, España",
-          "lat": 42.27727611111112,
-          "lon": -4.233412222222222,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredFromPlace": true
+          "lat": 42.274,
+          "lon": -4.2152,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "78c61ad0a427",
@@ -9290,11 +9255,10 @@
           "size": null,
           "orig": "IMG_3633.MOV",
           "place": "Itero del Castillo, España",
-          "lat": 42.27727611111112,
-          "lon": -4.233412222222222,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredFromPlace": true
+          "lat": 42.2787,
+          "lon": -4.2433,
+          "gpsInferred": false,
+          "locationEstimated": true
         }
       ],
       "notes": "**Title**\nTactical day between heat, waiting, and coordination.\n\n**Where I was / stage**\nCastrojeriz / Itero de la Vega / Itero del Castillo area, with support at Ermita de San Nicolás de Puente Fitero.\n\n**Key scene**\nI started walking around 5:15 to take advantage of the cool air. About three hours later, at the gates of Castrojeriz, I met a very particular pilgrim: he was doing the Camino with his dog, and the dog also had its own little backpack. We exchanged a few words and he told me he also came from very far away, with a long route already behind him.\n\nI kept walking trying to take all the best of the morning: open fields, trails, calm, and the crunching of stones under the boots. It is a “ringtone” I love: when you enter into resonance with these sensory details, fatigue moves into the background.\n\nAround noon I arrived in Itero de la Vega: I sat at a table, drank two cold beers, and ate something while organizing logistics, distances, and accommodations for the following days.\n\nFor that day I had already decided to stop at Ermita de San Nicolás de Puente Fitero, an albergue run by the community of pilgrims from Perugia. It is a choice you make only if you really want it: the hermitage is still on the route (you do that climb anyway), but it is not in the village. So when you arrive there you have two options: either you stop immediately and stay there the whole time (but you must already have food with you), or you go on to the next village, Itero de la Vega, which is about 2 km away, and then come back. That is exactly the point: once in Itero, it would be more natural to sleep there without returning, while by going back to the hermitage those 2 km immediately become 4, and then the day after you do them again forward. On such hard days, 4 extra km are definitely felt, and if you do not dose your energy well you risk paying for it.\n\nIn addition, I had arrived very early (around 10:00), so it also meant stopping already in the middle of the day. But it was a precise decision: in the mesetas, up to León, I had decided to walk only in the morning and stop no later than 10/11, with 12:00 maximum only in extreme cases; then full rest in the afternoon.\n\nAt the hermitage there is no electricity, so I used the time well: laundry and drying in the sun. Behind it there is a structure with washbasins and showers, and a relaxing grass area with lines where you can hang clothes. At the end of the day the clothes were already dry and ready.\n\nAround 20:00 dinner was served, and that too was a special experience: they do foot washing and, at the end of dinner, they invite pilgrims to sing. I did not sing, but it was nice. With me there were also other people I had already met in previous days in San Bol and in the albergue of the previous day.\n\nWhile chatting a bit with the hospitalero, the topic of Maddalena also came up, because she had slept there a few days earlier. He did not know that we knew each other and told me about this Italian girl named Maddalena who was happily humming because she had just received the news that at the end of the year she would go to America for six months. Laughing, he also made the joke: “I washed Maddalena's feet” (clear religious reference). Then I wrote to her, she confirmed it was really her, and asked me to greet him.\n\nIn the Italian group, Antonella had asked the others whether they had already taken the halfway Camino card. I got curious and asked where to get it: they answered in Sahagún. But they were already much farther ahead than me. From that moment I gave myself a new mission: arrive in Sahagún and take that halfway card too.\n\nMeanwhile I kept coordinating via chat with Giselle and Catherine to organize the night strategy for the next day: meetup farther ahead, long break, dinner, and then evening departure again.\n\n**Sensory detail**\nCool dawn air, dry sound of steps on stones, ice-cold beer at noon, and the full silence of the meadow behind the hermitage.\n\n**What I understood**\nIn the mesetas, the one who wins is not the one who pushes more: the one who wins is the one who manages timing, heat, recovery, and logistics well.",
@@ -9382,11 +9346,10 @@
           "size": null,
           "orig": "IMG_3641.MOV",
           "place": "Frómista, España",
-          "lat": 42.2617305555556,
-          "lon": -4.38751944444444,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredNote": "Aligned to nearby photo IMG_3640.HEIC (dt 0 min, was 11.08 km away)"
+          "lat": 42.2618,
+          "lon": -4.3875,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "e9cca86dc896",
@@ -9432,9 +9395,9 @@
           "size": null,
           "orig": "IMG_3645.MOV",
           "place": "Frómista, España",
-          "lat": 42.266029357910156,
-          "lon": -4.401184558868408,
-          "gpsInferred": true,
+          "lat": 42.265699999999995,
+          "lon": -4.4007,
+          "gpsInferred": false,
           "locationEstimated": true
         },
         {
@@ -9470,7 +9433,7 @@
           "gpsInferred": false
         }
       ],
-      "notes": "**Title**\nDawn in the chapel, long stop in Frómista, night restart.\n\n**Where I was / stage**\nFrom San Nicolás to Frómista, then planning a night link-up toward Giselle's village.\n\n**Key scene**\nBreakfast was at candlelight inside the chapel-style albergue. I reached Frómista early and stayed for hours at La Gaspara. Catherine arrived later and we rested and talked over beers. I coordinated with Giselle: she confirmed Villalcázar at 14:15; I left Frómista at 22:00 sharing live location.\n\n**Sensory detail**\nDark dawn light, shaded grass, and then night-road focus again.\n\n**What I learned**\nGood coordination can turn a hard stage into a controlled one.",
+      "notes": "**Title**\nDawn in the little church, long stop in Frómista, and night departure.\n\n**Where I was / stage**\nFrom Ermita de San Nicolás de Puente Fitero to Frómista, with a night plan toward Giselle's village.\n\n**Key scene**\nThe alarm was early not only to use the morning coolness, but also for breakfast. It was beautiful, by candlelight: around 5:30/6:00 it was still dark outside and, without electricity, you could see nothing inside.\n\nThe albergue was basically a little church (probably deconsecrated): inside there were bunk beds (about 12 places) and the shared table for dinner and breakfast. The bathrooms, instead, were in the external annex, so at night, if you needed them, you had to go outside.\n\nWe set the table together with candelabras and had breakfast at 6:00. During breakfast the sun came up, and we set off.\n\nI arrived in Frómista shortly after 9:00 and lay down in the grass near Bar La Gaspara: trees, shade, benches, and tables. I stayed there for hours, watching many pilgrims pass. Shortly after noon I even filmed a particular one: he was walking on foot and using a horse only to carry his backpack.\n\nIn the afternoon Catherine finally arrived too. She stopped to rest near me and we had a long chat while drinking beer. I was happy to see her again, also because I had already planned to leave again that evening.\n\nMeanwhile I was coordinating with Giselle: she was farther ahead, so we had to align. At 14:15 she wrote that she had taken an albergue in Villalcázar. The idea was that I would leave earlier, reach her village, and then continue together. After several messages we agreed like this: she would not leave before 5:00, while I would leave Frómista at 22:00, without taking an albergue, to get there, sleep a bit outside, and have her wake me in the morning. When I started at 22:00, I also sent her live location so she could know where I was at any moment.\n\nOn the practical side there was also the charger problem: I had lost it in Sanbol. And I had almost finished my powerbank too, because in San Nicolás I had let other pilgrims use it to charge their phones (there was no electricity there). I had only one bar left, which had to be enough to keep my iPhone 8 alive until I found a new charger.\n\nI started looking by asking around. Normally in these cases the first attempt is the accommodation reception, because they often have chargers forgotten by pilgrims. But that day I had not booked any albergue, so I asked Carla to ask her hospitalero: no luck. So I switched to total power-saving mode: very little phone, no photos, no videos, no social media, only saving energy while looking for a solution.\n\n**Sensory detail**\nCandles at dawn, cool grass in the shade in Frómista, cold beer in the afternoon, and then the mind already oriented to the night again.\n\n**What I understood**\nIn the mesetas, the difference is made by management: timing, energy, logistics, and the right people to coordinate with.",
       "strava": [
         "https://www.strava.com/activities/8362690559",
         "https://www.strava.com/activities/8369574290"
@@ -9556,10 +9519,10 @@
           "mime": "video/mp4",
           "size": null,
           "orig": "IMG_3654.MOV",
-          "place": "Carrión de los Condes, España",
-          "lat": 42.342803955078125,
-          "lon": -4.637099742889404,
-          "gpsInferred": true,
+          "place": "Bustillo del Páramo de Carrión, España",
+          "lat": 42.336,
+          "lon": -4.7328,
+          "gpsInferred": false,
           "locationEstimated": true
         },
         {
@@ -9654,11 +9617,10 @@
           "size": null,
           "orig": "IMG_3662.MOV",
           "place": "Cervatos de la Cueza, España",
-          "lat": 42.3289805555556,
-          "lon": -4.80285,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredNote": "Aligned to nearby photo IMG_3661.HEIC (dt 0 min, was 6.12 km away)"
+          "lat": 42.3289,
+          "lon": -4.8027999999999995,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "c92607ed3871",
@@ -9738,11 +9700,10 @@
           "size": null,
           "orig": "IMG_3668.MOV",
           "place": "Cervatos de la Cueza, España",
-          "lat": 42.33021850619846,
-          "lon": -4.78663133128484,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredFromPlace": true
+          "lat": 42.329,
+          "lon": -4.8024000000000004,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "daef8c5d60b5",
@@ -9777,7 +9738,7 @@
           "gpsInferred": false
         }
       ],
-      "notes": "**Title**\nNight road, “paradise” arrival, and full recovery day.\n\n**Where I was / stage**\nNight progression to a pool albergue, then full recovery base.\n\n**Key scene**\nAt 1:10 I wrote Giselle from her village football field where I was sleeping briefly. I restarted at 5:20, shared location, and reached the albergue at 10:00, matching my meseta rule to stop early. I called it “paradise” in chat to convince others to come.\n\nThe hospitalero let me in very early. I had orange juice and cake, swam, and rested in shade for hours. Dorm conditions were rough and hot, but I adapted well. By afternoon familiar faces arrived: Giselle, Laura, Francesco, Juan, then Charles, Ananda, Alicia, and others. Dinner was together at Hostal Restaurante Camino Real.\n\n**Sensory detail**\nNight cool, final-hour heat, pool water, and evening convivial relief.\n\n**What I learned**\nIn extreme days, morale and recovery strategy are decisive.",
+      "notes": "**Title**\nNight on the road, arrival in “paradise,” and a full recovery day.\n\n**Where I was / stage**\nNight walking until the albergue with pool, with a recovery base for the day.\n\n**Key scene**\nAt 1:10 I wrote to Giselle: I had reached her village and had settled to sleep at the football field, asking her to wake me when she left.\n\nAt 5:00 the alarm rang. I woke up and saw she still had not read the message. At 5:20 I wrote that I was leaving anyway, because I understood she was still sleeping.\n\nShe replied only at 8:10: she had not managed to wake up and was leaving then. I told her I was on a short break and sent my location: 42.342941,-4.680614. I was already about 12 km ahead of Villalcázar, so around two hours ahead of her. At 8:18 I wrote that I was walking again.\n\nAt 10:00 I arrived at the albergue. Perfect, because my mesetas policy was clear: do not walk past 10:00 (at most 10:30/11:00 in exceptions). After so many night kilometers, seeing that albergue with a pool really felt like arriving in paradise. In chat I called it exactly that, to convince others to reach me: “where are you?” “In paradise.”\n\nLuck was also the hospitalero: he accepted me immediately at arrival, even though I was there very early. It was not obvious at all, because in other albergues it had never happened to me. For me it was pure joy: night walking in cool weather, only the last hour (9-10) heavier with the sun starting to hit, and then from 10 onward only relaxation.\n\nI had orange juice and a small cake for breakfast, then a regenerating swim and hours in the shade on the lawn near the pool. I felt great. At one point I even thought about staying two nights. It cost only 5 euros: incredible.\n\nThen I also understood why: terrible dormitory, huge shared room without air conditioning, heavy air, around twenty or maybe thirty beds. Many others in fact could not sleep there and booked the other albergue, basically attached to this one: no pool, but much better conditions and far more livable in the heat (probably with air conditioning).\n\nBut I did not care at all. Not because I did not feel the discomfort too, but because I adapt very well and do not experience it as a blocking problem. On the contrary, those are exactly the moments that make me appreciate everything else even more.\n\nAt 10:04 we spoke again with Giselle: I explained that the last 7 km were very hard already for me between 9 and 10, so with rising heat it would be even worse for her. Straight stretch, full sun, zero shade, zero trees. There were only two bars along the trail, not in villages: simple support points to refresh.\n\nShe replied that she was evaluating whether to stop where she was and leave again the next day. At 10:38 I sent her the photo of “paradise”: an albergue with pool for 5 euros. That photo was decisive: she still had about 11 km left and decided to continue precisely after seeing the pool.\n\nMeanwhile other familiar faces arrived too: Charles (the somewhat strange Swiss guy who was trying with Catherine), Ananda, her friend/partner (I do not know for sure, but there was strong chemistry between them), Alicia, and another pilgrim whose name I do not remember.\n\nFor dinner we all went to Hostal Restaurante Camino Real. A group of 10 formed: among the familiar faces there were me, Giselle, Laura, Juan, Francesco, Ananda, Charles, and Alicia. I did not know the other two, except by sight, and had never exchanged many words with them. It was beautiful: those convivial moments that made thoughts, fatigue, blisters, and pain fade away.\n\nAt 12:00 she wrote that she had met other pilgrims and was walking with them. In fact at 15:30 I saw them arrive smiling and happy, as if they had not just crossed hell: they were Giselle, Laura, Francesco, and Juan. From there it was now clear that a new stable little group had begun to form, and it was all beautiful.\n\n**Sensory detail**\nDark and cool at night, hard sun in the last hour, then shade on the grass, pool water, and finally a body at peace.\n\n**What I understood**\nIn the mesetas, if you manage timing and recovery well, you can turn a very hard stage into an almost perfect day.",
       "recommendations": [
         "Recommended stop for this day: the pool albergue. The dorm is not the most inviting, but the welcome is excellent and the staff is truly kind."
       ]
@@ -9796,10 +9757,10 @@
           "mime": "video/mp4",
           "size": null,
           "orig": "IMG_3677.MOV",
-          "place": "Ledigos, España",
-          "lat": 42.32917022705078,
-          "lon": -4.802460670471191,
-          "gpsInferred": true,
+          "place": "Cervatos de la Cueza, España",
+          "lat": 42.329299999999996,
+          "lon": -4.8065,
+          "gpsInferred": false,
           "locationEstimated": true
         },
         {
@@ -9878,11 +9839,10 @@
           "size": null,
           "orig": "IMG_3683.MOV",
           "place": "Moratinos, España",
-          "lat": 42.3649361111111,
-          "lon": -4.95928333333333,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredNote": "Aligned to nearby photo IMG_3682.HEIC (dt 0 min, was 8.00 km away)"
+          "lat": 42.3649,
+          "lon": -4.9593,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "c3dc30d01af7",
@@ -9962,11 +9922,10 @@
           "size": null,
           "orig": "IMG_3707.MOV",
           "place": "Sahagún, España",
-          "lat": 42.37062420634921,
-          "lon": -5.02818492063492,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredFromPlace": true
+          "lat": 42.3685,
+          "lon": -5.0324,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "5019b5f16a44",
@@ -10012,11 +9971,10 @@
           "size": null,
           "orig": "IMG_3710.MOV",
           "place": "Sahagún, España",
-          "lat": 42.37062420634921,
-          "lon": -5.02818492063492,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredFromPlace": true
+          "lat": 42.3719,
+          "lon": -5.031,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "370521eea10f",
@@ -10030,14 +9988,13 @@
           "size": null,
           "orig": "IMG_3711.MOV",
           "place": "Sahagún, España",
-          "lat": 42.37062420634921,
-          "lon": -5.02818492063492,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredFromPlace": true
+          "lat": 42.372,
+          "lon": -5.031,
+          "gpsInferred": false,
+          "locationEstimated": true
         }
       ],
-      "notes": "",
+      "notes": "**Title**\nSahagún: halfway mark, organization, and relationships in motion.\n\n**Where I was / stage**\nArrival in Sahagún, a management day between heat, halfway certificate, and coordination with others.\n\n**Key scene**\nI had agreed with Giselle to set off together early in the morning. I wrote to her at 5:30 telling her to come to my albergue (it was right on the Camino), but she replied that she would stay and sleep a little longer. I told her that was totally fine and left alone.\n\nI did not experience it as a problem: it is exactly the spirit of the Camino. Everyone goes at their own pace, their own rhythm, and according to what the body allows that day. Sometimes you walk together, sometimes not, and both have value.\n\nThat morning, moreover, I had also solved the energy problem: at the previous day's albergue the hospitalero gave me a cable and a wall plug to recharge the powerbank. They were items left by another pilgrim. A simple gesture, but decisive.\n\nAt 9:55 I arrived in Sahagún. I spent part of the day orienting myself about the halfway card: tourism office, directions, times, costs. Then Giselle and I updated each other several times and I sent her all the correct info: pickup at Santuario de la Peregrina, time slot 18:00-20:00, cost 3 euros.\n\nThe important detail is that, in 2019, Google Maps took you to the wrong point. Both Giselle and I had to ask local people to reach the right place, not far from what was shown online.\n\nAt the albergue I took the chance to do a full wash: clothes, towel, and also windbreaker jacket. Then I had lunch there with Alicia and another pilgrim: we ate pasta, salad, and other things together, with that simple and convivial atmosphere that immediately gets you back on track.\n\nDuring the afternoon I also spoke with Catherine: she was farther behind (Templaria area) and we exchanged real Camino updates, between tiredness, mosquitoes, feet holding better than expected, and pace management. At lunch I was with other pilgrims; she was writing that she had stopped alone for a beer.\n\nIn the evening I had dinner with Francesco, Laura, Joan, and Alicia, at Pensión Restaurante La Costa del Adobe. Earlier, walking in town, we had already witnessed a hilarious scene: a man ordered a caña pequeña and the bartender, as a joke, brought him a tiny tiny glass. The same scene happened to Francesco too when we went for dinner there. It was one of those stupid but irresistible moments, laughing to death. Being with Francesco was always super fun: he is really very likeable and brings incredible energy and lightness. At one point I even started giving him totally improvised guitar lessons, in a complete mess: he had found a guitar and started playing La canzone del sole.\n\nThe conversation then moved to something very concrete: timing and return flights. In that case it was mainly Catherine who had to do the math: she was planning her return flight and thought of taking it no later than July 17, so she needed to calculate well how many kilometers per day to do in order to arrive in Santiago in time.\n\nIn parallel I stayed in touch with the Orisson group and with “Pamplona Party People,” which was the name of the WhatsApp group created in Pamplona to update each other logistically on where each of us was from time to time. Messages were constantly flowing there about who had already arrived, who would pass the next day, and who wanted to understand how to get the certificate. I found myself acting as an information “hub,” between advice and useful coordinates.\n\n**Sensory detail**\nEntering town with heat still on me, slow lunch break with pilgrims, phone full of crossed messages, and that strange feeling of being still but still in the middle of movement.\n\n**What I understood**\nStages are not made only of kilometers: some days are for realigning people, energy, goals, and direction.",
       "strava": [
         "https://www.strava.com/activities/8369574150"
       ],
@@ -10106,9 +10063,9 @@
           "size": null,
           "orig": "IMG_3715.MOV",
           "place": "Calzada del Coto, España",
-          "lat": 42.37092971801758,
-          "lon": -5.026981830596924,
-          "gpsInferred": true,
+          "lat": 42.3898,
+          "lon": -5.0952,
+          "gpsInferred": false,
           "locationEstimated": true
         },
         {
@@ -10187,11 +10144,10 @@
           "size": null,
           "orig": "IMG_3723.MOV",
           "place": "El Burgo Ranero, España",
-          "lat": 42.422091965964974,
-          "lon": -5.218357013815421,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredFromPlace": true
+          "lat": 42.4216,
+          "lon": -5.2183,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "1aca5e20a074",
@@ -10205,14 +10161,13 @@
           "size": null,
           "orig": "IMG_3724.MOV",
           "place": "El Burgo Ranero, España",
-          "lat": 42.422091965964974,
-          "lon": -5.218357013815421,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredFromPlace": true
+          "lat": 42.4216,
+          "lon": -5.2183,
+          "gpsInferred": false,
+          "locationEstimated": true
         }
       ],
-      "notes": "",
+      "notes": "**Title**\nHeat, detours, and real logistics: the day that sets up León.\n\n**Where I was / stage**\nBurgo Ranero / Mansilla area, with planning toward arrival in León.\n\n**Key scene**\nOn the same day I also heard from Thomas: he was already beyond Ponferrada and was already thinking about Santiago + Finisterre (also by hitchhiking). It was the perfect picture of how our rhythms were now on different tracks.\n\nJune 30 was a day of smart management more than “raw leg power”: heat, reasoned stops, cash, accommodation, and decisions on when to push and when to stop.\n\nIn the morning I wrote with Catherine almost in real time: she was in Sahagún and was not feeling well (cold, nausea, little sleep), so we reasoned step by step on how much to push and how much to protect herself. I repeated to her to listen to her body and not overdo it: on the Camino there is no need to play heroes when the day goes wrong.\n\nMeanwhile I was in the Burgo Ranero area, with a non-trivial practical issue: few services and no convenient bank. In these small villages, if you mismanage cash, you get blocked quickly. It is one of those things that from outside look like details, but on the Camino become central.\n\nWith Giselle we updated where each person was and where to converge: in the end she kept going, and we began coordinating for León, with the idea of staying there at least two days.\n\nWith Francesco there was also the classic pilgrim-life episode: he had arrived in the same village but in another albergue because the donativo was full, and he asked if I could lend him cash because there they did not accept cards. I was almost in the same situation: I had very little cash and could scrape together only a small amount. This too was emblematic of that period: strong heat, small villages, limited services, and continuous micro-solutions among pilgrims.\n\nIn the afternoon/evening the conversation with Catherine became more strategic: she had taken a variant (Camino Romano), the tracks had split, and we realigned positions and goals. In that phase she was very doubtful about what to do: she had even considered taking a bus. In the end, however, she stayed faithful to the original idea of doing the whole route on foot, and she made it. The impressive thing was exactly this: from a morning when she was even thinking about stopping in Sahagún to sleep, she got to close 30 km. Incredible willpower. By end of day she had still done about 30 km despite the difficult start: feet destroyed, but high satisfaction.\n\nMeanwhile I was evaluating a long night push to aim for León, then in the evening I checked the weather again and adjusted the plan: no useless forcing, early alarm, and walking in the morning coolness. Simple decision, but right.\n\n**Sensory detail**\nDry, rough day: hot air, overheated rooms, short shade breaks, and phone always in hand to fit distances and people together.\n\n**What I understood**\nThe best stages are not always the most epic: often they are the ones where you manage limits well, yours and others', without losing direction.",
       "strava": [
         "https://www.strava.com/activities/8369574130"
       ],
@@ -10248,10 +10203,10 @@
           "mime": "video/mp4",
           "size": null,
           "orig": "IMG_3730.MOV",
-          "place": "El Burgo Ranero, España",
-          "lat": 42.42338562011719,
-          "lon": -5.218757152557373,
-          "gpsInferred": true,
+          "place": "Santas Martas, España",
+          "lat": 42.456399999999995,
+          "lon": -5.2885,
+          "gpsInferred": false,
           "locationEstimated": true
         },
         {
@@ -10297,10 +10252,10 @@
           "mime": "video/mp4",
           "size": null,
           "orig": "IMG_3733.MOV",
-          "place": "Villasabariego, España",
-          "lat": 42.499053955078125,
-          "lon": -5.418239593505859,
-          "gpsInferred": true,
+          "place": "Valdefresno, España",
+          "lat": 42.5577,
+          "lon": -5.4763,
+          "gpsInferred": false,
           "locationEstimated": true
         },
         {
@@ -10314,10 +10269,10 @@
           "mime": "video/mp4",
           "size": null,
           "orig": "IMG_3734.MOV",
-          "place": "Villasabariego, España",
-          "lat": 42.502113342285156,
-          "lon": -5.420301914215088,
-          "gpsInferred": true,
+          "place": "Valdefresno, España",
+          "lat": 42.5655,
+          "lon": -5.4918,
+          "gpsInferred": false,
           "locationEstimated": true
         },
         {
@@ -10331,10 +10286,10 @@
           "mime": "video/mp4",
           "size": null,
           "orig": "IMG_3735.MOV",
-          "place": "Villasabariego, España",
-          "lat": 42.502113342285156,
-          "lon": -5.420301914215088,
-          "gpsInferred": true,
+          "place": "Valdefresno, España",
+          "lat": 42.565599999999996,
+          "lon": -5.4918,
+          "gpsInferred": false,
           "locationEstimated": true
         },
         {
@@ -10403,7 +10358,7 @@
           "gpsInferred": false
         }
       ],
-      "notes": "",
+      "notes": "**Title**\nNight, long stride, and arrival in León.\n\n**Where I was / stage**\nJuly 1: very early departure and long progression to León.\n\n**Key scene**\nI left when it was still full night, around 3:40-3:50, with the idea of maximizing cool weather. At 4:52, shortly after I started walking, I wanted to record a video just to capture the sound of the night: you could hardly see anything, but the crickets' sound told me I was in open countryside. It was relaxing, better than classical music. In Mansilla I stopped for a long break, then started again and reached León around 13:00, tired but very satisfied. At 10:32 I recorded another video because I was amazed by an ant trail: it was so heavily used that they had even moved small stones, leaving a clear mark of their passage.\n\nThe day was a continuous puzzle of alignments with others. Catherine and I wrote while I was already ahead: she was farther behind and would reach León only the next day. We updated each other on timing, energy, and accommodation, as often happens when rhythms diverge but the group thread stays alive.\n\nWith Giselle we chased each other for hours: at first it looked like we would cross on the road, then we decided to meet directly in town. Once we both arrived at Albergue Muralla, we gave ourselves time for shower and recovery and started organizing the evening.\n\nIn parallel I was also hearing from Francesco: he was in a very social phase of the Camino and kept updating me on his crossings and plans. There was that typical atmosphere where groups continuously change shape: you lose each other for half a day, then realign at dinner or in the next village.\n\nIn León the context changed suddenly: after days of meseta and small villages, I was in a full, noisy, lively city. I took a very comfortable albergue (small rooms, large showers, code access), perfect to recharge and stop 2-3 days.\n\nIn the evening, between sudden rain and shifting schedules, we still moved to meet for food and drinks. Nothing linear, but very Camino: plans changing, people joining at the last minute, and in the end you still meet.\n\nThat night we went out: I was with the new little group formed by Francesco, Laura, and Juan, and Ocean, Giselle, and another girl named Rossana joined us.\n\n**Sensory detail**\nThe strongest contrast was clear: darkness and silence at 4 in the morning, then heat, heavy feet, and finally León's urban confusion with evening rain on downtown stones.\n\n**What I understood**\nWhen you leave before everyone else, you gain kilometers; when you arrive in a city, you recover relationships. On the Camino you need both.",
       "strava": [
         "https://www.strava.com/activities/8369574305"
       ],
@@ -10440,11 +10395,10 @@
           "size": null,
           "orig": "IMG_3751.MOV",
           "place": "León, España",
-          "lat": 42.598204404244896,
-          "lon": -5.56876758057658,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredFromPlace": true
+          "lat": 42.597300000000004,
+          "lon": -5.566599999999999,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "333e6dd51d25",
@@ -10458,11 +10412,10 @@
           "size": null,
           "orig": "IMG_3759.MOV",
           "place": "León, España",
-          "lat": 42.598204404244896,
-          "lon": -5.56876758057658,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredFromPlace": true
+          "lat": 42.5989,
+          "lon": -5.5667,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "a5e4c92e7044",
@@ -10492,11 +10445,10 @@
           "size": null,
           "orig": "IMG_3761.MOV",
           "place": "León, España",
-          "lat": 42.598204404244896,
-          "lon": -5.56876758057658,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredFromPlace": true
+          "lat": 42.597899999999996,
+          "lon": -5.5718000000000005,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "488ad67916b4",
@@ -10510,11 +10462,10 @@
           "size": null,
           "orig": "IMG_3773.MOV",
           "place": "León, España",
-          "lat": 42.598204404244896,
-          "lon": -5.56876758057658,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredFromPlace": true
+          "lat": 42.5969,
+          "lon": -5.5789,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "68577693d28a",
@@ -10560,11 +10511,10 @@
           "size": null,
           "orig": "IMG_3787.MOV",
           "place": "León, España",
-          "lat": 42.598204404244896,
-          "lon": -5.56876758057658,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredFromPlace": true
+          "lat": 42.5989,
+          "lon": -5.5813,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "636e8abd4d31",
@@ -10662,11 +10612,10 @@
           "size": null,
           "orig": "IMG_3800.MOV",
           "place": "León, España",
-          "lat": 42.598204404244896,
-          "lon": -5.56876758057658,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredFromPlace": true
+          "lat": 42.597,
+          "lon": -5.5668,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "cf30633dd6c6",
@@ -10680,11 +10629,10 @@
           "size": null,
           "orig": "IMG_3801.MOV",
           "place": "León, España",
-          "lat": 42.598204404244896,
-          "lon": -5.56876758057658,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredFromPlace": true
+          "lat": 42.5969,
+          "lon": -5.5668999999999995,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "34029b34ef75",
@@ -10730,11 +10678,10 @@
           "size": null,
           "orig": "IMG_3804.MOV",
           "place": "León, España",
-          "lat": 42.598204404244896,
-          "lon": -5.56876758057658,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredFromPlace": true
+          "lat": 42.597,
+          "lon": -5.5668,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "c86102d8b31a",
@@ -10748,14 +10695,13 @@
           "size": null,
           "orig": "IMG_3805.MOV",
           "place": "León, España",
-          "lat": 42.598204404244896,
-          "lon": -5.56876758057658,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredFromPlace": true
+          "lat": 42.597,
+          "lon": -5.5668,
+          "gpsInferred": false,
+          "locationEstimated": true
         }
       ],
-      "notes": "",
+      "notes": "**Title**\nLeón: recovery, crêpes party, and a memorable evening.\n\n**Where I was / stage**\nJuly 2, full stop in León.\n\n**Key scene**\nAfter the long push of the previous day, July 2 was a true recovery day: no aggressive alarm, body to reset, mind to realign. When you do 37 km the day before, rest is not a luxury: it is maintenance.\n\nIn the early afternoon Catherine also arrived in León. We updated each other on accommodation and timing: she was at Unamuno, I was at Albergue Muralla. The idea was to meet for a beer and then understand how to fit the evening together.\n\nMeanwhile Laura wanted to make crêpes: for the occasion I bought a jar of Nutella, while they handled the rest. We then met in the evening at the Airbnb they had booked.\n\nIt was me, Juan, Laura, Ocean, Francesco, and Rossana. A little later Anita joined us too, one of the girls Francesco had met during the day on the road.\n\nFrancesco was hilarious the entire evening: truly laugh-out-loud funny. He really liked Anita and staged a burst of sketches, constantly involving her. She was very in tune and laughed wholeheartedly. At one point Francesco even did a joking “marriage proposal,” and she was super entertained. Watching that evening was a total blast.\n\nToo bad Catherine did not come: in my opinion she would have had fun too. I had invited her several times (beer, crêpes party, meetup near the cathedral), but she was undecided about socializing that night.\n\nIn parallel I was also hearing from Andrius, who was nearby and wanted to understand whether we would walk together the next day or not. I told him that for me July 3 was still a rest day, with city walk and cathedral, and that I would decide departure afterwards.\n\nIn the Pamplona Party People group, logistical updates kept coming on where everyone was: some in municipal albergues, some in private ones, some already ready to leave, others planning to stop two days. It was the usual Camino mosaic: same thread, different timing.\n\n**Sensory detail**\nSlow urban rhythm, long showers, squares full of pilgrims, and then a house full of laughter, jokes, and lightness.\n\n**What I understood**\nCity stops work when you truly live them: you recover physically, but above all you recharge the human side of the Camino.",
       "recommendations": []
     },
     {
@@ -10869,11 +10815,10 @@
           "size": null,
           "orig": "IMG_3822.MOV",
           "place": "León, España",
-          "lat": 42.598204404244896,
-          "lon": -5.56876758057658,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredFromPlace": true
+          "lat": 42.5961,
+          "lon": -5.5793,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "a62d721d7353",
@@ -10887,14 +10832,13 @@
           "size": null,
           "orig": "IMG_3824.MOV",
           "place": "León, España",
-          "lat": 42.598204404244896,
-          "lon": -5.56876758057658,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredFromPlace": true
+          "lat": 42.5972,
+          "lon": -5.5674,
+          "gpsInferred": false,
+          "locationEstimated": true
         }
       ],
-      "notes": "",
+      "notes": "**Title**\nLeón, extra time: cathedral, alignments, and relationships changing pace.\n\n**Where I was / stage**\nJuly 3, still in León before leaving again.\n\n**Key scene**\nJuly 3 started late: after the long night the day before I woke up calmly, and from there the day became a continuous game of meetups to re-fit. In the morning I found in my phone a real mini photoshoot of selfies Ocean had taken with my phone the night before, when we were sitting outside in an alley. From those signals, I had the suspicion she liked me a bit.\n\nWith Catherine we wrote from the morning to manage to meet before she left the city. We kept trying to line up around the cathedral area: I had just crossed Mark and Carla, they were leaving, she was arriving. In the end we realigned there, at León’s classic convergence point.\n\nIn parallel there was Andrius, who wanted to organize meeting up and understand plans for the next day. Between shifted timing, last-minute showers, movements between albergues and park, even with him it was a day of “I’m arriving soon.” But that is also the beauty of long stops: less rigidity, more human fitting.\n\nOn the social side, the wave from the previous evening was still felt: the little group with Francesco, Laura, Juan, Ocean, Giselle, and the others was consolidating. Francesco was in full showman mode, with the whole Anita story that kept the day’s ironic tone alive. Sometimes one message was enough to reopen the same energy as the night before.\n\nIn the evening, as often happens in cities, dinner plans kept changing. In the end I stayed on the practical side: I managed my return to albergue and kept food light with what I had there, waiting to understand if and when to rejoin the others.\n\nIn Pamplona Party People, meanwhile, logistical updates kept coming from every direction: some on alternative variants, some under storms, some already projected to the next stage. It was clear that the “group” was no longer a single block but a mobile constellation.\n\n**Sensory detail**\nOld town full, waiting in front of the cathedral, park lawn in the afternoon, and that gentle tiredness of a day without kilometers but not without movement.\n\n**What I understood**\nRest days are never really still: they are used to put relationships, energy, and direction back in order before returning to the trail.",
       "recommendations": []
     },
     {
@@ -11008,11 +10952,10 @@
           "size": null,
           "orig": "IMG_3848.MOV",
           "place": "León, España",
-          "lat": 42.598204404244896,
-          "lon": -5.56876758057658,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredFromPlace": true
+          "lat": 42.599399999999996,
+          "lon": -5.5667,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "2112c4c7b8a5",
@@ -11042,11 +10985,10 @@
           "size": null,
           "orig": "IMG_3852.MOV",
           "place": "León, España",
-          "lat": 42.598204404244896,
-          "lon": -5.56876758057658,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredFromPlace": true
+          "lat": 42.5987,
+          "lon": -5.5673,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "1de9ba63da65",
@@ -11204,11 +11146,10 @@
           "size": null,
           "orig": "IMG_3875.MOV",
           "place": "Chozas de Abajo, España",
-          "lat": 42.485275,
-          "lon": -5.72416944444444,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredNote": "Aligned to nearby photo IMG_3879.HEIC (dt 5 min, was 9.81 km away)"
+          "lat": 42.4874,
+          "lon": -5.7191,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "5d4a1bd6b6b6",
@@ -11450,11 +11391,10 @@
           "size": null,
           "orig": "IMG_3900.MOV",
           "place": "Chozas de Abajo, España",
-          "lat": 42.50151485400391,
-          "lon": -5.7093338743794755,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredFromPlace": true
+          "lat": 42.482499999999995,
+          "lon": -5.7162,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "2c2eb98ba6a1",
@@ -11468,12 +11408,10 @@
           "size": null,
           "orig": "IMG_3901.MOV",
           "place": "Chozas de Abajo, España",
-          "lat": 42.4838333333333,
-          "lon": -5.72576388888889,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredFromPlace": true,
-          "gpsInferredNote": "Aligned to nearby photo IMG_1897.HEIC (dt 5 min, was 2.38 km away)"
+          "lat": 42.482299999999995,
+          "lon": -5.712899999999999,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "56a69db6a136",
@@ -11556,7 +11494,7 @@
           "gpsInferred": false
         }
       ],
-      "notes": "",
+      "notes": "**Title**\nBack on the Camino: good variant, live contacts, and direction Astorga.\n\n**Where I was / stage**\nJuly 4: out of León and arrival in Villar de Mazarife, choosing the alternative variant.\n\n**Key scene**\nAfter the rest days in León, this was a true restart day. Andrius and I coordinated early in the morning and decided to move together. Instead of the road track, we took the variant: more countryside, less asphalt, more silence.\n\nThe choice was right. It was not the shortest route in absolute terms, and in some stretches shade was limited, but walking away from traffic completely changed the quality of the stage. By late morning I was satisfied: about 21 km done well, with the feeling of having found the right pace again after the city stop.\n\nIn the group, cross-logistical updates kept flowing: Mark and Danny were already in Astorga, while I would stop in Villar de Mazarife with the idea of reaching Astorga the next day. In parallel, Francesco wrote me that he had found my hat: a small thing, but very useful, because in the Mesetas the sun does not forgive.\n\nIn the afternoon I disconnected a bit and recovered energy. We stayed at Albergue El Refugio de Jesús. Shortly before 19:00, Andrius and I met Juan and Laura in the albergue garden: aperitivo with wine, olives, and snacks, then shortly after we organized to cook dinner. It was a simple and very pleasant evening spent together. Meanwhile, via WhatsApp, alignments for the following days kept going. With Ocean we synced quickly: she was already in Astorga, I confirmed I would arrive the next day.\n\nWith Catherine we also spoke again in the evening. She was tired and told me about an intense day, but we still realigned distances: I would push more, she would do fewer kilometers, with the idea of crossing again soon. That was the rhythm of those days: often walking separately, but the thread between people always remained active.\n\nIn town, at one point, a man standing outside his door invited us in to see his phone museum: Casa Museo Antolín. It was a curious and truly particular visit. He had filled the house with objects related to the world of telephony, many very old: it was immediately clear he was a true enthusiast and had dedicated a whole life to it.\n\nEach area of the house was organized by theme, which made everything even more interesting to explore. The house is right along the Camino, so the visit is very easy to fit into the stage. Entry is free, but at the end the owner asks for a voluntary offering. I recommend it: very memorable.\n\n**Sensory detail**\nOpen countryside, steady pace, less road noise, and that clear feeling of your mind breathing again as soon as the city is behind you.\n\n**What I understood**\nWhen you choose the right route and keep the right contacts alive, even a “transition” stage becomes a full day.",
       "strava": [
         "https://www.strava.com/activities/8369574167"
       ],
@@ -11644,11 +11582,10 @@
           "size": null,
           "orig": "IMG_3911.MOV",
           "place": "Hospital de Órbigo, España",
-          "lat": 42.4640722222222,
-          "lon": -5.87885,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredNote": "Aligned to nearby photo IMG_1905.HEIC (dt 1 min, was 9.77 km away)"
+          "lat": 42.464,
+          "lon": -5.879700000000001,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "74ee83d85492",
@@ -11710,9 +11647,9 @@
           "size": null,
           "orig": "IMG_3916.MOV",
           "place": "Villares de Órbigo, España",
-          "lat": 42.46305465698242,
-          "lon": -5.838582992553711,
-          "gpsInferred": true,
+          "lat": 42.4598,
+          "lon": -5.9332,
+          "gpsInferred": false,
           "locationEstimated": true
         },
         {
@@ -11727,11 +11664,10 @@
           "size": null,
           "orig": "IMG_3917.MOV",
           "place": "Villares de Órbigo, España",
-          "lat": 42.4645083333333,
-          "lon": -5.94140277777778,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredNote": "Aligned to nearby photo IMG_3918.HEIC (dt 0 min, was 7.86 km away)"
+          "lat": 42.4645,
+          "lon": -5.941199999999999,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "3fb2e6f7408b",
@@ -11776,10 +11712,10 @@
           "mime": "video/mp4",
           "size": null,
           "orig": "IMG_3919.MOV",
-          "place": "Hospital de Órbigo, España",
-          "lat": 42.45885467529297,
-          "lon": -5.875883102416992,
-          "gpsInferred": true,
+          "place": "San Justo de la Vega, España",
+          "lat": 42.4659,
+          "lon": -5.9727,
+          "gpsInferred": false,
           "locationEstimated": true
         },
         {
@@ -11826,11 +11762,10 @@
           "size": null,
           "orig": "IMG_3920.MOV",
           "place": "San Justo de la Vega, España",
-          "lat": 42.4539722222222,
-          "lon": -5.99973611111111,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredNote": "Aligned to nearby photo IMG_1913.HEIC (dt 3 min, was 8.75 km away)"
+          "lat": 42.4539,
+          "lon": -6.0001999999999995,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "440ff678ac79",
@@ -11913,7 +11848,7 @@
           "gpsInferred": false
         }
       ],
-      "notes": "",
+      "notes": "**Title**\nAstorga: day with Andrius and first kiss with Catherine.\n\n**Where I was / stage**\nJuly 5: walk to Astorga and evening in town.\n\n**Key scene**\nOn July 5 I walked the whole day with Andrius to Astorga. It was a well-lived stage, with steady pace and chats that made everything lighter.\n\nWhen I arrived in town, I found Catherine seated at a table drinking a beer with Judith, a French woman Catherine had bonded with a lot and often confided in. I stopped with them to talk for a bit, then went toward the pilgrims’ albergue.\n\nWhen we were alone, Catherine spoke with a bit of embarrassment but very directly: she had understood she was starting to feel something for me and did not want to continue walking together without clarity, so as not to suffer.\n\nThose words made me very happy. I told her I liked her too, and it was the first time we kissed.\n\nThen we checked in at Albergue de peregrinos de Astorga and moved to the small viewpoint garden nearby: another moment for us, between children joking as they passed in front of us. After that we went to dinner together.\n\n**Sensory detail**\nSoft end-of-day light, city noise in the background, cold beer at the table, and the little park wall turned into a small fixed point.\n\n**What I understood**\nOn the Camino some days change direction without warning: you leave thinking only about the stage, you arrive carrying much more.",
       "strava": [
         "https://www.strava.com/activities/8369574334"
       ],
@@ -12078,11 +12013,10 @@
           "size": null,
           "orig": "IMG_3958.MOV",
           "place": "Astorga, España",
-          "lat": 42.4558,
-          "lon": -6.16356111111111,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredNote": "Aligned to nearby photo IMG_3957.HEIC (dt 0 min, was 4.28 km away)"
+          "lat": 42.455799999999996,
+          "lon": -6.1636,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "2f060a81f79e",
@@ -12160,11 +12094,10 @@
           "size": null,
           "orig": "IMG_3968.MOV",
           "place": "Santa Colomba de Somoza, España",
-          "lat": 42.48148298940776,
-          "lon": -6.347823620661982,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredFromPlace": true
+          "lat": 42.482,
+          "lon": -6.281899999999999,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "1c3967275c4e",
@@ -12178,11 +12111,10 @@
           "size": null,
           "orig": "IMG_3969.MOV",
           "place": "Santa Colomba de Somoza, España",
-          "lat": 42.48148298940776,
-          "lon": -6.347823620661982,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredFromPlace": true
+          "lat": 42.482,
+          "lon": -6.282,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "d66dc8b9bb0f",
@@ -12196,11 +12128,10 @@
           "size": null,
           "orig": "IMG_3970.MOV",
           "place": "Santa Colomba de Somoza, España",
-          "lat": 42.48148298940776,
-          "lon": -6.347823620661982,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredFromPlace": true
+          "lat": 42.481899999999996,
+          "lon": -6.282,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "bdf3c63bad6a",
@@ -12232,11 +12163,10 @@
           "size": null,
           "orig": "IMG_3972.MOV",
           "place": "Santa Colomba de Somoza, España",
-          "lat": 42.48148298940776,
-          "lon": -6.347823620661982,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredFromPlace": true
+          "lat": 42.482,
+          "lon": -6.282,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "f4be42da8e33",
@@ -12266,12 +12196,10 @@
           "size": null,
           "orig": "IMG_3974.MOV",
           "place": "Santa Colomba de Somoza, España",
-          "lat": 42.4819194444444,
-          "lon": -6.28205,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredFromPlace": true,
-          "gpsInferredNote": "Aligned to nearby photo IMG_3973.HEIC (dt 0 min, was 5.39 km away)"
+          "lat": 42.482,
+          "lon": -6.2821,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "995b7e2b5b26",
@@ -12285,15 +12213,13 @@
           "size": null,
           "orig": "IMG_3975.MOV",
           "place": "Santa Colomba de Somoza, España",
-          "lat": 42.4819194444444,
-          "lon": -6.28205,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredFromPlace": true,
-          "gpsInferredNote": "Aligned to nearby photo IMG_3973.HEIC (dt 0 min, was 5.39 km away)"
+          "lat": 42.482,
+          "lon": -6.2821,
+          "gpsInferred": false,
+          "locationEstimated": true
         }
       ],
-      "notes": "",
+      "notes": "**Title**\nRabanal: base change, donative tent setup, and dawn plan toward Cruz de Ferro.\n\n**Where I was / stage**\nJuly 6: arrival in Rabanal del Camino and settling day before the next climb.\n\n**Key scene**\nJuly 6 was one of those days when logistics count almost as much as kilometers. Once in Rabanal, at first I had aimed for a more “classic” albergue, but then Francesco told me about a donative place with tents (Green Garden). I went to see it, liked it immediately, and in the end changed base.\n\nIt was a choice very aligned with my spirit: less standard comfort, more experience. There was that temporary base-camp feeling, simple but alive, perfect to prepare the next day well.\n\nIn that context, new acquaintances also formed: among them Lucia, a very nice Italian girl with whom Francesco immediately connected. During the day there were light, shared moments, between some yoga and good watermelon, typical of those stops where the Camino slows down and becomes pure sociality. Catherine, however, spent a good part of the time acting jealous of Lucia toward me, even though there was no reason. Precisely to avoid upsetting her, I preferred not to participate in group activities.\n\nMeanwhile intersections with everyone kept going. Andrius had even kept a bed near his for me in the first lodging, a beautiful gesture, but I explained I had decided to move. Catherine and I had been in touch since the morning: the idea was to try crossing in Rabanal or along the road, even with different rhythms. With Giselle we updated positions: she was already ahead in Molinaseca and confirmed the stretch toward Cruz de Ferro was absolutely worth it. And it was exactly the same Cruz de Ferro Carla had told me about on June 12, when she explained the small-stone tradition to carry there. From there I fixed the final plan: very early alarm and departure at 4:30, with the goal of seeing sunrise at altitude.\n\nThe evening closed like this: few things, mind already on the next day, and the clear feeling that I was entering a different phase of the route, more mountain-like and more intense.\n\n**Sensory detail**\nCooler Rabanal air, backpack resting in front of the tent, phone full of coordination messages, and that positive tension of an early-dawn start.\n\n**What I understood**\nTransition days are not pauses: they are the moment when you set the tone of the most important stages.",
       "strava": [
         "https://www.strava.com/activities/8369574289"
       ],
@@ -12314,11 +12240,10 @@
           "size": null,
           "orig": "IMG_3977.MOV",
           "place": "Santa Colomba de Somoza, España",
-          "lat": 42.4890444444444,
-          "lon": -6.36106666666667,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredNote": "Aligned to nearby photo IMG_3978.HEIC (dt 0 min, was 6.49 km away)"
+          "lat": 42.4892,
+          "lon": -6.360799999999999,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "f6bc0bc8d4f6",
@@ -12540,11 +12465,10 @@
           "size": null,
           "orig": "IMG_3993.MOV",
           "place": "Santa Colomba de Somoza, España",
-          "lat": 42.4521416666667,
-          "lon": -6.38313055555556,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredNote": "Aligned to nearby photo IMG_3998.HEIC (dt 4 min, was 6.56 km away)"
+          "lat": 42.4522,
+          "lon": -6.383100000000001,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "cf1eb2a8f82c",
@@ -12558,11 +12482,10 @@
           "size": null,
           "orig": "IMG_3996.MOV",
           "place": "Santa Colomba de Somoza, España",
-          "lat": 42.4521416666667,
-          "lon": -6.38313055555556,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredNote": "Aligned to nearby photo IMG_3998.HEIC (dt 2 min, was 6.56 km away)"
+          "lat": 42.4521,
+          "lon": -6.383100000000001,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "55bbdcca7c07",
@@ -12576,11 +12499,10 @@
           "size": null,
           "orig": "IMG_3997.MOV",
           "place": "Santa Colomba de Somoza, España",
-          "lat": 42.4521416666667,
-          "lon": -6.38313055555556,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredNote": "Aligned to nearby photo IMG_3998.HEIC (dt 1 min, was 6.52 km away)"
+          "lat": 42.4521,
+          "lon": -6.3831999999999995,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "0565720bb736",
@@ -12626,9 +12548,9 @@
           "size": null,
           "orig": "IMG_4001.MOV",
           "place": "Santa Colomba de Somoza, España",
-          "lat": 42.49107360839844,
-          "lon": -6.342630386352539,
-          "gpsInferred": true,
+          "lat": 42.4521,
+          "lon": -6.3835,
+          "gpsInferred": false,
           "locationEstimated": true
         },
         {
@@ -12728,10 +12650,10 @@
           "mime": "video/mp4",
           "size": null,
           "orig": "IMG_4008.MOV",
-          "place": "Santa Colomba de Somoza, España",
-          "lat": 42.487945556640625,
-          "lon": -6.370861530303955,
-          "gpsInferred": true,
+          "place": "Molinaseca, España",
+          "lat": 42.4895,
+          "lon": -6.4178999999999995,
+          "gpsInferred": false,
           "locationEstimated": true
         },
         {
@@ -12745,10 +12667,10 @@
           "mime": "video/mp4",
           "size": null,
           "orig": "IMG_4009.MOV",
-          "place": "Santa Colomba de Somoza, España",
-          "lat": 42.48876190185547,
-          "lon": -6.370056629180908,
-          "gpsInferred": true,
+          "place": "Molinaseca, España",
+          "lat": 42.4888,
+          "lon": -6.4189,
+          "gpsInferred": false,
           "locationEstimated": true
         },
         {
@@ -12795,11 +12717,10 @@
           "size": null,
           "orig": "IMG_4012.MOV",
           "place": "Molinaseca, España",
-          "lat": 42.4982222222222,
-          "lon": -6.45611944444444,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredNote": "Aligned to nearby photo IMG_4011.HEIC (dt 0 min, was 2.63 km away)"
+          "lat": 42.4983,
+          "lon": -6.456099999999999,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "d474572aa08d",
@@ -12845,9 +12766,9 @@
           "size": null,
           "orig": "IMG_4016.MOV",
           "place": "Molinaseca, España",
-          "lat": 42.537681579589844,
-          "lon": -6.51926326751709,
-          "gpsInferred": true,
+          "lat": 42.5378,
+          "lon": -6.5195,
+          "gpsInferred": false,
           "locationEstimated": true
         },
         {
@@ -12879,7 +12800,7 @@
           "orig": "IMG_4015.PNG"
         }
       ],
-      "notes": "",
+      "notes": "**Title**\nCruz de Ferro, wrong road, and a wild high-altitude encounter.\n\n**Where I was / stage**\nJuly 7: departure from Rabanal, passage at Cruz de Ferro, then descent toward Acebo and Molinaseca.\n\n**Key scene**\nIn the morning I headed toward Cruz de Ferro together with Sara, a girl I had met in Sanbol and crossed paths with several times in the following days. She is a particular person, very spiritual. After the cross, without realizing it, we took a wrong detour: a beautiful mountain road pointing toward Prada de la Sierra, but it was not the Camino.\n\nAfter 5-6 km we found ourselves in front of an incredible scene: a herd of wild horses beyond a hollow. Two foals came out spontaneously from the group and approached us, wary but curious, letting us pet them for a few minutes. Sara was also very happy about that unexpected detour: seeing horses like that, free in nature, gave us one of the best moments of the day. Then what looked like their mother appeared on top of the little hill: she did not have to do anything, the two little ones ran straight to her. A beautiful encounter, one that stays with you.\n\nThe real problem came right after: checking the map we realized the mistake. Going back meant doing another 5-6 km, but even continuing was not simple because internet was not working and the map, when zooming, stayed blurry and useless. At that point Sara started doing her gestures “to attract positive energy” and, coincidence or not, shortly after the network came back. I managed to load details and check options: there were no real shortcuts, only returning on a parallel track that brought us back basically toward the Cruz de Ferro area, a little farther ahead.\n\nWe chose that solution and got back on the official route. My only regret is that, being already so close, we could have visited Prada de la Sierra, which seems a very particular place, because it is a tiny village inhabited by very few people, almost deserted. But we were already tired and a bit drained at the idea of adding even more distance.\n\nFor the rest of the day I continued to Acebo for a stop and then to Molinaseca: a long, off-plan stage, but memorable.\n\nIn the evening, among messages, an unexpected thought arrived too: Ocean wrote me with early birthday wishes.\n\n**Sensory detail**\nOpen mountain, silence broken only by hooves and wind, then the return to the trail with a clearer head and much heavier legs.\n\n**What I understood**\nOn the Camino you can take a wrong road, but that does not necessarily mean a wrong day: sometimes exactly the unexpected events build the strongest memories.",
       "strava": [
         "https://www.strava.com/activities/8369574485"
       ],
@@ -12963,10 +12884,10 @@
           "mime": "video/mp4",
           "size": null,
           "orig": "IMG_4031.MOV",
-          "place": "Ponferrada, España",
-          "lat": 42.57258605957031,
-          "lon": -6.609413146972656,
-          "gpsInferred": true,
+          "place": "Camponaraya, España",
+          "lat": 42.587900000000005,
+          "lon": -6.6826,
+          "gpsInferred": false,
           "locationEstimated": true
         },
         {
@@ -12980,10 +12901,10 @@
           "mime": "video/mp4",
           "size": null,
           "orig": "IMG_4032.MOV",
-          "place": "Ponferrada, España",
-          "lat": 42.57435989379883,
-          "lon": -6.611989498138428,
-          "gpsInferred": true,
+          "place": "Camponaraya, España",
+          "lat": 42.5898,
+          "lon": -6.6918,
+          "gpsInferred": false,
           "locationEstimated": true
         },
         {
@@ -13003,7 +12924,7 @@
           "gpsInferred": false
         }
       ],
-      "notes": "",
+      "notes": "**Title**\nFrom dawn silence to shared walking: a day that puts everything back in line.\n\n**Where I was / stage**\nJuly 8: departure from Molinaseca, passage through Ponferrada, and progress toward Villafranca / Cacabelos.\n\n**Key scene**\nJuly 8 started in the dark, alone, shortly before five. After the broken-up stage of the previous day I needed to get back into the rhythm of the real Camino: steady pace, clear head, open eyes on the landscape. The first hours were beautiful exactly for that: cool air, roads still empty, boot sound, and that clear sensation of still being in the right place at the right time.\n\nLeaving Molinaseca and approaching Ponferrada, I found again the beauty of the route in simple details: the light changing slowly, fields opening up, villages appearing and disappearing along the track. The Camino, when lived like this, is not only movement: it is a long breath.\n\nLater I rejoined Andrius and we walked together for a stretch, with a breakfast stop. During the morning Francesco joined too: at one point I was behind them while they walked singing in chorus a little Latin song, “un dos tres cinco seis siete.” A light, absurd, beautiful scene, one of those that immediately change the tone of your day.\n\nWe arrived in Cacabelos around 12 and stopped there. Francesco, faithful to his style, wanted to immortalize the moment in front of the town sign doing one of his gags: pose in “I’m pooping” style under the “Cacabelos” sign, and we all burst out laughing.\n\nIn the afternoon I stayed in Cacabelos with Catherine.\n\nMeanwhile Andrius, Francesco, and Lucia (the girl met at the tent place) were in Villafranca. Francesco was doing a great job with Andrius: he kept making him smile. In the evening, while the three of them were having dinner in Villafranca, Francesco sent me two photos of Andrius smiling; in one there was even Andrius himself taking a group selfie with the three of them. Andrius was going through a period of depression, and these moments with Francesco were clearly changing him for the better.\n\nThat scene stayed with me, because it told well the spirit of those days: we separated for a few hours or a full stage, but we still stayed connected. In the end it was a full day in the right way: first the good solitude of dawn, then the shared stretch with Andrius and Francesco, and finally the evening at distance, between Cacabelos and Villafranca, with the same atmosphere of lightness.\n\n**Sensory detail**\nMorning coolness, golden light rising on the trails, steady steps, voices singing ahead of me, and that clean tiredness that comes when you walk well.\n\n**What I understood**\nThe best days are not the ones in which you do more: they are the ones in which you stay in harmony among landscape, pace, and people.",
       "strava": [
         "https://www.strava.com/activities/8369574386"
       ],
@@ -13267,9 +13188,9 @@
           "size": null,
           "orig": "IMG_4059.MOV",
           "place": "Vega de Valcarce, España",
-          "lat": 42.66009521484375,
-          "lon": -6.917948246002197,
-          "gpsInferred": true,
+          "lat": 42.6722,
+          "lon": -6.9864999999999995,
+          "gpsInferred": false,
           "locationEstimated": true
         },
         {
@@ -13284,9 +13205,9 @@
           "size": null,
           "orig": "IMG_4060.MOV",
           "place": "Vega de Valcarce, España",
-          "lat": 42.66009521484375,
-          "lon": -6.917948246002197,
-          "gpsInferred": true,
+          "lat": 42.672999999999995,
+          "lon": -6.9889,
+          "gpsInferred": false,
           "locationEstimated": true
         },
         {
@@ -13317,9 +13238,9 @@
           "size": null,
           "orig": "IMG_4062.MOV",
           "place": "Vega de Valcarce, España",
-          "lat": 42.66562271118164,
-          "lon": -6.955581188201904,
-          "gpsInferred": true,
+          "lat": 42.68750000000001,
+          "lon": -7.0127999999999995,
+          "gpsInferred": false,
           "locationEstimated": true
         },
         {
@@ -13398,11 +13319,10 @@
           "size": null,
           "orig": "IMG_4068.MOV",
           "place": "Pedrafita do Cebreiro, España",
-          "lat": 42.7075305555556,
-          "lon": -7.04260833333333,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredNote": "Aligned to nearby photo IMG_4072.HEIC (dt 3 min, was 5.09 km away)"
+          "lat": 42.7076,
+          "lon": -7.0408,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "dfb4885e4db9",
@@ -13464,11 +13384,10 @@
           "size": null,
           "orig": "IMG_4076.MOV",
           "place": "Pedrafita do Cebreiro, España",
-          "lat": 42.7078138888889,
-          "lon": -7.0458,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredNote": "Aligned to nearby photo IMG_4075.HEIC (dt 0 min, was 4.60 km away)"
+          "lat": 42.707699999999996,
+          "lon": -7.0461,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "f83ae09d74f8",
@@ -13514,9 +13433,9 @@
           "size": null,
           "orig": "IMG_4080.MOV",
           "place": "Pedrafita do Cebreiro, España",
-          "lat": 42.70772171020508,
-          "lon": -7.04610013961792,
-          "gpsInferred": true,
+          "lat": 42.7078,
+          "lon": -7.044,
+          "gpsInferred": false,
           "locationEstimated": true
         },
         {
@@ -13563,11 +13482,10 @@
           "size": null,
           "orig": "IMG_4086.MOV",
           "place": "Pedrafita do Cebreiro, España",
-          "lat": 42.70798932977687,
-          "lon": -7.050552200330769,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredFromPlace": true
+          "lat": 42.7168,
+          "lon": -7.0454,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "46eae01c0dfa",
@@ -13597,11 +13515,10 @@
           "size": null,
           "orig": "IMG_4089.MOV",
           "place": "Pedrafita do Cebreiro, España",
-          "lat": 42.70798932977687,
-          "lon": -7.050552200330769,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredFromPlace": true
+          "lat": 42.707699999999996,
+          "lon": -7.0469,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "81924c64d038",
@@ -13622,7 +13539,7 @@
           "gpsInferredFromPlace": true
         }
       ],
-      "notes": "",
+      "notes": "**Title**\nClimb to O Cebreiro: hard road, important clarifications, and birthday eve.\n\n**Where I was / stage**\nJuly 9: from La Portela de Valcarce toward O Cebreiro, with a considered passage via Vega de Valcarce and high-altitude arrival in late afternoon.\n\n**Key scene**\nJuly 9 was one of those days when the Camino changes face several times. Midday I was stopped in La Portela de Valcarce, with the initial idea of closing the stage in Vega de Valcarce. The road was not great: lots of asphalt, traffic nearby, less poetry than other stretches. Catherine too, who was farther back in Pereje area, confirmed the same feeling: route not very exciting.\n\nExactly for this reason, instead of closing early, I chose to relaunch: aim for O Cebreiro. I was happy to be able to reach it, because I had heard from everyone it was very beautiful. I knew it was more demanding and that I would have to push, but I felt that climb would put me back into the real Camino. Meanwhile Andrius was already farther ahead and we stayed aligned at distance with location and messages: at one point he wrote that he had found space at the pilgrims’ albergue and sent me the exact point, telling me to keep going because beds were still available. That kind of help, when you are climbing tired, weighs hugely on the positive side.\n\nAt the top a beautiful sunset was waiting too. It would have been great if Catherine had managed to reach us to live it together, but that day she stopped about 10 km earlier.\n\nIn that stretch another point was also clear to me: there was no longer hope of seeing the Italian group again (Stefano, Maddalena, Antonella, Matteo, and the others). They had passed O Cebreiro about a week earlier, they were far ahead, and it had become realistically impossible to meet again. On the same day I also heard from Thomas: he had already reached Finisterre and returned to Santiago; I confirmed to him I had moved my flight to the 24th and was taking it more slowly, precisely to avoid losing people along the road.\n\nDuring the afternoon there was a deeper conversation with Catherine. She wrote that seeing me go ahead to O Cebreiro could look like running away, while I explained that was not it: I had caught the signals that she needed some space, and at the same time I wanted to use the day to reach the others before my birthday, so we could all meet again and then spend the next day together. She later confirmed it herself: she needed to be a bit alone and agreed on not forcing anything and following the flow, but since she could not read my mind she had thought I was escaping from her. I clarified that was not the case.\n\nWe told each other things directly: she said she struggled to “guess” my thoughts and preferred more clarity; I said I was not running away and that I wanted to keep sharing the Camino with her, without forcing. In the end we realigned on the simplest principle: go with the flow, impose nothing but stay open. It was an important, human clarification that put things back in order without drama.\n\nMeanwhile I kept climbing, she kept a calmer pace, but with a clear perspective: meet the next day in O Cebreiro.\n\nOnce in O Cebreiro, quick shower and then evening with Andrius and Carla. The atmosphere was completely different from the valley floor: cooler air, sharper light, threshold feeling. In group chats early wishes were already starting to arrive, and at sunset I shared a video of O Cebreiro: it was my birthday eve and the place seemed perfect to close the day, offering drinks to Carla and Andrius, who were with me that evening.\n\nLater I also heard from Francesco: he had done a very long stage, almost a personal record. Talking about Andrius, a detail came out that struck me: he had lost his glasses along the route, had gone back, and in the end found them. In the evening, though, the best thing was another: at dinner Andrius was present, smiling, inside conversations, without hiding in his phone. Small signs, but strong.\n\n**Sensory detail**\nThe fatigue of the final climb, the air cooling as you go up, and then the high-altitude sunset: one of those endings that empties your legs but fills your head.\n\n**What I understood**\nThere are days when arriving is not enough: you also need to clarify, choose, realign. And when you do, the destination weighs less and is worth more.",
       "strava": [
         "https://www.strava.com/activities/8369574353"
       ],
@@ -13675,11 +13592,10 @@
           "size": null,
           "orig": "IMG_4100.MOV",
           "place": "Pedrafita do Cebreiro, España",
-          "lat": 42.70798932977687,
-          "lon": -7.050552200330769,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredFromPlace": true
+          "lat": 42.7087,
+          "lon": -7.0405999999999995,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "7381614be626",
@@ -13709,11 +13625,10 @@
           "size": null,
           "orig": "IMG_4113.MOV",
           "place": "Pedrafita do Cebreiro, España",
-          "lat": 42.70798932977687,
-          "lon": -7.050552200330769,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredFromPlace": true
+          "lat": 42.7088,
+          "lon": -7.0405999999999995,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "d090a67e1954",
@@ -13764,7 +13679,7 @@
           "gpsInferred": false
         }
       ],
-      "notes": "",
+      "notes": "**Title**\nBirthday at altitude, in slow mode.\n\n**Where I was / stage**\nJuly 10: from O Cebreiro to O Poio, with arrival and stop at Albergue del Puerto.\n\n**Key scene**\nAfter checkout from the pilgrims’ albergue, I lay down on a nearby meadow looking at the view: mat on the ground, total calm, full enjoyment of the moment. It was exactly the right day to slow down.\n\nCatherine arrived between 11 and 12. From there we resumed our ritual: beer together, lunch, and then the whole afternoon together until evening in the same albergue, without hurry and without chasing anything.\n\nWe walked about 8 km and stopped in O Poio, at Albergue del Puerto.\n\nAt 18:38 we sent a message to the bike rental to book two bikes for the next day: the plan was to leave at 8:00 and reach Sarria by bike. The guy confirmed immediately, no problem.\n\n**Sensory detail**\nCool high-altitude air, soft grass under the mat, silence broken only by wind and the movement of arriving pilgrims.\n\n**What I understood**\nEven on symbolic days there is no need for big numbers: sometimes the best choice is to remove pressure and truly enjoy the Camino.",
       "strava": [
         "https://www.strava.com/activities/8369574192"
       ],
@@ -13834,9 +13749,9 @@
           "size": null,
           "orig": "IMG_4128.MOV",
           "place": "Triacastela, España",
-          "lat": 42.71258544921875,
-          "lon": -7.126184463500977,
-          "gpsInferred": true,
+          "lat": 42.7405,
+          "lon": -7.1916,
+          "gpsInferred": false,
           "locationEstimated": true
         },
         {
@@ -13867,11 +13782,10 @@
           "size": null,
           "orig": "IMG_4132.MOV",
           "place": "Triacastela, España",
-          "lat": 42.755825,
-          "lon": -7.23059722222222,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredNote": "Aligned to nearby photo IMG_4133.HEIC (dt 4 min, was 9.79 km away)"
+          "lat": 42.748599999999996,
+          "lon": -7.219199999999999,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "4c7d2c02c578",
@@ -13948,10 +13862,10 @@
           "mime": "video/mp4",
           "size": null,
           "orig": "IMG_4138.MOV",
-          "place": "Triacastela, España",
-          "lat": 42.74481964111328,
-          "lon": -7.187802314758301,
-          "gpsInferred": true,
+          "place": "Samos, España",
+          "lat": 42.7405,
+          "lon": -7.2963,
+          "gpsInferred": false,
           "locationEstimated": true
         },
         {
@@ -14003,7 +13917,7 @@
           "gpsInferred": false
         }
       ],
-      "notes": "",
+      "notes": "**Title**\nToward Sarria, with the Camino changing skin.\n\n**Where I was / stage**\nJuly 11: bike transfer to Sarria together with Catherine.\n\n**Key scene**\nJuly 11 was a transition day, but no less intense for that. After departure we did the planned bike stretch and arrived in Sarria: a true threshold of the Camino, where suddenly everything becomes more crowded, faster, more cross-connected.\n\nWith Catherine I spent the whole day, from departure to arrival in town; once in Sarria, we shifted into organization mode: lodging, alignments, meeting point, and evening management. Meanwhile I also contacted Andrius to understand where he was and where he was sleeping; in a short time we realigned with him too. In parallel messages with Francesco kept coming, and by then he was already farther ahead toward Portomarín: at that point it was clear everyone was following their own pace, but with a contact network that still kept everyone close.\n\nIn the wider group, between Sarria and Triacastela, people were already talking about crossing again in the following days and how to arrive in Santiago in a similar time window. It was the classic atmosphere of this phase: Camino families that separate, recompose, brush past each other, and meet again in waves.\n\n**Sensory detail**\nEntering Sarria after more isolated stretches has a clear impact: more voices, more backpacks, more urban energy, less trail silence.\n\n**What I understood**\nFrom Sarria onward it is not enough to “keep going”: you need to choose more carefully with whom to share time, space, and pace, so as not to lose the quality of the experience.",
       "strava": [
         "https://www.strava.com/activities/8369574318"
       ],
@@ -14136,11 +14050,10 @@
           "size": null,
           "orig": "IMG_4155.MOV",
           "place": "Sarria, España",
-          "lat": 42.7791444444444,
-          "lon": -7.48898888888889,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredNote": "Aligned to nearby photo IMG_4150.HEIC (dt 0 min, was 4.44 km away)"
+          "lat": 42.7808,
+          "lon": -7.49,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "5b7c90a9a548",
@@ -14202,9 +14115,9 @@
           "size": null,
           "orig": "IMG_4167.MOV",
           "place": "Sarria, España",
-          "lat": 42.7695426940918,
-          "lon": -7.456254482269287,
-          "gpsInferred": true,
+          "lat": 42.780899999999995,
+          "lon": -7.490099999999999,
+          "gpsInferred": false,
           "locationEstimated": true
         },
         {
@@ -14298,10 +14211,10 @@
           "mime": "video/mp4",
           "size": null,
           "orig": "IMG_4173.MOV",
-          "place": "Sarria, España",
-          "lat": 42.78110122680664,
-          "lon": -7.489943027496338,
-          "gpsInferred": true,
+          "place": "Paradela, España",
+          "lat": 42.7835,
+          "lon": -7.533299999999999,
+          "gpsInferred": false,
           "locationEstimated": true
         },
         {
@@ -14369,7 +14282,7 @@
           "gpsInferred": false
         }
       ],
-      "notes": "",
+      "notes": "**Title**\nBetween trail and alignments: the group redraws itself.\n\n**Where I was / stage**\nJuly 12, walking toward Portomarín, with my head already projected to the final days.\n\n**Key scene**\nJuly 12 was a day when Camino and logistics traveled together. On the trail the pace was steady, but meanwhile chats were full: who was arriving in Santiago, who was going to Finisterre, who was trying to understand whether it was still possible to meet all together at least once before the end.\n\nWith Catherine we kept moving in alignment, and at the same time we also managed the practical piece of dates: her flight was fixed for July 17 and she could not move it. This put a real constraint on the next stages, so every choice of the day was also a calendar piece.\n\nIn the wider group there was talk of a possible regrouping toward Ribadiso and then Santiago, but it was clear everyone was living a different ending: someone already in the city, someone still in full stages, someone on personal detours. More than one single group, we were a moving network.\n\nIn the evening, between messages and clarifications on plans and dates, the tone still stayed light: tiredness on us, but desire to stay connected and not lose the human thread that had brought us there.\n\n**Sensory detail**\nBackpack, steps, and road ahead; then, as soon as you stop, the phone fills with locations, times, ideas, and small plans to meet again.\n\n**What I understood**\nIn the final part of the Camino, the real difficulty is not only arriving: it is making individual freedom coexist with the desire to still share pieces of road with the right people.",
       "strava": [
         "https://www.strava.com/activities/8369574385"
       ],
@@ -14438,13 +14351,13 @@
           "size": null,
           "orig": "IMG_4186.MOV",
           "place": "Palas de Rei, España",
-          "lat": 42.87955093383789,
-          "lon": -7.923418045043945,
-          "gpsInferred": true,
+          "lat": 42.878699999999995,
+          "lon": -7.928199999999999,
+          "gpsInferred": false,
           "locationEstimated": true
         }
       ],
-      "notes": "",
+      "notes": "**Title**\nRain, alignments, and final steps toward Santiago.\n\n**Where I was / stage**\nJuly 13, intermediate stretch toward Portomarín and the final days of the Camino Francés.\n\n**Key scene**\nJuly 13 was one of those days when the Camino asks for continuous flexibility. Andrius and I stayed in contact through the morning, trying to fit a break together: first a bar too close, then another point farther ahead. Meanwhile the stage flowed between short stops, restarts, and that classic balance between pace and logistics.\n\nMidday rain also arrived, then it stopped, and in the afternoon the rhythm became more regular again. In the meantime Andrius kept telling small road episodes: random encounters, new people, even a group of Mexicans who had asked him for a video greeting. They were simple details, but they showed well the energy of those days: tired, yes, but still fully alive inside the Camino.\n\nNear the end we had to adapt again: the place where we thought we would stop was closed, so we stretched the stage a bit more. Nothing dramatic, but enough to remind you that on the Camino the perfect plan almost never exists.\n\nIn parallel, in the wider group it was Mark’s birthday: between wishes, messages, and reflections, you could clearly feel we were entering the phase of taking stock. Many were already talking about Santiago, staggered arrivals, possible meetups before the end. In practice, while walking, we were also saying goodbye in advance to part of that experience.\n\n**Sensory detail**\nWet asphalt and trail, damp backpack, and then lighter air again when the rain stops: the day changing tone several times.\n\n**What I understood**\nIn the final phase of the Camino, it is not only about “keeping the average”: it is about staying elastic, accepting setbacks, and continuing to give value to the people you meet along the way.",
       "strava": [
         "https://www.strava.com/activities/8369574480"
       ],
@@ -14497,11 +14410,10 @@
           "size": null,
           "orig": "IMG_4192.MOV",
           "place": "Melide, España",
-          "lat": 42.91259305555555,
-          "lon": -8.02998611111111,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredFromPlace": true
+          "lat": 42.916599999999995,
+          "lon": -8.0476,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "e1c1bb85998d",
@@ -14515,12 +14427,10 @@
           "size": null,
           "orig": "IMG_4197.MOV",
           "place": "Arzúa, España",
-          "lat": 42.9307972222222,
-          "lon": -8.13049444444444,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredFromPlace": true,
-          "gpsInferredNote": "Aligned to nearby photo IMG_4198.HEIC (dt 2 min, was 5.24 km away)"
+          "lat": 42.9309,
+          "lon": -8.1302,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "a34a775dbf8a",
@@ -14539,7 +14449,7 @@
           "gpsInferred": false
         }
       ],
-      "notes": "",
+      "notes": "**Title**\nBlisters, short rhythm, and smart management.\n\n**Where I was / stage**\nJuly 14: stretch toward Arzúa / Ribadiso area, with strategic stops and controlled pace.\n\n**Key scene**\nJuly 14 was a less “epic” and much more concrete day. I stopped in Parabispo area before the next oasis, managing pace without forcing. In this phase every choice mattered: when feet start protesting, the line between holding and damage becomes thin.\n\nAndrius and I updated each other during the day. He was in Ribadiso, had gone for a swim in the river, and was telling me about the albergue and the people he met there; at the same time he had serious blister problems due to sandals. I was not much better: my feet were suffering too. In practice we were in the same mental condition: keep going, yes, but intelligently.\n\nThat was exactly the sense of the day: slow down so you do not break the engine. No useless heroics, only lucid management of energy and pain, with the awareness that Santiago was close but not close enough to allow mistakes.\n\nAt the end of the day we realigned geographically too in a similar area, sign that despite different rhythms the road kept compacting trajectories.\n\n**Sensory detail**\nShort stride, hot sensitive feet, and that immediate relief you feel every time you stop and unload the backpack even just for a few minutes.\n\n**What I understood**\nIn the final part of the Camino, true discipline is not going fast: it is listening to your body and choosing the pace that lets you arrive well.",
       "recommendations": []
     },
     {
@@ -14557,11 +14467,10 @@
           "size": null,
           "orig": "IMG_4200.MOV",
           "place": "Arzúa, España",
-          "lat": 42.9285444444444,
-          "lon": -8.21464166666667,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredNote": "Aligned to nearby photo IMG_4201.HEIC (dt 3 min, was 6.59 km away)"
+          "lat": 42.9287,
+          "lon": -8.2121,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "56f73af55f5b",
@@ -14622,10 +14531,10 @@
           "mime": "video/mp4",
           "size": null,
           "orig": "IMG_4208.MOV",
-          "place": "Arzúa, España",
-          "lat": 42.918575286865234,
-          "lon": -8.2405366897583,
-          "gpsInferred": true,
+          "place": "O Pino, España",
+          "lat": 42.9202,
+          "lon": -8.2982,
+          "gpsInferred": false,
           "locationEstimated": true
         },
         {
@@ -14639,10 +14548,10 @@
           "mime": "video/mp4",
           "size": null,
           "orig": "IMG_4209.MOV",
-          "place": "O Pino, España",
-          "lat": 42.918270111083984,
-          "lon": -8.310689926147461,
-          "gpsInferred": true,
+          "place": "O Pedrouzo, España",
+          "lat": 42.9154,
+          "lon": -8.3467,
+          "gpsInferred": false,
           "locationEstimated": true
         },
         {
@@ -14849,11 +14758,10 @@
           "size": null,
           "orig": "IMG_4225.MOV",
           "place": "Santiago de Compostela, España",
-          "lat": 42.8865583333333,
-          "lon": -8.51205833333333,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredNote": "Aligned to nearby photo IMG_4223.HEIC (dt 0 min, was 4.03 km away)"
+          "lat": 42.8866,
+          "lon": -8.512000000000002,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "d3c14fd46481",
@@ -14883,11 +14791,10 @@
           "size": null,
           "orig": "IMG_4227.MOV",
           "place": "Santiago de Compostela, España",
-          "lat": 42.8812555555556,
-          "lon": -8.54426111111111,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredNote": "Aligned to nearby photo IMG_4226.HEIC (dt 4 min, was 2.98 km away)"
+          "lat": 42.881099999999996,
+          "lon": -8.545,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "11046556b47e",
@@ -14949,11 +14856,10 @@
           "size": null,
           "orig": "IMG_4239.MOV",
           "place": "Santiago de Compostela, España",
-          "lat": 42.8804083333333,
-          "lon": -8.54584444444444,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredNote": "Aligned to nearby photo IMG_4237.HEIC (dt 0 min, was 3.04 km away)"
+          "lat": 42.880399999999995,
+          "lon": -8.5459,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "94d643e73cd7",
@@ -14972,7 +14878,7 @@
           "gpsInferred": false
         }
       ],
-      "notes": "",
+      "notes": "**Title**\nA quiet stage, with one more weight.\n\n**Where I was / stage**\nJuly 15: pre-Santiago stretch, still walking in late afternoon/evening.\n\n**Key scene**\nJuly 15 was not a spectacular day, but one that stays inside you for its human side. I was still on the road toward Santiago when I heard from Andrius: from his messages it was clear he was going through a very difficult moment, linked to lack of sleep and a strong state of disorientation. He wrote to me from the mental health ward in Santiago.\n\nIt was a shock to read those words while walking. The pace continued anyway, but with a different kind of attention on me: less performance mindset, more real concern for a person with whom I had shared weeks of road. In late afternoon we spoke again: I was still walking, I sent him my location, and kept asking how he was.\n\nThe feeling of the day was this: very little is missing to arrive, but the Camino is not only distance or timing. Sometimes it becomes mutual support in fragile moments, even across many kilometers.\n\n**Sensory detail**\nSteady steps on trail, phone in hand more than usual, and that knot in the stomach that comes when you understand a travel companion is in real difficulty.\n\n**What I understood**\nIn the final part of the Camino, strength is not only in the legs: it is in the ability to stay present for others too, especially when the road becomes heavy.",
       "strava": [
         "https://www.strava.com/activities/8369574539"
       ],
@@ -15027,11 +14933,10 @@
           "size": null,
           "orig": "IMG_4244.MOV",
           "place": "Santiago de Compostela, España",
-          "lat": 42.88343546307774,
-          "lon": -8.539604813191557,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredFromPlace": true
+          "lat": 42.8807,
+          "lon": -8.5459,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "71caef08be64",
@@ -15061,11 +14966,10 @@
           "size": null,
           "orig": "IMG_4247.MOV",
           "place": "Santiago de Compostela, España",
-          "lat": 42.88343546307774,
-          "lon": -8.539604813191557,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredFromPlace": true
+          "lat": 42.881699999999995,
+          "lon": -8.5468,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "7fc82b810da1",
@@ -15079,11 +14983,10 @@
           "size": null,
           "orig": "IMG_4248.MOV",
           "place": "Santiago de Compostela, España",
-          "lat": 42.88343546307774,
-          "lon": -8.539604813191557,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredFromPlace": true
+          "lat": 42.882200000000005,
+          "lon": -8.5468,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "3c8fdf99211d",
@@ -15177,11 +15080,10 @@
           "size": null,
           "orig": "IMG_4256.MOV",
           "place": "Fisterra, España",
-          "lat": 42.90613910578309,
-          "lon": -9.260400200707927,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredFromPlace": true
+          "lat": 42.9046,
+          "lon": -9.2619,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "b1384d410e59",
@@ -15194,15 +15096,14 @@
           "mime": "video/mp4",
           "size": null,
           "orig": "IMG_4257.MOV",
-          "place": "Fisterra, España",
-          "lat": 42.90613910578309,
-          "lon": -9.260400200707927,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredFromPlace": true
+          "place": "España",
+          "lat": 42.905,
+          "lon": -9.2619,
+          "gpsInferred": false,
+          "locationEstimated": true
         }
       ],
-      "notes": "",
+      "notes": "**Title**\nSantiago stamped, then straight to the ocean.\n\n**Where I was / stage**\nJuly 16: certificate in Santiago in the morning and transfer to Finisterre with Catherine.\n\n**Key scene**\nJuly 16 was one of those compressed days, when it feels like living two days in one. The evening before we had arrived in Santiago late, around 23:00, after choosing not to stop at Monte do Gozo as initially planned. In the morning, early alarm: goal was credential office as soon as it opened, stamp and certificate in hand.\n\nThat moment, which for many coincides with the end, for us was only a turning point: a few hours later we were already on the bus to Finisterre. The idea was to fit timing well and not give up the ocean stretch, even with the narrow window of Catherine’s flight in the following days.\n\nThe day moved fast: arrival, movements, photos, sea, and the constant feeling of living an “extra time” earned. In Finisterre we also met Anita and her friend: other Camino faces reappearing when you least expected.\n\nMeanwhile I kept contacts with Andrius and with the group: while some were celebrating arrivals in Plaza and others were in their final kilometers, Catherine and I were already projected into the coast ending. It was a Camino inside the Camino.\n\n**Sensory detail**\nIn the morning, Santiago city noise, then the clear change: Atlantic wind, different light, and smell of sea as soon as we got off in Finisterre.\n\n**What I understood**\nSantiago is not always the final point: sometimes it is the passage that lets you choose how you really want to close your story.",
       "recommendations": []
     },
     {
@@ -15305,7 +15206,7 @@
           "gpsInferred": false
         }
       ],
-      "notes": "",
+      "notes": "**Title**\nReturn to Santiago, missed flight, and an upside-down day.\n\n**Where I was / stage**\nJuly 17: return by bus from Finisterre/Santiago, with a day entirely dedicated to return logistics.\n\n**Key scene**\nJuly 17 was supposed to be a linear transition day, but it turned into a small organizational chaos. Catherine and I had returned to Santiago by bus to let her catch her afternoon flight. Everything seemed under control, then the blunt news arrived: gate closed, flight missed.\n\nFrom there, everything changed. New ticket for the next day, immediate return into the city, and improvised meetup point at the bus station. In the middle there was also practical logistics (battery, movements, waiting), but above all the emotional recoil: when you have already said goodbye to someone and then find them there again for 24 hours, the day’s perspective changes.\n\nIn parallel, the rest of the group was also in full arrival-and-goodbye phase: photos in Plaza, people closing their Compostela, others already leaving. I was fitting messages with Francesco and Andrius, who were on different trajectories but with the same end-of-Camino background. Precisely with Andrius, the heavier side also came out: he wrote that he was returning to Lithuania to seek help. A short sentence, but very strong.\n\nBy the end of the day, the picture was very clear: no more single pilgrim flow in motion. We were now in a liquid phase, made of returns, detours, and decisions taken hour by hour. And yet, even in this confusion, a form of mutual presence continued to exist.\n\n**Sensory detail**\nBuses, stations, waiting, and phone always in hand: less trail under your feet, more “nervous” city-and-departure movement.\n\n**What I understood**\nIn the final part of the Camino it is not only where you arrive that matters: it is how you manage setbacks, and how you remain human even when plans collapse.",
       "recommendations": []
     },
     {
@@ -15589,11 +15490,10 @@
           "size": null,
           "orig": "IMG_4287.MOV",
           "place": "Santiago de Compostela, España",
-          "lat": 42.88343546307774,
-          "lon": -8.539604813191557,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredFromPlace": true
+          "lat": 42.884699999999995,
+          "lon": -8.5331,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "57ec38ba11cd",
@@ -15607,11 +15507,10 @@
           "size": null,
           "orig": "IMG_4288.MOV",
           "place": "Santiago de Compostela, España",
-          "lat": 42.88343546307774,
-          "lon": -8.539604813191557,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredFromPlace": true
+          "lat": 42.884800000000006,
+          "lon": -8.5313,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "3b21cf3b08ff",
@@ -15625,14 +15524,13 @@
           "size": null,
           "orig": "IMG_4289.MOV",
           "place": "Santiago de Compostela, España",
-          "lat": 42.88343546307774,
-          "lon": -8.539604813191557,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredFromPlace": true
+          "lat": 42.884699999999995,
+          "lon": -8.5331,
+          "gpsInferred": false,
+          "locationEstimated": true
         }
       ],
-      "notes": "",
+      "notes": "**Title**\nTransitional Santiago: arrivals, farewells, and shared cooking.\n\n**Where I was / stage**\nJuly 18: day in Santiago, waiting for new regroupings.\n\n**Key scene**\nJuly 18 was not a kilometers day, but a human-alignments day. In the morning I was still in Santiago in slow mode, between park and short breaks, while Catherine was already at the airport ready to return. We talked several times: that strange mix of everyday tone and separation that arrives when the Camino ends for one of you, but for the other it continues a little longer.\n\nIn parallel there was the “Santiago front”: Andrius was in his final walking hours to finally close his Compostela. We followed him almost live through messages, encouragement, and updates on remaining kilometers, until in the evening the news we were waiting for arrived: he had made it. It was one of those moments when joy is collective, because you know how much effort and difficulty were behind it.\n\nMeanwhile, with Francesco we reorganized to sleep in the same albergue: I took his bed spot, he arrived in the evening, and we set the classic pilgrim plan for those who do not want to complicate life. Essential groceries, good but simple food, shared kitchen, light chats.\n\nThe day ended like this: no striking scene, but a full sense of belonging. People leaving, people arriving, someone returning, someone extending: the Camino kept moving, only in different forms.\n\n**Sensory detail**\nThe contrast between Santiago park calm and evening albergue energy: backpacks, food on the table, mixed voices, and good tiredness.\n\n**What I understood**\nIn that day’s messages I also fixed a clear balance: from SJPdP to Santiago I had taken 35 days, deliberately slowing down with long stops (León and Burgos) and short stages so as not to lose the important people I had met along the way.\n\nThere are days when you do not cover distance, but build memory: by keeping together people, different timing, and small concrete gestures.",
       "recommendations": []
     },
     {
@@ -15765,10 +15663,10 @@
           "mime": "video/mp4",
           "size": null,
           "orig": "IMG_4302.MOV",
-          "place": "Santiago de Compostela, España",
-          "lat": 42.888919830322266,
-          "lon": -8.653313636779785,
-          "gpsInferred": true,
+          "place": "Ames, España",
+          "lat": 42.9022,
+          "lon": -8.6892,
+          "gpsInferred": false,
           "locationEstimated": true
         },
         {
@@ -15783,11 +15681,10 @@
           "size": null,
           "orig": "IMG_4303.MOV",
           "place": "Ames, España",
-          "lat": 42.9052805555556,
-          "lon": -8.69481666666667,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredNote": "Aligned to nearby photo IMG_4306.HEIC (dt 5 min, was 3.84 km away)"
+          "lat": 42.9052,
+          "lon": -8.6943,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "be0e8085402a",
@@ -15817,11 +15714,10 @@
           "size": null,
           "orig": "IMG_4308.MOV",
           "place": "Ames, España",
-          "lat": 42.9052805555556,
-          "lon": -8.69481666666667,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredNote": "Aligned to nearby photo IMG_4306.HEIC (dt 2 min, was 3.84 km away)"
+          "lat": 42.9052,
+          "lon": -8.694799999999999,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "2aca29dd144e",
@@ -15996,13 +15892,13 @@
           "size": null,
           "orig": "IMG_4321.MOV",
           "place": "Negreira, España",
-          "lat": 42.93314743041992,
-          "lon": -8.811150550842285,
-          "gpsInferred": true,
+          "lat": 42.9433,
+          "lon": -8.8498,
+          "gpsInferred": false,
           "locationEstimated": true
         }
       ],
-      "notes": "",
+      "notes": "**Title**\nToward Fisterra, alone: long stage and atmosphere shift.\n\n**Where I was / stage**\nJuly 19: departure from Santiago on Camino de Fisterra, arrival in Vilaserío.\n\n**Key scene**\nJuly 19 was the day I truly felt the phase change. Leaving Santiago, I resumed walking westward with a very long stage: on paper it looked like about 30/32 km, but on the phone it came out almost 38.5. I arrived in Vilaserío exhausted.\n\nPhysical fatigue was evident, but the strongest difference was in the atmosphere: this was no longer the Camino Francés I had lived for weeks. On Camino de Fisterra I found new people, often already in pairs or small groups, and less of that spontaneous continuous-encounter magic I had known before. It felt a bit like returning to the first days: you walk, you greet, but you feel the context is different.\n\nMeanwhile the “old group” was dissolving definitively: Francesco and Andrius were already in return mode, with flights and transfers underway. We updated each other at distance, and even there the same thing was perceptible: the Camino had changed rhythm for everyone.\n\nWith Catherine we talked throughout the day. I told her about the stage, the tiredness, and this sensation of “less magic.” She, from her return to family life, was living a similar passage: less trail, more everyday reality. It was one of those dialogues where you understand the emotional side of returning has already started, even if you are still walking.\n\nIn the evening, after shower, dinner, and laundry, I was finally on the albergue bed with an emptied body. But inside, the meaning of the day stayed clear: I was still moving forward, just in a different way.\n\n**Sensory detail**\nHeavy legs, dry sweat, backpack pulling on shoulders, and that mechanical final-hour stride when you move forward mostly by inertia.\n\n**What I understood**\nIt was also the day I had focused the symbolic plan for the ending: I would run Muxía-Finisterre as the final day of the Camino and as a mental bridge toward the new USA adventure planned for November.\n\nNot all final stretches have the same magic as the first ones, but right there you learn the hardest part of the Camino: continue even when enthusiasm drops, and stay faithful to the direction you chose.",
       "strava": [
         "https://www.strava.com/activities/8369586229"
       ],
@@ -16124,7 +16020,7 @@
           "gpsInferred": false
         }
       ],
-      "notes": "",
+      "notes": "**Title**\nToward Muxía, with nostalgia already in the air.\n\n**Where I was / stage**\nJuly 20: from Dumbría toward Muxía, with a plan already set to then close on Finisterre.\n\n**Key scene**\nJuly 20 was a transition day that already contained the whole ending. I was walking toward Muxía with the sensation that the “classic” part of the Camino was now behind me, and that from there on every choice was more free, more personal.\n\nIn the group, post-Camino nostalgia was strongly in the air: messages about car returns, airports, memories suddenly resurfacing while reading town signs we had crossed together. It was evident that for everyone that strange phase was starting in which the body is already elsewhere, but the mind is still on the trail.\n\nMeanwhile I was designing my ending: arrive in Muxía the next day, then Finisterre the day after, ideally from km 0.000 to km 0.000, and possibly running. With Carla we discussed exactly this: she gave me practical tips on timing and fog at the sanctuary, and in that moment the plan took concrete shape.\n\nDuring the day I also heard from Catherine: she was with her family and told me about a very different dimension from mine, more domestic and less free, while I was still immersed in Camino rhythm. At the end of the day it was also beautiful to find familiar faces again: Sara and Renato in the same albergue in Dumbría. In that phase, every familiar encounter had the taste of a small gift.\n\n**Sensory detail**\nAtlantic air getting closer and closer, moving sky, and that coastal light that changes fast and makes you understand you are near the far western edge.\n\n**What I understood**\nIn the final days it is not only about “arriving”: it is about how you choose to close the circle, and with what energy you want to carry the whole Camino back home.",
       "strava": [
         "https://www.strava.com/activities/8369586230"
       ],
@@ -16161,9 +16057,9 @@
           "size": null,
           "orig": "IMG_4339.MOV",
           "place": "Dumbría, España",
-          "lat": 43.00461959838867,
-          "lon": -9.112264633178711,
-          "gpsInferred": true,
+          "lat": 43.0208,
+          "lon": -9.1371,
+          "gpsInferred": false,
           "locationEstimated": true
         },
         {
@@ -16210,11 +16106,10 @@
           "size": null,
           "orig": "IMG_4342.MOV",
           "place": "Muxía, España",
-          "lat": 43.0628583333333,
-          "lon": -9.19051944444444,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredNote": "Aligned to nearby photo IMG_4341.HEIC (dt 1 min, was 8.17 km away)"
+          "lat": 43.0633,
+          "lon": -9.1912,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "726671151d71",
@@ -16228,11 +16123,10 @@
           "size": null,
           "orig": "IMG_4343.MOV",
           "place": "Muxía, España",
-          "lat": 43.0628583333333,
-          "lon": -9.19051944444444,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredNote": "Aligned to nearby photo IMG_4341.HEIC (dt 1 min, was 8.17 km away)"
+          "lat": 43.0634,
+          "lon": -9.191400000000002,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "d49429b04834",
@@ -16246,11 +16140,10 @@
           "size": null,
           "orig": "IMG_4344.MOV",
           "place": "Muxía, España",
-          "lat": 43.0628583333333,
-          "lon": -9.19051944444444,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredNote": "Aligned to nearby photo IMG_4341.HEIC (dt 1 min, was 8.17 km away)"
+          "lat": 43.0635,
+          "lon": -9.191699999999999,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "8de9f2e231f9",
@@ -16280,9 +16173,9 @@
           "size": null,
           "orig": "IMG_4348.MOV",
           "place": "Muxía, España",
-          "lat": 43.03449630737305,
-          "lon": -9.160784721374512,
-          "gpsInferred": true,
+          "lat": 43.0903,
+          "lon": -9.2198,
+          "gpsInferred": false,
           "locationEstimated": true
         },
         {
@@ -16297,11 +16190,10 @@
           "size": null,
           "orig": "IMG_4351.MOV",
           "place": "Muxía, España",
-          "lat": 43.0915805555556,
-          "lon": -9.2209,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredNote": "Aligned to nearby photo IMG_4353.HEIC (dt 1 min, was 7.62 km away)"
+          "lat": 43.0915,
+          "lon": -9.221,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "b2c0af0967d3",
@@ -16379,11 +16271,10 @@
           "size": null,
           "orig": "IMG_4362.MOV",
           "place": "Muxía, España",
-          "lat": 43.1111416666667,
-          "lon": -9.21938055555556,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredNote": "Aligned to nearby photo IMG_4361.HEIC (dt 0 min, was 4.56 km away)"
+          "lat": 43.1111,
+          "lon": -9.2194,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "09396c07b49f",
@@ -16429,11 +16320,10 @@
           "size": null,
           "orig": "IMG_4366.MOV",
           "place": "Muxía, España",
-          "lat": 43.1111222222222,
-          "lon": -9.21939166666667,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredNote": "Aligned to nearby photo IMG_4363.HEIC (dt 0 min, was 4.18 km away)"
+          "lat": 43.1111,
+          "lon": -9.2194,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "6e4340864d48",
@@ -16447,11 +16337,10 @@
           "size": null,
           "orig": "IMG_4367.MOV",
           "place": "Muxía, España",
-          "lat": 43.1111222222222,
-          "lon": -9.21939166666667,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredNote": "Aligned to nearby photo IMG_4363.HEIC (dt 0 min, was 4.18 km away)"
+          "lat": 43.1111,
+          "lon": -9.2194,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "f11ee8e89b6d",
@@ -16512,12 +16401,11 @@
           "mime": "video/mp4",
           "size": null,
           "orig": "IMG_4376.MOV",
-          "place": "Muxía, España",
-          "lat": 43.114125,
-          "lon": -9.21886666666667,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredNote": "Aligned to nearby photo IMG_4380.HEIC (dt 4 min, was 1.27 km away)"
+          "place": "España",
+          "lat": 43.1284,
+          "lon": -9.1977,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "789f4a5a2995",
@@ -16531,11 +16419,10 @@
           "size": null,
           "orig": "IMG_4379.MOV",
           "place": "Muxía, España",
-          "lat": 43.114125,
-          "lon": -9.21886666666667,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredNote": "Aligned to nearby photo IMG_4380.HEIC (dt 3 min, was 1.20 km away)"
+          "lat": 43.1141,
+          "lon": -9.218900000000001,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "750d55c09f52",
@@ -16565,9 +16452,9 @@
           "size": null,
           "orig": "IMG_4384.MOV",
           "place": "Muxía, España",
-          "lat": 43.106632232666016,
-          "lon": -9.217764854431152,
-          "gpsInferred": true,
+          "lat": 43.1141,
+          "lon": -9.218900000000001,
+          "gpsInferred": false,
           "locationEstimated": true
         },
         {
@@ -16582,9 +16469,9 @@
           "size": null,
           "orig": "IMG_4387.MOV",
           "place": "Muxía, España",
-          "lat": 43.10689163208008,
-          "lon": -9.217546463012695,
-          "gpsInferred": true,
+          "lat": 43.1141,
+          "lon": -9.2188,
+          "gpsInferred": false,
           "locationEstimated": true
         },
         {
@@ -16615,9 +16502,9 @@
           "size": null,
           "orig": "IMG_4391.MOV",
           "place": "Muxía, España",
-          "lat": 43.10689163208008,
-          "lon": -9.217546463012695,
-          "gpsInferred": true,
+          "lat": 43.1141,
+          "lon": -9.218900000000001,
+          "gpsInferred": false,
           "locationEstimated": true
         },
         {
@@ -16648,9 +16535,9 @@
           "size": null,
           "orig": "IMG_4393.MOV",
           "place": "Muxía, España",
-          "lat": 43.10689163208008,
-          "lon": -9.217546463012695,
-          "gpsInferred": true,
+          "lat": 43.102399999999996,
+          "lon": -9.2137,
+          "gpsInferred": false,
           "locationEstimated": true
         },
         {
@@ -16817,11 +16704,10 @@
           "size": null,
           "orig": "IMG_4424.MOV",
           "place": "Muxía, España",
-          "lat": 43.09513509179409,
-          "lon": -9.210135942411734,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredFromPlace": true
+          "lat": 43.1089,
+          "lon": -9.2182,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "1eb82ed1b436",
@@ -16883,12 +16769,10 @@
           "size": null,
           "orig": "IMG_4434.MOV",
           "place": "Muxía, España",
-          "lat": 43.108275,
-          "lon": -9.21850555555556,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredFromPlace": true,
-          "gpsInferredNote": "Aligned to nearby photo IMG_4431.HEIC (dt 0 min, was 1.61 km away)"
+          "lat": 43.1089,
+          "lon": -9.2182,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "86604583e679",
@@ -16902,12 +16786,10 @@
           "size": null,
           "orig": "IMG_4435.MOV",
           "place": "Muxía, España",
-          "lat": 43.108275,
-          "lon": -9.21850555555556,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredFromPlace": true,
-          "gpsInferredNote": "Aligned to nearby photo IMG_4431.HEIC (dt 2 min, was 1.61 km away)"
+          "lat": 43.108399999999996,
+          "lon": -9.218399999999999,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "e72f3876a6d3",
@@ -16937,12 +16819,10 @@
           "size": null,
           "orig": "IMG_4439.MOV",
           "place": "Muxía, España",
-          "lat": 43.1088555555556,
-          "lon": -9.21801111111111,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredFromPlace": true,
-          "gpsInferredNote": "Aligned to nearby photo IMG_4437.HEIC (dt 0 min, was 1.65 km away)"
+          "lat": 43.1089,
+          "lon": -9.218,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "d1c2276e5e8e",
@@ -16961,7 +16841,7 @@
           "gpsInferred": false
         }
       ],
-      "notes": "",
+      "notes": "**Title**\nMuxía, the edge of the world and an earned sunset.\n\n**Where I was / stage**\nJuly 21: full day in Muxía, between symbolic arrival, sea, and preparation for the finale toward Finisterre/Santiago.\n\n**Key scene**\nJuly 21 was one of those days that do not need big numbers to stay impressed. I was in Muxía, finally with my own “arrival” photo, and in the group there was a beautiful climate: crossed congratulations, jokes, stories from those already back home who still kept feeling part of the same Camino family.\n\nDuring the day I saw Giselle again: we met in the morning and planned to meet again in the evening, with the idea of closing the day in front of the sunset. In between, the rhythm was the right one for Muxía: sea, long pauses, photos, and that end-of-journey sensation in which every detail seems to carry more weight than usual.\n\nWith Catherine we talked often: I sent her images of the place, she wrote that she wished she could be there. There was physical distance, but still a very alive connection, made of simple and sincere messages. Meanwhile I was also beginning to prepare the next step: the day after I would aim for Finisterre, to complete the “double finale” I had set in my mind.\n\nThe perfect closure came in the evening: a clean, full sunset, the kind that after weeks of Camino you almost feel as a reward. There I had the clear perception that the journey was changing phase: less conquest, more absorption of everything that had happened.\n\n**Sensory detail**\nCoastal wind, smell of salt, warm light slowly dropping over the sea and forcing even your thoughts to slow down.\n\n**What I understood**\nWhen you reach symbolic places like Muxía, it is not only about “having arrived there”: it is about the state of mind with which you arrive, and with whom you choose to share that moment.",
       "strava": [
         "https://www.strava.com/activities/8369586110"
       ],
@@ -17374,11 +17254,10 @@
           "size": null,
           "orig": "IMG_4476.MOV",
           "place": "Fisterra, España",
-          "lat": 42.90613910578309,
-          "lon": -9.260400200707927,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredFromPlace": true
+          "lat": 42.9082,
+          "lon": -9.274899999999999,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "ed2849440466",
@@ -17439,13 +17318,11 @@
           "mime": "video/mp4",
           "size": null,
           "orig": "IMG_4502.MOV",
-          "place": "Fisterra, España",
-          "lat": 42.8831972222222,
-          "lon": -9.27154166666667,
-          "gpsInferred": true,
-          "locationEstimated": true,
-          "gpsInferredFromPlace": true,
-          "gpsInferredNote": "Aligned to nearby photo IMG_4503.HEIC (dt 1 min, was 2.71 km away)"
+          "place": "España",
+          "lat": 42.9023,
+          "lon": -9.257399999999999,
+          "gpsInferred": false,
+          "locationEstimated": true
         },
         {
           "id": "b56f70b3b768",
@@ -17514,7 +17391,7 @@
           "gpsInferred": false
         }
       ],
-      "notes": "",
+      "notes": "**Title**\nFrom Muxía to Finisterre: the hardest and truest ending.\n\n**Where I was / stage**\nJuly 22: from km 0.000 in Muxía to Finisterre, largely running, with closure at the lighthouse.\n\n**Key scene**\nOn July 22 I set myself a clear mission: start from km 0.000 in Muxía and reach km 0.000 in Finisterre running. At 11:00 I really started. The idea was great, but the day was very hard: heat, heavy stretches, energy rising and falling, continuous rhythm changes between running and walking.\n\nWhen I arrived in Finisterre I was cooked. I felt sick, I also vomited, and for hours I could hardly eat anything: only water, lots of water, and little else. After a shower and a bit of recovery I still decided to close the circle completely: I went to the lighthouse, another 3 km, for the passage at marker 0.000. It was the most exhausting part of the day, done practically like a zombie, but it was also the part I wanted the most.\n\nCatherine and I stayed in touch all day, at distance: she followed my updates, I sent her videos and pieces of road. In the evening, when my body started responding again, I finally ate something properly and got back in balance.\n\nAt night, beyond tiredness, the mental side arrived too: return to Italy now near, the sensation that the Camino was about to close, and at the same time the desire not to lose the bonds born along the way. It was already clear that the journey did not end at the return flight: it was becoming a network of people to reconnect with over time.\n\n**Sensory detail**\nReal thirst, empty legs, salt on skin, lighthouse wind, and that mix of nausea and happiness that comes only after pushing effort to the very end.\n\n**What I understood**\nThe most memorable endings are not the most comfortable ones: they are the ones where you arrive emptied out, but certain you lived the day exactly the way you wanted.",
       "strava": [
         "https://www.strava.com/activities/8369586185"
       ],
@@ -17543,13 +17420,13 @@
           "gpsInferredNote": "Muxia Km 0 (manual)"
         }
       ],
-      "notes": "",
+      "notes": "**Title**\nReturn from Muxía and decompression day.\n\n**Where I was / stage**\nJuly 23: return to Santiago after Muxía, with an afternoon of recovery outside the center.\n\n**Key scene**\nJuly 23 was the true “landing” day after the final effort. In the morning I shared in the group how the run to Muxía had gone: very tight arrival, strong heat, continuous alternation between running and walking, lots of water right after arrival, and then passage at km 0 later, at sunset. It was one of those satisfactions where you feel euphoria and full tiredness together.\n\nOnce back in Santiago, however, mode changed: full stop. I took a hotel with spa outside the center, with the idea of recovering seriously and not adding other unnecessary kilometers. Taxi instead of walking, pool and sauna as the main afternoon program. After weeks of backpack and dormitories, that pause almost felt like a state transition: from pilgrim rhythm to return rhythm.\n\nCatherine and I talked throughout the day, between light messages, irony, and small moments of complicity. Meanwhile I was already looking at the next day: St. James celebration in town, lots of security around, and flight departure in the afternoon. Logistics were clear too: from hotel you first had to return to Santiago and then take the bus to the airport.\n\nThe evening passed in full relaxation, with the sensation I had earned that slowness. It was no longer time to “push”: it was time to let everything settle.\n\n**Sensory detail**\nPool water, sauna heat, white sheets, and body finally still after days of continuous effort.\n\n**What I understood**\nRecovery is also part of the Camino: it is not a break from the route, it is the final necessary piece to close it well.",
       "recommendations": []
     },
     {
       "date": "2019-07-24",
       "items": [],
-      "notes": "",
+      "notes": "**Title**\nEpilogue in Santiago: St. James celebration and return.\n\n**Where I was / stage**\nJuly 24: final day in Santiago, with no tracked walking.\n\n**Key scene**\nAfter returning from the Muxía/Fisterra stretch, the 24th was the true closing day. Santiago was in St. James celebration atmosphere, with the city full and an energy completely different from the trails of the previous weeks.\n\nThe day moved in practical and conclusive mode: deadlines to respect, final movements, return preparation, and bus toward the airport. After many days marked only by steps, backpack, and “soft” timing, going back to rigid logistics had a strong impact.\n\nIt was also the moment when I felt the transition clearly: the Camino was no longer in front of me, but already inside what I was carrying away.\n\n**Sensory detail**\nNoise of a city in celebration, lighter backpack on shoulders, and head full of still-fresh images from the route.\n\n**What I understood**\nThe last day is not only “going back”: it is the moment when you truly realize how much the Camino changed you.",
       "recommendations": []
     },
     {
