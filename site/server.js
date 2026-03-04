@@ -8,11 +8,13 @@ const crypto = require('crypto');
 const ROOT = path.resolve(__dirname);
 const PORT = Number(process.env.PORT || 4173);
 const HOST = process.env.HOST || '127.0.0.1';
-const SUPPORTED_LANGS = new Set(['it', 'en']);
+const SUPPORTED_LANGS = new Set(['it', 'en', 'es', 'fr']);
 const ENTRY_LANGS = ['it', 'en'];
 const ENTRIES_PATH_BY_LANG = {
   it: path.join(ROOT, 'data', 'entries.it.json'),
-  en: path.join(ROOT, 'data', 'entries.en.json')
+  en: path.join(ROOT, 'data', 'entries.en.json'),
+  es: path.join(ROOT, 'data', 'entries.es.json'),
+  fr: path.join(ROOT, 'data', 'entries.fr.json')
 };
 const SEO_BY_LANG = {
   it: {
@@ -22,11 +24,19 @@ const SEO_BY_LANG = {
   en: {
     title: 'Camino de Santiago — Visual Diary',
     description: 'Visual Camino de Santiago diary with photos, videos, GPS tracks, and day-by-day storytelling.'
+  },
+  es: {
+    title: 'Camino de Santiago — Diario Visual',
+    description: 'Diario visual del Camino de Santiago con fotos, vídeos, trazas GPS y relatos diarios.'
+  },
+  fr: {
+    title: 'Chemin de Saint-Jacques — Journal Visuel',
+    description: 'Journal visuel du Chemin de Saint-Jacques avec photos, vidéos, traces GPS et récits quotidiens.'
   }
 };
 const SITE_AUTHOR = 'Jacopo';
-const DAY_PAGE_PATH_RE = /^\/(it|en)\/day\/(\d{4}-\d{2}-\d{2})\/?$/i;
-const MAP_PAGE_PATH_RE = /^\/(it|en)\/map\/?$/i;
+const DAY_PAGE_PATH_RE = /^\/(it|en|es|fr)\/day\/(\d{4}-\d{2}-\d{2})\/?$/i;
+const MAP_PAGE_PATH_RE = /^\/(it|en|es|fr)\/map\/?$/i;
 
 function loadDotEnv(rootDir) {
   try {
@@ -160,13 +170,62 @@ function localizeMapHtml(rawHtml, locale, req) {
     ? String(locale).toLowerCase()
     : 'it';
   const origin = getRequestOrigin(req);
-  const title = lang === 'en' ? 'Camino de Santiago — Map' : 'Cammino di Santiago — Mappa';
-  const desc = lang === 'en'
-    ? 'Interactive map of the Camino de Santiago route with daily media points.'
-    : 'Mappa interattiva del Cammino di Santiago con punti media giornalieri.';
+  const MAP_SEO = {
+    it: {
+      title: 'Cammino di Santiago — Mappa',
+      desc: 'Mappa interattiva del Cammino di Santiago con punti media giornalieri.'
+    },
+    en: {
+      title: 'Camino de Santiago — Map',
+      desc: 'Interactive map of the Camino de Santiago route with daily media points.'
+    },
+    es: {
+      title: 'Camino de Santiago — Mapa',
+      desc: 'Mapa interactivo del Camino de Santiago con puntos de medios diarios.'
+    },
+    fr: {
+      title: 'Chemin de Saint-Jacques — Carte',
+      desc: 'Carte interactive du Chemin de Saint-Jacques avec points média quotidiens.'
+    }
+  };
+  const title = (MAP_SEO[lang] || MAP_SEO.it).title;
+  const desc = (MAP_SEO[lang] || MAP_SEO.it).desc;
+  const MAP_UI = {
+    it: {
+      eyebrow: 'Mappa del percorso',
+      heading: 'Cammino di Santiago',
+      lead: 'Traccia ricavata dai metadati GPS delle foto e dei video.',
+      back: 'Torna al diario',
+      close: 'Chiudi'
+    },
+    en: {
+      eyebrow: 'Route map',
+      heading: 'Camino de Santiago',
+      lead: 'Track derived from GPS metadata in photos and videos.',
+      back: 'Back to diary',
+      close: 'Close'
+    },
+    es: {
+      eyebrow: 'Mapa del recorrido',
+      heading: 'Camino de Santiago',
+      lead: 'Trazado obtenido de los metadatos GPS de fotos y vídeos.',
+      back: 'Volver al diario',
+      close: 'Cerrar'
+    },
+    fr: {
+      eyebrow: 'Carte du parcours',
+      heading: 'Chemin de Saint-Jacques',
+      lead: 'Tracé issu des métadonnées GPS des photos et vidéos.',
+      back: 'Retour au journal',
+      close: 'Fermer'
+    }
+  };
+  const ui = MAP_UI[lang] || MAP_UI.it;
   const canonical = `${origin}/${lang}/map/`;
   const altIt = `${origin}/it/map/`;
   const altEn = `${origin}/en/map/`;
+  const altEs = `${origin}/es/map/`;
+  const altFr = `${origin}/fr/map/`;
   let out = String(rawHtml || '');
   out = out.replace(/<html lang="[^"]*">/i, `<html lang="${lang}">`);
   out = out.replace(/<title>[\s\S]*?<\/title>/i, `<title>${escapeHtml(title)}</title>`);
@@ -180,7 +239,12 @@ function localizeMapHtml(rawHtml, locale, req) {
   } else {
     out = out.replace('</head>', `  <link rel="canonical" href="${escapeHtml(canonical)}" />\n</head>`);
   }
-  out = out.replace('</head>', `  <link rel="alternate" hreflang="it" href="${escapeHtml(altIt)}" />\n  <link rel="alternate" hreflang="en" href="${escapeHtml(altEn)}" />\n  <link rel="alternate" hreflang="x-default" href="${escapeHtml(altIt)}" />\n</head>`);
+  out = out.replace('</head>', `  <link rel="alternate" hreflang="it" href="${escapeHtml(altIt)}" />\n  <link rel="alternate" hreflang="en" href="${escapeHtml(altEn)}" />\n  <link rel="alternate" hreflang="es" href="${escapeHtml(altEs)}" />\n  <link rel="alternate" hreflang="fr" href="${escapeHtml(altFr)}" />\n  <link rel="alternate" hreflang="x-default" href="${escapeHtml(altIt)}" />\n</head>`);
+  out = out.replace(/<span class="eyebrow">[\s\S]*?<\/span>/i, `<span class="eyebrow">${escapeHtml(ui.eyebrow)}</span>`);
+  out = out.replace(/<h1>[\s\S]*?<\/h1>/i, `<h1>${escapeHtml(ui.heading)}</h1>`);
+  out = out.replace(/<p class="lead">[\s\S]*?<\/p>/i, `<p class="lead">${escapeHtml(ui.lead)}</p>`);
+  out = out.replace(/<a class="view-btn active" href="[^"]*">[\s\S]*?<\/a>/i, `<a class="view-btn active" href="/${lang}/">${escapeHtml(ui.back)}</a>`);
+  out = out.replace(/(<button[^>]*id="map-media-modal-close"[^>]*aria-label=")[^"]*(")/i, `$1${escapeHtml(ui.close)}$2`);
   return out;
 }
 
@@ -189,7 +253,13 @@ function formatDisplayDate(dateValue, lang) {
   if (!y || !m || !d) return String(dateValue || '');
   const dt = new Date(Date.UTC(y, m - 1, d));
   try {
-    return dt.toLocaleDateString(lang === 'en' ? 'en-US' : 'it-IT', {
+    const localeMap = {
+      it: 'it-IT',
+      en: 'en-US',
+      es: 'es-ES',
+      fr: 'fr-FR'
+    };
+    return dt.toLocaleDateString(localeMap[lang] || 'it-IT', {
       weekday: 'long',
       year: 'numeric',
       month: 'long',
@@ -218,28 +288,143 @@ function renderRecommendations(recommendations) {
     .filter(Boolean)
     .join('\n');
   if (!items) return '';
-  return `<section class="day-section"><h2>Posti consigliati</h2><ul>${items}</ul></section>`;
+  return `<section class="day-section"><h2>__RECOMMENDATIONS_HEADING__</h2><ul>${items}</ul></section>`;
 }
 
 function buildDayPageHtml({ origin, lang, day, prevDay, nextDay }) {
+  const DAY_UI = {
+    it: {
+      titlePrefix: 'Diario Cammino',
+      defaultDescription: (date) => `Pagina diario del Cammino di Santiago per il ${date}: foto, video, GPS e note del giorno.`,
+      noMetadata: 'Nessun metadato',
+      comments: 'Commenti',
+      backToDiary: 'Torna al diario',
+      openInteractiveDiary: 'Apri nel diario interattivo',
+      openMap: 'Apri mappa',
+      dayNotes: 'Note del giorno',
+      noNotes: 'Nessuna nota disponibile.',
+      mediaHeading: 'Media',
+      noMedia: 'Nessun media per questo giorno.',
+      close: 'Chiudi',
+      prev: 'Precedente',
+      next: 'Successivo',
+      zoomOut: 'Riduci zoom',
+      zoomIn: 'Aumenta zoom',
+      name: 'Nome',
+      writeComment: 'Scrivi un commento',
+      send: 'Invia',
+      commentsEmpty: 'Nessun commento per ora.',
+      commentsOnDay: 'Commenti sulla nota del giorno',
+      commentsOnMedia: 'Commenti sul media',
+      commentsLoading: 'Caricamento commenti...',
+      commentsLoadError: 'Errore nel caricamento commenti',
+      commentsSaveError: 'Errore durante il salvataggio commento',
+      recommendations: 'Posti consigliati'
+    },
+    en: {
+      titlePrefix: 'Camino Diary',
+      defaultDescription: (date) => `Camino de Santiago diary entry for ${date}: photos, videos, GPS and daily notes.`,
+      noMetadata: 'No metadata',
+      comments: 'Comments',
+      backToDiary: 'Back to diary',
+      openInteractiveDiary: 'Open in interactive diary',
+      openMap: 'Open map',
+      dayNotes: 'Day Notes',
+      noNotes: 'No notes available.',
+      mediaHeading: 'Media',
+      noMedia: 'No media for this day.',
+      close: 'Close',
+      prev: 'Previous',
+      next: 'Next',
+      zoomOut: 'Zoom out',
+      zoomIn: 'Zoom in',
+      name: 'Name',
+      writeComment: 'Write a comment',
+      send: 'Send',
+      commentsEmpty: 'No comments yet.',
+      commentsOnDay: 'Comments on day note',
+      commentsOnMedia: 'Comments on media',
+      commentsLoading: 'Loading comments...',
+      commentsLoadError: 'Failed to load comments',
+      commentsSaveError: 'Failed to save comment',
+      recommendations: 'Recommended places'
+    },
+    es: {
+      titlePrefix: 'Diario del Camino',
+      defaultDescription: (date) => `Página del diario del Camino de Santiago para ${date}: fotos, vídeos, GPS y notas del día.`,
+      noMetadata: 'Sin metadatos',
+      comments: 'Comentarios',
+      backToDiary: 'Volver al diario',
+      openInteractiveDiary: 'Abrir en el diario interactivo',
+      openMap: 'Abrir mapa',
+      dayNotes: 'Notas del día',
+      noNotes: 'No hay notas disponibles.',
+      mediaHeading: 'Media',
+      noMedia: 'No hay media para este día.',
+      close: 'Cerrar',
+      prev: 'Anterior',
+      next: 'Siguiente',
+      zoomOut: 'Alejar zoom',
+      zoomIn: 'Acercar zoom',
+      name: 'Nombre',
+      writeComment: 'Escribe un comentario',
+      send: 'Enviar',
+      commentsEmpty: 'Aún no hay comentarios.',
+      commentsOnDay: 'Comentarios sobre la nota del día',
+      commentsOnMedia: 'Comentarios sobre el media',
+      commentsLoading: 'Cargando comentarios...',
+      commentsLoadError: 'Error al cargar comentarios',
+      commentsSaveError: 'Error al guardar el comentario',
+      recommendations: 'Lugares recomendados'
+    },
+    fr: {
+      titlePrefix: 'Journal du Chemin',
+      defaultDescription: (date) => `Page du journal du Chemin de Saint-Jacques pour le ${date} : photos, vidéos, GPS et notes du jour.`,
+      noMetadata: 'Aucune métadonnée',
+      comments: 'Commentaires',
+      backToDiary: 'Retour au journal',
+      openInteractiveDiary: 'Ouvrir dans le journal interactif',
+      openMap: 'Ouvrir la carte',
+      dayNotes: 'Notes du jour',
+      noNotes: 'Aucune note disponible.',
+      mediaHeading: 'Médias',
+      noMedia: 'Aucun média pour ce jour.',
+      close: 'Fermer',
+      prev: 'Précédent',
+      next: 'Suivant',
+      zoomOut: 'Zoom arrière',
+      zoomIn: 'Zoom avant',
+      name: 'Nom',
+      writeComment: 'Écrire un commentaire',
+      send: 'Envoyer',
+      commentsEmpty: 'Aucun commentaire pour le moment.',
+      commentsOnDay: 'Commentaires sur la note du jour',
+      commentsOnMedia: 'Commentaires sur le média',
+      commentsLoading: 'Chargement des commentaires...',
+      commentsLoadError: 'Erreur de chargement des commentaires',
+      commentsSaveError: 'Erreur lors de l’enregistrement du commentaire',
+      recommendations: 'Lieux conseillés'
+    }
+  };
+  const ui = DAY_UI[lang] || DAY_UI.it;
   const date = String(day && day.date ? day.date : '');
   const displayDate = formatDisplayDate(date, lang);
   const canonicalPath = `/${lang}/day/${date}/`;
-  const altPath = `/${lang === 'it' ? 'en' : 'it'}/day/${date}/`;
   const canonicalUrl = buildAbsoluteUrl(origin, canonicalPath);
-  const altUrl = buildAbsoluteUrl(origin, altPath);
+  const altItUrl = buildAbsoluteUrl(origin, `/it/day/${date}/`);
+  const altEnUrl = buildAbsoluteUrl(origin, `/en/day/${date}/`);
+  const altEsUrl = buildAbsoluteUrl(origin, `/es/day/${date}/`);
+  const altFrUrl = buildAbsoluteUrl(origin, `/fr/day/${date}/`);
   const diaryUrl = buildAbsoluteUrl(origin, `/${lang}/?day=${encodeURIComponent(date)}`);
-  const titlePrefix = lang === 'en' ? 'Camino Diary' : 'Diario Cammino';
+  const titlePrefix = ui.titlePrefix;
   const pageTitle = `${titlePrefix} · ${date}`;
-  const description = firstTextParagraph(day && day.notes, 240)
-    || (lang === 'en'
-      ? `Camino de Santiago diary entry for ${date}: photos, videos, GPS and daily notes.`
-      : `Pagina diario del Cammino di Santiago per il ${date}: foto, video, GPS e note del giorno.`);
+  const description = firstTextParagraph(day && day.notes, 240) || ui.defaultDescription(date);
   const items = Array.isArray(day && day.items) ? day.items : [];
   const ogImagePath = normalizeImageCandidate(items.find((entry) => entry && (entry.type === 'image' || entry.type === 'video')) || null);
   const ogImageUrl = ogImagePath ? buildAbsoluteUrl(origin, `/${String(ogImagePath).replace(/^\/+/, '')}`) : '';
   const noteHtml = markdownToSafeHtml(day && day.notes ? day.notes : '');
-  const recommendationsHtml = renderRecommendations(day && day.recommendations);
+  const recommendationsHtml = renderRecommendations(day && day.recommendations)
+    .replace('__RECOMMENDATIONS_HEADING__', escapeHtml(ui.recommendations));
   const interactiveMediaBase = `${origin}/${lang}/?day=${encodeURIComponent(date)}&target=`;
   const mediaCards = items.slice(0, 32).map((item) => {
     const isVideo = String(item.type || '') === 'video';
@@ -253,6 +438,7 @@ function buildDayPageHtml({ origin, lang, day, prevDay, nextDay }) {
     const rawId = String(item.id || '').trim();
     const duration = isVideo ? buildVideoDurationLabel(item.durationSec) : '';
     const meta = [labelTime, place].filter(Boolean).join(' · ');
+    const commentTarget = rawId ? `media-${rawId}` : '';
     const interactiveHref = rawId
       ? `${interactiveMediaBase}${encodeURIComponent(`media-${rawId}`)}`
       : `${origin}/${lang}/?day=${encodeURIComponent(date)}`;
@@ -265,11 +451,12 @@ function buildDayPageHtml({ origin, lang, day, prevDay, nextDay }) {
           data-media-type="${isVideo ? 'video' : 'image'}"
           data-media-src="${escapeHtml(mediaSrc)}"
           data-media-poster="${escapeHtml(mediaPoster)}"
-          data-media-meta="${escapeHtml(meta || (lang === 'en' ? 'No metadata' : 'Nessun metadato'))}"
+          data-media-meta="${escapeHtml(meta || ui.noMetadata)}"
         >
           ${mediaUrl ? `<img loading="lazy" src="${mediaUrl}" alt="${escapeHtml(`${displayDate} ${meta}`)}" />` : '<div class="media-fallback"></div>'}
         </a>
-        <div class="media-card__meta">${escapeHtml(meta || (lang === 'en' ? 'No metadata' : 'Nessun metadato'))}${duration ? ` · video ${escapeHtml(duration)}` : ''}</div>
+        ${commentTarget ? `<button type="button" class="day-comment-btn day-comment-btn--media" data-comment-target="${escapeHtml(commentTarget)}">${ui.comments}</button>` : ''}
+        <div class="media-card__meta">${escapeHtml(meta || ui.noMetadata)}${duration ? ` · video ${escapeHtml(duration)}` : ''}</div>
       </article>
     `;
   }).join('\n');
@@ -325,9 +512,11 @@ function buildDayPageHtml({ origin, lang, day, prevDay, nextDay }) {
   <meta name="description" content="${escapeHtml(description)}" />
   <meta name="robots" content="index,follow,max-image-preview:large" />
   <link rel="canonical" href="${escapeHtml(canonicalUrl)}" />
-  <link rel="alternate" hreflang="${lang}" href="${escapeHtml(canonicalUrl)}" />
-  <link rel="alternate" hreflang="${lang === 'it' ? 'en' : 'it'}" href="${escapeHtml(altUrl)}" />
-  <link rel="alternate" hreflang="x-default" href="${escapeHtml(buildAbsoluteUrl(origin, '/it/'))}" />
+  <link rel="alternate" hreflang="it" href="${escapeHtml(altItUrl)}" />
+  <link rel="alternate" hreflang="en" href="${escapeHtml(altEnUrl)}" />
+  <link rel="alternate" hreflang="es" href="${escapeHtml(altEsUrl)}" />
+  <link rel="alternate" hreflang="fr" href="${escapeHtml(altFrUrl)}" />
+  <link rel="alternate" hreflang="x-default" href="${escapeHtml(altItUrl)}" />
   <meta property="og:type" content="article" />
   <meta property="og:title" content="${escapeHtml(pageTitle)}" />
   <meta property="og:description" content="${escapeHtml(description)}" />
@@ -361,42 +550,86 @@ function buildDayPageHtml({ origin, lang, day, prevDay, nextDay }) {
     .day-modal__nav--next{right:10px}
     .day-modal__nav[disabled]{opacity:.35;cursor:not-allowed}
     .day-modal__meta{margin:0 36px 10px 2px;font-size:13px;color:#5a5248}
+    .day-modal__body{position:relative}
     .day-modal__body img,.day-modal__body video{display:block;width:100%;max-height:75vh;object-fit:contain;border-radius:10px;background:#111}
+    .day-modal__zoom-shell{position:relative;overflow:hidden;border-radius:10px;background:#111;touch-action:none}
+    .day-modal__zoom-image{cursor:grab;transform-origin:center center;will-change:transform}
+    .day-modal__zoom-image.is-dragging{cursor:grabbing}
+    .day-modal__zoom-controls{position:absolute;right:14px;top:50px;z-index:3;display:flex;flex-direction:column;gap:6px}
+    .day-modal__zoom-btn{width:32px;height:32px;border-radius:8px;border:1px solid rgba(255,250,242,.78);background:rgba(31,26,22,.72);color:#fffaf2;font-size:20px;line-height:1;cursor:pointer}
     @media (max-width: 720px){.day-modal__dialog{width:95vw;max-height:92vh;padding:10px}}
+    .day-comments-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
+    .day-comment-btn{border:1px solid rgba(31,26,22,.2);background:#fffaf2;color:#2d2823;border-radius:8px;padding:6px 10px;font-size:12px;cursor:pointer}
+    .day-comment-btn--media{align-self:flex-end}
+    .day-comments-modal{position:fixed;inset:0;display:none;z-index:10000}
+    .day-comments-modal.is-open{display:block}
+    .day-comments-modal__backdrop{position:absolute;inset:0;background:rgba(13,11,10,.7)}
+    .day-comments-modal__dialog{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(92vw,760px);max-height:90vh;overflow:auto;background:#faf6f1;border-radius:14px;padding:14px}
+    .day-comments-modal__close{position:absolute;right:10px;top:8px;border:0;background:transparent;font-size:32px;line-height:1;cursor:pointer;color:#4a433a}
+    .day-comments-modal__title{margin:2px 38px 10px 2px;font-size:18px}
+    .day-comments-list{display:flex;flex-direction:column;gap:10px}
+    .day-comment-item{background:#fff;border:1px solid rgba(31,26,22,.08);border-radius:10px;padding:9px 10px}
+    .day-comment-meta{font-size:12px;color:#746a60;margin-bottom:4px}
+    .day-comment-text{white-space:pre-wrap;line-height:1.4;color:#2d2823}
+    .day-comments-form{margin-top:12px;display:flex;flex-direction:column;gap:8px}
+    .day-comments-form input,.day-comments-form textarea{width:100%;border:1px solid rgba(31,26,22,.2);border-radius:8px;padding:8px 9px;background:#fffaf2;color:#2d2823}
+    .day-comments-form textarea{min-height:84px;resize:vertical}
+    .day-comments-form button{align-self:flex-end;border:1px solid rgba(31,26,22,.2);background:#2d2823;color:#fffaf2;border-radius:8px;padding:8px 12px;cursor:pointer}
+    .day-comments-state{color:#746a60;font-size:13px}
   </style>
   <script type="application/ld+json">${JSON.stringify(jsonLd)}</script>
 </head>
 <body>
   <header class="day-head">
     <div>
-      <p><a class="back-link" href="/${lang}/">${lang === 'en' ? 'Back to diary' : 'Torna al diario'}</a></p>
+      <p><a class="back-link" href="/${lang}/">${ui.backToDiary}</a></p>
       <h1>${escapeHtml(displayDate)} (${escapeHtml(date)})</h1>
       <div class="hero-links">
-        <a class="back-link" href="${escapeHtml(diaryUrl)}">${lang === 'en' ? 'Open in interactive diary' : 'Apri nel diario interattivo'}</a>
-        <a class="back-link" href="/${lang}/map/">${lang === 'en' ? 'Open map' : 'Apri mappa'}</a>
+        <a class="back-link" href="${escapeHtml(diaryUrl)}">${ui.openInteractiveDiary}</a>
+        <a class="back-link" href="/${lang}/map/">${ui.openMap}</a>
       </div>
     </div>
     <nav class="day-nav">${navPrev}${navNext}</nav>
   </header>
   <section class="day-section">
-    <h2>${lang === 'en' ? 'Day Notes' : 'Note del giorno'}</h2>
-    ${noteHtml || `<p>${lang === 'en' ? 'No notes available.' : 'Nessuna nota disponibile.'}</p>`}
+    <div class="day-comments-head">
+      <h2>${ui.dayNotes}</h2>
+      <button type="button" class="day-comment-btn" data-comment-target="note-${escapeHtml(date)}">${ui.comments}</button>
+    </div>
+    ${noteHtml || `<p>${ui.noNotes}</p>`}
   </section>
   ${recommendationsHtml}
   <section class="day-section">
-    <h2>${lang === 'en' ? 'Media' : 'Media'} (${items.length})</h2>
+    <h2>${ui.mediaHeading} (${items.length})</h2>
     <div class="media-grid">
-      ${mediaCards || `<p>${lang === 'en' ? 'No media for this day.' : 'Nessun media per questo giorno.'}</p>`}
+      ${mediaCards || `<p>${ui.noMedia}</p>`}
     </div>
   </section>
   <div class="day-modal" id="day-media-modal" aria-hidden="true">
     <div class="day-modal__backdrop" id="day-media-backdrop"></div>
     <div class="day-modal__dialog" role="dialog" aria-modal="true" aria-label="Media">
-      <button type="button" class="day-modal__close" id="day-media-close" aria-label="${lang === 'en' ? 'Close' : 'Chiudi'}">×</button>
-      <button type="button" class="day-modal__nav day-modal__nav--prev" id="day-media-prev" aria-label="${lang === 'en' ? 'Previous' : 'Precedente'}">‹</button>
-      <button type="button" class="day-modal__nav day-modal__nav--next" id="day-media-next" aria-label="${lang === 'en' ? 'Next' : 'Successivo'}">›</button>
+      <button type="button" class="day-modal__close" id="day-media-close" aria-label="${ui.close}">×</button>
+      <button type="button" class="day-modal__nav day-modal__nav--prev" id="day-media-prev" aria-label="${ui.prev}">‹</button>
+      <button type="button" class="day-modal__nav day-modal__nav--next" id="day-media-next" aria-label="${ui.next}">›</button>
+      <div class="day-modal__zoom-controls" id="day-media-zoom-controls">
+        <button type="button" class="day-modal__zoom-btn" id="day-media-zoom-out" aria-label="${ui.zoomOut}">−</button>
+        <button type="button" class="day-modal__zoom-btn" id="day-media-zoom-in" aria-label="${ui.zoomIn}">+</button>
+      </div>
       <p class="day-modal__meta" id="day-media-meta"></p>
       <div class="day-modal__body" id="day-media-body"></div>
+    </div>
+  </div>
+  <div class="day-comments-modal" id="day-comments-modal" aria-hidden="true">
+    <div class="day-comments-modal__backdrop" id="day-comments-backdrop"></div>
+    <div class="day-comments-modal__dialog" role="dialog" aria-modal="true" aria-label="${ui.comments}">
+      <button type="button" class="day-comments-modal__close" id="day-comments-close" aria-label="${ui.close}">×</button>
+      <h3 class="day-comments-modal__title" id="day-comments-title">${ui.comments}</h3>
+      <div class="day-comments-list" id="day-comments-list"></div>
+      <form class="day-comments-form" id="day-comments-form">
+        <input id="day-comments-author" type="text" maxlength="80" placeholder="${ui.name}" required />
+        <textarea id="day-comments-text" maxlength="1200" placeholder="${ui.writeComment}" required></textarea>
+        <button type="submit">${ui.send}</button>
+      </form>
     </div>
   </div>
   <script>
@@ -408,9 +641,84 @@ function buildDayPageHtml({ origin, lang, day, prevDay, nextDay }) {
       const backdrop = document.getElementById('day-media-backdrop');
       const prevBtn = document.getElementById('day-media-prev');
       const nextBtn = document.getElementById('day-media-next');
-      if (!modal || !body || !meta || !closeBtn || !backdrop || !prevBtn || !nextBtn) return;
+      const zoomControls = document.getElementById('day-media-zoom-controls');
+      const zoomOutBtn = document.getElementById('day-media-zoom-out');
+      const zoomInBtn = document.getElementById('day-media-zoom-in');
+      if (!modal || !body || !meta || !closeBtn || !backdrop || !prevBtn || !nextBtn || !zoomControls || !zoomOutBtn || !zoomInBtn) return;
       const links = Array.from(document.querySelectorAll('.day-media-link'));
       let activeIndex = -1;
+      let zoomCleanup = null;
+
+      const attachZoom = (imgEl) => {
+        if (!imgEl) return () => {};
+        let scale = 1;
+        let tx = 0;
+        let ty = 0;
+        let dragging = false;
+        let startX = 0;
+        let startY = 0;
+        let baseTx = 0;
+        let baseTy = 0;
+
+        const clamp = (v, min, max) => Math.min(max, Math.max(min, v));
+        const apply = () => {
+          imgEl.style.transform = 'translate(' + tx + 'px,' + ty + 'px) scale(' + scale + ')';
+          zoomOutBtn.disabled = scale <= 1.001;
+          zoomInBtn.disabled = scale >= 4.999;
+        };
+        const zoomTo = (next) => {
+          scale = clamp(next, 1, 5);
+          if (scale <= 1.001) {
+            tx = 0;
+            ty = 0;
+          }
+          apply();
+        };
+        const onWheel = (event) => {
+          event.preventDefault();
+          const delta = event.deltaY < 0 ? 1.12 : 1 / 1.12;
+          zoomTo(scale * delta);
+        };
+        const onDown = (event) => {
+          if (scale <= 1.001) return;
+          dragging = true;
+          imgEl.classList.add('is-dragging');
+          startX = event.clientX;
+          startY = event.clientY;
+          baseTx = tx;
+          baseTy = ty;
+        };
+        const onMove = (event) => {
+          if (!dragging) return;
+          event.preventDefault();
+          tx = baseTx + (event.clientX - startX);
+          ty = baseTy + (event.clientY - startY);
+          apply();
+        };
+        const onUp = () => {
+          dragging = false;
+          imgEl.classList.remove('is-dragging');
+        };
+        const onZoomIn = () => zoomTo(scale * 1.2);
+        const onZoomOut = () => zoomTo(scale / 1.2);
+
+        imgEl.addEventListener('wheel', onWheel, { passive: false });
+        imgEl.addEventListener('mousedown', onDown);
+        window.addEventListener('mousemove', onMove);
+        window.addEventListener('mouseup', onUp);
+        zoomInBtn.addEventListener('click', onZoomIn);
+        zoomOutBtn.addEventListener('click', onZoomOut);
+        apply();
+
+        return () => {
+          imgEl.removeEventListener('wheel', onWheel);
+          imgEl.removeEventListener('mousedown', onDown);
+          window.removeEventListener('mousemove', onMove);
+          window.removeEventListener('mouseup', onUp);
+          zoomInBtn.removeEventListener('click', onZoomIn);
+          zoomOutBtn.removeEventListener('click', onZoomOut);
+        };
+      };
 
       const openModal = (index) => {
         const link = links[index];
@@ -420,6 +728,10 @@ function buildDayPageHtml({ origin, lang, day, prevDay, nextDay }) {
         const src = link.getAttribute('data-media-src') || '';
         const poster = link.getAttribute('data-media-poster') || '';
         const metaText = link.getAttribute('data-media-meta') || '';
+        if (zoomCleanup) {
+          zoomCleanup();
+          zoomCleanup = null;
+        }
         body.innerHTML = '';
         if (type === 'video') {
           const v = document.createElement('video');
@@ -430,12 +742,19 @@ function buildDayPageHtml({ origin, lang, day, prevDay, nextDay }) {
           v.src = src || '';
           if (poster) v.poster = poster;
           body.appendChild(v);
+          zoomControls.style.display = 'none';
         } else {
+          const shell = document.createElement('div');
+          shell.className = 'day-modal__zoom-shell';
           const img = document.createElement('img');
           img.loading = 'eager';
           img.src = src || '';
           img.alt = metaText || '';
-          body.appendChild(img);
+          img.className = 'day-modal__zoom-image';
+          shell.appendChild(img);
+          body.appendChild(shell);
+          zoomControls.style.display = '';
+          zoomCleanup = attachZoom(img);
         }
         meta.textContent = metaText || '';
         prevBtn.disabled = links.length <= 1;
@@ -455,6 +774,10 @@ function buildDayPageHtml({ origin, lang, day, prevDay, nextDay }) {
         modal.classList.remove('is-open');
         modal.setAttribute('aria-hidden', 'true');
         body.innerHTML = '';
+        if (zoomCleanup) {
+          zoomCleanup();
+          zoomCleanup = null;
+        }
         activeIndex = -1;
       };
 
@@ -476,6 +799,108 @@ function buildDayPageHtml({ origin, lang, day, prevDay, nextDay }) {
         if (event.key === 'ArrowLeft') openByOffset(-1);
         if (event.key === 'ArrowRight') openByOffset(1);
       });
+
+      const commentsModal = document.getElementById('day-comments-modal');
+      const commentsBackdrop = document.getElementById('day-comments-backdrop');
+      const commentsClose = document.getElementById('day-comments-close');
+      const commentsTitle = document.getElementById('day-comments-title');
+      const commentsList = document.getElementById('day-comments-list');
+      const commentsForm = document.getElementById('day-comments-form');
+      const commentsAuthor = document.getElementById('day-comments-author');
+      const commentsText = document.getElementById('day-comments-text');
+      const AUTHOR_KEY = 'cammino_comment_author_v1';
+      let activeCommentTarget = '';
+
+      const escapeHtml = (value) => String(value || '')
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#39;');
+
+      const renderComments = (items, stateText) => {
+        if (!commentsList) return;
+        if (stateText) {
+          commentsList.innerHTML = '<div class="day-comments-state">' + escapeHtml(stateText) + '</div>';
+          return;
+        }
+        const arr = Array.isArray(items) ? items : [];
+        if (!arr.length) {
+          commentsList.innerHTML = '<div class="day-comments-state">${escapeHtml(ui.commentsEmpty)}</div>';
+          return;
+        }
+        commentsList.innerHTML = arr.map((c) => (
+          '<article class="day-comment-item">' +
+            '<div class="day-comment-meta">' + escapeHtml(c.author || '') + ' · ' + escapeHtml(String(c.created_at || '').replace('T', ' ').slice(0, 16)) + '</div>' +
+            '<div class="day-comment-text">' + escapeHtml(c.text || '') + '</div>' +
+          '</article>'
+        )).join('');
+      };
+
+      const openComments = async (target) => {
+        activeCommentTarget = String(target || '').trim();
+        if (!activeCommentTarget) return;
+        if (commentsTitle) commentsTitle.textContent = activeCommentTarget.startsWith('note-')
+          ? '${escapeHtml(ui.commentsOnDay)}'
+          : '${escapeHtml(ui.commentsOnMedia)}';
+        if (commentsAuthor && !commentsAuthor.value) {
+          try { commentsAuthor.value = localStorage.getItem(AUTHOR_KEY) || ''; } catch {}
+        }
+        renderComments([], '${escapeHtml(ui.commentsLoading)}');
+        commentsModal.classList.add('is-open');
+        commentsModal.setAttribute('aria-hidden', 'false');
+        try {
+          const res = await fetch('/api/comments?target=' + encodeURIComponent(activeCommentTarget), { cache: 'no-store' });
+          if (!res.ok) throw new Error('HTTP ' + res.status);
+          const payload = await res.json();
+          renderComments(payload && payload.comments ? payload.comments : []);
+        } catch (err) {
+          renderComments([], '${escapeHtml(ui.commentsLoadError)}');
+        }
+      };
+
+      const closeComments = () => {
+        commentsModal.classList.remove('is-open');
+        commentsModal.setAttribute('aria-hidden', 'true');
+        activeCommentTarget = '';
+      };
+
+      document.querySelectorAll('[data-comment-target]').forEach((btn) => {
+        btn.addEventListener('click', (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          openComments(btn.getAttribute('data-comment-target'));
+        });
+      });
+
+      if (commentsBackdrop) commentsBackdrop.addEventListener('click', closeComments);
+      if (commentsClose) commentsClose.addEventListener('click', closeComments);
+      if (commentsForm) {
+        commentsForm.addEventListener('submit', async (event) => {
+          event.preventDefault();
+          if (!activeCommentTarget) return;
+          const author = String((commentsAuthor && commentsAuthor.value) || '').trim();
+          const text = String((commentsText && commentsText.value) || '').trim();
+          if (!author || !text) return;
+          try { localStorage.setItem(AUTHOR_KEY, author); } catch {}
+          const submitBtn = commentsForm.querySelector('button[type="submit"]');
+          if (submitBtn) submitBtn.disabled = true;
+          try {
+            const res = await fetch('/api/comments', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ target: activeCommentTarget, author, text })
+            });
+            if (!res.ok) throw new Error('HTTP ' + res.status);
+            if (commentsText) commentsText.value = '';
+            await openComments(activeCommentTarget);
+          } catch (err) {
+            renderComments([], '${escapeHtml(ui.commentsSaveError)}');
+          } finally {
+            if (submitBtn) submitBtn.disabled = false;
+          }
+        });
+      }
     })();
   </script>
 </body>
@@ -487,24 +912,90 @@ async function buildSitemapXml(req) {
   const itEntries = await readEntriesByLang('it');
   const days = Array.isArray(itEntries && itEntries.days) ? itEntries.days : [];
   const urls = [];
-  const push = (locPath, lastmod = null, priority = null, changefreq = null) => {
+  const langs = ['it', 'en', 'es', 'fr'];
+  const isImagePath = (value) => {
+    const pathValue = String(value || '').trim().toLowerCase();
+    return /\.(jpg|jpeg|png|webp|gif|heic|heif)(\?.*)?$/.test(pathValue);
+  };
+  const asSitePath = (value) => {
+    const clean = String(value || '').trim();
+    if (!clean) return '';
+    return clean.startsWith('/') ? clean : `/${clean.replace(/^\.?\//, '')}`;
+  };
+  const pickImagesForDay = (day) => {
+    const byLoc = new Map();
+    const items = Array.isArray(day && day.items) ? day.items : [];
+    items.forEach((item) => {
+      const candidates = [item && item.thumb, item && item.poster, item && item.src].map(asSitePath).filter(Boolean);
+      candidates.forEach((candidate) => {
+        if (!isImagePath(candidate)) return;
+        const loc = buildAbsoluteUrl(origin, candidate);
+        if (byLoc.has(loc)) return;
+        const mediaType = String(item && item.type ? item.type : '').toLowerCase() === 'video' ? 'Video' : 'Foto';
+        const date = String(day && day.date ? day.date : '').trim();
+        const time = String(item && item.time ? item.time : '').trim();
+        const orig = String(item && item.orig ? item.orig : '').trim();
+        const title = `Cammino di Santiago · ${date} · ${mediaType}`;
+        const captionBase = orig || `${mediaType} del ${date}`;
+        const caption = time ? `${date} ${time} · ${captionBase}` : `${date} · ${captionBase}`;
+        byLoc.set(loc, { loc, title, caption });
+      });
+    });
+    return Array.from(byLoc.values());
+  };
+  const push = (locPath, lastmod = null, priority = null, changefreq = null, images = [], alternates = null) => {
     const tags = [`<loc>${escapeHtml(buildAbsoluteUrl(origin, locPath))}</loc>`];
     if (lastmod) tags.push(`<lastmod>${escapeHtml(lastmod)}</lastmod>`);
     if (changefreq) tags.push(`<changefreq>${escapeHtml(changefreq)}</changefreq>`);
     if (priority) tags.push(`<priority>${escapeHtml(priority)}</priority>`);
+    if (alternates && typeof alternates === 'object') {
+      langs.forEach((lang) => {
+        const hrefPath = alternates[lang];
+        if (!hrefPath) return;
+        tags.push(`<xhtml:link rel="alternate" hreflang="${lang}" href="${escapeHtml(buildAbsoluteUrl(origin, hrefPath))}" />`);
+      });
+      if (alternates.it) {
+        tags.push(`<xhtml:link rel="alternate" hreflang="x-default" href="${escapeHtml(buildAbsoluteUrl(origin, alternates.it))}" />`);
+      }
+    }
+    if (Array.isArray(images) && images.length) {
+      images.forEach((img) => {
+        if (!img || !img.loc) return;
+        const imageTags = [`<image:loc>${escapeHtml(img.loc)}</image:loc>`];
+        if (img.title) imageTags.push(`<image:title>${escapeHtml(img.title)}</image:title>`);
+        if (img.caption) imageTags.push(`<image:caption>${escapeHtml(img.caption)}</image:caption>`);
+        tags.push(`<image:image>${imageTags.join('')}</image:image>`);
+      });
+    }
     urls.push(`<url>${tags.join('')}</url>`);
   };
-  push('/it/', itEntries && itEntries.generated_at ? String(itEntries.generated_at).slice(0, 10) : null, '1.0', 'daily');
-  push('/en/', itEntries && itEntries.generated_at ? String(itEntries.generated_at).slice(0, 10) : null, '0.9', 'daily');
-  push('/it/map/', null, '0.8', 'weekly');
-  push('/en/map/', null, '0.8', 'weekly');
+  const generatedDate = itEntries && itEntries.generated_at ? String(itEntries.generated_at).slice(0, 10) : null;
+  const homeAlt = { it: '/it/', en: '/en/', es: '/es/', fr: '/fr/' };
+  const mapAlt = { it: '/it/map/', en: '/en/map/', es: '/es/map/', fr: '/fr/map/' };
+  push('/it/', generatedDate, '1.0', 'daily', [], homeAlt);
+  push('/en/', generatedDate, '0.9', 'daily', [], homeAlt);
+  push('/es/', generatedDate, '0.9', 'daily', [], homeAlt);
+  push('/fr/', generatedDate, '0.9', 'daily', [], homeAlt);
+  push('/it/map/', null, '0.8', 'weekly', [], mapAlt);
+  push('/en/map/', null, '0.8', 'weekly', [], mapAlt);
+  push('/es/map/', null, '0.8', 'weekly', [], mapAlt);
+  push('/fr/map/', null, '0.8', 'weekly', [], mapAlt);
   for (const day of days) {
     const date = String(day && day.date ? day.date : '').trim();
     if (!date) continue;
-    push(`/it/day/${date}/`, date, '0.7', 'monthly');
-    push(`/en/day/${date}/`, date, '0.7', 'monthly');
+    const images = pickImagesForDay(day);
+    const dayAlt = {
+      it: `/it/day/${date}/`,
+      en: `/en/day/${date}/`,
+      es: `/es/day/${date}/`,
+      fr: `/fr/day/${date}/`
+    };
+    push(`/it/day/${date}/`, date, '0.7', 'monthly', images, dayAlt);
+    push(`/en/day/${date}/`, date, '0.7', 'monthly', images, dayAlt);
+    push(`/es/day/${date}/`, date, '0.7', 'monthly', images, dayAlt);
+    push(`/fr/day/${date}/`, date, '0.7', 'monthly', images, dayAlt);
   }
-  return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.join('\n')}\n</urlset>\n`;
+  return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n${urls.join('\n')}\n</urlset>\n`;
 }
 
 function getRequestOrigin(req) {
@@ -517,7 +1008,7 @@ function getRequestOrigin(req) {
 
 function parseLocaleFromPath(pathname) {
   const pathValue = String(pathname || '/');
-  const match = pathValue.match(/^\/(it|en)(\/|$)/i);
+  const match = pathValue.match(/^\/(it|en|es|fr)(\/|$)/i);
   if (!match) {
     return {
       locale: '',
@@ -543,10 +1034,20 @@ function localizeIndexHtml(rawHtml, locale, req) {
     : 'it';
   const seo = SEO_BY_LANG[lang] || SEO_BY_LANG.it;
   const origin = getRequestOrigin(req);
-  const canonical = `${origin}/${lang}/`;
-  const altIt = `${origin}/it/`;
-  const altEn = `${origin}/en/`;
+  const reqUrl = new URL(String(req && req.url ? req.url : '/'), origin);
+  const dayParam = String(reqUrl.searchParams.get('day') || '').trim();
+  const targetParam = String(reqUrl.searchParams.get('target') || '').trim();
+  const hasValidDay = /^\d{4}-\d{2}-\d{2}$/.test(dayParam);
+  const canonicalPath = hasValidDay ? `/${lang}/day/${dayParam}/` : `/${lang}/`;
+  const canonical = `${origin}${canonicalPath}`;
+  const altIt = `${origin}${hasValidDay ? `/it/day/${dayParam}/` : '/it/'}`;
+  const altEn = `${origin}${hasValidDay ? `/en/day/${dayParam}/` : '/en/'}`;
+  const altEs = `${origin}${hasValidDay ? `/es/day/${dayParam}/` : '/es/'}`;
+  const altFr = `${origin}${hasValidDay ? `/fr/day/${dayParam}/` : '/fr/'}`;
   const ogImage = `${origin}/assets/img/img_f98bce6cb159.jpg`;
+  const robotsContent = targetParam
+    ? 'noindex,follow,max-image-preview:large'
+    : 'index,follow,max-image-preview:large';
 
   let out = String(rawHtml || '');
   out = out.replace(/<html lang="[^"]*">/i, `<html lang="${lang}">`);
@@ -558,11 +1059,13 @@ function localizeIndexHtml(rawHtml, locale, req) {
   out = out.replace(/(<link[^>]*id="seo-canonical"[^>]*href=")[^"]*(")/i, `$1${escapeHtml(canonical)}$2`);
   out = out.replace(/(<link[^>]*id="seo-alt-it"[^>]*href=")[^"]*(")/i, `$1${escapeHtml(altIt)}$2`);
   out = out.replace(/(<link[^>]*id="seo-alt-en"[^>]*href=")[^"]*(")/i, `$1${escapeHtml(altEn)}$2`);
+  out = out.replace(/(<link[^>]*id="seo-alt-es"[^>]*href=")[^"]*(")/i, `$1${escapeHtml(altEs)}$2`);
+  out = out.replace(/(<link[^>]*id="seo-alt-fr"[^>]*href=")[^"]*(")/i, `$1${escapeHtml(altFr)}$2`);
   out = out.replace(
     /(<link[^>]*id="seo-alt-default"[^>]*href=")[^"]*(")/i,
     `$1${escapeHtml(altIt)}$2`
   );
-  const metaRobots = '<meta name="robots" content="index,follow,max-image-preview:large" />';
+  const metaRobots = `<meta name="robots" content="${escapeHtml(robotsContent)}" />`;
   if (!/<meta[^>]*name="robots"/i.test(out)) {
     out = out.replace('</head>', `  ${metaRobots}\n</head>`);
   }

@@ -1,5 +1,6 @@
 const I18N = {
   it: {
+    language_label: 'Lingua',
     eyebrow: 'Diario di viaggio',
     title: 'Cammino di Santiago',
     subtitle: 'Un recap giorno per giorno tra foto, video e ricordi di strada.',
@@ -26,6 +27,7 @@ const I18N = {
     mini_map: 'Percorso del giorno',
     mini_map_cumulative: 'Percorso cumulativo',
     open_map: 'Apri la mappa',
+    open_map_hero: 'Apri la mappa del percorso',
     open_short: 'Apri Mappa',
     goto_day: 'Vai al giorno',
     close: 'Chiudi',
@@ -60,6 +62,13 @@ const I18N = {
     comments_saved: 'Commento inviato',
     comments_target_media: 'Commenti foto/video',
     comments_target_note: 'Commenti testo del giorno',
+    admin_token_prompt: 'Inserisci token admin per operazione protetta:',
+    admin_auth_failed: 'Autenticazione admin fallita.',
+    admin_auth_failed_with_reason: 'Autenticazione admin fallita: {reason}',
+    delete_single_item: 'Cancella questo elemento',
+    reload_day_content: 'Ricarica contenuti giorno',
+    reload_content: 'Ricarica contenuti',
+    map_error_prefix: 'Errore mappa',
     legal_notice:
       '© Tutti i diritti riservati. Foto, video e testi di questo sito non possono essere copiati, riutilizzati, ripubblicati o redistribuiti senza autorizzazione scritta dell’autore.',
     after_camino_title: 'Dopo il Cammino',
@@ -67,6 +76,7 @@ const I18N = {
       'A fine 2019 ho fatto un viaggio negli Stati Uniti per correre la maratona di New York, ma l’ho trasformato in un itinerante di circa 50 giorni: proprio questo mi ha dato modo di reincontrare alcune persone conosciute sul Cammino. In quel viaggio ho rivisto Mark a New York insieme alla sua fidanzata (poi diventata sua moglie), la figlia di Pam a Philadelphia con suo marito, Danielle a San Francisco, Marcia a casa sua vicino a San Francisco, e anche Chris e Jessica, a cui ho finalmente restituito la torcia che mi avevano prestato per attraversare le mesetas. Mi è dispiaciuto non riuscire a reincontrare Ginger e Giselle: purtroppo il Texas non era fattibile in quel giro.\n\nCatherine l’ho invece reincontrata nel 2023, durante un altro viaggio itinerante: bici da Basilea a Monaco, maratona di Berlino, poi Dublino e infine Bruxelles. Lì ero andato per incontrare un mio amico storico, che festeggiava il compleanno con altri amici, e con l’occasione ho scritto anche a Catherine per vederci una sera. Questi però sono altri viaggi da raccontare in un altro sito-diario.'
   },
   en: {
+    language_label: 'Language',
     eyebrow: 'Travel diary',
     title: 'Camino de Santiago',
     subtitle: 'A day-by-day recap through photos, videos, and trail memories.',
@@ -93,6 +103,7 @@ const I18N = {
     mini_map: 'Daily route',
     mini_map_cumulative: 'Cumulative route',
     open_map: 'Open map',
+    open_map_hero: 'Open route map',
     open_short: 'Open Map',
     goto_day: 'Jump to day',
     close: 'Close',
@@ -109,7 +120,7 @@ const I18N = {
     select_mode: 'Select',
     clear_selected: 'Clear selection',
     unlock_day: 'Load content',
-    day_locked: 'Content not loaded yet to keep the page light.',
+    day_locked: 'Content is loading. Please wait a moment.',
     delete_selected: 'Delete selected',
     delete_confirm: 'Confirm permanent deletion of {count} files?',
     delete_success: '{count} files deleted.',
@@ -127,16 +138,175 @@ const I18N = {
     comments_saved: 'Comment posted',
     comments_target_media: 'Media comments',
     comments_target_note: 'Day text comments',
+    admin_token_prompt: 'Enter admin token for protected operation:',
+    admin_auth_failed: 'Admin authentication failed.',
+    admin_auth_failed_with_reason: 'Admin authentication failed: {reason}',
+    delete_single_item: 'Delete this item',
+    reload_day_content: 'Reload day content',
+    reload_content: 'Reload content',
+    map_error_prefix: 'Map error',
     legal_notice:
       '© All rights reserved. Photos, videos, and texts on this site may not be copied, reused, republished, or redistributed without prior written permission from the author.',
     after_camino_title: 'After the Camino',
     after_camino_text:
       'At the end of 2019 I went to the United States to run the New York City Marathon, but I turned that trip into an itinerant journey of about 50 days: that is exactly what gave me the chance to meet again some people I had met on the Camino. During that trip I saw Mark again in New York with his girlfriend (later his wife), Pam’s daughter in Philadelphia with her husband, Danielle in San Francisco, Marcia at her home near San Francisco, and also Chris and Jessica, to whom I was finally able to return the headlamp they had lent me to cross the mesetas. I was sorry I could not meet Ginger and Giselle again: Texas was not feasible on that route.\n\nI met Catherine again in 2023 during another itinerant journey: cycling from Basel to Munich, Berlin Marathon, then Dublin, and finally Brussels. I had gone there to meet a longtime friend who was celebrating his birthday with other friends, and on that occasion I also wrote to Catherine to meet one evening. Those are other stories to tell in another diary-site.'
+  },
+  es: {
+    language_label: 'Idioma',
+    eyebrow: 'Diario de viaje',
+    title: 'Camino de Santiago',
+    subtitle: 'Un resumen día a día entre fotos, vídeos y recuerdos del camino.',
+    hero_intro:
+      'Soy Jacopo: en 2019, después de dejar mi trabajo, me tomé un año sabático. Fue un año intenso, hecho de viajes itinerantes y también de carreras, entre ellas la media maratón de la Muralla China y la maratón de Nueva York. Viéndolo hoy, me doy cuenta de la suerte que tuve de vivirlo justo en ese momento: pocos meses después, con las dificultades y los cierres de 2020, esa misma libertad habría sido impensable. Este diario cuenta mi Camino de Santiago, reconstruido día a día entre trazas GPS, fotos, vídeos y memoria.',
+    days: 'Días',
+    photos: 'Fotos',
+    videos: 'Vídeos',
+    loading: 'Preparando el diario…',
+    day_label: 'Día',
+    prologue_label: 'Prólogo',
+    prologue_title: 'Prólogo (2–3 de junio)',
+    items_label: 'contenidos',
+    photo_tag: 'Foto',
+    video_tag: 'Vídeo',
+    footer_note:
+      'El sitio se creó en 2026, años después de la experiencia vivida, pero se reconstruyó fielmente uniendo el seguimiento registrado en el momento con una app de tracking, los metadatos (incluidas las coordenadas GPS) extraídos de fotos y vídeos, y los textos sobre emociones y eventos recuperados de notas antiguas, mensajes, chats de WhatsApp, audios, contenidos sociales y recuerdos.',
+    view_diary: 'Diario',
+    notes_label: 'Notas del día',
+    empty_note: 'Añade aquí un recuerdo personal.',
+    recommendations_label: 'Lugares recomendados',
+    empty_recommendations:
+      'si esta sección está vacía es porque no hay nada especialmente memorable ni en positivo ni en negativo',
+    mini_map: 'Ruta del día',
+    mini_map_cumulative: 'Ruta acumulada',
+    open_map: 'Abrir mapa',
+    open_map_hero: 'Abrir el mapa del recorrido',
+    open_short: 'Abrir mapa',
+    goto_day: 'Ir al día',
+    close: 'Cerrar',
+    mini_map_minimize: 'Minimizar mapa',
+    mini_map_expand: 'Expandir mapa',
+    strava_label: 'Strava',
+    km_tracked_label: 'Trazados',
+    km_cumulative_label: 'Acumulado',
+    mini_map_empty: 'No hay GPS para este día. Desplázate hacia abajo para empezar el viaje.',
+    gps_estimated: 'estimada',
+    whatsapp_badge: 'Reenviada por WhatsApp · hora no fiable',
+    share: 'Compartir',
+    share_copied: 'Copiado',
+    select_mode: 'Seleccionar',
+    clear_selected: 'Deseleccionar todo',
+    unlock_day: 'Recargar contenidos',
+    day_locked: 'Contenido cargándose. Espera un momento.',
+    delete_selected: 'Eliminar seleccionados',
+    delete_confirm: '¿Confirmas la eliminación definitiva de {count} archivos?',
+    delete_success: '{count} archivos eliminados.',
+    delete_error: 'Error durante la eliminación',
+    deleting: 'Eliminando...',
+    carousel: 'Carrusel',
+    comments: 'Comentarios',
+    comments_open: 'Abrir comentarios',
+    comments_name: 'Nombre',
+    comments_text: 'Escribe un comentario',
+    comments_send: 'Enviar',
+    comments_empty: 'Aún no hay comentarios.',
+    comments_loading: 'Cargando comentarios...',
+    comments_error: 'Error al cargar comentarios',
+    comments_saved: 'Comentario enviado',
+    comments_target_media: 'Comentarios de foto/vídeo',
+    comments_target_note: 'Comentarios del texto del día',
+    admin_token_prompt: 'Introduce el token de admin para la operación protegida:',
+    admin_auth_failed: 'Falló la autenticación de admin.',
+    admin_auth_failed_with_reason: 'Falló la autenticación de admin: {reason}',
+    delete_single_item: 'Eliminar este elemento',
+    reload_day_content: 'Recargar contenidos del día',
+    reload_content: 'Recargar contenidos',
+    map_error_prefix: 'Error del mapa',
+    legal_notice:
+      '© Todos los derechos reservados. Las fotos, vídeos y textos de este sitio no pueden copiarse, reutilizarse, republicarse ni redistribuirse sin autorización escrita del autor.',
+    after_camino_title: 'Después del Camino',
+    after_camino_text:
+      'A finales de 2019 hice un viaje a Estados Unidos para correr la maratón de Nueva York, pero lo convertí en un itinerante de unos 50 días: precisamente eso me permitió reencontrar a algunas personas conocidas en el Camino. En ese viaje volví a ver a Mark en Nueva York con su novia (luego su esposa), a la hija de Pam en Filadelfia con su marido, a Danielle en San Francisco, a Marcia en su casa cerca de San Francisco, y también a Chris y Jessica, a quienes por fin devolví la frontal que me habían prestado para cruzar las mesetas. Me dio pena no poder reencontrar a Ginger y Giselle: Texas no era viable en ese itinerario.\n\nA Catherine, en cambio, la reencontré en 2023 durante otro viaje itinerante: bici de Basilea a Múnich, maratón de Berlín, luego Dublín y finalmente Bruselas. Allí fui para ver a un amigo histórico que celebraba su cumpleaños con otros amigos, y aproveché para escribir también a Catherine y vernos una tarde. Pero esos son otros viajes que contar en otro sitio-diario.'
+  },
+  fr: {
+    language_label: 'Langue',
+    eyebrow: 'Journal de voyage',
+    title: 'Chemin de Saint-Jacques',
+    subtitle: 'Un récit jour par jour entre photos, vidéos et souvenirs de route.',
+    hero_intro:
+      'Je suis Jacopo : en 2019, après avoir quitté mon travail, j’ai pris une année sabbatique. Ce fut une année intense, faite de voyages itinérants et aussi de courses, dont le semi-marathon de la Grande Muraille de Chine et le marathon de New York. Avec le recul, je me rends compte de la chance de l’avoir vécue exactement à ce moment-là : quelques mois plus tard, avec les difficultés et les fermetures de 2020, cette même liberté serait devenue impensable. Ce journal raconte mon Chemin de Saint-Jacques, reconstruit jour après jour à partir de traces GPS, photos, vidéos et mémoire.',
+    days: 'Jours',
+    photos: 'Photos',
+    videos: 'Vidéos',
+    loading: 'Préparation du journal…',
+    day_label: 'Jour',
+    prologue_label: 'Prologue',
+    prologue_title: 'Prologue (2–3 juin)',
+    items_label: 'contenus',
+    photo_tag: 'Photo',
+    video_tag: 'Vidéo',
+    footer_note:
+      'Le site a été créé en 2026, des années après l’expérience vécue, mais il a été reconstruit fidèlement en combinant le suivi enregistré sur le moment via une application de tracking, les métadonnées (y compris les coordonnées GPS) extraites des photos et vidéos, et les textes sur les émotions et les événements récupérés à partir d’anciennes notes, messages, chats WhatsApp, audios, contenus sociaux et souvenirs.',
+    view_diary: 'Journal',
+    notes_label: 'Notes du jour',
+    empty_note: 'Ajoute ici un souvenir personnel.',
+    recommendations_label: 'Lieux conseillés',
+    empty_recommendations:
+      'si cette section est vide, c’est qu’il n’y a rien de particulièrement mémorable, ni en positif ni en négatif',
+    mini_map: 'Parcours du jour',
+    mini_map_cumulative: 'Parcours cumulé',
+    open_map: 'Ouvrir la carte',
+    open_map_hero: 'Ouvrir la carte du parcours',
+    open_short: 'Ouvrir carte',
+    goto_day: 'Aller au jour',
+    close: 'Fermer',
+    mini_map_minimize: 'Réduire la carte',
+    mini_map_expand: 'Agrandir la carte',
+    strava_label: 'Strava',
+    km_tracked_label: 'Tracés',
+    km_cumulative_label: 'Cumulé',
+    mini_map_empty: 'Aucun GPS pour ce jour. Fais défiler vers le bas pour commencer le voyage.',
+    gps_estimated: 'estimée',
+    whatsapp_badge: 'Transférée sur WhatsApp · heure non fiable',
+    share: 'Partager',
+    share_copied: 'Copié',
+    select_mode: 'Sélectionner',
+    clear_selected: 'Tout désélectionner',
+    unlock_day: 'Recharger contenus',
+    day_locked: 'Contenus en chargement. Patiente un instant.',
+    delete_selected: 'Supprimer la sélection',
+    delete_confirm: 'Confirmer la suppression définitive de {count} fichiers ?',
+    delete_success: '{count} fichiers supprimés.',
+    delete_error: 'Erreur pendant la suppression',
+    deleting: 'Suppression...',
+    carousel: 'Carrousel',
+    comments: 'Commentaires',
+    comments_open: 'Ouvrir les commentaires',
+    comments_name: 'Nom',
+    comments_text: 'Écrire un commentaire',
+    comments_send: 'Envoyer',
+    comments_empty: 'Aucun commentaire pour le moment.',
+    comments_loading: 'Chargement des commentaires...',
+    comments_error: 'Erreur lors du chargement des commentaires',
+    comments_saved: 'Commentaire envoyé',
+    comments_target_media: 'Commentaires photo/vidéo',
+    comments_target_note: 'Commentaires du texte du jour',
+    admin_token_prompt: 'Saisis le token admin pour l’opération protégée :',
+    admin_auth_failed: 'Authentification admin échouée.',
+    admin_auth_failed_with_reason: 'Authentification admin échouée : {reason}',
+    delete_single_item: 'Supprimer cet élément',
+    reload_day_content: 'Recharger les contenus du jour',
+    reload_content: 'Recharger contenus',
+    map_error_prefix: 'Erreur carte',
+    legal_notice:
+      '© Tous droits réservés. Les photos, vidéos et textes de ce site ne peuvent pas être copiés, réutilisés, republiés ou redistribués sans autorisation écrite de l’auteur.',
+    after_camino_title: 'Après le Chemin',
+    after_camino_text:
+      'Fin 2019, j’ai fait un voyage aux États-Unis pour courir le marathon de New York, mais je l’ai transformé en itinérance d’environ 50 jours : c’est précisément ce qui m’a permis de revoir certaines personnes rencontrées sur le Chemin. Pendant ce voyage, j’ai revu Mark à New York avec sa petite amie (devenue ensuite sa femme), la fille de Pam à Philadelphie avec son mari, Danielle à San Francisco, Marcia chez elle près de San Francisco, et aussi Chris et Jessica, à qui j’ai enfin rendu la lampe frontale qu’ils m’avaient prêtée pour traverser les mesetas. J’ai regretté de ne pas pouvoir revoir Ginger et Giselle : le Texas n’était pas faisable sur cet itinéraire.\n\nJ’ai en revanche revu Catherine en 2023, pendant un autre voyage itinérant : vélo de Bâle à Munich, marathon de Berlin, puis Dublin et enfin Bruxelles. J’y étais allé pour retrouver un ami de longue date qui fêtait son anniversaire avec d’autres amis, et j’en ai profité pour écrire à Catherine afin de la voir un soir. Mais ce sont d’autres voyages à raconter dans un autre site-journal.'
   }
 };
 
 let currentLang = 'it';
-const SUPPORTED_LANGS = new Set(['it', 'en']);
+const SUPPORTED_LANGS = new Set(['it', 'en', 'es', 'fr']);
 const SEO_META = {
   it: {
     title: 'Cammino di Santiago — Diario Visivo',
@@ -145,6 +315,14 @@ const SEO_META = {
   en: {
     title: 'Camino de Santiago — Visual Diary',
     description: 'Visual Camino de Santiago diary with photos, videos, GPS tracks, and day-by-day storytelling.'
+  },
+  es: {
+    title: 'Camino de Santiago — Diario Visual',
+    description: 'Diario visual del Camino de Santiago con fotos, vídeos, trazas GPS y relatos diarios.'
+  },
+  fr: {
+    title: 'Chemin de Saint-Jacques — Journal Visuel',
+    description: 'Journal visuel du Chemin de Saint-Jacques avec photos, vidéos, traces GPS et récits quotidiens.'
   }
 };
 
@@ -159,7 +337,7 @@ const getEntriesDataPath = (lang = currentLang) => {
 };
 
 const getLangFromPathname = (pathnameValue = '') => {
-  const match = String(pathnameValue || '').match(/^\/(it|en)(?:\/|$)/i);
+  const match = String(pathnameValue || '').match(/^\/(it|en|es|fr)(?:\/|$)/i);
   return match ? normalizeLang(match[1]) : '';
 };
 
@@ -167,7 +345,7 @@ const buildLocalizedPath = (lang, pathnameValue = '') => {
   const targetLang = normalizeLang(lang) || 'it';
   let pathValue = String(pathnameValue || '/');
   if (!pathValue.startsWith('/')) pathValue = `/${pathValue}`;
-  pathValue = pathValue.replace(/^\/(it|en)(?=\/|$)/i, '');
+  pathValue = pathValue.replace(/^\/(it|en|es|fr)(?=\/|$)/i, '');
   if (!pathValue) pathValue = '/';
   if (!pathValue.startsWith('/')) pathValue = `/${pathValue}`;
   if (pathValue === '/index.html') pathValue = '/';
@@ -218,18 +396,34 @@ const updateSeoForLang = (lang) => {
   const normalized = normalizeLang(lang) || 'it';
   const seo = SEO_META[normalized] || SEO_META.it;
   const origin = window.location.origin || '';
-  const canonical = `${origin}/${normalized}/`;
-  const altIt = `${origin}/it/`;
-  const altEn = `${origin}/en/`;
+  const params = new URLSearchParams(window.location.search || '');
+  const dayParam = String(params.get('day') || '').trim();
+  const targetParam = String(params.get('target') || '').trim();
+  const hasValidDay = /^\d{4}-\d{2}-\d{2}$/.test(dayParam);
+  const canonicalPath = hasValidDay ? `/${normalized}/day/${dayParam}/` : `/${normalized}/`;
+  const canonical = `${origin}${canonicalPath}`;
+  const altIt = `${origin}${hasValidDay ? `/it/day/${dayParam}/` : '/it/'}`;
+  const altEn = `${origin}${hasValidDay ? `/en/day/${dayParam}/` : '/en/'}`;
+  const altEs = `${origin}${hasValidDay ? `/es/day/${dayParam}/` : '/es/'}`;
+  const altFr = `${origin}${hasValidDay ? `/fr/day/${dayParam}/` : '/fr/'}`;
+  const robotsContent = targetParam
+    ? 'noindex,follow,max-image-preview:large'
+    : 'index,follow,max-image-preview:large';
   document.title = seo.title;
   const descriptionTag = ensureMetaTag('meta-description', { name: 'description' });
   descriptionTag.setAttribute('content', seo.description);
+  const robotsTag = ensureMetaTag('meta-robots', { name: 'robots' });
+  robotsTag.setAttribute('content', robotsContent);
   const canonicalTag = ensureLinkTag('seo-canonical', { rel: 'canonical' });
   canonicalTag.setAttribute('href', canonical);
   const altItTag = ensureLinkTag('seo-alt-it', { rel: 'alternate', hreflang: 'it' });
   altItTag.setAttribute('href', altIt);
   const altEnTag = ensureLinkTag('seo-alt-en', { rel: 'alternate', hreflang: 'en' });
   altEnTag.setAttribute('href', altEn);
+  const altEsTag = ensureLinkTag('seo-alt-es', { rel: 'alternate', hreflang: 'es' });
+  altEsTag.setAttribute('href', altEs);
+  const altFrTag = ensureLinkTag('seo-alt-fr', { rel: 'alternate', hreflang: 'fr' });
+  altFrTag.setAttribute('href', altFr);
   const altDefaultTag = ensureLinkTag('seo-alt-default', { rel: 'alternate', hreflang: 'x-default' });
   altDefaultTag.setAttribute('href', altIt);
 };
@@ -268,9 +462,16 @@ const setLang = (lang, options = {}) => {
       el.textContent = I18N[normalized][key];
     }
   });
+  document.querySelectorAll('.map-link').forEach((el) => {
+    if (el && el.tagName === 'A') el.href = buildLocalizedMapPath(normalized);
+  });
   document.querySelectorAll('.lang__btn').forEach((btn) => {
     btn.classList.toggle('active', btn.dataset.lang === normalized);
   });
+  const langSelect = document.getElementById('lang-select');
+  if (langSelect && langSelect.value !== normalized) {
+    langSelect.value = normalized;
+  }
   document.querySelectorAll('[data-share-btn]').forEach((btn) => {
     if (btn.dataset.copied === '1') btn.textContent = '✓';
     else btn.innerHTML = getShareIconMarkup();
@@ -466,17 +667,17 @@ const ensureAdminSessionInteractive = async () => {
   if (adminAuthenticated) return true;
   const active = await getAdminSessionStatus();
   if (active) return true;
-  const token = window.prompt('Inserisci token admin per operazione protetta:');
+  const token = window.prompt(I18N[currentLang].admin_token_prompt);
   if (!token) return false;
   try {
     const ok = await loginAdminSession(token);
     if (!ok) {
-      window.alert('Autenticazione admin fallita.');
+      window.alert(I18N[currentLang].admin_auth_failed);
       return false;
     }
     return true;
   } catch (err) {
-    window.alert(`Autenticazione admin fallita: ${err.message || err}`);
+    window.alert(formatI18N('admin_auth_failed_with_reason', { reason: err.message || err }));
     return false;
   }
 };
@@ -718,6 +919,42 @@ const buildPrologueNarrative = (lang = 'it') => {
       '',
       '**Practical note**',
       'Transfer Perugia-Milan by BlaBlaCar, Milan-Orio by train, night in Bergamo hosted by friends, then evening flight on June 3.'
+    ].join('\n');
+  }
+  if (lang === 'es') {
+    return [
+      '**Título**',
+      'Prólogo: partir antes de partir.',
+      '',
+      '**Dónde estaba / etapa**',
+      'El 2 y el 3 de junio fueron los días de aproximación: de Perugia a Bérgamo, luego vuelo nocturno hacia Lourdes.',
+      '',
+      '**Escena clave**',
+      'El camino empezó antes del sendero. El 2 de junio hice Perugia-Milán con un amigo que iba a Milán ese mismo día; durante el viaje habíamos recogido a otras personas con BlaBlaCar y el trayecto pasó rápido entre conversaciones interesantes. Luego seguí de Milán a Orio en tren para llegar a unos amigos que me alojarían una noche. Para el camino había pensado llevar tienda, pero en las horas previas a la salida, justo mientras preparaba la mochila, entendí que sería demasiado voluminosa y pesada para el equilibrio de la mochila, así que no la llevé, dejando en la mochila solo el saco de dormir. La mañana del 3, en Bérgamo, di una vuelta en bici: aire ligero, ritmo lento, y al final de un sendero, cerca de un estancamiento del río Brembo, me encontré con unos burros. Por la tarde tomé el vuelo: aterricé en Lourdes tarde y no había organizado alojamiento. No conseguía encontrar dónde dormir y los sitios que encontraba, cuando llegaba, estaban todos cerrados o sin recepción. Era preocupante, porque no tenía realmente dónde pasar la noche, pero no estaba nada ansioso: tenía el saco de dormir y no tenía ningún problema en dormir fuera, homeless style. Desde ahí ya no era preparación, era el inicio real.',
+      '',
+      '**Una cosa que entendí**',
+      'El primer paso del camino no coincide con el primer kilómetro a pie: empieza en las decisiones logísticas, en la espera y en cómo te preparas para el viaje.',
+      '',
+      '**Nota práctica**',
+      'Traslado Perugia-Milán con BlaBlaCar, tren Milán-Orio, noche en Bérgamo con amigos y luego vuelo nocturno del 3 de junio.'
+    ].join('\n');
+  }
+  if (lang === 'fr') {
+    return [
+      '**Titre**',
+      'Prologue : partir avant de partir.',
+      '',
+      '**Où j’étais / étape**',
+      'Les 2 et 3 juin ont été les jours d’approche : de Pérouse à Bergame, puis vol du soir vers Lourdes.',
+      '',
+      '**Scène clé**',
+      'Le chemin a commencé avant le sentier. Le 2 juin, j’ai fait Pérouse-Milan avec un ami qui allait à Milan ce jour-là ; pendant le trajet, nous avions pris d’autres personnes via BlaBlaCar, et le voyage est passé vite entre discussions intéressantes. Ensuite, j’ai continué de Milan à Orio en train pour rejoindre des amis qui m’hébergeaient une nuit. Pour le chemin, j’avais envisagé d’emporter une tente, mais dans les heures avant le départ, au moment de préparer mon sac, j’ai compris qu’elle serait trop encombrante et trop lourde pour l’équilibre du sac ; je ne l’ai donc pas prise, en gardant seulement le sac de couchage dans le sac. Le matin du 3, à Bergame, j’ai fait un tour à vélo : air léger, rythme lent, et au bout d’un sentier, près d’une retenue stagnante de la rivière Brembo, j’ai croisé des ânes. Le soir, j’ai pris l’avion : je suis arrivé tard à Lourdes et je n’avais pas organisé d’hébergement. Je n’arrivais pas à trouver où dormir et les lieux que je trouvais, une fois sur place, étaient déjà fermés ou sans réception. C’était inquiétant, parce que je n’avais pas réellement d’endroit pour la nuit, mais je n’étais pas du tout anxieux : j’avais le sac de couchage et je n’avais aucun problème à dormir dehors, homeless style. À partir de là, ce n’était plus de la préparation, c’était le vrai début.',
+      '',
+      '**Ce que j’ai compris**',
+      'Le premier pas du chemin ne coïncide pas avec le premier kilomètre à pied : il commence dans les choix logistiques, dans l’attente et dans la manière de se disposer au voyage.',
+      '',
+      '**Note pratique**',
+      'Trajet Pérouse-Milan en BlaBlaCar, train Milan-Orio, nuit à Bergame chez des amis, puis vol du soir du 3 juin.'
     ].join('\n');
   }
   return [
@@ -1120,8 +1357,8 @@ const appendModalGroupPanel = (currentItem) => {
       const deleteBtn = document.createElement('button');
       deleteBtn.type = 'button';
       deleteBtn.className = 'modal__group-delete';
-      deleteBtn.setAttribute('aria-label', 'Cancella questo elemento');
-      deleteBtn.title = 'Cancella questo elemento';
+      deleteBtn.setAttribute('aria-label', I18N[currentLang].delete_single_item);
+      deleteBtn.title = I18N[currentLang].delete_single_item;
       deleteBtn.textContent = '×';
       deleteBtn.addEventListener('click', async (event) => {
         event.preventDefault();
@@ -1492,13 +1729,13 @@ const buildShareUrl = (anchorId) => {
   if (!anchor) return `${origin}/${lang}/`;
   if (anchor.startsWith('note-')) {
     const dayKey = anchor.slice('note-'.length);
-    if (/^\d{4}-\d{2}-\d{2}$/.test(dayKey)) return `${origin}/${lang}/?day=${encodeURIComponent(dayKey)}`;
+    if (/^\d{4}-\d{2}-\d{2}$/.test(dayKey)) return `${origin}/${lang}/day/${encodeURIComponent(dayKey)}/`;
     return `${origin}/${lang}/?target=${encodeURIComponent(anchor)}`;
   }
   if (anchor.startsWith('media-')) {
     const itemId = anchor.slice('media-'.length);
     const dayKey = findDayKeyByItemId(itemId);
-    if (dayKey) return `${origin}/${lang}/?day=${encodeURIComponent(dayKey)}&target=${encodeURIComponent(anchor)}`;
+    if (dayKey) return `${origin}/${lang}/day/${encodeURIComponent(dayKey)}/?target=${encodeURIComponent(anchor)}`;
     return `${origin}/${lang}/?target=${encodeURIComponent(anchor)}`;
   }
   return `${origin}/${lang}/?target=${encodeURIComponent(anchor)}`;
@@ -1950,7 +2187,12 @@ const getNote = (day) => {
   const note = day ? day.notes : '';
   if (typeof note === 'string') return note;
   if (note && typeof note === 'object') {
-    return (currentLang === 'it' ? note.it : note.en) || '';
+    const fallbackOrder = [currentLang, 'it', 'en', 'es', 'fr'];
+    for (const lang of fallbackOrder) {
+      const value = note[lang];
+      if (typeof value === 'string' && value.trim()) return value;
+    }
+    return '';
   }
   return '';
 };
@@ -1983,9 +2225,14 @@ const getRecommendations = (day) => {
   if (Array.isArray(rec)) {
     return rec.map((item) => String(item || '').trim()).filter(Boolean);
   }
-  const list = currentLang === 'it' ? rec.it : rec.en;
-  if (!Array.isArray(list)) return [];
-  return list.map((item) => String(item || '').trim()).filter(Boolean);
+  const fallbackOrder = [currentLang, 'it', 'en', 'es', 'fr'];
+  for (const lang of fallbackOrder) {
+    const list = rec[lang];
+    if (Array.isArray(list)) {
+      return list.map((item) => String(item || '').trim()).filter(Boolean);
+    }
+  }
+  return [];
 };
 
 const getStravaLinks = (day) => {
@@ -2437,8 +2684,8 @@ const buildDay = (day, idx) => {
   const reloadDayBtn = document.createElement('button');
   reloadDayBtn.type = 'button';
   reloadDayBtn.className = 'day__reload';
-  reloadDayBtn.setAttribute('aria-label', 'Ricarica contenuti giorno');
-  reloadDayBtn.setAttribute('title', 'Ricarica contenuti');
+  reloadDayBtn.setAttribute('aria-label', I18N[currentLang].reload_day_content);
+  reloadDayBtn.setAttribute('title', I18N[currentLang].reload_content);
   reloadDayBtn.textContent = '↻';
 
   header.appendChild(title);
@@ -3169,7 +3416,7 @@ const renderMiniMap = (dayKey, dayIndex = null) => {
     const body = document.getElementById('mini-map-body');
     if (body) {
       body.classList.add('is-empty');
-      body.setAttribute('data-empty-message', `Errore mappa: ${err.message || err}`);
+      body.setAttribute('data-empty-message', `${I18N[currentLang].map_error_prefix}: ${err.message || err}`);
     }
   }
 };
@@ -3222,6 +3469,7 @@ const observeSections = () => {
       const currentUrl = `${window.location.pathname}${window.location.search}`;
       if (nextUrl === currentUrl) return;
       window.history.replaceState(null, '', nextUrl);
+      updateSeoForLang(currentLang);
     }, HASH_SYNC_DELAY_MS);
   };
   const clickUnlockIfNeeded = (sectionEl) => {
@@ -3389,7 +3637,7 @@ const renderView = () => {
           })
           .filter(Boolean);
         if (!parts.length) return '';
-        if (field === 'it' || field === 'en') return buildPrologueNarrative(field);
+        if (field === 'it' || field === 'en' || field === 'es' || field === 'fr') return buildPrologueNarrative(field);
         return parts.join('\n\n');
       };
       const mergeRecommendationsField = (field) => {
@@ -3422,10 +3670,17 @@ const renderView = () => {
         trackDate: PROLOGUE_TRACK_DATE,
         distanceKeys: [],
         items: mergedItems,
-        notes: { it: mergeNoteField('it'), en: mergeNoteField('en') },
+        notes: {
+          it: mergeNoteField('it'),
+          en: mergeNoteField('en'),
+          es: mergeNoteField('es'),
+          fr: mergeNoteField('fr')
+        },
         recommendations: {
           it: mergeRecommendationsField('it'),
-          en: mergeRecommendationsField('en')
+          en: mergeRecommendationsField('en'),
+          es: mergeRecommendationsField('es'),
+          fr: mergeRecommendationsField('fr')
         },
         strava: mergedStrava
       };
@@ -3577,14 +3832,15 @@ window.addEventListener('DOMContentLoaded', () => {
         deleteSelectedItems().catch(() => {});
       });
     }
-    document.querySelectorAll('.lang__btn').forEach((btn) => {
-      btn.addEventListener('click', () => {
-        const targetLang = normalizeLang(btn.dataset.lang);
+    const langSelect = document.getElementById('lang-select');
+    if (langSelect) {
+      langSelect.addEventListener('change', () => {
+        const targetLang = normalizeLang(langSelect.value);
         if (!targetLang || targetLang === currentLang) return;
         setLang(targetLang, { renderExisting: false });
         init();
       });
-    });
+    }
     const miniMapToggle = document.getElementById('mini-map-toggle');
     if (miniMapToggle) {
       miniMapToggle.addEventListener('click', () => {
