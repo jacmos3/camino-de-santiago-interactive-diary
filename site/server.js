@@ -24,6 +24,9 @@ const SEO_BY_LANG = {
     description: 'Visual Camino de Santiago diary with photos, videos, GPS tracks, and day-by-day storytelling.'
   }
 };
+const SITE_AUTHOR = 'Jacopo';
+const DAY_PAGE_PATH_RE = /^\/(it|en)\/day\/(\d{4}-\d{2}-\d{2})\/?$/i;
+const MAP_PAGE_PATH_RE = /^\/(it|en)\/map\/?$/i;
 
 function loadDotEnv(rootDir) {
   try {
@@ -108,6 +111,402 @@ function escapeHtml(value) {
     .replaceAll("'", '&#39;');
 }
 
+function buildAbsoluteUrl(origin, pathValue) {
+  const base = String(origin || '').replace(/\/+$/, '');
+  const pathPart = String(pathValue || '/').startsWith('/') ? String(pathValue || '/') : `/${String(pathValue || '/')}`;
+  return `${base}${pathPart}`;
+}
+
+function markdownToSafeHtml(markdown) {
+  const raw = String(markdown || '').trim();
+  if (!raw) return '';
+  let html = escapeHtml(raw);
+  html = html.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+  html = html.replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
+  const blocks = html.split(/\n{2,}/).map((part) => part.trim()).filter(Boolean);
+  return blocks.map((part) => `<p>${part.replace(/\n/g, '<br/>')}</p>`).join('\n');
+}
+
+function firstTextParagraph(markdown, maxLen = 220) {
+  const text = String(markdown || '')
+    .replace(/\*\*([^*]+)\*\*/g, '$1')
+    .replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g, '$1')
+    .replace(/\s+/g, ' ')
+    .trim();
+  if (!text) return '';
+  if (text.length <= maxLen) return text;
+  return `${text.slice(0, maxLen - 1).trim()}…`;
+}
+
+function normalizeImageCandidate(item) {
+  if (!item || typeof item !== 'object') return '';
+  const thumb = String(item.thumb || '').trim();
+  const src = String(item.src || '').trim();
+  const poster = String(item.poster || '').trim();
+  return thumb || poster || src;
+}
+
+function buildVideoDurationLabel(seconds) {
+  const total = Number(seconds);
+  if (!Number.isFinite(total) || total <= 0) return '';
+  const s = Math.round(total);
+  const mm = Math.floor(s / 60);
+  const ss = s % 60;
+  return `${String(mm).padStart(2, '0')}:${String(ss).padStart(2, '0')}`;
+}
+
+function localizeMapHtml(rawHtml, locale, req) {
+  const lang = SUPPORTED_LANGS.has(String(locale || '').toLowerCase())
+    ? String(locale).toLowerCase()
+    : 'it';
+  const origin = getRequestOrigin(req);
+  const title = lang === 'en' ? 'Camino de Santiago — Map' : 'Cammino di Santiago — Mappa';
+  const desc = lang === 'en'
+    ? 'Interactive map of the Camino de Santiago route with daily media points.'
+    : 'Mappa interattiva del Cammino di Santiago con punti media giornalieri.';
+  const canonical = `${origin}/${lang}/map/`;
+  const altIt = `${origin}/it/map/`;
+  const altEn = `${origin}/en/map/`;
+  let out = String(rawHtml || '');
+  out = out.replace(/<html lang="[^"]*">/i, `<html lang="${lang}">`);
+  out = out.replace(/<title>[\s\S]*?<\/title>/i, `<title>${escapeHtml(title)}</title>`);
+  if (/<meta[^>]*name="description"/i.test(out)) {
+    out = out.replace(/(<meta[^>]*name="description"[^>]*content=")[^"]*(")/i, `$1${escapeHtml(desc)}$2`);
+  } else {
+    out = out.replace('</head>', `  <meta name="description" content="${escapeHtml(desc)}" />\n</head>`);
+  }
+  if (/<link[^>]*rel="canonical"/i.test(out)) {
+    out = out.replace(/(<link[^>]*rel="canonical"[^>]*href=")[^"]*(")/i, `$1${escapeHtml(canonical)}$2`);
+  } else {
+    out = out.replace('</head>', `  <link rel="canonical" href="${escapeHtml(canonical)}" />\n</head>`);
+  }
+  out = out.replace('</head>', `  <link rel="alternate" hreflang="it" href="${escapeHtml(altIt)}" />\n  <link rel="alternate" hreflang="en" href="${escapeHtml(altEn)}" />\n  <link rel="alternate" hreflang="x-default" href="${escapeHtml(altIt)}" />\n</head>`);
+  return out;
+}
+
+function formatDisplayDate(dateValue, lang) {
+  const [y, m, d] = String(dateValue || '').split('-').map((v) => Number(v));
+  if (!y || !m || !d) return String(dateValue || '');
+  const dt = new Date(Date.UTC(y, m - 1, d));
+  try {
+    return dt.toLocaleDateString(lang === 'en' ? 'en-US' : 'it-IT', {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      timeZone: 'UTC'
+    });
+  } catch {
+    return String(dateValue || '');
+  }
+}
+
+function renderRecommendations(recommendations) {
+  const list = Array.isArray(recommendations) ? recommendations : [];
+  if (!list.length) return '';
+  const items = list
+    .map((entry) => {
+      const name = escapeHtml(entry && entry.name ? entry.name : '');
+      const note = entry && entry.note ? markdownToSafeHtml(entry.note) : '';
+      const href = entry && entry.url ? escapeHtml(entry.url) : '';
+      if (!name) return '';
+      if (href) {
+        return `<li><a href="${href}" target="_blank" rel="noopener noreferrer">${name}</a>${note ? `<div class="rec-note">${note}</div>` : ''}</li>`;
+      }
+      return `<li>${name}${note ? `<div class="rec-note">${note}</div>` : ''}</li>`;
+    })
+    .filter(Boolean)
+    .join('\n');
+  if (!items) return '';
+  return `<section class="day-section"><h2>Posti consigliati</h2><ul>${items}</ul></section>`;
+}
+
+function buildDayPageHtml({ origin, lang, day, prevDay, nextDay }) {
+  const date = String(day && day.date ? day.date : '');
+  const displayDate = formatDisplayDate(date, lang);
+  const canonicalPath = `/${lang}/day/${date}/`;
+  const altPath = `/${lang === 'it' ? 'en' : 'it'}/day/${date}/`;
+  const canonicalUrl = buildAbsoluteUrl(origin, canonicalPath);
+  const altUrl = buildAbsoluteUrl(origin, altPath);
+  const diaryUrl = buildAbsoluteUrl(origin, `/${lang}/?day=${encodeURIComponent(date)}`);
+  const titlePrefix = lang === 'en' ? 'Camino Diary' : 'Diario Cammino';
+  const pageTitle = `${titlePrefix} · ${date}`;
+  const description = firstTextParagraph(day && day.notes, 240)
+    || (lang === 'en'
+      ? `Camino de Santiago diary entry for ${date}: photos, videos, GPS and daily notes.`
+      : `Pagina diario del Cammino di Santiago per il ${date}: foto, video, GPS e note del giorno.`);
+  const items = Array.isArray(day && day.items) ? day.items : [];
+  const ogImagePath = normalizeImageCandidate(items.find((entry) => entry && (entry.type === 'image' || entry.type === 'video')) || null);
+  const ogImageUrl = ogImagePath ? buildAbsoluteUrl(origin, `/${String(ogImagePath).replace(/^\/+/, '')}`) : '';
+  const noteHtml = markdownToSafeHtml(day && day.notes ? day.notes : '');
+  const recommendationsHtml = renderRecommendations(day && day.recommendations);
+  const interactiveMediaBase = `${origin}/${lang}/?day=${encodeURIComponent(date)}&target=`;
+  const mediaCards = items.slice(0, 32).map((item) => {
+    const isVideo = String(item.type || '') === 'video';
+    const mediaImg = normalizeImageCandidate(item);
+    const mediaUrl = buildAbsoluteUrl(origin, `/${String(mediaImg || '').replace(/^\/+/, '')}`);
+    const mediaSrc = buildAbsoluteUrl(origin, `/${String(item && item.src ? item.src : mediaImg || '').replace(/^\/+/, '')}`);
+    const mediaPoster = buildAbsoluteUrl(origin, `/${String(item && item.poster ? item.poster : mediaImg || '').replace(/^\/+/, '')}`);
+    const labelTime = escapeHtml(String(item.time || ''));
+    const place = escapeHtml(String(item.place || ''));
+    const id = escapeHtml(String(item.id || ''));
+    const rawId = String(item.id || '').trim();
+    const duration = isVideo ? buildVideoDurationLabel(item.durationSec) : '';
+    const meta = [labelTime, place].filter(Boolean).join(' · ');
+    const interactiveHref = rawId
+      ? `${interactiveMediaBase}${encodeURIComponent(`media-${rawId}`)}`
+      : `${origin}/${lang}/?day=${encodeURIComponent(date)}`;
+    return `
+      <article class="media-card">
+        <a
+          class="day-media-link"
+          href="${escapeHtml(interactiveHref)}"
+          aria-label="media ${id}"
+          data-media-type="${isVideo ? 'video' : 'image'}"
+          data-media-src="${escapeHtml(mediaSrc)}"
+          data-media-poster="${escapeHtml(mediaPoster)}"
+          data-media-meta="${escapeHtml(meta || (lang === 'en' ? 'No metadata' : 'Nessun metadato'))}"
+        >
+          ${mediaUrl ? `<img loading="lazy" src="${mediaUrl}" alt="${escapeHtml(`${displayDate} ${meta}`)}" />` : '<div class="media-fallback"></div>'}
+        </a>
+        <div class="media-card__meta">${escapeHtml(meta || (lang === 'en' ? 'No metadata' : 'Nessun metadato'))}${duration ? ` · video ${escapeHtml(duration)}` : ''}</div>
+      </article>
+    `;
+  }).join('\n');
+
+  const mediaJsonLd = items.slice(0, 20).map((item) => {
+    const image = normalizeImageCandidate(item);
+    if (!image) return null;
+    const contentUrl = buildAbsoluteUrl(origin, `/${String(item.src || image).replace(/^\/+/, '')}`);
+    const thumbnailUrl = buildAbsoluteUrl(origin, `/${String(image).replace(/^\/+/, '')}`);
+    const uploadDate = item.date && item.time ? `${item.date}T${item.time}:00` : undefined;
+    if (String(item.type || '') === 'video') {
+      return {
+        '@type': 'VideoObject',
+        name: item.orig || item.id || 'Video',
+        uploadDate,
+        contentUrl,
+        thumbnailUrl,
+        duration: Number.isFinite(Number(item.durationSec)) ? `PT${Math.max(1, Math.round(Number(item.durationSec)))}S` : undefined
+      };
+    }
+    return {
+      '@type': 'ImageObject',
+      name: item.orig || item.id || 'Image',
+      uploadDate,
+      contentUrl,
+      thumbnailUrl
+    };
+  }).filter(Boolean);
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: pageTitle,
+    description,
+    datePublished: `${date}T00:00:00Z`,
+    dateModified: `${date}T23:59:59Z`,
+    inLanguage: lang,
+    author: { '@type': 'Person', name: SITE_AUTHOR },
+    mainEntityOfPage: canonicalUrl,
+    image: ogImageUrl || undefined,
+    hasPart: mediaJsonLd.length ? mediaJsonLd : undefined
+  };
+
+  const navPrev = prevDay ? `<a href="/${lang}/day/${escapeHtml(prevDay.date)}/">← ${escapeHtml(prevDay.date)}</a>` : '';
+  const navNext = nextDay ? `<a href="/${lang}/day/${escapeHtml(nextDay.date)}/">${escapeHtml(nextDay.date)} →</a>` : '';
+
+  return `<!doctype html>
+<html lang="${lang}">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>${escapeHtml(pageTitle)}</title>
+  <meta name="description" content="${escapeHtml(description)}" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <link rel="canonical" href="${escapeHtml(canonicalUrl)}" />
+  <link rel="alternate" hreflang="${lang}" href="${escapeHtml(canonicalUrl)}" />
+  <link rel="alternate" hreflang="${lang === 'it' ? 'en' : 'it'}" href="${escapeHtml(altUrl)}" />
+  <link rel="alternate" hreflang="x-default" href="${escapeHtml(buildAbsoluteUrl(origin, '/it/'))}" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="${escapeHtml(pageTitle)}" />
+  <meta property="og:description" content="${escapeHtml(description)}" />
+  <meta property="og:url" content="${escapeHtml(canonicalUrl)}" />
+  ${ogImageUrl ? `<meta property="og:image" content="${escapeHtml(ogImageUrl)}" />` : ''}
+  <meta name="twitter:card" content="${ogImageUrl ? 'summary_large_image' : 'summary'}" />
+  <meta name="twitter:title" content="${escapeHtml(pageTitle)}" />
+  <meta name="twitter:description" content="${escapeHtml(description)}" />
+  ${ogImageUrl ? `<meta name="twitter:image" content="${escapeHtml(ogImageUrl)}" />` : ''}
+  <link rel="stylesheet" href="/styles.css" />
+  <style>
+    body{max-width:1100px;margin:0 auto;padding:24px}
+    .day-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px}
+    .day-nav{display:flex;gap:12px;flex-wrap:wrap}
+    .day-nav a,.back-link{display:inline-block;padding:8px 12px;border-radius:12px;background:#ece7df;color:#2d2823;text-decoration:none}
+    .day-section{margin-top:18px;background:#fff;border-radius:16px;padding:16px}
+    .media-grid{margin-top:16px;display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px}
+    .media-grid > .media-card{background:#f7f3ee;border-radius:12px;padding:8px;display:flex !important;flex-direction:column !important;align-items:stretch !important;justify-content:flex-start !important;gap:6px;min-height:0;overflow:visible}
+    .media-grid > .media-card > a{display:block !important;width:100% !important;flex:0 0 auto !important}
+    .media-grid > .media-card > a > img{width:100%;height:180px;object-fit:cover;border-radius:10px;display:block}
+    .media-grid > .media-card > .media-card__meta{display:block !important;width:100% !important;font-size:12px;line-height:1.35;color:#5a5248;word-break:break-word;white-space:normal}
+    .media-fallback{height:160px;border-radius:10px;background:#ddd}
+    .hero-links{display:flex;gap:8px;flex-wrap:wrap}
+    .day-modal{position:fixed;inset:0;display:none;z-index:9999}
+    .day-modal.is-open{display:block}
+    .day-modal__backdrop{position:absolute;inset:0;background:rgba(13,11,10,.7)}
+    .day-modal__dialog{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(92vw,980px);max-height:90vh;background:#faf6f1;border-radius:14px;padding:12px;overflow:auto}
+    .day-modal__close{position:absolute;right:10px;top:8px;border:0;background:transparent;font-size:34px;line-height:1;cursor:pointer;color:#4a433a}
+    .day-modal__nav{position:absolute;top:50%;transform:translateY(-50%);z-index:2;border:0;background:rgba(31,26,22,.66);color:#fffaf2;width:34px;height:44px;border-radius:10px;cursor:pointer;font-size:24px;line-height:1}
+    .day-modal__nav--prev{left:10px}
+    .day-modal__nav--next{right:10px}
+    .day-modal__nav[disabled]{opacity:.35;cursor:not-allowed}
+    .day-modal__meta{margin:0 36px 10px 2px;font-size:13px;color:#5a5248}
+    .day-modal__body img,.day-modal__body video{display:block;width:100%;max-height:75vh;object-fit:contain;border-radius:10px;background:#111}
+    @media (max-width: 720px){.day-modal__dialog{width:95vw;max-height:92vh;padding:10px}}
+  </style>
+  <script type="application/ld+json">${JSON.stringify(jsonLd)}</script>
+</head>
+<body>
+  <header class="day-head">
+    <div>
+      <p><a class="back-link" href="/${lang}/">${lang === 'en' ? 'Back to diary' : 'Torna al diario'}</a></p>
+      <h1>${escapeHtml(displayDate)} (${escapeHtml(date)})</h1>
+      <div class="hero-links">
+        <a class="back-link" href="${escapeHtml(diaryUrl)}">${lang === 'en' ? 'Open in interactive diary' : 'Apri nel diario interattivo'}</a>
+        <a class="back-link" href="/${lang}/map/">${lang === 'en' ? 'Open map' : 'Apri mappa'}</a>
+      </div>
+    </div>
+    <nav class="day-nav">${navPrev}${navNext}</nav>
+  </header>
+  <section class="day-section">
+    <h2>${lang === 'en' ? 'Day Notes' : 'Note del giorno'}</h2>
+    ${noteHtml || `<p>${lang === 'en' ? 'No notes available.' : 'Nessuna nota disponibile.'}</p>`}
+  </section>
+  ${recommendationsHtml}
+  <section class="day-section">
+    <h2>${lang === 'en' ? 'Media' : 'Media'} (${items.length})</h2>
+    <div class="media-grid">
+      ${mediaCards || `<p>${lang === 'en' ? 'No media for this day.' : 'Nessun media per questo giorno.'}</p>`}
+    </div>
+  </section>
+  <div class="day-modal" id="day-media-modal" aria-hidden="true">
+    <div class="day-modal__backdrop" id="day-media-backdrop"></div>
+    <div class="day-modal__dialog" role="dialog" aria-modal="true" aria-label="Media">
+      <button type="button" class="day-modal__close" id="day-media-close" aria-label="${lang === 'en' ? 'Close' : 'Chiudi'}">×</button>
+      <button type="button" class="day-modal__nav day-modal__nav--prev" id="day-media-prev" aria-label="${lang === 'en' ? 'Previous' : 'Precedente'}">‹</button>
+      <button type="button" class="day-modal__nav day-modal__nav--next" id="day-media-next" aria-label="${lang === 'en' ? 'Next' : 'Successivo'}">›</button>
+      <p class="day-modal__meta" id="day-media-meta"></p>
+      <div class="day-modal__body" id="day-media-body"></div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      const modal = document.getElementById('day-media-modal');
+      const body = document.getElementById('day-media-body');
+      const meta = document.getElementById('day-media-meta');
+      const closeBtn = document.getElementById('day-media-close');
+      const backdrop = document.getElementById('day-media-backdrop');
+      const prevBtn = document.getElementById('day-media-prev');
+      const nextBtn = document.getElementById('day-media-next');
+      if (!modal || !body || !meta || !closeBtn || !backdrop || !prevBtn || !nextBtn) return;
+      const links = Array.from(document.querySelectorAll('.day-media-link'));
+      let activeIndex = -1;
+
+      const openModal = (index) => {
+        const link = links[index];
+        if (!link) return;
+        activeIndex = index;
+        const type = link.getAttribute('data-media-type') || 'image';
+        const src = link.getAttribute('data-media-src') || '';
+        const poster = link.getAttribute('data-media-poster') || '';
+        const metaText = link.getAttribute('data-media-meta') || '';
+        body.innerHTML = '';
+        if (type === 'video') {
+          const v = document.createElement('video');
+          v.controls = true;
+          v.autoplay = true;
+          v.playsInline = true;
+          v.preload = 'metadata';
+          v.src = src || '';
+          if (poster) v.poster = poster;
+          body.appendChild(v);
+        } else {
+          const img = document.createElement('img');
+          img.loading = 'eager';
+          img.src = src || '';
+          img.alt = metaText || '';
+          body.appendChild(img);
+        }
+        meta.textContent = metaText || '';
+        prevBtn.disabled = links.length <= 1;
+        nextBtn.disabled = links.length <= 1;
+        modal.classList.add('is-open');
+        modal.setAttribute('aria-hidden', 'false');
+      };
+
+      const openByOffset = (offset) => {
+        if (!links.length) return;
+        const base = activeIndex < 0 ? 0 : activeIndex;
+        const next = (base + offset + links.length) % links.length;
+        openModal(next);
+      };
+
+      const closeModal = () => {
+        modal.classList.remove('is-open');
+        modal.setAttribute('aria-hidden', 'true');
+        body.innerHTML = '';
+        activeIndex = -1;
+      };
+
+      links.forEach((link, idx) => {
+        link.addEventListener('click', (event) => {
+          if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button === 1) return;
+          event.preventDefault();
+          openModal(idx);
+        });
+      });
+
+      closeBtn.addEventListener('click', closeModal);
+      backdrop.addEventListener('click', closeModal);
+      prevBtn.addEventListener('click', () => openByOffset(-1));
+      nextBtn.addEventListener('click', () => openByOffset(1));
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') closeModal();
+        if (!modal.classList.contains('is-open')) return;
+        if (event.key === 'ArrowLeft') openByOffset(-1);
+        if (event.key === 'ArrowRight') openByOffset(1);
+      });
+    })();
+  </script>
+</body>
+</html>`;
+}
+
+async function buildSitemapXml(req) {
+  const origin = getRequestOrigin(req);
+  const itEntries = await readEntriesByLang('it');
+  const days = Array.isArray(itEntries && itEntries.days) ? itEntries.days : [];
+  const urls = [];
+  const push = (locPath, lastmod = null, priority = null, changefreq = null) => {
+    const tags = [`<loc>${escapeHtml(buildAbsoluteUrl(origin, locPath))}</loc>`];
+    if (lastmod) tags.push(`<lastmod>${escapeHtml(lastmod)}</lastmod>`);
+    if (changefreq) tags.push(`<changefreq>${escapeHtml(changefreq)}</changefreq>`);
+    if (priority) tags.push(`<priority>${escapeHtml(priority)}</priority>`);
+    urls.push(`<url>${tags.join('')}</url>`);
+  };
+  push('/it/', itEntries && itEntries.generated_at ? String(itEntries.generated_at).slice(0, 10) : null, '1.0', 'daily');
+  push('/en/', itEntries && itEntries.generated_at ? String(itEntries.generated_at).slice(0, 10) : null, '0.9', 'daily');
+  push('/it/map/', null, '0.8', 'weekly');
+  push('/en/map/', null, '0.8', 'weekly');
+  for (const day of days) {
+    const date = String(day && day.date ? day.date : '').trim();
+    if (!date) continue;
+    push(`/it/day/${date}/`, date, '0.7', 'monthly');
+    push(`/en/day/${date}/`, date, '0.7', 'monthly');
+  }
+  return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.join('\n')}\n</urlset>\n`;
+}
+
 function getRequestOrigin(req) {
   const protoHeader = String(req.headers['x-forwarded-proto'] || '').split(',')[0].trim();
   const hostHeader = String(req.headers['x-forwarded-host'] || req.headers.host || '').split(',')[0].trim();
@@ -147,6 +546,7 @@ function localizeIndexHtml(rawHtml, locale, req) {
   const canonical = `${origin}/${lang}/`;
   const altIt = `${origin}/it/`;
   const altEn = `${origin}/en/`;
+  const ogImage = `${origin}/assets/img/img_f98bce6cb159.jpg`;
 
   let out = String(rawHtml || '');
   out = out.replace(/<html lang="[^"]*">/i, `<html lang="${lang}">`);
@@ -162,6 +562,35 @@ function localizeIndexHtml(rawHtml, locale, req) {
     /(<link[^>]*id="seo-alt-default"[^>]*href=")[^"]*(")/i,
     `$1${escapeHtml(altIt)}$2`
   );
+  const metaRobots = '<meta name="robots" content="index,follow,max-image-preview:large" />';
+  if (!/<meta[^>]*name="robots"/i.test(out)) {
+    out = out.replace('</head>', `  ${metaRobots}\n</head>`);
+  }
+  const ogTags = [
+    '<meta property="og:type" content="website" />',
+    `<meta property="og:title" content="${escapeHtml(seo.title)}" />`,
+    `<meta property="og:description" content="${escapeHtml(seo.description)}" />`,
+    `<meta property="og:url" content="${escapeHtml(canonical)}" />`,
+    `<meta property="og:image" content="${escapeHtml(ogImage)}" />`,
+    '<meta name="twitter:card" content="summary_large_image" />',
+    `<meta name="twitter:title" content="${escapeHtml(seo.title)}" />`,
+    `<meta name="twitter:description" content="${escapeHtml(seo.description)}" />`,
+    `<meta name="twitter:image" content="${escapeHtml(ogImage)}" />`
+  ];
+  out = out.replace('</head>', `  ${ogTags.join('\n  ')}\n</head>`);
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: seo.title,
+    description: seo.description,
+    inLanguage: lang,
+    url: canonical,
+    author: {
+      '@type': 'Person',
+      name: SITE_AUTHOR
+    }
+  };
+  out = out.replace('</head>', `  <script type="application/ld+json">${JSON.stringify(jsonLd)}</script>\n</head>`);
   return out;
 }
 
@@ -744,6 +1173,25 @@ async function serveStatic(req, res, requestPath = null, locale = '') {
     }
   }
 
+  if (ext === '.html' && finalPath === path.join(ROOT, 'map.html') && locale) {
+    try {
+      const raw = await fs.readFile(finalPath, 'utf8');
+      const html = localizeMapHtml(raw, locale, req);
+      res.writeHead(200, {
+        'Content-Type': type,
+        'Cache-Control': 'no-cache'
+      });
+      if (req.method === 'HEAD') {
+        res.end();
+      } else {
+        res.end(html);
+      }
+      return;
+    } catch {
+      // Fallback to standard static stream.
+    }
+  }
+
   res.writeHead(200, {
     'Content-Type': type,
     'Cache-Control': noCacheExt.has(ext) ? 'no-cache' : 'public, max-age=3600'
@@ -753,6 +1201,37 @@ async function serveStatic(req, res, requestPath = null, locale = '') {
     return;
   }
   createReadStream(finalPath).pipe(res);
+}
+
+async function serveDayPage(req, res, lang, date) {
+  try {
+    const entries = await readEntriesByLang(lang);
+    const days = Array.isArray(entries && entries.days) ? entries.days : [];
+    const index = days.findIndex((day) => String(day && day.date ? day.date : '') === date);
+    if (index < 0) {
+      res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
+      res.end('Not found');
+      return;
+    }
+    const day = days[index];
+    const prevDay = index > 0 ? days[index - 1] : null;
+    const nextDay = index < days.length - 1 ? days[index + 1] : null;
+    const html = buildDayPageHtml({
+      origin: getRequestOrigin(req),
+      lang,
+      day,
+      prevDay,
+      nextDay
+    });
+    res.writeHead(200, {
+      'Content-Type': 'text/html; charset=utf-8',
+      'Cache-Control': 'no-cache'
+    });
+    res.end(html);
+  } catch (err) {
+    res.writeHead(500, { 'Content-Type': 'text/plain; charset=utf-8' });
+    res.end(err && err.message ? err.message : 'Server error');
+  }
 }
 
 const server = http.createServer(async (req, res) => {
@@ -816,10 +1295,54 @@ const server = http.createServer(async (req, res) => {
   }
 
   const urlObj = new URL(req.url || '/', `http://${HOST}:${PORT}`);
+  if (urlObj.pathname === '/robots.txt') {
+    const origin = getRequestOrigin(req);
+    const body = `User-agent: *\nAllow: /\nSitemap: ${buildAbsoluteUrl(origin, '/sitemap.xml')}\n`;
+    res.writeHead(200, {
+      'Content-Type': 'text/plain; charset=utf-8',
+      'Cache-Control': 'no-cache'
+    });
+    res.end(body);
+    return;
+  }
+  if (urlObj.pathname === '/sitemap.xml') {
+    try {
+      const xml = await buildSitemapXml(req);
+      res.writeHead(200, {
+        'Content-Type': 'application/xml; charset=utf-8',
+        'Cache-Control': 'no-cache'
+      });
+      res.end(xml);
+    } catch (err) {
+      res.writeHead(500, { 'Content-Type': 'text/plain; charset=utf-8' });
+      res.end(err && err.message ? err.message : 'Server error');
+    }
+    return;
+  }
   if (urlObj.pathname === '/') {
     const target = `/it/${urlObj.search || ''}`;
     res.writeHead(302, { Location: target });
     res.end();
+    return;
+  }
+
+  const dayMatch = urlObj.pathname.match(DAY_PAGE_PATH_RE);
+  if (dayMatch) {
+    const lang = String(dayMatch[1]).toLowerCase();
+    const date = String(dayMatch[2]);
+    if (urlObj.pathname !== `/${lang}/day/${date}/`) {
+      res.writeHead(301, { Location: `/${lang}/day/${date}/${urlObj.search || ''}` });
+      res.end();
+      return;
+    }
+    await serveDayPage(req, res, lang, date);
+    return;
+  }
+
+  const mapMatch = urlObj.pathname.match(MAP_PAGE_PATH_RE);
+  if (mapMatch) {
+    const lang = String(mapMatch[1]).toLowerCase();
+    await serveStatic(req, res, `/map.html${urlObj.search || ''}`, lang);
     return;
   }
 

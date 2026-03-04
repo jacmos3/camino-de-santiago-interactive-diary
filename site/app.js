@@ -34,7 +34,7 @@ const I18N = {
     strava_label: 'Strava',
     km_tracked_label: 'Tracciati',
     km_cumulative_label: 'Cumulativo',
-    mini_map_empty: 'Nessun GPS per questo giorno.',
+    mini_map_empty: 'Nessun GPS per questo giorno. Scorri in basso per iniziare il viaggio.',
     gps_estimated: 'stimata',
     whatsapp_badge: 'Inoltrata su WhatsApp · orario non affidabile',
     share: 'Condividi',
@@ -101,7 +101,7 @@ const I18N = {
     strava_label: 'Strava',
     km_tracked_label: 'Tracked',
     km_cumulative_label: 'Cumulative',
-    mini_map_empty: 'No GPS for this day.',
+    mini_map_empty: 'No GPS for this day. Scroll down to start the journey.',
     gps_estimated: 'estimated',
     whatsapp_badge: 'Forwarded on WhatsApp · unreliable time',
     share: 'Share',
@@ -172,6 +172,16 @@ const buildLocalizedPath = (lang, pathnameValue = '') => {
   if (!pathValue.startsWith('/')) pathValue = `/${pathValue}`;
   if (pathValue === '/index.html') pathValue = '/';
   return `/${targetLang}${pathValue === '/' ? '/' : pathValue}`;
+};
+
+const buildLocalizedMapPath = (lang, params = null) => {
+  const targetLang = normalizeLang(lang) || 'it';
+  const base = `/${targetLang}/map/`;
+  if (!params) return base;
+  const query = params instanceof URLSearchParams
+    ? params.toString()
+    : new URLSearchParams(params).toString();
+  return query ? `${base}?${query}` : base;
 };
 
 const syncLanguagePath = (lang) => {
@@ -1476,9 +1486,22 @@ const getShareIconMarkup = () =>
   '<span class="share-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M12 3v11" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M8.5 6.5L12 3l3.5 3.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.5 10.5H5.8a2.8 2.8 0 0 0-2.8 2.8v4.9A2.8 2.8 0 0 0 5.8 21h12.4a2.8 2.8 0 0 0 2.8-2.8v-4.9a2.8 2.8 0 0 0-2.8-2.8h-.7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>';
 
 const buildShareUrl = (anchorId) => {
-  const url = new URL(window.location.href);
-  url.hash = String(anchorId || '').trim();
-  return url.toString();
+  const anchor = String(anchorId || '').trim();
+  const origin = window.location.origin || '';
+  const lang = normalizeLang(currentLang) || 'it';
+  if (!anchor) return `${origin}/${lang}/`;
+  if (anchor.startsWith('note-')) {
+    const dayKey = anchor.slice('note-'.length);
+    if (/^\d{4}-\d{2}-\d{2}$/.test(dayKey)) return `${origin}/${lang}/?day=${encodeURIComponent(dayKey)}`;
+    return `${origin}/${lang}/?target=${encodeURIComponent(anchor)}`;
+  }
+  if (anchor.startsWith('media-')) {
+    const itemId = anchor.slice('media-'.length);
+    const dayKey = findDayKeyByItemId(itemId);
+    if (dayKey) return `${origin}/${lang}/?day=${encodeURIComponent(dayKey)}&target=${encodeURIComponent(anchor)}`;
+    return `${origin}/${lang}/?target=${encodeURIComponent(anchor)}`;
+  }
+  return `${origin}/${lang}/?target=${encodeURIComponent(anchor)}`;
 };
 
 const copyTextToClipboard = async (text) => {
@@ -1532,9 +1555,6 @@ const createShareButton = (anchorId, className) => {
     const copied = await copyTextToClipboard(url);
     if (copied) {
       setShareButtonCopied(btn);
-      if (history && typeof history.replaceState === 'function') {
-        history.replaceState(null, '', `#${anchorId}`);
-      }
       return;
     }
     window.prompt('Copia questo link:', url);
@@ -1743,6 +1763,25 @@ const focusHashAnchor = (hashValue, attempts = 6) => {
   }
   target.scrollIntoView({ behavior: 'smooth', block: 'center' });
   highlightLinkedTarget(target);
+};
+
+const getLinkedTargetFromLocation = () => {
+  const hashRaw = String(window.location.hash || '').replace(/^#/, '').trim();
+  if (hashRaw) return decodeURIComponent(hashRaw);
+  const queryTarget = String(new URLSearchParams(window.location.search).get('target') || '').trim();
+  if (queryTarget) return queryTarget;
+  return '';
+};
+
+const focusLinkedTargetFromLocation = () => {
+  const target = getLinkedTargetFromLocation();
+  if (!target) return;
+  focusHashAnchor(target);
+};
+
+const getRequestedDayFromLocation = () => {
+  const value = String(new URLSearchParams(window.location.search).get('day') || '').trim();
+  return /^\d{4}-\d{2}-\d{2}$/.test(value) ? value : '';
 };
 
 const renderManageTools = () => {
@@ -2770,7 +2809,7 @@ const buildDayTrackCard = (dayKey) => {
   label.textContent = I18N[currentLang].mini_map;
   const open = document.createElement('a');
   open.className = 'day-track__open';
-  open.href = `/map.html?day=${encodeURIComponent(String(dayKey || ''))}`;
+  open.href = buildLocalizedMapPath(currentLang, { day: String(dayKey || '') });
   open.textContent = I18N[currentLang].open_map;
   head.appendChild(label);
   head.appendChild(open);
@@ -3051,7 +3090,7 @@ const renderMiniMap = (dayKey, dayIndex = null) => {
     const openLink = document.querySelector('.mini-map__open');
     if (dateEl) dateEl.textContent = formatDateNoWeekday(dayKey);
     if (openLink) {
-      openLink.href = `/map.html?upto=${encodeURIComponent(String(dayKey || ''))}`;
+      openLink.href = buildLocalizedMapPath(currentLang, { upto: String(dayKey || '') });
     }
 
     const hasIndex = Number.isInteger(dayIndex) && dayIndex >= 0 && dayIndex < renderedDayOrder.length;
@@ -3168,14 +3207,20 @@ const observeSections = () => {
   let unlockDrainTimer = null;
   let scrollIdleTimer = null;
   let hashSyncTimer = null;
-  const scheduleNoteHashUpdate = (targetId) => {
-    const id = String(targetId || '').trim();
-    if (!id) return;
+  const scheduleDayUrlUpdate = (dayKey) => {
+    const day = String(dayKey || '').trim();
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(day)) return;
     if (hashSyncTimer) window.clearTimeout(hashSyncTimer);
     hashSyncTimer = window.setTimeout(() => {
-      const nextHash = `#${encodeURIComponent(id)}`;
-      if (window.location.hash === nextHash) return;
-      const nextUrl = `${window.location.pathname}${window.location.search}${nextHash}`;
+      const next = new URL(window.location.href);
+      const lang = normalizeLang(currentLang) || 'it';
+      next.pathname = `/${lang}/`;
+      next.searchParams.set('day', day);
+      next.searchParams.delete('target');
+      next.hash = '';
+      const nextUrl = `${next.pathname}${next.search}`;
+      const currentUrl = `${window.location.pathname}${window.location.search}`;
+      if (nextUrl === currentUrl) return;
       window.history.replaceState(null, '', nextUrl);
     }, HASH_SYNC_DELAY_MS);
   };
@@ -3241,7 +3286,7 @@ const observeSections = () => {
     const activeSection = sections[idx];
     const dayKey = activeSection.id.replace('day-', '');
     renderMiniMap(dayKey, idx);
-    scheduleNoteHashUpdate(`note-${dayKey}`);
+    scheduleDayUrlUpdate(dayKey);
   };
 
   const pickIndexFromScroll = () => {
@@ -3283,7 +3328,14 @@ const observeSections = () => {
 
   window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('resize', onScroll);
-  setActiveIndex(0);
+  const requestedDay = getRequestedDayFromLocation();
+  const requestedIndex = requestedDay
+    ? sections.findIndex((sectionEl) => sectionEl.id === `day-${requestedDay}`)
+    : -1;
+  setActiveIndex(requestedIndex >= 0 ? requestedIndex : 0);
+  if (requestedIndex >= 0) {
+    sections[requestedIndex].scrollIntoView({ behavior: 'auto', block: 'start' });
+  }
   onScroll();
   scheduleIdleUnlock();
   recoverVisibleLazyMedia();
@@ -3425,9 +3477,7 @@ const renderView = () => {
     });
   });
   refreshCommentCounts(commentTargets).catch(() => {});
-  if (window.location.hash) {
-    window.setTimeout(() => focusHashAnchor(window.location.hash), 20);
-  }
+  window.setTimeout(() => focusLinkedTargetFromLocation(), 20);
 };
 
 const init = async () => {
@@ -3555,7 +3605,7 @@ window.addEventListener('DOMContentLoaded', () => {
     setLang(getInitialLanguage());
     renderManageTools();
     window.addEventListener('hashchange', () => {
-      focusHashAnchor(window.location.hash);
+      focusLinkedTargetFromLocation();
     });
     document.addEventListener('keydown', (event) => {
       if (event.key === 'Escape' && dayPickerOpen) closeDayPicker();
