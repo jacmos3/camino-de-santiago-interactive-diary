@@ -12,6 +12,8 @@
   <link id="seo-canonical" rel="canonical" href="/it/" />
   <link id="seo-alt-it" rel="alternate" hreflang="it" href="/it/" />
   <link id="seo-alt-en" rel="alternate" hreflang="en" href="/en/" />
+  <link id="seo-alt-es" rel="alternate" hreflang="es" href="/es/" />
+  <link id="seo-alt-fr" rel="alternate" hreflang="fr" href="/fr/" />
   <link id="seo-alt-default" rel="alternate" hreflang="x-default" href="/it/" />
   <link rel="stylesheet" href="styles.css" />
   <link
@@ -34,11 +36,20 @@
           <p class="hero__intro" data-i18n="hero_intro">
             Sono Jacopo: nel 2019 ho percorso il Cammino di Santiago in anno sabbatico, ricostruito qui giorno per giorno tra tracce, immagini e memorie.
           </p>
-          <p class="lead"><a class="map-link" href="/it/map/">Apri la mappa del percorso</a></p>
+          <p class="lead"><a class="map-link" href="/it/map/" data-i18n="open_map_hero">Apri la mappa del percorso</a></p>
         </div>
         <div class="controls">
+          <div class="lang-select">
+            <label for="lang-select" class="lang-select__label" data-i18n="language_label">Lingua</label>
+            <select id="lang-select" class="lang-select__input" aria-label="Seleziona lingua">
+              <option value="it">🇮🇹 Italiano</option>
+              <option value="en">🇬🇧 English</option>
+              <option value="es">🇪🇸 Español</option>
+              <option value="fr">🇫🇷 Français</option>
+            </select>
+          </div>
           <div class="manage-tools">
-            <button class="manage-btn manage-btn--danger" id="delete-selected" disabled data-i18n="delete_selected">
+            <button class="manage-btn manage-btn--danger" id="delete-selected" disabled data-i18n="delete_selected" style="display:none">
               Cancella selezionati
             </button>
           </div>
@@ -64,12 +75,7 @@
   <section class="timeline-nav" aria-label="timeline">
     <div class="timeline-nav__wrap">
       <div class="timeline-nav__inner" id="timeline-nav"></div>
-      <div class="timeline-nav__actions" id="timeline-nav-actions">
-        <div class="lang">
-          <button class="lang__btn" data-lang="it">IT</button>
-          <button class="lang__btn" data-lang="en">EN</button>
-        </div>
-      </div>
+      <div class="timeline-nav__actions" id="timeline-nav-actions"></div>
     </div>
   </section>
 

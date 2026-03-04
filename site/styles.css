@@ -148,6 +148,30 @@ h1, h2, h3 {
   gap: 12px;
 }
 
+.lang-select {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.lang-select__label {
+  font-size: 0.78rem;
+  color: #efe4d8;
+  letter-spacing: 0.02em;
+}
+
+.lang-select__input {
+  border: 1px solid rgba(31, 26, 22, 0.18);
+  background: #fffaf2;
+  color: var(--ink);
+  border-radius: 10px;
+  padding: 7px 10px;
+  font-weight: 600;
+  min-width: 150px;
+  cursor: pointer;
+}
+
 .manage-tools {
   display: inline-flex;
   gap: 8px;

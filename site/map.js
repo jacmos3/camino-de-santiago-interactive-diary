@@ -1,4 +1,82 @@
 const map = L.map('map', { scrollWheelZoom: true });
+const normalizeLang = (value) => {
+  const v = String(value || '').trim().toLowerCase();
+  return ['it', 'en', 'es', 'fr'].includes(v) ? v : '';
+};
+const getPathLang = () => {
+  const m = String(window.location.pathname || '').match(/^\/(it|en|es|fr)(?:\/|$)/i);
+  return m ? normalizeLang(m[1]) : '';
+};
+const currentLang = normalizeLang(document.documentElement.lang) || getPathLang() || 'it';
+const I18N = {
+  it: {
+    detailTitle: 'Dettaglio media',
+    decimals: 'decimali',
+    goToDaySuffix: ' - vai al giorno',
+    goToDayConfirm: 'Vuoi aprire il diario del {day} per leggere i dettagli?',
+    prevItem: 'Elemento precedente',
+    nextItem: 'Elemento successivo',
+    carousel: 'Carosello',
+    item: 'Elemento',
+    media: 'media',
+    photo: 'foto',
+    video: 'video',
+    flightSegment: 'Tratto aereo ~{km} km',
+    modalClose: 'Chiudi'
+  },
+  en: {
+    detailTitle: 'Media detail',
+    decimals: 'decimals',
+    goToDaySuffix: ' - go to day',
+    goToDayConfirm: 'Open the diary for {day} to read details?',
+    prevItem: 'Previous item',
+    nextItem: 'Next item',
+    carousel: 'Carousel',
+    item: 'Item',
+    media: 'media',
+    photo: 'photo',
+    video: 'video',
+    flightSegment: 'Flight segment ~{km} km',
+    modalClose: 'Close'
+  },
+  es: {
+    detailTitle: 'Detalle de media',
+    decimals: 'decimales',
+    goToDaySuffix: ' - ir al día',
+    goToDayConfirm: '¿Abrir el diario del {day} para leer los detalles?',
+    prevItem: 'Elemento anterior',
+    nextItem: 'Elemento siguiente',
+    carousel: 'Carrusel',
+    item: 'Elemento',
+    media: 'media',
+    photo: 'foto',
+    video: 'vídeo',
+    flightSegment: 'Tramo aéreo ~{km} km',
+    modalClose: 'Cerrar'
+  },
+  fr: {
+    detailTitle: 'Détail média',
+    decimals: 'décimales',
+    goToDaySuffix: ' - aller au jour',
+    goToDayConfirm: 'Ouvrir le journal du {day} pour lire les détails ?',
+    prevItem: 'Élément précédent',
+    nextItem: 'Élément suivant',
+    carousel: 'Carrousel',
+    item: 'Élément',
+    media: 'médias',
+    photo: 'photo',
+    video: 'vidéo',
+    flightSegment: 'Segment aérien ~{km} km',
+    modalClose: 'Fermer'
+  }
+};
+const t = (key, vars = {}) => {
+  let text = ((I18N[currentLang] || I18N.it)[key]) || '';
+  Object.entries(vars).forEach(([k, v]) => {
+    text = text.replace(new RegExp(`\\{${k}\\}`, 'g'), String(v));
+  });
+  return text;
+};
 const PHOTO_EXTENSIONS = new Set(['jpg', 'jpeg', 'png', 'heic', 'heif', 'webp']);
 const MAX_LINK_KM = 100;
 const selectedDay = new URLSearchParams(window.location.search).get('day') || '';
@@ -28,7 +106,8 @@ const formatPointDateTime = (raw) => {
   if (!raw) return '';
   const d = new Date(String(raw));
   if (Number.isNaN(d.getTime())) return '';
-  return d.toLocaleString('it-IT', {
+  const localeMap = { it: 'it-IT', en: 'en-US', es: 'es-ES', fr: 'fr-FR' };
+  return d.toLocaleString(localeMap[currentLang] || 'it-IT', {
     year: 'numeric',
     month: '2-digit',
     day: '2-digit',
@@ -264,15 +343,15 @@ const buildMediaDetailControl = (onChange, initialPrecision) => {
   control.onAdd = () => {
     const wrap = L.DomUtil.create('div', 'map-media-detail-control');
     wrap.innerHTML = `
-      <div class="map-media-detail-control__title">Dettaglio media</div>
+      <div class="map-media-detail-control__title">${t('detailTitle')}</div>
       <input class="map-media-detail-control__range" type="range" min="${MEDIA_DETAIL_MIN}" max="${MEDIA_DETAIL_MAX}" step="1" value="${initialPrecision}">
-      <div class="map-media-detail-control__value">${initialPrecision} decimali</div>
+      <div class="map-media-detail-control__value">${initialPrecision} ${t('decimals')}</div>
     `;
     const input = wrap.querySelector('.map-media-detail-control__range');
     const valueEl = wrap.querySelector('.map-media-detail-control__value');
     const apply = () => {
       const next = Number(input.value);
-      valueEl.textContent = `${next} decimali`;
+      valueEl.textContent = `${next} ${t('decimals')}`;
       onChange(next);
     };
     input.addEventListener('input', apply);
@@ -290,6 +369,7 @@ const mapMediaModal = {
   body: document.getElementById('map-media-modal-body'),
   meta: document.getElementById('map-media-modal-meta')
 };
+if (mapMediaModal.close) mapMediaModal.close.setAttribute('aria-label', t('modalClose'));
 
 let mapModalItems = [];
 let mapModalIndex = -1;
@@ -421,15 +501,15 @@ const renderMapMediaModal = () => {
   if (mapMediaModal.meta) {
     const day = String(item.date || '').slice(0, 10);
     const label = `${formatMediaPopupDateTime(item)}${item.place ? ` · ${item.place}` : ''}`;
-    mapMediaModal.meta.textContent = day ? `${label} - vai al giorno` : label;
-    mapMediaModal.meta.href = day ? `index.html#note-${encodeURIComponent(day)}` : '#';
+    mapMediaModal.meta.textContent = day ? `${label}${t('goToDaySuffix')}` : label;
+    mapMediaModal.meta.href = day ? `/${currentLang}/#note-${encodeURIComponent(day)}` : '#';
     mapMediaModal.meta.onclick = (event) => {
       if (!day) {
         event.preventDefault();
         return;
       }
       event.preventDefault();
-      const ok = window.confirm(`Vuoi aprire il diario del ${day} per leggere i dettagli?`);
+      const ok = window.confirm(t('goToDayConfirm', { day }));
       if (!ok) return;
       window.location.href = mapMediaModal.meta.href;
     };
@@ -479,12 +559,12 @@ const renderMapMediaModal = () => {
     const prevBtn = document.createElement('button');
     prevBtn.type = 'button';
     prevBtn.className = 'modal__nav-btn modal__nav-btn--prev';
-    prevBtn.setAttribute('aria-label', 'Elemento precedente');
+    prevBtn.setAttribute('aria-label', t('prevItem'));
     prevBtn.textContent = '‹';
     const nextBtn = document.createElement('button');
     nextBtn.type = 'button';
     nextBtn.className = 'modal__nav-btn modal__nav-btn--next';
-    nextBtn.setAttribute('aria-label', 'Elemento successivo');
+    nextBtn.setAttribute('aria-label', t('nextItem'));
     nextBtn.textContent = '›';
     prevBtn.addEventListener('click', () => {
       mapModalIndex = (mapModalIndex - 1 + mapModalItems.length) % mapModalItems.length;
@@ -502,7 +582,7 @@ const renderMapMediaModal = () => {
     panel.className = 'modal__group-panel';
     const title = document.createElement('div');
     title.className = 'modal__group-title';
-    title.textContent = 'Carosello';
+    title.textContent = t('carousel');
     panel.appendChild(title);
 
     const list = document.createElement('div');
@@ -518,7 +598,7 @@ const renderMapMediaModal = () => {
       btn.type = 'button';
       btn.className = 'modal__group-item';
       btn.setAttribute('role', 'option');
-      btn.setAttribute('aria-label', entry.orig || 'Elemento');
+      btn.setAttribute('aria-label', entry.orig || t('item'));
       if (idx === mapModalIndex) {
         btn.classList.add('is-active');
         btn.setAttribute('aria-selected', 'true');
@@ -574,7 +654,12 @@ window.addEventListener('keydown', (event) => {
 
 Promise.all([
   fetch('data/track_points.json').then((res) => res.json()).catch(() => []),
-  fetch('data/entries.it.json').then((res) => res.json()).catch(() => ({ days: [] }))
+  fetch(`data/entries.${currentLang}.json`)
+    .then((res) => {
+      if (!res.ok) throw new Error(`entries.${currentLang}.json not available`);
+      return res.json();
+    })
+    .catch(() => fetch('data/entries.it.json').then((res) => res.json()).catch(() => ({ days: [] })))
 ])
   .then(([trackPoints, entriesData]) => {
     const normalizedTrackPoints = normalizeTrackPointsByActivityDay(trackPoints);
@@ -640,7 +725,7 @@ Promise.all([
           iconAnchor: [15, 15]
         })
       }).addTo(map);
-      plane.bindPopup(`Tratto aereo ~${Math.round(segment.km)} km`);
+      plane.bindPopup(t('flightSegment', { km: Math.round(segment.km) }));
     });
 
     let selectedLineLayer = null;
@@ -711,11 +796,11 @@ Promise.all([
         const place = String(first.place || '').trim();
         let popup = '';
         if (count > 1) {
-          popup = `${count} media (${imageCount} foto, ${videoCount} video)`;
+          popup = `${count} ${t('media')} (${imageCount} ${t('photo')}, ${videoCount} ${t('video')})`;
           if (place) popup += `<br>${place}`;
         } else {
           const when = formatMediaPopupDateTime(first);
-          const typeLabel = first.type === 'video' ? 'video' : 'foto';
+          const typeLabel = first.type === 'video' ? t('video') : t('photo');
           popup = `${when ? `${when} · ` : ''}${typeLabel}`;
           if (place) popup += `<br>${place}`;
         }
