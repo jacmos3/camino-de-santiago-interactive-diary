@@ -61,7 +61,10 @@ const I18N = {
     comments_target_media: 'Commenti foto/video',
     comments_target_note: 'Commenti testo del giorno',
     legal_notice:
-      '© Tutti i diritti riservati. Foto, video e testi di questo sito non possono essere copiati, riutilizzati, ripubblicati o redistribuiti senza autorizzazione scritta dell’autore.'
+      '© Tutti i diritti riservati. Foto, video e testi di questo sito non possono essere copiati, riutilizzati, ripubblicati o redistribuiti senza autorizzazione scritta dell’autore.',
+    after_camino_title: 'Dopo il Cammino',
+    after_camino_text:
+      'A fine 2019 ho fatto un viaggio negli Stati Uniti per correre la maratona di New York, ma l’ho trasformato in un itinerante di circa 50 giorni: proprio questo mi ha dato modo di reincontrare alcune persone conosciute sul Cammino. In quel viaggio ho rivisto Mark a New York insieme alla sua fidanzata (poi diventata sua moglie), la figlia di Pam a Philadelphia con suo marito, Danielle a San Francisco, Marcia a casa sua vicino a San Francisco, e anche Chris e Jessica, a cui ho finalmente restituito la torcia che mi avevano prestato per attraversare le mesetas. Mi è dispiaciuto non riuscire a reincontrare Ginger e Giselle: purtroppo il Texas non era fattibile in quel giro.\n\nCatherine l’ho invece reincontrata nel 2023, durante un altro viaggio itinerante: bici da Basilea a Monaco, maratona di Berlino, poi Dublino e infine Bruxelles. Lì ero andato per incontrare un mio amico storico, che festeggiava il compleanno con altri amici, e con l’occasione ho scritto anche a Catherine per vederci una sera. Questi però sono altri viaggi da raccontare in un altro sito-diario.'
   },
   en: {
     eyebrow: 'Travel diary',
@@ -125,7 +128,10 @@ const I18N = {
     comments_target_media: 'Media comments',
     comments_target_note: 'Day text comments',
     legal_notice:
-      '© All rights reserved. Photos, videos, and texts on this site may not be copied, reused, republished, or redistributed without prior written permission from the author.'
+      '© All rights reserved. Photos, videos, and texts on this site may not be copied, reused, republished, or redistributed without prior written permission from the author.',
+    after_camino_title: 'After the Camino',
+    after_camino_text:
+      'At the end of 2019 I went to the United States to run the New York City Marathon, but I turned that trip into an itinerant journey of about 50 days: that is exactly what gave me the chance to meet again some people I had met on the Camino. During that trip I saw Mark again in New York with his girlfriend (later his wife), Pam’s daughter in Philadelphia with her husband, Danielle in San Francisco, Marcia at her home near San Francisco, and also Chris and Jessica, to whom I was finally able to return the headlamp they had lent me to cross the mesetas. I was sorry I could not meet Ginger and Giselle again: Texas was not feasible on that route.\n\nI met Catherine again in 2023 during another itinerant journey: cycling from Basel to Munich, Berlin Marathon, then Dublin, and finally Brussels. I had gone there to meet a longtime friend who was celebrating his birthday with other friends, and on that occasion I also wrote to Catherine to meet one evening. Those are other stories to tell in another diary-site.'
   }
 };
 
@@ -1910,6 +1916,28 @@ const getNote = (day) => {
   return '';
 };
 
+const buildAfterCaminoSection = () => {
+  const section = document.createElement('section');
+  section.className = 'after-camino';
+  section.id = 'after-camino';
+
+  const inner = document.createElement('div');
+  inner.className = 'after-camino__inner';
+
+  const title = document.createElement('h2');
+  title.className = 'after-camino__title';
+  title.textContent = I18N[currentLang].after_camino_title;
+
+  const text = document.createElement('p');
+  text.className = 'after-camino__text';
+  text.textContent = I18N[currentLang].after_camino_text;
+
+  inner.appendChild(title);
+  inner.appendChild(text);
+  section.appendChild(inner);
+  return section;
+};
+
 const getRecommendations = (day) => {
   const rec = day && day.recommendations ? day.recommendations : null;
   if (!rec) return [];
@@ -3383,6 +3411,7 @@ const renderView = () => {
   list.forEach((day, idx) => {
     content.appendChild(buildDay(day, idx));
   });
+  content.appendChild(buildAfterCaminoSection());
 
   buildTimelineNav(list);
   observeSections();

@@ -367,6 +367,35 @@ h1, h2, h3 {
   padding: 32px 24px 80px;
 }
 
+.after-camino {
+  margin-top: 8px;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  background:
+    linear-gradient(132deg, rgba(19, 25, 36, 0.9), rgba(41, 58, 71, 0.82)),
+    radial-gradient(1100px 360px at 84% 0%, rgba(255, 214, 159, 0.22), rgba(255, 214, 159, 0) 70%);
+}
+
+.after-camino__inner {
+  padding: 28px 28px 30px;
+}
+
+.after-camino__title {
+  margin: 0 0 10px;
+  color: #fff4e6;
+  font-size: clamp(1.5rem, 2.2vw, 2.1rem);
+  letter-spacing: 0.4px;
+}
+
+.after-camino__text {
+  margin: 0;
+  color: #f3eadf;
+  line-height: 1.55;
+  font-size: 1.02rem;
+  max-width: 980px;
+}
+
 .loading {
   text-align: center;
   color: var(--muted);
@@ -1777,6 +1806,8 @@ h1, h2, h3 {
   .controls { align-items: flex-start; }
   .hero__stats { grid-template-columns: 1fr; }
   .content { padding: 20px 12px 90px; }
+  .after-camino__inner { padding: 22px 16px 24px; }
+  .after-camino__text { font-size: 0.98rem; line-height: 1.52; }
   .timeline-nav__inner { display: none; }
   .timeline-nav__wrap { flex-wrap: wrap; }
   .timeline-nav__actions {
