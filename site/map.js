@@ -116,7 +116,142 @@ const formatPointDateTime = (raw) => {
   });
 };
 
-const assetUrl = (value) => (value ? String(value) : '');
+const toRootAssetUrl = (value) => {
+  const raw = String(value || '').trim();
+  if (!raw) return '';
+  if (/^(?:[a-z]+:)?\/\//i.test(raw)) return raw;
+  if (raw.startsWith('data:') || raw.startsWith('blob:')) return raw;
+  if (raw.startsWith('/')) return raw;
+  return `/${raw.replace(/^\.?\//, '')}`;
+};
+
+const normalizeAssetPathByItem = (item, field) => {
+  const raw = String(item && item[field] ? item[field] : '').trim();
+  if (!raw) return '';
+  const date = String(item && item.date ? item.date : '').slice(0, 10);
+
+  const normalizeRaw = raw.startsWith('/') ? raw : `/${raw.replace(/^\.?\//, '')}`;
+  const datedOk = /^\/assets\/(img|thumb|poster|video_resized)\/\d{4}-\d{2}-\d{2}\/[^/]+$/i.test(normalizeRaw);
+  if (datedOk) return normalizeRaw;
+
+  const fileName = normalizeRaw.split('/').pop() || '';
+  const kindFromField = field === 'src'
+    ? ((String(item && item.type ? item.type : '') === 'video') ? 'video_resized' : 'img')
+    : (field === 'thumb' ? 'thumb' : 'poster');
+
+  const kindMatch = normalizeRaw.match(/^\/assets\/(img|thumb|poster|video_resized)\//i);
+  const kind = kindMatch ? String(kindMatch[1]).toLowerCase() : kindFromField;
+
+  if (date && fileName) {
+    return `/assets/${kind}/${date}/${fileName}`;
+  }
+
+  // Last-resort absolute path (used only when the date is unavailable).
+  return toRootAssetUrl(raw);
+};
+
+const mediaPath = (item, field) => {
+  const raw = String(item && item[field] ? item[field] : '').trim();
+  if (!raw) return '';
+  if (/^(?:[a-z]+:)?\/\//i.test(raw) || raw.startsWith('data:') || raw.startsWith('blob:')) {
+    return raw;
+  }
+  return normalizeAssetPathByItem(item, field);
+};
+
+const applyImageSrcWithFallback = (imgEl, value) => {
+  if (!imgEl) return;
+  const primary = toRootAssetUrl(value);
+  imgEl.onerror = null;
+  imgEl.src = primary;
+};
+
+const formatBytes = (bytes) => {
+  const n = Number(bytes);
+  if (!Number.isFinite(n) || n <= 0) return '0 B';
+  const units = ['B', 'KB', 'MB', 'GB'];
+  let value = n;
+  let idx = 0;
+  while (value >= 1024 && idx < units.length - 1) {
+    value /= 1024;
+    idx += 1;
+  }
+  const digits = value >= 100 || idx === 0 ? 0 : value >= 10 ? 1 : 2;
+  return `${value.toFixed(digits)} ${units[idx]}`;
+};
+
+const createMapLoader = () => {
+  const mapEl = document.getElementById('map');
+  if (!mapEl) return null;
+  const overlay = document.createElement('div');
+  overlay.className = 'map-load-overlay';
+  overlay.innerHTML = `
+    <div class="map-load-card">
+      <div class="map-load-spinner" aria-hidden="true"></div>
+      <div class="map-load-title">Caricamento tracciato…</div>
+      <div class="map-load-subtitle" id="map-load-subtitle">Inizializzazione…</div>
+      <div class="map-load-progress">
+        <div class="map-load-progress__bar" id="map-load-progress-bar"></div>
+      </div>
+    </div>
+  `;
+  mapEl.appendChild(overlay);
+  const subtitle = overlay.querySelector('#map-load-subtitle');
+  const bar = overlay.querySelector('#map-load-progress-bar');
+  return {
+    set(message, ratio = null) {
+      if (subtitle) subtitle.textContent = message || '';
+      if (bar) {
+        const pct = Number.isFinite(ratio) ? Math.max(0, Math.min(1, ratio)) : null;
+        bar.style.width = pct === null ? '20%' : `${Math.round(pct * 100)}%`;
+      }
+    },
+    done() {
+      overlay.classList.add('is-done');
+      window.setTimeout(() => overlay.remove(), 280);
+    },
+    fail(message) {
+      overlay.classList.add('is-error');
+      if (subtitle) subtitle.textContent = message || 'Errore nel caricamento mappa';
+    }
+  };
+};
+
+const fetchJsonWithProgress = async (url, onProgress) => {
+  const response = await fetch(url);
+  if (!response.ok) throw new Error(`${url} -> HTTP ${response.status}`);
+  const total = Number(response.headers.get('content-length')) || 0;
+
+  if (!response.body || typeof response.body.getReader !== 'function') {
+    const text = await response.text();
+    const size = total || text.length;
+    if (onProgress) onProgress({ loaded: size, total: size, phase: 'download' });
+    if (onProgress) onProgress({ loaded: size, total: size, phase: 'parse' });
+    return JSON.parse(text);
+  }
+
+  const reader = response.body.getReader();
+  const chunks = [];
+  let loaded = 0;
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    if (value) {
+      chunks.push(value);
+      loaded += value.byteLength;
+      if (onProgress) onProgress({ loaded, total, phase: 'download' });
+    }
+  }
+  if (onProgress) onProgress({ loaded, total: total || loaded, phase: 'parse' });
+  const bytes = new Uint8Array(loaded);
+  let offset = 0;
+  chunks.forEach((chunk) => {
+    bytes.set(chunk, offset);
+    offset += chunk.byteLength;
+  });
+  const text = new TextDecoder().decode(bytes);
+  return JSON.parse(text);
+};
 
 const flattenDayItems = (items) => {
   const out = [];
@@ -146,15 +281,17 @@ const buildMediaPoints = (entriesData) => {
   const days = Array.isArray(entriesData && entriesData.days) ? entriesData.days : [];
   const points = [];
   days.forEach((day) => {
+    const dayDate = String(day && day.date ? day.date : '').slice(0, 10);
     flattenDayItems(day.items || []).forEach((item) => {
       if (!item || (item.type !== 'image' && item.type !== 'video')) return;
       const lat = toFiniteCoord(item.lat);
       const lon = toFiniteCoord(item.lon);
       if (lat === null || lon === null) return;
+      const itemDate = String(item && item.date ? item.date : dayDate).slice(0, 10);
       points.push({
         id: item.id || '',
         type: item.type,
-        date: String(item.date || '').slice(0, 10),
+        date: itemDate,
         time: item.time || '',
         place: item.place || '',
         src: item.src || '',
@@ -521,9 +658,9 @@ const renderMapMediaModal = () => {
     video.autoplay = true;
     video.playsInline = true;
     video.preload = 'metadata';
-    if (item.poster) video.poster = assetUrl(item.poster);
+    if (item.poster) video.poster = mediaPath(item, 'poster');
     const source = document.createElement('source');
-    source.src = assetUrl(item.src);
+    source.src = mediaPath(item, 'src');
     source.type = item.mime || 'video/mp4';
     video.appendChild(source);
     mapMediaModal.body.appendChild(video);
@@ -546,7 +683,7 @@ const renderMapMediaModal = () => {
     shell.className = 'modal__zoom-shell';
     const img = document.createElement('img');
     img.className = 'modal__image';
-    img.src = assetUrl(item.src || item.thumb);
+    applyImageSrcWithFallback(img, mediaPath(item, 'src') || mediaPath(item, 'thumb'));
     img.alt = item.orig || '';
     shell.appendChild(img);
     mapMediaModal.body.appendChild(shell);
@@ -607,7 +744,10 @@ const renderMapMediaModal = () => {
       }
       const preview = document.createElement('img');
       preview.className = 'modal__group-thumb';
-      preview.src = assetUrl(entry.poster || entry.thumb || entry.src);
+      applyImageSrcWithFallback(
+        preview,
+        mediaPath(entry, 'poster') || mediaPath(entry, 'thumb') || mediaPath(entry, 'src')
+      );
       preview.alt = entry.orig || '';
       btn.appendChild(preview);
       btn.addEventListener('click', () => {
@@ -652,16 +792,35 @@ window.addEventListener('keydown', (event) => {
   }
 });
 
-Promise.all([
-  fetch('data/track_points.json').then((res) => res.json()).catch(() => []),
-  fetch(`data/entries.${currentLang}.json`)
-    .then((res) => {
-      if (!res.ok) throw new Error(`entries.${currentLang}.json not available`);
-      return res.json();
-    })
-    .catch(() => fetch('data/entries.it.json').then((res) => res.json()).catch(() => ({ days: [] })))
-])
-  .then(([trackPoints, entriesData]) => {
+const loader = createMapLoader();
+
+const initMap = async () => {
+  try {
+    const trackPoints = await fetchJsonWithProgress('/data/track_points.json', (p) => {
+      const loaded = Number(p.loaded || 0);
+      const total = Number(p.total || 0);
+      if (!loader) return;
+      if (p.phase === 'parse') {
+        loader.set(`Tracciato scaricato (${formatBytes(loaded)}). Parsing…`, 1);
+        return;
+      }
+      if (total > 0) {
+        const ratio = loaded / total;
+        loader.set(`Scarico tracciato: ${Math.round(ratio * 100)}% (${formatBytes(loaded)} / ${formatBytes(total)})`, ratio);
+      } else {
+        loader.set(`Scarico tracciato: ${formatBytes(loaded)}`, null);
+      }
+    }).catch(() => []);
+
+    if (loader) loader.set('Carico media della mappa…', null);
+    let entriesData;
+    try {
+      entriesData = await fetchJsonWithProgress(`/data/entries.${currentLang}.json`);
+    } catch {
+      entriesData = await fetchJsonWithProgress('/data/entries.it.json').catch(() => ({ days: [] }));
+    }
+
+    if (loader) loader.set('Disegno tracciato e punti…', null);
     const normalizedTrackPoints = normalizeTrackPointsByActivityDay(trackPoints);
     const mediaPoints = buildMediaPoints(entriesData);
     const pointFeatures = normalizedTrackPoints
@@ -854,5 +1013,11 @@ Promise.all([
     } else {
       map.setView([0, 0], 2);
     }
-  })
-  .catch(() => map.setView([0, 0], 2));
+    if (loader) loader.done();
+  } catch (error) {
+    map.setView([0, 0], 2);
+    if (loader) loader.fail('Errore nel caricamento della mappa');
+  }
+};
+
+initMap();

@@ -37,6 +37,8 @@ const I18N = {
     km_tracked_label: 'Tracciati',
     km_cumulative_label: 'Cumulativo',
     mini_map_empty: 'Nessun GPS per questo giorno. Scorri in basso per iniziare il viaggio.',
+    day_track_empty: 'Nessun GPS per questo giorno.',
+    day_track_loading: 'Caricamento mappa del giorno...',
     gps_estimated: 'stimata',
     whatsapp_badge: 'Inoltrata su WhatsApp · orario non affidabile',
     share: 'Condividi',
@@ -113,6 +115,8 @@ const I18N = {
     km_tracked_label: 'Tracked',
     km_cumulative_label: 'Cumulative',
     mini_map_empty: 'No GPS for this day. Scroll down to start the journey.',
+    day_track_empty: 'No GPS for this day.',
+    day_track_loading: 'Loading day map...',
     gps_estimated: 'estimated',
     whatsapp_badge: 'Forwarded on WhatsApp · unreliable time',
     share: 'Share',
@@ -189,6 +193,8 @@ const I18N = {
     km_tracked_label: 'Trazados',
     km_cumulative_label: 'Acumulado',
     mini_map_empty: 'No hay GPS para este día. Desplázate hacia abajo para empezar el viaje.',
+    day_track_empty: 'No hay GPS para este día.',
+    day_track_loading: 'Cargando mapa del día...',
     gps_estimated: 'estimada',
     whatsapp_badge: 'Reenviada por WhatsApp · hora no fiable',
     share: 'Compartir',
@@ -265,6 +271,8 @@ const I18N = {
     km_tracked_label: 'Tracés',
     km_cumulative_label: 'Cumulé',
     mini_map_empty: 'Aucun GPS pour ce jour. Fais défiler vers le bas pour commencer le voyage.',
+    day_track_empty: 'Aucun GPS pour ce jour.',
+    day_track_loading: 'Chargement de la carte du jour...',
     gps_estimated: 'estimée',
     whatsapp_badge: 'Transférée sur WhatsApp · heure non fiable',
     share: 'Partager',
@@ -362,6 +370,11 @@ const buildLocalizedMapPath = (lang, params = null) => {
   return query ? `${base}?${query}` : base;
 };
 
+const getDayFromPathname = (pathnameValue = '') => {
+  const match = String(pathnameValue || '').match(/^\/(?:it|en|es|fr)\/day\/(\d{4}-\d{2}-\d{2})\/?$/i);
+  return match ? String(match[1] || '') : '';
+};
+
 const syncLanguagePath = (lang) => {
   if (typeof window === 'undefined' || !window.history || typeof window.history.replaceState !== 'function') return;
   const nextPath = buildLocalizedPath(lang, window.location.pathname);
@@ -392,12 +405,33 @@ const ensureLinkTag = (id, attrs) => {
   return tag;
 };
 
+const hardenExternalAnchors = (root = document) => {
+  if (!root || typeof root.querySelectorAll !== 'function') return;
+  const anchors = root.querySelectorAll('a[href]');
+  anchors.forEach((a) => {
+    const rawHref = String(a.getAttribute('href') || '').trim();
+    if (!rawHref) return;
+    if (!/^https?:\/\//i.test(rawHref)) return;
+    let parsed = null;
+    try {
+      parsed = new URL(rawHref, window.location.origin);
+    } catch {
+      return;
+    }
+    if (!parsed || parsed.origin === window.location.origin) return;
+    a.target = '_blank';
+    a.rel = 'noopener noreferrer';
+  });
+};
+
 const updateSeoForLang = (lang) => {
   const normalized = normalizeLang(lang) || 'it';
   const seo = SEO_META[normalized] || SEO_META.it;
   const origin = window.location.origin || '';
   const params = new URLSearchParams(window.location.search || '');
-  const dayParam = String(params.get('day') || '').trim();
+  const dayFromQuery = String(params.get('day') || '').trim();
+  const dayFromPath = getDayFromPathname(window.location.pathname);
+  const dayParam = dayFromQuery || dayFromPath;
   const targetParam = String(params.get('target') || '').trim();
   const hasValidDay = /^\d{4}-\d{2}-\d{2}$/.test(dayParam);
   const canonicalPath = hasValidDay ? `/${normalized}/day/${dayParam}/` : `/${normalized}/`;
@@ -504,6 +538,9 @@ const setLang = (lang, options = {}) => {
 let dataCache = null;
 let trackByDay = null;
 let normalizedTrackByDay = null;
+let trackSplitEnabled = false;
+let trackIndexByDay = new Map();
+let trackDayLoadPromises = new Map();
 let miniMap = null;
 let miniLayer = null;
 let dayMapRegistry = new Map();
@@ -513,6 +550,7 @@ let renderedDayOrder = [];
 let modalZoomCleanup = null;
 let lazyMediaObserver = null;
 let deleteInFlight = false;
+let trackDataFetchDone = false;
 const selectedIds = new Set();
 let unlockedDayKeys = new Set();
 const commentCounts = new Map();
@@ -573,15 +611,97 @@ const toRootAssetUrl = (value) => {
   if (!raw) return '';
   if (/^(?:[a-z]+:)?\/\//i.test(raw)) return raw;
   if (raw.startsWith('data:') || raw.startsWith('blob:')) return raw;
-  if (raw.startsWith('/')) return raw;
-  return `/${raw.replace(/^\.?\//, '')}`;
+  return raw.startsWith('/') ? raw : `/${raw.replace(/^\.?\//, '')}`;
 };
 
-const API_BASE_CANDIDATES = [
-  'http://127.0.0.1:4173',
-  'http://localhost:4173',
-  ''
-];
+const normalizeAssetPathByItem = (item, field) => {
+  const raw = String(item && item[field] ? item[field] : '').trim();
+  if (!raw) return '';
+  const date = String(item && item.date ? item.date : '').slice(0, 10);
+  const normalized = raw.startsWith('/') ? raw : `/${raw.replace(/^\.?\//, '')}`;
+  if (/^(?:[a-z]+:)?\/\//i.test(normalized) || normalized.startsWith('data:') || normalized.startsWith('blob:')) {
+    return normalized;
+  }
+  const alreadyDated = /^\/assets\/(img|thumb|poster|video_resized)\/\d{4}-\d{2}-\d{2}\/[^/]+$/i.test(normalized);
+  if (alreadyDated) return normalized;
+  const fileName = normalized.split('/').pop() || '';
+  const kindFromField = field === 'src'
+    ? ((String(item && item.type ? item.type : '') === 'video') ? 'video_resized' : 'img')
+    : (field === 'thumb' ? 'thumb' : 'poster');
+  const kindMatch = normalized.match(/^\/assets\/(img|thumb|poster|video_resized)\//i);
+  const kind = kindMatch ? String(kindMatch[1]).toLowerCase() : kindFromField;
+  if (date && fileName) return `/assets/${kind}/${date}/${fileName}`;
+  return normalized;
+};
+
+const mediaPath = (item, field) => {
+  const raw = String(item && item[field] ? item[field] : '').trim();
+  if (!raw) return '';
+  if (/^(?:[a-z]+:)?\/\//i.test(raw) || raw.startsWith('data:') || raw.startsWith('blob:')) return raw;
+  return normalizeAssetPathByItem(item, field);
+};
+
+const normalizeEntriesAssetPaths = (entriesPayload) => {
+  if (!entriesPayload || !Array.isArray(entriesPayload.days)) return entriesPayload;
+  const fields = ['src', 'thumb', 'poster'];
+  const normalizeItemTree = (item, fallbackDate) => {
+    if (!item || typeof item !== 'object') return;
+    if (!item.date && fallbackDate) item.date = fallbackDate;
+    fields.forEach((field) => {
+      const next = normalizeAssetPathByItem(item, field);
+      if (next) item[field] = next;
+    });
+    if (Array.isArray(item.items)) item.items.forEach((sub) => normalizeItemTree(sub, item.date || fallbackDate));
+  };
+  entriesPayload.days.forEach((day) => {
+    const dayDate = String(day && day.date ? day.date : '').slice(0, 10);
+    const items = Array.isArray(day && day.items) ? day.items : [];
+    items.forEach((item) => normalizeItemTree(item, dayDate));
+  });
+  return entriesPayload;
+};
+
+const uniqueNonEmpty = (list) => {
+  const seen = new Set();
+  const out = [];
+  (list || []).forEach((value) => {
+    const v = String(value || '').trim();
+    if (!v || seen.has(v)) return;
+    seen.add(v);
+    out.push(v);
+  });
+  return out;
+};
+
+const getImageSourceCandidates = (item) => uniqueNonEmpty([
+  mediaPath(item, 'src'),
+  mediaPath(item, 'thumb')
+]);
+
+const getVideoSourceCandidates = (item) => uniqueNonEmpty([
+  mediaPath(item, 'src')
+]);
+
+const getApiBaseCandidates = () => {
+  // Always use same-origin API endpoints to avoid cross-origin issues
+  // and accidental calls to stale localhost servers in production.
+  return [''];
+};
+
+const API_BASE_CANDIDATES = getApiBaseCandidates();
+
+const isCommentsApiEnabled = () => {
+  if (typeof window === 'undefined') return false;
+  const meta = document.querySelector('meta[name="cammino-comments-api"]');
+  const mode = String(meta && meta.getAttribute('content') ? meta.getAttribute('content') : '')
+    .trim()
+    .toLowerCase();
+  if (mode === 'on' || mode === 'true' || mode === '1') return true;
+  if (mode === 'off' || mode === 'false' || mode === '0') return false;
+  return true;
+};
+
+const COMMENTS_API_ENABLED = isCommentsApiEnabled();
 
 const postJsonWithApiFallback = async (path, payload) => {
   let lastError = null;
@@ -1065,7 +1185,12 @@ const renderDates = () => {
   const dayPickerClose = document.getElementById('day-picker-close');
   if (dayPickerClose) dayPickerClose.setAttribute('aria-label', I18N[currentLang].close);
   document.querySelectorAll('[data-day-track-empty]').forEach((el) => {
-    el.textContent = I18N[currentLang].mini_map_empty;
+    const mode = String(el.getAttribute('data-day-track-empty') || '').trim();
+    if (mode === 'loading') {
+      el.textContent = I18N[currentLang].day_track_loading || I18N[currentLang].loading;
+    } else {
+      el.textContent = I18N[currentLang].day_track_empty || I18N[currentLang].mini_map_empty;
+    }
   });
   document.querySelectorAll('[data-day-lock-msg]').forEach((el) => {
     el.textContent = I18N[currentLang].day_locked;
@@ -1234,8 +1359,8 @@ const MODAL_GROUP_LAYOUT_CLASS = 'modal__body--with-group';
 
 const getModalPreviewSrc = (item) => {
   if (!item) return '';
-  if (item.type === 'video') return toRootAssetUrl(item.poster || item.thumb || item.src || '');
-  return toRootAssetUrl(item.thumb || item.src || '');
+  if (item.type === 'video') return mediaPath(item, 'poster') || mediaPath(item, 'thumb') || mediaPath(item, 'src') || '';
+  return mediaPath(item, 'thumb') || mediaPath(item, 'src') || '';
 };
 
 const flattenItems = (items) => {
@@ -1553,15 +1678,17 @@ const openImageModal = (item, itemIndex = null) => {
   const shell = document.createElement('div');
   shell.className = 'modal__zoom-shell';
   const image = document.createElement('img');
-  image.src = toRootAssetUrl(item.src || item.thumb) || IMG_PLACEHOLDER;
+  const imageCandidates = getImageSourceCandidates(item);
+  let imageCandidateIndex = 0;
+  image.src = imageCandidates[0] || IMG_PLACEHOLDER;
   image.addEventListener('error', () => {
-    const thumbSrc = toRootAssetUrl(item.thumb);
-    if (thumbSrc && image.src !== thumbSrc) {
-      image.src = thumbSrc;
+    imageCandidateIndex += 1;
+    if (imageCandidateIndex < imageCandidates.length) {
+      image.src = imageCandidates[imageCandidateIndex];
       return;
     }
     image.src = IMG_PLACEHOLDER;
-  }, { once: true });
+  });
   image.alt = item.orig || '';
   image.className = 'modal__image';
   image.draggable = false;
@@ -1650,11 +1777,20 @@ const openVideoModal = (item, itemIndex = null) => {
   video.autoplay = true;
   video.playsInline = true;
   video.preload = 'metadata';
-  if (item.poster) video.poster = toRootAssetUrl(item.poster);
+  if (item.poster) video.poster = mediaPath(item, 'poster');
   const source = document.createElement('source');
-  source.src = toRootAssetUrl(item.src);
+  const videoCandidates = getVideoSourceCandidates(item);
+  let videoCandidateIndex = 0;
+  source.src = videoCandidates[0] || '';
   source.type = item.mime || 'video/mp4';
   video.appendChild(source);
+  video.addEventListener('error', () => {
+    videoCandidateIndex += 1;
+    if (videoCandidateIndex >= videoCandidates.length) return;
+    source.src = videoCandidates[videoCandidateIndex];
+    video.load();
+    video.play().catch(() => {});
+  });
   modalBody.appendChild(video);
   appendModalGroupPanel(item);
 
@@ -1851,6 +1987,7 @@ const syncCommentCountInUi = (targetId, count) => {
 };
 
 const createCommentButton = (targetId, className) => {
+  if (!COMMENTS_API_ENABLED) return null;
   const btn = document.createElement('button');
   btn.type = 'button';
   btn.className = className;
@@ -1868,20 +2005,31 @@ const createCommentButton = (targetId, className) => {
 };
 
 const refreshCommentCounts = async (targetIds) => {
+  if (!COMMENTS_API_ENABLED) return;
   const unique = Array.from(new Set((targetIds || []).map((v) => String(v || '').trim()).filter(Boolean)));
   if (!unique.length) return;
-  const chunkSize = 80;
+  const chunkSize = 50;
   for (let i = 0; i < unique.length; i += chunkSize) {
     const chunk = unique.slice(i, i + chunkSize);
     try {
-      const query = encodeURIComponent(chunk.join(','));
-      const payload = await getJsonWithApiFallback(`/api/comments/counts?targets=${query}`);
+      const out = await postJsonWithApiFallback('/api/comments/counts', { targets: chunk });
+      const payload = out && out.payload ? out.payload : {};
       const counts = payload && payload.counts ? payload.counts : {};
       chunk.forEach((target) => {
         syncCommentCountInUi(target, counts[target] || 0);
       });
     } catch {
-      // keep UI usable even if comments API is unavailable
+      // Backward-compatible fallback (older servers may support GET only).
+      try {
+        const query = encodeURIComponent(chunk.join(','));
+        const payload = await getJsonWithApiFallback(`/api/comments/counts?targets=${query}`);
+        const counts = payload && payload.counts ? payload.counts : {};
+        chunk.forEach((target) => {
+          syncCommentCountInUi(target, counts[target] || 0);
+        });
+      } catch {
+        // keep UI usable even if comments API is unavailable
+      }
     }
   }
 };
@@ -1926,6 +2074,7 @@ const renderCommentsList = (comments, error = '') => {
 };
 
 const loadCommentsForTarget = async (targetId) => {
+  if (!COMMENTS_API_ENABLED) return;
   if (!commentsList) return;
   commentsList.innerHTML = `<div class="comments__state">${I18N[currentLang].comments_loading}</div>`;
   try {
@@ -1940,6 +2089,7 @@ const loadCommentsForTarget = async (targetId) => {
 };
 
 const openCommentsModal = (targetId) => {
+  if (!COMMENTS_API_ENABLED) return;
   const target = String(targetId || '').trim();
   if (!target || !commentsModal) return;
   commentsModalTarget = target;
@@ -2017,8 +2167,10 @@ const focusLinkedTargetFromLocation = () => {
 };
 
 const getRequestedDayFromLocation = () => {
-  const value = String(new URLSearchParams(window.location.search).get('day') || '').trim();
-  return /^\d{4}-\d{2}-\d{2}$/.test(value) ? value : '';
+  const fromQuery = String(new URLSearchParams(window.location.search).get('day') || '').trim();
+  if (/^\d{4}-\d{2}-\d{2}$/.test(fromQuery)) return fromQuery;
+  const fromPath = getDayFromPathname(window.location.pathname);
+  return /^\d{4}-\d{2}-\d{2}$/.test(fromPath) ? fromPath : '';
 };
 
 const renderManageTools = () => {
@@ -2103,10 +2255,10 @@ const deleteItemsByIds = async (ids, options = {}) => {
       throw err;
     }
     if (payload && payload.data) {
-      dataCache = payload.data;
+      dataCache = normalizeEntriesAssetPaths(payload.data);
     } else {
       const reload = await fetch(`${getEntriesDataPath()}?t=${Date.now()}`, { cache: 'no-store' });
-      dataCache = await reload.json();
+      dataCache = normalizeEntriesAssetPaths(await reload.json());
     }
     uniqueIds.forEach((id) => selectedIds.delete(id));
     if (closeModalAfter) closeModal();
@@ -2140,6 +2292,7 @@ if (commentsModalBackdrop) commentsModalBackdrop.addEventListener('click', close
 if (commentsForm) {
   commentsForm.addEventListener('submit', async (event) => {
     event.preventDefault();
+    if (!COMMENTS_API_ENABLED) return;
     if (!commentsModalTarget) return;
     const author = String((commentsAuthorInput && commentsAuthorInput.value) || '').trim();
     const text = String((commentsTextInput && commentsTextInput.value) || '').trim();
@@ -2334,8 +2487,8 @@ const groupDayItems = (items) => {
 
 const getGroupThumbSrc = (item) => {
   if (!item) return '';
-  if (item.type === 'video') return toRootAssetUrl(item.poster || item.thumb || '');
-  return toRootAssetUrl(item.thumb || item.src || '');
+  if (item.type === 'video') return mediaPath(item, 'poster') || mediaPath(item, 'thumb') || '';
+  return mediaPath(item, 'thumb') || mediaPath(item, 'src') || '';
 };
 
 const formatItemTimeLabel = (value) => {
@@ -2506,17 +2659,19 @@ const buildMediaCard = (groupItems) => {
     img.alt = item.orig;
     if (item.id) img.dataset.itemId = String(item.id);
     img.src = IMG_PLACEHOLDER;
-    img.dataset.src = toRootAssetUrl(item.thumb || item.src);
+    const imageCandidates = getImageSourceCandidates(item);
+    let imageCandidateIndex = 0;
+    img.dataset.src = imageCandidates[0] || '';
     img.decoding = 'async';
     img.addEventListener('error', () => {
-      const srcFallback = toRootAssetUrl(item.src);
-      if (srcFallback && img.src !== srcFallback) {
-        img.src = srcFallback;
+      imageCandidateIndex += 1;
+      if (imageCandidateIndex < imageCandidates.length) {
+        img.src = imageCandidates[imageCandidateIndex];
         return;
       }
       img.src = IMG_PLACEHOLDER;
       if (!img.dataset.src) {
-        const retrySrc = toRootAssetUrl(item.thumb || item.src);
+        const retrySrc = imageCandidates[0] || '';
         if (retrySrc) img.dataset.src = retrySrc;
       }
       window.setTimeout(() => registerLazyMedia(img), 250);
@@ -2538,14 +2693,21 @@ const buildMediaCard = (groupItems) => {
     posterImg.loading = 'lazy';
     posterImg.alt = item.orig || 'Video';
     posterImg.src = IMG_PLACEHOLDER;
-    posterImg.dataset.src = toRootAssetUrl(item.poster || item.thumb || item.src);
+    const posterCandidates = uniqueNonEmpty([
+      mediaPath(item, 'poster'),
+      ...getImageSourceCandidates(item)
+    ]);
+    let posterCandidateIndex = 0;
+    posterImg.dataset.src = posterCandidates[0] || '';
     posterImg.decoding = 'async';
     posterImg.addEventListener('error', () => {
-      posterImg.src = IMG_PLACEHOLDER;
-      if (!posterImg.dataset.src) {
-        const retrySrc = toRootAssetUrl(item.poster || item.thumb || item.src);
-        if (retrySrc) posterImg.dataset.src = retrySrc;
+      posterCandidateIndex += 1;
+      if (posterCandidateIndex < posterCandidates.length) {
+        posterImg.src = posterCandidates[posterCandidateIndex];
+        return;
       }
+      posterImg.src = IMG_PLACEHOLDER;
+      if (!posterImg.dataset.src && posterCandidates[0]) posterImg.dataset.src = posterCandidates[0];
       window.setTimeout(() => registerLazyMedia(posterImg), 250);
     });
     registerLazyMedia(posterImg);
@@ -2556,13 +2718,23 @@ const buildMediaCard = (groupItems) => {
 
     const probe = document.createElement('video');
     probe.preload = 'metadata';
-    probe.src = toRootAssetUrl(item.src);
+    const videoCandidates = getVideoSourceCandidates(item);
+    let videoCandidateIndex = 0;
+    probe.src = videoCandidates[0] || '';
     probe.addEventListener('loadedmetadata', () => {
       durationBadge.textContent = `video ${formatDuration(probe.duration)}`;
     }, { once: true });
-    probe.addEventListener('error', () => {
+    const onProbeError = () => {
+      videoCandidateIndex += 1;
+      if (videoCandidateIndex < videoCandidates.length) {
+        probe.src = videoCandidates[videoCandidateIndex];
+        probe.load();
+        return;
+      }
       durationBadge.textContent = 'video --:--';
-    }, { once: true });
+      probe.removeEventListener('error', onProbeError);
+    };
+    probe.addEventListener('error', onProbeError);
     if (!item.src) {
       durationBadge.textContent = 'video --:--';
     }
@@ -2591,7 +2763,7 @@ const buildMediaCard = (groupItems) => {
     const shareBtn = createShareButton(`media-${item.id}`, 'media-share');
     card.appendChild(shareBtn);
     const commentBtn = createCommentButton(`media-${item.id}`, 'media-comment');
-    card.appendChild(commentBtn);
+    if (commentBtn) card.appendChild(commentBtn);
   }
 
   if (selectBtn) card.appendChild(selectBtn);
@@ -2673,6 +2845,7 @@ const buildDay = (day, idx) => {
   count.textContent = `${day.items.length} ${I18N[currentLang].items_label}`;
   const distance = document.createElement('div');
   distance.className = 'day__meta';
+  distance.classList.add('day__meta--distance');
   const dayDistanceKeysAttr = Array.isArray(day.distanceKeys)
     ? day.distanceKeys.join(',')
     : day.date;
@@ -2688,10 +2861,11 @@ const buildDay = (day, idx) => {
   reloadDayBtn.setAttribute('title', I18N[currentLang].reload_content);
   reloadDayBtn.textContent = '↻';
 
-  header.appendChild(title);
-  header.appendChild(meta);
-  header.appendChild(count);
-  header.appendChild(distance);
+  const chips = document.createElement('div');
+  chips.className = 'day__chips';
+  chips.appendChild(meta);
+  chips.appendChild(count);
+  chips.appendChild(distance);
   const stravaLinks = getStravaLinks(day);
   if (stravaLinks.length) {
     const stravaWrap = document.createElement('div');
@@ -2705,9 +2879,11 @@ const buildDay = (day, idx) => {
       a.textContent = stravaLinks.length > 1 ? `${I18N[currentLang].strava_label} ${linkIdx + 1}` : I18N[currentLang].strava_label;
       stravaWrap.appendChild(a);
     });
-    header.appendChild(stravaWrap);
+    chips.appendChild(stravaWrap);
   }
-  if (hasMedia) header.appendChild(reloadDayBtn);
+  if (hasMedia) chips.appendChild(reloadDayBtn);
+  header.appendChild(title);
+  header.appendChild(chips);
   
   const dayTrackCard = isPrologueDay(day) ? null : buildDayTrackCard(day.trackDate || day.date);
 
@@ -2725,7 +2901,7 @@ const buildDay = (day, idx) => {
   const notesComments = createCommentButton(`note-${day.date}`, 'notes__comments');
   const notesActions = document.createElement('div');
   notesActions.className = 'notes__actions';
-  notesActions.appendChild(notesComments);
+  if (notesComments) notesActions.appendChild(notesComments);
   notesActions.appendChild(notesShare);
   notesHead.appendChild(notesLabel);
   notesHead.appendChild(notesActions);
@@ -2895,6 +3071,53 @@ const recomputeCumulativeDayDistanceKm = (orderedDayKeys) => {
     if (km > 0) sum += km;
     dayDistanceCumKmByDate.set(dayKey, sum);
   });
+};
+
+const hasTrackDataForDay = (dayKey) => {
+  const key = String(dayKey || '').slice(0, 10);
+  if (!key) return false;
+  if (!trackSplitEnabled) return true;
+  return trackIndexByDay.has(key);
+};
+
+const isTrackDayLoaded = (dayKey) => {
+  const key = String(dayKey || '').slice(0, 10);
+  if (!key) return false;
+  const raw = (trackByDay && trackByDay[key]) || null;
+  const norm = (normalizedTrackByDay && normalizedTrackByDay[key]) || null;
+  return Array.isArray(raw) || Array.isArray(norm);
+};
+
+const ensureTrackDayLoaded = async (dayKey) => {
+  const key = String(dayKey || '').slice(0, 10);
+  if (!key || !trackSplitEnabled || !hasTrackDataForDay(key)) return false;
+  if (isTrackDayLoaded(key)) return true;
+  if (trackDayLoadPromises.has(key)) return trackDayLoadPromises.get(key);
+  const promise = fetch(withCacheBust(`/data/tracks/day/${key}.json`, Date.now()), { cache: 'no-store' })
+    .then((res) => (res.ok ? res.json() : null))
+    .then((payload) => {
+      const points = Array.isArray(payload && payload.points) ? payload.points : [];
+      if (!trackByDay || typeof trackByDay !== 'object') trackByDay = {};
+      trackByDay[key] = points;
+      if (!normalizedTrackByDay || typeof normalizedTrackByDay !== 'object') normalizedTrackByDay = {};
+      const normalizedSingle = normalizeTrackByDayForActivities({ [key]: points }) || {};
+      normalizedTrackByDay[key] = Array.isArray(normalizedSingle[key]) ? normalizedSingle[key] : [];
+      return true;
+    })
+    .catch(() => false)
+    .finally(() => {
+      trackDayLoadPromises.delete(key);
+    });
+  trackDayLoadPromises.set(key, promise);
+  return promise;
+};
+
+const ensureTrackDaysLoaded = async (dayKeys) => {
+  if (!trackSplitEnabled) return;
+  const keys = Array.from(new Set((dayKeys || []).map((v) => String(v || '').slice(0, 10)).filter(Boolean)));
+  const needed = keys.filter((k) => hasTrackDataForDay(k) && !isTrackDayLoaded(k));
+  if (!needed.length) return;
+  await Promise.all(needed.map((k) => ensureTrackDayLoaded(k)));
 };
 
 const buildFlightCurve = (from, to, segments = 20) => {
@@ -3068,8 +3291,16 @@ const buildDayTrackCard = (dayKey) => {
   const totalPoints = segments.reduce((acc, s) => acc + s.length, 0);
   if (!segments.length || totalPoints < 2) {
     body.classList.add('is-empty');
-    body.setAttribute('data-day-track-empty', '1');
-    body.textContent = I18N[currentLang].mini_map_empty;
+    const shouldShowLoading =
+      !trackDataFetchDone
+      || (trackSplitEnabled && hasTrackDataForDay(dayKey) && !isTrackDayLoaded(dayKey));
+    if (shouldShowLoading) {
+      body.setAttribute('data-day-track-empty', 'loading');
+      body.textContent = I18N[currentLang].day_track_loading || I18N[currentLang].loading;
+    } else {
+      body.setAttribute('data-day-track-empty', 'empty');
+      body.textContent = I18N[currentLang].day_track_empty || I18N[currentLang].mini_map_empty;
+    }
     wrap.appendChild(head);
     wrap.appendChild(body);
     return wrap;
@@ -3090,10 +3321,13 @@ const buildDayTrackCard = (dayKey) => {
   return wrap;
 };
 
-const initDayTrackMap = (mapEl) => {
+const initDayTrackMap = async (mapEl) => {
   if (!mapEl || typeof L === 'undefined') return;
   const dayKey = mapEl.getAttribute('data-day-track-map');
   if (!dayKey || dayMapRegistry.has(dayKey)) return;
+  if (trackSplitEnabled && hasTrackDataForDay(dayKey) && !isTrackDayLoaded(dayKey)) {
+    await ensureTrackDayLoaded(dayKey);
+  }
   const segments = getDayTrackSegments(dayKey);
   if (!segments.length) return;
 
@@ -3187,9 +3421,24 @@ const initDayTrackMap = (mapEl) => {
 };
 
 const ensureVisibleDayTrackMaps = () => {
+  if (trackSplitEnabled) {
+    document.querySelectorAll('.day-track[data-day-track]').forEach((card) => {
+      const dayKey = String(card.getAttribute('data-day-track') || '');
+      if (!dayKey) return;
+      if (!hasTrackDataForDay(dayKey) || isTrackDayLoaded(dayKey)) return;
+      if (!isNearViewport(card, 450)) return;
+      ensureTrackDayLoaded(dayKey)
+        .then(() => {
+          refreshDayTrackCardForDay(dayKey);
+          const mapEl = document.querySelector(`.day-track__map[data-day-track-map="${dayKey}"]`);
+          if (mapEl) initDayTrackMap(mapEl).catch(() => {});
+        })
+        .catch(() => {});
+    });
+  }
   document.querySelectorAll('.day-track__map').forEach((el) => {
     if (!isNearViewport(el, 300)) return;
-    initDayTrackMap(el);
+    initDayTrackMap(el).catch(() => {});
   });
 };
 
@@ -3202,8 +3451,33 @@ const refreshDayTrackCards = () => {
     if (!oldCard) return;
     const nextCard = buildDayTrackCard(dayKey);
     oldCard.replaceWith(nextCard);
+    const mapEl = section.querySelector(`.day-track__map[data-day-track-map="${dayKey}"]`);
+    if (mapEl) {
+      dayMapRegistry.delete(dayKey);
+      window.setTimeout(() => {
+        initDayTrackMap(mapEl).catch(() => {});
+      }, 0);
+    }
   });
   ensureVisibleDayTrackMaps();
+};
+
+const refreshDayTrackCardForDay = (dayKey) => {
+  const key = String(dayKey || '').slice(0, 10);
+  if (!key) return;
+  const section = document.getElementById(`day-${key}`);
+  if (!section) return;
+  const oldCard = section.querySelector('.day-track');
+  if (!oldCard) return;
+  const nextCard = buildDayTrackCard(key);
+  oldCard.replaceWith(nextCard);
+  const mapEl = section.querySelector(`.day-track__map[data-day-track-map="${key}"]`);
+  if (mapEl) {
+    dayMapRegistry.delete(key);
+    window.setTimeout(() => {
+      initDayTrackMap(mapEl).catch(() => {});
+    }, 0);
+  }
 };
 
 const buildTimelineNav = (days) => {
@@ -3330,7 +3604,7 @@ const applyMiniMapCollapsed = (collapsed, persist = true) => {
   }
 };
 
-const renderMiniMap = (dayKey, dayIndex = null) => {
+const renderMiniMap = async (dayKey, dayIndex = null) => {
   try {
     const body = document.getElementById('mini-map-body');
     const dateEl = document.getElementById('mini-map-date');
@@ -3342,6 +3616,17 @@ const renderMiniMap = (dayKey, dayIndex = null) => {
 
     const hasIndex = Number.isInteger(dayIndex) && dayIndex >= 0 && dayIndex < renderedDayOrder.length;
     const dayKeysToDraw = hasIndex ? renderedDayOrder.slice(0, dayIndex + 1) : [dayKey];
+
+    if (trackSplitEnabled) {
+      const toLoad = dayKeysToDraw.filter((key) => hasTrackDataForDay(key));
+      if (toLoad.length) {
+        if (body) {
+          body.classList.add('is-empty');
+          body.setAttribute('data-empty-message', I18N[currentLang].day_track_loading || I18N[currentLang].loading);
+        }
+        await ensureTrackDaysLoaded(toLoad);
+      }
+    }
 
     const dayTracks = [];
     dayKeysToDraw.forEach((key) => {
@@ -3461,8 +3746,8 @@ const observeSections = () => {
     hashSyncTimer = window.setTimeout(() => {
       const next = new URL(window.location.href);
       const lang = normalizeLang(currentLang) || 'it';
-      next.pathname = `/${lang}/`;
-      next.searchParams.set('day', day);
+      next.pathname = `/${lang}/day/${day}/`;
+      next.searchParams.delete('day');
       next.searchParams.delete('target');
       next.hash = '';
       const nextUrl = `${next.pathname}${next.search}`;
@@ -3695,9 +3980,6 @@ const renderView = () => {
   list.forEach((day) => {
     if (isPrologueDay(day)) nonTrackedDayKeys.add(String(day.date || ''));
   });
-  if (!unlockedDayKeys.size && list.length) {
-    unlockedDayKeys.add(list[0].date);
-  }
   renderedDayOrder = list.map((day) => day.date);
   recomputeCumulativeDayDistanceKm(renderedDayOrder);
   allModalItems = list.flatMap((day) => flattenItems(day.items || []));
@@ -3732,6 +4014,7 @@ const renderView = () => {
     });
   });
   refreshCommentCounts(commentTargets).catch(() => {});
+  hardenExternalAnchors(content);
   window.setTimeout(() => focusLinkedTargetFromLocation(), 20);
 };
 
@@ -3739,6 +4022,7 @@ const init = async () => {
   const token = ++initRequestToken;
   const content = document.getElementById('content');
   const cacheBust = Date.now();
+  trackDataFetchDone = false;
   const fail = (msg) => {
     if (token !== initRequestToken) return;
     if (content) {
@@ -3756,45 +4040,72 @@ const init = async () => {
     }
     const data = await res.json();
     if (token !== initRequestToken) return;
-    try {
-      const resTrackPoints = await fetch(withCacheBust('/data/track_points.json', cacheBust), {
-        cache: 'no-store'
-      });
-      if (resTrackPoints.ok) {
-        const trackPoints = await resTrackPoints.json();
-        if (token !== initRequestToken) return;
-        enrichDataWithTrackPoints(data, trackPoints);
-      }
-    } catch {
-      // Optional enrichment: keep rendering even if GPS file is unavailable.
-    }
-    if (token !== initRequestToken) return;
-    dataCache = data;
+    dataCache = normalizeEntriesAssetPaths(data);
     refreshStats();
 
+    // Render notes and day structure immediately without waiting for heavy GPS enrichment.
     renderView();
 
-    // Load mini-map data asynchronously (should never block photos)
-    fetch(withCacheBust('/data/track_by_day.json', cacheBust), { cache: 'no-store' })
+    // Load track data in split mode first (day-by-day files), fallback to legacy monolithic JSON.
+    fetch(withCacheBust('/data/tracks/index.json', cacheBust), { cache: 'no-store' })
       .then((res) => (res.ok ? res.json() : null))
-      .then((json) => {
+      .then((indexJson) => {
         if (token !== initRequestToken) return;
-        trackByDay = json || null;
-        normalizedTrackByDay = normalizeTrackByDayForActivities(trackByDay);
-        computeDayDistanceKmFromTrack(trackByDay);
-        recomputeCumulativeDayDistanceKm(renderedDayOrder);
-        refreshDayTrackCards();
-        renderDates();
-        if (data.days.length) {
-          renderMiniMap(data.days[0].date, 0);
+        if (indexJson && Array.isArray(indexJson.days)) {
+          trackSplitEnabled = true;
+          trackByDay = {};
+          normalizedTrackByDay = {};
+          trackIndexByDay = new Map();
+          dayDistanceKmByDate.clear();
+          indexJson.days.forEach((entry) => {
+            const key = String(entry && entry.date ? entry.date : '').slice(0, 10);
+            if (!key) return;
+            trackIndexByDay.set(key, {
+              points: Number(entry && entry.points ? entry.points : 0),
+              distanceKm: Number(entry && entry.distance_km ? entry.distance_km : 0)
+            });
+            const km = Number(entry && entry.distance_km ? entry.distance_km : 0);
+            if (Number.isFinite(km) && km > 0) dayDistanceKmByDate.set(key, km);
+          });
+          trackDataFetchDone = true;
+          recomputeCumulativeDayDistanceKm(renderedDayOrder);
+          refreshDayTrackCards();
+          renderDates();
+          if (data.days.length) {
+            renderMiniMap(data.days[0].date, 0).catch(() => {});
+          }
+          return;
         }
+
+        // Fallback legacy: load full track_by_day.json
+        return fetch(withCacheBust('/data/track_by_day.json', cacheBust), { cache: 'no-store' })
+          .then((res) => (res.ok ? res.json() : null))
+          .then((json) => {
+            if (token !== initRequestToken) return;
+            trackSplitEnabled = false;
+            trackIndexByDay = new Map();
+            trackByDay = json || null;
+            normalizedTrackByDay = normalizeTrackByDayForActivities(trackByDay);
+            trackDataFetchDone = true;
+            computeDayDistanceKmFromTrack(trackByDay);
+            recomputeCumulativeDayDistanceKm(renderedDayOrder);
+            refreshDayTrackCards();
+            renderDates();
+            if (data.days.length) {
+              renderMiniMap(data.days[0].date, 0).catch(() => {});
+            }
+          });
       })
       .catch(() => {
         if (token !== initRequestToken) return;
+        trackSplitEnabled = false;
+        trackIndexByDay = new Map();
         trackByDay = null;
         normalizedTrackByDay = null;
+        trackDataFetchDone = true;
         dayDistanceKmByDate.clear();
         recomputeCumulativeDayDistanceKm(renderedDayOrder);
+        refreshDayTrackCards();
         renderDates();
       });
   } catch (err) {
@@ -3866,7 +4177,6 @@ window.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('keydown', (event) => {
       if (event.key === 'Escape' && dayPickerOpen) closeDayPicker();
     });
-    getAdminSessionStatus().catch(() => {});
     init();
   } catch (err) {
     const content = document.getElementById('content');

@@ -35,6 +35,9 @@ const SEO_BY_LANG = {
   }
 };
 const SITE_AUTHOR = 'Jacopo';
+const OG_IMAGE_WIDTH = 1200;
+const OG_IMAGE_HEIGHT = 630;
+const OG_IMAGE_TYPE = 'image/jpeg';
 const DAY_PAGE_PATH_RE = /^\/(it|en|es|fr)\/day\/(\d{4}-\d{2}-\d{2})\/?$/i;
 const MAP_PAGE_PATH_RE = /^\/(it|en|es|fr)\/map\/?$/i;
 
@@ -522,10 +525,15 @@ function buildDayPageHtml({ origin, lang, day, prevDay, nextDay }) {
   <meta property="og:description" content="${escapeHtml(description)}" />
   <meta property="og:url" content="${escapeHtml(canonicalUrl)}" />
   ${ogImageUrl ? `<meta property="og:image" content="${escapeHtml(ogImageUrl)}" />` : ''}
+  ${ogImageUrl ? `<meta property="og:image:width" content="${OG_IMAGE_WIDTH}" />` : ''}
+  ${ogImageUrl ? `<meta property="og:image:height" content="${OG_IMAGE_HEIGHT}" />` : ''}
+  ${ogImageUrl ? `<meta property="og:image:type" content="${OG_IMAGE_TYPE}" />` : ''}
   <meta name="twitter:card" content="${ogImageUrl ? 'summary_large_image' : 'summary'}" />
   <meta name="twitter:title" content="${escapeHtml(pageTitle)}" />
   <meta name="twitter:description" content="${escapeHtml(description)}" />
   ${ogImageUrl ? `<meta name="twitter:image" content="${escapeHtml(ogImageUrl)}" />` : ''}
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" href="/favicon.png" />
   <link rel="stylesheet" href="/styles.css" />
   <style>
     body{max-width:1100px;margin:0 auto;padding:24px}
@@ -1044,7 +1052,7 @@ function localizeIndexHtml(rawHtml, locale, req) {
   const altEn = `${origin}${hasValidDay ? `/en/day/${dayParam}/` : '/en/'}`;
   const altEs = `${origin}${hasValidDay ? `/es/day/${dayParam}/` : '/es/'}`;
   const altFr = `${origin}${hasValidDay ? `/fr/day/${dayParam}/` : '/fr/'}`;
-  const ogImage = `${origin}/assets/img/img_f98bce6cb159.jpg`;
+  const ogImage = `${origin}/assets/og-image.jpg`;
   const robotsContent = targetParam
     ? 'noindex,follow,max-image-preview:large'
     : 'index,follow,max-image-preview:large';
@@ -1075,6 +1083,9 @@ function localizeIndexHtml(rawHtml, locale, req) {
     `<meta property="og:description" content="${escapeHtml(seo.description)}" />`,
     `<meta property="og:url" content="${escapeHtml(canonical)}" />`,
     `<meta property="og:image" content="${escapeHtml(ogImage)}" />`,
+    `<meta property="og:image:width" content="${OG_IMAGE_WIDTH}" />`,
+    `<meta property="og:image:height" content="${OG_IMAGE_HEIGHT}" />`,
+    `<meta property="og:image:type" content="${OG_IMAGE_TYPE}" />`,
     '<meta name="twitter:card" content="summary_large_image" />',
     `<meta name="twitter:title" content="${escapeHtml(seo.title)}" />`,
     `<meta name="twitter:description" content="${escapeHtml(seo.description)}" />`,
@@ -1636,7 +1647,8 @@ async function handleDelete(req, res) {
 }
 
 async function serveStatic(req, res, requestPath = null, locale = '') {
-  const fsPath = toFsPath(requestPath || req.url || '/');
+  const requested = requestPath || req.url || '/';
+  const fsPath = toFsPath(requested);
   if (!fsPath) {
     res.writeHead(403);
     res.end('Forbidden');
