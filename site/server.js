@@ -40,6 +40,7 @@ const OG_IMAGE_HEIGHT = 630;
 const OG_IMAGE_TYPE = 'image/jpeg';
 const DAY_PAGE_PATH_RE = /^\/(it|en|es|fr)\/day\/(\d{4}-\d{2}-\d{2})\/?$/i;
 const MAP_PAGE_PATH_RE = /^\/(it|en|es|fr)\/map\/?$/i;
+const CONTACT_PAGE_PATH_RE = /^\/(it|en|es|fr)\/contatti\/?$/i;
 
 function loadDotEnv(rootDir) {
   try {
@@ -1033,6 +1034,7 @@ async function buildSitemapXml(req) {
   const generatedDate = itEntries && itEntries.generated_at ? String(itEntries.generated_at).slice(0, 10) : null;
   const homeAlt = { it: '/it/', en: '/en/', es: '/es/', fr: '/fr/' };
   const mapAlt = { it: '/it/map/', en: '/en/map/', es: '/es/map/', fr: '/fr/map/' };
+  const contactAlt = { it: '/it/contatti/', en: '/en/contatti/', es: '/es/contatti/', fr: '/fr/contatti/' };
   push('/it/', generatedDate, '1.0', 'daily', [], homeAlt);
   push('/en/', generatedDate, '0.9', 'daily', [], homeAlt);
   push('/es/', generatedDate, '0.9', 'daily', [], homeAlt);
@@ -1041,6 +1043,10 @@ async function buildSitemapXml(req) {
   push('/en/map/', null, '0.8', 'weekly', [], mapAlt);
   push('/es/map/', null, '0.8', 'weekly', [], mapAlt);
   push('/fr/map/', null, '0.8', 'weekly', [], mapAlt);
+  push('/it/contatti/', null, '0.5', 'monthly', [], contactAlt);
+  push('/en/contatti/', null, '0.5', 'monthly', [], contactAlt);
+  push('/es/contatti/', null, '0.5', 'monthly', [], contactAlt);
+  push('/fr/contatti/', null, '0.5', 'monthly', [], contactAlt);
   for (const day of days) {
     const date = String(day && day.date ? day.date : '').trim();
     if (!date) continue;
@@ -1924,6 +1930,18 @@ const server = http.createServer(async (req, res) => {
   if (mapMatch) {
     const lang = String(mapMatch[1]).toLowerCase();
     await serveStatic(req, res, `/map.html${urlObj.search || ''}`, lang);
+    return;
+  }
+
+  const contactMatch = urlObj.pathname.match(CONTACT_PAGE_PATH_RE);
+  if (contactMatch) {
+    const lang = String(contactMatch[1]).toLowerCase();
+    if (urlObj.pathname !== `/${lang}/contatti/`) {
+      res.writeHead(301, { Location: `/${lang}/contatti/${urlObj.search || ''}` });
+      res.end();
+      return;
+    }
+    await serveStatic(req, res, `/contatti.html${urlObj.search || ''}`, lang);
     return;
   }
 

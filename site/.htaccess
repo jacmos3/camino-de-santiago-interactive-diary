@@ -16,6 +16,7 @@ RewriteRule ^api/(.*)$ /api/index.php [L,NC,QSA]
 
 # Localized map route -> static map page
 RewriteRule ^(it|en|es|fr)/map/?$ /map.html [L,NC]
+RewriteRule ^(it|en|es|fr)/contatti/?$ /contatti.html [L,NC]
 
 # SPA fallback for localized diary/map routes
 RewriteRule ^(it|en|es|fr)(/.*)?$ /index.html [L]

@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contatti — Cammino di Santiago</title>
+  <meta name="description" content="Contatti per acquistare il template del diario del Cammino." />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="stylesheet" href="/styles.css" />
+  <style>
+    .contact-wrap { max-width: 860px; margin: 0 auto; padding: 28px 22px 60px; }
+    .contact-card { background: #fffaf2; border: 1px solid rgba(31,26,22,.1); border-radius: 16px; box-shadow: var(--shadow); padding: 22px; }
+    .contact-title { margin: 0 0 10px; font-size: 1.7rem; }
+    .contact-lead { margin: 0 0 16px; color: var(--muted); }
+    .contact-list { margin: 0; padding-left: 18px; }
+    .contact-list li { margin: 6px 0; }
+    .contact-form { margin-top: 14px; display: grid; gap: 10px; }
+    .contact-form label { font-weight: 600; color: var(--ink); font-size: .95rem; }
+    .contact-form input, .contact-form textarea {
+      width: 100%; border: 1px solid rgba(31,26,22,.18); border-radius: 10px; padding: 10px 11px;
+      background: #fff; color: var(--ink); font: inherit;
+    }
+    .contact-form textarea { min-height: 130px; resize: vertical; }
+    .contact-submit {
+      justify-self: start; border: 1px solid rgba(31,95,91,.35); background:#1f5f5b; color:#fffaf2;
+      border-radius:999px; padding:9px 14px; text-decoration:none; font-weight:700; cursor: pointer;
+    }
+    .contact-submit:hover { filter: brightness(1.05); }
+    .contact-status { margin-top: 6px; min-height: 1.2em; color: var(--muted); font-size: .92rem; }
+    .contact-back { margin-top: 18px; display: inline-block; color: var(--accent-2); }
+  </style>
+</head>
+<body>
+  <header class="hero" style="padding:42px 22px 26px; background-position:center 45%;">
+    <div class="hero__inner">
+      <span class="eyebrow" id="contact-eyebrow">Contatti</span>
+      <h1 style="margin-bottom:8px;" id="contact-h1">Acquista il template del diario</h1>
+      <p class="lead" id="contact-sub">Scrivimi per ricevere dettagli su costi, contenuti inclusi e modalità di consegna.</p>
+    </div>
+  </header>
+
+  <main class="contact-wrap">
+    <section class="contact-card">
+      <h2 class="contact-title" id="contact-title">Come funziona</h2>
+      <p class="contact-lead" id="contact-lead">Il template replica la struttura di questo sito e può essere adattato ai tuoi materiali (foto, video, tracce e testi).</p>
+      <ul class="contact-list" id="contact-list">
+        <li>Impostazione base pronta all’uso</li>
+        <li>Supporto per contenuti multilingua</li>
+        <li>Mappa, timeline e galleria media</li>
+      </ul>
+      <form class="contact-form" id="contact-form">
+        <div>
+          <label for="contact-name" id="lbl-name">Nome</label>
+          <input id="contact-name" name="name" maxlength="120" required />
+        </div>
+        <div>
+          <label for="contact-email" id="lbl-email">Email</label>
+          <input id="contact-email" name="email" type="email" maxlength="190" required />
+        </div>
+        <div>
+          <label for="contact-message" id="lbl-message">Messaggio</label>
+          <textarea id="contact-message" name="message" maxlength="5000" required></textarea>
+        </div>
+        <div style="display:none">
+          <label for="contact-website">Website</label>
+          <input id="contact-website" name="website" autocomplete="off" tabindex="-1" />
+        </div>
+        <button type="submit" class="contact-submit" id="contact-submit">Invia richiesta</button>
+        <div class="contact-status" id="contact-status"></div>
+      </form>
+      <p style="margin:10px 0 0;color:var(--muted);font-size:.9rem" id="contact-note">Le richieste vengono inviate via endpoint API e recapitate via email.</p>
+      <a class="contact-back" id="contact-back" href="/it/">← Torna al diario</a>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      const path = String(window.location.pathname || '/');
+      const m = path.match(/^\/(it|en|es|fr)\//i);
+      const lang = (m ? m[1] : 'it').toLowerCase();
+      const T = {
+        it: {
+          eyebrow: 'Contatti',
+          h1: 'Acquista il template del diario',
+          sub: 'Scrivimi per ricevere dettagli su costi, contenuti inclusi e modalità di consegna.',
+          title: 'Come funziona',
+          lead: 'Il template replica la struttura di questo sito e può essere adattato ai tuoi materiali (foto, video, tracce e testi).',
+          bullets: ['Impostazione base pronta all’uso', 'Supporto per contenuti multilingua', 'Mappa, timeline e galleria media'],
+          lblName: 'Nome',
+          lblEmail: 'Email',
+          lblMsg: 'Messaggio',
+          submit: 'Invia richiesta',
+          note: 'Le richieste vengono inviate via endpoint API e recapitate via email.',
+          sending: 'Invio in corso...',
+          ok: 'Messaggio inviato correttamente. Ti risponderò appena possibile.',
+          err: 'Invio non riuscito. Riprova tra poco.',
+          errMissingConfig: 'Invio non disponibile: configurazione email mancante sul server.',
+          errRate: 'Hai inviato troppe richieste in poco tempo. Riprova più tardi.',
+          valName: 'Inserisci un nome valido (max 120 caratteri).',
+          valEmail: 'Inserisci un indirizzo email valido.',
+          valMessage: 'Il messaggio deve contenere almeno 10 caratteri.',
+          back: '← Torna al diario'
+        },
+        en: {
+          eyebrow: 'Contacts',
+          h1: 'Buy the diary template',
+          sub: 'Write to me to receive details on pricing, included features, and delivery.',
+          title: 'How it works',
+          lead: 'The template replicates this site structure and can be adapted to your materials (photos, videos, tracks, and texts).',
+          bullets: ['Ready-to-use base setup', 'Multilingual content support', 'Map, timeline, and media gallery'],
+          lblName: 'Name',
+          lblEmail: 'Email',
+          lblMsg: 'Message',
+          submit: 'Send request',
+          note: 'Requests are sent via API endpoint and delivered by email.',
+          sending: 'Sending...',
+          ok: 'Message sent successfully. I will reply as soon as possible.',
+          err: 'Sending failed. Please try again shortly.',
+          errMissingConfig: 'Sending unavailable: missing email configuration on server.',
+          errRate: 'Too many requests in a short time. Please try again later.',
+          valName: 'Enter a valid name (max 120 chars).',
+          valEmail: 'Enter a valid email address.',
+          valMessage: 'Message must be at least 10 characters long.',
+          back: '← Back to diary'
+        },
+        es: {
+          eyebrow: 'Contacto',
+          h1: 'Compra la plantilla del diario',
+          sub: 'Escríbeme para recibir detalles sobre precios, contenido incluido y forma de entrega.',
+          title: 'Cómo funciona',
+          lead: 'La plantilla replica la estructura de este sitio y puede adaptarse a tus materiales (fotos, vídeos, tracks y textos).',
+          bullets: ['Configuración base lista para usar', 'Soporte para contenidos multilingües', 'Mapa, timeline y galería de medios'],
+          lblName: 'Nombre',
+          lblEmail: 'Email',
+          lblMsg: 'Mensaje',
+          submit: 'Enviar solicitud',
+          note: 'Las solicitudes se envían por endpoint API y se entregan por correo.',
+          sending: 'Enviando...',
+          ok: 'Mensaje enviado correctamente. Te responderé lo antes posible.',
+          err: 'No se pudo enviar. Vuelve a intentarlo en breve.',
+          errMissingConfig: 'Envío no disponible: falta configuración de email en el servidor.',
+          errRate: 'Has enviado demasiadas solicitudes en poco tiempo. Inténtalo más tarde.',
+          valName: 'Introduce un nombre válido (máx. 120 caracteres).',
+          valEmail: 'Introduce un email válido.',
+          valMessage: 'El mensaje debe tener al menos 10 caracteres.',
+          back: '← Volver al diario'
+        },
+        fr: {
+          eyebrow: 'Contact',
+          h1: 'Acheter le modèle du journal',
+          sub: 'Écris-moi pour recevoir les détails sur le prix, le contenu inclus et la livraison.',
+          title: 'Comment ça marche',
+          lead: 'Le modèle reproduit la structure de ce site et peut être adapté à tes contenus (photos, vidéos, traces et textes).',
+          bullets: ['Base prête à l’emploi', 'Support des contenus multilingues', 'Carte, timeline et galerie média'],
+          lblName: 'Nom',
+          lblEmail: 'Email',
+          lblMsg: 'Message',
+          submit: 'Envoyer la demande',
+          note: 'Les demandes sont envoyées via un endpoint API et livrées par email.',
+          sending: 'Envoi en cours...',
+          ok: 'Message envoyé avec succès. Je te répondrai dès que possible.',
+          err: 'Envoi échoué. Réessaie dans un instant.',
+          errMissingConfig: 'Envoi indisponible: configuration email manquante sur le serveur.',
+          errRate: 'Trop de demandes en peu de temps. Réessaie plus tard.',
+          valName: 'Saisis un nom valide (max 120 caractères).',
+          valEmail: 'Saisis une adresse email valide.',
+          valMessage: 'Le message doit contenir au moins 10 caractères.',
+          back: '← Retour au journal'
+        }
+      };
+      const t = T[lang] || T.it;
+      document.documentElement.lang = lang;
+      document.getElementById('contact-eyebrow').textContent = t.eyebrow;
+      document.getElementById('contact-h1').textContent = t.h1;
+      document.getElementById('contact-sub').textContent = t.sub;
+      document.getElementById('contact-title').textContent = t.title;
+      document.getElementById('contact-lead').textContent = t.lead;
+      const ul = document.getElementById('contact-list');
+      ul.innerHTML = '';
+      t.bullets.forEach((txt) => { const li = document.createElement('li'); li.textContent = txt; ul.appendChild(li); });
+      document.getElementById('lbl-name').textContent = t.lblName;
+      document.getElementById('lbl-email').textContent = t.lblEmail;
+      document.getElementById('lbl-message').textContent = t.lblMsg;
+      document.getElementById('contact-submit').textContent = t.submit;
+      document.getElementById('contact-note').textContent = t.note;
+      const back = document.getElementById('contact-back');
+      back.textContent = t.back;
+      back.href = `/${lang}/`;
+      document.title = `${t.eyebrow} — Cammino di Santiago`;
+
+      const form = document.getElementById('contact-form');
+      const status = document.getElementById('contact-status');
+      form.addEventListener('submit', async (ev) => {
+        ev.preventDefault();
+        const name = String(document.getElementById('contact-name').value || '').trim();
+        const email = String(document.getElementById('contact-email').value || '').trim();
+        const message = String(document.getElementById('contact-message').value || '').trim();
+        const website = String(document.getElementById('contact-website').value || '').trim();
+
+        if (!name || name.length > 120) {
+          status.textContent = t.valName;
+          return;
+        }
+        const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        if (!emailOk || email.length > 190) {
+          status.textContent = t.valEmail;
+          return;
+        }
+        if (!message || message.length < 10 || message.length > 5000) {
+          status.textContent = t.valMessage;
+          return;
+        }
+
+        status.textContent = t.sending;
+        const submit = document.getElementById('contact-submit');
+        submit.disabled = true;
+        try {
+          const payload = {
+            name,
+            email,
+            message,
+            website,
+            lang,
+          };
+          const res = await fetch('/api/contact/send', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+          });
+          const data = await res.json().catch(() => ({}));
+          if (!res.ok) {
+            const apiMsg = String(data && data.error ? data.error : '').trim();
+            if (res.status === 429) {
+              status.textContent = t.errRate;
+            } else if (apiMsg === 'Invio non configurato: destinatario email mancante sul server.' || apiMsg === 'Contact destination is not configured') {
+              status.textContent = t.errMissingConfig;
+            } else if (apiMsg) {
+              status.textContent = apiMsg;
+            } else {
+              status.textContent = t.err;
+            }
+            throw new Error('http_' + res.status + ':' + apiMsg);
+          }
+          status.textContent = t.ok;
+          form.reset();
+        } catch (e) {
+          if (!status.textContent || status.textContent === t.sending) {
+            status.textContent = t.err;
+          }
+        } finally {
+          submit.disabled = false;
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

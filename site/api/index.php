@@ -281,6 +281,99 @@ function save_store(array $store): void {
   }
 }
 
+function contact_to_email(): string {
+  $v = env_value('CONTACT_TO_EMAIL');
+  if ($v === null) $v = env_value('CONTACT_TO');
+  return trim((string)($v ?? ''));
+}
+
+function contact_from_email(): string {
+  $v = env_value('CONTACT_FROM_EMAIL');
+  if ($v !== null && trim($v) !== '') return trim($v);
+  $host = (string)($_SERVER['HTTP_HOST'] ?? 'localhost');
+  $host = preg_replace('/:\d+$/', '', $host) ?: 'localhost';
+  return 'noreply@' . $host;
+}
+
+function contact_rate_limit_per_hour(): int {
+  $v = (int)(env_value('CONTACT_RATE_LIMIT_PER_HOUR') ?? 5);
+  return max(1, min(100, $v));
+}
+
+function contact_rate_limit_path(): string {
+  return __DIR__ . '/logs/contact_rate_limit.json';
+}
+
+function contact_log_path(): string {
+  return __DIR__ . '/logs/contact.log';
+}
+
+function contact_client_ip(): string {
+  $xff = trim((string)($_SERVER['HTTP_X_FORWARDED_FOR'] ?? ''));
+  if ($xff !== '') {
+    $parts = array_map('trim', explode(',', $xff));
+    if (!empty($parts[0])) return (string)$parts[0];
+  }
+  return trim((string)($_SERVER['REMOTE_ADDR'] ?? ''));
+}
+
+function contact_safe_header_value(string $value): string {
+  return str_replace(["\r", "\n"], '', trim($value));
+}
+
+function contact_log(string $level, array $data): void {
+  try {
+    $path = contact_log_path();
+    $dir = dirname($path);
+    if (!is_dir($dir)) @mkdir($dir, 0775, true);
+    $row = ['time' => gmdate('c'), 'level' => $level] + $data;
+    @file_put_contents($path, json_encode($row, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . PHP_EOL, FILE_APPEND | LOCK_EX);
+  } catch (Throwable $ignore) {
+    // no-op
+  }
+}
+
+function contact_rate_limit_allowed(string $ip): bool {
+  $path = contact_rate_limit_path();
+  $dir = dirname($path);
+  if (!is_dir($dir)) @mkdir($dir, 0775, true);
+  $now = time();
+  $windowStart = $now - 3600;
+  $limit = contact_rate_limit_per_hour();
+  $store = ['hits' => []];
+  if (is_file($path)) {
+    $raw = file_get_contents($path);
+    if ($raw !== false && trim($raw) !== '') {
+      $decoded = json_decode($raw, true);
+      if (is_array($decoded) && isset($decoded['hits']) && is_array($decoded['hits'])) {
+        $store = $decoded;
+      }
+    }
+  }
+  $hits = [];
+  foreach (($store['hits'] ?? []) as $k => $arr) {
+    if (!is_array($arr)) continue;
+    $filtered = [];
+    foreach ($arr as $ts) {
+      $n = (int)$ts;
+      if ($n >= $windowStart) $filtered[] = $n;
+    }
+    if (!empty($filtered)) $hits[(string)$k] = $filtered;
+  }
+  $ipKey = $ip !== '' ? $ip : 'unknown';
+  $ipHits = $hits[$ipKey] ?? [];
+  if (count($ipHits) >= $limit) {
+    $store['hits'] = $hits;
+    @file_put_contents($path, json_encode($store, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES), LOCK_EX);
+    return false;
+  }
+  $ipHits[] = $now;
+  $hits[$ipKey] = $ipHits;
+  $store['hits'] = $hits;
+  @file_put_contents($path, json_encode($store, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES), LOCK_EX);
+  return true;
+}
+
 $method = strtoupper($_SERVER['REQUEST_METHOD'] ?? 'GET');
 $path = get_path_after_api();
 
@@ -411,6 +504,79 @@ if ($path === '/admin/comments/delete') {
 
 if ($path === '/delete') {
   respond(501, ['error' => 'Delete endpoint not enabled on PHP static deploy']);
+}
+
+if ($path === '/contact/send') {
+  if ($method !== 'POST') respond(405, ['error' => 'Method not allowed']);
+
+  $payload = read_json_body();
+  $name = trim((string)($payload['name'] ?? ''));
+  $email = trim((string)($payload['email'] ?? ''));
+  $message = trim((string)($payload['message'] ?? ''));
+  $website = trim((string)($payload['website'] ?? '')); // honeypot
+  $lang = trim((string)($payload['lang'] ?? ''));
+
+  if ($website !== '') {
+    respond(200, ['ok' => true]);
+  }
+
+  if ($name === '' || mb_strlen($name) > 120) {
+    respond(400, ['error' => 'Nome non valido: inserisci un nome tra 1 e 120 caratteri.']);
+  }
+  if ($email === '' || !filter_var($email, FILTER_VALIDATE_EMAIL) || mb_strlen($email) > 190) {
+    respond(400, ['error' => 'Email non valida: inserisci un indirizzo email valido.']);
+  }
+  if ($message === '' || mb_strlen($message) < 10 || mb_strlen($message) > 5000) {
+    respond(400, ['error' => 'Messaggio non valido: il testo deve essere tra 10 e 5000 caratteri.']);
+  }
+
+  $ip = contact_client_ip();
+  if (!contact_rate_limit_allowed($ip)) {
+    respond(429, ['error' => 'Troppe richieste in poco tempo. Riprova più tardi.']);
+  }
+
+  $to = contact_to_email();
+  if ($to === '' || !filter_var($to, FILTER_VALIDATE_EMAIL)) {
+    respond(500, ['error' => 'Invio non configurato: destinatario email mancante sul server.']);
+  }
+
+  $safeName = contact_safe_header_value($name);
+  $safeEmail = contact_safe_header_value($email);
+  $safeFrom = contact_safe_header_value(contact_from_email());
+  $subject = 'Richiesta template diario cammino';
+  $body = implode("\n", [
+    'Nuovo contatto dal form del sito',
+    '--------------------------------',
+    'Nome: ' . $safeName,
+    'Email: ' . $safeEmail,
+    'Lingua: ' . $lang,
+    'IP: ' . $ip,
+    'User-Agent: ' . (string)($_SERVER['HTTP_USER_AGENT'] ?? ''),
+    'URL: ' . (string)($_SERVER['HTTP_REFERER'] ?? ''),
+    '',
+    'Messaggio:',
+    $message,
+    '',
+  ]);
+  $headers = [];
+  $headers[] = 'MIME-Version: 1.0';
+  $headers[] = 'Content-Type: text/plain; charset=UTF-8';
+  $headers[] = 'From: Cammino Site <' . $safeFrom . '>';
+  $headers[] = 'Reply-To: ' . $safeName . ' <' . $safeEmail . '>';
+
+  $ok = @mail($to, $subject, $body, implode("\r\n", $headers));
+  contact_log($ok ? 'info' : 'error', [
+    'event' => 'contact_send',
+    'ok' => $ok,
+    'name' => $safeName,
+    'email' => $safeEmail,
+    'lang' => $lang,
+    'ip' => $ip,
+  ]);
+  if (!$ok) {
+    respond(500, ['error' => 'Invio email fallito lato server.']);
+  }
+  respond(200, ['ok' => true]);
 }
 
 if ($path === '/track') {

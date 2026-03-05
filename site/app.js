@@ -5,7 +5,7 @@ const I18N = {
     title: 'Cammino di Santiago',
     subtitle: 'Un recap giorno per giorno tra foto, video e ricordi di strada.',
     hero_intro:
-      'Questo diario racconta il mio Cammino di Santiago, iniziato a Lourdes e concluso a Santiago, proseguendo poi fino a Finisterre e Muxia. È stato il capitolo più intenso del mio 2019 sabbatico, dopo essermi dimesso da un contratto a tempo indeterminato come informatico. L’ho vissuto in modalità relax: non avevo nessuno che mi correva dietro e il tempo era l’unica cosa che non mi mancava.\n\nIl 2019 è stato anche l’anno della mezza maratona sulla Muraglia Cinese e della maratona di New York, ma queste sono altre storie e le racconterò in un altro diario.\n\nGodetevi ora foto, video e racconti del mio cammino giorno per giorno, tra ricordi, emozioni e dettagli concreti del percorso. Piccola chicca: ogni contenuto mostra in basso orario e luogo di scatto, e cliccando sulla località si apre Google Maps esattamente nel punto in cui quella foto o quel video è stato registrato.\n\nSe vi va, lasciatemi un commento: potete farlo su ogni foto oppure direttamente nella nota del giorno.\n\nSe sei arrivato qui perché stai pianificando il tuo cammino, spero troverai spunti e informazioni utili per goderti al meglio il viaggio. Buen Camino, peregrino!',
+      'Questo diario racconta il mio Cammino Francese di Santiago, iniziato a Lourdes e concluso a Santiago, proseguendo poi fino a Finisterre e Muxia. È stato il capitolo più intenso del mio 2019 sabbatico, dopo essermi dimesso da un contratto a tempo indeterminato come informatico. L’ho vissuto in modalità relax: non avevo nessuno che mi correva dietro e il tempo era l’unica cosa che non mi mancava.\n\nIl 2019 è stato anche l’anno della mezza maratona sulla Muraglia Cinese e della maratona di New York, ma queste sono altre storie e le racconterò in un altro diario.\n\nGodetevi ora foto, video e racconti del mio cammino giorno per giorno, tra ricordi, emozioni e dettagli concreti del percorso. Piccola chicca: ogni contenuto mostra in basso orario e luogo di scatto, e cliccando sulla località si apre Google Maps esattamente nel punto in cui quella foto o quel video è stato registrato.\n\nSe vi va, lasciatemi un commento: potete farlo su ogni foto oppure direttamente nella nota del giorno.\n\nSe sei arrivato qui perché stai pianificando il tuo cammino, spero troverai spunti e informazioni utili per goderti al meglio il viaggio. Buen Camino, peregrino!',
     days: 'Giorni',
     photos: 'Foto',
     videos: 'Video',
@@ -17,7 +17,12 @@ const I18N = {
     photo_tag: 'Foto',
     video_tag: 'Video',
     footer_note:
-      'Il sito è stato creato nel 2026, a distanza di anni dall’esperienza vissuta, ma è stato ricostruito in modo fedele unendo il tracciamento registrato sul momento tramite app di tracking, i metadata (incluse le coordinate GPS) estratti da foto e video, e i testi su stati d’animo ed eventi recuperati da vecchie note, messaggi, chat WhatsApp, audio, contenuti social e ricordi.',
+      'Il sito è stato creato successivamente rispetto all’esperienza vissuta, ma ricostruisce il mio cammino in modo molto fedele: unisce il tracciamento registrato sul momento tramite app, i metadati (incluse le coordinate GPS) estratti da foto e video, e i testi su eventi e stati d’animo recuperati da vecchie note, messaggi, chat WhatsApp, audio, contenuti social e ricordi. Molti dettagli, però, sono rimasti fuori: il cammino è qualcosa che ogni persona attraversa in modo unico, e una parte di ciò che si vive resta sempre impossibile da tradurre del tutto in parole, immagini o coordinate.\n\nIl mio consiglio è di partire da soli, per vivere davvero l’esperienza fino in fondo, senza paura di non avere nessuno con cui parlare o di sbagliare strada: sul Cammino Francese è praticamente impossibile. È un’esperienza che consiglio a tutti e non richiede allenamenti speciali né una preparazione fisica particolare: la preparazione più importante è mentale. Ho visto più persone fermarsi per preconcetti e limiti mentali che per veri limiti fisici. Se senti che vuoi farlo, non riempirti di dubbi: prendi un biglietto, prepara lo zaino e parti, peregrino. Ultreja!',
+    footer_cta_prefix:
+      'Realizzare questo sito è stato un lavoro mastodontico di raccolta, selezione dati, recupero e filtraggio delle informazioni, oltre a una lunga ricostruzione narrativa giorno per giorno.',
+    footer_cta_link: 'Contattami qui',
+    footer_cta_suffix:
+      ' per acquistare il template che ho realizzato e ricreare la stessa struttura con i tuoi contenuti.',
     view_diary: 'Diario',
     notes_label: 'Note del giorno',
     empty_note: 'Aggiungi un ricordo personale qui.',
@@ -75,7 +80,7 @@ const I18N = {
       '© Tutti i diritti riservati. Foto, video e testi di questo sito non possono essere copiati, riutilizzati, ripubblicati o redistribuiti senza autorizzazione scritta dell’autore.',
     after_camino_title: 'Dopo il Cammino',
     after_camino_text:
-      'A fine 2019 ho fatto un viaggio negli Stati Uniti per correre la maratona di New York, ma l’ho trasformato in un itinerante di circa 50 giorni: proprio questo mi ha dato modo di reincontrare alcune persone conosciute sul Cammino. In quel viaggio ho rivisto Mark a New York insieme alla sua fidanzata (poi diventata sua moglie), la figlia di Pam a Philadelphia con suo marito, Danielle a San Francisco, Marcia a casa sua vicino a San Francisco, e anche Chris e Jessica, a cui ho finalmente restituito la torcia che mi avevano prestato per attraversare le mesetas. Mi è dispiaciuto non riuscire a reincontrare Ginger e Giselle: purtroppo il Texas non era fattibile in quel giro.\n\nCatherine l’ho invece reincontrata nel 2023, durante un altro viaggio itinerante: bici da Basilea a Monaco, maratona di Berlino, poi Dublino e infine Bruxelles. Lì ero andato per incontrare un mio amico storico, che festeggiava il compleanno con altri amici, e con l’occasione ho scritto anche a Catherine per vederci una sera. Questi però sono altri viaggi da raccontare in un altro sito-diario.'
+      'Qualche mese dopo il cammino ho fatto un viaggio negli Stati Uniti per correre la maratona di New York, ma l’ho trasformato in un itinerante di circa 50 giorni: proprio questo mi ha dato modo di reincontrare alcune persone conosciute sul Cammino. In quel viaggio ho rivisto Mark a New York insieme alla sua fidanzata (poi diventata sua moglie), la figlia di Pam a Philadelphia con suo marito, Danielle a San Francisco, Marcia a casa sua vicino a San Francisco, e anche Chris e Jessica, a cui ho finalmente restituito la torcia che mi avevano prestato per attraversare le mesetas. Mi è dispiaciuto non riuscire a reincontrare Ginger e Giselle: purtroppo il Texas non era fattibile in quel giro.\n\nCatherine l’ho invece reincontrata qualche anno più tardi, durante un altro viaggio itinerante: ero a Basilea e ho comprato una bici con cui mi sono spostato fino a Monaco, dove ho incontrato un amico con cui poi sono andato a Berlino per correre la maratona. Dopo Berlino sono volato a Dublino e infine a Bruxelles per incontrare un altro mio amico portoghese, che era lì in vacanza per festeggiare il compleanno. In quell’occasione ho scritto a Catherine, senza preavviso, per dirle che ero a Bruxelles: ci siamo visti una sera per un saluto. Ma questi sono altri viaggi che saranno raccontati in altri diari.'
   },
   en: {
     language_label: 'Language',
@@ -83,7 +88,7 @@ const I18N = {
     title: 'Camino de Santiago',
     subtitle: 'A day-by-day recap through photos, videos, and trail memories.',
     hero_intro:
-      'This diary tells my Camino de Santiago, which began in Lourdes and ended in Santiago, then continued to Finisterre and Muxia. It was the most intense chapter of my 2019 sabbatical, after resigning from a permanent job as a software engineer. I lived it in a relaxed mode: no one was chasing me, and time was the one thing I had in abundance.\n\n2019 was also the year of the Great Wall of China Half Marathon and the New York City Marathon, but those are different stories and I will tell them in another diary.\n\nNow enjoy photos, videos, and day-by-day stories from my Camino, between memories, emotions, and concrete route details. A small extra: each item shows capture time and place at the bottom, and clicking the location opens Google Maps exactly at the point where that photo or video was recorded.\n\nIf you like, leave me a comment: you can do it on each photo or directly in the day note.\n\nIf you came here because you are planning your own Camino, I hope you will find useful ideas and information to enjoy your journey at its best. Buen Camino, peregrino!',
+      'This diary tells my Camino Francés, which began in Lourdes and ended in Santiago, then continued to Finisterre and Muxia. It was the most intense chapter of my 2019 sabbatical, after resigning from a permanent job as a software engineer. I lived it in a relaxed mode: no one was chasing me, and time was the one thing I had in abundance.\n\n2019 was also the year of the Great Wall of China Half Marathon and the New York City Marathon, but those are different stories and I will tell them in another diary.\n\nNow enjoy photos, videos, and day-by-day stories from my Camino, between memories, emotions, and concrete route details. A small extra: each item shows capture time and place at the bottom, and clicking the location opens Google Maps exactly at the point where that photo or video was recorded.\n\nIf you like, leave me a comment: you can do it on each photo or directly in the day note.\n\nIf you came here because you are planning your own Camino, I hope you will find useful ideas and information to enjoy your journey at its best. Buen Camino, peregrino!',
     days: 'Days',
     photos: 'Photos',
     videos: 'Videos',
@@ -95,7 +100,12 @@ const I18N = {
     photo_tag: 'Photo',
     video_tag: 'Video',
     footer_note:
-      'This site was created many years after the lived experience, but it was reconstructed very faithfully by combining route tracking recorded at the time with Runtastic, metadata (including GPS coordinates) extracted from photos and videos, and notes about emotions and events recovered from old notes, messages, audio, and memories.',
+      'This site was created after the experience itself, but it reconstructs my Camino very faithfully: it combines tracking recorded at the time via app, metadata (including GPS coordinates) extracted from photos and videos, and texts about events and states of mind recovered from old notes, messages, WhatsApp chats, audio, social content, and memories. Many details, however, were left out: the Camino is something each person goes through in a unique way, and part of what you live always remains impossible to fully translate into words, images, or coordinates.\n\nMy advice is to start alone, to truly live the experience all the way, without being afraid of having no one to talk to or taking a wrong path: on the French Way it is practically impossible. It is an experience I recommend to everyone, and it does not require special training or particular physical preparation: the most important preparation is mental. I have seen more people stop because of preconceptions and mental limits than because of real physical limits. If you feel you want to do it, do not fill yourself with doubts: buy a ticket, pack your backpack, and go, pilgrim. Ultreja!',
+    footer_cta_prefix:
+      'Building this site was a huge effort of collection, data selection, source recovery and information filtering, plus a long day-by-day narrative reconstruction.',
+    footer_cta_link: 'Contact me here',
+    footer_cta_suffix:
+      ' to buy the template I built and recreate the same structure with your own content.',
     view_diary: 'Diary',
     notes_label: 'Day notes',
     empty_note: 'Add a personal memory here.',
@@ -153,7 +163,7 @@ const I18N = {
       '© All rights reserved. Photos, videos, and texts on this site may not be copied, reused, republished, or redistributed without prior written permission from the author.',
     after_camino_title: 'After the Camino',
     after_camino_text:
-      'At the end of 2019 I went to the United States to run the New York City Marathon, but I turned that trip into an itinerant journey of about 50 days: that is exactly what gave me the chance to meet again some people I had met on the Camino. During that trip I saw Mark again in New York with his girlfriend (later his wife), Pam’s daughter in Philadelphia with her husband, Danielle in San Francisco, Marcia at her home near San Francisco, and also Chris and Jessica, to whom I was finally able to return the headlamp they had lent me to cross the mesetas. I was sorry I could not meet Ginger and Giselle again: Texas was not feasible on that route.\n\nI met Catherine again in 2023 during another itinerant journey: cycling from Basel to Munich, Berlin Marathon, then Dublin, and finally Brussels. I had gone there to meet a longtime friend who was celebrating his birthday with other friends, and on that occasion I also wrote to Catherine to meet one evening. Those are other stories to tell in another diary-site.'
+      'A few months after the Camino, I took a trip to the United States to run the New York City Marathon, but I turned it into an itinerant journey of about 50 days: that is exactly what gave me the chance to meet again some people I had met on the Camino. During that trip I saw Mark again in New York with his girlfriend (later his wife), Pam’s daughter in Philadelphia with her husband, Danielle in San Francisco, Marcia at her home near San Francisco, and also Chris and Jessica, to whom I was finally able to return the headlamp they had lent me to cross the mesetas. I was sorry I could not meet Ginger and Giselle again: Texas was not feasible on that route.\n\nI met Catherine again a few years later, during another itinerant trip: I was in Basel and bought a bike that I used to move toward Munich, where I met a friend and then went with him to Berlin to run the marathon. After Berlin I flew to Dublin and finally to Brussels to meet another Portuguese friend of mine, who was there on holiday to celebrate a birthday. On that occasion I wrote to Catherine, without any notice, to tell her I was in Brussels: we met one evening just to say hello. But those are other journeys that will be told in other diaries.'
   },
   es: {
     language_label: 'Idioma',
@@ -161,7 +171,7 @@ const I18N = {
     title: 'Camino de Santiago',
     subtitle: 'Un resumen día a día entre fotos, vídeos y recuerdos del camino.',
     hero_intro:
-      'Este diario cuenta mi Camino de Santiago, empezado en Lourdes y terminado en Santiago, y luego prolongado hasta Finisterre y Muxia. Fue el capítulo más intenso de mi 2019 sabático, después de dejar un contrato indefinido como informático. Lo viví en modo relax: no tenía a nadie persiguiéndome y el tiempo era lo único que no me faltaba.\n\n2019 también fue el año de la media maratón de la Muralla China y de la maratón de Nueva York, pero esas son otras historias y las contaré en otro diario.\n\nAhora disfrutad fotos, vídeos y relatos de mi camino día a día, entre recuerdos, emociones y detalles concretos del recorrido. Pequeño extra: cada contenido muestra abajo la hora y el lugar de captura, y al hacer clic en la localidad se abre Google Maps exactamente en el punto donde se registró esa foto o ese vídeo.\n\nSi os apetece, dejadme un comentario: podéis hacerlo en cada foto o directamente en la nota del día.\n\nSi has llegado aquí porque estás planificando tu camino, espero que encuentres ideas e información útiles para disfrutar al máximo de tu viaje. Buen Camino, peregrino!',
+      'Este diario cuenta mi Camino Francés de Santiago, empezado en Lourdes y terminado en Santiago, y luego prolongado hasta Finisterre y Muxia. Fue el capítulo más intenso de mi 2019 sabático, después de dejar un contrato indefinido como informático. Lo viví en modo relax: no tenía a nadie persiguiéndome y el tiempo era lo único que no me faltaba.\n\n2019 también fue el año de la media maratón de la Muralla China y de la maratón de Nueva York, pero esas son otras historias y las contaré en otro diario.\n\nAhora disfrutad fotos, vídeos y relatos de mi camino día a día, entre recuerdos, emociones y detalles concretos del recorrido. Pequeño extra: cada contenido muestra abajo la hora y el lugar de captura, y al hacer clic en la localidad se abre Google Maps exactamente en el punto donde se registró esa foto o ese vídeo.\n\nSi os apetece, dejadme un comentario: podéis hacerlo en cada foto o directamente en la nota del día.\n\nSi has llegado aquí porque estás planificando tu camino, espero que encuentres ideas e información útiles para disfrutar al máximo de tu viaje. Buen Camino, peregrino!',
     days: 'Días',
     photos: 'Fotos',
     videos: 'Vídeos',
@@ -173,7 +183,12 @@ const I18N = {
     photo_tag: 'Foto',
     video_tag: 'Vídeo',
     footer_note:
-      'El sitio se creó en 2026, años después de la experiencia vivida, pero se reconstruyó fielmente uniendo el seguimiento registrado en el momento con una app de tracking, los metadatos (incluidas las coordenadas GPS) extraídos de fotos y vídeos, y los textos sobre emociones y eventos recuperados de notas antiguas, mensajes, chats de WhatsApp, audios, contenidos sociales y recuerdos.',
+      'El sitio se creó después de la experiencia vivida, pero reconstruye mi Camino de forma muy fiel: une el seguimiento registrado en su momento mediante app, los metadatos (incluidas las coordenadas GPS) extraídos de fotos y vídeos, y los textos sobre eventos y estados de ánimo recuperados de notas antiguas, mensajes, chats de WhatsApp, audios, contenidos sociales y recuerdos. Muchos detalles, sin embargo, se han quedado fuera: el Camino es algo que cada persona atraviesa de forma única, y una parte de lo que se vive siempre es imposible de traducir del todo en palabras, imágenes o coordenadas.\n\nMi consejo es salir solo, para vivir de verdad la experiencia hasta el fondo, sin miedo a no tener con quién hablar o a equivocarte de camino: en el Camino Francés es prácticamente imposible. Es una experiencia que recomiendo a todos y no requiere entrenamientos especiales ni una preparación física particular: la preparación más importante es mental. He visto a más personas pararse por prejuicios y límites mentales que por límites físicos reales. Si sientes que quieres hacerlo, no te llenes de dudas: compra un billete, prepara la mochila y sal, peregrino. ¡Ultreja!',
+    footer_cta_prefix:
+      'Crear este sitio fue un trabajo enorme de recopilación, selección de datos, recuperación y filtrado de información, además de una larga reconstrucción narrativa día a día.',
+    footer_cta_link: 'Contáctame aquí',
+    footer_cta_suffix:
+      ' para comprar la plantilla que he creado y recrear la misma estructura con tus contenidos.',
     view_diary: 'Diario',
     notes_label: 'Notas del día',
     empty_note: 'Añade aquí un recuerdo personal.',
@@ -231,7 +246,7 @@ const I18N = {
       '© Todos los derechos reservados. Las fotos, vídeos y textos de este sitio no pueden copiarse, reutilizarse, republicarse ni redistribuirse sin autorización escrita del autor.',
     after_camino_title: 'Después del Camino',
     after_camino_text:
-      'A finales de 2019 hice un viaje a Estados Unidos para correr la maratón de Nueva York, pero lo convertí en un itinerante de unos 50 días: precisamente eso me permitió reencontrar a algunas personas conocidas en el Camino. En ese viaje volví a ver a Mark en Nueva York con su novia (luego su esposa), a la hija de Pam en Filadelfia con su marido, a Danielle en San Francisco, a Marcia en su casa cerca de San Francisco, y también a Chris y Jessica, a quienes por fin devolví la frontal que me habían prestado para cruzar las mesetas. Me dio pena no poder reencontrar a Ginger y Giselle: Texas no era viable en ese itinerario.\n\nA Catherine, en cambio, la reencontré en 2023 durante otro viaje itinerante: bici de Basilea a Múnich, maratón de Berlín, luego Dublín y finalmente Bruselas. Allí fui para ver a un amigo histórico que celebraba su cumpleaños con otros amigos, y aproveché para escribir también a Catherine y vernos una tarde. Pero esos son otros viajes que contar en otro sitio-diario.'
+      'Unos meses después del Camino hice un viaje a Estados Unidos para correr la maratón de Nueva York, pero lo convertí en un itinerante de unos 50 días: precisamente eso me permitió reencontrar a algunas personas conocidas en el Camino. En ese viaje volví a ver a Mark en Nueva York con su novia (luego su esposa), a la hija de Pam en Filadelfia con su marido, a Danielle en San Francisco, a Marcia en su casa cerca de San Francisco, y también a Chris y Jessica, a quienes por fin devolví la frontal que me habían prestado para cruzar las mesetas. Me dio pena no poder reencontrar a Ginger y Giselle: Texas no era viable en ese itinerario.\n\nA Catherine, en cambio, la reencontré algunos años más tarde, durante otro viaje itinerante: estaba en Basilea y compré una bici con la que me moví hasta Múnich, donde me encontré con un amigo con el que luego fui a Berlín para correr la maratón. Después de Berlín volé a Dublín y finalmente a Bruselas para encontrarme con otro amigo portugués, que estaba allí de vacaciones para celebrar un cumpleaños. En esa ocasión le escribí a Catherine, sin aviso previo, para decirle que estaba en Bruselas: nos vimos una noche para saludarnos. Pero esos son otros viajes que se contarán en otros diarios.'
   },
   fr: {
     language_label: 'Langue',
@@ -239,7 +254,7 @@ const I18N = {
     title: 'Chemin de Saint-Jacques',
     subtitle: 'Un récit jour par jour entre photos, vidéos et souvenirs de route.',
     hero_intro:
-      'Ce journal raconte mon Chemin de Saint-Jacques, commencé à Lourdes et terminé à Santiago, puis prolongé jusqu’à Finisterre et Muxia. Cela a été le chapitre le plus intense de mon année sabbatique 2019, après avoir quitté un CDI comme informaticien. Je l’ai vécu en mode relax: personne ne me courait après, et le temps était la seule chose qui ne me manquait pas.\n\n2019 a aussi été l’année du semi-marathon de la Muraille de Chine et du marathon de New York, mais ce sont d’autres histoires que je raconterai dans un autre journal.\n\nProfitez maintenant des photos, vidéos et récits de mon chemin jour après jour, entre souvenirs, émotions et détails concrets du parcours. Petite cerise: chaque contenu affiche en bas l’heure et le lieu de prise, et en cliquant sur la localité, Google Maps s’ouvre exactement au point où cette photo ou cette vidéo a été enregistrée.\n\nSi vous voulez, laissez-moi un commentaire: vous pouvez le faire sur chaque photo ou directement dans la note du jour.\n\nSi vous êtes arrivé ici parce que vous préparez votre chemin, j’espère que vous y trouverez des idées et des informations utiles pour profiter au mieux de votre voyage. Buen Camino, peregrino!',
+      'Ce journal raconte mon Camino Francés, commencé à Lourdes et terminé à Santiago, puis prolongé jusqu’à Finisterre et Muxia. Cela a été le chapitre le plus intense de mon année sabbatique 2019, après avoir quitté un CDI comme informaticien. Je l’ai vécu en mode relax: personne ne me courait après, et le temps était la seule chose qui ne me manquait pas.\n\n2019 a aussi été l’année du semi-marathon de la Muraille de Chine et du marathon de New York, mais ce sont d’autres histoires que je raconterai dans un autre journal.\n\nProfitez maintenant des photos, vidéos et récits de mon chemin jour après jour, entre souvenirs, émotions et détails concrets du parcours. Petite cerise: chaque contenu affiche en bas l’heure et le lieu de prise, et en cliquant sur la localité, Google Maps s’ouvre exactement au point où cette photo ou cette vidéo a été enregistrée.\n\nSi vous voulez, laissez-moi un commentaire: vous pouvez le faire sur chaque photo ou directement dans la note du jour.\n\nSi vous êtes arrivé ici parce que vous préparez votre chemin, j’espère que vous y trouverez des idées et des informations utiles pour profiter au mieux de votre voyage. Buen Camino, peregrino!',
     days: 'Jours',
     photos: 'Photos',
     videos: 'Vidéos',
@@ -251,7 +266,12 @@ const I18N = {
     photo_tag: 'Photo',
     video_tag: 'Vidéo',
     footer_note:
-      'Le site a été créé en 2026, des années après l’expérience vécue, mais il a été reconstruit fidèlement en combinant le suivi enregistré sur le moment via une application de tracking, les métadonnées (y compris les coordonnées GPS) extraites des photos et vidéos, et les textes sur les émotions et les événements récupérés à partir d’anciennes notes, messages, chats WhatsApp, audios, contenus sociaux et souvenirs.',
+      'Le site a été créé après l’expérience vécue, mais il reconstruit mon chemin de manière très fidèle: il réunit le suivi enregistré sur le moment via app, les métadonnées (y compris les coordonnées GPS) extraites des photos et des vidéos, et les textes sur les événements et les états d’âme récupérés à partir d’anciennes notes, messages, chats WhatsApp, audios, contenus sociaux et souvenirs. Beaucoup de détails, cependant, sont restés en dehors: le chemin est quelque chose que chacun traverse de façon unique, et une partie de ce que l’on vit reste toujours impossible à traduire entièrement en mots, images ou coordonnées.\n\nMon conseil est de partir seul, pour vivre vraiment l’expérience jusqu’au bout, sans peur de n’avoir personne à qui parler ni de se tromper de route: sur le Camino Francés, c’est pratiquement impossible. C’est une expérience que je recommande à tous, et elle ne demande ni entraînement spécial ni préparation physique particulière: la préparation la plus importante est mentale. J’ai vu plus de personnes s’arrêter à cause de préjugés et de limites mentales qu’à cause de vraies limites physiques. Si tu sens que tu veux le faire, ne te remplis pas de doutes: prends un billet, prépare ton sac, et pars, pèlerin. Ultreja!',
+    footer_cta_prefix:
+      'Créer ce site a été un travail colossal de collecte, sélection des données, récupération et filtrage des informations, ainsi qu’une longue reconstruction narrative jour après jour.',
+    footer_cta_link: 'Contacte-moi ici',
+    footer_cta_suffix:
+      ' pour acheter le modèle que j’ai réalisé et recréer la même structure avec tes contenus.',
     view_diary: 'Journal',
     notes_label: 'Notes du jour',
     empty_note: 'Ajoute ici un souvenir personnel.',
@@ -309,7 +329,7 @@ const I18N = {
       '© Tous droits réservés. Les photos, vidéos et textes de ce site ne peuvent pas être copiés, réutilisés, republiés ou redistribués sans autorisation écrite de l’auteur.',
     after_camino_title: 'Après le Chemin',
     after_camino_text:
-      'Fin 2019, j’ai fait un voyage aux États-Unis pour courir le marathon de New York, mais je l’ai transformé en itinérance d’environ 50 jours : c’est précisément ce qui m’a permis de revoir certaines personnes rencontrées sur le Chemin. Pendant ce voyage, j’ai revu Mark à New York avec sa petite amie (devenue ensuite sa femme), la fille de Pam à Philadelphie avec son mari, Danielle à San Francisco, Marcia chez elle près de San Francisco, et aussi Chris et Jessica, à qui j’ai enfin rendu la lampe frontale qu’ils m’avaient prêtée pour traverser les mesetas. J’ai regretté de ne pas pouvoir revoir Ginger et Giselle : le Texas n’était pas faisable sur cet itinéraire.\n\nJ’ai en revanche revu Catherine en 2023, pendant un autre voyage itinérant : vélo de Bâle à Munich, marathon de Berlin, puis Dublin et enfin Bruxelles. J’y étais allé pour retrouver un ami de longue date qui fêtait son anniversaire avec d’autres amis, et j’en ai profité pour écrire à Catherine afin de la voir un soir. Mais ce sont d’autres voyages à raconter dans un autre site-journal.'
+      'Quelques mois après le Chemin, j’ai fait un voyage aux États-Unis pour courir le marathon de New York, mais je l’ai transformé en itinérance d’environ 50 jours : c’est précisément ce qui m’a permis de revoir certaines personnes rencontrées sur le Chemin. Pendant ce voyage, j’ai revu Mark à New York avec sa petite amie (devenue ensuite sa femme), la fille de Pam à Philadelphie avec son mari, Danielle à San Francisco, Marcia chez elle près de San Francisco, et aussi Chris et Jessica, à qui j’ai enfin rendu la lampe frontale qu’ils m’avaient prêtée pour traverser les mesetas. J’ai regretté de ne pas pouvoir revoir Ginger et Giselle : le Texas n’était pas faisable sur cet itinéraire.\n\nJ’ai en revanche revu Catherine quelques années plus tard, pendant un autre voyage itinérant : j’étais à Bâle et j’ai acheté un vélo avec lequel je me suis déplacé jusqu’à Munich, où j’ai retrouvé un ami avec qui je suis ensuite allé à Berlin pour courir le marathon. Après Berlin, j’ai pris un vol pour Dublin puis pour Bruxelles afin de retrouver un autre ami portugais, qui était là en vacances pour fêter un anniversaire. À cette occasion, j’ai écrit à Catherine, sans prévenir, pour lui dire que j’étais à Bruxelles : nous nous sommes vus un soir pour un salut. Mais ce sont d’autres voyages qui seront racontés dans d’autres journaux.'
   }
 };
 
@@ -368,6 +388,11 @@ const buildLocalizedMapPath = (lang, params = null) => {
     ? params.toString()
     : new URLSearchParams(params).toString();
   return query ? `${base}?${query}` : base;
+};
+
+const buildLocalizedContactPath = (lang) => {
+  const targetLang = normalizeLang(lang) || 'it';
+  return `/${targetLang}/contatti/`;
 };
 
 const getDayFromPathname = (pathnameValue = '') => {
@@ -496,6 +521,9 @@ const setLang = (lang, options = {}) => {
   });
   document.querySelectorAll('.map-link').forEach((el) => {
     if (el && el.tagName === 'A') el.href = buildLocalizedMapPath(normalized);
+  });
+  document.querySelectorAll('[data-contact-link]').forEach((el) => {
+    if (el && el.tagName === 'A') el.href = buildLocalizedContactPath(normalized);
   });
   document.querySelectorAll('.lang__btn').forEach((btn) => {
     btn.classList.toggle('active', btn.dataset.lang === normalized);
@@ -1165,13 +1193,13 @@ const buildPrologueNarrative = (lang = 'it') => {
       'June 2 and 3 were the approach days: from Perugia to Bergamo, then an evening flight to Lourdes.',
       '',
       '**Key scene**',
-      'The Camino started before the trail. On June 2 I went from Perugia to Milan with a friend who was heading to Milan that same day; along the way we had picked up other people through BlaBlaCar, and the trip passed quickly through interesting conversations. Then I continued from Milan to Orio by train to reach friends who would host me for one night. For the Camino I had considered bringing a tent, but in the hours right before departure, while I was packing my backpack, I realized it would be too bulky and heavy for the backpack balance, so I did not bring it and kept only the sleeping bag in my backpack. On the morning of June 3, in Bergamo, I went for a bike ride: light air, slow pace, and at the end of a path, near a stagnant stretch of the Brembo River, I encountered donkeys. In the evening I took the flight: I landed in Lourdes late and had not organized accommodation. I could not find a place to sleep, and every place I reached was already closed or had no reception. It was objectively worrying because I really had nowhere to stay for the night, but I was not anxious at all: I had the sleeping bag and had no problem sleeping outside, homeless style. From that point on, it was no longer preparation, it was the real start.',
+      'The Camino started before the trail. On June 2 I went from Perugia to Milan with a friend who was heading to Milan that same day; along the way we had picked up other people through BlaBlaCar, and the trip passed quickly through interesting conversations. Then I continued from Milan to Bergamo by train to reach friends who would host me for one night. For the Camino I had considered bringing a tent, but in the hours right before departure, while I was packing my backpack, I realized it would be too bulky and heavy for the backpack balance, so I did not bring it and kept only the sleeping bag in my backpack. On the morning of June 3, in Bergamo, I went for a bike ride: light air, slow pace, and at the end of a path, near a stagnant stretch of the Brembo River, I encountered donkeys. In the evening I took the flight: I landed in Lourdes late and had not organized accommodation. I could not find a place to sleep, and every place I reached was already closed or had no reception. It was objectively worrying because I really had nowhere to stay for the night, but I was not anxious at all: I had the sleeping bag and had no problem sleeping outside, homeless style. From that point on, it was no longer preparation, it was the real start.',
       '',
       '**What I understood**',
       'The first step of the Camino does not coincide with the first kilometer on foot: it begins in logistical choices, in waiting, and in the way you prepare yourself for the journey.',
       '',
       '**Practical note**',
-      'Transfer Perugia-Milan by BlaBlaCar, Milan-Orio by train, night in Bergamo hosted by friends, then evening flight on June 3.'
+      'Transfer Perugia-Milan by BlaBlaCar, Milan-Bergamo by train, night in Bergamo hosted by friends, then evening flight on June 3.'
     ].join('\n');
   }
   if (lang === 'es') {
@@ -1183,13 +1211,13 @@ const buildPrologueNarrative = (lang = 'it') => {
       'El 2 y el 3 de junio fueron los días de aproximación: de Perugia a Bérgamo, luego vuelo nocturno hacia Lourdes.',
       '',
       '**Escena clave**',
-      'El camino empezó antes del sendero. El 2 de junio hice Perugia-Milán con un amigo que iba a Milán ese mismo día; durante el viaje habíamos recogido a otras personas con BlaBlaCar y el trayecto pasó rápido entre conversaciones interesantes. Luego seguí de Milán a Orio en tren para llegar a unos amigos que me alojarían una noche. Para el camino había pensado llevar tienda, pero en las horas previas a la salida, justo mientras preparaba la mochila, entendí que sería demasiado voluminosa y pesada para el equilibrio de la mochila, así que no la llevé, dejando en la mochila solo el saco de dormir. La mañana del 3, en Bérgamo, di una vuelta en bici: aire ligero, ritmo lento, y al final de un sendero, cerca de un estancamiento del río Brembo, me encontré con unos burros. Por la tarde tomé el vuelo: aterricé en Lourdes tarde y no había organizado alojamiento. No conseguía encontrar dónde dormir y los sitios que encontraba, cuando llegaba, estaban todos cerrados o sin recepción. Era preocupante, porque no tenía realmente dónde pasar la noche, pero no estaba nada ansioso: tenía el saco de dormir y no tenía ningún problema en dormir fuera, homeless style. Desde ahí ya no era preparación, era el inicio real.',
+      'El camino empezó antes del sendero. El 2 de junio hice Perugia-Milán con un amigo que iba a Milán ese mismo día; durante el viaje habíamos recogido a otras personas con BlaBlaCar y el trayecto pasó rápido entre conversaciones interesantes. Luego seguí de Milán a Bérgamo en tren para llegar a unos amigos que me alojarían una noche. Para el camino había pensado llevar tienda, pero en las horas previas a la salida, justo mientras preparaba la mochila, entendí que sería demasiado voluminosa y pesada para el equilibrio de la mochila, así que no la llevé, dejando en la mochila solo el saco de dormir. La mañana del 3, en Bérgamo, di una vuelta en bici: aire ligero, ritmo lento, y al final de un sendero, cerca de un estancamiento del río Brembo, me encontré con unos burros. Por la tarde tomé el vuelo: aterricé en Lourdes tarde y no había organizado alojamiento. No conseguía encontrar dónde dormir y los sitios que encontraba, cuando llegaba, estaban todos cerrados o sin recepción. Era preocupante, porque no tenía realmente dónde pasar la noche, pero no estaba nada ansioso: tenía el saco de dormir y no tenía ningún problema en dormir fuera, homeless style. Desde ahí ya no era preparación, era el inicio real.',
       '',
       '**Una cosa que entendí**',
       'El primer paso del camino no coincide con el primer kilómetro a pie: empieza en las decisiones logísticas, en la espera y en cómo te preparas para el viaje.',
       '',
       '**Nota práctica**',
-      'Traslado Perugia-Milán con BlaBlaCar, tren Milán-Orio, noche en Bérgamo con amigos y luego vuelo nocturno del 3 de junio.'
+      'Traslado Perugia-Milán con BlaBlaCar, tren Milán-Bérgamo, noche en Bérgamo con amigos y luego vuelo nocturno del 3 de junio.'
     ].join('\n');
   }
   if (lang === 'fr') {
@@ -1201,13 +1229,13 @@ const buildPrologueNarrative = (lang = 'it') => {
       'Les 2 et 3 juin ont été les jours d’approche : de Pérouse à Bergame, puis vol du soir vers Lourdes.',
       '',
       '**Scène clé**',
-      'Le chemin a commencé avant le sentier. Le 2 juin, j’ai fait Pérouse-Milan avec un ami qui allait à Milan ce jour-là ; pendant le trajet, nous avions pris d’autres personnes via BlaBlaCar, et le voyage est passé vite entre discussions intéressantes. Ensuite, j’ai continué de Milan à Orio en train pour rejoindre des amis qui m’hébergeaient une nuit. Pour le chemin, j’avais envisagé d’emporter une tente, mais dans les heures avant le départ, au moment de préparer mon sac, j’ai compris qu’elle serait trop encombrante et trop lourde pour l’équilibre du sac ; je ne l’ai donc pas prise, en gardant seulement le sac de couchage dans le sac. Le matin du 3, à Bergame, j’ai fait un tour à vélo : air léger, rythme lent, et au bout d’un sentier, près d’une retenue stagnante de la rivière Brembo, j’ai croisé des ânes. Le soir, j’ai pris l’avion : je suis arrivé tard à Lourdes et je n’avais pas organisé d’hébergement. Je n’arrivais pas à trouver où dormir et les lieux que je trouvais, une fois sur place, étaient déjà fermés ou sans réception. C’était inquiétant, parce que je n’avais pas réellement d’endroit pour la nuit, mais je n’étais pas du tout anxieux : j’avais le sac de couchage et je n’avais aucun problème à dormir dehors, homeless style. À partir de là, ce n’était plus de la préparation, c’était le vrai début.',
+      'Le chemin a commencé avant le sentier. Le 2 juin, j’ai fait Pérouse-Milan avec un ami qui allait à Milan ce jour-là ; pendant le trajet, nous avions pris d’autres personnes via BlaBlaCar, et le voyage est passé vite entre discussions intéressantes. Ensuite, j’ai continué de Milan à Bergame en train pour rejoindre des amis qui m’hébergeaient une nuit. Pour le chemin, j’avais envisagé d’emporter une tente, mais dans les heures avant le départ, au moment de préparer mon sac, j’ai compris qu’elle serait trop encombrante et trop lourde pour l’équilibre du sac ; je ne l’ai donc pas prise, en gardant seulement le sac de couchage dans le sac. Le matin du 3, à Bergame, j’ai fait un tour à vélo : air léger, rythme lent, et au bout d’un sentier, près d’une retenue stagnante de la rivière Brembo, j’ai croisé des ânes. Le soir, j’ai pris l’avion : je suis arrivé tard à Lourdes et je n’avais pas organisé d’hébergement. Je n’arrivais pas à trouver où dormir et les lieux que je trouvais, une fois sur place, étaient déjà fermés ou sans réception. C’était inquiétant, parce que je n’avais pas réellement d’endroit pour la nuit, mais je n’étais pas du tout anxieux : j’avais le sac de couchage et je n’avais aucun problème à dormir dehors, homeless style. À partir de là, ce n’était plus de la préparation, c’était le vrai début.',
       '',
       '**Ce que j’ai compris**',
       'Le premier pas du chemin ne coïncide pas avec le premier kilomètre à pied : il commence dans les choix logistiques, dans l’attente et dans la manière de se disposer au voyage.',
       '',
       '**Note pratique**',
-      'Trajet Pérouse-Milan en BlaBlaCar, train Milan-Orio, nuit à Bergame chez des amis, puis vol du soir du 3 juin.'
+      'Trajet Pérouse-Milan en BlaBlaCar, train Milan-Bergame, nuit à Bergame chez des amis, puis vol du soir du 3 juin.'
     ].join('\n');
   }
   return [
@@ -1218,13 +1246,13 @@ const buildPrologueNarrative = (lang = 'it') => {
     'Il 2 e il 3 giugno sono stati i giorni di avvicinamento: da Perugia a Bergamo, poi volo serale verso Lourdes.',
     '',
     '**Scena chiave**',
-    'Il cammino è iniziato prima del sentiero. Il 2 giugno ho fatto Perugia-Milano con un mio amico che andava a Milano proprio quel giorno; lungo il viaggio avevamo caricato altre persone su BlaBlaCar e il tragitto è passato veloce tra chiacchiere interessanti. Poi ho proseguito da Milano a Orio in treno per raggiungere amici che mi avrebbero ospitato una notte. Per il cammino avevo considerato di portare la tenda, ma nelle ore precedenti alla partenza, proprio mentre stavo preparando lo zaino, ho capito che sarebbe stata troppo ingombrante e pesante per l’equilibrio dello zaino, quindi non l’ho portata, tenendo nello zaino solo il sacco a pelo. Il 3 mattina, a Bergamo, ho fatto un giro in bici: aria leggera, ritmo lento, e alla fine di un sentiero, vicino a un ristagnamento del fiume Brembo, ho incontrato degli asini. In serata ho preso il volo: sono atterrato a Lourdes tardi e non avevo organizzato l’alloggio. Non riuscivo a trovare posto per dormire e i posti che trovavo, una volta arrivato lì, erano già tutti chiusi o senza reception. Era una cosa preoccupante, perché non avevo realmente un posto dove stare la notte, ma non ero per nulla in ansia: avevo il sacco a pelo e non avevo alcun problema a dormire fuori, homeless style. Da lì in poi non era più preparazione, era inizio vero.',
+    'Il cammino è iniziato prima del sentiero. Il 2 giugno ho fatto Perugia-Milano con un mio amico che andava a Milano proprio quel giorno; lungo il viaggio avevamo caricato altre persone su BlaBlaCar e il tragitto è passato veloce tra chiacchiere interessanti. Poi ho proseguito da Milano a Bergamo in treno per raggiungere amici che mi avrebbero ospitato una notte. Per il cammino avevo considerato di portare la tenda, ma nelle ore precedenti alla partenza, proprio mentre stavo preparando lo zaino, ho capito che sarebbe stata troppo ingombrante e pesante per l’equilibrio dello zaino, quindi non l’ho portata, tenendo nello zaino solo il sacco a pelo. Il 3 mattina, a Bergamo, ho fatto un giro in bici: aria leggera, ritmo lento, e alla fine di un sentiero, vicino a un ristagnamento del fiume Brembo, ho incontrato degli asini. In serata ho preso il volo: sono atterrato a Lourdes tardi e non avevo organizzato l’alloggio. Non riuscivo a trovare posto per dormire e i posti che trovavo, una volta arrivato lì, erano già tutti chiusi o senza reception. Era una cosa preoccupante, perché non avevo realmente un posto dove stare la notte, ma non ero per nulla in ansia: avevo il sacco a pelo e non avevo alcun problema a dormire fuori, homeless style. Da lì in poi non era più preparazione, era inizio vero.',
     '',
     '**Una cosa che ho capito**',
     'Il primo passo del cammino non coincide con il primo chilometro a piedi: comincia nelle scelte logistiche, nell’attesa e nel modo in cui ti predisponi al viaggio.',
     '',
     '**Nota pratica**',
-    'Trasferimento Perugia-Milano con BlaBlaCar, treno Milano-Orio, notte a Bergamo da amici, poi volo serale del 3 giugno.'
+    'Trasferimento Perugia-Milano con BlaBlaCar, treno Milano-Bergamo, notte a Bergamo da amici, poi volo serale del 3 giugno.'
   ].join('\n');
 };
 
@@ -2386,9 +2414,21 @@ const syncSelectedIdsWithCurrentData = () => {
   });
 };
 
+const getCamminoDaysTotal = () => {
+  if (!dataCache || !Array.isArray(dataCache.days)) return 0;
+  let maxDay = 0;
+  dataCache.days.forEach((day) => {
+    const raw = getCamminoDayNumber(day && day.date);
+    const num = Number.parseInt(String(raw || ''), 10);
+    if (Number.isFinite(num) && num > maxDay) maxDay = num;
+  });
+  return maxDay;
+};
+
 const refreshStats = () => {
   if (!dataCache) return;
-  document.getElementById('stat-days').textContent = dataCache.days.length;
+  const camminoDaysTotal = getCamminoDaysTotal();
+  document.getElementById('stat-days').textContent = camminoDaysTotal > 0 ? camminoDaysTotal : dataCache.days.length;
   document.getElementById('stat-photos').textContent = dataCache.counts.images;
   document.getElementById('stat-videos').textContent = dataCache.counts.videos;
 };
@@ -3681,7 +3721,12 @@ const buildTimelineNav = (days) => {
   nav.innerHTML = '';
   days.forEach((day, idx) => {
     const btn = document.createElement('button');
-    btn.textContent = isPrologueDay(day) ? I18N[currentLang].prologue_label : formatDate(day.date);
+    if (isPrologueDay(day)) {
+      btn.textContent = I18N[currentLang].prologue_label;
+    } else {
+      const num = getCamminoDayNumber(day.date);
+      btn.textContent = num ? `${I18N[currentLang].day_label} ${num}` : formatDate(day.date);
+    }
     btn.addEventListener('click', () => {
       document.getElementById(`day-${day.date}`).scrollIntoView({ behavior: 'smooth' });
     });
@@ -3911,7 +3956,16 @@ const observeSections = () => {
   const nav = document.getElementById('timeline-nav');
   const buttons = Array.from(document.querySelectorAll('.timeline-nav__inner button'));
   const sections = Array.from(document.querySelectorAll('.day'));
+  const heroSection = document.querySelector('.hero');
+  const afterCaminoSection = document.getElementById('after-camino');
+  const footerSection = document.getElementById('footer');
+  const miniMapWrap = document.getElementById('mini-map');
   if (!sections.length) return;
+
+  const setMiniMapHidden = (hidden) => {
+    if (!miniMapWrap) return;
+    miniMapWrap.classList.toggle('is-hidden', !!hidden);
+  };
 
   const ensureVisible = (btn) => {
     if (!nav || !btn) return;
@@ -3924,6 +3978,7 @@ const observeSections = () => {
   };
 
   let activeIndex = -1;
+  let activeSpecialZone = '';
   let ticking = false;
   const SCROLL_IDLE_DELAY_MS = 1000;
   const HASH_SYNC_DELAY_MS = 180;
@@ -3948,6 +4003,33 @@ const observeSections = () => {
       next.hash = '';
       const nextUrl = `${next.pathname}${next.search}`;
       const currentUrl = `${window.location.pathname}${window.location.search}`;
+      if (nextUrl === currentUrl) return;
+      window.history.replaceState(null, '', nextUrl);
+      updateSeoForLang(currentLang);
+    }, HASH_SYNC_DELAY_MS);
+  };
+  const scheduleSpecialUrlUpdate = (zoneKey, dayKey = '') => {
+    if (hashSyncTimer) window.clearTimeout(hashSyncTimer);
+    hashSyncTimer = window.setTimeout(() => {
+      const next = new URL(window.location.href);
+      const lang = normalizeLang(currentLang) || 'it';
+      next.pathname = `/${lang}/`;
+      next.searchParams.delete('day');
+      next.searchParams.delete('target');
+      if (zoneKey === 'hero') {
+        next.hash = '#hero';
+      } else if (zoneKey === 'prologue') {
+        const baseDay = String(dayKey || PROLOGUE_DATES[0] || '').slice(0, 10);
+        next.hash = baseDay ? `#note-${baseDay}` : '#prologo';
+      } else if (zoneKey === 'after') {
+        next.hash = '#after-camino';
+      } else if (zoneKey === 'footer') {
+        next.hash = '#footer';
+      } else {
+        next.hash = '';
+      }
+      const nextUrl = `${next.pathname}${next.search}${next.hash}`;
+      const currentUrl = `${window.location.pathname}${window.location.search}${window.location.hash}`;
       if (nextUrl === currentUrl) return;
       window.history.replaceState(null, '', nextUrl);
       updateSeoForLang(currentLang);
@@ -4008,14 +4090,21 @@ const observeSections = () => {
     unlockDrainTimer = window.setTimeout(drain, 10);
   };
   const setActiveIndex = (idx) => {
-    if (idx < 0 || idx >= sections.length || idx === activeIndex) return;
+    if (idx < 0 || idx >= sections.length || (idx === activeIndex && activeSpecialZone === '')) return;
     activeIndex = idx;
+    activeSpecialZone = '';
     buttons.forEach((btn, i) => btn.classList.toggle('active', i === idx));
     ensureVisible(buttons[idx]);
     const activeSection = sections[idx];
     const dayKey = activeSection.id.replace('day-', '');
-    renderMiniMap(dayKey, idx);
-    scheduleDayUrlUpdate(dayKey);
+    const isPrologue = isPrologueDay({ date: dayKey });
+    setMiniMapHidden(isPrologue);
+    if (!isPrologue) {
+      renderMiniMap(dayKey, idx);
+      scheduleDayUrlUpdate(dayKey);
+    } else {
+      scheduleSpecialUrlUpdate('prologue', dayKey);
+    }
   };
 
   const pickIndexFromScroll = () => {
@@ -4031,6 +4120,34 @@ const observeSections = () => {
 
   const syncFromScroll = () => {
     ticking = false;
+    const anchorY = Math.max(120, window.innerHeight * 0.35);
+    const heroRect = heroSection ? heroSection.getBoundingClientRect() : null;
+    if (heroRect && heroRect.bottom > anchorY) {
+      if (activeSpecialZone !== 'hero') {
+        activeSpecialZone = 'hero';
+        setMiniMapHidden(true);
+        scheduleSpecialUrlUpdate('hero');
+      }
+      return;
+    }
+    const afterRect = afterCaminoSection ? afterCaminoSection.getBoundingClientRect() : null;
+    if (afterRect && afterRect.top <= anchorY && afterRect.bottom > anchorY) {
+      if (activeSpecialZone !== 'after') {
+        activeSpecialZone = 'after';
+        setMiniMapHidden(true);
+        scheduleSpecialUrlUpdate('after');
+      }
+      return;
+    }
+    const footerRect = footerSection ? footerSection.getBoundingClientRect() : null;
+    if (footerRect && footerRect.top <= window.innerHeight * 0.85) {
+      if (activeSpecialZone !== 'footer') {
+        activeSpecialZone = 'footer';
+        setMiniMapHidden(true);
+        scheduleSpecialUrlUpdate('footer');
+      }
+      return;
+    }
     setActiveIndex(pickIndexFromScroll());
   };
 
