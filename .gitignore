@@ -15,3 +15,5 @@ site/data/notes_backlog_whatsapp_francesco.md
 site/data/notes_backlog_whatsapp_thomas.md
 takeout/
 video/
+site/scripts/migrate-assets-by-day.js
+site/scripts/recover-missing-assets-from-legacy.js
