@@ -22,3 +22,4 @@ foto/
 new/
 site/.env
 **/.DS_Store
+site/deploy-runtime/
