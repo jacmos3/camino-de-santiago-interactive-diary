@@ -115,6 +115,27 @@ function toFsPath(urlPath) {
   return resolved;
 }
 
+function buildStaticFallbackCandidates(urlPath) {
+  const sanitized = decodeURIComponent(String(urlPath || '').split('?')[0].split('#')[0]);
+  const out = [];
+  const datedMatch = sanitized.match(/^\/assets\/(img|thumb|poster|video_resized)\/(\d{4}-\d{2}-\d{2})\/([^/]+)$/i);
+  if (datedMatch) {
+    const kind = String(datedMatch[1] || '').toLowerCase();
+    const file = String(datedMatch[3] || '');
+    out.push(`/assets/${kind}/${file}`);
+    out.push(`/deploy-runtime/assets/${kind}/${file}`);
+    return out;
+  }
+  const flatMatch = sanitized.match(/^\/assets\/(img|thumb|poster|video_resized)\/([^/]+)$/i);
+  if (flatMatch) {
+    const kind = String(flatMatch[1] || '').toLowerCase();
+    const file = String(flatMatch[2] || '');
+    out.push(`/deploy-runtime/assets/${kind}/${file}`);
+    return out;
+  }
+  return out;
+}
+
 function escapeHtml(value) {
   return String(value || '')
     .replaceAll('&', '&amp;')
@@ -153,10 +174,41 @@ function firstTextParagraph(markdown, maxLen = 220) {
 
 function normalizeImageCandidate(item) {
   if (!item || typeof item !== 'object') return '';
-  const thumb = String(item.thumb || '').trim();
-  const src = String(item.src || '').trim();
-  const poster = String(item.poster || '').trim();
+  const thumb = mediaPath(item, 'thumb');
+  const src = mediaPath(item, 'src');
+  const poster = mediaPath(item, 'poster');
   return thumb || poster || src;
+}
+
+function normalizeAssetPathByItem(item, field, fallbackDate = '') {
+  const raw = String(item && item[field] ? item[field] : '').trim();
+  if (!raw) return '';
+  const date = String(
+    item && item.date
+      ? item.date
+      : fallbackDate
+  ).slice(0, 10);
+  const normalized = raw.startsWith('/') ? raw : `/${raw.replace(/^\.?\//, '')}`;
+  if (/^(?:[a-z]+:)?\/\//i.test(normalized) || normalized.startsWith('data:') || normalized.startsWith('blob:')) {
+    return normalized;
+  }
+  const alreadyDated = /^\/assets\/(img|thumb|poster|video_resized)\/\d{4}-\d{2}-\d{2}\/[^/]+$/i.test(normalized);
+  if (alreadyDated) return normalized;
+  const fileName = normalized.split('/').pop() || '';
+  const kindFromField = field === 'src'
+    ? ((String(item && item.type ? item.type : '') === 'video') ? 'video_resized' : 'img')
+    : (field === 'thumb' ? 'thumb' : 'poster');
+  const kindMatch = normalized.match(/^\/assets\/(img|thumb|poster|video_resized)\//i);
+  const kind = kindMatch ? String(kindMatch[1]).toLowerCase() : kindFromField;
+  if (date && fileName) return `/assets/${kind}/${date}/${fileName}`;
+  return normalized;
+}
+
+function mediaPath(item, field, fallbackDate = '') {
+  const raw = String(item && item[field] ? item[field] : '').trim();
+  if (!raw) return '';
+  if (/^(?:[a-z]+:)?\/\//i.test(raw) || raw.startsWith('data:') || raw.startsWith('blob:')) return raw;
+  return normalizeAssetPathByItem(item, field, fallbackDate);
 }
 
 function buildVideoDurationLabel(seconds) {
@@ -431,10 +483,10 @@ function buildDayPageHtml({ origin, lang, day, prevDay, nextDay }) {
   const interactiveMediaBase = `${origin}/${lang}/?day=${encodeURIComponent(date)}&target=`;
   const mediaCards = items.slice(0, 32).map((item) => {
     const isVideo = String(item.type || '') === 'video';
-    const mediaImg = normalizeImageCandidate(item);
+    const mediaImg = mediaPath(item, 'thumb', date) || mediaPath(item, 'poster', date) || mediaPath(item, 'src', date);
     const mediaUrl = buildAbsoluteUrl(origin, `/${String(mediaImg || '').replace(/^\/+/, '')}`);
-    const mediaSrc = buildAbsoluteUrl(origin, `/${String(item && item.src ? item.src : mediaImg || '').replace(/^\/+/, '')}`);
-    const mediaPoster = buildAbsoluteUrl(origin, `/${String(item && item.poster ? item.poster : mediaImg || '').replace(/^\/+/, '')}`);
+    const mediaSrc = buildAbsoluteUrl(origin, `/${String(mediaPath(item, 'src', date) || mediaImg || '').replace(/^\/+/, '')}`);
+    const mediaPoster = buildAbsoluteUrl(origin, `/${String(mediaPath(item, 'poster', date) || mediaImg || '').replace(/^\/+/, '')}`);
     const labelTime = escapeHtml(String(item.time || ''));
     const place = escapeHtml(String(item.place || ''));
     const id = escapeHtml(String(item.id || ''));
@@ -465,9 +517,9 @@ function buildDayPageHtml({ origin, lang, day, prevDay, nextDay }) {
   }).join('\n');
 
   const mediaJsonLd = items.slice(0, 20).map((item) => {
-    const image = normalizeImageCandidate(item);
+    const image = mediaPath(item, 'thumb', date) || mediaPath(item, 'poster', date) || mediaPath(item, 'src', date);
     if (!image) return null;
-    const contentUrl = buildAbsoluteUrl(origin, `/${String(item.src || image).replace(/^\/+/, '')}`);
+    const contentUrl = buildAbsoluteUrl(origin, `/${String(mediaPath(item, 'src', date) || image).replace(/^\/+/, '')}`);
     const thumbnailUrl = buildAbsoluteUrl(origin, `/${String(image).replace(/^\/+/, '')}`);
     const uploadDate = item.date && item.time ? `${item.date}T${item.time}:00` : undefined;
     if (String(item.type || '') === 'video') {
@@ -532,6 +584,7 @@ function buildDayPageHtml({ origin, lang, day, prevDay, nextDay }) {
   <meta name="twitter:title" content="${escapeHtml(pageTitle)}" />
   <meta name="twitter:description" content="${escapeHtml(description)}" />
   ${ogImageUrl ? `<meta name="twitter:image" content="${escapeHtml(ogImageUrl)}" />` : ''}
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="icon" type="image/png" href="/favicon.png" />
   <link rel="stylesheet" href="/styles.css" />
@@ -1043,19 +1096,15 @@ function localizeIndexHtml(rawHtml, locale, req) {
   const seo = SEO_BY_LANG[lang] || SEO_BY_LANG.it;
   const origin = getRequestOrigin(req);
   const reqUrl = new URL(String(req && req.url ? req.url : '/'), origin);
-  const dayParam = String(reqUrl.searchParams.get('day') || '').trim();
-  const targetParam = String(reqUrl.searchParams.get('target') || '').trim();
-  const hasValidDay = /^\d{4}-\d{2}-\d{2}$/.test(dayParam);
-  const canonicalPath = hasValidDay ? `/${lang}/day/${dayParam}/` : `/${lang}/`;
+  void reqUrl;
+  const canonicalPath = `/${lang}/`;
   const canonical = `${origin}${canonicalPath}`;
-  const altIt = `${origin}${hasValidDay ? `/it/day/${dayParam}/` : '/it/'}`;
-  const altEn = `${origin}${hasValidDay ? `/en/day/${dayParam}/` : '/en/'}`;
-  const altEs = `${origin}${hasValidDay ? `/es/day/${dayParam}/` : '/es/'}`;
-  const altFr = `${origin}${hasValidDay ? `/fr/day/${dayParam}/` : '/fr/'}`;
+  const altIt = `${origin}/it/`;
+  const altEn = `${origin}/en/`;
+  const altEs = `${origin}/es/`;
+  const altFr = `${origin}/fr/`;
   const ogImage = `${origin}/assets/og-image.jpg`;
-  const robotsContent = targetParam
-    ? 'noindex,follow,max-image-preview:large'
-    : 'index,follow,max-image-preview:large';
+  const robotsContent = 'noindex,follow,max-image-preview:large';
 
   let out = String(rawHtml || '');
   out = out.replace(/<html lang="[^"]*">/i, `<html lang="${lang}">`);
@@ -1648,7 +1697,7 @@ async function handleDelete(req, res) {
 
 async function serveStatic(req, res, requestPath = null, locale = '') {
   const requested = requestPath || req.url || '/';
-  const fsPath = toFsPath(requested);
+  let fsPath = toFsPath(requested);
   if (!fsPath) {
     res.writeHead(403);
     res.end('Forbidden');
@@ -1659,9 +1708,26 @@ async function serveStatic(req, res, requestPath = null, locale = '') {
   try {
     stat = await fs.stat(fsPath);
   } catch {
-    res.writeHead(404);
-    res.end('Not found');
-    return;
+    const fallbacks = buildStaticFallbackCandidates(requested);
+    let resolvedFallback = null;
+    for (const candidate of fallbacks) {
+      const candidatePath = toFsPath(candidate);
+      if (!candidatePath) continue;
+      try {
+        const s = await fs.stat(candidatePath);
+        resolvedFallback = { path: candidatePath, stat: s };
+        break;
+      } catch {
+        // continue
+      }
+    }
+    if (!resolvedFallback) {
+      res.writeHead(404);
+      res.end('Not found');
+      return;
+    }
+    fsPath = resolvedFallback.path;
+    stat = resolvedFallback.stat;
   }
 
   const finalPath = stat.isDirectory() ? path.join(fsPath, 'index.html') : fsPath;

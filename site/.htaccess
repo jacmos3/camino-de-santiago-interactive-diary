@@ -1,0 +1,42 @@
+RewriteEngine On
+
+# Serve real files/directories as-is
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Never rewrite SEO/public files
+RewriteRule ^robots\.txt$ - [L,NC]
+RewriteRule ^sitemap\.xml$ - [L,NC]
+RewriteRule ^favicon\.ico$ - [L,NC]
+
+# API routes (PHP router)
+RewriteRule ^api/?$ /api/index.php [L,NC,QSA]
+RewriteRule ^api/(.*)$ /api/index.php [L,NC,QSA]
+
+# Localized map route -> static map page
+RewriteRule ^(it|en|es|fr)/map/?$ /map.html [L,NC]
+
+# SPA fallback for localized diary/map routes
+RewriteRule ^(it|en|es|fr)(/.*)?$ /index.html [L]
+
+# Optional root fallback
+RewriteRule ^$ /index.html [L]
+
+# Video delivery hardening (avoid HTTP/2 protocol issues on some hosts/CDNs)
+<IfModule mod_mime.c>
+  AddType video/mp4 .mp4
+  AddType video/quicktime .mov
+</IfModule>
+
+<IfModule mod_deflate.c>
+  SetEnvIfNoCase Request_URI "\\.(mp4|mov)$" no-gzip=1
+</IfModule>
+
+<IfModule mod_headers.c>
+  <FilesMatch "\\.(mp4|mov)$">
+    Header set Accept-Ranges "bytes"
+    Header unset Content-Encoding
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+</IfModule>

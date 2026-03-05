@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mycamino.semproxlab.it/sitemap.xml

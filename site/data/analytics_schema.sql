@@ -1,0 +1,25 @@
+-- Cammino analytics schema (MySQL/MariaDB)
+CREATE TABLE IF NOT EXISTS analytics_events (
+  id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  created_at DATETIME NOT NULL,
+  cid VARCHAR(64) NOT NULL,
+  session_id VARCHAR(64) NOT NULL,
+  event_type VARCHAR(60) NOT NULL,
+  path VARCHAR(300) NULL,
+  lang VARCHAR(8) NULL,
+  day_key VARCHAR(10) NULL,
+  media_id VARCHAR(80) NULL,
+  target_id VARCHAR(80) NULL,
+  referrer_host VARCHAR(120) NULL,
+  ip_raw VARCHAR(64) NULL,
+  user_agent_raw TEXT NULL,
+  user_agent_hash CHAR(64) NULL,
+  ip_hash CHAR(64) NULL,
+  metadata_json JSON NULL,
+  INDEX idx_analytics_created_at (created_at),
+  INDEX idx_analytics_event_type (event_type),
+  INDEX idx_analytics_day_key (day_key),
+  INDEX idx_analytics_media_id (media_id),
+  INDEX idx_analytics_lang (lang),
+  INDEX idx_analytics_cid (cid)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

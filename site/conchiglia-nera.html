@@ -184,6 +184,36 @@
         </table>
       </div>
     </div>
+
+    <div class="card">
+      <h3 style="margin:0 0 8px;">Statistiche accessi</h3>
+      <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px;">
+        <button id="analytics-health-btn" class="btn-primary" type="button">Test connessione DB</button>
+        <span id="analytics-health-status" style="font-size:0.9rem;color:#6f6156;"></span>
+      </div>
+      <div id="analytics-kpi" class="stats"></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px;">
+        <div>
+          <div style="font-weight:600;margin-bottom:6px;">Top giorni</div>
+          <div id="analytics-top-days" style="font-size:0.9rem;color:#6f6156;"></div>
+        </div>
+        <div>
+          <div style="font-weight:600;margin-bottom:6px;">Top media</div>
+          <div id="analytics-top-media" style="font-size:0.9rem;color:#6f6156;"></div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px;">
+        <div>
+          <div style="font-weight:600;margin-bottom:6px;">Lingue</div>
+          <div id="analytics-langs" style="font-size:0.9rem;color:#6f6156;"></div>
+        </div>
+        <div>
+          <div style="font-weight:600;margin-bottom:6px;">Eventi</div>
+          <div id="analytics-events" style="font-size:0.9rem;color:#6f6156;"></div>
+        </div>
+      </div>
+      <div id="analytics-health-details" style="margin-top:10px;font-size:0.86rem;color:#6f6156;white-space:pre-wrap;"></div>
+    </div>
   </div>
 
   <script>
@@ -197,6 +227,14 @@
     const statusEl = document.getElementById('status');
     const rowsEl = document.getElementById('rows');
     const statsEl = document.getElementById('stats');
+    const analyticsKpiEl = document.getElementById('analytics-kpi');
+    const analyticsTopDaysEl = document.getElementById('analytics-top-days');
+    const analyticsTopMediaEl = document.getElementById('analytics-top-media');
+    const analyticsLangsEl = document.getElementById('analytics-langs');
+    const analyticsEventsEl = document.getElementById('analytics-events');
+    const analyticsHealthBtn = document.getElementById('analytics-health-btn');
+    const analyticsHealthStatusEl = document.getElementById('analytics-health-status');
+    const analyticsHealthDetailsEl = document.getElementById('analytics-health-details');
     const STORAGE_KEY = 'cammino_admin_token_v1';
 
     const escapeHtml = (value) => String(value || '')
@@ -328,9 +366,81 @@
         if (!payload) return;
         renderStats(payload || {});
         renderRows(payload && payload.comments);
+        await refreshAnalytics();
         setStatus(`Caricati ${Array.isArray(payload && payload.comments) ? payload.comments.length : 0} commenti.`);
       } catch (err) {
         setStatus(`Errore: ${err.message || err}`, true);
+      }
+    };
+
+    const renderSimpleList = (el, rows, mapFn) => {
+      if (!el) return;
+      const list = Array.isArray(rows) ? rows : [];
+      if (!list.length) {
+        el.innerHTML = '<div>Nessun dato.</div>';
+        return;
+      }
+      el.innerHTML = list.map((row) => `<div>${mapFn(row)}</div>`).join('');
+    };
+
+    const refreshAnalytics = async () => {
+      try {
+        const response = await fetch('/api/admin/analytics/overview?days=30', { cache: 'no-store' });
+        if (!response.ok) {
+          if (response.status === 404) return;
+          throw new Error(`HTTP ${response.status}`);
+        }
+        const payload = await response.json();
+        if (payload && payload.disabled) {
+          if (analyticsKpiEl) analyticsKpiEl.innerHTML = '<span>Tracking disabilitato</span>';
+          return;
+        }
+        const totals = payload && payload.totals ? payload.totals : {};
+        if (analyticsKpiEl) {
+          analyticsKpiEl.innerHTML = `
+            <span>Eventi 24h: <strong>${Number(totals.events_24h || 0)}</strong></span>
+            <span>Eventi 7gg: <strong>${Number(totals.events_7d || 0)}</strong></span>
+            <span>Eventi 30gg: <strong>${Number(totals.events_30d || 0)}</strong></span>
+            <span>Unici 24h: <strong>${Number(totals.unique_cid_24h || 0)}</strong></span>
+            <span>Unici 7gg: <strong>${Number(totals.unique_cid_7d || 0)}</strong></span>
+            <span>Unici 30gg: <strong>${Number(totals.unique_cid_30d || 0)}</strong></span>
+          `;
+        }
+        renderSimpleList(analyticsTopDaysEl, payload.top_days, (row) => `${escapeHtml(row.day_key)}: <strong>${Number(row.n || 0)}</strong>`);
+        renderSimpleList(analyticsTopMediaEl, payload.top_media, (row) => `${escapeHtml(row.media_id)}: <strong>${Number(row.n || 0)}</strong>`);
+        renderSimpleList(analyticsLangsEl, payload.langs, (row) => `${escapeHtml(row.lang || '-')}: <strong>${Number(row.n || 0)}</strong>`);
+        renderSimpleList(analyticsEventsEl, payload.events_by_type, (row) => `${escapeHtml(row.event_type || '-')}: <strong>${Number(row.n || 0)}</strong>`);
+      } catch (err) {
+        if (analyticsKpiEl) analyticsKpiEl.innerHTML = `<span style="color:#9f1b1b;">Errore analytics: ${escapeHtml(err.message || err)}</span>`;
+      }
+    };
+
+    const testAnalyticsHealth = async () => {
+      if (analyticsHealthStatusEl) analyticsHealthStatusEl.textContent = 'Test in corso...';
+      if (analyticsHealthDetailsEl) analyticsHealthDetailsEl.textContent = '';
+      try {
+        const response = await fetch('/api/admin/analytics/health', { cache: 'no-store' });
+        if (!response.ok) {
+          const text = await response.text();
+          throw new Error(text || `HTTP ${response.status}`);
+        }
+        const payload = await response.json();
+        const ok = !!(payload && payload.ok && payload.can_connect);
+        if (analyticsHealthStatusEl) {
+          analyticsHealthStatusEl.textContent = ok ? 'Connessione DB OK' : 'Connessione DB KO';
+          analyticsHealthStatusEl.style.color = ok ? '#1f5f5b' : '#9f1b1b';
+        }
+        if (analyticsHealthDetailsEl) {
+          analyticsHealthDetailsEl.textContent = JSON.stringify(payload, null, 2);
+        }
+      } catch (err) {
+        if (analyticsHealthStatusEl) {
+          analyticsHealthStatusEl.textContent = 'Errore test DB';
+          analyticsHealthStatusEl.style.color = '#9f1b1b';
+        }
+        if (analyticsHealthDetailsEl) {
+          analyticsHealthDetailsEl.textContent = String(err && err.message ? err.message : err);
+        }
       }
     };
 
@@ -385,6 +495,11 @@
       targetFilter.value = '';
       refresh().catch(() => {});
     });
+    if (analyticsHealthBtn) {
+      analyticsHealthBtn.addEventListener('click', () => {
+        testAnalyticsHealth().catch(() => {});
+      });
+    }
     searchInput.addEventListener('keydown', (event) => {
       if (event.key === 'Enter') refresh().catch(() => {});
     });

@@ -17,6 +17,38 @@ function respond(int $status, array $payload): void {
   exit;
 }
 
+function api_debug_enabled(): bool {
+  $value = env_value('API_DEBUG');
+  if ($value === null) return false;
+  $v = strtolower(trim($value));
+  return in_array($v, ['1', 'true', 'yes', 'on'], true);
+}
+
+function api_log_path(): string {
+  return __DIR__ . '/logs/api_error.log';
+}
+
+function api_log_error(string $where, Throwable $e, array $context = []): void {
+  try {
+    $path = api_log_path();
+    $dir = dirname($path);
+    if (!is_dir($dir)) {
+      @mkdir($dir, 0775, true);
+    }
+    $entry = [
+      'time' => gmdate('c'),
+      'where' => $where,
+      'error' => $e->getMessage(),
+      'file' => $e->getFile(),
+      'line' => $e->getLine(),
+      'context' => $context,
+    ];
+    @file_put_contents($path, json_encode($entry, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . PHP_EOL, FILE_APPEND | LOCK_EX);
+  } catch (Throwable $ignore) {
+    // no-op
+  }
+}
+
 function get_path_after_api(): string {
   $uriPath = parse_url($_SERVER['REQUEST_URI'] ?? '/api', PHP_URL_PATH);
   $path = (string)$uriPath;
@@ -99,6 +131,116 @@ function normalize_target(string $target): string {
 
 function comments_store_path(): string {
   return dirname(__DIR__) . '/data/comments.json';
+}
+
+function analytics_enabled(): bool {
+  $value = env_value('ANALYTICS_ENABLED');
+  if ($value === null) return true;
+  $v = strtolower(trim($value));
+  if ($v === '' || $v === '1' || $v === 'true' || $v === 'yes' || $v === 'on') return true;
+  return false;
+}
+
+function analytics_mysql_host(): string { return trim((string)(env_value('ANALYTICS_MYSQL_HOST') ?? '')); }
+function analytics_mysql_port(): int { return max(1, min(65535, (int)(env_value('ANALYTICS_MYSQL_PORT') ?? '3306'))); }
+function analytics_mysql_db(): string { return trim((string)(env_value('ANALYTICS_MYSQL_DB') ?? '')); }
+function analytics_mysql_user(): string { return trim((string)(env_value('ANALYTICS_MYSQL_USER') ?? '')); }
+function analytics_mysql_pass(): string { return (string)(env_value('ANALYTICS_MYSQL_PASS') ?? ''); }
+function analytics_store_raw_ip(): bool {
+  $value = env_value('ANALYTICS_STORE_RAW_IP');
+  if ($value === null) return false;
+  $v = strtolower(trim($value));
+  return in_array($v, ['1', 'true', 'yes', 'on'], true);
+}
+function analytics_store_raw_ua(): bool {
+  $value = env_value('ANALYTICS_STORE_RAW_UA');
+  if ($value === null) return false;
+  $v = strtolower(trim($value));
+  return in_array($v, ['1', 'true', 'yes', 'on'], true);
+}
+
+function analytics_secret_salt(): string {
+  $salt = env_value('ANALYTICS_SALT');
+  if ($salt !== null && trim($salt) !== '') return trim($salt);
+  $fallback = admin_token();
+  if ($fallback !== '') return $fallback;
+  return 'cammino-analytics-salt';
+}
+
+function analytics_hash(?string $value): string {
+  $v = trim((string)$value);
+  if ($v === '') return '';
+  return hash('sha256', analytics_secret_salt() . '|' . $v);
+}
+
+function analytics_pdo(): PDO {
+  static $pdo = null;
+  if ($pdo instanceof PDO) return $pdo;
+  $host = analytics_mysql_host();
+  $port = analytics_mysql_port();
+  $db = analytics_mysql_db();
+  $user = analytics_mysql_user();
+  $pass = analytics_mysql_pass();
+  if ($host === '' || $db === '' || $user === '') {
+    throw new RuntimeException('Analytics MySQL config missing (ANALYTICS_MYSQL_HOST/DB/USER)');
+  }
+  $dsn = sprintf('mysql:host=%s;port=%d;dbname=%s;charset=utf8mb4', $host, $port, $db);
+  $pdo = new PDO($dsn, $user, $pass, [
+    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+    PDO::ATTR_EMULATE_PREPARES => false,
+  ]);
+  $pdo->exec("
+    CREATE TABLE IF NOT EXISTS analytics_events (
+      id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+      created_at DATETIME NOT NULL,
+      cid VARCHAR(64) NOT NULL,
+      session_id VARCHAR(64) NOT NULL,
+      event_type VARCHAR(60) NOT NULL,
+      path VARCHAR(300) NULL,
+      lang VARCHAR(8) NULL,
+      day_key VARCHAR(10) NULL,
+      media_id VARCHAR(80) NULL,
+      target_id VARCHAR(80) NULL,
+      referrer_host VARCHAR(120) NULL,
+      ip_raw VARCHAR(64) NULL,
+      user_agent_raw TEXT NULL,
+      user_agent_hash CHAR(64) NULL,
+      ip_hash CHAR(64) NULL,
+      metadata_json JSON NULL,
+      INDEX idx_analytics_created_at (created_at),
+      INDEX idx_analytics_event_type (event_type),
+      INDEX idx_analytics_day_key (day_key),
+      INDEX idx_analytics_media_id (media_id),
+      INDEX idx_analytics_lang (lang),
+      INDEX idx_analytics_cid (cid)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  ");
+  try { $pdo->exec("ALTER TABLE analytics_events ADD COLUMN ip_raw VARCHAR(64) NULL"); } catch (Throwable $e) {}
+  try { $pdo->exec("ALTER TABLE analytics_events ADD COLUMN user_agent_raw TEXT NULL"); } catch (Throwable $e) {}
+  try {
+    $pdo->exec("ALTER TABLE analytics_events MODIFY metadata_json JSON NULL");
+  } catch (Throwable $e) {
+    // MySQL/MariaDB variant without native JSON support: keep existing type
+  }
+  return $pdo;
+}
+
+function analytics_string(mixed $value, int $maxLen = 255): string {
+  $v = trim((string)$value);
+  if ($v === '') return '';
+  if (mb_strlen($v) > $maxLen) return mb_substr($v, 0, $maxLen);
+  return $v;
+}
+
+function analytics_normalize_day_key(mixed $value): string {
+  $v = analytics_string($value, 10);
+  return preg_match('/^\d{4}-\d{2}-\d{2}$/', $v) ? $v : '';
+}
+
+function analytics_normalize_event_type(mixed $value): string {
+  $v = analytics_string($value, 60);
+  return preg_match('/^[a-z0-9._:-]{2,60}$/i', $v) ? strtolower($v) : '';
 }
 
 function load_store(): array {
@@ -261,13 +403,272 @@ if ($path === '/admin/comments/delete') {
   try {
     save_store($store);
   } catch (Throwable $e) {
-    respond(500, ['error' => 'Cannot persist comments file']);
+    api_log_error('admin/comments/delete', $e);
+    respond(500, ['error' => 'Cannot persist comments file', 'detail' => api_debug_enabled() ? $e->getMessage() : null]);
   }
   respond(200, ['ok' => true, 'removed' => $removed]);
 }
 
 if ($path === '/delete') {
   respond(501, ['error' => 'Delete endpoint not enabled on PHP static deploy']);
+}
+
+if ($path === '/track') {
+  if ($method !== 'POST') respond(405, ['error' => 'Method not allowed']);
+  if (!analytics_enabled()) respond(200, ['ok' => true, 'accepted' => 0, 'disabled' => true]);
+  $payload = read_json_body();
+  $incoming = [];
+  if (isset($payload['events']) && is_array($payload['events'])) {
+    $incoming = $payload['events'];
+  } elseif (is_array($payload) && (isset($payload['event_type']) || isset($payload['type']))) {
+    $incoming = [$payload];
+  }
+  if (!is_array($incoming) || count($incoming) === 0) {
+    respond(400, ['error' => 'No events']);
+  }
+  $incoming = array_slice($incoming, 0, 50);
+  $cid = analytics_string($payload['cid'] ?? '', 64);
+  $sessionId = analytics_string($payload['session_id'] ?? '', 64);
+  if ($cid === '') $cid = bin2hex(random_bytes(8));
+  if ($sessionId === '') $sessionId = bin2hex(random_bytes(8));
+  $langGlobal = analytics_string($payload['lang'] ?? '', 8);
+  $ip = (string)($_SERVER['REMOTE_ADDR'] ?? '');
+  $ua = (string)($_SERVER['HTTP_USER_AGENT'] ?? '');
+  $ref = (string)($_SERVER['HTTP_REFERER'] ?? '');
+  $refHost = '';
+  if ($ref !== '') {
+    $refHost = analytics_string((string)(parse_url($ref, PHP_URL_HOST) ?? ''), 120);
+  }
+  $ipHash = analytics_hash($ip);
+  $uaHash = analytics_hash($ua);
+
+  try {
+    $pdo = analytics_pdo();
+    $stmt = $pdo->prepare('
+      INSERT INTO analytics_events (
+        created_at, cid, session_id, event_type, path, lang, day_key, media_id, target_id,
+        referrer_host, ip_raw, user_agent_raw, user_agent_hash, ip_hash, metadata_json
+      ) VALUES (
+        :created_at, :cid, :session_id, :event_type, :path, :lang, :day_key, :media_id, :target_id,
+        :referrer_host, :ip_raw, :user_agent_raw, :user_agent_hash, :ip_hash, :metadata_json
+      )
+    ');
+    $accepted = 0;
+    foreach ($incoming as $event) {
+      if (!is_array($event)) continue;
+      $eventType = analytics_normalize_event_type($event['event_type'] ?? $event['type'] ?? '');
+      if ($eventType === '') continue;
+      $pathValue = analytics_string($event['path'] ?? '', 300);
+      $lang = analytics_string($event['lang'] ?? $langGlobal, 8);
+      $dayKey = analytics_normalize_day_key($event['day_key'] ?? '');
+      $mediaId = analytics_string($event['media_id'] ?? '', 80);
+      $targetId = analytics_string($event['target_id'] ?? '', 80);
+      $meta = $event['meta'] ?? [];
+      if (!is_array($meta)) $meta = [];
+      $metaJson = json_encode($meta, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+      if ($metaJson === false) $metaJson = '{}';
+      $stmt->execute([
+        ':created_at' => gmdate('Y-m-d H:i:s'),
+        ':cid' => $cid,
+        ':session_id' => $sessionId,
+        ':event_type' => $eventType,
+        ':path' => $pathValue,
+        ':lang' => $lang,
+        ':day_key' => $dayKey,
+        ':media_id' => $mediaId,
+        ':target_id' => $targetId,
+        ':referrer_host' => $refHost,
+        ':ip_raw' => analytics_store_raw_ip() ? analytics_string($ip, 64) : null,
+        ':user_agent_raw' => analytics_store_raw_ua() ? analytics_string($ua, 2000) : null,
+        ':user_agent_hash' => $uaHash,
+        ':ip_hash' => $ipHash,
+        ':metadata_json' => $metaJson,
+      ]);
+      $accepted += 1;
+    }
+    respond(200, ['ok' => true, 'accepted' => $accepted]);
+  } catch (Throwable $e) {
+    api_log_error('analytics/track', $e, [
+      'events_in_request' => is_array($incoming) ? count($incoming) : 0,
+      'cid' => $cid ?? '',
+      'session_id' => $sessionId ?? '',
+    ]);
+    respond(500, ['error' => 'Cannot persist analytics events', 'detail' => api_debug_enabled() ? $e->getMessage() : null]);
+  }
+}
+
+if ($path === '/admin/analytics/overview') {
+  if ($method !== 'GET') respond(405, ['error' => 'Method not allowed']);
+  require_admin_auth();
+  if (!analytics_enabled()) respond(200, ['disabled' => true]);
+  try {
+    $pdo = analytics_pdo();
+    $periodDays = max(1, min(365, (int)($_GET['days'] ?? 30)));
+
+    $countSince = static function (PDO $pdo, int $days): int {
+      $days = max(1, min(3650, $days));
+      $sql = "SELECT COUNT(*) FROM analytics_events WHERE created_at >= DATE_SUB(UTC_TIMESTAMP(), INTERVAL {$days} DAY)";
+      $stmt = $pdo->query($sql);
+      return (int)$stmt->fetchColumn();
+    };
+    $uniqueSince = static function (PDO $pdo, int $days): int {
+      $days = max(1, min(3650, $days));
+      $sql = "SELECT COUNT(DISTINCT cid) FROM analytics_events WHERE created_at >= DATE_SUB(UTC_TIMESTAMP(), INTERVAL {$days} DAY)";
+      $stmt = $pdo->query($sql);
+      return (int)$stmt->fetchColumn();
+    };
+
+    $tot24 = $countSince($pdo, 1);
+    $tot7 = $countSince($pdo, 7);
+    $tot30 = $countSince($pdo, 30);
+    $uniq24 = $uniqueSince($pdo, 1);
+    $uniq7 = $uniqueSince($pdo, 7);
+    $uniq30 = $uniqueSince($pdo, 30);
+    $period = max(1, min(365, $periodDays));
+
+    $topDaysStmt = $pdo->query("
+      SELECT day_key, COUNT(*) AS n
+      FROM analytics_events
+      WHERE created_at >= DATE_SUB(UTC_TIMESTAMP(), INTERVAL {$period} DAY)
+        AND event_type IN ('day_view', 'page_view')
+        AND day_key IS NOT NULL
+        AND day_key <> ''
+      GROUP BY day_key
+      ORDER BY n DESC
+      LIMIT 12
+    ");
+    $topDays = $topDaysStmt->fetchAll(PDO::FETCH_ASSOC) ?: [];
+
+    $topMediaStmt = $pdo->query("
+      SELECT media_id, COUNT(*) AS n
+      FROM analytics_events
+      WHERE created_at >= DATE_SUB(UTC_TIMESTAMP(), INTERVAL {$period} DAY)
+        AND event_type = 'media_open'
+        AND media_id IS NOT NULL
+        AND media_id <> ''
+      GROUP BY media_id
+      ORDER BY n DESC
+      LIMIT 12
+    ");
+    $topMedia = $topMediaStmt->fetchAll(PDO::FETCH_ASSOC) ?: [];
+
+    $langStmt = $pdo->query("
+      SELECT lang, COUNT(*) AS n
+      FROM analytics_events
+      WHERE created_at >= DATE_SUB(UTC_TIMESTAMP(), INTERVAL {$period} DAY)
+        AND lang IS NOT NULL
+        AND lang <> ''
+      GROUP BY lang
+      ORDER BY n DESC
+      LIMIT 12
+    ");
+    $langs = $langStmt->fetchAll(PDO::FETCH_ASSOC) ?: [];
+
+    $eventStmt = $pdo->query("
+      SELECT event_type, COUNT(*) AS n
+      FROM analytics_events
+      WHERE created_at >= DATE_SUB(UTC_TIMESTAMP(), INTERVAL {$period} DAY)
+      GROUP BY event_type
+      ORDER BY n DESC
+      LIMIT 20
+    ");
+    $events = $eventStmt->fetchAll(PDO::FETCH_ASSOC) ?: [];
+
+    respond(200, [
+      'period_days' => $periodDays,
+      'totals' => [
+        'events_24h' => $tot24,
+        'events_7d' => $tot7,
+        'events_30d' => $tot30,
+        'unique_cid_24h' => $uniq24,
+        'unique_cid_7d' => $uniq7,
+        'unique_cid_30d' => $uniq30,
+      ],
+      'top_days' => $topDays,
+      'top_media' => $topMedia,
+      'langs' => $langs,
+      'events_by_type' => $events,
+    ]);
+  } catch (Throwable $e) {
+    api_log_error('analytics/overview', $e, ['period_days' => $periodDays ?? null]);
+    respond(500, ['error' => 'Cannot read analytics overview', 'detail' => api_debug_enabled() ? $e->getMessage() : null]);
+  }
+}
+
+if ($path === '/admin/analytics/health') {
+  if ($method !== 'GET') respond(405, ['error' => 'Method not allowed']);
+  require_admin_auth();
+  if (!analytics_enabled()) {
+    respond(200, [
+      'ok' => false,
+      'enabled' => false,
+      'message' => 'Analytics disabled',
+      'config' => [
+        'host' => analytics_mysql_host(),
+        'port' => analytics_mysql_port(),
+        'db' => analytics_mysql_db(),
+        'user' => analytics_mysql_user(),
+      ]
+    ]);
+  }
+  try {
+    $pdo = analytics_pdo();
+    $serverVersion = '';
+    try {
+      $serverVersion = (string)$pdo->query('SELECT VERSION()')->fetchColumn();
+    } catch (Throwable $ignore) {
+      $serverVersion = '';
+    }
+
+    $tableExists = false;
+    $rows = 0;
+    try {
+      $stmt = $pdo->query("SHOW TABLES LIKE 'analytics_events'");
+      $tableExists = (bool)$stmt->fetchColumn();
+    } catch (Throwable $ignore) {
+      $tableExists = false;
+    }
+    if ($tableExists) {
+      try {
+        $rows = (int)$pdo->query('SELECT COUNT(*) FROM analytics_events')->fetchColumn();
+      } catch (Throwable $ignore) {
+        $rows = 0;
+      }
+    }
+
+    respond(200, [
+      'ok' => true,
+      'enabled' => true,
+      'can_connect' => true,
+      'server_version' => $serverVersion,
+      'table' => [
+        'name' => 'analytics_events',
+        'exists' => $tableExists,
+        'rows' => $rows,
+      ],
+      'config' => [
+        'host' => analytics_mysql_host(),
+        'port' => analytics_mysql_port(),
+        'db' => analytics_mysql_db(),
+        'user' => analytics_mysql_user(),
+      ]
+    ]);
+  } catch (Throwable $e) {
+    api_log_error('analytics/health', $e);
+    respond(200, [
+      'ok' => false,
+      'enabled' => true,
+      'can_connect' => false,
+      'error' => 'DB connection failed',
+      'detail' => api_debug_enabled() ? $e->getMessage() : null,
+      'config' => [
+        'host' => analytics_mysql_host(),
+        'port' => analytics_mysql_port(),
+        'db' => analytics_mysql_db(),
+        'user' => analytics_mysql_user(),
+      ]
+    ]);
+  }
 }
 
 if ($path === '/comments/counts') {
@@ -342,7 +743,8 @@ if ($path === '/comments') {
     try {
       save_store($store);
     } catch (Throwable $e) {
-      respond(500, ['error' => 'Cannot persist comment']);
+      api_log_error('comments/post', $e);
+      respond(500, ['error' => 'Cannot persist comment', 'detail' => api_debug_enabled() ? $e->getMessage() : null]);
     }
     respond(201, ['ok' => true, 'comment' => $record]);
   }

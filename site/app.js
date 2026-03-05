@@ -5,7 +5,7 @@ const I18N = {
     title: 'Cammino di Santiago',
     subtitle: 'Un recap giorno per giorno tra foto, video e ricordi di strada.',
     hero_intro:
-      'Sono Jacopo: nel 2019, dopo essermi dimesso, ho preso un anno sabbatico. È stato un anno pieno, fatto di viaggi itineranti e anche di gare, tra cui la mezza maratona sulla Muraglia Cinese e la maratona di New York. Guardandolo oggi, mi rendo conto di quanto sia stata una fortuna viverlo proprio in quel momento: pochi mesi dopo, con le difficoltà e le chiusure del 2020, quella stessa libertà sarebbe diventata impensabile. Questo diario racconta il mio Cammino di Santiago, ricostruito giorno per giorno tra tracce GPS, foto, video e memoria.',
+      'Questo diario racconta il mio Cammino di Santiago, iniziato a Lourdes e concluso a Santiago, proseguendo poi fino a Finisterre e Muxia. È stato il capitolo più intenso del mio 2019 sabbatico, dopo essermi dimesso da un contratto a tempo indeterminato come informatico. L’ho vissuto in modalità relax: non avevo nessuno che mi correva dietro e il tempo era l’unica cosa che non mi mancava.\n\nIl 2019 è stato anche l’anno della mezza maratona sulla Muraglia Cinese e della maratona di New York, ma queste sono altre storie e le racconterò in un altro diario.\n\nGodetevi ora foto, video e racconti del mio cammino giorno per giorno, tra ricordi, emozioni e dettagli concreti del percorso. Piccola chicca: ogni contenuto mostra in basso orario e luogo di scatto, e cliccando sulla località si apre Google Maps esattamente nel punto in cui quella foto o quel video è stato registrato.\n\nSe vi va, lasciatemi un commento: potete farlo su ogni foto oppure direttamente nella nota del giorno.\n\nSe sei arrivato qui perché stai pianificando il tuo cammino, spero troverai spunti e informazioni utili per goderti al meglio il viaggio. Buen Camino, peregrino!',
     days: 'Giorni',
     photos: 'Foto',
     videos: 'Video',
@@ -83,7 +83,7 @@ const I18N = {
     title: 'Camino de Santiago',
     subtitle: 'A day-by-day recap through photos, videos, and trail memories.',
     hero_intro:
-      'I am Jacopo: in 2019, after resigning from my job, I took a sabbatical year. It was a full year, with long-form itinerant travel and races, including the Great Wall of China Half Marathon and the New York City Marathon. Looking back, I realize how lucky I was to live it right then: a few months later, with the difficulties and closures of 2020, that same freedom would have become unthinkable. This diary tells only my Camino de Santiago, reconstructed day by day through GPS tracks, photos, videos, and memory.',
+      'This diary tells my Camino de Santiago, which began in Lourdes and ended in Santiago, then continued to Finisterre and Muxia. It was the most intense chapter of my 2019 sabbatical, after resigning from a permanent job as a software engineer. I lived it in a relaxed mode: no one was chasing me, and time was the one thing I had in abundance.\n\n2019 was also the year of the Great Wall of China Half Marathon and the New York City Marathon, but those are different stories and I will tell them in another diary.\n\nNow enjoy photos, videos, and day-by-day stories from my Camino, between memories, emotions, and concrete route details. A small extra: each item shows capture time and place at the bottom, and clicking the location opens Google Maps exactly at the point where that photo or video was recorded.\n\nIf you like, leave me a comment: you can do it on each photo or directly in the day note.\n\nIf you came here because you are planning your own Camino, I hope you will find useful ideas and information to enjoy your journey at its best. Buen Camino, peregrino!',
     days: 'Days',
     photos: 'Photos',
     videos: 'Videos',
@@ -161,7 +161,7 @@ const I18N = {
     title: 'Camino de Santiago',
     subtitle: 'Un resumen día a día entre fotos, vídeos y recuerdos del camino.',
     hero_intro:
-      'Soy Jacopo: en 2019, después de dejar mi trabajo, me tomé un año sabático. Fue un año intenso, hecho de viajes itinerantes y también de carreras, entre ellas la media maratón de la Muralla China y la maratón de Nueva York. Viéndolo hoy, me doy cuenta de la suerte que tuve de vivirlo justo en ese momento: pocos meses después, con las dificultades y los cierres de 2020, esa misma libertad habría sido impensable. Este diario cuenta mi Camino de Santiago, reconstruido día a día entre trazas GPS, fotos, vídeos y memoria.',
+      'Este diario cuenta mi Camino de Santiago, empezado en Lourdes y terminado en Santiago, y luego prolongado hasta Finisterre y Muxia. Fue el capítulo más intenso de mi 2019 sabático, después de dejar un contrato indefinido como informático. Lo viví en modo relax: no tenía a nadie persiguiéndome y el tiempo era lo único que no me faltaba.\n\n2019 también fue el año de la media maratón de la Muralla China y de la maratón de Nueva York, pero esas son otras historias y las contaré en otro diario.\n\nAhora disfrutad fotos, vídeos y relatos de mi camino día a día, entre recuerdos, emociones y detalles concretos del recorrido. Pequeño extra: cada contenido muestra abajo la hora y el lugar de captura, y al hacer clic en la localidad se abre Google Maps exactamente en el punto donde se registró esa foto o ese vídeo.\n\nSi os apetece, dejadme un comentario: podéis hacerlo en cada foto o directamente en la nota del día.\n\nSi has llegado aquí porque estás planificando tu camino, espero que encuentres ideas e información útiles para disfrutar al máximo de tu viaje. Buen Camino, peregrino!',
     days: 'Días',
     photos: 'Fotos',
     videos: 'Vídeos',
@@ -239,7 +239,7 @@ const I18N = {
     title: 'Chemin de Saint-Jacques',
     subtitle: 'Un récit jour par jour entre photos, vidéos et souvenirs de route.',
     hero_intro:
-      'Je suis Jacopo : en 2019, après avoir quitté mon travail, j’ai pris une année sabbatique. Ce fut une année intense, faite de voyages itinérants et aussi de courses, dont le semi-marathon de la Grande Muraille de Chine et le marathon de New York. Avec le recul, je me rends compte de la chance de l’avoir vécue exactement à ce moment-là : quelques mois plus tard, avec les difficultés et les fermetures de 2020, cette même liberté serait devenue impensable. Ce journal raconte mon Chemin de Saint-Jacques, reconstruit jour après jour à partir de traces GPS, photos, vidéos et mémoire.',
+      'Ce journal raconte mon Chemin de Saint-Jacques, commencé à Lourdes et terminé à Santiago, puis prolongé jusqu’à Finisterre et Muxia. Cela a été le chapitre le plus intense de mon année sabbatique 2019, après avoir quitté un CDI comme informaticien. Je l’ai vécu en mode relax: personne ne me courait après, et le temps était la seule chose qui ne me manquait pas.\n\n2019 a aussi été l’année du semi-marathon de la Muraille de Chine et du marathon de New York, mais ce sont d’autres histoires que je raconterai dans un autre journal.\n\nProfitez maintenant des photos, vidéos et récits de mon chemin jour après jour, entre souvenirs, émotions et détails concrets du parcours. Petite cerise: chaque contenu affiche en bas l’heure et le lieu de prise, et en cliquant sur la localité, Google Maps s’ouvre exactement au point où cette photo ou cette vidéo a été enregistrée.\n\nSi vous voulez, laissez-moi un commentaire: vous pouvez le faire sur chaque photo ou directement dans la note du jour.\n\nSi vous êtes arrivé ici parce que vous préparez votre chemin, j’espère que vous y trouverez des idées et des informations utiles pour profiter au mieux de votre voyage. Buen Camino, peregrino!',
     days: 'Jours',
     photos: 'Photos',
     videos: 'Vidéos',
@@ -429,20 +429,14 @@ const updateSeoForLang = (lang) => {
   const seo = SEO_META[normalized] || SEO_META.it;
   const origin = window.location.origin || '';
   const params = new URLSearchParams(window.location.search || '');
-  const dayFromQuery = String(params.get('day') || '').trim();
-  const dayFromPath = getDayFromPathname(window.location.pathname);
-  const dayParam = dayFromQuery || dayFromPath;
-  const targetParam = String(params.get('target') || '').trim();
-  const hasValidDay = /^\d{4}-\d{2}-\d{2}$/.test(dayParam);
-  const canonicalPath = hasValidDay ? `/${normalized}/day/${dayParam}/` : `/${normalized}/`;
+  void params;
+  const canonicalPath = `/${normalized}/`;
   const canonical = `${origin}${canonicalPath}`;
-  const altIt = `${origin}${hasValidDay ? `/it/day/${dayParam}/` : '/it/'}`;
-  const altEn = `${origin}${hasValidDay ? `/en/day/${dayParam}/` : '/en/'}`;
-  const altEs = `${origin}${hasValidDay ? `/es/day/${dayParam}/` : '/es/'}`;
-  const altFr = `${origin}${hasValidDay ? `/fr/day/${dayParam}/` : '/fr/'}`;
-  const robotsContent = targetParam
-    ? 'noindex,follow,max-image-preview:large'
-    : 'index,follow,max-image-preview:large';
+  const altIt = `${origin}/it/`;
+  const altEn = `${origin}/en/`;
+  const altEs = `${origin}/es/`;
+  const altFr = `${origin}/fr/`;
+  const robotsContent = 'noindex,follow,max-image-preview:large';
   document.title = seo.title;
   const descriptionTag = ensureMetaTag('meta-description', { name: 'description' });
   descriptionTag.setAttribute('content', seo.description);
@@ -481,9 +475,13 @@ const setLang = (lang, options = {}) => {
   const normalized = normalizeLang(lang) || 'it';
   const syncPath = options.syncPath !== false;
   const renderExisting = options.renderExisting !== false;
+  const previousLang = currentLang;
   currentLang = normalized;
   document.documentElement.lang = normalized;
   if (syncPath) syncLanguagePath(normalized);
+  if (trackingInitialized && normalized !== previousLang) {
+    trackEvent('lang_switch', { meta: { from: previousLang, to: normalized } });
+  }
   updateSeoForLang(normalized);
   try {
     window.localStorage.setItem('cammino_lang', normalized);
@@ -702,6 +700,141 @@ const isCommentsApiEnabled = () => {
 };
 
 const COMMENTS_API_ENABLED = isCommentsApiEnabled();
+const TRACKING_ENABLED = true;
+const TRACKING_CID_KEY = 'cammino_tracking_cid_v1';
+const TRACKING_SESSION_KEY = 'cammino_tracking_sid_v1';
+const TRACKING_QUEUE_MAX = 20;
+const TRACKING_FLUSH_MS = 3500;
+let trackingCid = '';
+let trackingSessionId = '';
+let trackingQueue = [];
+let trackingFlushTimer = null;
+let trackingInitialized = false;
+
+const randomId = () => {
+  try {
+    const bytes = new Uint8Array(16);
+    window.crypto.getRandomValues(bytes);
+    return Array.from(bytes, (b) => b.toString(16).padStart(2, '0')).join('');
+  } catch {
+    return `${Date.now().toString(16)}${Math.random().toString(16).slice(2, 14)}`;
+  }
+};
+
+const getTrackingCid = () => {
+  if (trackingCid) return trackingCid;
+  try {
+    const saved = String(window.localStorage.getItem(TRACKING_CID_KEY) || '').trim();
+    if (saved) {
+      trackingCid = saved;
+      return trackingCid;
+    }
+  } catch {
+    // ignore
+  }
+  trackingCid = randomId();
+  try {
+    window.localStorage.setItem(TRACKING_CID_KEY, trackingCid);
+  } catch {
+    // ignore
+  }
+  return trackingCid;
+};
+
+const getTrackingSessionId = () => {
+  if (trackingSessionId) return trackingSessionId;
+  try {
+    const saved = String(window.sessionStorage.getItem(TRACKING_SESSION_KEY) || '').trim();
+    if (saved) {
+      trackingSessionId = saved;
+      return trackingSessionId;
+    }
+  } catch {
+    // ignore
+  }
+  trackingSessionId = randomId();
+  try {
+    window.sessionStorage.setItem(TRACKING_SESSION_KEY, trackingSessionId);
+  } catch {
+    // ignore
+  }
+  return trackingSessionId;
+};
+
+const detectDayKeyFromLocation = () => {
+  const dayFromPath = getDayFromPathname(window.location.pathname);
+  if (dayFromPath) return dayFromPath;
+  const dayFromQuery = String(new URLSearchParams(window.location.search).get('day') || '').trim();
+  if (/^\d{4}-\d{2}-\d{2}$/.test(dayFromQuery)) return dayFromQuery;
+  const hash = String(window.location.hash || '').replace(/^#/, '');
+  const m = hash.match(/^note-(\d{4}-\d{2}-\d{2})$/);
+  return m ? m[1] : '';
+};
+
+const flushTrackingQueue = async (useBeacon = false) => {
+  if (!TRACKING_ENABLED) return;
+  if (!trackingQueue.length) return;
+  const events = trackingQueue.splice(0, trackingQueue.length);
+  const payload = {
+    cid: getTrackingCid(),
+    session_id: getTrackingSessionId(),
+    lang: currentLang,
+    events
+  };
+  const body = JSON.stringify(payload);
+  if (useBeacon && navigator.sendBeacon) {
+    try {
+      const blob = new Blob([body], { type: 'application/json' });
+      navigator.sendBeacon('/api/track', blob);
+      return;
+    } catch {
+      // fallback to fetch
+    }
+  }
+  try {
+    await fetch('/api/track', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body,
+      keepalive: true
+    });
+  } catch {
+    // drop on network errors to avoid UI impact
+  }
+};
+
+const scheduleTrackingFlush = () => {
+  if (trackingFlushTimer) return;
+  trackingFlushTimer = window.setTimeout(() => {
+    trackingFlushTimer = null;
+    flushTrackingQueue(false).catch(() => {});
+  }, TRACKING_FLUSH_MS);
+};
+
+const trackEvent = (eventType, data = {}) => {
+  if (!TRACKING_ENABLED) return;
+  const type = String(eventType || '').trim().toLowerCase();
+  if (!type) return;
+  const event = {
+    event_type: type,
+    path: `${window.location.pathname || '/'}${window.location.search || ''}`,
+    lang: currentLang,
+    day_key: String(data.day_key || detectDayKeyFromLocation() || ''),
+    media_id: String(data.media_id || ''),
+    target_id: String(data.target_id || ''),
+    meta: data.meta && typeof data.meta === 'object' ? data.meta : {}
+  };
+  trackingQueue.push(event);
+  if (trackingQueue.length >= TRACKING_QUEUE_MAX) {
+    if (trackingFlushTimer) {
+      window.clearTimeout(trackingFlushTimer);
+      trackingFlushTimer = null;
+    }
+    flushTrackingQueue(false).catch(() => {});
+    return;
+  }
+  scheduleTrackingFlush();
+};
 
 const postJsonWithApiFallback = async (path, payload) => {
   let lastError = null;
@@ -1235,6 +1368,20 @@ const isNearViewport = (el, margin = 700) => {
   return rect.bottom >= -margin && rect.top <= vh + margin;
 };
 
+const setMediaCardLoading = (el, isLoading) => {
+  if (!el || typeof el.closest !== 'function') return;
+  const card = el.closest('.media-card');
+  if (!card) return;
+  card.classList.toggle('is-loading', !!isLoading);
+};
+
+const createModalMediaLoader = () => {
+  const loader = document.createElement('div');
+  loader.className = 'modal__media-loader';
+  loader.innerHTML = '<span class="modal__media-loader-spinner" aria-hidden="true"></span><span class="modal__media-loader-text">Caricamento…</span>';
+  return loader;
+};
+
 const hydrateLazyMedia = (el) => {
   if (!el) return;
   if (el.tagName === 'IMG') {
@@ -1242,19 +1389,23 @@ const hydrateLazyMedia = (el) => {
     if (!src) return;
     if (el.dataset.lazyHydrating === '1') return;
     if (el.dataset.lazyLoaded === '1') {
+      setMediaCardLoading(el, false);
       el.removeAttribute('data-src');
       return;
     }
+    setMediaCardLoading(el, true);
     const onLoad = () => {
       el.dataset.lazyLoaded = '1';
       el.removeAttribute('data-src');
       el.removeAttribute('data-lazy-hydrating');
+      setMediaCardLoading(el, false);
       el.removeEventListener('load', onLoad);
       el.removeEventListener('error', onError);
     };
     const onError = () => {
       // Keep data-src so recoverVisibleLazyMedia can retry.
       el.removeAttribute('data-lazy-hydrating');
+      setMediaCardLoading(el, false);
       el.removeEventListener('load', onLoad);
       el.removeEventListener('error', onError);
     };
@@ -1677,10 +1828,15 @@ const openImageModal = (item, itemIndex = null) => {
   if (modalSource) modalBody.appendChild(modalSource);
   const shell = document.createElement('div');
   shell.className = 'modal__zoom-shell';
+  const modalLoader = createModalMediaLoader();
+  shell.appendChild(modalLoader);
   const image = document.createElement('img');
   const imageCandidates = getImageSourceCandidates(item);
   let imageCandidateIndex = 0;
   image.src = imageCandidates[0] || IMG_PLACEHOLDER;
+  image.addEventListener('load', () => {
+    modalLoader.classList.add('is-hidden');
+  }, { once: true });
   image.addEventListener('error', () => {
     imageCandidateIndex += 1;
     if (imageCandidateIndex < imageCandidates.length) {
@@ -1688,6 +1844,7 @@ const openImageModal = (item, itemIndex = null) => {
       return;
     }
     image.src = IMG_PLACEHOLDER;
+    modalLoader.classList.add('is-hidden');
   });
   image.alt = item.orig || '';
   image.className = 'modal__image';
@@ -1772,11 +1929,21 @@ const openVideoModal = (item, itemIndex = null) => {
   }
   const modalSource = buildSourceBadge(getGroupContextItems(item), 'modal__source');
   if (modalSource) modalBody.appendChild(modalSource);
+  const shell = document.createElement('div');
+  shell.className = 'modal__video-shell';
+  const modalLoader = createModalMediaLoader();
+  shell.appendChild(modalLoader);
   const video = document.createElement('video');
   video.controls = true;
   video.autoplay = true;
   video.playsInline = true;
   video.preload = 'metadata';
+  video.addEventListener('loadeddata', () => {
+    modalLoader.classList.add('is-hidden');
+  }, { once: true });
+  video.addEventListener('canplay', () => {
+    modalLoader.classList.add('is-hidden');
+  }, { once: true });
   if (item.poster) video.poster = mediaPath(item, 'poster');
   const source = document.createElement('source');
   const videoCandidates = getVideoSourceCandidates(item);
@@ -1786,12 +1953,16 @@ const openVideoModal = (item, itemIndex = null) => {
   video.appendChild(source);
   video.addEventListener('error', () => {
     videoCandidateIndex += 1;
-    if (videoCandidateIndex >= videoCandidates.length) return;
+    if (videoCandidateIndex >= videoCandidates.length) {
+      modalLoader.classList.add('is-hidden');
+      return;
+    }
     source.src = videoCandidates[videoCandidateIndex];
     video.load();
     video.play().catch(() => {});
   });
-  modalBody.appendChild(video);
+  shell.appendChild(video);
+  modalBody.appendChild(shell);
   appendModalGroupPanel(item);
 
   if (modalItems.length > 1 && modalIndex >= 0) {
@@ -1826,6 +1997,11 @@ const openVideoModal = (item, itemIndex = null) => {
 
 const openModalItem = (item, index = null) => {
   if (!item) return;
+  trackEvent('media_open', {
+    media_id: String(item.id || ''),
+    day_key: String(item.date || '').slice(0, 10) || detectDayKeyFromLocation(),
+    meta: { media_type: String(item.type || '') }
+  });
   if (item.type === 'video') {
     openVideoModal(item, index);
     return;
@@ -1924,6 +2100,7 @@ const createShareButton = (anchorId, className) => {
   btn.addEventListener('click', async (event) => {
     event.preventDefault();
     event.stopPropagation();
+    trackEvent('share_click', { target_id: String(anchorId || '') });
     const url = buildShareUrl(anchorId);
     const copied = await copyTextToClipboard(url);
     if (copied) {
@@ -2092,6 +2269,7 @@ const openCommentsModal = (targetId) => {
   if (!COMMENTS_API_ENABLED) return;
   const target = String(targetId || '').trim();
   if (!target || !commentsModal) return;
+  trackEvent('comments_open', { target_id: target });
   commentsModalTarget = target;
   if (commentsModalTitle) commentsModalTitle.textContent = getCommentTargetTitle(target);
   const savedAuthor = window.localStorage.getItem(COMMENT_AUTHOR_STORAGE_KEY) || '';
@@ -2305,6 +2483,10 @@ if (commentsForm) {
         target: commentsModalTarget,
         author,
         text
+      });
+      trackEvent('comment_submit', {
+        target_id: commentsModalTarget,
+        meta: { text_len: text.length }
       });
       if (commentsTextInput) commentsTextInput.value = '';
       await loadCommentsForTarget(commentsModalTarget);
@@ -2654,6 +2836,7 @@ const buildMediaCard = (groupItems) => {
   }
 
   if (item.type === 'image') {
+    card.classList.add('is-loading');
     const img = document.createElement('img');
     img.loading = 'lazy';
     img.alt = item.orig;
@@ -2663,6 +2846,11 @@ const buildMediaCard = (groupItems) => {
     let imageCandidateIndex = 0;
     img.dataset.src = imageCandidates[0] || '';
     img.decoding = 'async';
+    img.addEventListener('load', () => {
+      if (img.dataset.lazyLoaded === '1' || !img.dataset.src) {
+        setMediaCardLoading(img, false);
+      }
+    });
     img.addEventListener('error', () => {
       imageCandidateIndex += 1;
       if (imageCandidateIndex < imageCandidates.length) {
@@ -2670,6 +2858,7 @@ const buildMediaCard = (groupItems) => {
         return;
       }
       img.src = IMG_PLACEHOLDER;
+      setMediaCardLoading(img, false);
       if (!img.dataset.src) {
         const retrySrc = imageCandidates[0] || '';
         if (retrySrc) img.dataset.src = retrySrc;
@@ -2684,6 +2873,7 @@ const buildMediaCard = (groupItems) => {
     });
   } else {
     card.classList.add('media-card--video');
+    card.classList.add('is-loading');
     const itemIdx = item.id ? modalIndexById.get(item.id) : -1;
     const durationBadge = document.createElement('div');
     durationBadge.className = 'media-duration';
@@ -2700,6 +2890,11 @@ const buildMediaCard = (groupItems) => {
     let posterCandidateIndex = 0;
     posterImg.dataset.src = posterCandidates[0] || '';
     posterImg.decoding = 'async';
+    posterImg.addEventListener('load', () => {
+      if (posterImg.dataset.lazyLoaded === '1' || !posterImg.dataset.src) {
+        setMediaCardLoading(posterImg, false);
+      }
+    });
     posterImg.addEventListener('error', () => {
       posterCandidateIndex += 1;
       if (posterCandidateIndex < posterCandidates.length) {
@@ -2707,6 +2902,7 @@ const buildMediaCard = (groupItems) => {
         return;
       }
       posterImg.src = IMG_PLACEHOLDER;
+      setMediaCardLoading(posterImg, false);
       if (!posterImg.dataset.src && posterCandidates[0]) posterImg.dataset.src = posterCandidates[0];
       window.setTimeout(() => registerLazyMedia(posterImg), 250);
     });
@@ -3746,8 +3942,8 @@ const observeSections = () => {
     hashSyncTimer = window.setTimeout(() => {
       const next = new URL(window.location.href);
       const lang = normalizeLang(currentLang) || 'it';
-      next.pathname = `/${lang}/day/${day}/`;
-      next.searchParams.delete('day');
+      next.pathname = `/${lang}/`;
+      next.searchParams.set('day', day);
       next.searchParams.delete('target');
       next.hash = '';
       const nextUrl = `${next.pathname}${next.search}`;
@@ -4115,6 +4311,19 @@ const init = async () => {
 
 window.addEventListener('DOMContentLoaded', () => {
   try {
+    trackingInitialized = true;
+    trackEvent('page_view', {
+      day_key: detectDayKeyFromLocation(),
+      meta: { view: 'diary' }
+    });
+    window.addEventListener('pagehide', () => {
+      flushTrackingQueue(true).catch(() => {});
+    });
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'hidden') {
+        flushTrackingQueue(true).catch(() => {});
+      }
+    });
     const toggleSelectBtn = document.getElementById('toggle-select');
     const deleteSelectedBtn = document.getElementById('delete-selected');
     const timelineActions = document.getElementById('timeline-nav-actions');

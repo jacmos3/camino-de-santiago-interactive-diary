@@ -11,7 +11,7 @@ const currentLang = normalizeLang(document.documentElement.lang) || getPathLang(
 const I18N = {
   it: {
     detailTitle: 'Dettaglio media',
-    decimals: 'decimali',
+    decimals: 'livello dettaglio',
     goToDaySuffix: ' - vai al giorno',
     goToDayConfirm: 'Vuoi aprire il diario del {day} per leggere i dettagli?',
     prevItem: 'Elemento precedente',
@@ -26,7 +26,7 @@ const I18N = {
   },
   en: {
     detailTitle: 'Media detail',
-    decimals: 'decimals',
+    decimals: 'detail level',
     goToDaySuffix: ' - go to day',
     goToDayConfirm: 'Open the diary for {day} to read details?',
     prevItem: 'Previous item',
@@ -41,7 +41,7 @@ const I18N = {
   },
   es: {
     detailTitle: 'Detalle de media',
-    decimals: 'decimales',
+    decimals: 'nivel de detalle',
     goToDaySuffix: ' - ir al día',
     goToDayConfirm: '¿Abrir el diario del {day} para leer los detalles?',
     prevItem: 'Elemento anterior',
@@ -56,7 +56,7 @@ const I18N = {
   },
   fr: {
     detailTitle: 'Détail média',
-    decimals: 'décimales',
+    decimals: 'niveau de détail',
     goToDaySuffix: ' - aller au jour',
     goToDayConfirm: 'Ouvrir le journal du {day} pour lire les détails ?',
     prevItem: 'Élément précédent',
@@ -83,7 +83,77 @@ const selectedDay = new URLSearchParams(window.location.search).get('day') || ''
 const selectedUptoDay = new URLSearchParams(window.location.search).get('upto') || '';
 const MEDIA_DETAIL_MIN = 0;
 const MEDIA_DETAIL_MAX = 6;
-const MEDIA_DETAIL_DEFAULT = 0;
+const MEDIA_DETAIL_DEFAULT = 6;
+const TRACKING_CID_KEY = 'cammino_tracking_cid_v1';
+const TRACKING_SESSION_KEY = 'cammino_tracking_sid_v1';
+
+const randomId = () => {
+  try {
+    const bytes = new Uint8Array(16);
+    window.crypto.getRandomValues(bytes);
+    return Array.from(bytes, (b) => b.toString(16).padStart(2, '0')).join('');
+  } catch {
+    return `${Date.now().toString(16)}${Math.random().toString(16).slice(2, 14)}`;
+  }
+};
+
+const getTrackingCid = () => {
+  try {
+    const saved = String(window.localStorage.getItem(TRACKING_CID_KEY) || '').trim();
+    if (saved) return saved;
+    const id = randomId();
+    window.localStorage.setItem(TRACKING_CID_KEY, id);
+    return id;
+  } catch {
+    return randomId();
+  }
+};
+
+const getTrackingSessionId = () => {
+  try {
+    const saved = String(window.sessionStorage.getItem(TRACKING_SESSION_KEY) || '').trim();
+    if (saved) return saved;
+    const id = randomId();
+    window.sessionStorage.setItem(TRACKING_SESSION_KEY, id);
+    return id;
+  } catch {
+    return randomId();
+  }
+};
+
+const trackEvent = (eventType, data = {}) => {
+  const type = String(eventType || '').trim().toLowerCase();
+  if (!type) return;
+  const payload = {
+    cid: getTrackingCid(),
+    session_id: getTrackingSessionId(),
+    lang: currentLang,
+    events: [{
+      event_type: type,
+      path: `${window.location.pathname || '/'}${window.location.search || ''}`,
+      lang: currentLang,
+      day_key: String(data.day_key || selectedDay || selectedUptoDay || ''),
+      media_id: String(data.media_id || ''),
+      target_id: String(data.target_id || ''),
+      meta: data.meta && typeof data.meta === 'object' ? data.meta : {}
+    }]
+  };
+  const body = JSON.stringify(payload);
+  if (navigator.sendBeacon) {
+    try {
+      const blob = new Blob([body], { type: 'application/json' });
+      if (navigator.sendBeacon('/api/track', blob)) return;
+    } catch {
+      // fallback
+    }
+  }
+  fetch('/api/track', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body,
+    keepalive: true
+  }).catch(() => {});
+};
 
 const isPhotoFile = (name) => {
   const file = (name ? String(name) : '').trim().toLowerCase();
@@ -114,6 +184,15 @@ const formatPointDateTime = (raw) => {
     hour: '2-digit',
     minute: '2-digit'
   });
+};
+
+const createModalMediaLoader = () => {
+  const loader = document.createElement('div');
+  loader.className = 'modal__media-loader';
+  const spinner = document.createElement('div');
+  spinner.className = 'modal__media-loader-spinner';
+  loader.appendChild(spinner);
+  return loader;
 };
 
 const toRootAssetUrl = (value) => {
@@ -482,13 +561,13 @@ const buildMediaDetailControl = (onChange, initialPrecision) => {
     wrap.innerHTML = `
       <div class="map-media-detail-control__title">${t('detailTitle')}</div>
       <input class="map-media-detail-control__range" type="range" min="${MEDIA_DETAIL_MIN}" max="${MEDIA_DETAIL_MAX}" step="1" value="${initialPrecision}">
-      <div class="map-media-detail-control__value">${initialPrecision} ${t('decimals')}</div>
+      <div class="map-media-detail-control__value">${t('decimals')}: ${initialPrecision}</div>
     `;
     const input = wrap.querySelector('.map-media-detail-control__range');
     const valueEl = wrap.querySelector('.map-media-detail-control__value');
     const apply = () => {
       const next = Number(input.value);
-      valueEl.textContent = `${next} ${t('decimals')}`;
+      valueEl.textContent = `${t('decimals')}: ${next}`;
       onChange(next);
     };
     input.addEventListener('input', apply);
@@ -633,6 +712,10 @@ const renderMapMediaModal = () => {
   }
   const item = mapModalItems[mapModalIndex];
   if (!item) return;
+  trackEvent('media_open', {
+    media_id: String(item.id || ''),
+    day_key: String(item.date || '').slice(0, 10)
+  });
   mapMediaModal.body.innerHTML = '';
   mapMediaModal.body.classList.toggle('modal__body--with-group', mapModalItems.length > 1);
   if (mapMediaModal.meta) {
@@ -653,17 +736,25 @@ const renderMapMediaModal = () => {
   }
 
   if (item.type === 'video') {
+    const shell = document.createElement('div');
+    shell.className = 'modal__video-shell';
+    const modalLoader = createModalMediaLoader();
+    shell.appendChild(modalLoader);
     const video = document.createElement('video');
     video.controls = true;
     video.autoplay = true;
     video.playsInline = true;
     video.preload = 'metadata';
+    video.addEventListener('loadeddata', () => modalLoader.classList.add('is-hidden'), { once: true });
+    video.addEventListener('canplay', () => modalLoader.classList.add('is-hidden'), { once: true });
+    video.addEventListener('error', () => modalLoader.classList.add('is-hidden'));
     if (item.poster) video.poster = mediaPath(item, 'poster');
     const source = document.createElement('source');
     source.src = mediaPath(item, 'src');
     source.type = item.mime || 'video/mp4';
     video.appendChild(source);
-    mapMediaModal.body.appendChild(video);
+    shell.appendChild(video);
+    mapMediaModal.body.appendChild(shell);
   } else {
     const zoomControls = document.createElement('div');
     zoomControls.className = 'modal__zoom-controls';
@@ -681,9 +772,13 @@ const renderMapMediaModal = () => {
 
     const shell = document.createElement('div');
     shell.className = 'modal__zoom-shell';
+    const modalLoader = createModalMediaLoader();
+    shell.appendChild(modalLoader);
     const img = document.createElement('img');
     img.className = 'modal__image';
     applyImageSrcWithFallback(img, mediaPath(item, 'src') || mediaPath(item, 'thumb'));
+    img.addEventListener('load', () => modalLoader.classList.add('is-hidden'), { once: true });
+    img.addEventListener('error', () => modalLoader.classList.add('is-hidden'));
     img.alt = item.orig || '';
     shell.appendChild(img);
     mapMediaModal.body.appendChild(shell);
@@ -795,6 +890,10 @@ window.addEventListener('keydown', (event) => {
 const loader = createMapLoader();
 
 const initMap = async () => {
+  trackEvent('page_view', {
+    day_key: String(selectedDay || selectedUptoDay || ''),
+    meta: { view: 'map' }
+  });
   try {
     const trackPoints = await fetchJsonWithProgress('/data/track_points.json', (p) => {
       const loaded = Number(p.loaded || 0);

@@ -447,10 +447,29 @@ h1, h2, h3 {
 .day__title {
   font-size: 1.4rem;
   margin: 0;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.day__chips {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  flex: 0 1 64%;
+  min-width: 320px;
 }
 
 .day__meta {
   color: var(--muted);
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  background: rgba(31, 26, 22, 0.08);
+  padding: 4px 10px;
+  line-height: 1.15;
+  white-space: nowrap;
 }
 
 .day__reload {
@@ -577,6 +596,30 @@ h1, h2, h3 {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.media-card.is-loading::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  background: rgba(240, 232, 222, 0.78);
+}
+
+.media-card.is-loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 30px;
+  height: 30px;
+  margin-top: -15px;
+  margin-left: -15px;
+  border-radius: 999px;
+  border: 3px solid rgba(31, 26, 22, 0.2);
+  border-top-color: rgba(31, 95, 91, 0.88);
+  animation: media-spin 0.8s linear infinite;
+  z-index: 6;
 }
 
 .media-card.is-selected {
@@ -1398,8 +1441,40 @@ h1, h2, h3 {
 }
 
 .modal__zoom-shell {
+  position: relative;
   overflow: hidden;
   border-radius: 12px;
+}
+
+.modal__video-shell {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.modal__media-loader {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(20, 16, 14, 0.25);
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+}
+
+.modal__media-loader-spinner {
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  border: 3px solid rgba(255, 250, 242, 0.35);
+  border-top-color: rgba(255, 250, 242, 0.95);
+  animation: media-spin 0.8s linear infinite;
+}
+
+.modal__media-loader.is-hidden {
+  opacity: 0;
 }
 
 #live-modal-body.modal__body--with-group {
@@ -1824,6 +1899,10 @@ h1, h2, h3 {
   to { opacity: 1; transform: translateY(0); }
 }
 
+@keyframes media-spin {
+  to { transform: rotate(360deg); }
+}
+
 @media (max-width: 720px) {
   .hero { padding: 40px 16px 28px; }
   .hero__top { flex-direction: column; }
@@ -1856,6 +1935,11 @@ h1, h2, h3 {
     border-radius: 999px;
     background: rgba(31, 26, 22, 0.08);
     padding: 4px 8px;
+  }
+  .day__chips {
+    min-width: 0;
+    flex: 1 1 auto;
+    justify-content: flex-start;
   }
   .day__reload { margin-left: 0; }
   .grid {
