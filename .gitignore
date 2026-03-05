@@ -5,3 +5,7 @@ site/data/*.js
 !site/data/.gitkeep
 site/assets/*
 !site/assets/og-image.jpg
+site/data/conversations_extracted/
+site/data/conversations_story_candidates.md
+site/data/conversations_story_research.md
+site/data/conversations_timeline_raw.md

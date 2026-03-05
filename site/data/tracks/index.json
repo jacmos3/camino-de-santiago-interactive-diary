@@ -1,0 +1,270 @@
+{
+  "generated_at": "2026-03-04T15:51:27.903Z",
+  "days": [
+    {
+      "date": "2019-06-02",
+      "points": 1,
+      "distance_km": 0
+    },
+    {
+      "date": "2019-06-03",
+      "points": 159,
+      "distance_km": 7.445
+    },
+    {
+      "date": "2019-06-04",
+      "points": 579,
+      "distance_km": 15.908
+    },
+    {
+      "date": "2019-06-05",
+      "points": 825,
+      "distance_km": 20.809
+    },
+    {
+      "date": "2019-06-06",
+      "points": 801,
+      "distance_km": 20.336
+    },
+    {
+      "date": "2019-06-07",
+      "points": 1036,
+      "distance_km": 23.419
+    },
+    {
+      "date": "2019-06-08",
+      "points": 1197,
+      "distance_km": 28.854
+    },
+    {
+      "date": "2019-06-09",
+      "points": 1552,
+      "distance_km": 34.466
+    },
+    {
+      "date": "2019-06-10",
+      "points": 412,
+      "distance_km": 7.655
+    },
+    {
+      "date": "2019-06-11",
+      "points": 723,
+      "distance_km": 17.604
+    },
+    {
+      "date": "2019-06-12",
+      "points": 1424,
+      "distance_km": 33.868
+    },
+    {
+      "date": "2019-06-13",
+      "points": 426,
+      "distance_km": 9.529
+    },
+    {
+      "date": "2019-06-14",
+      "points": 1316,
+      "distance_km": 24.907
+    },
+    {
+      "date": "2019-06-15",
+      "points": 1142,
+      "distance_km": 22.707
+    },
+    {
+      "date": "2019-06-16",
+      "points": 916,
+      "distance_km": 20.33
+    },
+    {
+      "date": "2019-06-17",
+      "points": 724,
+      "distance_km": 18.452
+    },
+    {
+      "date": "2019-06-18",
+      "points": 809,
+      "distance_km": 23.335
+    },
+    {
+      "date": "2019-06-19",
+      "points": 1270,
+      "distance_km": 32.686
+    },
+    {
+      "date": "2019-06-20",
+      "points": 561,
+      "distance_km": 20.107
+    },
+    {
+      "date": "2019-06-21",
+      "points": 1321,
+      "distance_km": 38.909
+    },
+    {
+      "date": "2019-06-22",
+      "points": 720,
+      "distance_km": 19.623
+    },
+    {
+      "date": "2019-06-23",
+      "points": 41,
+      "distance_km": 0
+    },
+    {
+      "date": "2019-06-24",
+      "points": 63,
+      "distance_km": 1.079
+    },
+    {
+      "date": "2019-06-25",
+      "points": 702,
+      "distance_km": 23.967
+    },
+    {
+      "date": "2019-06-26",
+      "points": 900,
+      "distance_km": 23.839
+    },
+    {
+      "date": "2019-06-27",
+      "points": 841,
+      "distance_km": 24.861
+    },
+    {
+      "date": "2019-06-28",
+      "points": 1072,
+      "distance_km": 27.054
+    },
+    {
+      "date": "2019-06-29",
+      "points": 783,
+      "distance_km": 22.113
+    },
+    {
+      "date": "2019-06-30",
+      "points": 685,
+      "distance_km": 19.022
+    },
+    {
+      "date": "2019-07-01",
+      "points": 1284,
+      "distance_km": 37.421
+    },
+    {
+      "date": "2019-07-02",
+      "points": 28,
+      "distance_km": 0
+    },
+    {
+      "date": "2019-07-03",
+      "points": 12,
+      "distance_km": 0
+    },
+    {
+      "date": "2019-07-04",
+      "points": 818,
+      "distance_km": 21.012
+    },
+    {
+      "date": "2019-07-05",
+      "points": 1086,
+      "distance_km": 31.857
+    },
+    {
+      "date": "2019-07-06",
+      "points": 883,
+      "distance_km": 21.3
+    },
+    {
+      "date": "2019-07-07",
+      "points": 1505,
+      "distance_km": 37.385
+    },
+    {
+      "date": "2019-07-08",
+      "points": 1012,
+      "distance_km": 22.88
+    },
+    {
+      "date": "2019-07-09",
+      "points": 1318,
+      "distance_km": 36.99
+    },
+    {
+      "date": "2019-07-10",
+      "points": 479,
+      "distance_km": 8.533
+    },
+    {
+      "date": "2019-07-11",
+      "points": 664,
+      "distance_km": 36.229
+    },
+    {
+      "date": "2019-07-12",
+      "points": 987,
+      "distance_km": 22.652
+    },
+    {
+      "date": "2019-07-13",
+      "points": 1198,
+      "distance_km": 29.877
+    },
+    {
+      "date": "2019-07-14",
+      "points": 3,
+      "distance_km": 0
+    },
+    {
+      "date": "2019-07-15",
+      "points": 1804,
+      "distance_km": 42.821
+    },
+    {
+      "date": "2019-07-16",
+      "points": 7,
+      "distance_km": 0
+    },
+    {
+      "date": "2019-07-17",
+      "points": 6,
+      "distance_km": 0
+    },
+    {
+      "date": "2019-07-18",
+      "points": 2,
+      "distance_km": 0
+    },
+    {
+      "date": "2019-07-19",
+      "points": 1230,
+      "distance_km": 34.218
+    },
+    {
+      "date": "2019-07-20",
+      "points": 1209,
+      "distance_km": 31.601
+    },
+    {
+      "date": "2019-07-21",
+      "points": 676,
+      "distance_km": 17.222
+    },
+    {
+      "date": "2019-07-22",
+      "points": 662,
+      "distance_km": 29.428
+    },
+    {
+      "date": "2019-07-23",
+      "points": 0,
+      "distance_km": 0
+    },
+    {
+      "date": "2019-07-24",
+      "points": 0,
+      "distance_km": 0
+    }
+  ]
+}
