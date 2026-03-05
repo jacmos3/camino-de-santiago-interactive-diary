@@ -17,3 +17,8 @@ takeout/
 video/
 site/scripts/migrate-assets-by-day.js
 site/scripts/recover-missing-assets-from-legacy.js
+assets old/
+foto/
+new/
+site/.env
+**/.DS_Store
