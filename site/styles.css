@@ -106,6 +106,33 @@ h1, h2, h3 {
   text-decoration: underline;
 }
 
+.view-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 250, 242, 0.32);
+  background: rgba(255, 250, 242, 0.12);
+  color: #fff8ef;
+  text-decoration: none;
+  padding: 9px 14px;
+  border-radius: 999px;
+  font-weight: 700;
+}
+
+.view-btn:hover {
+  background: rgba(255, 250, 242, 0.2);
+}
+
+.page-shell {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 28px 24px 64px;
+}
+
+.page-shell__loading {
+  color: var(--muted);
+}
+
 .map-canvas {
   position: relative;
   height: 70vh;
@@ -237,6 +264,157 @@ h1, h2, h3 {
   margin-top: 32px;
 }
 
+.people-hub {
+  background: linear-gradient(160deg, rgba(255, 250, 242, 0.96), rgba(247, 236, 220, 0.92));
+  border: 1px solid rgba(31, 26, 22, 0.08);
+  border-radius: 26px;
+  padding: 22px;
+  box-shadow: var(--shadow);
+}
+
+.people-hub__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
+.people-hub__title {
+  margin: 0 0 6px;
+  font-size: 1.35rem;
+}
+
+.people-hub__intro {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.45;
+  max-width: 760px;
+}
+
+.people-hub__summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 999px;
+  padding: 8px 12px;
+  background: rgba(31, 95, 91, 0.1);
+  color: var(--accent-2);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.people-hub__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 14px;
+}
+
+.people-hub__empty {
+  margin: 0;
+  color: var(--muted);
+}
+
+.people-card {
+  display: grid;
+  gap: 14px;
+  padding: 18px;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.76);
+  border: 1px solid rgba(31, 26, 22, 0.08);
+}
+
+.people-card__top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.people-card__name {
+  margin: 0;
+  font-size: 1.15rem;
+}
+
+.people-card__count {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 6px 10px;
+  background: rgba(176, 108, 54, 0.14);
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.people-card__first,
+.people-card__excerpt {
+  margin: 0;
+  line-height: 1.45;
+}
+
+.people-card__first {
+  color: var(--muted);
+}
+
+.people-card__excerpt {
+  color: var(--ink);
+}
+
+.people-card__block {
+  display: grid;
+  gap: 8px;
+}
+
+.people-card__label {
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.people-card__chips,
+.people-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.people-chip,
+.people-action,
+.timeline-people__chip,
+.timeline-people__link {
+  border: 1px solid rgba(31, 26, 22, 0.12);
+  background: #fffaf2;
+  color: var(--ink);
+  border-radius: 999px;
+  padding: 8px 12px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.people-chip:hover,
+.people-action:hover,
+.timeline-people__chip:hover,
+.timeline-people__link:hover {
+  border-color: rgba(31, 95, 91, 0.32);
+}
+
+.people-chip--related {
+  background: rgba(31, 95, 91, 0.08);
+  color: var(--accent-2);
+}
+
+.people-action--primary,
+.timeline-people__chip.is-active,
+.timeline-people__link {
+  background: var(--ink);
+  color: #fffaf2;
+  border-color: rgba(31, 26, 22, 0.4);
+}
+
 .stat {
   background: var(--card);
   border-radius: var(--radius);
@@ -307,6 +485,43 @@ h1, h2, h3 {
 .timeline-nav__inner button.active {
   background: var(--accent);
   color: #fffaf2;
+}
+
+.timeline-people {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px 12px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.timeline-people__rail {
+  min-width: 0;
+  flex: 1 1 auto;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  overflow-x: auto;
+}
+
+.timeline-people__chip {
+  flex: 0 0 auto;
+  background: rgba(255, 250, 242, 0.88);
+}
+
+.timeline-people__chip.is-dim {
+  opacity: 0.46;
+}
+
+.timeline-people__chip.is-active {
+  background: var(--accent-2);
+  border-color: rgba(31, 95, 91, 0.5);
+}
+
+.timeline-people__link {
+  flex: 0 0 auto;
+  text-decoration: none;
 }
 
 .day-picker-fab {
@@ -1978,6 +2193,7 @@ h1, h2, h3 {
   .hero__top { flex-direction: column; }
   .controls { align-items: flex-start; }
   .hero__stats { grid-template-columns: 1fr; }
+  .people-hub__head { flex-direction: column; }
   .content { padding: 20px 12px 90px; }
   .after-camino__inner { padding: 22px 16px 24px; }
   .after-camino__text { font-size: 0.98rem; line-height: 1.52; }
@@ -1986,6 +2202,12 @@ h1, h2, h3 {
   .timeline-nav__actions {
     width: 100%;
     justify-content: space-between;
+  }
+  .timeline-people {
+    padding: 0 12px 12px;
+  }
+  .timeline-people__rail {
+    overflow-x: auto;
   }
   .day__header {
     position: sticky;

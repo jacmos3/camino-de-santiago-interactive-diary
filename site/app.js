@@ -78,6 +78,18 @@ const I18N = {
     map_error_prefix: 'Errore mappa',
     legal_notice:
       '© Tutti i diritti riservati. Foto, video e testi di questo sito non possono essere copiati, riutilizzati, ripubblicati o redistribuiti senza autorizzazione scritta dell’autore.',
+    people_hub_title: 'Persone del cammino',
+    people_hub_intro:
+      'Una mappa relazionale ricostruita dalle note: chi compare, quando entra davvero nella storia e con chi si intreccia lungo il percorso.',
+    people_hub_empty: 'Nessuna persona rilevata nelle note disponibili.',
+    people_days_template: '{count} giorni',
+    people_first_seen: 'Prima comparsa',
+    people_excerpt: 'Come entra nel racconto',
+    people_connections: 'Si intreccia con',
+    people_days_block: 'Giorni citati',
+    people_strip_link: 'Mappa delle persone',
+    people_jump_first: 'Vai al primo incontro',
+    people_summary_template: '{count} persone emerse dalle note',
     after_camino_title: 'Dopo il Cammino',
     after_camino_text:
       'Qualche mese dopo il cammino ho fatto un viaggio negli Stati Uniti per correre la maratona di New York, ma l’ho trasformato in un itinerante di circa 50 giorni: proprio questo mi ha dato modo di reincontrare alcune persone conosciute sul Cammino. In quel viaggio ho rivisto Mark a New York insieme alla sua fidanzata (poi diventata sua moglie), la figlia di Pam a Philadelphia con suo marito, Danielle a San Francisco, Marcia a casa sua vicino a San Francisco, e anche Chris e Jessica, a cui ho finalmente restituito la torcia che mi avevano prestato per attraversare le mesetas. Mi è dispiaciuto non riuscire a reincontrare Ginger e Giselle: purtroppo il Texas non era fattibile in quel giro.\n\nCatherine l’ho invece reincontrata qualche anno più tardi, durante un altro viaggio itinerante: ero a Basilea e ho comprato una bici con cui mi sono spostato fino a Monaco, dove ho incontrato un amico con cui poi sono andato a Berlino per correre la maratona. Dopo Berlino sono volato a Dublino e infine a Bruxelles per incontrare un altro mio amico portoghese, che era lì in vacanza per festeggiare il compleanno. In quell’occasione ho scritto a Catherine, senza preavviso, per dirle che ero a Bruxelles: ci siamo visti una sera per un saluto. Ma questi sono altri viaggi che saranno raccontati in altri diari.'
@@ -161,6 +173,18 @@ const I18N = {
     map_error_prefix: 'Map error',
     legal_notice:
       '© All rights reserved. Photos, videos, and texts on this site may not be copied, reused, republished, or redistributed without prior written permission from the author.',
+    people_hub_title: 'People on the Camino',
+    people_hub_intro:
+      'A relationship map rebuilt from the notes: who appears, when they truly enter the story, and who they intersect with along the way.',
+    people_hub_empty: 'No people detected in the available notes.',
+    people_days_template: '{count} days',
+    people_first_seen: 'First appearance',
+    people_excerpt: 'How they enter the story',
+    people_connections: 'Connected with',
+    people_days_block: 'Mentioned days',
+    people_strip_link: 'People map',
+    people_jump_first: 'Jump to first meeting',
+    people_summary_template: '{count} people surfaced from the notes',
     after_camino_title: 'After the Camino',
     after_camino_text:
       'A few months after the Camino, I took a trip to the United States to run the New York City Marathon, but I turned it into an itinerant journey of about 50 days: that is exactly what gave me the chance to meet again some people I had met on the Camino. During that trip I saw Mark again in New York with his girlfriend (later his wife), Pam’s daughter in Philadelphia with her husband, Danielle in San Francisco, Marcia at her home near San Francisco, and also Chris and Jessica, to whom I was finally able to return the headlamp they had lent me to cross the mesetas. I was sorry I could not meet Ginger and Giselle again: Texas was not feasible on that route.\n\nI met Catherine again a few years later, during another itinerant trip: I was in Basel and bought a bike that I used to move toward Munich, where I met a friend and then went with him to Berlin to run the marathon. After Berlin I flew to Dublin and finally to Brussels to meet another Portuguese friend of mine, who was there on holiday to celebrate a birthday. On that occasion I wrote to Catherine, without any notice, to tell her I was in Brussels: we met one evening just to say hello. But those are other journeys that will be told in other diaries.'
@@ -244,6 +268,18 @@ const I18N = {
     map_error_prefix: 'Error del mapa',
     legal_notice:
       '© Todos los derechos reservados. Las fotos, vídeos y textos de este sitio no pueden copiarse, reutilizarse, republicarse ni redistribuirse sin autorización escrita del autor.',
+    people_hub_title: 'Personas del camino',
+    people_hub_intro:
+      'Un mapa relacional reconstruido a partir de las notas: quién aparece, cuándo entra de verdad en la historia y con quién se cruza durante el recorrido.',
+    people_hub_empty: 'No se detectaron personas en las notas disponibles.',
+    people_days_template: '{count} días',
+    people_first_seen: 'Primera aparición',
+    people_excerpt: 'Cómo entra en el relato',
+    people_connections: 'Se cruza con',
+    people_days_block: 'Días mencionados',
+    people_strip_link: 'Mapa de personas',
+    people_jump_first: 'Ir al primer encuentro',
+    people_summary_template: '{count} personas surgidas de las notas',
     after_camino_title: 'Después del Camino',
     after_camino_text:
       'Unos meses después del Camino hice un viaje a Estados Unidos para correr la maratón de Nueva York, pero lo convertí en un itinerante de unos 50 días: precisamente eso me permitió reencontrar a algunas personas conocidas en el Camino. En ese viaje volví a ver a Mark en Nueva York con su novia (luego su esposa), a la hija de Pam en Filadelfia con su marido, a Danielle en San Francisco, a Marcia en su casa cerca de San Francisco, y también a Chris y Jessica, a quienes por fin devolví la frontal que me habían prestado para cruzar las mesetas. Me dio pena no poder reencontrar a Ginger y Giselle: Texas no era viable en ese itinerario.\n\nA Catherine, en cambio, la reencontré algunos años más tarde, durante otro viaje itinerante: estaba en Basilea y compré una bici con la que me moví hasta Múnich, donde me encontré con un amigo con el que luego fui a Berlín para correr la maratón. Después de Berlín volé a Dublín y finalmente a Bruselas para encontrarme con otro amigo portugués, que estaba allí de vacaciones para celebrar un cumpleaños. En esa ocasión le escribí a Catherine, sin aviso previo, para decirle que estaba en Bruselas: nos vimos una noche para saludarnos. Pero esos son otros viajes que se contarán en otros diarios.'
@@ -327,6 +363,18 @@ const I18N = {
     map_error_prefix: 'Erreur carte',
     legal_notice:
       '© Tous droits réservés. Les photos, vidéos et textes de ce site ne peuvent pas être copiés, réutilisés, republiés ou redistribués sans autorisation écrite de l’auteur.',
+    people_hub_title: 'Personnes du chemin',
+    people_hub_intro:
+      'Une carte relationnelle reconstruite à partir des notes: qui apparaît, quand cette personne entre vraiment dans l’histoire et avec qui elle se croise en route.',
+    people_hub_empty: 'Aucune personne détectée dans les notes disponibles.',
+    people_days_template: '{count} jours',
+    people_first_seen: 'Première apparition',
+    people_excerpt: 'Comment la personne entre dans le récit',
+    people_connections: 'Liens avec',
+    people_days_block: 'Jours mentionnés',
+    people_strip_link: 'Carte des personnes',
+    people_jump_first: 'Aller à la première rencontre',
+    people_summary_template: '{count} personnes ressortent des notes',
     after_camino_title: 'Après le Chemin',
     after_camino_text:
       'Quelques mois après le Chemin, j’ai fait un voyage aux États-Unis pour courir le marathon de New York, mais je l’ai transformé en itinérance d’environ 50 jours : c’est précisément ce qui m’a permis de revoir certaines personnes rencontrées sur le Chemin. Pendant ce voyage, j’ai revu Mark à New York avec sa petite amie (devenue ensuite sa femme), la fille de Pam à Philadelphie avec son mari, Danielle à San Francisco, Marcia chez elle près de San Francisco, et aussi Chris et Jessica, à qui j’ai enfin rendu la lampe frontale qu’ils m’avaient prêtée pour traverser les mesetas. J’ai regretté de ne pas pouvoir revoir Ginger et Giselle : le Texas n’était pas faisable sur cet itinéraire.\n\nJ’ai en revanche revu Catherine quelques années plus tard, pendant un autre voyage itinérant : j’étais à Bâle et j’ai acheté un vélo avec lequel je me suis déplacé jusqu’à Munich, où j’ai retrouvé un ami avec qui je suis ensuite allé à Berlin pour courir le marathon. Après Berlin, j’ai pris un vol pour Dublin puis pour Bruxelles afin de retrouver un autre ami portugais, qui était là en vacances pour fêter un anniversaire. À cette occasion, j’ai écrit à Catherine, sans prévenir, pour lui dire que j’étais à Bruxelles : nous nous sommes vus un soir pour un salut. Mais ce sont d’autres voyages qui seront racontés dans d’autres journaux.'
@@ -393,6 +441,11 @@ const buildLocalizedMapPath = (lang, params = null) => {
 const buildLocalizedContactPath = (lang) => {
   const targetLang = normalizeLang(lang) || 'it';
   return `/${targetLang}/contatti/`;
+};
+
+const buildLocalizedPeoplePath = (lang) => {
+  const targetLang = normalizeLang(lang) || 'it';
+  return `/${targetLang}/people/`;
 };
 
 const getDayFromPathname = (pathnameValue = '') => {
@@ -525,6 +578,9 @@ const setLang = (lang, options = {}) => {
   document.querySelectorAll('[data-contact-link]').forEach((el) => {
     if (el && el.tagName === 'A') el.href = buildLocalizedContactPath(normalized);
   });
+  document.querySelectorAll('[data-people-link]').forEach((el) => {
+    if (el && el.tagName === 'A') el.href = buildLocalizedPeoplePath(normalized);
+  });
   document.querySelectorAll('.lang__btn').forEach((btn) => {
     btn.classList.toggle('active', btn.dataset.lang === normalized);
   });
@@ -553,6 +609,7 @@ const setLang = (lang, options = {}) => {
     const submit = commentsForm.querySelector('button[type="submit"]');
     if (submit) submit.textContent = I18N[normalized].comments_send;
   }
+  applyFooterTemplateCtaVisibility();
   if (dataCache && renderExisting) {
     renderView();
   } else {
@@ -586,10 +643,69 @@ let adminAuthenticated = false;
 let miniMapCollapsed = false;
 let initRequestToken = 0;
 let dayPickerOpen = false;
+let publicUiSettings = { show_footer_template_cta: true };
+let peopleIndexCache = [];
+let activeDayKeyForPeople = '';
 const MINI_MAP_COLLAPSED_KEY = 'cammino_minimap_collapsed_v1';
 const dayDistanceKmByDate = new Map();
 const dayDistanceCumKmByDate = new Map();
 const nonTrackedDayKeys = new Set();
+
+const PEOPLE_CATALOG = [
+  { id: 'maria', name: 'Maria', aliases: ['Maria'] },
+  { id: 'thomas', name: 'Thomas', aliases: ['Thomas', 'Tomà', 'Toma'] },
+  { id: 'talia', name: 'Talia', aliases: ['Talia'] },
+  { id: 'alicia', name: 'Alicia', aliases: ['Alicia'] },
+  { id: 'ananda', name: 'Ananda', aliases: ['Ananda'] },
+  { id: 'beatrice', name: 'Beatrice', aliases: ['Beatrice'] },
+  { id: 'catherine', name: 'Catherine', aliases: ['Catherine'] },
+  { id: 'charles', name: 'Charles', aliases: ['Charles'] },
+  { id: 'francesco', name: 'Francesco', aliases: ['Francesco'] },
+  { id: 'hongsuan', name: 'Hongsuan', aliases: ['Hongsuan', 'Ocean'] },
+  { id: 'andrius', name: 'Andrius', aliases: ['Andrius'] },
+  { id: 'giselle', name: 'Giselle', aliases: ['Giselle'] },
+  { id: 'judith', name: 'Judith', aliases: ['Judith'] },
+  { id: 'lucia', name: 'Lucia', aliases: ['Lucia', 'Lucía'] },
+  { id: 'mark', name: 'Mark', aliases: ['Mark'] },
+  { id: 'pamela', name: 'Pamela', aliases: ['Pamela', 'Pam'] },
+  { id: 'chris', name: 'Chris', aliases: ['Chris'] },
+  { id: 'jessica', name: 'Jessica', aliases: ['Jessica'] },
+  { id: 'danielle', name: 'Danielle', aliases: ['Danielle'] },
+  { id: 'ginger', name: 'Ginger', aliases: ['Ginger'] },
+  { id: 'carla', name: 'Carla', aliases: ['Carla'] },
+  { id: 'anita', name: 'Anita', aliases: ['Anita'] },
+  { id: 'isabel', name: 'Isabel', aliases: ['Isabel'] },
+  { id: 'sara', name: 'Sara', aliases: ['Sara'] },
+  { id: 'renato', name: 'Renato', aliases: ['Renato'] },
+  { id: 'laura', name: 'Laura', aliases: ['Laura'] },
+  { id: 'juan', name: 'Juan', aliases: ['Juan', 'Juean', 'Joan'] },
+  { id: 'matteo', name: 'Matteo', aliases: ['Matteo'] },
+  { id: 'stefano', name: 'Stefano', aliases: ['Stefano'] },
+  { id: 'maddalena', name: 'Maddalena', aliases: ['Maddalena'] },
+  { id: 'antonella', name: 'Antonella', aliases: ['Antonella'] }
+];
+
+const applyFooterTemplateCtaVisibility = () => {
+  const footerCta = document.querySelector('.footer__cta');
+  if (!footerCta) return;
+  const visible = publicUiSettings.show_footer_template_cta !== false;
+  footerCta.style.display = visible ? '' : 'none';
+};
+
+const loadPublicUiSettings = async () => {
+  try {
+    const response = await fetch('/api/public/settings', { cache: 'no-store' });
+    if (!response.ok) return;
+    const payload = await response.json();
+    const settings = payload && payload.settings ? payload.settings : {};
+    publicUiSettings = {
+      show_footer_template_cta: settings.show_footer_template_cta !== false,
+    };
+  } catch {
+    // Keep defaults when endpoint is not available.
+  }
+  applyFooterTemplateCtaVisibility();
+};
 
 const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
 const PHOTO_EXTENSIONS = new Set(['jpg', 'jpeg', 'png', 'heic', 'heif', 'webp']);
@@ -2610,6 +2726,135 @@ const getRecommendations = (day) => {
   return [];
 };
 
+const formatI18nTemplate = (template, vars = {}) => String(template || '').replace(/\{(\w+)\}/g, (_, key) => {
+  const value = vars[key];
+  return value == null ? '' : String(value);
+});
+
+const escapeRegExp = (value) => String(value || '').replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+const stripNoteMarkup = (text) => String(text || '')
+  .replace(/\*\*/g, '')
+  .replace(/[_`>#-]+/g, ' ')
+  .replace(/\[(.*?)\]\((.*?)\)/g, '$1')
+  .replace(/\s+/g, ' ')
+  .trim();
+
+const buildPersonRegex = (aliases) => new RegExp(`(?<![\\p{L}\\p{N}_])(?:${aliases.map(escapeRegExp).join('|')})(?![\\p{L}\\p{N}_])`, 'giu');
+
+const buildExcerptAroundMatch = (text, matchIndex, matchLength) => {
+  const normalized = stripNoteMarkup(text);
+  if (!normalized) return '';
+  const start = Math.max(0, matchIndex - 72);
+  const end = Math.min(normalized.length, matchIndex + matchLength + 96);
+  const prefix = start > 0 ? '…' : '';
+  const suffix = end < normalized.length ? '…' : '';
+  return `${prefix}${normalized.slice(start, end).trim()}${suffix}`;
+};
+
+const scrollToDay = (dayKey, behavior = 'smooth') => {
+  const section = document.getElementById(`day-${dayKey}`);
+  if (section) section.scrollIntoView({ behavior, block: 'start' });
+};
+
+const analyzePeopleFromDays = (days) => {
+  const people = PEOPLE_CATALOG.map((person) => ({
+    ...person,
+    regex: buildPersonRegex(person.aliases),
+    mentions: 0,
+    days: [],
+    excerpt: '',
+    related: []
+  }));
+  const peopleById = new Map(people.map((person) => [person.id, person]));
+  const cooccurrence = new Map();
+
+  (days || []).forEach((day) => {
+    const noteText = stripNoteMarkup(getNote(day));
+    if (!noteText) return;
+    const present = [];
+    people.forEach((person) => {
+      person.regex.lastIndex = 0;
+      const matches = [...noteText.matchAll(person.regex)];
+      if (!matches.length) return;
+      person.mentions += matches.length;
+      const dayEntry = {
+        date: day.date,
+        title: getDayTitle(day),
+        label: getDayLabelText(day),
+        index: renderedDayOrder.indexOf(day.date)
+      };
+      person.days.push(dayEntry);
+      if (!person.excerpt) {
+        const first = matches[0];
+        person.excerpt = buildExcerptAroundMatch(noteText, first.index || 0, first[0].length);
+      }
+      present.push(person.id);
+    });
+    for (let i = 0; i < present.length; i += 1) {
+      for (let j = i + 1; j < present.length; j += 1) {
+        const pairKey = [present[i], present[j]].sort().join('::');
+        cooccurrence.set(pairKey, (cooccurrence.get(pairKey) || 0) + 1);
+      }
+    }
+  });
+
+  cooccurrence.forEach((weight, pairKey) => {
+    const [leftId, rightId] = pairKey.split('::');
+    const left = peopleById.get(leftId);
+    const right = peopleById.get(rightId);
+    if (!left || !right) return;
+    left.related.push({ id: right.id, name: right.name, weight });
+    right.related.push({ id: left.id, name: left.name, weight });
+  });
+
+  return people
+    .filter((person) => person.days.length)
+    .map((person) => ({
+      ...person,
+      firstDay: person.days[0],
+      related: person.related.sort((a, b) => b.weight - a.weight || a.name.localeCompare(b.name)).slice(0, 4)
+    }))
+    .sort((a, b) => b.days.length - a.days.length || b.mentions - a.mentions || a.name.localeCompare(b.name));
+};
+
+const updatePeopleStripActiveState = (dayKey) => {
+  activeDayKeyForPeople = String(dayKey || '').slice(0, 10);
+  const rail = document.getElementById('timeline-people-rail');
+  if (!rail) return;
+  const chips = Array.from(rail.querySelectorAll('.timeline-people__chip[data-person-day-list]'));
+  chips.forEach((chip) => {
+    const list = String(chip.getAttribute('data-person-day-list') || '').split(',').filter(Boolean);
+    const active = !!activeDayKeyForPeople && list.includes(activeDayKeyForPeople);
+    chip.classList.toggle('is-active', active);
+    chip.classList.toggle('is-dim', !active);
+  });
+};
+
+const renderPeopleStrip = (days) => {
+  peopleIndexCache = analyzePeopleFromDays(days);
+  const root = document.getElementById('timeline-people');
+  const rail = document.getElementById('timeline-people-rail');
+  const link = document.getElementById('timeline-people-link');
+  if (!root || !rail || !link) return;
+  rail.innerHTML = '';
+  if (!peopleIndexCache.length) return;
+  link.href = buildLocalizedPeoplePath(currentLang);
+  link.textContent = I18N[currentLang].people_strip_link;
+  peopleIndexCache.forEach((person) => {
+    const chip = document.createElement('button');
+    chip.type = 'button';
+    chip.className = 'timeline-people__chip';
+    chip.textContent = person.name;
+    chip.setAttribute('data-person-day-list', person.days.map((day) => day.date).join(','));
+    chip.addEventListener('click', () => {
+      if (person.firstDay) scrollToDay(person.firstDay.date);
+    });
+    rail.appendChild(chip);
+  });
+  updatePeopleStripActiveState(activeDayKeyForPeople || renderedDayOrder[0] || '');
+};
+
 const getStravaLinks = (day) => {
   const links = Array.isArray(day && day.strava) ? day.strava : [];
   return links
@@ -4097,6 +4342,7 @@ const observeSections = () => {
     ensureVisible(buttons[idx]);
     const activeSection = sections[idx];
     const dayKey = activeSection.id.replace('day-', '');
+    updatePeopleStripActiveState(dayKey);
     const isPrologue = isPrologueDay({ date: dayKey });
     setMiniMapHidden(isPrologue);
     if (!isPrologue) {
@@ -4316,6 +4562,7 @@ const renderView = () => {
   content.appendChild(buildAfterCaminoSection());
 
   buildTimelineNav(list);
+  renderPeopleStrip(list);
   observeSections();
   renderDates();
   renderManageTools();
@@ -4390,24 +4637,7 @@ const init = async () => {
           return;
         }
 
-        // Fallback legacy: load full track_by_day.json
-        return fetch(withCacheBust('/data/track_by_day.json', cacheBust), { cache: 'no-store' })
-          .then((res) => (res.ok ? res.json() : null))
-          .then((json) => {
-            if (token !== initRequestToken) return;
-            trackSplitEnabled = false;
-            trackIndexByDay = new Map();
-            trackByDay = json || null;
-            normalizedTrackByDay = normalizeTrackByDayForActivities(trackByDay);
-            trackDataFetchDone = true;
-            computeDayDistanceKmFromTrack(trackByDay);
-            recomputeCumulativeDayDistanceKm(renderedDayOrder);
-            refreshDayTrackCards();
-            renderDates();
-            if (data.days.length) {
-              renderMiniMap(data.days[0].date, 0).catch(() => {});
-            }
-          });
+        throw new Error('Split day tracks unavailable');
       })
       .catch(() => {
         if (token !== initRequestToken) return;
@@ -4503,7 +4733,9 @@ window.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('keydown', (event) => {
       if (event.key === 'Escape' && dayPickerOpen) closeDayPicker();
     });
-    init();
+    loadPublicUiSettings().finally(() => {
+      init();
+    });
   } catch (err) {
     const content = document.getElementById('content');
     if (content) {

@@ -40,6 +40,7 @@ const OG_IMAGE_HEIGHT = 630;
 const OG_IMAGE_TYPE = 'image/jpeg';
 const DAY_PAGE_PATH_RE = /^\/(it|en|es|fr)\/day\/(\d{4}-\d{2}-\d{2})\/?$/i;
 const MAP_PAGE_PATH_RE = /^\/(it|en|es|fr)\/map\/?$/i;
+const PEOPLE_PAGE_PATH_RE = /^\/(it|en|es|fr)\/people\/?$/i;
 const CONTACT_PAGE_PATH_RE = /^\/(it|en|es|fr)\/contatti\/?$/i;
 
 function loadDotEnv(rootDir) {
@@ -301,6 +302,84 @@ function localizeMapHtml(rawHtml, locale, req) {
   out = out.replace(/<p class="lead">[\s\S]*?<\/p>/i, `<p class="lead">${escapeHtml(ui.lead)}</p>`);
   out = out.replace(/<a class="view-btn active" href="[^"]*">[\s\S]*?<\/a>/i, `<a class="view-btn active" href="/${lang}/">${escapeHtml(ui.back)}</a>`);
   out = out.replace(/(<button[^>]*id="map-media-modal-close"[^>]*aria-label=")[^"]*(")/i, `$1${escapeHtml(ui.close)}$2`);
+  return out;
+}
+
+function localizePeopleHtml(rawHtml, locale, req) {
+  const lang = SUPPORTED_LANGS.has(String(locale || '').toLowerCase())
+    ? String(locale).toLowerCase()
+    : 'it';
+  const origin = getRequestOrigin(req);
+  const PEOPLE_SEO = {
+    it: {
+      title: 'Cammino di Santiago — Persone',
+      desc: 'Persone incontrate sul Cammino di Santiago, ricostruite dalle note giornaliere.'
+    },
+    en: {
+      title: 'Camino de Santiago — People',
+      desc: 'People met on the Camino de Santiago, reconstructed from the daily notes.'
+    },
+    es: {
+      title: 'Camino de Santiago — Personas',
+      desc: 'Personas encontradas en el Camino de Santiago, reconstruidas a partir de las notas diarias.'
+    },
+    fr: {
+      title: 'Chemin de Saint-Jacques — Personnes',
+      desc: 'Personnes rencontrées sur le Chemin de Saint-Jacques, reconstituées à partir des notes quotidiennes.'
+    }
+  };
+  const PEOPLE_UI = {
+    it: {
+      eyebrow: 'Geografia umana del cammino',
+      heading: 'Persone del Cammino',
+      lead: 'Una pagina dedicata agli incontri che ritornano, si intrecciano e diventano parte della storia.',
+      back: 'Torna al diario'
+    },
+    en: {
+      eyebrow: 'Human map of the Camino',
+      heading: 'People on the Camino',
+      lead: 'A dedicated page for the encounters that return, intertwine, and become part of the story.',
+      back: 'Back to diary'
+    },
+    es: {
+      eyebrow: 'Geografía humana del Camino',
+      heading: 'Personas del Camino',
+      lead: 'Una página dedicada a los encuentros que vuelven, se cruzan y terminan formando parte de la historia.',
+      back: 'Volver al diario'
+    },
+    fr: {
+      eyebrow: 'Géographie humaine du Chemin',
+      heading: 'Personnes du Chemin',
+      lead: 'Une page dédiée aux rencontres qui reviennent, se croisent et deviennent une partie de l’histoire.',
+      back: 'Retour au journal'
+    }
+  };
+  const title = (PEOPLE_SEO[lang] || PEOPLE_SEO.it).title;
+  const desc = (PEOPLE_SEO[lang] || PEOPLE_SEO.it).desc;
+  const ui = PEOPLE_UI[lang] || PEOPLE_UI.it;
+  const canonical = `${origin}/${lang}/people/`;
+  const altIt = `${origin}/it/people/`;
+  const altEn = `${origin}/en/people/`;
+  const altEs = `${origin}/es/people/`;
+  const altFr = `${origin}/fr/people/`;
+  let out = String(rawHtml || '');
+  out = out.replace(/<html lang="[^"]*">/i, `<html lang="${lang}">`);
+  out = out.replace(/<title>[\s\S]*?<\/title>/i, `<title>${escapeHtml(title)}</title>`);
+  if (/<meta[^>]*name="description"/i.test(out)) {
+    out = out.replace(/(<meta[^>]*name="description"[^>]*content=")[^"]*(")/i, `$1${escapeHtml(desc)}$2`);
+  } else {
+    out = out.replace('</head>', `  <meta name="description" content="${escapeHtml(desc)}" />\n</head>`);
+  }
+  if (/<link[^>]*rel="canonical"/i.test(out)) {
+    out = out.replace(/(<link[^>]*rel="canonical"[^>]*href=")[^"]*(")/i, `$1${escapeHtml(canonical)}$2`);
+  } else {
+    out = out.replace('</head>', `  <link rel="canonical" href="${escapeHtml(canonical)}" />\n</head>`);
+  }
+  out = out.replace('</head>', `  <link rel="alternate" hreflang="it" href="${escapeHtml(altIt)}" />\n  <link rel="alternate" hreflang="en" href="${escapeHtml(altEn)}" />\n  <link rel="alternate" hreflang="es" href="${escapeHtml(altEs)}" />\n  <link rel="alternate" hreflang="fr" href="${escapeHtml(altFr)}" />\n  <link rel="alternate" hreflang="x-default" href="${escapeHtml(altIt)}" />\n</head>`);
+  out = out.replace(/<span class="eyebrow"[^>]*>[\s\S]*?<\/span>/i, `<span class="eyebrow">${escapeHtml(ui.eyebrow)}</span>`);
+  out = out.replace(/<h1[^>]*>[\s\S]*?<\/h1>/i, `<h1>${escapeHtml(ui.heading)}</h1>`);
+  out = out.replace(/<p class="lead"[^>]*>[\s\S]*?<\/p>/i, `<p class="lead">${escapeHtml(ui.lead)}</p>`);
+  out = out.replace(/<a class="view-btn active" href="[^"]*">[\s\S]*?<\/a>/i, `<a class="view-btn active" href="/${lang}/">${escapeHtml(ui.back)}</a>`);
   return out;
 }
 
@@ -1034,6 +1113,7 @@ async function buildSitemapXml(req) {
   const generatedDate = itEntries && itEntries.generated_at ? String(itEntries.generated_at).slice(0, 10) : null;
   const homeAlt = { it: '/it/', en: '/en/', es: '/es/', fr: '/fr/' };
   const mapAlt = { it: '/it/map/', en: '/en/map/', es: '/es/map/', fr: '/fr/map/' };
+  const peopleAlt = { it: '/it/people/', en: '/en/people/', es: '/es/people/', fr: '/fr/people/' };
   const contactAlt = { it: '/it/contatti/', en: '/en/contatti/', es: '/es/contatti/', fr: '/fr/contatti/' };
   push('/it/', generatedDate, '1.0', 'daily', [], homeAlt);
   push('/en/', generatedDate, '0.9', 'daily', [], homeAlt);
@@ -1043,6 +1123,10 @@ async function buildSitemapXml(req) {
   push('/en/map/', null, '0.8', 'weekly', [], mapAlt);
   push('/es/map/', null, '0.8', 'weekly', [], mapAlt);
   push('/fr/map/', null, '0.8', 'weekly', [], mapAlt);
+  push('/it/people/', null, '0.7', 'weekly', [], peopleAlt);
+  push('/en/people/', null, '0.7', 'weekly', [], peopleAlt);
+  push('/es/people/', null, '0.7', 'weekly', [], peopleAlt);
+  push('/fr/people/', null, '0.7', 'weekly', [], peopleAlt);
   push('/it/contatti/', null, '0.5', 'monthly', [], contactAlt);
   push('/en/contatti/', null, '0.5', 'monthly', [], contactAlt);
   push('/es/contatti/', null, '0.5', 'monthly', [], contactAlt);
@@ -1552,17 +1636,6 @@ function removeTrackFileRefs(trackPoints, removedOrigSet) {
   return trackPoints.filter((p) => !removedOrigSet.has(String(p.file || '')));
 }
 
-function rebuildTrackByDay(trackPoints) {
-  const byDay = {};
-  for (const point of trackPoints) {
-    const key = String(point.date || '').slice(0, 10);
-    if (!key) continue;
-    if (!byDay[key]) byDay[key] = [];
-    byDay[key].push(point);
-  }
-  return byDay;
-}
-
 function rebuildTrackGeoJson(trackPoints) {
   const coords = trackPoints
     .map((p) => [Number(p.lon), Number(p.lat)])
@@ -1602,7 +1675,6 @@ async function handleDelete(req, res) {
     }
 
     const trackPointsPath = path.join(ROOT, 'data', 'track_points.json');
-    const trackByDayPath = path.join(ROOT, 'data', 'track_by_day.json');
     const trackGeoJsonPath = path.join(ROOT, 'data', 'track.geojson');
     const idSet = new Set(ids);
 
@@ -1679,14 +1751,12 @@ async function handleDelete(req, res) {
 
     const trackPoints = await readJson(trackPointsPath, []);
     const filteredTrackPoints = removeTrackFileRefs(trackPoints, removedOrigSet);
-    const rebuiltTrackByDay = rebuildTrackByDay(filteredTrackPoints);
     const rebuiltTrackGeo = rebuildTrackGeoJson(filteredTrackPoints);
 
     for (const lang of ENTRY_LANGS) {
       await writeEntriesByLang(lang, updatedEntriesByLang[lang]);
     }
     await writeJson(trackPointsPath, filteredTrackPoints);
-    await writeJson(trackByDayPath, rebuiltTrackByDay);
     await writeJson(trackGeoJsonPath, rebuiltTrackGeo);
 
     sendJson(res, 200, {
@@ -1764,6 +1834,25 @@ async function serveStatic(req, res, requestPath = null, locale = '') {
     try {
       const raw = await fs.readFile(finalPath, 'utf8');
       const html = localizeMapHtml(raw, locale, req);
+      res.writeHead(200, {
+        'Content-Type': type,
+        'Cache-Control': 'no-cache'
+      });
+      if (req.method === 'HEAD') {
+        res.end();
+      } else {
+        res.end(html);
+      }
+      return;
+    } catch {
+      // Fallback to standard static stream.
+    }
+  }
+
+  if (ext === '.html' && finalPath === path.join(ROOT, 'people.html') && locale) {
+    try {
+      const raw = await fs.readFile(finalPath, 'utf8');
+      const html = localizePeopleHtml(raw, locale, req);
       res.writeHead(200, {
         'Content-Type': type,
         'Cache-Control': 'no-cache'
@@ -1913,6 +2002,12 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
+  if (urlObj.pathname === '/people' || urlObj.pathname === '/people.html') {
+    res.writeHead(301, { Location: `/it/people/${urlObj.search || ''}` });
+    res.end();
+    return;
+  }
+
   const dayMatch = urlObj.pathname.match(DAY_PAGE_PATH_RE);
   if (dayMatch) {
     const lang = String(dayMatch[1]).toLowerCase();
@@ -1930,6 +2025,18 @@ const server = http.createServer(async (req, res) => {
   if (mapMatch) {
     const lang = String(mapMatch[1]).toLowerCase();
     await serveStatic(req, res, `/map.html${urlObj.search || ''}`, lang);
+    return;
+  }
+
+  const peopleMatch = urlObj.pathname.match(PEOPLE_PAGE_PATH_RE);
+  if (peopleMatch) {
+    const lang = String(peopleMatch[1]).toLowerCase();
+    if (urlObj.pathname !== `/${lang}/people/`) {
+      res.writeHead(301, { Location: `/${lang}/people/${urlObj.search || ''}` });
+      res.end();
+      return;
+    }
+    await serveStatic(req, res, `/people.html${urlObj.search || ''}`, lang);
     return;
   }
 
