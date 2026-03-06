@@ -3,7 +3,7 @@ const I18N = {
     language_label: 'Lingua',
     eyebrow: 'Diario di viaggio',
     title: 'Cammino di Santiago',
-    subtitle: 'Un recap giorno per giorno tra foto, video e ricordi di strada.',
+    subtitle: 'Un recap giorno per giorno del mio cammino in solitaria, tra foto, video e ricordi di strada.',
     hero_intro:
       'Questo diario racconta il mio Cammino Francese di Santiago, iniziato a Lourdes e concluso a Santiago, proseguendo poi fino a Finisterre e Muxia. È stato il capitolo più intenso del mio 2019 sabbatico, dopo essermi dimesso da un contratto a tempo indeterminato come informatico. L’ho vissuto in modalità relax: non avevo nessuno che mi correva dietro e il tempo era l’unica cosa che non mi mancava.\n\nIl 2019 è stato anche l’anno della mezza maratona sulla Muraglia Cinese e della maratona di New York, ma queste sono altre storie e le racconterò in un altro diario.\n\nGodetevi ora foto, video e racconti del mio cammino giorno per giorno, tra ricordi, emozioni e dettagli concreti del percorso. Piccola chicca: ogni contenuto mostra in basso orario e luogo di scatto, e cliccando sulla località si apre Google Maps esattamente nel punto in cui quella foto o quel video è stato registrato.\n\nSe vi va, lasciatemi un commento: potete farlo su ogni foto oppure direttamente nella nota del giorno.\n\nSe sei arrivato qui perché stai pianificando il tuo cammino, spero troverai spunti e informazioni utili per goderti al meglio il viaggio. Buen Camino, peregrino!',
     days: 'Giorni',
@@ -98,7 +98,7 @@ const I18N = {
     language_label: 'Language',
     eyebrow: 'Travel diary',
     title: 'Camino de Santiago',
-    subtitle: 'A day-by-day recap through photos, videos, and trail memories.',
+    subtitle: 'A day-by-day recap of my solo Camino, through photos, videos, and memories from the road.',
     hero_intro:
       'This diary tells my Camino Francés, which began in Lourdes and ended in Santiago, then continued to Finisterre and Muxia. It was the most intense chapter of my 2019 sabbatical, after resigning from a permanent job as a software engineer. I lived it in a relaxed mode: no one was chasing me, and time was the one thing I had in abundance.\n\n2019 was also the year of the Great Wall of China Half Marathon and the New York City Marathon, but those are different stories and I will tell them in another diary.\n\nNow enjoy photos, videos, and day-by-day stories from my Camino, between memories, emotions, and concrete route details. A small extra: each item shows capture time and place at the bottom, and clicking the location opens Google Maps exactly at the point where that photo or video was recorded.\n\nIf you like, leave me a comment: you can do it on each photo or directly in the day note.\n\nIf you came here because you are planning your own Camino, I hope you will find useful ideas and information to enjoy your journey at its best. Buen Camino, peregrino!',
     days: 'Days',
@@ -193,7 +193,7 @@ const I18N = {
     language_label: 'Idioma',
     eyebrow: 'Diario de viaje',
     title: 'Camino de Santiago',
-    subtitle: 'Un resumen día a día entre fotos, vídeos y recuerdos del camino.',
+    subtitle: 'Un resumen día a día de mi camino en solitario, entre fotos, vídeos y recuerdos del camino.',
     hero_intro:
       'Este diario cuenta mi Camino Francés de Santiago, empezado en Lourdes y terminado en Santiago, y luego prolongado hasta Finisterre y Muxia. Fue el capítulo más intenso de mi 2019 sabático, después de dejar un contrato indefinido como informático. Lo viví en modo relax: no tenía a nadie persiguiéndome y el tiempo era lo único que no me faltaba.\n\n2019 también fue el año de la media maratón de la Muralla China y de la maratón de Nueva York, pero esas son otras historias y las contaré en otro diario.\n\nAhora disfrutad fotos, vídeos y relatos de mi camino día a día, entre recuerdos, emociones y detalles concretos del recorrido. Pequeño extra: cada contenido muestra abajo la hora y el lugar de captura, y al hacer clic en la localidad se abre Google Maps exactamente en el punto donde se registró esa foto o ese vídeo.\n\nSi os apetece, dejadme un comentario: podéis hacerlo en cada foto o directamente en la nota del día.\n\nSi has llegado aquí porque estás planificando tu camino, espero que encuentres ideas e información útiles para disfrutar al máximo de tu viaje. Buen Camino, peregrino!',
     days: 'Días',
@@ -288,7 +288,7 @@ const I18N = {
     language_label: 'Langue',
     eyebrow: 'Journal de voyage',
     title: 'Chemin de Saint-Jacques',
-    subtitle: 'Un récit jour par jour entre photos, vidéos et souvenirs de route.',
+    subtitle: 'Un récit jour par jour de mon chemin en solitaire, entre photos, vidéos et souvenirs de route.',
     hero_intro:
       'Ce journal raconte mon Camino Francés, commencé à Lourdes et terminé à Santiago, puis prolongé jusqu’à Finisterre et Muxia. Cela a été le chapitre le plus intense de mon année sabbatique 2019, après avoir quitté un CDI comme informaticien. Je l’ai vécu en mode relax: personne ne me courait après, et le temps était la seule chose qui ne me manquait pas.\n\n2019 a aussi été l’année du semi-marathon de la Muraille de Chine et du marathon de New York, mais ce sont d’autres histoires que je raconterai dans un autre journal.\n\nProfitez maintenant des photos, vidéos et récits de mon chemin jour après jour, entre souvenirs, émotions et détails concrets du parcours. Petite cerise: chaque contenu affiche en bas l’heure et le lieu de prise, et en cliquant sur la localité, Google Maps s’ouvre exactement au point où cette photo ou cette vidéo a été enregistrée.\n\nSi vous voulez, laissez-moi un commentaire: vous pouvez le faire sur chaque photo ou directement dans la note du jour.\n\nSi vous êtes arrivé ici parce que vous préparez votre chemin, j’espère que vous y trouverez des idées et des informations utiles pour profiter au mieux de votre voyage. Buen Camino, peregrino!',
     days: 'Jours',
