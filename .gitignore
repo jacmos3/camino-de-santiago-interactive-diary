@@ -25,3 +25,6 @@ new/
 site/.env
 **/.DS_Store
 site/deploy-runtime/
+
+# Local extracted chat exports (keep on disk, never commit)
+site/metadata_only/data_metadata/conversations_extracted/**/_chat.txt
