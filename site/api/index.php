@@ -937,12 +937,21 @@ if ($path === '/comments/counts') {
   $targets = array_values(array_unique(array_filter(array_map('normalize_target', $targets))));
   $store = load_store();
   $counts = [];
-  foreach ($targets as $t) $counts[$t] = 0;
-  foreach ($store['comments'] as $comment) {
-    if (!is_array($comment)) continue;
-    $target = normalize_target((string)($comment['target'] ?? ''));
-    if ($target === '' || !array_key_exists($target, $counts)) continue;
-    $counts[$target] += 1;
+  if ($targets) {
+    foreach ($targets as $t) $counts[$t] = 0;
+    foreach ($store['comments'] as $comment) {
+      if (!is_array($comment)) continue;
+      $target = normalize_target((string)($comment['target'] ?? ''));
+      if ($target === '' || !array_key_exists($target, $counts)) continue;
+      $counts[$target] += 1;
+    }
+  } else {
+    foreach ($store['comments'] as $comment) {
+      if (!is_array($comment)) continue;
+      $target = normalize_target((string)($comment['target'] ?? ''));
+      if ($target === '') continue;
+      $counts[$target] = (int)($counts[$target] ?? 0) + 1;
+    }
   }
   respond(200, ['counts' => $counts]);
 }

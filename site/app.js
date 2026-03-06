@@ -748,6 +748,22 @@ const withCacheBust = (url, token) => {
   return `${url}${sep}v=${encodeURIComponent(String(token))}`;
 };
 
+const STATIC_DATA_VERSION = (() => {
+  try {
+    const script = Array.from(document.scripts || []).find((node) => /\/app\.js(?:\?|$)/.test(String(node.src || '')));
+    if (script && script.src) {
+      const parsed = new URL(script.src, window.location.origin);
+      const value = String(parsed.searchParams.get('v') || '').trim();
+      if (value) return value;
+    }
+  } catch {
+    // ignore
+  }
+  return '1';
+})();
+
+const withStaticDataVersion = (url) => withCacheBust(url, STATIC_DATA_VERSION);
+
 const toRootAssetUrl = (value) => {
   const raw = String(value || '').trim();
   if (!raw) return '';
@@ -2329,28 +2345,23 @@ const refreshCommentCounts = async (targetIds) => {
   if (!COMMENTS_API_ENABLED) return;
   const unique = Array.from(new Set((targetIds || []).map((v) => String(v || '').trim()).filter(Boolean)));
   if (!unique.length) return;
-  const chunkSize = 50;
-  for (let i = 0; i < unique.length; i += chunkSize) {
-    const chunk = unique.slice(i, i + chunkSize);
+  try {
+    const payload = await getJsonWithApiFallback('/api/comments/counts');
+    const counts = payload && payload.counts ? payload.counts : {};
+    unique.forEach((target) => {
+      syncCommentCountInUi(target, counts[target] || 0);
+    });
+  } catch {
+    // Backward-compatible fallback for older endpoints.
     try {
-      const out = await postJsonWithApiFallback('/api/comments/counts', { targets: chunk });
+      const out = await postJsonWithApiFallback('/api/comments/counts', { targets: unique });
       const payload = out && out.payload ? out.payload : {};
       const counts = payload && payload.counts ? payload.counts : {};
-      chunk.forEach((target) => {
+      unique.forEach((target) => {
         syncCommentCountInUi(target, counts[target] || 0);
       });
     } catch {
-      // Backward-compatible fallback (older servers may support GET only).
-      try {
-        const query = encodeURIComponent(chunk.join(','));
-        const payload = await getJsonWithApiFallback(`/api/comments/counts?targets=${query}`);
-        const counts = payload && payload.counts ? payload.counts : {};
-        chunk.forEach((target) => {
-          syncCommentCountInUi(target, counts[target] || 0);
-        });
-      } catch {
-        // keep UI usable even if comments API is unavailable
-      }
+      // keep UI usable even if comments API is unavailable
     }
   }
 };
@@ -3585,7 +3596,7 @@ const ensureTrackDayLoaded = async (dayKey) => {
   if (!key || !trackSplitEnabled || !hasTrackDataForDay(key)) return false;
   if (isTrackDayLoaded(key)) return true;
   if (trackDayLoadPromises.has(key)) return trackDayLoadPromises.get(key);
-  const promise = fetch(withCacheBust(`/data/tracks/day/${key}.json`, Date.now()), { cache: 'no-store' })
+  const promise = fetch(withStaticDataVersion(`/data/tracks/day/${key}.json`))
     .then((res) => (res.ok ? res.json() : null))
     .then((payload) => {
       const points = Array.isArray(payload && payload.points) ? payload.points : [];
@@ -4592,7 +4603,6 @@ const renderView = () => {
 const init = async () => {
   const token = ++initRequestToken;
   const content = document.getElementById('content');
-  const cacheBust = Date.now();
   trackDataFetchDone = false;
   const fail = (msg) => {
     if (token !== initRequestToken) return;
@@ -4601,10 +4611,7 @@ const init = async () => {
     }
   };
   try {
-    // Always load fresh JSON to avoid stale cached inline payloads.
-    const res = await fetch(withCacheBust(getEntriesDataPath(), cacheBust), {
-      cache: 'no-store'
-    });
+    const res = await fetch(withStaticDataVersion(getEntriesDataPath()));
     if (!res.ok) {
       const raw = await res.text();
       throw new Error(raw || `HTTP ${res.status}`);
@@ -4618,7 +4625,7 @@ const init = async () => {
     renderView();
 
     // Load track data in split mode first (day-by-day files), fallback to legacy monolithic JSON.
-    fetch(withCacheBust('/data/tracks/index.json', cacheBust), { cache: 'no-store' })
+    fetch(withStaticDataVersion('/data/tracks/index.json'))
       .then((res) => (res.ok ? res.json() : null))
       .then((indexJson) => {
         if (token !== initRequestToken) return;
@@ -4744,9 +4751,8 @@ window.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('keydown', (event) => {
       if (event.key === 'Escape' && dayPickerOpen) closeDayPicker();
     });
-    loadPublicUiSettings().finally(() => {
-      init();
-    });
+    init();
+    loadPublicUiSettings();
   } catch (err) {
     const content = document.getElementById('content');
     if (content) {

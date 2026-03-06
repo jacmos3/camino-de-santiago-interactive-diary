@@ -1480,20 +1480,24 @@ async function handleGetCommentCounts(req, res) {
       .split(',')
       .map((v) => normalizeCommentTarget(v))
       .filter(Boolean);
-    if (!targets.length) {
-      sendJson(res, 400, { error: 'Missing targets' });
-      return;
-    }
-    const wanted = new Set(targets);
     const counts = {};
-    targets.forEach((t) => {
-      counts[t] = 0;
-    });
     const store = await readCommentsStore();
-    for (const comment of store.comments) {
-      const target = String(comment.target || '');
-      if (!wanted.has(target)) continue;
-      counts[target] = (counts[target] || 0) + 1;
+    if (targets.length) {
+      const wanted = new Set(targets);
+      targets.forEach((t) => {
+        counts[t] = 0;
+      });
+      for (const comment of store.comments) {
+        const target = String(comment.target || '');
+        if (!wanted.has(target)) continue;
+        counts[target] = (counts[target] || 0) + 1;
+      }
+    } else {
+      for (const comment of store.comments) {
+        const target = normalizeCommentTarget(comment && comment.target);
+        if (!target) continue;
+        counts[target] = (counts[target] || 0) + 1;
+      }
     }
     sendJson(res, 200, { counts });
   } catch (err) {

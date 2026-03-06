@@ -133,6 +133,24 @@ const buildDiaryDayUrl = (lang, day) => `/${normalizeLang(lang)}/?day=${encodeUR
 const buildDiaryHomeUrl = (lang) => `/${normalizeLang(lang)}/`;
 const buildPeopleUrl = (lang) => `/${normalizeLang(lang)}/people/`;
 const buildEntriesUrl = (lang) => `/data/entries.${normalizeLang(lang)}.json`;
+const STATIC_DATA_VERSION = (() => {
+  try {
+    const script = Array.from(document.scripts || []).find((node) => /\/people\.js(?:\?|$)/.test(String(node.src || '')));
+    if (script && script.src) {
+      const parsed = new URL(script.src, window.location.origin);
+      const value = String(parsed.searchParams.get('v') || '').trim();
+      if (value) return value;
+    }
+  } catch {
+    // ignore
+  }
+  return '1';
+})();
+const buildVersionedEntriesUrl = (lang) => {
+  const url = buildEntriesUrl(lang);
+  const sep = url.includes('?') ? '&' : '?';
+  return `${url}${sep}v=${encodeURIComponent(STATIC_DATA_VERSION)}`;
+};
 
 const formatTemplate = (template, vars = {}) => String(template || '').replace(/\{(\w+)\}/g, (_, key) => {
   const value = vars[key];
@@ -413,7 +431,7 @@ const renderPeoplePage = () => {
 const loadPeople = async () => {
   const root = document.getElementById('people-page-root');
   if (root) root.textContent = PEOPLE_PAGE_I18N[currentLang].loading;
-  const response = await fetch(buildEntriesUrl(currentLang), { cache: 'no-store' });
+  const response = await fetch(buildVersionedEntriesUrl(currentLang));
   if (!response.ok) throw new Error(`HTTP ${response.status}`);
   const payload = await response.json();
   const days = Array.isArray(payload && payload.days) ? payload.days : [];
