@@ -2823,25 +2823,16 @@ const updatePeopleStripActiveState = (dayKey) => {
   const rail = document.getElementById('timeline-people-rail');
   if (!rail) return;
   const chips = Array.from(rail.querySelectorAll('.timeline-people__chip[data-person-day-list]'));
-  const visibleChips = [];
-  const futureChips = [];
   chips.forEach((chip) => {
     const list = String(chip.getAttribute('data-person-day-list') || '').split(',').filter(Boolean);
-    const firstDay = String(chip.getAttribute('data-person-first-day') || '').slice(0, 10);
-    const hasAppeared = !activeDayKeyForPeople || !firstDay || firstDay <= activeDayKeyForPeople;
     const active = !!activeDayKeyForPeople && list.includes(activeDayKeyForPeople);
-    chip.hidden = !hasAppeared;
     chip.classList.toggle('is-active', active);
-    chip.classList.toggle('is-dim', hasAppeared && !active);
-    if (hasAppeared) {
-      visibleChips.push(chip);
-    } else {
-      futureChips.push(chip);
-    }
+    chip.classList.toggle('is-dim', !active);
   });
+  const visibleChips = chips.filter((chip) => !chip.hidden);
   const activeChips = visibleChips.filter((chip) => chip.classList.contains('is-active'));
   const inactiveChips = visibleChips.filter((chip) => !chip.classList.contains('is-active'));
-  [...activeChips, ...inactiveChips, ...futureChips].forEach((chip) => rail.appendChild(chip));
+  [...activeChips, ...inactiveChips].forEach((chip) => rail.appendChild(chip));
 };
 
 const renderPeopleStrip = (days) => {
@@ -2867,7 +2858,6 @@ const renderPeopleStrip = (days) => {
     chip.className = 'timeline-people__chip';
     chip.textContent = person.name;
     chip.setAttribute('data-person-day-list', person.days.map((day) => day.date).join(','));
-    chip.setAttribute('data-person-first-day', person.firstDay ? person.firstDay.date : '');
     chip.addEventListener('click', () => {
       if (person.firstDay) scrollToDay(person.firstDay.date);
     });
