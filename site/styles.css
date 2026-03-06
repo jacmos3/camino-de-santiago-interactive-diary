@@ -381,6 +381,16 @@ h1, h2, h3 {
   gap: 8px;
 }
 
+.people-card__chips--scroll {
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.people-card__chips--scroll .people-chip {
+  flex: 0 0 auto;
+}
+
 .people-chip,
 .people-action,
 .timeline-people__chip,

@@ -175,6 +175,17 @@ const formatDate = (dateStr) => {
   }).format(date);
 };
 
+const formatDateCompact = (dateStr) => {
+  const [year, month, day] = String(dateStr || '').split('-').map(Number);
+  const date = new Date(Date.UTC(year, (month || 1) - 1, day || 1));
+  const localeMap = { it: 'it-IT', en: 'en-US', es: 'es-ES', fr: 'fr-FR' };
+  return new Intl.DateTimeFormat(localeMap[currentLang] || 'it-IT', {
+    day: 'numeric',
+    month: 'long',
+    timeZone: 'UTC'
+  }).format(date);
+};
+
 const buildExcerptAroundMatch = (text, matchIndex, matchLength) => {
   const normalized = stripNoteMarkup(text);
   if (!normalized) return '';
@@ -373,12 +384,12 @@ const renderPeoplePage = () => {
     daysLabel.className = 'people-card__label';
     daysLabel.textContent = ui.days;
     const daysChips = document.createElement('div');
-    daysChips.className = 'people-card__chips';
-    person.days.slice(0, 8).forEach((day) => {
+    daysChips.className = 'people-card__chips people-card__chips--scroll';
+    person.days.forEach((day) => {
       const chip = document.createElement('a');
       chip.className = 'people-chip';
       chip.href = buildDiaryDayUrl(currentLang, day.date);
-      chip.textContent = day.title;
+      chip.textContent = formatDateCompact(day.date);
       daysChips.appendChild(chip);
     });
     daysBlock.appendChild(daysLabel);
