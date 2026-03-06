@@ -133,6 +133,58 @@ function comments_store_path(): string {
   return dirname(__DIR__) . '/data/comments.json';
 }
 
+function ui_flags_store_path(): string {
+  return dirname(__DIR__) . '/data/ui_flags.json';
+}
+
+function default_ui_flags(): array {
+  return [
+    'show_footer_template_cta' => true,
+  ];
+}
+
+function normalize_ui_flags(array $raw): array {
+  $defaults = default_ui_flags();
+  return [
+    'show_footer_template_cta' => array_key_exists('show_footer_template_cta', $raw)
+      ? (bool)$raw['show_footer_template_cta']
+      : (bool)$defaults['show_footer_template_cta'],
+  ];
+}
+
+function load_ui_flags(): array {
+  $path = ui_flags_store_path();
+  if (!is_file($path)) return default_ui_flags();
+  $raw = file_get_contents($path);
+  if ($raw === false || trim($raw) === '') return default_ui_flags();
+  $decoded = json_decode($raw, true);
+  if (!is_array($decoded)) return default_ui_flags();
+  return normalize_ui_flags($decoded);
+}
+
+function save_ui_flags(array $flags): void {
+  $path = ui_flags_store_path();
+  $dir = dirname($path);
+  if (!is_dir($dir)) {
+    if (!mkdir($dir, 0775, true) && !is_dir($dir)) {
+      throw new RuntimeException('Cannot create data directory');
+    }
+  }
+  $normalized = normalize_ui_flags($flags);
+  $json = json_encode($normalized, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+  if ($json === false) {
+    throw new RuntimeException('Cannot encode ui flags');
+  }
+  $tmp = $path . '.tmp';
+  if (file_put_contents($tmp, $json . PHP_EOL, LOCK_EX) === false) {
+    throw new RuntimeException('Cannot write temporary ui flags file');
+  }
+  if (!rename($tmp, $path)) {
+    @unlink($tmp);
+    throw new RuntimeException('Cannot persist ui flags file');
+  }
+}
+
 function analytics_enabled(): bool {
   $value = env_value('ANALYTICS_ENABLED');
   if ($value === null) return true;
@@ -500,6 +552,36 @@ if ($path === '/admin/comments/delete') {
     respond(500, ['error' => 'Cannot persist comments file', 'detail' => api_debug_enabled() ? $e->getMessage() : null]);
   }
   respond(200, ['ok' => true, 'removed' => $removed]);
+}
+
+if ($path === '/admin/settings') {
+  require_admin_auth();
+  if ($method === 'GET') {
+    respond(200, ['settings' => load_ui_flags()]);
+  }
+  if ($method === 'POST') {
+    $payload = read_json_body();
+    $incoming = [];
+    if (isset($payload['settings']) && is_array($payload['settings'])) {
+      $incoming = $payload['settings'];
+    } elseif (is_array($payload)) {
+      $incoming = $payload;
+    }
+    $next = normalize_ui_flags(is_array($incoming) ? $incoming : []);
+    try {
+      save_ui_flags($next);
+    } catch (Throwable $e) {
+      api_log_error('admin/settings/save', $e);
+      respond(500, ['error' => 'Cannot persist settings', 'detail' => api_debug_enabled() ? $e->getMessage() : null]);
+    }
+    respond(200, ['ok' => true, 'settings' => $next]);
+  }
+  respond(405, ['error' => 'Method not allowed']);
+}
+
+if ($path === '/public/settings') {
+  if ($method !== 'GET') respond(405, ['error' => 'Method not allowed']);
+  respond(200, ['settings' => load_ui_flags()]);
 }
 
 if ($path === '/delete') {

@@ -168,6 +168,18 @@
     </div>
 
     <div class="card">
+      <h3 style="margin:0 0 10px;">Impostazioni visibilità</h3>
+      <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+        <label style="display:flex;gap:8px;align-items:center;">
+          <input id="setting-show-footer-template-cta" type="checkbox" />
+          Mostra CTA footer "acquista template"
+        </label>
+        <button id="save-settings-btn" class="btn-primary" type="button">Salva impostazioni</button>
+        <span id="settings-status" style="font-size:0.9rem;color:#6f6156;"></span>
+      </div>
+    </div>
+
+    <div class="card">
       <div id="stats" class="stats"></div>
       <div style="overflow:auto;">
         <table>
@@ -235,6 +247,9 @@
     const analyticsHealthBtn = document.getElementById('analytics-health-btn');
     const analyticsHealthStatusEl = document.getElementById('analytics-health-status');
     const analyticsHealthDetailsEl = document.getElementById('analytics-health-details');
+    const settingShowFooterTemplateCta = document.getElementById('setting-show-footer-template-cta');
+    const saveSettingsBtn = document.getElementById('save-settings-btn');
+    const settingsStatusEl = document.getElementById('settings-status');
     const STORAGE_KEY = 'cammino_admin_token_v1';
 
     const escapeHtml = (value) => String(value || '')
@@ -259,6 +274,11 @@
     const setStatus = (msg, isError = false) => {
       statusEl.textContent = msg || '';
       statusEl.style.color = isError ? '#9f1b1b' : '#6f6156';
+    };
+    const setSettingsStatus = (msg, isError = false) => {
+      if (!settingsStatusEl) return;
+      settingsStatusEl.textContent = msg || '';
+      settingsStatusEl.style.color = isError ? '#9f1b1b' : '#6f6156';
     };
 
     const getToken = () => String(tokenInput.value || '').trim();
@@ -364,6 +384,7 @@
       try {
         const payload = await fetchAdminComments();
         if (!payload) return;
+        await loadSettings();
         renderStats(payload || {});
         renderRows(payload && payload.comments);
         await refreshAnalytics();
@@ -371,6 +392,40 @@
       } catch (err) {
         setStatus(`Errore: ${err.message || err}`, true);
       }
+    };
+
+    const loadSettings = async () => {
+      setSettingsStatus('Caricamento impostazioni...');
+      const response = await fetch('/api/admin/settings', { cache: 'no-store' });
+      if (!response.ok) {
+        const text = await response.text();
+        throw new Error(text || `HTTP ${response.status}`);
+      }
+      const payload = await response.json();
+      const settings = (payload && payload.settings) ? payload.settings : {};
+      if (settingShowFooterTemplateCta) {
+        settingShowFooterTemplateCta.checked = settings.show_footer_template_cta !== false;
+      }
+      setSettingsStatus('Impostazioni caricate.');
+    };
+
+    const saveSettings = async () => {
+      const body = {
+        settings: {
+          show_footer_template_cta: !!(settingShowFooterTemplateCta && settingShowFooterTemplateCta.checked),
+        }
+      };
+      setSettingsStatus('Salvataggio...');
+      const response = await fetch('/api/admin/settings', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      });
+      if (!response.ok) {
+        const text = await response.text();
+        throw new Error(text || `HTTP ${response.status}`);
+      }
+      setSettingsStatus('Impostazioni salvate.');
     };
 
     const renderSimpleList = (el, rows, mapFn) => {
@@ -498,6 +553,15 @@
     if (analyticsHealthBtn) {
       analyticsHealthBtn.addEventListener('click', () => {
         testAnalyticsHealth().catch(() => {});
+      });
+    }
+    if (saveSettingsBtn) {
+      saveSettingsBtn.addEventListener('click', async () => {
+        try {
+          await saveSettings();
+        } catch (err) {
+          setSettingsStatus(`Salvataggio fallito: ${err.message || err}`, true);
+        }
       });
     }
     searchInput.addEventListener('keydown', (event) => {
