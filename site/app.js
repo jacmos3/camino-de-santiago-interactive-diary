@@ -2823,12 +2823,25 @@ const updatePeopleStripActiveState = (dayKey) => {
   const rail = document.getElementById('timeline-people-rail');
   if (!rail) return;
   const chips = Array.from(rail.querySelectorAll('.timeline-people__chip[data-person-day-list]'));
+  const visibleChips = [];
+  const futureChips = [];
   chips.forEach((chip) => {
     const list = String(chip.getAttribute('data-person-day-list') || '').split(',').filter(Boolean);
+    const firstDay = String(chip.getAttribute('data-person-first-day') || '').slice(0, 10);
+    const hasAppeared = !activeDayKeyForPeople || !firstDay || firstDay <= activeDayKeyForPeople;
     const active = !!activeDayKeyForPeople && list.includes(activeDayKeyForPeople);
+    chip.hidden = !hasAppeared;
     chip.classList.toggle('is-active', active);
-    chip.classList.toggle('is-dim', !active);
+    chip.classList.toggle('is-dim', hasAppeared && !active);
+    if (hasAppeared) {
+      visibleChips.push(chip);
+    } else {
+      futureChips.push(chip);
+    }
   });
+  const activeChips = visibleChips.filter((chip) => chip.classList.contains('is-active'));
+  const inactiveChips = visibleChips.filter((chip) => !chip.classList.contains('is-active'));
+  [...activeChips, ...inactiveChips, ...futureChips].forEach((chip) => rail.appendChild(chip));
 };
 
 const renderPeopleStrip = (days) => {
@@ -2841,17 +2854,25 @@ const renderPeopleStrip = (days) => {
   if (!peopleIndexCache.length) return;
   link.href = buildLocalizedPeoplePath(currentLang);
   link.textContent = I18N[currentLang].people_strip_link;
-  peopleIndexCache.forEach((person) => {
+  peopleIndexCache
+    .slice()
+    .sort((a, b) => {
+      const left = String(a && a.firstDay && a.firstDay.date ? a.firstDay.date : '');
+      const right = String(b && b.firstDay && b.firstDay.date ? b.firstDay.date : '');
+      return left.localeCompare(right) || a.name.localeCompare(b.name);
+    })
+    .forEach((person) => {
     const chip = document.createElement('button');
     chip.type = 'button';
     chip.className = 'timeline-people__chip';
     chip.textContent = person.name;
     chip.setAttribute('data-person-day-list', person.days.map((day) => day.date).join(','));
+    chip.setAttribute('data-person-first-day', person.firstDay ? person.firstDay.date : '');
     chip.addEventListener('click', () => {
       if (person.firstDay) scrollToDay(person.firstDay.date);
     });
     rail.appendChild(chip);
-  });
+    });
   updatePeopleStripActiveState(activeDayKeyForPeople || renderedDayOrder[0] || '');
 };
 
