@@ -1,0 +1,130 @@
+{
+  "imported_count": 3,
+  "skipped_count": 23,
+  "imported": [
+    {
+      "file": "2019-07-07_0_0.jpg",
+      "id": "aead4ef7da77",
+      "date": "2019-07-07",
+      "carouselKey": "wa_2019-07-07_0",
+      "carouselOrder": 0,
+      "whatsappShared": true,
+      "img": "assets/img/img_aead4ef7da77.jpg",
+      "thumb": "assets/thumb/thumb_aead4ef7da77.jpg"
+    },
+    {
+      "file": "2019-07-07_0_1.jpg",
+      "id": "acab06d19699",
+      "date": "2019-07-07",
+      "carouselKey": "wa_2019-07-07_0",
+      "carouselOrder": 1,
+      "whatsappShared": true,
+      "img": "assets/img/img_acab06d19699.jpg",
+      "thumb": "assets/thumb/thumb_acab06d19699.jpg"
+    },
+    {
+      "file": "2019-07-07_1_0.jpg",
+      "id": "3d9bb41b99fc",
+      "date": "2019-07-07",
+      "carouselKey": "wa_2019-07-07_1",
+      "carouselOrder": 0,
+      "whatsappShared": true,
+      "img": "assets/img/img_3d9bb41b99fc.jpg",
+      "thumb": "assets/thumb/thumb_3d9bb41b99fc.jpg"
+    }
+  ],
+  "skipped": [
+    {
+      "file": "2019-06-12_20-03__PHOTO-2019-06-12-21-03-29.jpg",
+      "reason": "gia_presente_in_entries"
+    },
+    {
+      "file": "2019-06-14_1_0.jpg",
+      "reason": "gia_presente_in_entries"
+    },
+    {
+      "file": "2019-06-14_1_1.jpg",
+      "reason": "gia_presente_in_entries"
+    },
+    {
+      "file": "2019-06-15_0_0.jpg",
+      "reason": "gia_presente_in_entries"
+    },
+    {
+      "file": "2019-06-15_0_1.jpg",
+      "reason": "gia_presente_in_entries"
+    },
+    {
+      "file": "2019-06-15_0_2.jpg",
+      "reason": "gia_presente_in_entries"
+    },
+    {
+      "file": "2019-06-15_1_0.jpg",
+      "reason": "gia_presente_in_entries"
+    },
+    {
+      "file": "2019-06-15_1_1.jpg",
+      "reason": "gia_presente_in_entries"
+    },
+    {
+      "file": "2019-06-15_1_2.jpg",
+      "reason": "gia_presente_in_entries"
+    },
+    {
+      "file": "2019-06-15_1_3.jpg",
+      "reason": "gia_presente_in_entries"
+    },
+    {
+      "file": "2019-06-15_1_6.jpg",
+      "reason": "gia_presente_in_entries"
+    },
+    {
+      "file": "2019-06-15_1_7.jpg",
+      "reason": "gia_presente_in_entries"
+    },
+    {
+      "file": "2019-06-15_1_8.jpg",
+      "reason": "gia_presente_in_entries"
+    },
+    {
+      "file": "2019-06-15_1_9.jpg",
+      "reason": "gia_presente_in_entries"
+    },
+    {
+      "file": "2019-06-15_2_0.jpg",
+      "reason": "gia_presente_in_entries"
+    },
+    {
+      "file": "2019-06-15_2_1.jpg",
+      "reason": "gia_presente_in_entries"
+    },
+    {
+      "file": "2019-06-15_2_2.jpg",
+      "reason": "gia_presente_in_entries"
+    },
+    {
+      "file": "2019-06-15_2_3.jpg",
+      "reason": "gia_presente_in_entries"
+    },
+    {
+      "file": "2019-06-15_11-1_4.jpg",
+      "reason": "gia_presente_in_entries"
+    },
+    {
+      "file": "2019-06-15_11-1_5.jpg",
+      "reason": "gia_presente_in_entries"
+    },
+    {
+      "file": "2019-06-16_0_0.jpg",
+      "reason": "gia_presente_in_entries"
+    },
+    {
+      "file": "2019-06-16_0_1.jpg",
+      "reason": "gia_presente_in_entries"
+    },
+    {
+      "file": "2019-06-16_0_2.jpg",
+      "reason": "gia_presente_in_entries"
+    }
+  ]
+}

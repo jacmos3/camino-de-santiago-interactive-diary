@@ -1,0 +1,826 @@
+{
+  "takeoutDir": "/Volumes/HardDisk/Cammino di Santiago/takeout/takeout_merged/Takeout/Google Foto/Foto da 2019",
+  "scannedSidecars": 9054,
+  "sidecarsWithGps": 7339,
+  "it": {
+    "dataset": "it",
+    "totalVideos": 200,
+    "updatedExact": 177,
+    "updatedStemFallback": 0,
+    "unchanged": 23
+  },
+  "en": {
+    "dataset": "en",
+    "totalVideos": 200,
+    "updatedExact": 177,
+    "updatedStemFallback": 0,
+    "unchanged": 23
+  },
+  "examples": {
+    "it": [
+      {
+        "id": "ff0d24534996",
+        "orig": "IMG_2861.MOV",
+        "date": "2019-06-03",
+        "time": "13:23",
+        "lat": 45.6896,
+        "lon": 9.590600000000002,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_2861.MOV"
+      },
+      {
+        "id": "9e55295f83fb",
+        "orig": "IMG_2902.MOV",
+        "date": "2019-06-04",
+        "time": "06:49",
+        "lat": 43.0975,
+        "lon": -0.05709999999999999,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_2902.MOV"
+      },
+      {
+        "id": "618db3c08445",
+        "orig": "IMG_2908.MOV",
+        "date": "2019-06-04",
+        "time": "07:27",
+        "lat": 43.098099999999995,
+        "lon": -0.05969999999999999,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_2908.MOV"
+      },
+      {
+        "id": "9c64cfab7742",
+        "orig": "IMG_2941.MOV",
+        "date": "2019-06-06",
+        "time": "11:10",
+        "lat": 43.1442,
+        "lon": -0.4853,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_2941.MOV"
+      },
+      {
+        "id": "2643ed974d26",
+        "orig": "IMG_2945.MOV",
+        "date": "2019-06-06",
+        "time": "13:00",
+        "lat": 43.143499999999996,
+        "lon": -0.48390000000000005,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_2945.MOV"
+      },
+      {
+        "id": "dc3dd0a5e43d",
+        "orig": "IMG_2949.MOV",
+        "date": "2019-06-06",
+        "time": "14:07",
+        "lat": 43.15540000000001,
+        "lon": -0.514,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_2949.MOV"
+      },
+      {
+        "id": "3dda64d1a976",
+        "orig": "IMG_2952.MOV",
+        "date": "2019-06-06",
+        "time": "16:22",
+        "lat": 43.1866,
+        "lon": -0.5748,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_2952.MOV"
+      },
+      {
+        "id": "829f9ca02aa7",
+        "orig": "IMG_2953.MOV",
+        "date": "2019-06-06",
+        "time": "16:26",
+        "lat": 43.1879,
+        "lon": -0.5778,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_2953.MOV"
+      },
+      {
+        "id": "b653f500d04e",
+        "orig": "IMG_2954.MOV",
+        "date": "2019-06-06",
+        "time": "16:26",
+        "lat": 43.187999999999995,
+        "lon": -0.5779,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_2954.MOV"
+      },
+      {
+        "id": "9420e32acac9",
+        "orig": "IMG_2956.MOV",
+        "date": "2019-06-06",
+        "time": "16:52",
+        "lat": 43.194199999999995,
+        "lon": -0.6026,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_2956.MOV"
+      },
+      {
+        "id": "316000728531",
+        "orig": "IMG_2971.MOV",
+        "date": "2019-06-07",
+        "time": "07:59",
+        "lat": 43.1932,
+        "lon": -0.605,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_2971.MOV"
+      },
+      {
+        "id": "d863f06ae6b7",
+        "orig": "IMG_2984.MOV",
+        "date": "2019-06-07",
+        "time": "08:24",
+        "lat": 43.1932,
+        "lon": -0.605,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_2984.MOV"
+      },
+      {
+        "id": "a7a95c5db5c3",
+        "orig": "IMG_3003.MOV",
+        "date": "2019-06-07",
+        "time": "16:56",
+        "lat": 43.2403,
+        "lon": -0.7551,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_3003.MOV"
+      },
+      {
+        "id": "477e2798ebf3",
+        "orig": "IMG_3029.MOV",
+        "date": "2019-06-08",
+        "time": "09:46",
+        "lat": 43.2158,
+        "lon": -0.8137,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_3029.MOV"
+      },
+      {
+        "id": "929c68afcbee",
+        "orig": "IMG_3032.MOV",
+        "date": "2019-06-08",
+        "time": "09:50",
+        "lat": 43.2157,
+        "lon": -0.8154,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_3032.MOV"
+      },
+      {
+        "id": "d900d7d9f6f4",
+        "orig": "IMG_3033.MOV",
+        "date": "2019-06-08",
+        "time": "10:33",
+        "lat": 43.21770000000001,
+        "lon": -0.8298,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_3033.MOV"
+      },
+      {
+        "id": "09f2ba4c675b",
+        "orig": "IMG_3037.MOV",
+        "date": "2019-06-08",
+        "time": "10:36",
+        "lat": 43.217299999999994,
+        "lon": -0.8297,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_3037.MOV"
+      },
+      {
+        "id": "b9a3f35acd55",
+        "orig": "IMG_3039.MOV",
+        "date": "2019-06-08",
+        "time": "10:45",
+        "lat": 43.2176,
+        "lon": -0.8291999999999999,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_3039.MOV"
+      },
+      {
+        "id": "05fe2f8dd93c",
+        "orig": "IMG_3041.MOV",
+        "date": "2019-06-08",
+        "time": "10:52",
+        "lat": 43.216899999999995,
+        "lon": -0.8297,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_3041.MOV"
+      },
+      {
+        "id": "04f3b1c1cf2d",
+        "orig": "IMG_3042.MOV",
+        "date": "2019-06-08",
+        "time": "11:01",
+        "lat": 43.217,
+        "lon": -0.8297,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_3042.MOV"
+      },
+      {
+        "id": "511b243b4a5c",
+        "orig": "IMG_3043.MOV",
+        "date": "2019-06-08",
+        "time": "11:02",
+        "lat": 43.217299999999994,
+        "lon": -0.8297,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_3043.MOV"
+      },
+      {
+        "id": "91b836b2961e",
+        "orig": "IMG_3044.MOV",
+        "date": "2019-06-08",
+        "time": "11:04",
+        "lat": 43.217299999999994,
+        "lon": -0.8298,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_3044.MOV"
+      },
+      {
+        "id": "98c207eff95a",
+        "orig": "IMG_3045.MOV",
+        "date": "2019-06-08",
+        "time": "11:06",
+        "lat": 43.217299999999994,
+        "lon": -0.8296,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_3045.MOV"
+      },
+      {
+        "id": "73b80c8d330b",
+        "orig": "IMG_3046.MOV",
+        "date": "2019-06-08",
+        "time": "11:08",
+        "lat": 43.217099999999995,
+        "lon": -0.8297,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_3046.MOV"
+      },
+      {
+        "id": "26304939136f",
+        "orig": "IMG_3047.MOV",
+        "date": "2019-06-08",
+        "time": "11:22",
+        "lat": 43.2172,
+        "lon": -0.8297,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_3047.MOV"
+      },
+      {
+        "id": "5e51b2100d4a",
+        "orig": "IMG_3049.MOV",
+        "date": "2019-06-08",
+        "time": "12:56",
+        "lat": 43.2195,
+        "lon": -0.8685999999999999,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_3049.MOV"
+      },
+      {
+        "id": "a2680f380695",
+        "orig": "IMG_3051.MOV",
+        "date": "2019-06-08",
+        "time": "12:56",
+        "lat": 43.2195,
+        "lon": -0.8685999999999999,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_3051.MOV"
+      },
+      {
+        "id": "0cda4defa7ee",
+        "orig": "IMG_3053.MOV",
+        "date": "2019-06-08",
+        "time": "12:57",
+        "lat": 43.2195,
+        "lon": -0.8685999999999999,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_3053.MOV"
+      },
+      {
+        "id": "910cc769e897",
+        "orig": "IMG_3054.MOV",
+        "date": "2019-06-08",
+        "time": "12:59",
+        "lat": 43.2195,
+        "lon": -0.8684999999999999,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_3054.MOV"
+      },
+      {
+        "id": "c392f5ea0029",
+        "orig": "IMG_3055.MOV",
+        "date": "2019-06-08",
+        "time": "12:59",
+        "lat": 43.2195,
+        "lon": -0.8684999999999999,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_3055.MOV"
+      },
+      {
+        "id": "4f812ded995c",
+        "orig": "IMG_3056.MOV",
+        "date": "2019-06-08",
+        "time": "13:02",
+        "lat": 43.2194,
+        "lon": -0.8684,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_3056.MOV"
+      },
+      {
+        "id": "2a52446dd18f",
+        "orig": "IMG_3065.MOV",
+        "date": "2019-06-08",
+        "time": "17:24",
+        "lat": 43.1751,
+        "lon": -0.9511,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_3065.MOV"
+      },
+      {
+        "id": "eddbee8b512c",
+        "orig": "IMG_3066.MOV",
+        "date": "2019-06-09",
+        "time": "09:32",
+        "lat": 43.165800000000004,
+        "lon": -1.0158,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_3066.MOV"
+      },
+      {
+        "id": "1bef3de86f9f",
+        "orig": "IMG_3071.MOV",
+        "date": "2019-06-09",
+        "time": "10:27",
+        "lat": 43.1857,
+        "lon": -1.052,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_3071.MOV"
+      },
+      {
+        "id": "dc4b2235d038",
+        "orig": "IMG_3072.MOV",
+        "date": "2019-06-09",
+        "time": "10:28",
+        "lat": 43.1857,
+        "lon": -1.052,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_3072.MOV"
+      },
+      {
+        "id": "eda586033093",
+        "orig": "IMG_3074.MOV",
+        "date": "2019-06-09",
+        "time": "12:38",
+        "lat": 43.20700000000001,
+        "lon": -1.0986,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_3074.MOV"
+      },
+      {
+        "id": "0dd7e1959bb0",
+        "orig": "IMG_3076.MOV",
+        "date": "2019-06-09",
+        "time": "13:16",
+        "lat": 43.20830000000001,
+        "lon": -1.1141999999999999,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_3076.MOV"
+      },
+      {
+        "id": "9b27a2b27b60",
+        "orig": "IMG_3132.MOV",
+        "date": "2019-06-11",
+        "time": "10:19",
+        "lat": 43.0499,
+        "lon": -1.2679000000000002,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_3132.MOV"
+      },
+      {
+        "id": "47c0897d95d4",
+        "orig": "IMG_3135.MOV",
+        "date": "2019-06-11",
+        "time": "10:33",
+        "lat": 43.042899999999996,
+        "lon": -1.2715999999999998,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_3135.MOV"
+      },
+      {
+        "id": "46a7fddf6250",
+        "orig": "IMG_3172.MOV",
+        "date": "2019-06-12",
+        "time": "16:47",
+        "lat": 42.8979,
+        "lon": -1.542,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_3172.MOV"
+      }
+    ],
+    "en": [
+      {
+        "id": "ff0d24534996",
+        "orig": "IMG_2861.MOV",
+        "date": "2019-06-03",
+        "time": "13:23",
+        "lat": 45.6896,
+        "lon": 9.590600000000002,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_2861.MOV"
+      },
+      {
+        "id": "9e55295f83fb",
+        "orig": "IMG_2902.MOV",
+        "date": "2019-06-04",
+        "time": "06:49",
+        "lat": 43.0975,
+        "lon": -0.05709999999999999,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_2902.MOV"
+      },
+      {
+        "id": "618db3c08445",
+        "orig": "IMG_2908.MOV",
+        "date": "2019-06-04",
+        "time": "07:27",
+        "lat": 43.098099999999995,
+        "lon": -0.05969999999999999,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_2908.MOV"
+      },
+      {
+        "id": "9c64cfab7742",
+        "orig": "IMG_2941.MOV",
+        "date": "2019-06-06",
+        "time": "11:10",
+        "lat": 43.1442,
+        "lon": -0.4853,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_2941.MOV"
+      },
+      {
+        "id": "2643ed974d26",
+        "orig": "IMG_2945.MOV",
+        "date": "2019-06-06",
+        "time": "13:00",
+        "lat": 43.143499999999996,
+        "lon": -0.48390000000000005,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_2945.MOV"
+      },
+      {
+        "id": "dc3dd0a5e43d",
+        "orig": "IMG_2949.MOV",
+        "date": "2019-06-06",
+        "time": "14:07",
+        "lat": 43.15540000000001,
+        "lon": -0.514,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_2949.MOV"
+      },
+      {
+        "id": "3dda64d1a976",
+        "orig": "IMG_2952.MOV",
+        "date": "2019-06-06",
+        "time": "16:22",
+        "lat": 43.1866,
+        "lon": -0.5748,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_2952.MOV"
+      },
+      {
+        "id": "829f9ca02aa7",
+        "orig": "IMG_2953.MOV",
+        "date": "2019-06-06",
+        "time": "16:26",
+        "lat": 43.1879,
+        "lon": -0.5778,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_2953.MOV"
+      },
+      {
+        "id": "b653f500d04e",
+        "orig": "IMG_2954.MOV",
+        "date": "2019-06-06",
+        "time": "16:26",
+        "lat": 43.187999999999995,
+        "lon": -0.5779,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_2954.MOV"
+      },
+      {
+        "id": "9420e32acac9",
+        "orig": "IMG_2956.MOV",
+        "date": "2019-06-06",
+        "time": "16:52",
+        "lat": 43.194199999999995,
+        "lon": -0.6026,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_2956.MOV"
+      },
+      {
+        "id": "316000728531",
+        "orig": "IMG_2971.MOV",
+        "date": "2019-06-07",
+        "time": "07:59",
+        "lat": 43.1932,
+        "lon": -0.605,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_2971.MOV"
+      },
+      {
+        "id": "d863f06ae6b7",
+        "orig": "IMG_2984.MOV",
+        "date": "2019-06-07",
+        "time": "08:24",
+        "lat": 43.1932,
+        "lon": -0.605,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_2984.MOV"
+      },
+      {
+        "id": "a7a95c5db5c3",
+        "orig": "IMG_3003.MOV",
+        "date": "2019-06-07",
+        "time": "16:56",
+        "lat": 43.2403,
+        "lon": -0.7551,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_3003.MOV"
+      },
+      {
+        "id": "477e2798ebf3",
+        "orig": "IMG_3029.MOV",
+        "date": "2019-06-08",
+        "time": "09:46",
+        "lat": 43.2158,
+        "lon": -0.8137,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_3029.MOV"
+      },
+      {
+        "id": "929c68afcbee",
+        "orig": "IMG_3032.MOV",
+        "date": "2019-06-08",
+        "time": "09:50",
+        "lat": 43.2157,
+        "lon": -0.8154,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_3032.MOV"
+      },
+      {
+        "id": "d900d7d9f6f4",
+        "orig": "IMG_3033.MOV",
+        "date": "2019-06-08",
+        "time": "10:33",
+        "lat": 43.21770000000001,
+        "lon": -0.8298,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_3033.MOV"
+      },
+      {
+        "id": "09f2ba4c675b",
+        "orig": "IMG_3037.MOV",
+        "date": "2019-06-08",
+        "time": "10:36",
+        "lat": 43.217299999999994,
+        "lon": -0.8297,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_3037.MOV"
+      },
+      {
+        "id": "b9a3f35acd55",
+        "orig": "IMG_3039.MOV",
+        "date": "2019-06-08",
+        "time": "10:45",
+        "lat": 43.2176,
+        "lon": -0.8291999999999999,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_3039.MOV"
+      },
+      {
+        "id": "05fe2f8dd93c",
+        "orig": "IMG_3041.MOV",
+        "date": "2019-06-08",
+        "time": "10:52",
+        "lat": 43.216899999999995,
+        "lon": -0.8297,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_3041.MOV"
+      },
+      {
+        "id": "04f3b1c1cf2d",
+        "orig": "IMG_3042.MOV",
+        "date": "2019-06-08",
+        "time": "11:01",
+        "lat": 43.217,
+        "lon": -0.8297,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_3042.MOV"
+      },
+      {
+        "id": "511b243b4a5c",
+        "orig": "IMG_3043.MOV",
+        "date": "2019-06-08",
+        "time": "11:02",
+        "lat": 43.217299999999994,
+        "lon": -0.8297,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_3043.MOV"
+      },
+      {
+        "id": "91b836b2961e",
+        "orig": "IMG_3044.MOV",
+        "date": "2019-06-08",
+        "time": "11:04",
+        "lat": 43.217299999999994,
+        "lon": -0.8298,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_3044.MOV"
+      },
+      {
+        "id": "98c207eff95a",
+        "orig": "IMG_3045.MOV",
+        "date": "2019-06-08",
+        "time": "11:06",
+        "lat": 43.217299999999994,
+        "lon": -0.8296,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_3045.MOV"
+      },
+      {
+        "id": "73b80c8d330b",
+        "orig": "IMG_3046.MOV",
+        "date": "2019-06-08",
+        "time": "11:08",
+        "lat": 43.217099999999995,
+        "lon": -0.8297,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_3046.MOV"
+      },
+      {
+        "id": "26304939136f",
+        "orig": "IMG_3047.MOV",
+        "date": "2019-06-08",
+        "time": "11:22",
+        "lat": 43.2172,
+        "lon": -0.8297,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_3047.MOV"
+      },
+      {
+        "id": "5e51b2100d4a",
+        "orig": "IMG_3049.MOV",
+        "date": "2019-06-08",
+        "time": "12:56",
+        "lat": 43.2195,
+        "lon": -0.8685999999999999,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_3049.MOV"
+      },
+      {
+        "id": "a2680f380695",
+        "orig": "IMG_3051.MOV",
+        "date": "2019-06-08",
+        "time": "12:56",
+        "lat": 43.2195,
+        "lon": -0.8685999999999999,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_3051.MOV"
+      },
+      {
+        "id": "0cda4defa7ee",
+        "orig": "IMG_3053.MOV",
+        "date": "2019-06-08",
+        "time": "12:57",
+        "lat": 43.2195,
+        "lon": -0.8685999999999999,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_3053.MOV"
+      },
+      {
+        "id": "910cc769e897",
+        "orig": "IMG_3054.MOV",
+        "date": "2019-06-08",
+        "time": "12:59",
+        "lat": 43.2195,
+        "lon": -0.8684999999999999,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_3054.MOV"
+      },
+      {
+        "id": "c392f5ea0029",
+        "orig": "IMG_3055.MOV",
+        "date": "2019-06-08",
+        "time": "12:59",
+        "lat": 43.2195,
+        "lon": -0.8684999999999999,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_3055.MOV"
+      },
+      {
+        "id": "4f812ded995c",
+        "orig": "IMG_3056.MOV",
+        "date": "2019-06-08",
+        "time": "13:02",
+        "lat": 43.2194,
+        "lon": -0.8684,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_3056.MOV"
+      },
+      {
+        "id": "2a52446dd18f",
+        "orig": "IMG_3065.MOV",
+        "date": "2019-06-08",
+        "time": "17:24",
+        "lat": 43.1751,
+        "lon": -0.9511,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_3065.MOV"
+      },
+      {
+        "id": "eddbee8b512c",
+        "orig": "IMG_3066.MOV",
+        "date": "2019-06-09",
+        "time": "09:32",
+        "lat": 43.165800000000004,
+        "lon": -1.0158,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_3066.MOV"
+      },
+      {
+        "id": "1bef3de86f9f",
+        "orig": "IMG_3071.MOV",
+        "date": "2019-06-09",
+        "time": "10:27",
+        "lat": 43.1857,
+        "lon": -1.052,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_3071.MOV"
+      },
+      {
+        "id": "dc4b2235d038",
+        "orig": "IMG_3072.MOV",
+        "date": "2019-06-09",
+        "time": "10:28",
+        "lat": 43.1857,
+        "lon": -1.052,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_3072.MOV"
+      },
+      {
+        "id": "eda586033093",
+        "orig": "IMG_3074.MOV",
+        "date": "2019-06-09",
+        "time": "12:38",
+        "lat": 43.20700000000001,
+        "lon": -1.0986,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_3074.MOV"
+      },
+      {
+        "id": "0dd7e1959bb0",
+        "orig": "IMG_3076.MOV",
+        "date": "2019-06-09",
+        "time": "13:16",
+        "lat": 43.20830000000001,
+        "lon": -1.1141999999999999,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_3076.MOV"
+      },
+      {
+        "id": "9b27a2b27b60",
+        "orig": "IMG_3132.MOV",
+        "date": "2019-06-11",
+        "time": "10:19",
+        "lat": 43.0499,
+        "lon": -1.2679000000000002,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_3132.MOV"
+      },
+      {
+        "id": "47c0897d95d4",
+        "orig": "IMG_3135.MOV",
+        "date": "2019-06-11",
+        "time": "10:33",
+        "lat": 43.042899999999996,
+        "lon": -1.2715999999999998,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_3135.MOV"
+      },
+      {
+        "id": "46a7fddf6250",
+        "orig": "IMG_3172.MOV",
+        "date": "2019-06-12",
+        "time": "16:47",
+        "lat": 42.8979,
+        "lon": -1.542,
+        "matchedBy": "exact",
+        "takeoutTitle": "IMG_3172.MOV"
+      }
+    ]
+  },
+  "generatedAt": "2026-03-03T17:42:20.214Z"
+}

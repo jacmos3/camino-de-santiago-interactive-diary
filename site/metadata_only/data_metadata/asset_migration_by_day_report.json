@@ -1,0 +1,240 @@
+{
+  "moveStats": {
+    "planned": 2066,
+    "moved": 0,
+    "skipped": 0,
+    "missing": 1889
+  },
+  "rewriteStats": [
+    {
+      "fileName": "entries.it.json",
+      "changes": 2066
+    },
+    {
+      "fileName": "entries.en.json",
+      "changes": 2066
+    },
+    {
+      "fileName": "entries.es.json",
+      "changes": 0
+    },
+    {
+      "fileName": "entries.fr.json",
+      "changes": 0
+    }
+  ],
+  "missingCount": 7568,
+  "missingSample": [
+    {
+      "file": "entries.it.json",
+      "date": "2019-06-02",
+      "id": "6aa698b8dc7d",
+      "key": "thumb",
+      "path": "assets/thumb/2019-06-02/thumb_6aa698b8dc7d.jpg"
+    },
+    {
+      "file": "entries.it.json",
+      "date": "2019-06-03",
+      "id": "ff0d24534996",
+      "key": "src",
+      "path": "assets/video_resized/2019-06-03/vid_ff0d24534996.mp4"
+    },
+    {
+      "file": "entries.it.json",
+      "date": "2019-06-03",
+      "id": "ff0d24534996",
+      "key": "poster",
+      "path": "assets/poster/2019-06-03/poster_ff0d24534996.jpg"
+    },
+    {
+      "file": "entries.it.json",
+      "date": "2019-06-03",
+      "id": "30c63d014b78",
+      "key": "thumb",
+      "path": "assets/thumb/2019-06-03/thumb_30c63d014b78.jpg"
+    },
+    {
+      "file": "entries.it.json",
+      "date": "2019-06-03",
+      "id": "019093b45803",
+      "key": "thumb",
+      "path": "assets/thumb/2019-06-03/thumb_019093b45803.jpg"
+    },
+    {
+      "file": "entries.it.json",
+      "date": "2019-06-03",
+      "id": "bce07585f3c2",
+      "key": "thumb",
+      "path": "assets/thumb/2019-06-03/thumb_bce07585f3c2.jpg"
+    },
+    {
+      "file": "entries.it.json",
+      "date": "2019-06-04",
+      "id": "99b3521a721a",
+      "key": "thumb",
+      "path": "assets/thumb/2019-06-04/thumb_99b3521a721a.jpg"
+    },
+    {
+      "file": "entries.it.json",
+      "date": "2019-06-04",
+      "id": "028ec9bbd037",
+      "key": "thumb",
+      "path": "assets/thumb/2019-06-04/thumb_028ec9bbd037.jpg"
+    },
+    {
+      "file": "entries.it.json",
+      "date": "2019-06-04",
+      "id": "80d5c0bc8199",
+      "key": "thumb",
+      "path": "assets/thumb/2019-06-04/thumb_80d5c0bc8199.jpg"
+    },
+    {
+      "file": "entries.it.json",
+      "date": "2019-06-04",
+      "id": "33330d79b6a1",
+      "key": "thumb",
+      "path": "assets/thumb/2019-06-04/thumb_33330d79b6a1.jpg"
+    },
+    {
+      "file": "entries.it.json",
+      "date": "2019-06-04",
+      "id": "9e55295f83fb",
+      "key": "src",
+      "path": "assets/video_resized/2019-06-04/vid_9e55295f83fb.mp4"
+    },
+    {
+      "file": "entries.it.json",
+      "date": "2019-06-04",
+      "id": "9e55295f83fb",
+      "key": "poster",
+      "path": "assets/poster/2019-06-04/poster_9e55295f83fb.jpg"
+    },
+    {
+      "file": "entries.it.json",
+      "date": "2019-06-04",
+      "id": "0bcc9f523035",
+      "key": "thumb",
+      "path": "assets/thumb/2019-06-04/thumb_0bcc9f523035.jpg"
+    },
+    {
+      "file": "entries.it.json",
+      "date": "2019-06-04",
+      "id": "053eb1ca6880",
+      "key": "thumb",
+      "path": "assets/thumb/2019-06-04/thumb_053eb1ca6880.jpg"
+    },
+    {
+      "file": "entries.it.json",
+      "date": "2019-06-04",
+      "id": "c5c24fcaac6a",
+      "key": "thumb",
+      "path": "assets/thumb/2019-06-04/thumb_c5c24fcaac6a.jpg"
+    },
+    {
+      "file": "entries.it.json",
+      "date": "2019-06-04",
+      "id": "618db3c08445",
+      "key": "src",
+      "path": "assets/video_resized/2019-06-04/vid_618db3c08445.mp4"
+    },
+    {
+      "file": "entries.it.json",
+      "date": "2019-06-04",
+      "id": "618db3c08445",
+      "key": "poster",
+      "path": "assets/poster/2019-06-04/poster_618db3c08445.jpg"
+    },
+    {
+      "file": "entries.it.json",
+      "date": "2019-06-04",
+      "id": "c261872e1acf",
+      "key": "thumb",
+      "path": "assets/thumb/2019-06-04/thumb_c261872e1acf.jpg"
+    },
+    {
+      "file": "entries.it.json",
+      "date": "2019-06-04",
+      "id": "408a029556a0",
+      "key": "thumb",
+      "path": "assets/thumb/2019-06-04/thumb_408a029556a0.jpg"
+    },
+    {
+      "file": "entries.it.json",
+      "date": "2019-06-04",
+      "id": "ebcb60aa5238",
+      "key": "thumb",
+      "path": "assets/thumb/2019-06-04/thumb_ebcb60aa5238.jpg"
+    },
+    {
+      "file": "entries.it.json",
+      "date": "2019-06-04",
+      "id": "c61c9cc45419",
+      "key": "thumb",
+      "path": "assets/thumb/2019-06-04/thumb_c61c9cc45419.jpg"
+    },
+    {
+      "file": "entries.it.json",
+      "date": "2019-06-04",
+      "id": "12206e0d85e0",
+      "key": "thumb",
+      "path": "assets/thumb/2019-06-04/thumb_12206e0d85e0.jpg"
+    },
+    {
+      "file": "entries.it.json",
+      "date": "2019-06-04",
+      "id": "b0bb9654aac5",
+      "key": "thumb",
+      "path": "assets/thumb/2019-06-04/thumb_b0bb9654aac5.jpg"
+    },
+    {
+      "file": "entries.it.json",
+      "date": "2019-06-04",
+      "id": "a07a76154151",
+      "key": "thumb",
+      "path": "assets/thumb/2019-06-04/thumb_a07a76154151.jpg"
+    },
+    {
+      "file": "entries.it.json",
+      "date": "2019-06-05",
+      "id": "2c157387aca9",
+      "key": "thumb",
+      "path": "assets/thumb/2019-06-05/thumb_2c157387aca9.jpg"
+    },
+    {
+      "file": "entries.it.json",
+      "date": "2019-06-05",
+      "id": "9f6fc0aa47fd",
+      "key": "src",
+      "path": "assets/img/2019-06-05/img_9f6fc0aa47fd.jpg"
+    },
+    {
+      "file": "entries.it.json",
+      "date": "2019-06-05",
+      "id": "9f6fc0aa47fd",
+      "key": "thumb",
+      "path": "assets/thumb/2019-06-05/thumb_9f6fc0aa47fd.jpg"
+    },
+    {
+      "file": "entries.it.json",
+      "date": "2019-06-05",
+      "id": "5afd304d6188",
+      "key": "src",
+      "path": "assets/img/2019-06-05/img_5afd304d6188.jpg"
+    },
+    {
+      "file": "entries.it.json",
+      "date": "2019-06-05",
+      "id": "5afd304d6188",
+      "key": "thumb",
+      "path": "assets/thumb/2019-06-05/thumb_5afd304d6188.jpg"
+    },
+    {
+      "file": "entries.it.json",
+      "date": "2019-06-05",
+      "id": "93c28dd40256",
+      "key": "src",
+      "path": "assets/img/2019-06-05/img_93c28dd40256.jpg"
+    }
+  ],
+  "generatedAt": "2026-03-05T02:51:56.911Z"
+}

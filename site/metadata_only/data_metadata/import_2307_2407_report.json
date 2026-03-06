@@ -1,0 +1,25 @@
+{
+  "imported": [
+    {
+      "file": "PHOTO-2019-07-23-21-34-25.jpg",
+      "id": "681c4d023ff7",
+      "date": "2019-07-23",
+      "time": "21:34",
+      "type": "image",
+      "src": "assets/img/img_681c4d023ff7.jpg",
+      "thumb": "assets/thumb/thumb_681c4d023ff7.jpg",
+      "poster": null
+    },
+    {
+      "file": "49a50bd2ffb046ab8f770b7e2f85b8fb.mp4",
+      "id": "76a1b66f1563",
+      "date": "2019-07-24",
+      "time": "05:56",
+      "type": "video",
+      "src": "assets/video_resized/vid_76a1b66f1563.mp4",
+      "thumb": null,
+      "poster": "assets/poster/poster_76a1b66f1563.jpg"
+    }
+  ],
+  "skipped": []
+}

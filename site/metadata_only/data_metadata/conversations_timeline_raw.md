@@ -1,0 +1,1612 @@
+# Estrazione conversazioni (grezza, filtrata)
+
+## 2019-06-07 (1 messaggi rilevanti)
+- **Talia Camino** (1)
+  - 08:23:18 Jà: djjdhd
+
+## 2019-06-08 (3 messaggi rilevanti)
+- **Talia Camino** (3)
+  - 17:36:15 Jà: 😂😂😂😂
+  - 17:36:37 Jà: the game begins
+  - 17:36:40 Jà: 😂😂😂
+
+## 2019-06-10 (17 messaggi rilevanti)
+- **Talia Camino** (15)
+  - 14:51:09 Jà: hi talia! how r u??? have you found other shell?
+  - 14:57:10 Jà: now i am at orisson (after saint jean pied de port and before roncisvalle)
+  - 14:57:30 Jà: i think maria is going to roncisvalle today
+  - 14:57:41 Jà: dont know about thomas yet
+  - 15:00:22 Talia Camino: I'm sorry I missed it!! Is the second one far after Mauleon? I stayed here to rest today, and i will surely find it tomorrow!
+  - 15:00:46 Jà: one shell it was placed 2 km after hopital
+  - 15:03:08 Jà: you have to find it haha
+  - 15:22:43 Jà: where are you now?
+- **Mark Ripka** (2)
+  - 16:03:31 Jà: hi there
+  - 16:03:44 Mark Ripka: Hi Jacopo - It’s Mark from New York
+
+## 2019-06-11 (3 messaggi rilevanti)
+- **Talia Camino** (3)
+  - 12:28:18 Jà: do not miss it hahaha
+  - 14:15:39 Talia Camino: You know, it will be some days before i get there... I'm sleeping tonight at farm landrania, i hope I'll find the second one tomorrow
+  - 14:16:25 Jà: do not worry haha they are well hidden and nobody will take them
+
+## 2019-06-12 (26 messaggi rilevanti)
+- **Mark Ripka** (7)
+  - 14:55:56 Jà: hi mark
+  - 14:56:29 Jà: r u still on the way to zubiri with carla?
+  - 16:54:28 Mark Ripka: Hi. We finally made it to town and are with Carla and Isabel.
+  - 17:17:58 Jà: ah ok... i waited u but at 15.30 i moved... and now i am going to the place after larassoana. can u please give me the whatsapp number of carla?
+  - 17:18:21 Jà: r u planning to stop at zubiri today?
+  - 17:29:37 Jà: Posizione: https://maps.google.com/?q=42.889538,-1.558403
+  - 17:29:48 Jà: thanks
+- **Talia Camino** (3)
+  - 15:50:47 Jà: yoooo
+  - 15:51:01 Jà: good job
+  - 16:25:18 Jà: just left the last one
+- **Carla Cardenas** (16)
+  - 17:32:32 Jà: hi Carla!! its Jacopo! i am continued after zubiri and after larassoana also.. i have a 3 euro debit with you hahah but i will find a way to give it back to you during the way hahaha do you know the tom thumb story? haha stay tuned 😂😂😂
+  - 17:33:12 Carla Cardenas: Don’t worry about the 3 euros
+  - 17:33:28 Jà: 😂😂
+  - 17:33:52 Jà: haha okay
+  - 17:34:05 Jà: r u planning to stop in zubiri or r u continuing today?
+  - 17:40:30 Jà: the story of tom thumb in few words is the story of a child that was leaving things on the way while he was walking to know how to come back and do not loose the way... i was thinking to leave the money hidden on the way and give you the clues to find them hahah
+  - 17:42:32 Jà: something like that
+  - 17:43:44 Jà: (i like games 😂😂😂)
+
+## 2019-06-13 (51 messaggi rilevanti)
+- **Carla Cardenas** (42)
+  - 10:49:08 Jà: i am in pamplona now
+  - 11:31:24 Carla Cardenas: We are 11 kms away
+  - 11:31:46 Jà: dont know yet
+  - 11:32:37 Jà: now i am taking a rest in the garden
+  - 11:32:49 Jà: there is a little park here
+  - 11:44:18 Jà: i think i can wait you if you dont arrive too late but then i will continue to zariquiegui because it is in the middle of the uphill so i do half uphill today and half uphill tomorrow to split the pain 😂
+  - 12:06:56 Jà: ok i stay here today.. i just checked the flights and bought a new one on 24 of july
+  - 12:11:52 Jà: have u all already book a place to stay?
+- **+32 487 38 26 02** (4)
+  - 18:30:39 Jà: sure
+  - 18:31:12 Jà: haha i was asking if u want me to join, but then i thought to the thing u said before hahaha “always the same people” hahaha
+  - 18:34:24 Jà: yes have to put the shoes
+  - 23:11:16 Jà: it was nice to speak with u today, good night and get a nice rest for tomorrow 😁
+- **Pamplona Party People** (4)
+  - 21:33:43 Mark Ripka: Mark Ripka ha creato questo gruppo.
+  - 21:33:43 Pamplona Party People: Mark Ripka ti ha aggiunto.
+  - 21:34:13 Theresia Bavenby: Mark Ripka ha aggiunto Theresia Bavenby.
+  - 21:34:28 Mark Ripka: Hola party people. Love, Marky
+- **Andrius Camino** (1)
+  - 21:35:38 Jà: hi!
+
+## 2019-06-14 (38 messaggi rilevanti)
+- **+32 487 38 26 02** (12)
+  - 08:01:44 Jà: 💪💪💪
+  - 08:02:09 Jà: have a good day and buen camino! i just went out from the hostel
+  - 08:15:39 Jà: will try to go till puente la reina but i will decide village by village
+  - 08:16:42 ~Catherine Sauvage: OK, thats 25 km?
+  - 08:23:08 Jà: more or less
+  - 17:45:33 Jà: i think to go out to buy something to eat
+  - 17:45:55 Jà: do u need something? or do u join me?
+  - 17:49:41 Jà: how long it takes?
+- **Ginger treanor san antonio tx** (9)
+  - 09:07:21 Jà: hello! its jacopo from italy 🇮🇹 😁
+  - 16:39:09 Ginger treanor san antonio tx: Hey it's ginger. I left my walk stick on table.  Can u keep for me
+  - 16:42:46 Jà: hi.. yes ur stick is in safe 😁😁
+  - 17:18:51 Jà: we did nothing special 😁
+  - 17:19:28 Jà: ok, i went to take a shower and already lost catherine haha dont know where she is now 😂
+  - 17:23:40 Ginger treanor san antonio tx: Or asleep
+  - 17:24:06 Jà: i found her haha
+  - 19:50:00 Jà: i am going around the city
+- **Pamplona Party People** (17)
+  - 14:09:48 Pam Papa: Where are you?
+  - 14:10:10 Jà: hahaah
+  - 14:10:53 Jà: thanks
+  - 14:12:20 Danielle DeRome: Where are you, Pam & ?
+  - 14:44:14 Carla Cardenas: Andrius is going there
+  - 16:06:21 Pam Papa: ♥️love the photos, Jacopo!
+  - 16:43:53 Jà: i arrived to puente la reina
+  - 16:44:12 Jà: the today’s walking was really good! nice landacapes
+
+## 2019-06-15 (48 messaggi rilevanti)
+- **Pamplona Party People** (27)
+  - 10:27:35 Danielle DeRome: Mark - vinitis?
+  - 11:15:08 Pam Papa: We’re on a restroom break in Zarikiegi. Mark’s trying to find out how to walk out of Pamplona.
+  - 15:42:05 Danielle DeRome: Ok. Am at Albergue Puente in Puente la Reina. It’s a nice walk from Obanos, but I was on overload. Cannot move!
+  - 16:18:57 Carla Cardenas: Danielle where are you staying?
+  - 16:23:13 Danielle DeRome: Ok. Am at Albergue Puente in Puente la Reina. It’s a nice walk from Obanos, but I was on overload. Cannot move!
+  - 16:37:39 Jà: i am just arrived in estella guys haha i am dead also today 😂
+  - 16:38:16 Danielle DeRome: You are a monster, Jacobo!
+  - 16:44:09 Pam Papa: I am soooo jealous!  Leave cherry bags for us, Jacopo!
+- **Ginger treanor san antonio tx** (11)
+  - 16:35:44 Jà: thanks
+  - 16:36:22 Jà: no near my place no restaurants haha
+  - 16:36:34 Jà: btw we can meet at 19.00 not at 20.00
+  - 16:36:46 Jà: as u suggested
+  - 16:36:58 Jà: yep
+  - 18:20:29 Jà: i will meet catherine at the place we left at 18.50
+  - 18:24:09 Jà: see u later
+  - 21:07:31 Jà: thanks Ginger! tomorrow morning i would like to meet u again to give u a small gift from me!! at what time u think to go?
+- **+32 487 38 26 02** (7)
+  - 16:38:56 Jà: is it good ur place? 😁
+  - 17:07:42 Jà: ok.. here is not so good instead 😂 they dont give blanket neither 😂😂😂
+  - 17:16:04 Jà: it is donativo.. donativo works in this way: to enter u must have the pilgrims credential so they accept  you to stay and the day you leave u leave a donation depending how much u feel... usually i leave 15 or 20 when there is dinner and breakfast (plus i help to clean the dishes) but to this one i think i will leave 5 to 10 depending on how much good will be the breakfast tomorrow haha (there is no dinner in this one)
+  - 17:19:06 Jà: btw the appointment with ginger is at 19.00 still dont know where (but i think near her place because she said there are restaurants), do u join us or u think u will be hangry before of 19.00?
+  - 17:19:21 Jà: my place closes at 22.00
+  - 18:08:56 Jà: ok
+  - 18:09:27 Jà: see you later
+- **Giselle Camino** (1)
+  - 20:25:28 Jà: hello its jacopo
+- **Talia Camino** (1)
+  - 22:18:32 Jà: hey talia! how r u???? where r u today?? have u found the orher shells?? 😁😁
+- **Andrius Camino** (1)
+  - 22:19:40 Jà: hi andreius! r ur feet good?
+
+## 2019-06-16 (65 messaggi rilevanti)
+- **Pamplona Party People** (6)
+  - 02:05:13 Mark Ripka: Haha. You’re up late again?!  If you’re not going to sleep, you might as well hang out with me...
+  - 08:18:40 Carla Cardenas: Andrius and i are leaving now
+  - 08:31:39 Mark Ripka: Just walked out of my albergue
+  - 20:21:13 Carla Cardenas: Andrius
+  - 20:21:25 Carla Cardenas: I am going to sleep right now
+  - 20:44:04 Carla Cardenas: Mark and Isabel around 6.30
+- **Ginger treanor san antonio tx** (13)
+  - 07:43:00 Jà: ok.. i am moving to ur hostel now
+  - 07:43:07 Jà: 15 min
+  - 09:26:06 Ginger treanor san antonio tx: At bus station. Wish I were walking. So gracious for all ur help.
+  - 11:17:34 Jà: 💪💪💪💪
+  - 11:17:46 Jà: r u in the bus now?
+  - 11:33:05 Jà: haha yes it is good haga i filled ur bottle haha
+  - 12:26:08 Jà: wooo thats good!
+  - 12:26:19 Jà: google maps saved me a lot of times
+- **+32 487 38 26 02** (21)
+  - 08:27:12 Jà: not yet
+  - 08:27:18 Jà: iam with ginger
+  - 08:27:24 Jà: hekp her at the hostel
+  - 08:27:34 Jà: to figure out how to go to lograno
+  - 08:27:43 Jà: nobody speak english
+  - 08:27:55 Jà: do u?
+  - 08:32:30 Jà: yes
+  - 08:32:51 Jà: i just left her
+- **Talia Camino** (17)
+  - 16:48:29 Jà: yes take ur time 😁 yes the next one will be after orisson.. do not remember where exactly haha
+  - 16:48:51 Jà: yes i am having good an nice adventures!! hope u the same 😁
+  - 16:49:52 Jà: btw in orisson, show the shells to the young guy at the bar (michael) when he saw it he wanted me to explain what it was and he was enjoing the game a lot haha
+  - 16:51:39 Talia Camino: Im sitting here with a lovely Italian girl from Torino, she wants to know where you are from
+  - 16:52:11 Talia Camino: And where are you now?
+  - 16:54:11 Jà: i am from perugia but i worked in turin for 4 years since 6 months ago
+  - 16:54:56 Jà: just arrived in los arcos
+  - 16:55:06 Jà: thomas is two days ahead of me
+- **Giselle Camino** (6)
+  - 19:23:35 Jà: hi giselle i am with catherine and met other people. we are moving to the place called maria josè azcona beguristain
+  - 19:23:46 Jà: when u arrive in the neighborood write to me
+  - 19:45:37 Jà: a restaurant near “monaco hotel” it has pilgrims menu for 13
+  - 19:49:50 Jà: enter in the monaco hotel and do the stairs to go upstair
+  - 19:50:58 Jà: yes
+  - 19:51:19 Jà: yes
+- **Andrius Camino** (2)
+  - 20:26:12 Andrius Camino: Hi Jacobo! How did you do today?
+  - 21:06:53 Jà: oh god
+
+## 2019-06-17 (56 messaggi rilevanti)
+- **Ginger treanor san antonio tx** (14)
+  - 06:49:54 Ginger treanor san antonio tx: Ola my Italian friend.  Rise and shine and give God the glory!  Beautiful day. Sending blessings ur way.
+  - 06:50:40 Jà: thank you ginger!!! what about u? r u in madrid today?
+  - 06:50:58 Ginger treanor san antonio tx: Before hopping train to Madrid...I left plastic bag at front desk hotel with ur name. Told them u might get it on Tues.
+  - 06:59:04 Jà: oooh thank u
+  - 06:59:37 Jà: i will try to catch it!
+  - 07:00:03 Jà: i am moving now... will hear catherine later
+  - 07:01:01 Ginger treanor san antonio tx: Logrono old town very nice. Long bridge crossing river.  Ice cream capital of Spain.  Be sure get ur gelato!
+  - 07:03:01 Jà: ok!! i will then! thanks
+- **+32 487 38 26 02** (17)
+  - 07:00:35 Jà: bonjour! i am moving now
+  - 07:41:40 Jà: we will see later for sure i still have to do brakfast
+  - 11:09:12 Jà: i am arrived in viana now
+  - 11:09:40 Jà: i think i will stay here till 16.00 and then will decide if to continue other 9 km till logrono or not
+  - 11:12:40 Jà: where r u now?
+  - 13:44:35 Jà: the post office closes at 14.30
+  - 14:15:15 ~Catherine Sauvage: Hi, I am at viana, staying here
+  - 14:15:35 Jà: where?
+- **Andrius Camino** (12)
+  - 11:43:43 Jà: how r u??? can u walk?
+  - 11:45:26 Andrius Camino: Yes. I am walking, but at pace 20min per km. Very slow.
+  - 11:45:49 Andrius Camino: How are you? Where are you Jacobo?
+  - 11:46:23 Jà: i am at viana now
+  - 11:46:35 Jà: thinking if to go till logrono or not
+  - 11:46:51 Jà: yes its a good idea to go slow
+  - 11:47:55 Jà: thanks haha but i am a bit tired
+  - 11:48:10 Jà: i think i will rest here and wait the hot hours
+- **Talia Camino** (2)
+  - 11:47:07 Jà: yooooooook
+  - 12:50:34 Jà: the last one its the most special one. do not miss it
+- **Pamplona Party People** (10)
+  - 12:31:40 Carla Cardenas: Guys I just arrived!
+  - 15:26:46 Carla Cardenas: Where are you guys?
+  - 16:18:06 Mark Ripka: Dinner at albergue or elsewhere?
+  - 16:19:15 Carla Cardenas: Andrius where are you?
+  - 16:23:38 Danielle DeRome: Dinner at albergue is salad and lentils. I’m going to pass. Plaza sounds good.
+  - 16:25:01 Danielle DeRome: Jacobo, come va e dove sei?
+  - 17:19:00 Pam Papa: I want to shoot for Logrono.
+  - 17:20:07 Carla Cardenas: I was told  today that the albergue municipal in Logroño is very good
+- **Chris Souder** (1)
+  - 16:00:52 Jà: hello its jacopo moscioni from italy
+
+## 2019-06-18 (80 messaggi rilevanti)
+- **Pamplona Party People** (39)
+  - 09:18:00 Jà: wooow really nice pic
+  - 09:18:19 Jà: today i am still in viana
+  - 09:18:26 Jà: maybe u can catch me
+  - 09:19:01 Carla Cardenas: We are arriving soon
+  - 09:19:09 Carla Cardenas: Couple of kms far
+  - 09:19:39 Jà: iam still on the bed and will move in one hour and stay in lograno for visit the city in the early afternoon and then think to continue to the next village
+  - 09:25:11 Pam Papa: Yay! Jacopo!
+  - 09:46:00 Carla Cardenas: Danielle and Isabel where are you? I just arrived in Viana
+- **Ginger treanor san antonio tx** (8)
+  - 13:07:06 Jà: thank u
+  - 13:07:31 Jà: me and catherine are having lunch in logrono now, then will move to navarrete
+  - 13:07:45 Jà: i will try to find a good gelato
+  - 17:32:14 Jà: when i get the wifi i send u pics, but today i didnt take too much
+  - 21:43:01 Jà: hi ginger
+  - 21:43:15 Jà: sorry i was outside with others
+  - 22:29:45 Jà: Hai eliminato questo messaggio.
+  - 22:30:05 Jà: wifi doesnt work good at the today’s hostel
+- **+32 487 38 26 02** (33)
+  - 18:30:48 Jà: arrived at the hostel el cantaro
+  - 18:31:09 Jà: i paied with my phone so now i still have 10 eur more to spend vefore today
+  - 18:31:35 Jà: and it closes at 22.00 but they gives the keys to open the door
+  - 19:15:51 Jà: took a shower, whashed clothes and now going around... r u in the mood to go out also or not?
+  - 19:24:09 Jà: ok i am already out
+  - 19:27:00 Jà: come to circulo navarretano cafeteria
+  - 19:27:10 Jà: i am around here
+  - 19:28:05 Jà: near carrefour express
+
+## 2019-06-19 (106 messaggi rilevanti)
+- **+32 487 38 26 02** (74)
+  - 00:04:17 Jà: Hi Catherine!
+  - 07:34:06 Jà: first shell placed 300 meters before ventosa village. u cant miss it 😂😂
+  - 08:23:39 Jà: second shell placed 5 km after the first one in front of a grape field, near of a big circle of rocks
+  - 08:41:33 Jà: have u already passed ventosa?
+  - 09:26:04 Jà: the first shell is 200/300 meters before ventosa
+  - 09:26:05 ~Catherine Sauvage: Think i gonna go to najera
+  - 09:26:20 Jà: i am almost there
+  - 09:26:39 Jà: really?
+- **Chris Souder** (13)
+  - 00:05:08 Jà: hahahah jeah i saw it 😂😂😂
+  - 00:05:24 Jà: also me and cathering arrived in navarrete today
+  - 07:44:53 Chris Souder: Tell Catherine Happy Birthday for me.
+  - 08:05:33 Jà: atm we r not together but for sure i wll say happy birthday to her for you when i meet her later
+  - 18:17:01 Chris Souder: We would love to have a drink for Catherine’s birthday if she would like but we understand if she wants to be alone. Let us know.
+  - 18:57:19 Jà: where r u now?
+  - 18:57:28 Jà: catherine is in najera
+  - 18:58:22 Jà: i am in ciruna
+- **Pamplona Party People** (15)
+  - 06:01:18 Pam Papa: Mark says meet us by the church
+  - 06:06:07 Isabel Deckel: I m in front of your hostel
+  - 09:49:35 Carla Cardenas: Guys were are you? I am almost in Navarrete
+  - 10:03:28 Danielle DeRome: Did someone make a reservation in my name at Navarrete for tonight? I called to make one for tomorrow and woman on phone was confused and worried me.
+  - 10:07:52 Carla Cardenas: It is 20 kms from Logroño
+  - 12:01:16 Jà: i have been there. its nice because they give u the keys to enter even if it officially closes at 22.00
+  - 12:01:58 Jà: i confirm
+  - 12:02:11 Jà: and they accept card (if someone needs)
+- **Ginger treanor san antonio tx** (3)
+  - 08:24:55 Jà: lets try this evening under wifi (if it works) otherwise on 22 i ll have new gigabyte on my phone. now i am running out of giga for the next 3 days
+  - 08:25:08 Jà: btw have a good return in texas!
+  - 10:26:28 Ginger treanor san antonio tx: Sorry tonight no work. I arrive 530 pm andvu r 7 hrs ahead = 1230 am.  Call Thurs if u get WiFi n gb.  Safe journey. I envy u for completing.
+- **Ocean Camino** (1)
+  - 19:51:59 Jà: hola! its jacopo from italy!
+
+## 2019-06-20 (92 messaggi rilevanti)
+- **+32 487 38 26 02** (44)
+  - 06:10:38 Jà: not yet but in 20 min yes, and u how r u?
+  - 06:11:28 Jà: ok
+  - 06:12:26 Jà: 💪💪
+  - 06:12:59 Jà: very fresh
+  - 06:13:05 Jà: at 16.00 will rain
+  - 06:13:25 Jà: i only walk the morning
+  - 06:14:24 Jà: yes, could be
+  - 06:14:47 Jà: and in the middle i will stop to have breakfast aleo
+- **Ginger treanor san antonio tx** (1)
+  - 10:06:36 Jà: roadside fruit but without worms haha
+- **Pamplona Party People** (27)
+  - 10:36:52 Danielle DeRome: Where are you aiming at tonight?
+  - 10:57:18 Pam Papa: Ciruena. The Santa Maria Real is really cool. I’m touring that now
+  - 11:25:12 Theresia Bavenby: I'm in Najera right now and  my plan is to stay in Azofra tonight
+  - 11:27:11 Danielle DeRome: Heading to Najera. Albergue ppl in Navarrete super sweet  - no charge for me flaking on res and they’re forwarding my pack to Najera no extra charge!
+  - 12:13:42 Andrius Camino: Joe, where are you?
+  - 12:15:36 ~ Joe Herman: We are at the Albergue de Pilgims on Calle Street
+  - 12:46:32 Danielle DeRome: Will try. Need to get backpack In Najera
+  - 12:47:16 Danielle DeRome: Quick detour in Ventosa bcs of 1 km of art. I’m a sucker for art.
+- **Ocean Camino** (6)
+  - 19:41:33 Jà: hellooo
+  - 19:41:47 Jà: i am in a village but dont remember the name haha
+  - 19:41:57 Jà: Posizione: https://maps.google.com/?q=42.427216,-3.099530
+  - 19:43:07 Ocean Camino: Okay😂 I think that you are 7 km away
+  - 22:44:09 Jà: behind u or ahead u?
+  - 22:44:26 Jà: today i met two other china people
+- **Chris Souder** (14)
+  - 21:39:34 Jà: Posizione: https://maps.google.com/?q=42.427216,-3.099538
+  - 21:39:40 Jà: u?
+  - 21:46:56 Jà: the albergue was really nice
+  - 21:47:04 Jà: the city a little ghostly, yes
+  - 21:47:06 Jà: but ok
+  - 21:47:27 Jà: where i am now is worst
+  - 21:47:32 Jà: no bar no restaurants
+  - 21:47:32 Chris Souder: Which albergue ?
+
+## 2019-06-21 (136 messaggi rilevanti)
+- **Pamplona Party People** (23)
+  - 09:07:52 Carla Cardenas: Where are you guys?
+  - 09:17:30 Carla Cardenas: Where are you going today?
+  - 11:05:12 ~ Joe Herman: Where are you staying Danielle
+  - 12:39:17 ~ Joe Herman: Hey Mark, is Danny with you?
+  - 12:43:46 Pam Papa: He was.  We just left him at the church albergue
+  - 12:44:29 Mark Ripka: He and Andrius have checked in and Danny was getting in the shower.
+  - 12:44:54 ~ Joe Herman: Ok. Thanks Mark
+  - 12:48:11 Danielle DeRome: Throughout Spain
+- **+32 487 38 26 02** (106)
+  - 14:45:08 Jà: chriss!! the american guy that offered a beer to us
+  - 14:52:37 Jà: yes sorry haha
+  - 14:53:08 Jà: u so asocial 😛
+  - 14:55:02 ~Catherine Sauvage: Where are you now ?
+  - 14:55:10 Jà: tomorrow ill be in burgos and will stay there two days
+  - 14:55:16 Jà: so u have time to catch me hahaha
+  - 14:55:29 Jà: yes i mean one day off
+  - 14:55:34 Jà: to stay in town
+- **Chris Souder** (2)
+  - 17:12:38 Jà: hi Chris. today i am arrived in atapuerca (i did 40 km, wow!) and tomorrow will be burgos
+  - 17:13:10 Jà: i think i will stay there two days so we can meet again the day after tomorrow before your departure!
+- **Ocean Camino** (5)
+  - 18:30:08 Jà: hi
+  - 18:30:34 Ocean Camino: I think that I have to cancel my cooking plan because they don’t really have a supermarket here
+  - 18:31:02 Jà: uh..
+  - 18:31:12 Jà: no supermarkets here?
+  - 18:31:54 Jà: haha its a fakemarket
+
+## 2019-06-22 (81 messaggi rilevanti)
+- **Chris Souder** (9)
+  - 06:15:40 Jà: happy bday Chriss!! will we meet tomorrow in burgos?!
+  - 10:50:56 Chris Souder: We will be in Burgos Sunday around 2 or 3 pm
+  - 10:56:52 Jà: yes i will sleep in burgos two noghts
+  - 10:56:58 Jà: i am already arrived in burgos
+  - 11:25:09 Jà: nope i sleep two nights here
+  - 11:25:21 Jà: Hai eliminato questo messaggio.
+  - 11:25:34 Jà: Hai eliminato questo messaggio.
+  - 11:26:21 Jà: i sleep the night between sat and sunday and the night between sunday and monday
+- **+32 487 38 26 02** (28)
+  - 10:57:21 Jà: arrived in burgos
+  - 18:18:08 Jà: where r u?
+  - 18:18:18 Jà: 😂😂😂
+  - 18:35:42 Jà: tomorrow will be burgos?
+  - 19:02:01 Jà: cool
+  - 19:02:23 ~Catherine Sauvage: Bycicle to make a tour of burgos ?
+  - 19:02:59 Jà: yes
+  - 19:03:04 Jà: yes
+- **Ocean Camino** (29)
+  - 13:10:06 Jà: u sooo slooow 😂😂
+  - 13:15:31 Ocean Camino: When did you arrive
+  - 13:20:22 Jà: more or less at 10.30
+  - 13:21:16 Ocean Camino: But it’s like 20km
+  - 13:21:19 Jà: where do u sleep today?
+  - 13:21:22 Jà: yes
+  - 13:22:15 Jà: maybe it was 11.00 when i arrived
+  - 13:23:48 Jà: yes this one is yesterday (40km)
+- **Pamplona Party People** (15)
+  - 14:31:59 ~ Joe Herman: We are at the Albergue hanging out by the pool. You are welcome to join us
+  - 14:41:58 Danielle DeRome: Andrius did you get a place?
+  - 15:46:26 Danielle DeRome: Yup. Piscina!!!!!!!!!
+  - 18:25:16 Andrius Camino: Joe, I am at your place. Where are you guys?
+  - 18:34:24 ~ Joe Herman: Hi Andrius I'm in my room are you still here
+  - 19:02:55 ~ Joe Herman: Mark where are you at today
+  - 19:17:01 Carla Cardenas: Japopo! Good to see you. Is that in Burgos?
+  - 19:17:09 Jà: yes
+
+## 2019-06-23 (184 messaggi rilevanti)
+- **+32 487 38 26 02** (49)
+  - 07:26:01 ~Catherine Sauvage: Do you think i need booking for albergue in burgos ?
+  - 07:26:39 Jà: i don think
+  - 07:26:44 Jà: dont
+  - 07:27:15 Jà: i slept in one yesterday but now i have ti change
+  - 07:27:30 Jà: when i go there to the new one i can tell them one bed for u also
+  - 07:27:35 Jà: if u wish
+  - 07:28:01 Jà: the new one?
+  - 07:28:03 Jà: wait
+- **Chris Souder** (15)
+  - 08:47:22 Jà: okk just let me know when u r in town
+  - 13:27:37 Chris Souder: We will arrive approximately 1630
+  - 13:29:18 Jà: cool
+  - 13:50:27 Jà: u know how to enjoy the life haha
+  - 18:23:48 Jà: not yet
+  - 18:23:50 Jà: where r u?
+  - 18:24:08 Jà: we r just entered in a bar searching for a table to drink a beer
+  - 18:24:26 Jà: do u and jessica wants to join us?
+- **Ocean Camino** (8)
+  - 09:09:32 Jà: ok
+  - 09:19:02 Jà: 5 min
+  - 09:19:12 Jà: but google maps says it open at 10.00
+  - 09:32:35 Jà: i am along the river
+  - 09:32:43 Jà: just in front of the museum
+  - 09:46:57 Jà: in 10 min will open the museum
+  - 18:27:46 Ocean Camino: Where are you guys?
+  - 18:29:02 Jà: Posizione: https://maps.google.com/?q=42.340324,-3.702464
+- **Mark Ripka** (21)
+  - 11:25:58 Mark Ripka: Hi. For how long are you staying Burgos?
+  - 11:26:14 Jà: till tomorrow morning
+  - 11:26:25 Jà: i am staying here the whole day today
+  - 11:26:37 Jà: where r u now?
+  - 11:30:03 Mark Ripka: I’m with Pam  and Isabel and we’re in Villabal. Cath is here at the moment, too.  Carla just got to Burgos.
+  - 11:30:35 Jà: is she already arrived?
+  - 11:30:37 Jà: ok
+  - 11:31:00 Jà: atm i am at the human evolution museum and i think will go out in one hour
+- **Stefano Camino** (30)
+  - 11:53:31 Stefano Camino: Ciao JACOPO! Se vuoi,  io pensavo di partecipare al free walking Tour di burgos (offerta libera) In teoria va prenotato ma io andrò così spontaneamente.
+  - 11:53:32 Stefano Camino: https://www.freetour.com/burgos/free-tour-burgos
+  - 12:15:54 Jà: ciao io sto al museo dell evoluzione umana con ocean
+  - 12:16:06 Jà: quando comincia il free walking tour?
+  - 12:43:19 Jà: ok
+  - 12:58:15 Jà: hai già pranzato?
+  - 12:59:18 Stefano Camino: Non ancora. Ho appena fatto il check-in in albergue
+  - 13:00:41 Stefano Camino: Vaaa bene! Gli dico subito che arrivi
+- **Ginger treanor san antonio tx** (13)
+  - 12:16:50 Jà: hi ginger!! all is going good, i will meet catherin again in few hours
+  - 12:17:26 Jà: just not have too much time because always with other ppl and at 22.00 the albergue closes the door to go to sleep and cant speak inside
+  - 12:19:21 Ginger treanor san antonio tx: I miss y'all more than u know.  Trouble adjusting to being home again. I miss Spain more than anything
+  - 12:20:15 Jà: buen camino, is right! 😁
+  - 12:20:41 Jà: later in the afternoon when i meet cath again we will find a place to call u
+  - 19:02:03 Jà: heyyy
+  - 19:02:06 Jà: r u there?
+  - 19:02:13 Jà: i am with cath now
+- **Carla Cardenas** (34)
+  - 12:44:20 Jà: where r u now in burgos?
+  - 12:45:42 Carla Cardenas: Hi Jacopo
+  - 12:57:22 Jà: i am still at the museum
+  - 12:57:32 Jà: but in few minute we will go out
+  - 12:57:40 Jà: and find a place to eat
+  - 12:57:46 Jà: we will come to the center
+  - 12:57:54 Jà: have u already had lunch?
+  - 12:58:03 Jà: ok
+- **Giselle Camino** (9)
+  - 13:48:43 Jà: maridajel
+  - 13:48:56 Jà: maridajes restaurant
+  - 13:51:13 Jà: yes
+  - 13:54:41 Jà: should be at 14.00
+  - 13:54:52 Jà: but nobody here except me and ocean
+  - 13:54:58 Jà: i mean
+  - 13:55:02 Jà: the place opens at 14.00
+  - 13:55:18 Jà: ok
+- **Pamplona Party People** (5)
+  - 14:31:01 Andrius Camino: Andrius Camino ha cambiato il nome del gruppo in "Pamplona Party kkkikk".
+  - 22:50:22 Jà: guys some people told me that tonight at 00.00 will be firewarka
+  - 22:50:28 Jà: fireworks
+  - 22:56:03 Jà: there is a place to go to burn wishes but its 4 km far and i do not exactly where
+  - 23:06:29 Carla Cardenas: 4 km?!
+
+## 2019-06-24 (101 messaggi rilevanti)
+- **Chris Souder** (16)
+  - 00:18:27 Jà: really cool
+  - 00:19:10 Jà: yes, why not
+  - 00:19:24 Jà: i am staying here also tomorrow
+  - 00:19:51 Jà: 😁😁
+  - 13:20:14 Jà: palacio?
+  - 13:22:01 Jà: u mean the human evolution museum?
+  - 13:22:40 Jà: btw i am thinking to leave this evening
+  - 13:22:45 Jà: so we have to meet before
+- **Pamplona Party People** (18)
+  - 00:51:07 Mark Ripka: Mark Ripka ha cambiato il nome del gruppo in "Pamplona Party People".
+  - 09:31:23 Danielle DeRome: Am in Burgos. Where’s the party pad?
+  - 09:31:44 Jà: wellcomeee
+  - 09:32:06 Jà: Hai eliminato questo messaggio.
+  - 10:03:43 Jà: where r u all?
+  - 10:03:51 Jà: is there someone in da house?
+  - 10:04:16 Jà: im coming
+  - 10:06:14 Jà: i am with danielle just out of the door
+- **Ocean Camino** (5)
+  - 07:02:53 Jà: buen camino
+  - 07:03:05 Jà: have u fiund the shoes?
+  - 07:16:15 Jà: cooll  😂😂
+  - 07:16:29 Jà: oh its so frequent in turin haha
+  - 07:16:48 Jà: turin is rhe city where i lived the past 4 years for work
+- **+32 487 38 26 02** (21)
+  - 08:27:48 Jà: bonjour
+  - 08:28:03 Jà: have u already had breakfast?
+  - 08:47:15 Jà: we r just went to el horno if u want join us
+  - 08:47:26 Jà: in the same street of yesterday
+  - 08:50:36 Jà: mm wait i think no bc the others eant eggs
+  - 08:54:43 Jà: i ate something fast
+  - 08:54:54 Jà: and now goong to find a place to fix the shoes
+  - 08:59:25 Jà: 👍
+- **Ginger treanor san antonio tx** (4)
+  - 13:40:43 Jà: ok
+  - 15:22:13 Jà: its arrived
+  - 20:39:36 Jà: sending back the answer 👍
+  - 23:29:51 Jà: 👍
+- **Giselle Camino** (17)
+  - 15:20:52 Jà: from ginger email: [...] Would you and Katherine and Giselle consider meeting me in Lisbon next year to do the Beach Peru walk to Santiago? [...]
+  - 16:48:23 Jà: didnt
+  - 16:48:25 Jà: yet
+  - 16:49:02 Jà: this is the whole message:
+  - 16:49:05 Jà: Jacopo,
+  - 16:53:26 Jà: i feel a bit oppressed for sure haha but i understand that she is doing it because she cares (maybe too much)
+  - 16:59:43 Giselle Camino: What are you guys up to later for dinner? Thinking of grabbing a beer soon
+  - 17:00:02 Jà: i am along the river now
+- **Mark Ripka** (20)
+  - 20:12:43 Jà: where r u all?
+  - 20:13:41 Jà: whatsapp calls dont work
+  - 20:14:35 Mark Ripka: I just ran to store and lost the ladies. Andrius is coming back to you; Gisele is packing up and coming back, too.
+  - 20:15:11 Mark Ripka: Looking for Catherine and Marcia so that we can all have dinner with you.
+  - 20:16:43 Jà: allright
+  - 20:17:10 Jà: but i think ill not have dinner
+  - 20:17:37 Jà: maybe will eat somethint to 100 montaditos
+  - 20:17:42 Jà: but few
+
+## 2019-06-25 (88 messaggi rilevanti)
+- **Pamplona Party People** (18)
+  - 00:08:58 Jà: next to the right
+  - 00:10:45 Jà: woo
+  - 00:17:44 Jà: u can see the signal because it is reflecting the flash light haha
+  - 00:23:24 Jà: proofs sent 😂😂 good night and buen camino to all
+  - 00:36:09 Carla Cardenas: Bravo Jacopo!
+  - 08:20:38 Pam Papa: Awww....a bedroom with a view!!! Congratulations, Jacopo!!!
+  - 10:07:24 Jà: arrived in sanbol
+  - 10:07:35 Jà: but there is only the albergue in this “village”
+- **Chris Souder** (7)
+  - 00:18:20 Jà: on the way
+  - 00:23:49 Jà: thanks a lot for the lamp.. its great!
+  - 11:00:51 Jà: arrived in sanbol and met and spoke with two men from los angeles
+  - 11:03:55 Jà: open at 2.00pm
+  - 11:07:30 Jà: i have put the feet but cannot stay longer than 10 sec
+  - 11:13:19 Jà: impossible to do it now
+  - 11:13:22 Jà: so cold
+- **Ocean Camino** (2)
+  - 07:36:27 Jà: which village?
+  - 07:36:36 Jà: this night i left burgos
+- **Talia Camino** (4)
+  - 10:49:53 Jà: heyyyyyyy how r u???
+  - 10:50:02 Jà: i guess u didnt find the last shell
+  - 10:50:07 Jà: isnt it?
+  - 16:34:29 Jà: 😂😂😂
+- **Giselle Camino** (31)
+  - 11:27:21 Jà: cool! here there is only the albergue in the middle of nowhere
+  - 11:27:36 Jà: it has a garden and a little swimming pool
+  - 11:27:44 Jà: but the water is fucking cold
+  - 11:27:56 Jà: the swimming pool is a bit shaming
+  - 11:28:07 Jà: it opens at 14.00
+  - 11:28:12 Jà: so yes
+  - 11:28:39 Jà: stay here bc tomorrow i want to go to itero de castello, so 25 km today and 25 tomorrow
+  - 11:28:53 Jà: if now i do more (i should), then tomorrow will do nothing
+- **+32 487 38 26 02** (26)
+  - 17:24:50 Jà: weeeeeee
+  - 17:24:55 Jà: how r u?
+  - 17:25:10 Jà: and where did u arrive today?
+  - 17:25:23 Jà: me carla and giselle we are at sanbol
+  - 19:49:56 Jà: yes it was
+  - 20:41:14 Jà: where do u plan to go tomorrow?
+  - 20:42:35 Jà: ok the one before of mine
+  - 20:43:02 Jà: i try to get a bed on tje san nicolas where they have no electricity and only candles
+
+## 2019-06-26 (159 messaggi rilevanti)
+- **Pamplona Party People** (15)
+  - 11:44:43 Jà: guys in sahagun do not miss the place where they give u the certification of “half camino” or somethin like that
+  - 11:45:04 Jà: i still dont know where is that, but i was told about that now
+  - 12:23:24 Carla Cardenas: How are you guys? Where are you?
+  - 12:27:06 Jà: itero de la vega now but at 15.00 ill to back to itero del castillo
+  - 12:40:10 Jà: said the man that starts walking at 15.00
+  - 13:15:38 Jà: i am at itero de la vega now but will come back to itero del castillo at 15.00
+  - 13:26:55 Jà: it is 10/12 after castrojeritz
+  - 13:34:02 Danielle DeRome: Nice and toasty at Burgos Castle
+- **Giselle Camino** (45)
+  - 15:35:52 Jà: 3.00am its ok
+  - 15:36:00 Jà: i m allowed
+  - 15:36:55 Giselle Camino: Okay! Let me tell Carla
+  - 16:00:37 Giselle Camino: Okay, Carla will probably hang back. She’s gonna wait for the group in Fromista. But I will go with you at 3
+  - 16:39:01 Jà: alleight
+  - 16:42:08 Giselle Camino: I’ll wait for you outside my albergue at 3
+  - 16:42:31 Jà: i start at 3.00 from here
+  - 16:42:36 Jà: will be there at 3.15 i think
+- **+32 487 38 26 02** (64)
+  - 16:39:40 Jà: tomorrow me and giselle will walk at night
+  - 16:39:59 Jà: do u join us???? will be very very hot during the day
+  - 16:40:03 Jà: more than today
+  - 16:47:53 ~Catherine Sauvage: But where are toi?
+  - 16:52:52 Jà: 10km ahead of u
+  - 16:53:03 Jà: i can believe
+  - 16:53:15 Jà: today i arrived at 10.00 and i was really fresh
+  - 16:53:30 Jà: and didnt feel the hot because it was good
+- **Ocean Camino** (35)
+  - 17:17:11 Jà: where r u now?
+  - 17:36:03 Jà: cool
+  - 17:36:10 Jà: im at itero de castillo
+  - 17:51:36 Jà: yes
+  - 17:51:58 Jà: very goos
+  - 17:52:06 Jà: maybe i will replicate it tomorrow
+  - 17:52:24 Jà: yes
+  - 17:52:36 Jà: the signals were reflecting the light
+
+## 2019-06-27 (83 messaggi rilevanti)
+- **Chris Souder** (3)
+  - 05:36:36 Jà: i am nkw at itero del castillo
+  - 11:53:20 Chris Souder: Jacopo
+  - 11:56:53 Jà: wanna see it when ull come back at home 😁
+- **Giselle Camino** (47)
+  - 07:29:05 Jà: where r u now?
+  - 07:37:36 Jà: ok
+  - 07:37:45 Jà: one our haead of me
+  - 07:38:05 Jà: thinking to arrive at fromista in 2
+  - 08:26:12 Jà: me too now
+  - 09:13:45 Jà: arriving... in ehich bar r u?
+  - 09:24:48 Jà: allright
+  - 09:31:18 Jà: for now yes. i wont walk after 10.00
+- **Pamplona Party People** (18)
+  - 09:56:04 Carla Cardenas: Where are you?
+  - 09:56:25 Jà: me too
+  - 09:56:56 Jà: first bar pf the main square
+  - 09:57:13 ~ Danny Herman: Boadilla Del Camino, just 6km behind
+  - 10:44:21 Carla Cardenas: Guys the albergue is great! I am the only one right now.
+  - 10:47:52 Jà: carla can u ask to the albergue’s host if they have a wallplug for android? i lost my charger for the powerbank
+  - 10:48:31 Jà: maybe some other pillgrim has left it to the albergue in the past, so they maybe have one
+  - 10:48:55 Carla Cardenas: Where Jacopo?
+- **+32 487 38 26 02** (1)
+  - 11:08:30 Jà: u will come to fromista?
+- **Carla Cardenas** (12)
+  - 11:21:26 Jà: isabel is coming to you with my powerbank
+  - 11:50:57 Jà: 🧡
+  - 11:51:05 Jà: haha
+  - 15:04:04 Jà: im running out battery on the phone
+  - 15:04:11 Jà: i come to ur albergur
+  - 15:04:18 Jà: r u awake?
+  - 15:04:24 Jà: r u at tue albergue?
+  - 15:55:30 Carla Cardenas: I am at the albergue
+- **Ginger treanor san antonio tx** (1)
+  - 11:58:09 Jà: 😀
+- **Ocean Camino** (1)
+  - 21:02:49 Jà: no u r “ocean camino”
+
+## 2019-06-28 (111 messaggi rilevanti)
+- **Giselle Camino** (51)
+  - 01:10:02 Jà: arrived
+  - 01:10:52 Jà: when u go out come here to awake me 😁 i am at the football field
+  - 05:01:51 Jà: r u going out?
+  - 05:12:08 Jà: m outside ur place
+  - 05:19:50 Jà: i start moving
+  - 08:10:27 Jà: lool
+  - 08:10:29 Jà: okay
+  - 08:10:33 Jà: i am far away now
+- **Pamplona Party People** (22)
+  - 06:00:34 Jà: no dragons on the way... still alive 😂
+  - 08:34:21 Jà: i am on the way to calzadilla already 😂😂
+  - 08:34:36 Jà: hope to be there at 10
+  - 08:36:09 Mark Ripka: Wow for both Jacopo and you!
+  - 08:39:58 Pam Papa: I’m chillaxen somewhere. My plantar’s fasciitis has flared so I’m hoping the pain killers kick in soon.
+  - 09:40:58 Carla Cardenas: There’s another albergue in a monastery
+  - 10:49:20 Carla Cardenas: Where is that Jacopo?
+  - 11:04:49 Jà: Posizione: https://maps.google.com/?q=42.328964,-4.802373
+- **Chris Souder** (4)
+  - 08:15:06 Jà: wowowoooow
+  - 08:15:34 Jà: 3 glasses all for jessica?
+  - 22:14:56 Jà: wooo i miss the beach 😁😁😁
+  - 22:17:15 Jà: 😁😁😁
+- **+32 487 38 26 02** (23)
+  - 10:39:54 Jà: 5 euro for sleepling plus swimming pool
+  - 10:41:47 Jà: i think i can stay here two days hahahaha
+  - 12:13:49 Jà: hahaja just saw it now 😂😂
+  - 15:05:19 Jà: in the paradise
+  - 15:05:22 Jà: hahah
+  - 15:05:27 Jà: calzadilla something
+  - 15:06:25 Jà: after 16 km of absoluting nothing, there is this albergue and it is like a mirage
+  - 15:06:45 Jà: where r u instead?
+- **Ocean Camino** (8)
+  - 11:38:53 Jà: 😂😂😂
+  - 11:39:07 Jà: i did it
+  - 11:39:42 Jà: started at 22.00, stopped at 2.00, started again at 5.15 and arrived at 10.00. i did 37 km
+  - 15:09:05 Jà: where r u?
+  - 18:18:46 Ocean Camino: Where r u?
+  - 23:04:19 Jà: come back 36 km and u can enjoy the awimming pool too
+  - 23:05:18 Jà: i am here today
+  - 23:05:25 Jà: Posizione: https://maps.google.com/?q=42.328926,-4.802405
+- **Ginger treanor san antonio tx** (3)
+  - 13:36:00 Jà: hi ginger
+  - 13:36:19 Jà: today just arrived to a swimming pool
+  - 16:18:30 Ginger treanor san antonio tx: Very inviting!!! Wish I were there. Id give anything to return.  Too much stress at home. Is pool at hostel?
+
+## 2019-06-29 (114 messaggi rilevanti)
+- **Pamplona Party People** (40)
+  - 04:46:13 Carla Cardenas: Wow! I. Burgos?
+  - 10:58:15 Jà: woooohoo
+  - 11:29:47 Jà: what happened?
+  - 11:30:16 Jà: today i am arrived in sahagun and in few min ill go around to find the place to take the certificato of half camino
+  - 11:30:23 Jà: i was told it is 4 euro
+  - 11:30:38 Jà: but still dont know where.. will go to ask to the tourism office
+  - 12:49:07 Pam Papa: I’m headed there now. Then I’ll reevaluate how to move forward. I do want that half-Compostela certificate.  I read the half-way mark is a guestimation, so maybe I was close enough to the mark and get credit for all the back tracking when lost.
+  - 13:10:38 Jà: are u guys coming to sahagun today?
+- **Giselle Camino** (26)
+  - 05:17:15 Jà: awake??
+  - 05:21:49 Jà: when u r ready come to my albergue, the camino is over there
+  - 05:30:36 Giselle Camino: Gonna sleep more
+  - 05:31:23 Jà: lol
+  - 05:31:34 Jà: i go then
+  - 05:31:35 Jà: 😂😂😂
+  - 05:59:06 Jà: pay attention on the path. after one and two km more or less there there are some signal broken. take the right both of the time and be sure to walk near the main road
+  - 08:42:52 Jà: 5 km to shaugun
+- **Ginger treanor san antonio tx** (2)
+  - 11:15:05 Jà: yes i have ur water jug in my backpack
+  - 11:15:53 Jà: yes the pool it was at the albergue.. 5 euro for sleep, pool included. incredible price
+- **+32 487 38 26 02** (41)
+  - 12:57:41 Jà: i am in sahagun, where do u stop today?
+  - 12:58:15 Jà: the charger (with two usb) and the cable
+  - 12:58:17 Jà: for free
+  - 14:26:51 ~Catherine Sauvage: I am in the village 10 km far from paradise
+  - 14:29:11 Jà: terradillos de los something
+  - 14:30:07 Jà: 💪
+  - 14:30:30 Jà: more later ill go to take the certificate
+  - 14:30:40 Jà: you
+- **Ocean Camino** (5)
+  - 19:30:20 Jà: wooo
+  - 19:30:25 Jà: so cute
+  - 19:30:34 Jà: it is colled dinner haha
+  - 19:30:37 Jà: called
+  - 19:49:26 Jà: 😂😂😂😂😂
+
+## 2019-06-30 (115 messaggi rilevanti)
+- **Giselle Camino** (15)
+  - 09:30:08 Jà: burgo manera
+  - 09:30:17 Jà: 3.5 km far
+  - 09:30:30 Jà: u?
+  - 09:30:59 Jà: ok
+  - 09:31:01 Giselle Camino: It would be another 13 km lol
+  - 09:31:03 Jà: yes
+  - 11:54:56 Jà: so, u continued?
+  - 12:11:06 Jà: cool
+- **+32 487 38 26 02** (89)
+  - 09:57:31 Jà: i wrote it testerday
+  - 09:57:42 Jà: referred to this
+  - 09:58:27 Jà: im 2 km far from burgo de manera
+  - 09:58:41 Jà: taking a rest and in 2 minutes start to walk again
+  - 09:58:53 Jà: will stop there
+  - 09:59:12 Jà: sick?
+  - 10:00:15 Jà: many ppl got the diarrea passing trought carrion
+  - 10:00:39 Jà: btw
+- **Chris Souder** (3)
+  - 10:58:09 Jà: sahagun
+  - 10:58:15 Jà: i got the certificate there
+  - 10:58:29 Jà: because its officially the city in the middle of the way
+- **Pamplona Party People** (8)
+  - 20:26:01 Isabel Deckel: Hi Guys, I made my plan for the next stages until Santiago. If I get to stay at the monastery in Rabanal for 2 days, I would get to Santiago on the 14. - if not I could reach Santiago on the 12. Would be happy to wait for a day or two to meet at some point. Let me know what your plans are!!
+  - 20:26:13 Isabel Deckel: Remind me when Marks Birthday is!
+  - 20:27:59 Pam Papa: Yes!!!! Wait!!! July 13 is Mark’s Jocapo is July 10
+  - 21:08:37 Jà: good memory pam!
+  - 21:39:18 Danielle DeRome: How’s everyone? It’s pouring rain and thundering crazy loud roars by turns here. Nice and muggy. Missing you all, but am where I am supposed to be; my friend seems to be doing considerably better. Happy birthdays to all the Junes and Julys - Mark, I’m flying from Bilbao to London on yours. Does any of you remember Annalise from Italy? We met her at Orisson - she was thinking of turning back & giving up then. Well, she’s still having bloody blisters, but she’s not giving up - prob bcs one or more of you encouraged her. You guys are the best!
+  - 21:42:12 Isabel Deckel: Hi Danielle, so nice you are keeping your friend company. Where are you? I m in Leon where it is still very very hot 🥵
+  - 21:47:33 Jà: koreans very funny haha
+  - 22:21:49 Jà: woooo really beautifull
+
+## 2019-07-01 (190 messaggi rilevanti)
+- **Giselle Camino** (30)
+  - 05:22:51 Jà: probably we’ll meet on the way today... im 3 km to ur village
+  - 06:04:37 Jà: i already overtook u then 😁😁😁
+  - 06:04:49 Jà: Posizione: https://maps.google.com/?q=42.478226,-5.363458
+  - 07:14:00 Jà: arrived to mansilla
+  - 07:14:10 Jà: i am taking a long break here
+  - 07:15:08 Giselle Camino: Then probably see you there. About 4km away
+  - 08:25:39 Jà: where r u??
+  - 10:57:50 Giselle Camino: About 6k from Leon
+- **+32 487 38 26 02** (27)
+  - 07:47:20 Jà: in mansilla
+  - 07:59:52 Jà: yes
+  - 08:00:00 Jà: now taking a long break
+  - 08:00:16 Jà: today will be not warm
+  - 08:00:40 Jà: so i walk after ten also
+  - 08:00:48 Jà: and can take breaks
+  - 08:00:50 Jà: 😁
+  - 08:04:20 Jà: dont know
+- **Ocean Camino** (99)
+  - 08:27:01 Jà: today will be leon for me
+  - 08:27:09 Jà: will stay here 2/3 days
+  - 08:28:50 Jà: 😂😂
+  - 08:29:04 Ocean Camino: I arrived yesterday and am going to leave tomorrow
+  - 08:29:13 Jà: okay
+  - 08:29:46 Jà: where?
+  - 08:29:59 Jà: in albergue?
+  - 08:30:01 Ocean Camino: Hostel? San Martín
+- **Pamplona Party People** (22)
+  - 12:37:11 Jà: leoooon chicoss
+  - 12:38:15 Jà: just arrived
+  - 12:38:24 Jà: my feet crying
+  - 12:57:28 Jà: ??
+  - 12:57:34 Jà: what u mean?
+  - 12:58:16 Andrius Camino: Hi Isabel, will you be taking a bus again at some point? Because I counted that if to keep at this pace it’s possible to arrive at Santiago on 16 July. 15 more days. Not including 2 days at Rabanal. What do think?
+  - 13:02:23 Isabel Deckel: Hi Andrius, that makes sense! Are you walking alone? I havent planned to take a bus hoping to take a horse for 8km to O Cebreiro.
+  - 13:06:07 Jà: lol.. a horse????
+- **Ginger treanor san antonio tx** (12)
+  - 13:29:34 Ginger treanor san antonio tx: I've been busy since Friday caring for 3 mo old girl and 3 yr old boy my grandkids are in from Oregon.
+  - 13:29:55 Jà: hi ginger
+  - 13:30:02 Jà: i am arrived in leon
+  - 13:30:37 Jà: very tired! today i started at 3.50 and arrived at 13.15
+  - 13:30:47 Jà: 37km
+  - 13:31:39 Jà: 💪💪💪
+  - 13:31:49 Jà: catherine will join me in leon tomorrow
+  - 13:31:54 Jà: she is one day behind
+
+## 2019-07-02 (105 messaggi rilevanti)
+- **Chris Souder** (5)
+  - 01:00:16 Jà: im already in leon 😁😁😁😁
+  - 01:00:27 Jà: will stay here two or three days
+  - 01:06:50 Jà: haha
+  - 01:07:26 Jà: yes i have a code for the albergue
+  - 01:07:37 Jà: can enter whenever i want
+- **Pamplona Party People** (26)
+  - 07:00:16 Mark Ripka: Maybe, but the point is that you know who was ready before Pam and Andrius - thanks Isabel and Danny for making this possible.  :-)
+  - 08:44:40 Jà: sorry guys for the spam but its so much funny
+  - 08:56:06 Pam Papa: That was very funny! And Jacopo, you are easily amused!
+  - 10:11:35 Jà: welcome
+  - 10:33:01 Jà: tjis albergue is awesome
+  - 10:33:10 Jà: Posizione: https://maps.google.com/?q=42.596439,-5.566099
+  - 10:33:18 Jà: does not close at night
+  - 10:33:35 Jà: no need to do cjeckout in the middle if u stay more days
+- **Ocean Camino** (19)
+  - 08:24:01 Jà: me too
+  - 08:24:23 Jà: i try to sleep more
+  - 08:24:31 Jà: when the guy here gonout
+  - 08:28:00 Jà: 😂
+  - 08:34:37 Jà: which man?
+  - 08:34:52 Jà: i thought the noise were for the tables and chairs reordering
+  - 08:35:53 Jà: lol mimetic
+  - 08:36:04 Jà: ah yes
+- **Ginger treanor san antonio tx** (2)
+  - 13:17:23 Jà: thank u, and u too!
+  - 15:43:13 Jà: yess
+- **+32 487 38 26 02** (33)
+  - 14:20:52 ~Catherine Sauvage: Arrived in Léon
+  - 14:21:23 Jà: 💪💪
+  - 14:21:40 Jà: where do u go now?
+  - 14:21:44 Jà: which albergue?
+  - 14:22:00 ~Catherine Sauvage: Albergue unamino
+  - 14:22:30 Jà: ok
+  - 14:22:49 Jà: the others will do s crepe party later in the afternoon
+  - 14:23:02 Jà: laura juan etc
+- **Andrius Camino** (18)
+  - 15:14:56 Jà: tonight for dinner i am invited into a crepes party from other people that rented an apartment
+  - 15:15:08 Jà: u will stay two days?
+  - 15:15:14 Jà: or u will leave tomorrow?
+  - 15:19:17 Jà: i think i will stay tomorrow and will leave the day after
+  - 15:19:34 Jà: what u mean with “no stops”?
+  - 15:22:18 Andrius Camino: Ok. What will you do tomorrow? I meant no extra days up to Santiago?
+  - 15:30:08 Jà: ah
+  - 15:30:13 Jà: dunno yet
+- **Giselle Camino** (2)
+  - 15:44:12 Jà: thanks mom
+  - 15:45:10 Jà: lol
+
+## 2019-07-03 (76 messaggi rilevanti)
+- **Andrius Camino** (27)
+  - 04:58:19 Jà: i am going to sleep now
+  - 10:31:00 Jà: hello andrius. i just woke up
+  - 10:33:57 Jà: lets say in one hour there?
+  - 10:34:01 Jà: 11.30
+  - 13:55:37 Jà: coming sorry
+  - 13:56:16 Jà: sorry i got a short shower also
+  - 13:56:17 Jà: coming
+  - 16:09:21 Andrius Camino: Hairdressers are all busy. Where are you?
+- **+32 487 38 26 02** (12)
+  - 10:31:16 Jà: heyyyyy
+  - 10:31:25 Jà: before to leave tell meeee
+  - 10:32:32 Jà: i just woke up now 😅
+  - 11:11:39 Jà: ok i am going to the cathedral now.. where r u?
+  - 11:20:06 Jà: i just met mark and carla
+  - 11:20:38 Jà: mark is living now
+  - 11:20:42 Jà: right now
+  - 11:21:24 Jà: allright
+- **Pamplona Party People** (11)
+  - 11:59:08 Danielle DeRome: All i needed was the pool. Spent my pina colada money on it - well worth it!no bathing suit so I went in as was!
+  - 13:04:25 Jà: if u want a trick, some people spent 5 euro for the day there and then 5 euro for tje municipal for the night becsuse in the municipal they have the air conditioned
+  - 13:04:55 Jà: and in the one with swimming pool it is really hot instead, in the dormitory
+  - 14:18:34 Carla Cardenas: Andrius you need to clean the lens of your camera
+  - 14:34:49 Danielle DeRome: Thanks. We are sleeping in Terradillos de los Templarios. Just 3km more.
+  - 21:08:47 Carla Cardenas: Mark
+  - 21:08:54 Carla Cardenas: Where are you?
+  - 21:44:50 Danielle DeRome: Sahagun tmrw - I cannot believe I will make it 400 km!
+- **Ginger treanor san antonio tx** (2)
+  - 13:05:53 Jà: hi ginger
+  - 13:07:01 Jà: goodmornjng! i am still in leon, she left the city this morning. i met here for a beer yesterday afternoon but then i went with other friends in a crepes party till 5.00am and she didnt come because was tired
+- **Ocean Camino** (24)
+  - 13:27:42 Jà: what??
+  - 20:21:33 Jà: kisses in which way?
+  - 20:23:17 Ocean Camino: In a persistent way 😂
+  - 20:27:24 Jà: but mouth by mouth?
+  - 20:27:28 Jà: or on the cheeks?
+  - 20:29:47 Jà: ahhaha yes but “kiss” doesnt mean anything
+  - 20:29:49 Jà: i mean
+  - 20:30:16 Jà: in italy is normal to kiss people when u meet them but the kiss is not on the mouth, its a normal kiss on the cheeks
+
+## 2019-07-04 (67 messaggi rilevanti)
+- **Andrius Camino** (8)
+  - 06:02:34 Jà: now yes
+  - 06:02:44 Jà: lets do 7.30?
+  - 08:03:24 Jà: okk
+  - 08:03:27 Jà: wait here
+  - 13:15:03 Andrius Camino: Howdy? I went to supermarket. It’s at the end of town. What are you going to do?
+  - 13:15:32 Jà: nothing
+  - 13:15:37 Jà: stay on the bed for a while
+  - 19:00:12 Jà: qhen u wake up come in the garden
+- **Ginger treanor san antonio tx** (5)
+  - 12:53:53 Ginger treanor san antonio tx: Jacopo do u have family in strombolli?
+  - 12:57:38 Ginger treanor san antonio tx: Did my homeless ministry yesterday. Gave away 2 bikes food cards bus passes clothes and job referrals ..a blessed dsy amongst my homeless friends
+  - 15:30:54 Jà: hi Ginger! no i have no family there.. didnt know about the eruption 😮
+  - 15:31:12 Jà: woow 😁😁😁
+  - 15:32:12 Jà: cool, thats really great
+- **Pamplona Party People** (16)
+  - 13:46:49 Mark Ripka: Danny and I just got to Astorga.
+  - 13:46:58 Jà: tomorrow for me
+  - 13:48:17 Carla Cardenas: What town are you Jacopo?
+  - 13:48:27 Jà: dont remember
+  - 13:48:46 Jà: mazzarife
+  - 13:48:52 Carla Cardenas: How many kms did you walk?
+  - 13:48:56 Jà: 21
+  - 13:49:01 Danielle DeRome: Astorga... chocolate!!!
+- **Ocean Camino** (2)
+  - 17:38:02 Ocean Camino: I arrived in Astorga today✌
+  - 17:52:50 Jà: me tomorrow
+- **+32 487 38 26 02** (36)
+  - 18:42:47 Jà: hey finally haha 😂
+  - 18:43:00 Jà: im good! today nice dat
+  - 18:43:02 Jà: day
+  - 18:43:04 Jà: u??
+  - 18:47:03 ~Catherine Sauvage: Yes, good Day too, but Last night i was exhausted and didnt find the sleep easely. And tonight, it was pretty peacefull, until it turns in a god conversation with an old men that Just stress me a lot
+  - 18:47:19 Jà: finally in santiago!
+  - 18:48:10 Jà: “god conversation” u mean jesus and etc?
+  - 18:48:14 Jà: or good?
+
+## 2019-07-05 (42 messaggi rilevanti)
+- **Pamplona Party People** (5)
+  - 06:54:04 Pam Papa: Is that a new hat, Mark?
+  - 16:46:32 Isabel Deckel: Hi Guys, I m in Villafranca del Bierzo tonight and wanted to let you know that Albergue Leo is super nice!! Hope everyone is well!
+  - 19:14:31 Danielle DeRome: Your Camino will continue for the rest of your life no matter where you are (hint, hint... California is waiting for you!). I am so grateful to have shared time together. You are such a special person! Buen camino!
+  - 21:26:22 Pam Papa: I hope all is well, Mark! This is just a tease! I’m sure you didn’t influence the monks!
+  - 21:33:36 Carla Cardenas: Dear Theresia!!! I am going to miss you! I had the hope that I was going to see you again in this Camino. You are such a sweet person. It was a blessing to meet you. I send you a big hug.
+- **+32 487 38 26 02** (28)
+  - 09:23:33 Jà: Hai eliminato questo messaggio.
+  - 09:27:49 Jà: bonjourrr
+  - 12:12:36 Jà: found a bar?
+  - 23:08:24 Jà: yes
+  - 23:10:07 Jà: lol
+  - 23:10:12 Jà: and?
+  - 23:10:52 Jà: no i mean
+  - 23:11:02 Jà: and what happens??
+- **Andrius Camino** (9)
+  - 16:14:54 Andrius Camino: Are you enjoying Astorga? Where are you now?
+  - 16:15:28 Jà: coming back
+  - 20:12:04 Jà: hey andrius
+  - 20:12:13 Jà: i am outside with catherine
+  - 20:12:40 Jà: but the others they are having dinner
+  - 20:12:45 Jà: in the albergue
+  - 20:12:50 Jà: write to frwncesco
+  - 20:17:48 Andrius Camino: I have seen Francesco. We ate pasta.
+
+## 2019-07-06 (71 messaggi rilevanti)
+- **+32 487 38 26 02** (18)
+  - 07:26:11 Jà: good morniing 🙂
+  - 07:28:40 Jà: 5/10 min ago
+  - 07:34:57 Jà: 😂
+  - 07:35:08 Jà: how r u?
+  - 07:35:27 Jà: thanks u too ☺️
+  - 07:35:54 Jà: see u in rabanal?
+  - 07:36:23 Jà: if.. maybe.. could be 😂😂
+  - 07:36:33 Jà: i am fine also
+- **Ginger treanor san antonio tx** (1)
+  - 13:25:26 Ginger treanor san antonio tx: Found a cruise by Windstar fr San Juan to lisbon Feb 1. Only 1500. Considering Portugal walk to Santiago then train your if southern spain.
+- **Andrius Camino** (10)
+  - 13:32:57 Jà: hi andrius
+  - 13:32:58 Jà: thanks
+  - 13:33:18 Jà: i went to check the other donativo with the tents that francesco told me
+  - 13:33:21 Jà: and its cool
+  - 13:33:30 Jà: i change albergue so
+  - 14:09:54 Jà: 22.01
+  - 14:20:16 Jà: tomorrow will be 25.5 km for molinaseca
+  - 14:20:31 Jà: and 7.5 for the iron cross
+- **Giselle Camino** (41)
+  - 14:22:41 Giselle Camino: Ginger has texted me twice lol
+  - 14:25:55 Jà: yes hahahahhahahaha its true
+  - 14:28:38 Jà: rabanal
+  - 14:28:40 Jà: in a tent
+  - 14:28:57 Jà: where r u instead? its 3 days we dont meet i think
+  - 14:29:28 Jà: allright
+  - 14:29:35 Jà: si u alrrady went to the cross
+  - 14:29:44 Jà: i want to be there at sunrise tomorrow
+- **Pamplona Party People** (1)
+  - 22:34:10 Pam Papa: Looks like an expensive albergue!  Carla has us running straight up a hill tomorrow at 4:30 to catch the sunrise!  Mark and Danny are in the monastery across from us. I’ve seen and heard him more today while he’s been in the monastery than when we were in Orrison! 🤐🤐🤐
+
+## 2019-07-07 (29 messaggi rilevanti)
+- **Andrius Camino** (17)
+  - 09:12:21 Andrius Camino: Hi. How are you doing? Where are you now? I am at Acebo now. Is Francesco with you?
+  - 09:43:09 Jà: hi andrius i took a wrong path
+  - 09:43:18 Jà: i am still far away
+  - 09:43:27 Jà: Posizione: https://maps.google.com/?q=42.457443,-6.383164
+  - 13:45:14 Jà: i am just arrived to acebo
+  - 13:45:24 Jà: today i did a very long path in the middle of the mountain
+  - 13:45:41 Jà: i will start to walking again in half an hour
+  - 14:35:29 Andrius Camino: Ok. You can come to albergue municipal at Ponderrada. It’s nice here. See you.
+- **Ginger treanor san antonio tx** (5)
+  - 13:59:41 Jà: yes defenitely
+  - 14:06:32 Jà: 2 donkeys and 2 horses
+  - 14:06:49 Jà: the white and black are two donkeys and i think both if them pregnant
+  - 14:06:52 Jà: of*
+  - 14:08:08 Jà: yes
+- **+32 487 38 26 02** (3)
+  - 14:01:42 Jà: arrived in acebo and took a beer
+  - 14:02:32 Jà: wait for u here
+  - 14:17:41 Jà: .... if u want
+- **Pamplona Party People** (2)
+  - 15:09:07 Isabel Deckel: Its in Las Herririas, 8 Km to O’Cebreiro
+  - 16:41:49 Carla Cardenas: Dear Danielle!!! I miss you since you stayed in Burgos.
+- **Ocean Camino** (2)
+  - 23:35:30 Ocean Camino: Is today your birthday? Did I remember it correctly?
+  - 23:35:54 Ocean Camino: Happy 31th birthday 🎁
+
+## 2019-07-08 (30 messaggi rilevanti)
+- **Ocean Camino** (1)
+  - 04:56:56 Jà: it is on the tenth 😁😁 but thanks, ill keep it for later
+- **Andrius Camino** (14)
+  - 04:58:43 Jà: start moving
+  - 05:02:04 Andrius Camino: Can you let me know when you come to Ponferrada?
+  - 05:13:34 Jà: okk
+  - 05:54:57 Jà: Posizione: https://maps.google.com/?q=42.544670,-6.552180
+  - 05:56:14 Andrius Camino: You are 3.5km away from me.
+  - 06:47:39 Jà: Posizione: https://maps.google.com/?q=42.536259,-6.580537
+  - 06:57:35 Jà: its a live position
+  - 07:01:40 Jà: ok
+- **Pamplona Party People** (4)
+  - 07:21:24 Isabel Deckel: https://www.japantimes.co.jp/news/2019/07/08/world/two-americans-spaniard-gored-spains-pamplona-bull-run/#.XSLSqCWxWEc
+  - 17:50:05 Pam Papa: The Piedre Hostel owners asked if I wanted to walk him. Of course, he pulled and my leg tendons were screaming. But he’s a very sweet boy.
+  - 17:51:50 Pam Papa: At the hostel. I came back to drop off Rey and get a rain coat. Where are you? Marcia said she’s at your place.
+  - 17:54:24 Carla Cardenas: Marcia is here. The albergue is good. How is yours?
+- **+32 487 38 26 02** (6)
+  - 15:40:35 ~Catherine Sauvage: Y ou can put thé stuffs in the dryer.make sure your sleeping bag not too wet. And i Will go get the stuffs when it is done
+  - 15:40:54 Jà: allrighr
+  - 15:40:59 Jà: it is almost finishing
+  - 16:33:48 Jà: 😛
+  - 16:34:38 Jà: yes 😂
+  - 16:36:02 Jà: 😘🥰
+- **Chris Souder** (5)
+  - 15:41:20 Jà: hi chris!
+  - 15:41:37 Jà: just arrived to cacabelos
+  - 15:42:02 Jà: yesterday i did an offroad for mistake, but i had a beautifull gift
+  - 16:03:33 Jà: and what are the things going to u in portugal?
+  - 16:04:12 Jà: its the time to come back now?
+
+## 2019-07-09 (129 messaggi rilevanti)
+- **Pamplona Party People** (29)
+  - 08:59:01 Pam Papa: Ewwww!!! Where are you?
+  - 09:00:11 Isabel Deckel: leaving Sarria about to hit the last 100km marker
+  - 09:01:02 Mark Ripka: 109 Mark is significant!
+  - 09:07:15 Andrius Camino: Congrats Mark.
+  - 09:07:51 Mark Ripka: Thanks - still another 220 or so to Santiago, though.
+  - 09:09:53 Andrius Camino: Me and Francesco heading towards O Cebreiro. Are you far behind?
+  - 09:13:51 Pam Papa: Congratulations, Mark!!!! Pilgrim, Monk, Templar Knight! Traveler extraordinaire!
+  - 10:43:56 Pam Papa: I just woke up 😝! Just kidding! Well, compared to Carla, maybe, it’s the case.
+- **Andrius Camino** (20)
+  - 11:05:34 Andrius Camino: Where are you my friend? I am at Ambasmestas.
+  - 11:17:33 Jà: hi andrius!
+  - 11:17:37 Jà: i am here
+  - 11:17:55 Jà: Posizione: https://maps.google.com/?q=42.620983,-6.835898
+  - 14:15:47 Jà: maybe
+  - 14:16:02 Jà: ill try to head till o cebrairo today
+  - 14:16:22 Jà: but i still am 3 hours behind
+  - 14:19:28 Andrius Camino: Ok. I will let you know what albergue I will choose. See you later.
+- **+32 487 38 26 02** (63)
+  - 12:00:56 Jà: 🙃
+  - 12:57:56 Jà: ☀️
+  - 12:58:04 Jà: how r u??
+  - 13:03:20 Jà: just stopped at la portela
+  - 13:03:34 Jà: eating something me too
+  - 13:03:40 Jà: still to order
+  - 13:05:20 Jà: walking now?
+  - 13:05:29 Jà: the road today is ugly
+- **Ocean Camino** (10)
+  - 13:38:22 Ocean Camino: Where r u heading today?
+  - 13:40:21 Jà: hello
+  - 13:40:34 Jà: i am at la portela de valcarce
+  - 13:41:00 Jà: was thinking to arrive to vega de valcarce
+  - 13:41:06 Jà: but maybe ill go to o cebreiro
+  - 13:41:13 Jà: yes i know haha
+  - 13:41:31 Ocean Camino: I will arrive in o ce today
+  - 13:41:50 Jà: maybe me too but not sure
+- **Ginger treanor san antonio tx** (4)
+  - 14:07:12 Ginger treanor san antonio tx: Good morning! Ola!!! How many days til Santiago?
+  - 20:59:40 Jà: helloo
+  - 20:59:54 Jà: we will be jn santisgo on 16
+  - 22:43:24 Jà: o cebreiro
+- **Giselle Camino** (2)
+  - 21:34:36 Jà: hello
+  - 21:34:44 Jà: i am at o cebrairo today, r u far?
+- **Chris Souder** (1)
+  - 22:43:19 Jà: o cebreiro
+
+## 2019-07-10 (64 messaggi rilevanti)
+- **Pamplona Party People** (19)
+  - 06:08:56 Isabel Deckel: Happy Birthday Jacopo 💫💫💫 Hope you have a wonderful one! See you soon :)
+  - 07:02:36 Pam Papa: Happy Birthday, Jacopo 🎂🎂🎂🎂🍺🍺🍺!!!!
+  - 07:10:09 Andrius Camino: Happy birthday my friend!
+  - 07:11:00 Carla Cardenas: Happy birthday Jacopo!!! Have a great day!
+  - 07:32:59 Mark Ripka: Happy birthday, Old Man!!!
+  - 08:30:19 Jà: heyyy thank u all, camino’s friend!!!
+  - 10:29:43 Jà: still didnt understand if u are my brother or my boyfriend
+  - 16:21:47 Isabel Deckel: I did 40km in honor of Jacopo s birthday today!
+- **Mark Ripka** (2)
+  - 07:32:06 Mark Ripka: Happy birthday, Old Man!!!  Where are you stopping today and how are you celebrating?
+  - 08:19:43 Jà: hi mark, thank u! today ill stop at alto de poyo i think
+- **+32 487 38 26 02** (16)
+  - 08:17:59 Jà: heyyy
+  - 08:18:04 Jà: thank uuuu
+  - 08:18:19 Jà: i am still at the albergue packaging my stuff
+  - 08:18:25 Jà: see u later
+  - 08:58:20 Jà: ok no prob
+  - 08:58:53 Jà: sure
+  - 08:58:56 Jà: here is nice
+  - 08:59:34 Jà: androus is waiting me
+- **Giselle Camino** (9)
+  - 08:44:51 Jà: i will wait catherine here and then continue with her.. i think she is stopping in alto de poyo
+  - 08:45:38 Giselle Camino: Okay sounds good! When will you arrive in Santiago?
+  - 08:46:25 Jà: on 16
+  - 08:46:35 Jà: and stay there at least for two days
+  - 08:47:14 Jà: today u will meet francesco again i think
+  - 08:47:21 Jà: he told me he will stop in sarria
+  - 08:48:08 Jà: testerday it was very long for him
+  - 08:48:13 Jà: 50km hahaha
+- **Andrius Camino** (11)
+  - 14:35:32 Andrius Camino: Where are you?
+  - 14:47:00 Jà: Posizione: https://maps.google.com/?q=42.699429,-7.073025
+  - 14:47:08 Jà: u?
+  - 18:31:11 Jà: domani arriviamo a sarria
+  - 18:31:15 Jà: sorry
+  - 18:31:22 Jà: tomorrow we will be in sarria
+  - 18:31:28 Jà: because we try the bikes
+  - 19:16:22 Andrius Camino: See you in Sarria.
+- **Ginger treanor san antonio tx** (1)
+  - 18:04:57 Jà: yess!
+- **bike camino** (6)
+  - 18:38:56 Jà: hi there! its jacopo who calls for two bikes for tomorrow from o poio
+  - 18:39:06 Jà: we will stay at santamaria albergue
+  - 18:39:23 Jà: we would like to do o poio - sarria
+  - 18:55:09 Jà: one guy 1.80m and one girl 1.62m
+  - 18:55:14 Jà: at 8.00
+  - 21:53:50 Jà: sorry, we changed albergue. we stay at del puerto!
+
+## 2019-07-11 (37 messaggi rilevanti)
+- **Pamplona Party People** (19)
+  - 12:25:08 Mark Ripka: Live it!!!!  Where are you?
+  - 12:30:54 Carla Cardenas: Sarria!!!!
+  - 12:31:54 Isabel Deckel: On my way to Santa Irene. Tomorrow Santiago at around 10:30 hopefully!
+  - 12:32:28 Isabel Deckel: Where are you? Is the family walking together again?
+  - 12:33:39 Mark Ripka: Come back to Sarria - I cheated and am here now.  Have a swimming pool at the hotel...
+  - 12:34:45 Mark Ripka: Just can it here and celebrate my birthday!  Pool party!
+  - 12:35:51 Isabel Deckel: Ahhh!!! true!!  Where will you be on your birthday?
+  - 12:36:31 Mark Ripka: Either Sarria or Portomarín...
+- **Ginger treanor san antonio tx** (1)
+  - 13:56:43 Ginger treanor san antonio tx: 5 days....if u can do this u can do anything!  Including the NY Marathon! The skies the limit for Jacopo.  Seek Jesus in every step.
+- **Andrius Camino** (3)
+  - 14:57:38 Jà: are u in sarria?
+  - 16:00:33 Andrius Camino: Where are you staying?
+  - 16:11:10 Jà: Posizione: https://maps.google.com/?q=42.780262,-7.413107
+- **+32 487 38 26 02** (11)
+  - 19:40:55 Jà: dont say about the group
+  - 19:41:02 Jà: andrius is not inside
+  - 19:41:18 Jà: i mean
+  - 19:41:31 Jà: i dont know if mark did it in purpose or not
+  - 19:41:35 Jà: thats why i asked
+  - 19:41:52 Jà: yes
+  - 19:42:06 Jà: but dont let andrius know there is the group.. i think he will be offended
+  - 19:42:38 Jà: yes but if he knows mark created a group and he added only us he can be offended
+- **Giselle Camino** (3)
+  - 20:56:27 Jà: hi giselle
+  - 20:56:30 Jà: where r u?
+  - 20:56:37 Jà: me and cath are in sarria todau
+
+## 2019-07-12 (82 messaggi rilevanti)
+- **Pamplona Party People** (12)
+  - 13:30:46 Pam Papa: Maybe it will be Ribadiso on Monday? Mark’s Birthday. Can we make it work, family???? It follows the Brierly book. Jacopo (Catherine), Andrius, Mark, Carla, Danielle, Isabel, Danny, Joe, Josh, Theresia???
+  - 13:36:54 ~ Danny Herman: Haha so about that...I’m in Ferreiros. I pulled a Forrest Gump and just felt like walking. But I’ll be in Portomarin tomorrow for marky Mark’s birthday
+  - 15:47:51 Jà: me and catherine will be in ribadiso on sunday afternoon
+  - 15:50:52 Pam Papa: Great, Jacopo and Catherine!!!! You can wait for us!!!
+  - 15:51:55 Jà: catherine has the flight on 17
+  - 15:52:05 Jà: from santiago
+  - 15:54:42 Pam Papa: To where? See if she can change. It’s cheap in Europe!
+  - 15:57:05 Jà: she bought the flights few days ago because she has to be at home for that day, she cannot postpone it (has to go with her family in another place the day after)
+- **Giselle Camino** (4)
+  - 17:32:28 Giselle Camino: Hey! I’m in palas del reí! Where are you guys
+  - 17:44:22 Jà: arriving to portomarin
+  - 17:44:53 Giselle Camino: 2 euros
+  - 22:42:25 Jà: i saw rhe swimming pool here
+- **+32 487 38 26 02** (66)
+  - 22:28:25 Jà: in the albergue?
+  - 22:28:44 Jà: i dont remember any girl
+  - 22:29:15 Jà: i dont know
+  - 22:29:20 Jà: because i dont remember her
+  - 22:29:45 Jà: stupid u!!!
+  - 22:29:55 Jà: 😘😘
+  - 22:30:05 Jà: i know!
+  - 22:30:20 Jà: u dont
+
+## 2019-07-13 (39 messaggi rilevanti)
+- **Chris Souder** (5)
+  - 02:13:37 Chris Souder: Are you in Santiago yet?
+  - 06:02:21 Jà: hi chris
+  - 06:02:23 Jà: not yet
+  - 06:02:32 Jà: we r taking it very easy
+  - 06:02:39 Jà: qill be in santiago on 16
+- **Pamplona Party People** (15)
+  - 06:53:57 ~ Joe Herman: Happy Birthday Mark. I hope it is your best one yet. May God bless you with many more.
+  - 07:04:47 Danielle DeRome: Happy birthday, Mark - hope ypu have a year full of great adventures!
+  - 07:07:50 Pam Papa: Happy Birthday, Mark 🎂🎈🎊🧁🍦🍷!
+  - 07:11:33 Andrius Camino: Happy birthday my fellow walker!
+  - 08:00:43 Mark Ripka: Thanks for the birthday wishes - they mean a lot to me.
+  - 08:05:21 Danielle DeRome: Hey Mark, It sounds like your Camino is working its magic on you. Enjoy every step - heck, I know you will! Looking forward to shared times ahead. Hugs and love -
+  - 08:47:24 Andrius Camino: All the best Mark! Thank you very much for your support and care Mark. I got better thanks to you all. Appreciate every moment of this Camino and all of you guys. Thanks.
+  - 09:02:55 Pam Papa: Guess it’s time for you to fly, Mark! Maybe you can pull together all the advice and lessons you actively sought from everyone and actually use it on your third Camino! It takes some longer than others 🤭
+- **Andrius Camino** (5)
+  - 11:24:33 Jà: the next bar is too near so i didnt stop
+  - 11:24:58 Jà: but see u in another next one.. i tell u when we stop
+  - 16:51:09 Jà: woow why they filmed u??
+  - 16:54:55 Jà: 💪💪💪
+  - 16:55:14 Jà: we r continuing 1 km more because the pkace is closed today
+- **+32 487 38 26 02** (12)
+  - 13:06:07 Jà: i know.. but what u would to do?
+  - 13:06:22 Jà: before he asked to have dinner together
+  - 13:06:56 Jà: i am trying to say to speak with people
+  - 13:07:01 Jà: and have new friends
+  - 13:07:26 Jà: but he seems not so interrsted
+  - 20:17:16 Jà: ...
+  - 20:17:35 Jà: a bit
+  - 20:17:46 Jà: but we can kiss in silence
+- **Ginger treanor san antonio tx** (2)
+  - 15:09:05 Ginger treanor san antonio tx: Guilt trip for missing my last day by taking bus!!! Better yet I should have cancelled my flight n stayed on the path!!!
+  - 15:42:55 Jà: 😂
+
+## 2019-07-14 (17 messaggi rilevanti)
+- **+32 487 38 26 02** (3)
+  - 11:51:26 Jà: stopped here: parabispo
+  - 11:51:32 Jà: before the “oasis”
+  - 11:51:43 Jà: Posizione: https://maps.google.com/?q=42.915600,-8.057307
+- **Andrius Camino** (14)
+  - 17:31:02 Andrius Camino: Nice lady at Ribadiso Albertu suggested that I stay here. I bathed in the river. Met Lucina (Spanish) with her boyfriend. Where are you? I am ok by the way.
+  - 17:31:57 Andrius Camino: Are you still walking to Arzua? I have so many blisters from these sandals. No good.
+  - 17:34:45 Andrius Camino: *Albergue
+  - 17:37:00 Jà: wow
+  - 17:37:23 Jà: but u r swimming or just take pictures of people?
+  - 17:38:52 Andrius Camino: Where are you?
+  - 17:39:38 Jà: on the camino
+  - 17:39:49 Jà: before santiago
+
+## 2019-07-15 (14 messaggi rilevanti)
+- **Andrius Camino** (14)
+  - 17:12:59 Jà: hi andrius! how r u??
+  - 17:32:29 Andrius Camino: In mental health hospital.
+  - 17:33:32 Jà: ????
+  - 17:33:35 Jà: where??
+  - 17:33:49 Andrius Camino: Santiago.
+  - 17:34:21 Andrius Camino: I didn’t sleep and lost touch with reality.
+  - 17:34:26 Jà: what happened?
+  - 17:46:25 Andrius Camino: I didn’t have enough medication and couldn’t sleep. I lost touch.
+
+## 2019-07-16 (46 messaggi rilevanti)
+- **+32 487 38 26 02** (4)
+  - 07:24:34 Jà: ready to go?
+  - 07:24:37 Jà: the bag??
+  - 07:24:53 Jà: i take the bag.. dont know if er can entrr again
+  - 07:24:57 Jà: we
+- **Chris Souder** (3)
+  - 07:53:43 Chris Souder: Jacopo
+  - 08:57:32 Jà: me and cath arrived in santiago yesterday evening at 22.00
+  - 08:57:45 Jà: this morning wr just got the certificate
+- **Pamplona Party People** (7)
+  - 08:55:07 Pam Papa: Many many many Congratulations 🎈🎊🎉 to you Jacopo!!!
+  - 09:06:59 Isabel Deckel: Very nice picture Camino ladies!! Congratulations Jacopo 👍🏻👍🏻👍🏻
+  - 22:54:17 Carla Cardenas: This is our last time together at an albergue 😢
+  - 22:54:35 Pam Papa: Hi Joe! Great to hear from you! It’s going well, coming down to the end. Tomorrow is Santiago. I have a horrible shin splint type pain, but will make it even if I have to crawl. We are all walking in a few at a time.
+  - 22:55:53 Pam Papa: He is about ten km ahead of us. He wanted to only have a few km to reach Santiago tomorrow.
+  - 22:57:23 Pam Papa: He’s been with us in the albergue’s the last few nights. He starts his 4:30-5:00 jaunts and he catch up. It’s been great to keep seeing each other.
+  - 22:58:36 ~ Joe Herman: That's good. He may be in an albergue with no or limited wifi
+- **Andrius Camino** (5)
+  - 15:46:19 Jà: because a guy told us it was good to arrive in santiago early in the morning so we were planning to stop in monte campana yesterday (that is 7 km far from santiago) but at the end we decided to keep walking and we arrived in santiago at 23.00. now we are in finisterre. we wake up early to get the certificate at 8.00 and after we took the bus to finisterre
+  - 15:46:43 Jà: tomorrow we come back in santiago
+  - 19:58:08 Jà: hi andrius
+  - 19:58:12 Jà: how r u today?
+  - 19:58:17 Jà: still in the hospital?
+- **Carla Cardenas** (26)
+  - 17:58:36 Carla Cardenas: Hey Jacopo
+  - 18:00:05 Carla Cardenas: It is 20 euros
+  - 18:00:16 Carla Cardenas: In The Last Stamp albergue
+  - 19:57:34 Jà: hi carla, today i am finisterre but timorrow i will be back in santiago
+  - 19:57:37 Jà: ok i can take it
+  - 19:58:00 Jà: r u in santiago already?
+  - 19:58:44 Carla Cardenas: Jacopo
+  - 19:58:58 Jà: ah ok dont worry
+- **Ginger treanor san antonio tx** (1)
+  - 21:07:36 Jà: we walked 45 km yesterday and arrived at 22 more or less (still sunny at night)
+
+## 2019-07-17 (89 messaggi rilevanti)
+- **Ginger treanor san antonio tx** (4)
+  - 01:00:03 Ginger treanor san antonio tx: Crazy!!! U got that NY Marathon in the bag.  In other words u r a winner!!! And sunny at night, how cool is that.  Did Catherine make it? Giselle?
+  - 10:21:30 Jà: yes me and catherine walked aleays together for the last 12 days
+  - 10:21:53 Jà: giselle, she is arrived in santiago also, but we didnt meet her
+  - 12:52:29 Ginger treanor san antonio tx: Send my congratulations to Catherine as well. Guessing y'all are now forever friends. If u have gb send some pics.  I have jury duty today.
+- **Pamplona Party People** (4)
+  - 11:56:21 Jà: 🎉
+  - 12:00:51 Isabel Deckel: ❤❤ Well done Carla!
+  - 13:59:26 Pam Papa: Hi Joe!!! I have not. I’ve been in the plaza for a couple of hours to see if he walks by. I’ve asked others who know him and they have not seen him either. I imagine he arrived early and is taking care of other things.
+  - 14:02:19 Pam Papa: I’m sure he’s ok. He left our albergue early yesterday. I’ll keep an eye out.
+- **+32 487 38 26 02** (42)
+  - 14:19:28 Jà: heyyyy
+  - 14:19:34 Jà: how r u?
+  - 14:41:13 ~Catherine Sauvage: I am in hôtel mazarelos, on the place mazarelos. There are buses for the airport near
+  - 14:42:48 Jà: ok
+  - 14:53:47 Jà: walking
+  - 14:54:01 Jà: Posizione: https://maps.google.com/?q=42.881901,-8.538212
+  - 15:01:28 Jà: almost arrived ti the hotel
+  - 17:26:34 Jà: 😘
+- **Talia Camino** (35)
+  - 17:18:24 Jà: wheiii how r u??
+  - 17:18:29 Jà: and where are u??
+  - 17:18:48 Jà: i am in santiago and think to stat there till the day after tomorrow, then walk to muxia
+  - 17:21:02 Talia Camino: I'm in Burgo Ranero, a little before Leon :))))
+  - 17:21:31 Jà: ahh ok
+  - 17:21:36 Jà: still in the mesetas
+  - 17:21:47 Jà: there is a place really nice
+  - 17:21:56 Jà: after the mesetas
+- **Andrius Camino** (4)
+  - 20:20:30 Jà: r u good?
+  - 20:54:54 Jà: i wish u will find the help u r seeking for there
+  - 20:54:58 Jà: take care of u
+  - 20:55:32 Jà: me i am just finished to eat
+
+## 2019-07-18 (62 messaggi rilevanti)
+- **Andrius Camino** (4)
+  - 08:48:36 Jà: woow thats great!
+  - 08:49:13 Jà: we wish you to finish the camino! you are really close to it!
+  - 09:23:08 Jà: when ull arrive to santiago?
+  - 10:53:54 Jà: ok cool! let me updated then
+- **+32 487 38 26 02** (42)
+  - 11:06:13 Jà: ciao
+  - 11:51:13 Jà: heyy
+  - 11:51:30 Jà: r u at the airport?
+  - 11:56:27 Jà: ok
+  - 11:56:37 Jà: i am at the park again
+  - 11:56:39 Jà: 😂
+  - 11:57:15 Jà: yes
+  - 11:57:33 Jà: u?
+- **Pamplona Party People** (10)
+  - 11:09:41 Pam Papa: I hope you’re doing well, Andrius!
+  - 11:25:40 Mark Ripka: Go Andrius, go!!!
+  - 11:27:16 Isabel Deckel: Gooo Andrius!!! 👍🏻👍🏻👍🏻
+  - 11:59:31 Carla Cardenas: You can do it Andrius!!! We miss you
+  - 12:00:52 Jà: 💪💪💪
+  - 12:03:43 Pam Papa: Keep going Andrius!!! So close!!! You can do it!!!
+  - 15:22:01 Andrius Camino: Only 16km left.
+  - 20:24:29 Isabel Deckel: Congratulations Andrius!! Well deserved with all your blisters ☺
+- **Ocean Camino** (6)
+  - 12:54:22 Jà: heyyy r u in finisterre already?
+  - 13:29:49 Jà: cool!
+  - 13:30:03 Jà: i am still in santiago and will start to walk to muxia starting from tomkrrow
+  - 13:30:44 Ocean Camino: I am coming to Santiago today and will take the early flight to Madrid tomorrow
+  - 13:32:20 Jà: allright
+  - 13:32:25 Jà: have u meet ur mom?
+
+## 2019-07-19 (92 messaggi rilevanti)
+- **+32 487 38 26 02** (80)
+  - 00:53:04 Jà: bon nuit
+  - 14:39:53 Jà: ti penso anche io!! vorrei dormire con te, ma non ci sei più 🙁 che fai oggi??
+  - 15:36:04 Jà: alone
+  - 15:43:45 Jà: im thinking to the things to do at home
+  - 15:44:05 Jà: because i am a bit tired of walking actually
+  - 15:44:15 Jà: but i am happy to have done it
+  - 15:45:41 Jà: u too have things to do
+  - 15:45:48 Jà: start courses
+- **Pamplona Party People** (1)
+  - 11:16:17 Jà: 💪💪💪
+- **Andrius Camino** (6)
+  - 13:13:43 Jà: ???
+  - 13:13:52 Jà: not by flight?
+  - 13:14:27 Andrius Camino: Bus from the airport.
+  - 13:14:28 Jà: ah ok
+  - 13:14:33 Jà: cool
+  - 13:14:45 Jà: 😀
+- **Ginger treanor san antonio tx** (1)
+  - 14:47:31 Jà: 😀😀
+- **Giselle Camino** (4)
+  - 22:49:28 Jà: heyyyy
+  - 22:49:37 Jà: r u arrived to fisterre?
+  - 22:49:46 Jà: i am in vilaserio today
+  - 23:37:42 Giselle Camino: Hey! Yeah! I’m in Finisterre
+
+## 2019-07-20 (48 messaggi rilevanti)
+- **Giselle Camino** (9)
+  - 07:21:45 Jà: whats ur plan for the next days?
+  - 11:53:17 Jà: today ill stop to dumbria
+  - 11:53:23 Jà: and tomorrow muxia
+  - 14:30:44 Jà: 🤙
+  - 21:22:43 Jà: muxia worth to stay two days?
+  - 21:24:13 Jà: yes i am 22km far so i think ill be there in the morning
+  - 21:24:25 Jà: i will start at 6.00 more or less
+  - 21:24:35 Jà: i think to arrive at 10.30
+- **Pamplona Party People** (22)
+  - 11:47:36 Pam Papa: Safe travels, Carla!! And have a great vacation! I started imagining all of you walking beside me and laughing with each other at times when I was walking alone. I take the real times and the imaginary ones with me and it puts a huge smile on my face and in my heart.
+  - 14:31:45 Danielle DeRome: Notice the name of the train, too: Jacobite!
+  - 14:33:11 Jà: 💪💪💪
+  - 14:33:22 Jà: i am everywhere
+  - 15:44:02 Carla Cardenas: Jacopo where are you?
+  - 15:44:39 Carla Cardenas: Finisterre? Muxía
+  - 16:29:51 Jà: lets do an interactive survey
+  - 16:32:36 Jà: tic tac
+- **Ginger treanor san antonio tx** (7)
+  - 13:15:45 Ginger treanor san antonio tx: So what u up to?  Still in santiago?
+  - 13:16:07 Jà: hi ginger! not in santiago anymore i am goong to muxia
+  - 13:18:06 Jà: yes
+  - 13:18:11 Jà: in the ocean
+  - 13:21:10 Jà: yes i am tired to of walking and walking
+  - 13:21:13 Jà: but i am ok
+  - 13:22:31 Ginger treanor san antonio tx: Hows catherine?
+- **+32 487 38 26 02** (5)
+  - 14:53:16 Jà: lol
+  - 19:12:28 Jà: how is it going the day with ur family?
+  - 21:25:23 Jà: tomorrow i will see giselle in muxia
+  - 21:25:44 Jà: and today i saw sara and renato. they stay in the same albergue of mine in dumbrìa
+  - 23:11:39 Jà: 👍👍
+- **Chris Souder** (5)
+  - 17:10:21 Jà: hey
+  - 17:10:30 Jà: we went to finisterre on 16 by bus
+  - 17:10:37 Jà: then came back in santiago
+  - 17:10:54 Jà: but yesterday i started moving again by walking, in direction of muxia
+  - 17:20:07 Jà: 💪💪
+
+## 2019-07-21 (66 messaggi rilevanti)
+- **Pamplona Party People** (10)
+  - 09:03:53 Carla Cardenas: Great Jacopo!!! Congrats! You made it. I wish i had time to do the same. It will be in my next Camino
+  - 13:07:33 Carla Cardenas: Jacopo are you leaving your shoes there?
+  - 13:14:06 Jà: nono i have this shoes since 15 years haha and they will come back in italy with me ❤️
+  - 13:14:31 Jà: 😝😝😝
+  - 13:25:15 Pam Papa: Congratulations, Jacopo!!!  It’s been so much fun to have crossed our Camino paths!!!
+  - 14:20:09 Jà: 😝
+  - 14:32:53 Pam Papa: I LOVE this!!!!! Congratulations again, Jacopo!!!!!
+  - 14:48:17 Pam Papa: My souvenirs from the Santiago church museum.
+- **Mark Ripka** (6)
+  - 09:16:37 Jà: hi mark!!! how r u??? on 23 il be back in santiago, any chance to meet you there?
+  - 09:22:55 Mark Ripka: Hi Jacopo!  Unfortunately I’m still in Sarria. I’ve got stomach issues and the hospital in Lugo doesn’t think I’ll be able to hike for another 3 - days. It’s very frustrating. For how long will you be in Sarria?
+  - 09:36:17 Jà: ouch! i am sorry for that! now i am just arrived in muxia and wikl spend all the day here. tomorrow i will run to finisterre and the day after tomorrow back in santiago by bus and stay till 24
+  - 13:14:50 Jà: allright!! november is not far!
+  - 13:14:53 Jà: 😁
+  - 13:16:40 Jà: 🤙🤙
+- **+32 487 38 26 02** (9)
+  - 09:52:09 ~Catherine Sauvage: Beach in muxia seems better than fisterra
+  - 09:53:16 Jà: i think in finisterre there are better beaches than the one we saw
+  - 09:53:21 Jà: tomorrow i will see
+  - 09:53:43 Jà: we just went to the nearest one but it was in the middle of the city
+  - 13:16:29 Jà: i wish u be here 😘
+  - 16:12:54 Jà: yes i met her this morning and will meet her again this evening for the sunset
+  - 16:13:03 Jà: i gave her ur hug
+  - 16:13:25 Jà: so sweet! 🥰
+- **Giselle Camino** (38)
+  - 10:36:15 Giselle Camino: Where are you staying?
+  - 10:37:12 Jà: to sleep?
+  - 10:37:38 Giselle Camino: You’re in Muxia already right?
+  - 10:37:41 Jà: in an albergue called bela muxia but still didnt able to do checkin because too earu
+  - 10:37:44 Jà: early
+  - 10:41:38 Jà: which beach?
+  - 10:42:05 Jà: Posizione: https://maps.google.com/?q=43.111046,-9.219522
+  - 10:42:09 Jà: send the position
+- **Ginger treanor san antonio tx** (3)
+  - 15:27:01 Jà: catherine is not with me anymore
+  - 15:27:08 Jà: she is went back in belgium on 19
+  - 15:27:13 Jà: 18*
+
+## 2019-07-22 (171 messaggi rilevanti)
+- **Ocean Camino** (36)
+  - 07:43:43 Ocean Camino: Leaving Spain and going home now 🙁
+  - 08:49:50 Jà: 💪💪💪
+  - 08:49:55 Jà: have a good return!!
+  - 20:38:59 Jà: ouch
+  - 20:39:09 Jà: so?? what r u doing now
+  - 20:40:54 Jà: haha lol
+  - 20:40:59 Jà: ah perfect
+  - 20:41:19 Jà: did they pay the hotel?
+- **Pamplona Party People** (3)
+  - 10:03:45 Jà: (yesterday giselle told me there is a 0.000 even in finisterre)
+  - 10:47:30 Jà: yes i start at 11
+  - 12:30:45 Pam Papa: I guess you could run the Camino Frances backwards.  Take a shell with you, though, to prove you were at the end of the earth!
+- **+32 487 38 26 02** (132)
+  - 10:52:45 Jà: i start running at 11.00
+  - 10:53:26 Jà: see u in finisterre??
+  - 10:54:59 Jà: 😘
+  - 10:55:08 Jà: 😂
+  - 15:17:27 Jà: 😊
+  - 15:17:41 Jà: very tiring!!
+  - 15:17:59 Jà: i am dead like people in the graveyard
+  - 15:40:45 Jà: took a shower
+
+## 2019-07-23 (116 messaggi rilevanti)
+- **+32 487 38 26 02** (93)
+  - 00:00:00 Jà: finally
+  - 00:00:04 Jà: ah no
+  - 00:00:07 Jà: u r not at home
+  - 00:00:11 Jà: lol
+  - 00:00:30 Jà: but u have a proper bed now
+  - 00:00:58 ~Catherine Sauvage: Yes, not really different from albergue ones
+  - 00:03:46 Jà: yes
+  - 00:03:56 Jà: but then i realized u are not at home
+- **Pamplona Party People** (18)
+  - 08:11:07 Carla Cardenas: Jacopo did you make it??
+  - 08:12:42 Jà: yes yes but i didnt run till the mark 0.000 since it was so far from the center, so i srriced to the center and stopped and went to drink beer because i was really thirsty
+  - 08:12:51 Jà: then i went to the mark later for the sunset
+  - 08:33:50 Carla Cardenas: Wow!!! Congrats Jacopo!!! You made it!!!
+  - 08:40:20 Jà: yes i arrived very dead and during the up hill, after 18km i started to walk because very hard and very sunny.. then i run again, then walk, then run, tuen reached a beach and walked, then run along the sea then walk.. then i arrived to the center and i was so tired that i decided to stop to have a drink and drink a lot of water
+  - 08:53:55 Jà: yes less difficult for sure... it will be all flat and with no temptation of the beach hahahah and it will be in the early morning in autumn, not under the summer sun of july 😂😂 but i need to train a lot yet
+  - 09:17:59 Danielle DeRome: However, they do have some good beer in NYC...
+  - 17:24:28 Pam Papa: Great effort, Jacopo!!!! You can build up to it!!!
+- **Ocean Camino** (5)
+  - 16:36:17 Jà: wooow
+  - 16:36:20 Jà: i saw it now
+  - 18:12:50 Jà: wtf??
+  - 18:12:55 Jà: 500 euro?
+  - 18:13:28 Jà: ooohs poor u! its invalid for alchoolic drinks haha
+
+## 2019-07-24 (131 messaggi rilevanti)
+- **+32 487 38 26 02** (126)
+  - 10:35:15 Jà: hello
+  - 10:40:16 Jà: yes
+  - 10:40:27 Jà: im back in santiago
+  - 10:40:41 Jà: went to the office to take the last sello
+  - 10:40:52 Jà: now have nothing to do
+  - 10:41:26 Jà: wow u r relaxing
+  - 10:41:36 Jà: i woke up early today
+  - 10:41:51 Jà: had the chance to sleep till late
+- **Andrius Camino** (4)
+  - 11:15:16 Jà: hello Andrius!
+  - 11:15:19 Jà: how r u?
+  - 13:29:41 Jà: I am at the airport of Santiago, coming back to italy
+  - 13:30:15 Jà: But how are you? are you going to feel better?
+- **Pamplona Party People** (1)
+  - 17:01:07 Jà: very awesome group
+
+## 2019-07-25 (56 messaggi rilevanti)
+- **+32 487 38 26 02** (43)
+  - 00:45:40 Jà: the cycling
+  - 00:47:32 Jà: yes but its different.. even because here the others already know the others.. me only know two of them.. and not still ready to be like mark or francesco to speak free style in the middle of s group that i dont know and they lnow each other
+  - 13:15:47 Jà: heyyyyy
+  - 13:15:52 Jà: bonjourrrr
+  - 13:49:18 Jà: helloooooo
+  - 14:32:42 Jà: im fine.. im still at home of my friends and in two hour they will bring me at the station
+  - 14:52:39 Jà: ahha no i didnt dance
+  - 15:19:55 ~Catherine Sauvage: And did you talk to New persons ?
+- **Ocean Camino** (13)
+  - 08:53:34 Jà: ahhh ok not 4000 yuan
+  - 09:08:13 Jà: 😂
+  - 09:08:24 Jà: yep haha
+  - 09:08:31 Jà: i am in italy now
+  - 09:10:28 Jà: im not at home now haha
+  - 09:10:34 Jà: im still in travel
+  - 09:10:36 Jà: in milan
+  - 09:10:43 Jà: at friend’s flat
+
+## 2019-07-26 (7 messaggi rilevanti)
+- **Ocean Camino** (6)
+  - 12:18:11 Jà: around 1000 coins
+  - 12:18:27 Jà: around 500 euro
+  - 12:26:53 Jà: i started to collect them from the beginning of the euro coins
+  - 12:26:56 Jà: in 2002
+  - 12:27:17 Jà: but with no stress..
+  - 12:27:36 Jà: i mean i check when I have them in my hands, or sometimes i check what I have in the wallet
+- **Ginger treanor san antonio tx** (1)
+  - 14:43:06 Ginger treanor san antonio tx: Plz tell me u didnt jump in ocean n drift away...
+
+## 2019-07-29 (41 messaggi rilevanti)
+- **+32 487 38 26 02** (38)
+  - 14:57:59 Jà: heyyy
+  - 14:58:03 Jà: im fine
+  - 14:58:04 Jà: u??
+  - 15:13:11 Jà: yes
+  - 15:13:39 Jà: its the private armachair, with the lock
+  - 15:14:34 Jà: i have put the lock also.. did the hole and put the key mechanism 😂
+  - 15:14:59 Jà: finish things here
+  - 15:15:14 ~Catherine Sauvage: I like your way to stay busy
+- **Chris Souder** (3)
+  - 22:15:07 Jà: hi chris yes
+  - 22:15:12 Jà: i am at home now
+  - 22:17:30 Jà: wooow
+
+## 2019-07-31 (1 messaggi rilevanti)
+- **+32 487 38 26 02** (1)
+  - 16:43:50 Jà: 😘😘😘😘😘
+

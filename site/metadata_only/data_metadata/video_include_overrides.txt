@@ -1,0 +1,5 @@
+# One filename per line. These videos are always kept as real videos.
+IMG_2850.MP4
+IMG_3045.MOV
+IMG_3046.MOV
+IMG_3225(1).MP4

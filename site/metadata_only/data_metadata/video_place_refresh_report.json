@@ -1,0 +1,282 @@
+{
+  "precision": 4,
+  "pauseMs": 900,
+  "targetVideos": 177,
+  "updatedPlaces": 38,
+  "cacheHits": 19,
+  "apiCalls": 158,
+  "apiErrors": 0,
+  "sampleUpdates": [
+    {
+      "id": "ff0d24534996",
+      "orig": "IMG_2861.MOV",
+      "date": "2019-06-03",
+      "time": "13:23",
+      "lat": 45.6896,
+      "lon": 9.590600000000002,
+      "place": "Ponte San Pietro, Italia"
+    },
+    {
+      "id": "2643ed974d26",
+      "orig": "IMG_2945.MOV",
+      "date": "2019-06-06",
+      "time": "13:00",
+      "lat": 43.143499999999996,
+      "lon": -0.48390000000000005,
+      "place": "Buziet, France"
+    },
+    {
+      "id": "3dda64d1a976",
+      "orig": "IMG_2952.MOV",
+      "date": "2019-06-06",
+      "time": "16:22",
+      "lat": 43.1866,
+      "lon": -0.5748,
+      "place": "Précilhon, France"
+    },
+    {
+      "id": "829f9ca02aa7",
+      "orig": "IMG_2953.MOV",
+      "date": "2019-06-06",
+      "time": "16:26",
+      "lat": 43.1879,
+      "lon": -0.5778,
+      "place": "Précilhon, France"
+    },
+    {
+      "id": "b653f500d04e",
+      "orig": "IMG_2954.MOV",
+      "date": "2019-06-06",
+      "time": "16:26",
+      "lat": 43.187999999999995,
+      "lon": -0.5779,
+      "place": "Précilhon, France"
+    },
+    {
+      "id": "a7a95c5db5c3",
+      "orig": "IMG_3003.MOV",
+      "date": "2019-06-07",
+      "time": "16:56",
+      "lat": 43.2403,
+      "lon": -0.7551,
+      "place": "Aren, France"
+    },
+    {
+      "id": "98c207eff95a",
+      "orig": "IMG_3045.MOV",
+      "date": "2019-06-08",
+      "time": "11:06",
+      "lat": 43.217299999999994,
+      "lon": -0.8296,
+      "place": "Chéraute, France"
+    },
+    {
+      "id": "73b80c8d330b",
+      "orig": "IMG_3046.MOV",
+      "date": "2019-06-08",
+      "time": "11:08",
+      "lat": 43.217099999999995,
+      "lon": -0.8297,
+      "place": "Chéraute, France"
+    },
+    {
+      "id": "2a52446dd18f",
+      "orig": "IMG_3065.MOV",
+      "date": "2019-06-08",
+      "time": "17:24",
+      "lat": 43.1751,
+      "lon": -0.9511,
+      "place": "Ordiarp, France"
+    },
+    {
+      "id": "eddbee8b512c",
+      "orig": "IMG_3066.MOV",
+      "date": "2019-06-09",
+      "time": "09:32",
+      "lat": 43.165800000000004,
+      "lon": -1.0158,
+      "place": "Musculdy, France"
+    },
+    {
+      "id": "eda586033093",
+      "orig": "IMG_3074.MOV",
+      "date": "2019-06-09",
+      "time": "12:38",
+      "lat": 43.20700000000001,
+      "lon": -1.0986,
+      "place": "Ibarrolle, France"
+    },
+    {
+      "id": "0dd7e1959bb0",
+      "orig": "IMG_3076.MOV",
+      "date": "2019-06-09",
+      "time": "13:16",
+      "lat": 43.20830000000001,
+      "lon": -1.1141999999999999,
+      "place": "Larceveau, France"
+    },
+    {
+      "id": "9b27a2b27b60",
+      "orig": "IMG_3132.MOV",
+      "date": "2019-06-11",
+      "time": "10:19",
+      "lat": 43.0499,
+      "lon": -1.2679000000000002,
+      "place": "Luzaide / Valcarlos, España"
+    },
+    {
+      "id": "47c0897d95d4",
+      "orig": "IMG_3135.MOV",
+      "date": "2019-06-11",
+      "time": "10:33",
+      "lat": 43.042899999999996,
+      "lon": -1.2715999999999998,
+      "place": "Luzaide / Valcarlos, España"
+    },
+    {
+      "id": "d338b3bdd982",
+      "orig": "IMG_3271.MOV",
+      "date": "2019-06-15",
+      "time": "18:41",
+      "lat": 42.6701,
+      "lon": -2.0296,
+      "place": "Estella-Lizarra, España"
+    },
+    {
+      "id": "173fa855aade",
+      "orig": "IMG_3297.MOV",
+      "date": "2019-06-17",
+      "time": "10:19",
+      "lat": 42.527899999999995,
+      "lon": -2.3242,
+      "place": "Viana, España"
+    },
+    {
+      "id": "a1499d30eb1f",
+      "orig": "IMG_3306.MOV",
+      "date": "2019-06-18",
+      "time": "11:01",
+      "lat": 42.4891,
+      "lon": -2.4194,
+      "place": "Logroño, España"
+    },
+    {
+      "id": "81c1da442892",
+      "orig": "IMG_3568.MOV",
+      "date": "2019-06-25",
+      "time": "06:51",
+      "lat": 42.3422,
+      "lon": -3.8849,
+      "place": "Hornillos del Camino, España"
+    },
+    {
+      "id": "bf3510a41f78",
+      "orig": "IMG_3569.MOV",
+      "date": "2019-06-25",
+      "time": "06:51",
+      "lat": 42.3422,
+      "lon": -3.8849,
+      "place": "Hornillos del Camino, España"
+    },
+    {
+      "id": "a4103c483bdf",
+      "orig": "IMG_3654.MOV",
+      "date": "2019-06-28",
+      "time": "09:21",
+      "lat": 42.336,
+      "lon": -4.7328,
+      "place": "Bustillo del Páramo de Carrión, España"
+    },
+    {
+      "id": "9d9f0f6d5b41",
+      "orig": "IMG_3677.MOV",
+      "date": "2019-06-29",
+      "time": "05:37",
+      "lat": 42.329299999999996,
+      "lon": -4.8065,
+      "place": "Cervatos de la Cueza, España"
+    },
+    {
+      "id": "001512cdcf70",
+      "orig": "IMG_3730.MOV",
+      "date": "2019-07-01",
+      "time": "04:52",
+      "lat": 42.456399999999995,
+      "lon": -5.2885,
+      "place": "Santas Martas, España"
+    },
+    {
+      "id": "f629d542e4bb",
+      "orig": "IMG_3733.MOV",
+      "date": "2019-07-01",
+      "time": "10:32",
+      "lat": 42.5577,
+      "lon": -5.4763,
+      "place": "Valdefresno, España"
+    },
+    {
+      "id": "b6736146c582",
+      "orig": "IMG_3734.MOV",
+      "date": "2019-07-01",
+      "time": "10:51",
+      "lat": 42.5655,
+      "lon": -5.4918,
+      "place": "Valdefresno, España"
+    },
+    {
+      "id": "99d8088b44da",
+      "orig": "IMG_3735.MOV",
+      "date": "2019-07-01",
+      "time": "10:51",
+      "lat": 42.565599999999996,
+      "lon": -5.4918,
+      "place": "Valdefresno, España"
+    },
+    {
+      "id": "cf44a3c79014",
+      "orig": "IMG_3919.MOV",
+      "date": "2019-07-05",
+      "time": "10:29",
+      "lat": 42.4659,
+      "lon": -5.9727,
+      "place": "San Justo de la Vega, España"
+    },
+    {
+      "id": "ba2211e707e5",
+      "orig": "IMG_4008.MOV",
+      "date": "2019-07-07",
+      "time": "12:59",
+      "lat": 42.4895,
+      "lon": -6.4178999999999995,
+      "place": "Molinaseca, España"
+    },
+    {
+      "id": "5becbbf2902b",
+      "orig": "IMG_4009.MOV",
+      "date": "2019-07-07",
+      "time": "13:01",
+      "lat": 42.4888,
+      "lon": -6.4189,
+      "place": "Molinaseca, España"
+    },
+    {
+      "id": "1bcb9cbf86a0",
+      "orig": "IMG_4031.MOV",
+      "date": "2019-07-08",
+      "time": "11:06",
+      "lat": 42.587900000000005,
+      "lon": -6.6826,
+      "place": "Camponaraya, España"
+    },
+    {
+      "id": "9881243f1416",
+      "orig": "IMG_4032.MOV",
+      "date": "2019-07-08",
+      "time": "11:24",
+      "lat": 42.5898,
+      "lon": -6.6918,
+      "place": "Camponaraya, España"
+    }
+  ],
+  "generatedAt": "2026-03-03T19:10:25.793Z"
+}
