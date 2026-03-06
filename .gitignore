@@ -1,6 +1,8 @@
 site/data/*.json
 !site/data/entries.it.json
 !site/data/entries.en.json
+!site/data/entries.es.json
+!site/data/entries.fr.json
 site/data/*.js
 !site/data/.gitkeep
 site/assets/*
