@@ -9,8 +9,16 @@ set -euo pipefail
 #   scripts/prune-deploy.sh deploy-runtime-pruned
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-ROOT_DIR="$(cd "${SCRIPT_DIR}/.." && pwd)"
+ROOT_DIR="$(cd "${SCRIPT_DIR}/../.." && pwd)"
 OUTPUT_DIR="${1:-${ROOT_DIR}/deploy-runtime-pruned}"
+OUTPUT_BASENAME="$(basename "${OUTPUT_DIR}")"
+OUTPUT_PARENT="$(cd "$(dirname "${OUTPUT_DIR}")" && pwd)"
+ROOT_CANONICAL="$(cd "${ROOT_DIR}" && pwd)"
+RSYNC_EXTRA_EXCLUDES=()
+
+if [[ "${OUTPUT_PARENT}" == "${ROOT_CANONICAL}" ]]; then
+  RSYNC_EXTRA_EXCLUDES+=(--exclude "${OUTPUT_BASENAME}/")
+fi
 
 echo "[INFO] Source: ${ROOT_DIR}"
 echo "[INFO] Output: ${OUTPUT_DIR}"
@@ -21,6 +29,7 @@ mkdir -p "${OUTPUT_DIR}"
 rsync -a --delete \
   --exclude ".git/" \
   --exclude ".DS_Store" \
+  "${RSYNC_EXTRA_EXCLUDES[@]}" \
   "${ROOT_DIR}/" "${OUTPUT_DIR}/"
 
 DATA_DIR="${OUTPUT_DIR}/data"
@@ -39,6 +48,7 @@ declare -a KEEP_DATA_ROOT=(
   "entries.fr.json"
   "comments.json"
   "ui_flags.json"
+  "day_og_overrides.json"
   "track_points.json"
   "tracks"
 )
@@ -84,11 +94,18 @@ fi
 # Clean leftover DS_Store files everywhere in output.
 find "${OUTPUT_DIR}" -name ".DS_Store" -type f -delete || true
 
+# Remove any stale static day-page trees: day pages are now rendered live by PHP.
+for lang in it en es fr; do
+  rm -rf "${OUTPUT_DIR}/${lang}/day"
+done
+
 echo "[DONE] Pruned deploy created at: ${OUTPUT_DIR}"
 echo "[INFO] Runtime data kept:"
 echo "  - data/entries.{it,en,es,fr}.json"
 echo "  - data/comments.json"
 echo "  - data/ui_flags.json"
+echo "  - data/day_og_overrides.json"
 echo "  - data/track_points.json"
 echo "  - data/tracks/index.json"
 echo "  - data/tracks/day/*.json (excluding 2019-12-02.json)"
+echo "  - day.php runtime renderer for /{lang}/day/YYYY-MM-DD/"

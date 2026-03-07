@@ -137,6 +137,10 @@ function ui_flags_store_path(): string {
   return dirname(__DIR__) . '/data/ui_flags.json';
 }
 
+function day_og_overrides_store_path(): string {
+  return dirname(__DIR__) . '/data/day_og_overrides.json';
+}
+
 function default_ui_flags(): array {
   return [
     'show_footer_template_cta' => true,
@@ -182,6 +186,52 @@ function save_ui_flags(array $flags): void {
   if (!rename($tmp, $path)) {
     @unlink($tmp);
     throw new RuntimeException('Cannot persist ui flags file');
+  }
+}
+
+function normalize_day_og_overrides(array $raw): array {
+  $normalized = [];
+  foreach ($raw as $day => $value) {
+    $key = substr(trim((string)$day), 0, 10);
+    $mediaId = trim((string)$value);
+    if (preg_match('/^\d{4}-\d{2}-\d{2}$/', $key) && $mediaId !== '') {
+      $normalized[$key] = $mediaId;
+    }
+  }
+  ksort($normalized);
+  return $normalized;
+}
+
+function load_day_og_overrides(): array {
+  $path = day_og_overrides_store_path();
+  if (!is_file($path)) return [];
+  $raw = file_get_contents($path);
+  if ($raw === false || trim($raw) === '') return [];
+  $decoded = json_decode($raw, true);
+  if (!is_array($decoded)) return [];
+  return normalize_day_og_overrides($decoded);
+}
+
+function save_day_og_overrides(array $overrides): void {
+  $path = day_og_overrides_store_path();
+  $dir = dirname($path);
+  if (!is_dir($dir)) {
+    if (!mkdir($dir, 0775, true) && !is_dir($dir)) {
+      throw new RuntimeException('Cannot create data directory');
+    }
+  }
+  $normalized = normalize_day_og_overrides($overrides);
+  $json = json_encode($normalized, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+  if ($json === false) {
+    throw new RuntimeException('Cannot encode day og overrides');
+  }
+  $tmp = $path . '.tmp';
+  if (file_put_contents($tmp, $json . PHP_EOL, LOCK_EX) === false) {
+    throw new RuntimeException('Cannot write temporary day og overrides file');
+  }
+  if (!rename($tmp, $path)) {
+    @unlink($tmp);
+    throw new RuntimeException('Cannot persist day og overrides file');
   }
 }
 
@@ -575,6 +625,31 @@ if ($path === '/admin/settings') {
       respond(500, ['error' => 'Cannot persist settings', 'detail' => api_debug_enabled() ? $e->getMessage() : null]);
     }
     respond(200, ['ok' => true, 'settings' => $next]);
+  }
+  respond(405, ['error' => 'Method not allowed']);
+}
+
+if ($path === '/admin/day-og-overrides') {
+  require_admin_auth();
+  if ($method === 'GET') {
+    respond(200, ['overrides' => load_day_og_overrides()]);
+  }
+  if ($method === 'POST') {
+    $payload = read_json_body();
+    $incoming = [];
+    if (isset($payload['overrides']) && is_array($payload['overrides'])) {
+      $incoming = $payload['overrides'];
+    } elseif (is_array($payload)) {
+      $incoming = $payload;
+    }
+    $next = normalize_day_og_overrides(is_array($incoming) ? $incoming : []);
+    try {
+      save_day_og_overrides($next);
+    } catch (Throwable $e) {
+      api_log_error('admin/day-og-overrides/save', $e);
+      respond(500, ['error' => 'Cannot persist day og overrides', 'detail' => api_debug_enabled() ? $e->getMessage() : null]);
+    }
+    respond(200, ['ok' => true, 'overrides' => $next]);
   }
   respond(405, ['error' => 'Method not allowed']);
 }

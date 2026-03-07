@@ -132,12 +132,69 @@
       margin-top: 6px;
       min-height: 1.2em;
     }
+    .og-controls {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+    .og-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 10px;
+    }
+    .og-card {
+      border: 1px solid rgba(31, 26, 22, 0.12);
+      border-radius: 10px;
+      background: #fff;
+      padding: 8px;
+      cursor: pointer;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+    }
+    .og-card:hover {
+      border-color: rgba(31, 95, 91, 0.42);
+      transform: translateY(-1px);
+    }
+    .og-card.is-selected {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px rgba(31, 95, 91, 0.15);
+    }
+    .og-card img {
+      width: 100%;
+      aspect-ratio: 1.91 / 1;
+      object-fit: cover;
+      border-radius: 8px;
+      display: block;
+      background: rgba(31, 26, 22, 0.06);
+    }
+    .og-card__title {
+      margin-top: 8px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      line-height: 1.3;
+    }
+    .og-card__meta {
+      margin-top: 4px;
+      font-size: 0.76rem;
+      color: var(--muted);
+      line-height: 1.35;
+      word-break: break-word;
+    }
+    .og-empty {
+      color: var(--muted);
+      font-size: 0.9rem;
+      padding: 12px 0;
+    }
     @media (max-width: 900px) {
       .controls {
         grid-template-columns: 1fr;
       }
       .comment-text {
         max-width: 260px;
+      }
+      .og-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
     }
   </style>
@@ -177,6 +234,19 @@
         <button id="save-settings-btn" class="btn-primary" type="button">Salva impostazioni</button>
         <span id="settings-status" style="font-size:0.9rem;color:#6f6156;"></span>
       </div>
+    </div>
+
+    <div class="card">
+      <h3 style="margin:0 0 10px;">OG image pagine giorno</h3>
+      <div class="og-controls">
+        <select id="day-og-day-select">
+          <option value="">Seleziona un giorno</option>
+        </select>
+        <button id="save-day-og-btn" class="btn-primary" type="button">Salva immagine</button>
+        <button id="reset-day-og-btn" type="button">Ripristina default home</button>
+        <span id="day-og-status" style="font-size:0.9rem;color:#6f6156;"></span>
+      </div>
+      <div id="day-og-grid" class="og-grid"></div>
     </div>
 
     <div class="card">
@@ -250,7 +320,18 @@
     const settingShowFooterTemplateCta = document.getElementById('setting-show-footer-template-cta');
     const saveSettingsBtn = document.getElementById('save-settings-btn');
     const settingsStatusEl = document.getElementById('settings-status');
+    const dayOgDaySelect = document.getElementById('day-og-day-select');
+    const dayOgGrid = document.getElementById('day-og-grid');
+    const dayOgStatusEl = document.getElementById('day-og-status');
+    const saveDayOgBtn = document.getElementById('save-day-og-btn');
+    const resetDayOgBtn = document.getElementById('reset-day-og-btn');
     const STORAGE_KEY = 'cammino_admin_token_v1';
+    const HOME_OG_IMAGE = '/assets/og-image.jpg';
+    const DAY_OG_ENTRIES_PATH = '/data/entries.it.json';
+    let entriesDays = [];
+    let dayOgOverrides = {};
+    let selectedDayOgId = '';
+    let selectedDayOgDate = '';
 
     const escapeHtml = (value) => String(value || '')
       .replace(/&/g, '&amp;')
@@ -280,8 +361,152 @@
       settingsStatusEl.textContent = msg || '';
       settingsStatusEl.style.color = isError ? '#9f1b1b' : '#6f6156';
     };
+    const setDayOgStatus = (msg, isError = false) => {
+      if (!dayOgStatusEl) return;
+      dayOgStatusEl.textContent = msg || '';
+      dayOgStatusEl.style.color = isError ? '#9f1b1b' : '#6f6156';
+    };
 
     const getToken = () => String(tokenInput.value || '').trim();
+
+    const normalizeAssetUrl = (value) => {
+      const raw = String(value || '').trim();
+      if (!raw) return '';
+      if (/^(?:[a-z]+:)?\/\//i.test(raw) || raw.startsWith('data:') || raw.startsWith('blob:')) return raw;
+      return raw.startsWith('/') ? raw : `/${raw.replace(/^\.?\//, '')}`;
+    };
+
+    const buildAssetPreview = (item) => {
+      if (!item || typeof item !== 'object') return '';
+      if (String(item.type || '') === 'video') {
+        return normalizeAssetUrl(item.poster || item.thumb || item.src);
+      }
+      return normalizeAssetUrl(item.thumb || item.src || item.poster);
+    };
+
+    const formatDayLabel = (date) => {
+      const ts = Date.parse(`${String(date || '')}T12:00:00Z`);
+      if (Number.isNaN(ts)) return String(date || '');
+      return new Intl.DateTimeFormat('it-IT', {
+        day: '2-digit',
+        month: 'long',
+        year: 'numeric',
+        timeZone: 'UTC'
+      }).format(new Date(ts));
+    };
+
+    const getSelectedDay = () => {
+      const wanted = String(dayOgDaySelect && dayOgDaySelect.value ? dayOgDaySelect.value : '').trim();
+      if (!wanted) return null;
+      return entriesDays.find((day) => String(day && day.date ? day.date : '') === wanted) || null;
+    };
+
+    const populateDayOgSelect = () => {
+      if (!dayOgDaySelect) return;
+      const previous = String(dayOgDaySelect.value || '').trim();
+      const options = ['<option value="">Seleziona un giorno</option>'];
+      entriesDays.forEach((day) => {
+        const date = String(day && day.date ? day.date : '');
+        if (!date) return;
+        options.push(`<option value="${escapeHtml(date)}">${escapeHtml(formatDayLabel(date))}</option>`);
+      });
+      dayOgDaySelect.innerHTML = options.join('');
+      if (previous && entriesDays.some((day) => String(day.date) === previous)) {
+        dayOgDaySelect.value = previous;
+      } else if (!previous && entriesDays[0]) {
+        dayOgDaySelect.value = String(entriesDays[0].date || '');
+      }
+    };
+
+    const renderDayOgGrid = (preserveSelection = false) => {
+      if (!dayOgGrid) return;
+      const day = getSelectedDay();
+      if (!day) {
+        selectedDayOgId = '';
+        selectedDayOgDate = '';
+        dayOgGrid.innerHTML = '<div class="og-empty">Seleziona un giorno per scegliere l’immagine social della pagina.</div>';
+        return;
+      }
+      const overrideId = String(dayOgOverrides[day.date] || '').trim();
+      if (!preserveSelection || selectedDayOgDate !== day.date) {
+        selectedDayOgId = overrideId;
+      }
+      selectedDayOgDate = day.date;
+      const items = Array.isArray(day.items) ? day.items.filter((item) => String(item && item.id ? item.id : '').trim()) : [];
+      const cards = [];
+      cards.push(`
+        <button class="og-card${overrideId ? '' : ' is-selected'}" type="button" data-og-id="">
+          <img src="${escapeHtml(HOME_OG_IMAGE)}" alt="OG home default" loading="lazy" />
+          <div class="og-card__title">Default home</div>
+          <div class="og-card__meta">Usa sempre /assets/og-image.jpg per questo giorno.</div>
+        </button>
+      `);
+      items.forEach((item) => {
+        const id = String(item.id || '').trim();
+        const preview = buildAssetPreview(item) || HOME_OG_IMAGE;
+        const meta = [
+          item.type === 'video' ? 'Video' : 'Foto',
+          item.time || '',
+          item.place || '',
+        ].filter(Boolean).join(' · ');
+        cards.push(`
+          <button class="og-card${selectedDayOgId === id ? ' is-selected' : ''}" type="button" data-og-id="${escapeHtml(id)}">
+            <img src="${escapeHtml(preview)}" alt="${escapeHtml(id)}" loading="lazy" />
+            <div class="og-card__title">${escapeHtml(id)}</div>
+            <div class="og-card__meta">${escapeHtml(meta || 'Asset del giorno')}</div>
+          </button>
+        `);
+      });
+      dayOgGrid.innerHTML = cards.length ? cards.join('') : '<div class="og-empty">Nessun asset selezionabile per questo giorno.</div>';
+    };
+
+    const loadDayOgConfig = async () => {
+      if (!entriesDays.length) {
+        const entriesResponse = await fetch(DAY_OG_ENTRIES_PATH, { cache: 'no-store' });
+        if (!entriesResponse.ok) {
+          const text = await entriesResponse.text();
+          throw new Error(text || `HTTP ${entriesResponse.status}`);
+        }
+        const entriesPayload = await entriesResponse.json();
+        entriesDays = Array.isArray(entriesPayload && entriesPayload.days) ? entriesPayload.days : [];
+        populateDayOgSelect();
+      }
+      setDayOgStatus('Caricamento override OG...');
+      const response = await fetch('/api/admin/day-og-overrides', { cache: 'no-store' });
+      if (!response.ok) {
+        const text = await response.text();
+        throw new Error(text || `HTTP ${response.status}`);
+      }
+      const payload = await response.json();
+      dayOgOverrides = (payload && payload.overrides && typeof payload.overrides === 'object') ? payload.overrides : {};
+      renderDayOgGrid(false);
+      setDayOgStatus('Override OG caricati.');
+    };
+
+    const saveDayOgOverride = async () => {
+      const day = getSelectedDay();
+      if (!day) {
+        setDayOgStatus('Seleziona prima un giorno.', true);
+        return;
+      }
+      const next = { ...dayOgOverrides };
+      if (selectedDayOgId) next[day.date] = selectedDayOgId;
+      else delete next[day.date];
+      setDayOgStatus('Salvataggio override OG...');
+      const response = await fetch('/api/admin/day-og-overrides', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ overrides: next }),
+      });
+      if (!response.ok) {
+        const text = await response.text();
+        throw new Error(text || `HTTP ${response.status}`);
+      }
+      const payload = await response.json();
+      dayOgOverrides = (payload && payload.overrides && typeof payload.overrides === 'object') ? payload.overrides : next;
+      renderDayOgGrid(false);
+      setDayOgStatus(selectedDayOgId ? 'Immagine OG salvata.' : 'Ripristinato il default home.');
+    };
 
     const checkSession = async () => {
       const response = await fetch('/api/admin/session', { cache: 'no-store' });
@@ -385,6 +610,7 @@
         const payload = await fetchAdminComments();
         if (!payload) return;
         await loadSettings();
+        await loadDayOgConfig();
         renderStats(payload || {});
         renderRows(payload && payload.comments);
         await refreshAnalytics();
@@ -562,6 +788,36 @@
         } catch (err) {
           setSettingsStatus(`Salvataggio fallito: ${err.message || err}`, true);
         }
+      });
+    }
+    if (dayOgGrid) {
+      dayOgGrid.addEventListener('click', (event) => {
+        const btn = event.target.closest('[data-og-id]');
+        if (!btn) return;
+        selectedDayOgId = String(btn.dataset.ogId || '').trim();
+        renderDayOgGrid(true);
+      });
+    }
+    if (dayOgDaySelect) {
+      dayOgDaySelect.addEventListener('change', () => {
+        renderDayOgGrid(false);
+        setDayOgStatus('');
+      });
+    }
+    if (saveDayOgBtn) {
+      saveDayOgBtn.addEventListener('click', async () => {
+        try {
+          await saveDayOgOverride();
+        } catch (err) {
+          setDayOgStatus(`Salvataggio fallito: ${err.message || err}`, true);
+        }
+      });
+    }
+    if (resetDayOgBtn) {
+      resetDayOgBtn.addEventListener('click', () => {
+        selectedDayOgId = '';
+        renderDayOgGrid(true);
+        setDayOgStatus('Default home selezionato. Premi salva per confermare.');
       });
     }
     searchInput.addEventListener('keydown', (event) => {

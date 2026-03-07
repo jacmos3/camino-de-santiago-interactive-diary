@@ -1298,6 +1298,13 @@ const formatDateNoWeekday = (dateStr) => {
   return fmt.format(date);
 };
 
+const formatTimelineChipDate = (dateStr) => {
+  const value = String(dateStr || '').slice(0, 10);
+  const parts = value.split('-');
+  if (parts.length !== 3) return value;
+  return `${parts[2]}/${parts[1]}`;
+};
+
 const DAY_ZERO_DATE = '2019-06-04';
 const PROLOGUE_DATES = ['2019-06-02', '2019-06-03'];
 const PROLOGUE_TRACK_DATE = '2019-06-03';
@@ -3988,11 +3995,17 @@ const buildTimelineNav = (days) => {
   nav.innerHTML = '';
   days.forEach((day, idx) => {
     const btn = document.createElement('button');
+    btn.type = 'button';
     if (isPrologueDay(day)) {
       btn.textContent = I18N[currentLang].prologue_label;
     } else {
       const num = getCamminoDayNumber(day.date);
-      btn.textContent = num ? `${I18N[currentLang].day_label} ${num}` : formatDate(day.date);
+      const primary = formatTimelineChipDate(day.date);
+      const secondary = num ? `${I18N[currentLang].day_label} ${num}` : '';
+      btn.innerHTML = `
+        <span class="timeline-nav__primary">${escapeHtml(primary)}</span>
+        ${secondary ? `<span class="timeline-nav__secondary">${escapeHtml(secondary)}</span>` : ''}
+      `;
     }
     btn.addEventListener('click', () => {
       document.getElementById(`day-${day.date}`).scrollIntoView({ behavior: 'smooth' });
