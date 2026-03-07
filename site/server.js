@@ -86,6 +86,7 @@ const MIME = {
 
 let deleteInFlight = false;
 const COMMENTS_PATH = path.join(ROOT, 'data', 'comments.json');
+const DAY_OG_OVERRIDES_PATH = path.join(ROOT, 'data', 'day_og_overrides.json');
 const COMMENTS_MAX_TEXT = 1200;
 const COMMENTS_MAX_AUTHOR = 80;
 const ADMIN_TOKEN = String(process.env.ADMIN_TOKEN || process.env.COMMENTS_ADMIN_TOKEN || 'CHANGE_ME');
@@ -174,12 +175,120 @@ function firstTextParagraph(markdown, maxLen = 220) {
   return `${text.slice(0, maxLen - 1).trim()}…`;
 }
 
+function truncateText(text, maxLen = 160) {
+  const value = String(text || '').replace(/\s+/g, ' ').trim();
+  if (!value) return '';
+  if (value.length <= maxLen) return value;
+  return `${value.slice(0, maxLen - 1).trim()}…`;
+}
+
+function parseNoteSections(markdown) {
+  const lines = String(markdown || '').replace(/\r/g, '').split('\n');
+  const sections = [];
+  let current = null;
+  const pushCurrent = () => {
+    if (!current) return;
+    const body = current.lines.join(' ').replace(/\s+/g, ' ').trim();
+    sections.push({ heading: current.heading, body });
+  };
+  lines.forEach((line) => {
+    const headingMatch = String(line || '').trim().match(/^\*\*([^*]+)\*\*$/);
+    if (headingMatch) {
+      pushCurrent();
+      current = { heading: String(headingMatch[1] || '').trim(), lines: [] };
+      return;
+    }
+    if (!current) return;
+    const clean = String(line || '').trim();
+    if (clean) current.lines.push(clean);
+  });
+  pushCurrent();
+  return sections;
+}
+
+function firstSentence(text) {
+  const value = String(text || '').replace(/\s+/g, ' ').trim();
+  if (!value) return '';
+  const match = value.match(/^(.+?[.!?])(?:\s|$)/);
+  return match ? String(match[1] || '').trim() : value;
+}
+
+function buildDaySeoTitle(day, lang, ui) {
+  const date = String(day && day.date ? day.date : '');
+  const displayDate = formatDisplayDate(date, lang);
+  const sections = parseNoteSections(day && day.notes ? day.notes : '');
+  const title = String((sections[0] && sections[0].body) || '').trim();
+  if (title) return `${title} | ${displayDate} | ${ui.titlePrefix}`;
+  return `${ui.titlePrefix} · ${date}`;
+}
+
+function buildDaySeoDescription(day, lang, ui) {
+  const sections = parseNoteSections(day && day.notes ? day.notes : '');
+  const title = String((sections[0] && sections[0].body) || '').trim();
+  const stage = String((sections[1] && sections[1].body) || '').trim();
+  const scene = firstSentence((sections[2] && sections[2].body) || '');
+  const parts = [title, stage, scene].filter(Boolean);
+  const composed = truncateText(parts.join(' — '), 160);
+  return composed || ui.defaultDescription(String(day && day.date ? day.date : ''));
+}
+
 function normalizeImageCandidate(item) {
   if (!item || typeof item !== 'object') return '';
   const thumb = mediaPath(item, 'thumb');
   const src = mediaPath(item, 'src');
   const poster = mediaPath(item, 'poster');
   return thumb || poster || src;
+}
+
+async function readDayOgOverrides() {
+  try {
+    const raw = await fs.readFile(DAY_OG_OVERRIDES_PATH, 'utf8');
+    const parsed = JSON.parse(raw);
+    if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) return {};
+    const out = {};
+    Object.entries(parsed).forEach(([day, value]) => {
+      const key = String(day || '').slice(0, 10);
+      const mediaId = String(value || '').trim();
+      if (/^\d{4}-\d{2}-\d{2}$/.test(key) && mediaId) out[key] = mediaId;
+    });
+    return out;
+  } catch {
+    return {};
+  }
+}
+
+async function writeDayOgOverrides(overrides) {
+  const normalized = {};
+  Object.entries(overrides || {}).forEach(([day, value]) => {
+    const key = String(day || '').slice(0, 10);
+    const mediaId = String(value || '').trim();
+    if (/^\d{4}-\d{2}-\d{2}$/.test(key) && mediaId) normalized[key] = mediaId;
+  });
+  await fs.mkdir(path.dirname(DAY_OG_OVERRIDES_PATH), { recursive: true });
+  await fs.writeFile(DAY_OG_OVERRIDES_PATH, `${JSON.stringify(normalized, null, 2)}\n`, 'utf8');
+}
+
+function normalizeDayOgOverrides(raw) {
+  const normalized = {};
+  Object.entries(raw || {}).forEach(([day, value]) => {
+    const key = String(day || '').trim().slice(0, 10);
+    const mediaId = String(value || '').trim();
+    if (/^\d{4}-\d{2}-\d{2}$/.test(key) && mediaId) normalized[key] = mediaId;
+  });
+  return normalized;
+}
+
+function resolveDayOgImagePath(day, overrides) {
+  const date = String(day && day.date ? day.date : '').slice(0, 10);
+  const items = Array.isArray(day && day.items) ? day.items : [];
+  const overrideId = String(overrides && overrides[date] ? overrides[date] : '').trim();
+  if (!overrideId) return '/assets/og-image.jpg';
+  const item = items.find((entry) => String(entry && entry.id ? entry.id : '') === overrideId);
+  if (!item) return '/assets/og-image.jpg';
+  if (String(item.type || '') === 'video') {
+    return mediaPath(item, 'poster', date) || mediaPath(item, 'thumb', date) || '/assets/og-image.jpg';
+  }
+  return mediaPath(item, 'src', date) || mediaPath(item, 'thumb', date) || '/assets/og-image.jpg';
 }
 
 function normalizeAssetPathByItem(item, field, fallbackDate = '') {
@@ -426,7 +535,7 @@ function renderRecommendations(recommendations) {
   return `<section class="day-section"><h2>__RECOMMENDATIONS_HEADING__</h2><ul>${items}</ul></section>`;
 }
 
-function buildDayPageHtml({ origin, lang, day, prevDay, nextDay }) {
+function buildDayPageHtml({ origin, lang, day, prevDay, nextDay, dayOgOverrides }) {
   const DAY_UI = {
     it: {
       titlePrefix: 'Diario Cammino',
@@ -551,11 +660,10 @@ function buildDayPageHtml({ origin, lang, day, prevDay, nextDay }) {
   const altEsUrl = buildAbsoluteUrl(origin, `/es/day/${date}/`);
   const altFrUrl = buildAbsoluteUrl(origin, `/fr/day/${date}/`);
   const diaryUrl = buildAbsoluteUrl(origin, `/${lang}/?day=${encodeURIComponent(date)}`);
-  const titlePrefix = ui.titlePrefix;
-  const pageTitle = `${titlePrefix} · ${date}`;
-  const description = firstTextParagraph(day && day.notes, 240) || ui.defaultDescription(date);
+  const pageTitle = buildDaySeoTitle(day, lang, ui);
+  const description = buildDaySeoDescription(day, lang, ui);
   const items = Array.isArray(day && day.items) ? day.items : [];
-  const ogImagePath = normalizeImageCandidate(items.find((entry) => entry && (entry.type === 'image' || entry.type === 'video')) || null);
+  const ogImagePath = resolveDayOgImagePath(day, dayOgOverrides || {});
   const ogImageUrl = ogImagePath ? buildAbsoluteUrl(origin, `/${String(ogImagePath).replace(/^\/+/, '')}`) : '';
   const noteHtml = markdownToSafeHtml(day && day.notes ? day.notes : '');
   const recommendationsHtml = renderRecommendations(day && day.recommendations)
@@ -1048,8 +1156,7 @@ function buildDayPageHtml({ origin, lang, day, prevDay, nextDay }) {
 </html>`;
 }
 
-async function buildSitemapXml(req) {
-  const origin = getRequestOrigin(req);
+async function buildSitemapXmlForOrigin(origin) {
   const itEntries = await readEntriesByLang('it');
   const days = Array.isArray(itEntries && itEntries.days) ? itEntries.days : [];
   const urls = [];
@@ -1147,6 +1254,39 @@ async function buildSitemapXml(req) {
     push(`/fr/day/${date}/`, date, '0.7', 'monthly', images, dayAlt);
   }
   return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n${urls.join('\n')}\n</urlset>\n`;
+}
+
+async function buildSitemapXml(req) {
+  return buildSitemapXmlForOrigin(getRequestOrigin(req));
+}
+
+async function generateStaticDayPages({ outputRoot, origin }) {
+  const targetRoot = path.resolve(String(outputRoot || '').trim() || ROOT);
+  const siteOrigin = String(origin || '').trim().replace(/\/+$/, '') || 'https://mycamino.semproxlab.it';
+  const langs = ['it', 'en', 'es', 'fr'];
+  const dayOgOverrides = await readDayOgOverrides();
+  for (const lang of langs) {
+    const entries = await readEntriesByLang(lang);
+    const days = Array.isArray(entries && entries.days) ? entries.days : [];
+    for (let index = 0; index < days.length; index += 1) {
+      const day = days[index];
+      const date = String(day && day.date ? day.date : '').trim();
+      if (!date) continue;
+      const prevDay = index > 0 ? days[index - 1] : null;
+      const nextDay = index < days.length - 1 ? days[index + 1] : null;
+      const html = buildDayPageHtml({
+        origin: siteOrigin,
+        lang,
+        day,
+        prevDay,
+        nextDay,
+        dayOgOverrides
+      });
+      const dayDir = path.join(targetRoot, lang, 'day', date);
+      await fs.mkdir(dayDir, { recursive: true });
+      await fs.writeFile(path.join(dayDir, 'index.html'), html, 'utf8');
+    }
+  }
 }
 
 function getRequestOrigin(req) {
@@ -1604,6 +1744,36 @@ async function handleAdminDeleteComment(req, res) {
   }
 }
 
+async function handleAdminGetDayOgOverrides(req, res) {
+  try {
+    const urlObj = new URL(req.url || '/', `http://${HOST}:${PORT}`);
+    if (!ensureAdmin(req, res, urlObj)) return;
+    const overrides = await readDayOgOverrides();
+    sendJson(res, 200, { overrides });
+  } catch (err) {
+    sendJson(res, 500, { error: err.message || String(err) });
+  }
+}
+
+async function handleAdminSaveDayOgOverrides(req, res) {
+  try {
+    const urlObj = new URL(req.url || '/', `http://${HOST}:${PORT}`);
+    if (!ensureAdmin(req, res, urlObj)) return;
+    const payload = await parseJsonBody(req, 256 * 1024);
+    let overrides = {};
+    if (payload && payload.overrides && typeof payload.overrides === 'object' && !Array.isArray(payload.overrides)) {
+      overrides = payload.overrides;
+    } else if (payload && typeof payload === 'object' && !Array.isArray(payload)) {
+      overrides = payload;
+    }
+    const normalized = normalizeDayOgOverrides(overrides);
+    await writeDayOgOverrides(normalized);
+    sendJson(res, 200, { ok: true, overrides: normalized });
+  } catch (err) {
+    sendJson(res, 500, { error: err.message || String(err) });
+  }
+}
+
 function isInsideRoot(filePath) {
   return filePath.startsWith(ROOT + path.sep) || filePath === ROOT;
 }
@@ -1886,6 +2056,7 @@ async function serveStatic(req, res, requestPath = null, locale = '') {
 async function serveDayPage(req, res, lang, date) {
   try {
     const entries = await readEntriesByLang(lang);
+    const dayOgOverrides = await readDayOgOverrides();
     const days = Array.isArray(entries && entries.days) ? entries.days : [];
     const index = days.findIndex((day) => String(day && day.date ? day.date : '') === date);
     if (index < 0) {
@@ -1901,7 +2072,8 @@ async function serveDayPage(req, res, lang, date) {
       lang,
       day,
       prevDay,
-      nextDay
+      nextDay,
+      dayOgOverrides
     });
     res.writeHead(200, {
       'Content-Type': 'text/html; charset=utf-8',
@@ -1965,6 +2137,14 @@ const server = http.createServer(async (req, res) => {
   }
   if (req.method === 'POST' && req.url.split('?')[0] === '/api/admin/comments/delete') {
     await handleAdminDeleteComment(req, res);
+    return;
+  }
+  if (req.method === 'GET' && req.url.split('?')[0] === '/api/admin/day-og-overrides') {
+    await handleAdminGetDayOgOverrides(req, res);
+    return;
+  }
+  if (req.method === 'POST' && req.url.split('?')[0] === '/api/admin/day-og-overrides') {
+    await handleAdminSaveDayOgOverrides(req, res);
     return;
   }
 
@@ -2069,6 +2249,16 @@ const server = http.createServer(async (req, res) => {
   await serveStatic(req, res, staticPath, localeInfo.locale);
 });
 
-server.listen(PORT, HOST, () => {
-  console.log(`Server running at http://${HOST}:${PORT}`);
-});
+module.exports = {
+  buildDayPageHtml,
+  buildSitemapXmlForOrigin,
+  generateStaticDayPages,
+  readDayOgOverrides,
+  readEntriesByLang
+};
+
+if (require.main === module) {
+  server.listen(PORT, HOST, () => {
+    console.log(`Server running at http://${HOST}:${PORT}`);
+  });
+}

@@ -490,11 +490,29 @@ h1, h2, h3 {
   border-radius: 999px;
   cursor: pointer;
   white-space: nowrap;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+  min-width: 74px;
+  line-height: 1.05;
 }
 
 .timeline-nav__inner button.active {
   background: var(--accent);
   color: #fffaf2;
+}
+
+.timeline-nav__primary {
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.timeline-nav__secondary {
+  font-size: 0.68rem;
+  opacity: 0.7;
+  font-weight: 600;
 }
 
 .timeline-people {
@@ -2218,6 +2236,16 @@ h1, h2, h3 {
     order: 1;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
+  }
+  .timeline-nav__inner button {
+    min-width: 78px;
+    padding: 9px 12px;
+  }
+  .timeline-nav__primary {
+    font-size: 0.92rem;
+  }
+  .timeline-nav__secondary {
+    font-size: 0.66rem;
   }
   .timeline-nav__actions {
     width: 100%;
