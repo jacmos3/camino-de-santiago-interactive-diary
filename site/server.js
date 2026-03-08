@@ -38,7 +38,10 @@ const SITE_AUTHOR = 'Jacopo';
 const OG_IMAGE_WIDTH = 1200;
 const OG_IMAGE_HEIGHT = 630;
 const OG_IMAGE_TYPE = 'image/jpeg';
+const PROLOGUE_DATES = ['2019-06-02', '2019-06-03'];
+const PROLOGUE_TRACK_DATE = '2019-06-03';
 const DAY_PAGE_PATH_RE = /^\/(it|en|es|fr)\/day\/(\d{4}-\d{2}-\d{2})\/?$/i;
+const PROLOGUE_PAGE_PATH_RE = /^\/(it|en|es|fr)\/prologue\/?$/i;
 const MAP_PAGE_PATH_RE = /^\/(it|en|es|fr)\/map\/?$/i;
 const PEOPLE_PAGE_PATH_RE = /^\/(it|en|es|fr)\/people\/?$/i;
 const CONTACT_PAGE_PATH_RE = /^\/(it|en|es|fr)\/contatti\/?$/i;
@@ -230,6 +233,109 @@ function buildDaySeoDescription(day, lang, ui) {
   const parts = [title, stage, scene].filter(Boolean);
   const composed = truncateText(parts.join(' — '), 160);
   return composed || ui.defaultDescription(String(day && day.date ? day.date : ''));
+}
+
+function buildPrologueNarrative(lang = 'it') {
+  if (lang === 'en') {
+    return [
+      '**Title**',
+      'Prologue: leaving before leaving.',
+      '',
+      '**Where I was / stage**',
+      'June 2 and 3 were the approach days: from Perugia to Bergamo, then an evening flight to Lourdes.',
+      '',
+      '**Key scene**',
+      'The Camino started before the trail. On June 2 I went from Perugia to Milan with a friend who was heading to Milan that same day; along the way we had picked up other people through BlaBlaCar, and the trip passed quickly through interesting conversations. Then I continued from Milan to Bergamo by train to reach friends who would host me for one night. For the Camino I had considered bringing a tent, but in the hours right before departure, while I was packing my backpack, I realized it would be too bulky and heavy for the backpack balance, so I did not bring it and kept only the sleeping bag in my backpack. On the morning of June 3, in Bergamo, I went for a bike ride: light air, slow pace, and at the end of a path, near a stagnant stretch of the Brembo River, I encountered donkeys. In the evening I took the flight: I landed in Lourdes late and had not organized accommodation. I could not find a place to sleep, and every place I reached was already closed or had no reception. It was objectively worrying because I really had nowhere to stay for the night, but I was not anxious at all: I had the sleeping bag and had no problem sleeping outside, homeless style. From that point on, it was no longer preparation, it was the real start.',
+      '',
+      '**What I understood**',
+      'The first step of the Camino does not coincide with the first kilometer on foot: it begins in logistical choices, in waiting, and in the way you prepare yourself for the journey.',
+      '',
+      '**Practical note**',
+      'Transfer Perugia-Milan by BlaBlaCar, Milan-Bergamo by train, night in Bergamo hosted by friends, then evening flight on June 3.'
+    ].join('\n');
+  }
+  if (lang === 'es') {
+    return [
+      '**Título**',
+      'Prólogo: partir antes de partir.',
+      '',
+      '**Dónde estaba / etapa**',
+      'El 2 y el 3 de junio fueron los días de aproximación: de Perugia a Bérgamo, luego vuelo nocturno hacia Lourdes.',
+      '',
+      '**Escena clave**',
+      'El camino empezó antes del sendero. El 2 de junio hice Perugia-Milán con un amigo que iba a Milán ese mismo día; durante el viaje habíamos recogido a otras personas con BlaBlaCar y el trayecto pasó rápido entre conversaciones interesantes. Luego seguí de Milán a Bérgamo en tren para llegar a unos amigos que me alojarían una noche. Para el camino había pensado llevar tienda, pero en las horas previas a la salida, justo mientras preparaba la mochila, entendí que sería demasiado voluminosa y pesada para el equilibrio de la mochila, así que no la llevé, dejando en la mochila solo el saco de dormir. La mañana del 3, en Bérgamo, di una vuelta en bici: aire ligero, ritmo lento, y al final de un sendero, cerca de un estancamiento del río Brembo, me encontré con unos burros. Por la tarde tomé el vuelo: aterricé en Lourdes tarde y no había organizado alojamiento. No conseguía encontrar dónde dormir y los sitios que encontraba, cuando llegaba, estaban todos cerrados o sin recepción. Era preocupante, porque no tenía realmente dónde pasar la noche, pero no estaba nada ansioso: tenía el saco de dormir y no tenía ningún problema en dormir fuera, homeless style. Desde ahí ya no era preparación, era el inicio real.',
+      '',
+      '**Una cosa que entendí**',
+      'El primer paso del camino no coincide con el primer kilómetro a pie: empieza en las decisiones logísticas, en la espera y en cómo te preparas para el viaje.',
+      '',
+      '**Nota práctica**',
+      'Traslado Perugia-Milán con BlaBlaCar, tren Milán-Bérgamo, noche en Bérgamo con amigos y luego vuelo nocturno del 3 de junio.'
+    ].join('\n');
+  }
+  if (lang === 'fr') {
+    return [
+      '**Titre**',
+      'Prologue : partir avant de partir.',
+      '',
+      '**Où j’étais / étape**',
+      'Les 2 et 3 juin ont été les jours d’approche : de Pérouse à Bergame, puis vol du soir vers Lourdes.',
+      '',
+      '**Scène clé**',
+      'Le chemin a commencé avant le sentier. Le 2 juin, j’ai fait Pérouse-Milan avec un ami qui allait à Milan ce jour-là ; pendant le trajet, nous avions pris d’autres personnes via BlaBlaCar, et le voyage est passé vite entre discussions intéressantes. Ensuite, j’ai continué de Milan à Bergame en train pour rejoindre des amis qui m’hébergeaient une nuit. Pour le chemin, j’avais envisagé d’emporter une tente, mais dans les heures avant le départ, au moment de préparer mon sac, j’ai compris qu’elle serait trop encombrante et trop lourde pour l’équilibre du sac ; je ne l’ai donc pas prise, en gardant seulement le sac de couchage dans le sac. Le matin du 3, à Bergame, j’ai fait un tour à vélo : air léger, rythme lent, et au bout d’un sentier, près d’une retenue stagnante de la rivière Brembo, j’ai croisé des ânes. Le soir, j’ai pris l’avion : je suis arrivé tard à Lourdes et je n’avais pas organisé d’hébergement. Je n’arrivais pas à trouver où dormir et les lieux que je trouvais, une fois sur place, étaient déjà fermés ou sans réception. C’était inquiétant, parce que je n’avais pas réellement d’endroit pour la nuit, mais je n’étais pas du tout anxieux : j’avais le sac de couchage et je n’avais aucun problème à dormir dehors, homeless style. À partir de là, ce n’était plus de la préparation, c’était le vrai début.',
+      '',
+      '**Ce que j’ai compris**',
+      'Le premier pas du chemin ne coïncide pas avec le premier kilomètre à pied : il commence dans les choix logistiques, dans l’attente et dans la manière de se disposer au voyage.',
+      '',
+      '**Note pratique**',
+      'Trajet Pérouse-Milan en BlaBlaCar, train Milan-Bergame, nuit à Bergame chez des amis, puis vol du soir du 3 juin.'
+    ].join('\n');
+  }
+  return [
+    '**Titolo**',
+    'Prologo: partire prima di partire.',
+    '',
+    '**Dove ero / tappa**',
+    'Il 2 e il 3 giugno sono stati i giorni di avvicinamento: da Perugia a Bergamo, poi volo serale verso Lourdes.',
+    '',
+    '**Scena chiave**',
+    'Il cammino è iniziato prima del sentiero. Il 2 giugno ho fatto Perugia-Milano con un mio amico che andava a Milano proprio quel giorno; lungo il viaggio avevamo caricato altre persone su BlaBlaCar e il tragitto è passato veloce tra chiacchiere interessanti. Poi ho proseguito da Milano a Bergamo in treno per raggiungere amici che mi avrebbero ospitato una notte. Per il cammino avevo considerato di portare la tenda, ma nelle ore precedenti alla partenza, proprio mentre stavo preparando lo zaino, ho capito che sarebbe stata troppo ingombrante e pesante per l’equilibrio dello zaino, quindi non l’ho portata, tenendo nello zaino solo il sacco a pelo. Il 3 mattina, a Bergamo, ho fatto un giro in bici: aria leggera, ritmo lento, e alla fine di un sentiero, vicino a un ristagnamento del fiume Brembo, ho incontrato degli asini. In serata ho preso il volo: sono atterrato a Lourdes tardi e non avevo organizzato l’alloggio. Non riuscivo a trovare posto per dormire e i posti che trovavo, una volta arrivato lì, erano già tutti chiusi o senza reception. Era una cosa preoccupante, perché non avevo realmente un posto dove stare la notte, ma non ero per nulla in ansia: avevo il sacco a pelo e non avevo alcun problema a dormire fuori, homeless style. Da lì in poi non era più preparazione, era inizio vero.',
+    '',
+    '**Una cosa che ho capito**',
+    'Il primo passo del cammino non coincide con il primo chilometro a piedi: comincia nelle scelte logistiche, nell’attesa e nel modo in cui ti predisponi al viaggio.',
+    '',
+    '**Nota pratica**',
+    'Trasferimento Perugia-Milano con BlaBlaCar, treno Milano-Bergamo, notte a Bergamo da amici, poi volo serale del 3 giugno.'
+  ].join('\n');
+}
+
+function mergePrologueDay(days, lang = 'it') {
+  const source = Array.isArray(days)
+    ? days.filter((day) => PROLOGUE_DATES.includes(String(day && day.date ? day.date : '').slice(0, 10)))
+    : [];
+  if (!source.length) return null;
+  const notes = buildPrologueNarrative(lang);
+  const recommendations = Array.from(new Set(
+    source.flatMap((day) => (Array.isArray(day && day.recommendations) ? day.recommendations : []))
+      .map((entry) => JSON.stringify(entry))
+  )).map((entry) => {
+    try { return JSON.parse(entry); } catch { return null; }
+  }).filter(Boolean);
+  const items = source
+    .flatMap((day) => (Array.isArray(day && day.items) ? day.items : []).map((item) => ({
+      ...item,
+      date: String(item && item.date ? item.date : day && day.date ? day.date : '')
+    })))
+    .sort((a, b) => {
+      const left = `${String(a && a.date ? a.date : '')} ${String(a && a.time ? a.time : '')} ${String(a && a.orig ? a.orig : '')}`;
+      const right = `${String(b && b.date ? b.date : '')} ${String(b && b.time ? b.time : '')} ${String(b && b.orig ? b.orig : '')}`;
+      return left.localeCompare(right);
+    });
+  return {
+    date: PROLOGUE_TRACK_DATE,
+    notes,
+    recommendations,
+    items
+  };
 }
 
 function normalizeImageCandidate(item) {
@@ -535,7 +641,7 @@ function renderRecommendations(recommendations) {
   return `<section class="day-section"><h2>__RECOMMENDATIONS_HEADING__</h2><ul>${items}</ul></section>`;
 }
 
-function buildDayPageHtml({ origin, lang, day, prevDay, nextDay, dayOgOverrides }) {
+function buildDayPageHtml({ origin, lang, day, prevDay, nextDay, dayOgOverrides, options = {} }) {
   const DAY_UI = {
     it: {
       titlePrefix: 'Diario Cammino',
@@ -652,23 +758,32 @@ function buildDayPageHtml({ origin, lang, day, prevDay, nextDay, dayOgOverrides 
   };
   const ui = DAY_UI[lang] || DAY_UI.it;
   const date = String(day && day.date ? day.date : '');
-  const displayDate = formatDisplayDate(date, lang);
-  const canonicalPath = `/${lang}/day/${date}/`;
+  const displayDate = String(options.displayDate || formatDisplayDate(date, lang));
+  const canonicalPath = String(options.canonicalPath || `/${lang}/day/${date}/`);
   const canonicalUrl = buildAbsoluteUrl(origin, canonicalPath);
-  const altItUrl = buildAbsoluteUrl(origin, `/it/day/${date}/`);
-  const altEnUrl = buildAbsoluteUrl(origin, `/en/day/${date}/`);
-  const altEsUrl = buildAbsoluteUrl(origin, `/es/day/${date}/`);
-  const altFrUrl = buildAbsoluteUrl(origin, `/fr/day/${date}/`);
-  const diaryUrl = buildAbsoluteUrl(origin, `/${lang}/?day=${encodeURIComponent(date)}`);
-  const pageTitle = buildDaySeoTitle(day, lang, ui);
-  const description = buildDaySeoDescription(day, lang, ui);
+  const altPaths = options.altPaths || {
+    it: `/it/day/${date}/`,
+    en: `/en/day/${date}/`,
+    es: `/es/day/${date}/`,
+    fr: `/fr/day/${date}/`
+  };
+  const altItUrl = buildAbsoluteUrl(origin, String(altPaths.it || `/it/day/${date}/`));
+  const altEnUrl = buildAbsoluteUrl(origin, String(altPaths.en || `/en/day/${date}/`));
+  const altEsUrl = buildAbsoluteUrl(origin, String(altPaths.es || `/es/day/${date}/`));
+  const altFrUrl = buildAbsoluteUrl(origin, String(altPaths.fr || `/fr/day/${date}/`));
+  const diaryPath = String(options.diaryPath || `/${lang}/?day=${encodeURIComponent(date)}`);
+  const diaryUrl = buildAbsoluteUrl(origin, diaryPath);
+  const pageTitle = String(options.pageTitle || buildDaySeoTitle(day, lang, ui));
+  const description = String(options.description || buildDaySeoDescription(day, lang, ui));
+  const commentTargetDate = String(options.commentTargetDate || date);
+  const interactiveMediaBase = `${origin}${String(options.interactiveMediaBase || `/${lang}/?day=${encodeURIComponent(date)}&target=`)}`;
+  const headerTitle = String(options.headerTitle || `${displayDate} (${date})`);
   const items = Array.isArray(day && day.items) ? day.items : [];
   const ogImagePath = resolveDayOgImagePath(day, dayOgOverrides || {});
   const ogImageUrl = ogImagePath ? buildAbsoluteUrl(origin, `/${String(ogImagePath).replace(/^\/+/, '')}`) : '';
   const noteHtml = markdownToSafeHtml(day && day.notes ? day.notes : '');
   const recommendationsHtml = renderRecommendations(day && day.recommendations)
     .replace('__RECOMMENDATIONS_HEADING__', escapeHtml(ui.recommendations));
-  const interactiveMediaBase = `${origin}/${lang}/?day=${encodeURIComponent(date)}&target=`;
   const mediaCards = items.slice(0, 32).map((item) => {
     const isVideo = String(item.type || '') === 'video';
     const mediaImg = mediaPath(item, 'thumb', date) || mediaPath(item, 'poster', date) || mediaPath(item, 'src', date);
@@ -743,8 +858,12 @@ function buildDayPageHtml({ origin, lang, day, prevDay, nextDay, dayOgOverrides 
     hasPart: mediaJsonLd.length ? mediaJsonLd : undefined
   };
 
-  const navPrev = prevDay ? `<a href="/${lang}/day/${escapeHtml(prevDay.date)}/">← ${escapeHtml(prevDay.date)}</a>` : '';
-  const navNext = nextDay ? `<a href="/${lang}/day/${escapeHtml(nextDay.date)}/">${escapeHtml(nextDay.date)} →</a>` : '';
+  const prevHref = options.prevHref === null ? '' : String(options.prevHref || (prevDay ? `/${lang}/day/${prevDay.date}/` : ''));
+  const nextHref = options.nextHref === null ? '' : String(options.nextHref || (nextDay ? `/${lang}/day/${nextDay.date}/` : ''));
+  const prevLabel = String(options.prevLabel || (prevDay ? prevDay.date : ''));
+  const nextLabel = String(options.nextLabel || (nextDay ? nextDay.date : ''));
+  const navPrev = prevHref ? `<a href="${escapeHtml(prevHref)}">← ${escapeHtml(prevLabel)}</a>` : '';
+  const navNext = nextHref ? `<a href="${escapeHtml(nextHref)}">${escapeHtml(nextLabel)} →</a>` : '';
 
   return `<!doctype html>
 <html lang="${lang}">
@@ -832,7 +951,7 @@ function buildDayPageHtml({ origin, lang, day, prevDay, nextDay, dayOgOverrides 
   <header class="day-head">
     <div>
       <p><a class="back-link" href="/${lang}/">${ui.backToDiary}</a></p>
-      <h1>${escapeHtml(displayDate)} (${escapeHtml(date)})</h1>
+      <h1>${escapeHtml(headerTitle)}</h1>
       <div class="hero-links">
         <a class="back-link" href="${escapeHtml(diaryUrl)}">${ui.openInteractiveDiary}</a>
         <a class="back-link" href="/${lang}/map/">${ui.openMap}</a>
@@ -843,7 +962,7 @@ function buildDayPageHtml({ origin, lang, day, prevDay, nextDay, dayOgOverrides 
   <section class="day-section">
     <div class="day-comments-head">
       <h2>${ui.dayNotes}</h2>
-      <button type="button" class="day-comment-btn" data-comment-target="note-${escapeHtml(date)}">${ui.comments}</button>
+      <button type="button" class="day-comment-btn" data-comment-target="note-${escapeHtml(commentTargetDate)}">${ui.comments}</button>
     </div>
     ${noteHtml || `<p>${ui.noNotes}</p>`}
   </section>
@@ -1159,6 +1278,7 @@ function buildDayPageHtml({ origin, lang, day, prevDay, nextDay, dayOgOverrides 
 async function buildSitemapXmlForOrigin(origin) {
   const itEntries = await readEntriesByLang('it');
   const days = Array.isArray(itEntries && itEntries.days) ? itEntries.days : [];
+  const PROLOGUE_DATES = new Set(['2019-06-02', '2019-06-03']);
   const urls = [];
   const langs = ['it', 'en', 'es', 'fr'];
   const isImagePath = (value) => {
@@ -1238,9 +1358,35 @@ async function buildSitemapXmlForOrigin(origin) {
   push('/en/contatti/', null, '0.5', 'monthly', [], contactAlt);
   push('/es/contatti/', null, '0.5', 'monthly', [], contactAlt);
   push('/fr/contatti/', null, '0.5', 'monthly', [], contactAlt);
+  const prologueDays = days.filter((day) => PROLOGUE_DATES.has(String(day && day.date ? day.date : '').trim()));
+  if (prologueDays.length) {
+    const byLoc = new Map();
+    prologueDays.forEach((day) => {
+      pickImagesForDay(day).forEach((img) => {
+        if (img && img.loc && !byLoc.has(img.loc)) byLoc.set(img.loc, img);
+      });
+    });
+    const prologueImages = Array.from(byLoc.values());
+    const prologueLastmod = prologueDays
+      .map((day) => String(day && day.date ? day.date : '').trim())
+      .filter(Boolean)
+      .sort()
+      .slice(-1)[0] || null;
+    const prologueAlt = {
+      it: '/it/prologue/',
+      en: '/en/prologue/',
+      es: '/es/prologue/',
+      fr: '/fr/prologue/'
+    };
+    push('/it/prologue/', prologueLastmod, '0.7', 'monthly', prologueImages, prologueAlt);
+    push('/en/prologue/', prologueLastmod, '0.7', 'monthly', prologueImages, prologueAlt);
+    push('/es/prologue/', prologueLastmod, '0.7', 'monthly', prologueImages, prologueAlt);
+    push('/fr/prologue/', prologueLastmod, '0.7', 'monthly', prologueImages, prologueAlt);
+  }
   for (const day of days) {
     const date = String(day && day.date ? day.date : '').trim();
     if (!date) continue;
+    if (PROLOGUE_DATES.has(date)) continue;
     const images = pickImagesForDay(day);
     const dayAlt = {
       it: `/it/day/${date}/`,
@@ -1326,13 +1472,13 @@ function localizeIndexHtml(rawHtml, locale, req) {
   const seo = SEO_BY_LANG[lang] || SEO_BY_LANG.it;
   const origin = getRequestOrigin(req);
   const reqUrl = new URL(String(req && req.url ? req.url : '/'), origin);
-  void reqUrl;
-  const canonicalPath = `/${lang}/`;
+  const isPrologue = PROLOGUE_PAGE_PATH_RE.test(String(reqUrl.pathname || ''));
+  const canonicalPath = isPrologue ? `/${lang}/prologue/` : `/${lang}/`;
   const canonical = `${origin}${canonicalPath}`;
-  const altIt = `${origin}/it/`;
-  const altEn = `${origin}/en/`;
-  const altEs = `${origin}/es/`;
-  const altFr = `${origin}/fr/`;
+  const altIt = `${origin}${isPrologue ? '/it/prologue/' : '/it/'}`;
+  const altEn = `${origin}${isPrologue ? '/en/prologue/' : '/en/'}`;
+  const altEs = `${origin}${isPrologue ? '/es/prologue/' : '/es/'}`;
+  const altFr = `${origin}${isPrologue ? '/fr/prologue/' : '/fr/'}`;
   const ogImage = `${origin}/assets/og-image.jpg`;
   const robotsContent = 'noindex,follow,max-image-preview:large';
 
@@ -1356,26 +1502,28 @@ function localizeIndexHtml(rawHtml, locale, req) {
   if (!/<meta[^>]*name="robots"/i.test(out)) {
     out = out.replace('</head>', `  ${metaRobots}\n</head>`);
   }
+  const ogTitle = isPrologue ? `${seo.title} | Prologue` : seo.title;
+  const ogDescription = isPrologue ? seo.description : seo.description;
   const ogTags = [
     '<meta property="og:type" content="website" />',
-    `<meta property="og:title" content="${escapeHtml(seo.title)}" />`,
-    `<meta property="og:description" content="${escapeHtml(seo.description)}" />`,
+    `<meta property="og:title" content="${escapeHtml(ogTitle)}" />`,
+    `<meta property="og:description" content="${escapeHtml(ogDescription)}" />`,
     `<meta property="og:url" content="${escapeHtml(canonical)}" />`,
     `<meta property="og:image" content="${escapeHtml(ogImage)}" />`,
     `<meta property="og:image:width" content="${OG_IMAGE_WIDTH}" />`,
     `<meta property="og:image:height" content="${OG_IMAGE_HEIGHT}" />`,
     `<meta property="og:image:type" content="${OG_IMAGE_TYPE}" />`,
     '<meta name="twitter:card" content="summary_large_image" />',
-    `<meta name="twitter:title" content="${escapeHtml(seo.title)}" />`,
-    `<meta name="twitter:description" content="${escapeHtml(seo.description)}" />`,
+    `<meta name="twitter:title" content="${escapeHtml(ogTitle)}" />`,
+    `<meta name="twitter:description" content="${escapeHtml(ogDescription)}" />`,
     `<meta name="twitter:image" content="${escapeHtml(ogImage)}" />`
   ];
   out = out.replace('</head>', `  ${ogTags.join('\n  ')}\n</head>`);
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    name: seo.title,
-    description: seo.description,
+    name: ogTitle,
+    description: ogDescription,
     inLanguage: lang,
     url: canonical,
     author: {
@@ -2086,6 +2234,67 @@ async function serveDayPage(req, res, lang, date) {
   }
 }
 
+async function serveProloguePage(req, res, lang) {
+  try {
+    const entries = await readEntriesByLang(lang);
+    const dayOgOverrides = await readDayOgOverrides();
+    const days = Array.isArray(entries && entries.days) ? entries.days : [];
+    const mergedDay = mergePrologueDay(days, lang);
+    if (!mergedDay) {
+      res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
+      res.end('Not found');
+      return;
+    }
+    const nextDay = days.find((day) => !PROLOGUE_DATES.includes(String(day && day.date ? day.date : '').slice(0, 10))) || null;
+    const prologueLabelByLang = {
+      it: 'Prologo (2–3 giugno)',
+      en: 'Prologue (June 2–3)',
+      es: 'Prólogo (2–3 de junio)',
+      fr: 'Prologue (2–3 juin)'
+    };
+    const prologueSeoPrefixByLang = {
+      it: 'Prologo',
+      en: 'Prologue',
+      es: 'Prólogo',
+      fr: 'Prologue'
+    };
+    const displayLabel = prologueLabelByLang[lang] || prologueLabelByLang.it;
+    const seoPrefix = prologueSeoPrefixByLang[lang] || prologueSeoPrefixByLang.it;
+    const html = buildDayPageHtml({
+      origin: getRequestOrigin(req),
+      lang,
+      day: mergedDay,
+      prevDay: null,
+      nextDay,
+      dayOgOverrides,
+      options: {
+        canonicalPath: `/${lang}/prologue/`,
+        altPaths: {
+          it: '/it/prologue/',
+          en: '/en/prologue/',
+          es: '/es/prologue/',
+          fr: '/fr/prologue/'
+        },
+        diaryPath: `/${lang}/?day=prologue`,
+        interactiveMediaBase: `/${lang}/?day=prologue&target=`,
+        commentTargetDate: PROLOGUE_TRACK_DATE,
+        displayDate: displayLabel,
+        headerTitle: displayLabel,
+        pageTitle: `${seoPrefix} | ${displayLabel} | ${(SEO_BY_LANG[lang] || SEO_BY_LANG.it).title}`,
+        prevHref: null
+      }
+    });
+    res.writeHead(200, {
+      'Content-Type': 'text/html; charset=utf-8',
+      'Cache-Control': 'no-cache'
+    });
+    res.end(html);
+  } catch (err) {
+    res.writeHead(500, { 'Content-Type': 'text/plain; charset=utf-8' });
+    res.end(err && err.message ? err.message : 'Server error');
+  }
+}
+
 const server = http.createServer(async (req, res) => {
   if (!req.url) {
     res.writeHead(400);
@@ -2192,6 +2401,12 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
+  if (urlObj.pathname === '/prologue' || urlObj.pathname === '/prologue.html') {
+    res.writeHead(301, { Location: `/it/prologue/${urlObj.search || ''}` });
+    res.end();
+    return;
+  }
+
   const dayMatch = urlObj.pathname.match(DAY_PAGE_PATH_RE);
   if (dayMatch) {
     const lang = String(dayMatch[1]).toLowerCase();
@@ -2202,6 +2417,18 @@ const server = http.createServer(async (req, res) => {
       return;
     }
     await serveDayPage(req, res, lang, date);
+    return;
+  }
+
+  const prologueMatch = urlObj.pathname.match(PROLOGUE_PAGE_PATH_RE);
+  if (prologueMatch) {
+    const lang = String(prologueMatch[1]).toLowerCase();
+    if (urlObj.pathname !== `/${lang}/prologue/`) {
+      res.writeHead(301, { Location: `/${lang}/prologue/${urlObj.search || ''}` });
+      res.end();
+      return;
+    }
+    await serveProloguePage(req, res, lang);
     return;
   }
 

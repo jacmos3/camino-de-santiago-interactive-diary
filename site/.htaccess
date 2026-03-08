@@ -16,6 +16,7 @@ RewriteRule ^api/(.*)$ /api/index.php [L,NC,QSA]
 
 # Localized day route -> dynamic PHP day page
 RewriteRule ^(it|en|es|fr)/day/(\d{4}-\d{2}-\d{2})/?$ /day.php?lang=$1&date=$2 [L,NC,QSA]
+RewriteRule ^(it|en|es|fr)/prologue/?$ /day.php?lang=$1&date=prologue [L,NC,QSA]
 
 # Localized map route -> static map page
 RewriteRule ^(it|en|es|fr)/map/?$ /map.html [L,NC]

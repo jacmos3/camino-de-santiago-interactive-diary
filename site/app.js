@@ -448,10 +448,18 @@ const buildLocalizedPeoplePath = (lang) => {
   return `/${targetLang}/people/`;
 };
 
+const buildLocalizedProloguePath = (lang) => {
+  const targetLang = normalizeLang(lang) || 'it';
+  return `/${targetLang}/prologue/`;
+};
+
 const getDayFromPathname = (pathnameValue = '') => {
   const match = String(pathnameValue || '').match(/^\/(?:it|en|es|fr)\/day\/(\d{4}-\d{2}-\d{2})\/?$/i);
   return match ? String(match[1] || '') : '';
 };
+
+const isProloguePathname = (pathnameValue = '') =>
+  /^\/(?:it|en|es|fr)\/prologue\/?$/i.test(String(pathnameValue || ''));
 
 const syncLanguagePath = (lang) => {
   if (typeof window === 'undefined' || !window.history || typeof window.history.replaceState !== 'function') return;
@@ -506,14 +514,13 @@ const updateSeoForLang = (lang) => {
   const normalized = normalizeLang(lang) || 'it';
   const seo = SEO_META[normalized] || SEO_META.it;
   const origin = window.location.origin || '';
-  const params = new URLSearchParams(window.location.search || '');
-  void params;
-  const canonicalPath = `/${normalized}/`;
+  const isProloguePage = isProloguePathname(window.location.pathname);
+  const canonicalPath = isProloguePage ? `/${normalized}/prologue/` : `/${normalized}/`;
   const canonical = `${origin}${canonicalPath}`;
-  const altIt = `${origin}/it/`;
-  const altEn = `${origin}/en/`;
-  const altEs = `${origin}/es/`;
-  const altFr = `${origin}/fr/`;
+  const altIt = `${origin}${isProloguePage ? '/it/prologue/' : '/it/'}`;
+  const altEn = `${origin}${isProloguePage ? '/en/prologue/' : '/en/'}`;
+  const altEs = `${origin}${isProloguePage ? '/es/prologue/' : '/es/'}`;
+  const altFr = `${origin}${isProloguePage ? '/fr/prologue/' : '/fr/'}`;
   const robotsContent = 'noindex,follow,max-image-preview:large';
   document.title = seo.title;
   const descriptionTag = ensureMetaTag('meta-description', { name: 'description' });
@@ -831,7 +838,12 @@ const uniqueNonEmpty = (list) => {
   return out;
 };
 
-const getImageSourceCandidates = (item) => uniqueNonEmpty([
+const getPreviewImageSourceCandidates = (item) => uniqueNonEmpty([
+  mediaPath(item, 'thumb'),
+  mediaPath(item, 'src')
+]);
+
+const getFullImageSourceCandidates = (item) => uniqueNonEmpty([
   mediaPath(item, 'src'),
   mediaPath(item, 'thumb')
 ]);
@@ -922,13 +934,15 @@ const getTrackingSessionId = () => {
 };
 
 const detectDayKeyFromLocation = () => {
+  if (isProloguePathname(window.location.pathname)) return PROLOGUE_UI_KEY;
   const dayFromPath = getDayFromPathname(window.location.pathname);
-  if (dayFromPath) return dayFromPath;
+  if (dayFromPath) return normalizeDayUiKey(dayFromPath);
   const dayFromQuery = String(new URLSearchParams(window.location.search).get('day') || '').trim();
-  if (/^\d{4}-\d{2}-\d{2}$/.test(dayFromQuery)) return dayFromQuery;
+  const queryUiKey = normalizeDayUiKey(dayFromQuery);
+  if (queryUiKey) return queryUiKey;
   const hash = String(window.location.hash || '').replace(/^#/, '');
-  const m = hash.match(/^note-(\d{4}-\d{2}-\d{2})$/);
-  return m ? m[1] : '';
+  const m = hash.match(/^note-(prologue|\d{4}-\d{2}-\d{2})$/);
+  return m ? normalizeDayUiKey(m[1]) : '';
 };
 
 const flushTrackingQueue = async (useBeacon = false) => {
@@ -1308,8 +1322,34 @@ const formatTimelineChipDate = (dateStr) => {
 const DAY_ZERO_DATE = '2019-06-04';
 const PROLOGUE_DATES = ['2019-06-02', '2019-06-03'];
 const PROLOGUE_TRACK_DATE = '2019-06-03';
+const PROLOGUE_UI_KEY = 'prologue';
 
 const isPrologueDay = (day) => Boolean(day && day.isPrologue);
+const isPrologueSourceDate = (value) => {
+  const day = String(value || '').slice(0, 10);
+  return PROLOGUE_DATES.includes(day);
+};
+const normalizeDayUiKey = (value) => {
+  const raw = String(value || '').trim();
+  if (!raw) return '';
+  if (raw === PROLOGUE_UI_KEY) return PROLOGUE_UI_KEY;
+  const maybeDay = raw.slice(0, 10);
+  if (/^\d{4}-\d{2}-\d{2}$/.test(maybeDay)) {
+    return isPrologueSourceDate(maybeDay) ? PROLOGUE_UI_KEY : maybeDay;
+  }
+  return raw;
+};
+const getDayUiKey = (day) => {
+  if (!day) return '';
+  if (isPrologueDay(day)) return PROLOGUE_UI_KEY;
+  const explicit = normalizeDayUiKey(day.uiKey);
+  if (explicit) return explicit;
+  return normalizeDayUiKey(day.date);
+};
+const getDayCommentTargetKey = (day) => {
+  if (isPrologueDay(day)) return PROLOGUE_TRACK_DATE;
+  return String(day && day.date ? day.date : '').slice(0, 10);
+};
 
 const getDayTitle = (day) => {
   if (isPrologueDay(day)) return I18N[currentLang].prologue_title;
@@ -1998,7 +2038,7 @@ const openImageModal = (item, itemIndex = null) => {
   const modalLoader = createModalMediaLoader();
   shell.appendChild(modalLoader);
   const image = document.createElement('img');
-  const imageCandidates = getImageSourceCandidates(item);
+  const imageCandidates = getFullImageSourceCandidates(item);
   let imageCandidateIndex = 0;
   image.src = imageCandidates[0] || IMG_PLACEHOLDER;
   image.addEventListener('load', () => {
@@ -2205,17 +2245,38 @@ const buildShareUrl = (anchorId) => {
   const anchor = String(anchorId || '').trim();
   const origin = window.location.origin || '';
   const lang = normalizeLang(currentLang) || 'it';
+  const buildInteractiveBase = (day = '') => {
+    const dayKey = normalizeDayUiKey(day);
+    const qp = new URLSearchParams();
+    if (dayKey) qp.set('day', dayKey);
+    const query = qp.toString();
+    return `${origin}/${lang}/${query ? `?${query}` : ''}`;
+  };
+  const buildCanonicalDay = (day = '') => {
+    const dayKey = String(day || '').slice(0, 10);
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(dayKey)) return '';
+    return `${origin}/${lang}/day/${encodeURIComponent(dayKey)}/`;
+  };
   if (!anchor) return `${origin}/${lang}/`;
   if (anchor.startsWith('note-')) {
-    const dayKey = anchor.slice('note-'.length);
-    if (/^\d{4}-\d{2}-\d{2}$/.test(dayKey)) return `${origin}/${lang}/day/${encodeURIComponent(dayKey)}/`;
+    const dayKey = normalizeDayUiKey(anchor.slice('note-'.length));
+    if (dayKey === PROLOGUE_UI_KEY) return `${origin}${buildLocalizedProloguePath(lang)}`;
+    const canonical = buildCanonicalDay(dayKey);
+    if (canonical) return canonical;
     return `${origin}/${lang}/?target=${encodeURIComponent(anchor)}`;
   }
   if (anchor.startsWith('media-')) {
     const itemId = anchor.slice('media-'.length);
-    const dayKey = findDayKeyByItemId(itemId);
-    if (dayKey) return `${origin}/${lang}/day/${encodeURIComponent(dayKey)}/?target=${encodeURIComponent(anchor)}`;
+    const dayKey = normalizeDayUiKey(findDayKeyByItemId(itemId));
+    if (dayKey === PROLOGUE_UI_KEY) return `${buildInteractiveBase(dayKey)}&target=${encodeURIComponent(anchor)}`;
+    if (dayKey) return `${buildInteractiveBase(dayKey)}&target=${encodeURIComponent(anchor)}`;
     return `${origin}/${lang}/?target=${encodeURIComponent(anchor)}`;
+  }
+  if (anchor.startsWith('recommendations-')) {
+    const dayKey = normalizeDayUiKey(anchor.slice('recommendations-'.length));
+    if (dayKey === PROLOGUE_UI_KEY) return `${origin}${buildLocalizedProloguePath(lang)}`;
+    const canonical = buildCanonicalDay(dayKey);
+    if (canonical) return canonical;
   }
   return `${origin}/${lang}/?target=${encodeURIComponent(anchor)}`;
 };
@@ -2453,13 +2514,24 @@ const findDayKeyByItemId = (id) => {
   if (!key || !dataCache || !Array.isArray(dataCache.days)) return '';
   for (const day of dataCache.days) {
     const found = (day.items || []).some((it) => String(it && it.id) === key);
-    if (found) return String(day.date || '');
+    if (found) return normalizeDayUiKey(day.date);
   }
   return '';
 };
+const findMediaItemById = (id) => {
+  const key = String(id || '').trim();
+  if (!key) return null;
+  const idx = modalIndexById.get(key);
+  if (Number.isInteger(idx) && idx >= 0 && idx < modalItems.length) {
+    return modalItems[idx] || null;
+  }
+  const fallbackIdx = allModalItems.findIndex((it) => String(it && it.id) === key);
+  if (fallbackIdx < 0) return null;
+  return allModalItems[fallbackIdx] || null;
+};
 
 const updateDaySectionHydration = (dayKey) => {
-  const key = String(dayKey || '').trim();
+  const key = normalizeDayUiKey(dayKey);
   if (!key) return;
   const section = document.getElementById(`day-${key}`);
   if (!section) return;
@@ -2471,25 +2543,44 @@ const focusHashAnchor = (hashValue, attempts = 6) => {
   const raw = String(hashValue || window.location.hash || '').replace(/^#/, '');
   if (!raw) return;
   const anchor = decodeURIComponent(raw);
+  const mediaMatch = anchor.match(/^media-(.+)$/);
+  let mediaItem = null;
+  let mediaItemIndex = -1;
 
-  if (anchor.startsWith('media-')) {
-    const itemId = anchor.slice('media-'.length);
+  if (mediaMatch) {
+    const itemId = String(mediaMatch[1] || '').trim();
     const dayKey = findDayKeyByItemId(itemId);
     if (dayKey && !unlockedDayKeys.has(dayKey)) {
       unlockedDayKeys.add(dayKey);
       updateDaySectionHydration(dayKey);
     }
+    mediaItem = findMediaItemById(itemId);
+    mediaItemIndex = Number.isInteger(modalIndexById.get(itemId))
+      ? modalIndexById.get(itemId)
+      : allModalItems.findIndex((it) => String(it && it.id) === itemId);
   }
 
-  const target = document.getElementById(anchor);
+  let resolvedAnchor = anchor;
+  if (!document.getElementById(resolvedAnchor)) {
+    const noteMatch = resolvedAnchor.match(/^(note|recommendations)-(\d{4}-\d{2}-\d{2})$/);
+    if (noteMatch && isPrologueSourceDate(noteMatch[2])) {
+      resolvedAnchor = `${noteMatch[1]}-${PROLOGUE_UI_KEY}`;
+    }
+  }
+  const target = document.getElementById(resolvedAnchor);
   if (!target) {
     if (attempts > 0) {
-      window.setTimeout(() => focusHashAnchor(anchor, attempts - 1), 220);
+      window.setTimeout(() => focusHashAnchor(resolvedAnchor, attempts - 1), 220);
     }
     return;
   }
   target.scrollIntoView({ behavior: 'smooth', block: 'center' });
   highlightLinkedTarget(target);
+  if (mediaMatch && mediaItem) {
+    window.setTimeout(() => {
+      openModalItem(mediaItem, mediaItemIndex);
+    }, 120);
+  }
 };
 
 const getLinkedTargetFromLocation = () => {
@@ -2507,10 +2598,13 @@ const focusLinkedTargetFromLocation = () => {
 };
 
 const getRequestedDayFromLocation = () => {
+  if (isProloguePathname(window.location.pathname)) return PROLOGUE_UI_KEY;
   const fromQuery = String(new URLSearchParams(window.location.search).get('day') || '').trim();
-  if (/^\d{4}-\d{2}-\d{2}$/.test(fromQuery)) return fromQuery;
+  const queryUiKey = normalizeDayUiKey(fromQuery);
+  if (queryUiKey) return queryUiKey;
   const fromPath = getDayFromPathname(window.location.pathname);
-  return /^\d{4}-\d{2}-\d{2}$/.test(fromPath) ? fromPath : '';
+  const pathUiKey = normalizeDayUiKey(fromPath);
+  return pathUiKey || '';
 };
 
 const renderManageTools = () => {
@@ -2770,9 +2864,23 @@ const buildExcerptAroundMatch = (text, matchIndex, matchLength) => {
   return `${prefix}${normalized.slice(start, end).trim()}${suffix}`;
 };
 
+const getStickyUiOffset = () => {
+  const timeline = document.querySelector('.timeline-nav');
+  if (!timeline) return 12;
+  const rect = timeline.getBoundingClientRect();
+  const h = Number.isFinite(rect.height) ? rect.height : 0;
+  return Math.max(0, Math.ceil(h + 10));
+};
+
+const scrollElementWithStickyOffset = (el, behavior = 'smooth') => {
+  if (!el) return;
+  const top = window.scrollY + el.getBoundingClientRect().top - getStickyUiOffset();
+  window.scrollTo({ top: Math.max(0, top), behavior });
+};
+
 const scrollToDay = (dayKey, behavior = 'smooth') => {
-  const section = document.getElementById(`day-${dayKey}`);
-  if (section) section.scrollIntoView({ behavior, block: 'start' });
+  const section = document.getElementById(`day-${normalizeDayUiKey(dayKey)}`);
+  if (section) scrollElementWithStickyOffset(section, behavior);
 };
 
 const analyzePeopleFromDays = (days) => {
@@ -2800,7 +2908,7 @@ const analyzePeopleFromDays = (days) => {
         date: day.date,
         title: getDayTitle(day),
         label: getDayLabelText(day),
-        index: renderedDayOrder.indexOf(day.date)
+        index: renderedDayOrder.indexOf(getDayUiKey(day))
       };
       person.days.push(dayEntry);
       if (!person.excerpt) {
@@ -3156,7 +3264,7 @@ const buildMediaCard = (groupItems) => {
     img.alt = item.orig;
     if (item.id) img.dataset.itemId = String(item.id);
     img.src = IMG_PLACEHOLDER;
-    const imageCandidates = getImageSourceCandidates(item);
+    const imageCandidates = getPreviewImageSourceCandidates(item);
     let imageCandidateIndex = 0;
     img.dataset.src = imageCandidates[0] || '';
     img.decoding = 'async';
@@ -3199,7 +3307,7 @@ const buildMediaCard = (groupItems) => {
     posterImg.src = IMG_PLACEHOLDER;
     const posterCandidates = uniqueNonEmpty([
       mediaPath(item, 'poster'),
-      ...getImageSourceCandidates(item)
+      ...getPreviewImageSourceCandidates(item)
     ]);
     let posterCandidateIndex = 0;
     posterImg.dataset.src = posterCandidates[0] || '';
@@ -3329,10 +3437,12 @@ const buildMediaCard = (groupItems) => {
 };
 
 const buildDay = (day, idx) => {
+  const dayUiKey = getDayUiKey(day);
+  const commentTargetDayKey = getDayCommentTargetKey(day);
   const section = document.createElement('section');
   section.className = 'day reveal';
   section.style.setProperty('--delay', `${Math.min(idx * 0.05, 0.4)}s`);
-  section.id = `day-${day.date}`;
+  section.id = `day-${dayUiKey}`;
 
   const header = document.createElement('div');
   header.className = 'day__header';
@@ -3364,12 +3474,6 @@ const buildDay = (day, idx) => {
   distance.style.display = 'none';
 
   const hasMedia = Array.isArray(day.uiGroups) && day.uiGroups.length > 0;
-  const reloadDayBtn = document.createElement('button');
-  reloadDayBtn.type = 'button';
-  reloadDayBtn.className = 'day__reload';
-  reloadDayBtn.setAttribute('aria-label', I18N[currentLang].reload_day_content);
-  reloadDayBtn.setAttribute('title', I18N[currentLang].reload_content);
-  reloadDayBtn.textContent = '↻';
 
   const chips = document.createElement('div');
   chips.className = 'day__chips';
@@ -3391,7 +3495,6 @@ const buildDay = (day, idx) => {
     });
     chips.appendChild(stravaWrap);
   }
-  if (hasMedia) chips.appendChild(reloadDayBtn);
   header.appendChild(title);
   header.appendChild(chips);
   
@@ -3400,15 +3503,15 @@ const buildDay = (day, idx) => {
   const notesText = getNote(day);
   const notes = document.createElement('div');
   notes.className = 'notes';
-  notes.id = `note-${day.date}`;
+  notes.id = `note-${dayUiKey}`;
   const notesHead = document.createElement('div');
   notesHead.className = 'notes__head';
   const notesLabel = document.createElement('div');
   notesLabel.className = 'notes__label';
   notesLabel.setAttribute('data-notes-label', '1');
   notesLabel.textContent = I18N[currentLang].notes_label;
-  const notesShare = createShareButton(`note-${day.date}`, 'notes__share');
-  const notesComments = createCommentButton(`note-${day.date}`, 'notes__comments');
+  const notesShare = createShareButton(`note-${dayUiKey}`, 'notes__share');
+  const notesComments = createCommentButton(`note-${commentTargetDayKey}`, 'notes__comments');
   const notesActions = document.createElement('div');
   notesActions.className = 'notes__actions';
   if (notesComments) notesActions.appendChild(notesComments);
@@ -3430,7 +3533,7 @@ const buildDay = (day, idx) => {
   if (recommendationsText.length > 0) {
     recommendations = document.createElement('div');
     recommendations.className = 'recommendations';
-    recommendations.id = `recommendations-${day.date}`;
+    recommendations.id = `recommendations-${dayUiKey}`;
     const recommendationsHead = document.createElement('div');
     recommendationsHead.className = 'recommendations__head';
     const recommendationsLabel = document.createElement('div');
@@ -3438,7 +3541,7 @@ const buildDay = (day, idx) => {
     recommendationsLabel.setAttribute('data-recommendations-label', '1');
     recommendationsLabel.textContent = I18N[currentLang].recommendations_label;
     const recommendationsShare = createShareButton(
-      `recommendations-${day.date}`,
+      `recommendations-${dayUiKey}`,
       'recommendations__share'
     );
     recommendationsHead.appendChild(recommendationsLabel);
@@ -3479,23 +3582,7 @@ const buildDay = (day, idx) => {
       grid.appendChild(card);
     });
   };
-  const refillGrid = () => {
-    grid.innerHTML = '';
-    (day.uiGroups || []).forEach((group) => {
-      const card = buildMediaCard(group);
-      grid.appendChild(card);
-    });
-    recoverVisibleLazyMedia();
-  };
-
-  const dayKey = day.date;
-  if (hasMedia) {
-    reloadDayBtn.addEventListener('click', () => {
-      unlockedDayKeys.add(dayKey);
-      refillGrid();
-      if (lockPanel.parentNode) lockPanel.remove();
-    });
-  }
+  const dayKey = dayUiKey;
   if (hasMedia && unlockedDayKeys.has(dayKey)) {
     fillGrid();
   } else if (hasMedia) {
@@ -3507,9 +3594,9 @@ const buildDay = (day, idx) => {
   }
 
   section.appendChild(header);
-  if (dayTrackCard) section.appendChild(dayTrackCard);
   section.appendChild(notes);
   if (recommendations) section.appendChild(recommendations);
+  if (dayTrackCard) section.appendChild(dayTrackCard);
   if (hasMedia && !unlockedDayKeys.has(dayKey)) {
     section.appendChild(lockPanel);
   }
@@ -4008,7 +4095,9 @@ const buildTimelineNav = (days) => {
       `;
     }
     btn.addEventListener('click', () => {
-      document.getElementById(`day-${day.date}`).scrollIntoView({ behavior: 'smooth' });
+      const targetKey = getDayUiKey(day);
+      const target = document.getElementById(`day-${targetKey}`);
+      scrollElementWithStickyOffset(target, 'smooth');
     });
     if (idx === 0) btn.classList.add('active');
     nav.appendChild(btn);
@@ -4066,8 +4155,8 @@ const buildDayPicker = (days) => {
     btn.textContent = getDayTitle(day);
     btn.addEventListener('click', () => {
       closeDayPicker();
-      const section = document.getElementById(`day-${day.date}`);
-      if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      const section = document.getElementById(`day-${getDayUiKey(day)}`);
+      if (section) scrollElementWithStickyOffset(section, 'smooth');
     });
     list.appendChild(btn);
   });
@@ -4294,18 +4383,26 @@ const observeSections = () => {
       const next = new URL(window.location.href);
       const lang = normalizeLang(currentLang) || 'it';
       next.pathname = `/${lang}/`;
-      next.searchParams.delete('day');
       next.searchParams.delete('target');
       if (zoneKey === 'hero') {
+        next.searchParams.delete('day');
         next.hash = '#hero';
       } else if (zoneKey === 'prologue') {
-        const baseDay = String(dayKey || PROLOGUE_DATES[0] || '').slice(0, 10);
-        next.hash = baseDay ? `#note-${baseDay}` : '#prologo';
+        void dayKey;
+        next.pathname = `/${lang}/`;
+        next.searchParams.set('day', PROLOGUE_UI_KEY);
+        next.hash = '';
       } else if (zoneKey === 'after') {
+        next.searchParams.delete('day');
+        next.pathname = `/${lang}/`;
         next.hash = '#after-camino';
       } else if (zoneKey === 'footer') {
+        next.searchParams.delete('day');
+        next.pathname = `/${lang}/`;
         next.hash = '#footer';
       } else {
+        next.searchParams.delete('day');
+        next.pathname = `/${lang}/`;
         next.hash = '';
       }
       const nextUrl = `${next.pathname}${next.search}${next.hash}`;
@@ -4377,8 +4474,9 @@ const observeSections = () => {
     ensureVisible(buttons[idx]);
     const activeSection = sections[idx];
     const dayKey = activeSection.id.replace('day-', '');
-    updatePeopleStripActiveState(dayKey);
-    const isPrologue = isPrologueDay({ date: dayKey });
+    const peopleKey = dayKey === PROLOGUE_UI_KEY ? PROLOGUE_TRACK_DATE : dayKey;
+    updatePeopleStripActiveState(peopleKey);
+    const isPrologue = dayKey === PROLOGUE_UI_KEY;
     setMiniMapHidden(isPrologue);
     if (!isPrologue) {
       renderMiniMap(dayKey, idx);
@@ -4461,7 +4559,7 @@ const observeSections = () => {
     : -1;
   setActiveIndex(requestedIndex >= 0 ? requestedIndex : 0);
   if (requestedIndex >= 0) {
-    sections[requestedIndex].scrollIntoView({ behavior: 'auto', block: 'start' });
+    scrollElementWithStickyOffset(sections[requestedIndex], 'auto');
   }
   onScroll();
   scheduleIdleUnlock();
@@ -4545,6 +4643,7 @@ const renderView = () => {
       );
       mergedPrologue = {
         date: PROLOGUE_TRACK_DATE,
+        uiKey: PROLOGUE_UI_KEY,
         isPrologue: true,
         trackDate: PROLOGUE_TRACK_DATE,
         distanceKeys: [],
@@ -4568,13 +4667,14 @@ const renderView = () => {
   const normalizedRawList = mergedPrologue ? [mergedPrologue, ...baseList] : rawList;
   const list = normalizedRawList.map((day) => ({
     ...day,
+    uiKey: getDayUiKey(day),
     uiGroups: groupDayItems(day.items || [])
   }));
   nonTrackedDayKeys.clear();
   list.forEach((day) => {
-    if (isPrologueDay(day)) nonTrackedDayKeys.add(String(day.date || ''));
+    if (isPrologueDay(day)) nonTrackedDayKeys.add(getDayUiKey(day));
   });
-  renderedDayOrder = list.map((day) => day.date);
+  renderedDayOrder = list.map((day) => getDayUiKey(day));
   recomputeCumulativeDayDistanceKm(renderedDayOrder);
   allModalItems = list.flatMap((day) => flattenItems(day.items || []));
   setModalContext(allModalItems);
@@ -4603,7 +4703,7 @@ const renderView = () => {
   renderManageTools();
   const commentTargets = [];
   list.forEach((day) => {
-    commentTargets.push(`note-${day.date}`);
+    commentTargets.push(`note-${getDayCommentTargetKey(day)}`);
     (day.items || []).forEach((item) => {
       if (item && item.id) commentTargets.push(`media-${item.id}`);
     });
