@@ -672,6 +672,8 @@ if ($path === '/contact/send') {
   $message = trim((string)($payload['message'] ?? ''));
   $website = trim((string)($payload['website'] ?? '')); // honeypot
   $lang = trim((string)($payload['lang'] ?? ''));
+  $package = trim((string)($payload['package'] ?? ''));
+  $source = trim((string)($payload['source'] ?? ''));
 
   if ($website !== '') {
     respond(200, ['ok' => true]);
@@ -685,6 +687,12 @@ if ($path === '/contact/send') {
   }
   if ($message === '' || mb_strlen($message) < 10 || mb_strlen($message) > 5000) {
     respond(400, ['error' => 'Messaggio non valido: il testo deve essere tra 10 e 5000 caratteri.']);
+  }
+  if ($package !== '' && mb_strlen($package) > 80) {
+    respond(400, ['error' => 'Pacchetto non valido.']);
+  }
+  if ($source !== '' && mb_strlen($source) > 80) {
+    respond(400, ['error' => 'Sorgente non valida.']);
   }
 
   $ip = contact_client_ip();
@@ -700,13 +708,17 @@ if ($path === '/contact/send') {
   $safeName = contact_safe_header_value($name);
   $safeEmail = contact_safe_header_value($email);
   $safeFrom = contact_safe_header_value(contact_from_email());
-  $subject = 'Richiesta template diario cammino';
+  $safePackage = contact_safe_header_value($package);
+  $safeSource = contact_safe_header_value($source);
+  $subject = 'Richiesta diario interattivo';
   $body = implode("\n", [
     'Nuovo contatto dal form del sito',
     '--------------------------------',
     'Nome: ' . $safeName,
     'Email: ' . $safeEmail,
     'Lingua: ' . $lang,
+    'Pacchetto: ' . ($safePackage !== '' ? $safePackage : '-'),
+    'Sorgente: ' . ($safeSource !== '' ? $safeSource : '-'),
     'IP: ' . $ip,
     'User-Agent: ' . (string)($_SERVER['HTTP_USER_AGENT'] ?? ''),
     'URL: ' . (string)($_SERVER['HTTP_REFERER'] ?? ''),

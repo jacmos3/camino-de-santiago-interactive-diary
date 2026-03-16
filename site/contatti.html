@@ -3,201 +3,528 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Contatti — Cammino di Santiago</title>
-  <meta name="description" content="Contatti per acquistare il template del diario del Cammino." />
+  <title>Richiedi una valutazione — Cammino di Santiago</title>
+  <meta id="meta-description" name="description" content="Richiedi una valutazione per guida, call, template, setup o progetto su misura collegato al diario interattivo." />
+  <link id="seo-canonical" rel="canonical" href="/it/contatti/" />
+  <link id="seo-alt-it" rel="alternate" hreflang="it" href="/it/contatti/" />
+  <link id="seo-alt-en" rel="alternate" hreflang="en" href="/en/contatti/" />
+  <link id="seo-alt-es" rel="alternate" hreflang="es" href="/es/contatti/" />
+  <link id="seo-alt-fr" rel="alternate" hreflang="fr" href="/fr/contatti/" />
+  <link id="seo-alt-default" rel="alternate" hreflang="x-default" href="/it/contatti/" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="icon" type="image/png" href="/favicon.png" />
   <link rel="stylesheet" href="/styles.css" />
   <style>
-    .contact-wrap { max-width: 860px; margin: 0 auto; padding: 28px 22px 60px; }
-    .contact-card { background: #fffaf2; border: 1px solid rgba(31,26,22,.1); border-radius: 16px; box-shadow: var(--shadow); padding: 22px; }
+    .contact-wrap { max-width: 1100px; margin: 0 auto; padding: 28px 22px 60px; }
+    .contact-grid { display: grid; gap: 18px; grid-template-columns: 1fr 1.05fr; align-items: start; }
+    .contact-card,
+    .contact-side {
+      background: #fffaf2; border: 1px solid rgba(31,26,22,.1); border-radius: 18px;
+      box-shadow: var(--shadow); padding: 22px;
+    }
     .contact-title { margin: 0 0 10px; font-size: 1.7rem; }
     .contact-lead { margin: 0 0 16px; color: var(--muted); }
-    .contact-list { margin: 0; padding-left: 18px; }
-    .contact-list li { margin: 6px 0; }
-    .contact-form { margin-top: 14px; display: grid; gap: 10px; }
+    .contact-list,
+    .contact-mini-list { margin: 0; padding-left: 18px; }
+    .contact-list li,
+    .contact-mini-list li { margin: 7px 0; }
+    .contact-form { margin-top: 14px; display: grid; gap: 12px; }
     .contact-form label { font-weight: 600; color: var(--ink); font-size: .95rem; }
-    .contact-form input, .contact-form textarea {
+    .contact-form input,
+    .contact-form textarea,
+    .contact-form select {
       width: 100%; border: 1px solid rgba(31,26,22,.18); border-radius: 10px; padding: 10px 11px;
       background: #fff; color: var(--ink); font: inherit;
     }
-    .contact-form textarea { min-height: 130px; resize: vertical; }
+    .contact-form textarea { min-height: 170px; resize: vertical; }
     .contact-submit {
       justify-self: start; border: 1px solid rgba(31,95,91,.35); background:#1f5f5b; color:#fffaf2;
       border-radius:999px; padding:9px 14px; text-decoration:none; font-weight:700; cursor: pointer;
     }
     .contact-submit:hover { filter: brightness(1.05); }
     .contact-status { margin-top: 6px; min-height: 1.2em; color: var(--muted); font-size: .92rem; }
-    .contact-back { margin-top: 18px; display: inline-block; color: var(--accent-2); }
+    .contact-links { margin-top: 18px; display: flex; gap: 14px; flex-wrap: wrap; }
+    .contact-back { color: var(--accent-2); }
+    .contact-hero-top { display: flex; justify-content: space-between; gap: 18px; align-items: flex-start; flex-wrap: wrap; }
+    .contact-lang { display: grid; gap: 6px; min-width: 220px; }
+    .contact-lang label { font-size: .92rem; font-weight: 600; color: var(--ink); }
+    .contact-lang select { background: #fffaf2; }
+    .contact-pills { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+    .contact-pill {
+      display: inline-flex; align-items: center; border-radius: 999px; padding: 8px 12px;
+      background: rgba(31,95,91,.08); color: #1f5f5b; font-weight: 700; font-size: .92rem;
+    }
+    .contact-note { margin: 10px 0 0; color: var(--muted); font-size: .92rem; }
+    .contact-side h2 { margin-top: 0; }
+    .contact-side__price { font-weight: 800; color: var(--ink); }
+    .contact-side__block + .contact-side__block { margin-top: 18px; }
+    @media (max-width: 860px) {
+      .contact-grid { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
   <header class="hero" style="padding:42px 22px 26px; background-position:center 45%;">
     <div class="hero__inner">
-      <span class="eyebrow" id="contact-eyebrow">Contatti</span>
-      <h1 style="margin-bottom:8px;" id="contact-h1">Acquista il template del diario</h1>
-      <p class="lead" id="contact-sub">Scrivimi per ricevere dettagli su costi, contenuti inclusi e modalità di consegna.</p>
+      <div class="contact-hero-top">
+        <div>
+          <span class="eyebrow" id="contact-eyebrow">Valutazione</span>
+          <h1 style="margin-bottom:8px;" id="contact-h1">Dimmi cosa vuoi raccontare</h1>
+          <p class="lead" id="contact-sub">Uso questa pagina per capire se per te ha senso guida, call, template, setup oppure un progetto piu completo.</p>
+          <div class="contact-pills" id="contact-pills"></div>
+        </div>
+        <div class="contact-lang">
+          <label for="contact-lang-select" id="contact-lang-label">Lingua</label>
+          <select id="contact-lang-select" aria-label="Seleziona lingua">
+            <option value="it">Italiano</option>
+            <option value="en">English</option>
+            <option value="es">Espanol</option>
+            <option value="fr">Francais</option>
+          </select>
+        </div>
+      </div>
     </div>
   </header>
 
   <main class="contact-wrap">
-    <section class="contact-card">
-      <h2 class="contact-title" id="contact-title">Come funziona</h2>
-      <p class="contact-lead" id="contact-lead">Il template replica la struttura di questo sito e può essere adattato ai tuoi materiali (foto, video, tracce e testi).</p>
-      <ul class="contact-list" id="contact-list">
-        <li>Impostazione base pronta all’uso</li>
-        <li>Supporto per contenuti multilingua</li>
-        <li>Mappa, timeline e galleria media</li>
-      </ul>
-      <form class="contact-form" id="contact-form">
-        <div>
-          <label for="contact-name" id="lbl-name">Nome</label>
-          <input id="contact-name" name="name" maxlength="120" required />
+    <div class="contact-grid">
+      <section class="contact-card">
+        <h2 class="contact-title" id="contact-title">Richiedi una valutazione</h2>
+        <p class="contact-lead" id="contact-lead">Piuttosto che farti perdere tempo, preferisco capire subito che tipo di progetto hai e quale opzione regge davvero.</p>
+        <ul class="contact-list" id="contact-list"></ul>
+        <form class="contact-form" id="contact-form">
+          <div>
+            <label for="contact-package" id="lbl-package">Opzione di partenza</label>
+            <select id="contact-package" name="package"></select>
+          </div>
+          <div>
+            <label for="contact-name" id="lbl-name">Nome</label>
+            <input id="contact-name" name="name" maxlength="120" required />
+          </div>
+          <div>
+            <label for="contact-email" id="lbl-email">Email</label>
+            <input id="contact-email" name="email" type="email" maxlength="190" required />
+          </div>
+          <div>
+            <label for="contact-message" id="lbl-message">Messaggio</label>
+            <textarea id="contact-message" name="message" maxlength="5000" required></textarea>
+          </div>
+          <div style="display:none">
+            <label for="contact-website">Website</label>
+            <input id="contact-website" name="website" autocomplete="off" tabindex="-1" />
+          </div>
+          <button type="submit" class="contact-submit" id="contact-submit">Invia richiesta</button>
+          <div class="contact-status" id="contact-status"></div>
+        </form>
+        <p class="contact-note" id="contact-note">Le richieste vengono inviate via endpoint API e recapitate via email. Per ora non c'e checkout automatico.</p>
+        <div class="contact-links">
+          <a class="contact-back" id="contact-back" href="/it/crea-il-tuo-diario/">← Torna all'offerta</a>
+          <a class="contact-back" id="contact-diary-back" href="/it/">← Torna al diario</a>
         </div>
-        <div>
-          <label for="contact-email" id="lbl-email">Email</label>
-          <input id="contact-email" name="email" type="email" maxlength="190" required />
+      </section>
+
+      <aside class="contact-side">
+        <div class="contact-side__block">
+          <h2 id="side-title">Riferimenti rapidi</h2>
+          <ul class="contact-mini-list" id="side-prices"></ul>
         </div>
-        <div>
-          <label for="contact-message" id="lbl-message">Messaggio</label>
-          <textarea id="contact-message" name="message" maxlength="5000" required></textarea>
+        <div class="contact-side__block">
+          <h2 id="side-what-title">Nel messaggio scrivimi</h2>
+          <ul class="contact-mini-list" id="side-what"></ul>
         </div>
-        <div style="display:none">
-          <label for="contact-website">Website</label>
-          <input id="contact-website" name="website" autocomplete="off" tabindex="-1" />
+        <div class="contact-side__block">
+          <h2 id="side-why-title">Perche faccio cosi</h2>
+          <p class="contact-note" id="side-why-text">Preferisco filtrare bene all'inizio: un template da solo non risolve un progetto confuso, e un progetto su misura non ha senso per tutti.</p>
         </div>
-        <button type="submit" class="contact-submit" id="contact-submit">Invia richiesta</button>
-        <div class="contact-status" id="contact-status"></div>
-      </form>
-      <p style="margin:10px 0 0;color:var(--muted);font-size:.9rem" id="contact-note">Le richieste vengono inviate via endpoint API e recapitate via email.</p>
-      <a class="contact-back" id="contact-back" href="/it/">← Torna al diario</a>
-    </section>
+      </aside>
+    </div>
   </main>
 
   <script>
     (function () {
+      const offerSlug = 'crea-il-tuo-diario';
       const path = String(window.location.pathname || '/');
       const m = path.match(/^\/(it|en|es|fr)\//i);
       const lang = (m ? m[1] : 'it').toLowerCase();
+      const params = new URLSearchParams(window.location.search);
+      const packFromQuery = String(params.get('pack') || '').trim().toLowerCase();
+      const PACKS = ['guide', 'call', 'template', 'setup', 'custom'];
       const T = {
         it: {
-          eyebrow: 'Contatti',
-          h1: 'Acquista il template del diario',
-          sub: 'Scrivimi per ricevere dettagli su costi, contenuti inclusi e modalità di consegna.',
-          title: 'Come funziona',
-          lead: 'Il template replica la struttura di questo sito e può essere adattato ai tuoi materiali (foto, video, tracce e testi).',
-          bullets: ['Impostazione base pronta all’uso', 'Supporto per contenuti multilingua', 'Mappa, timeline e galleria media'],
+          pageTitle: 'Richiedi una valutazione',
+          pageDesc: 'Richiedi una valutazione per guida, call, template, setup o progetto su misura collegato al diario interattivo.',
+          eyebrow: 'Valutazione',
+          h1: 'Dimmi cosa vuoi raccontare',
+          sub: 'Uso questa pagina per capire se per te ha senso guida, call, template, setup oppure un progetto piu completo.',
+          pills: ['Guida 14 EUR', 'Call 49 EUR', 'Template 89 EUR', 'Setup 349 EUR', 'Custom su richiesta'],
+          langLabel: 'Lingua',
+          title: 'Richiedi una valutazione',
+          lead: 'Piuttosto che farti perdere tempo, preferisco capire subito che tipo di progetto hai e quale opzione regge davvero.',
+          bullets: [
+            'Se il tuo caso e semplice, ti indirizzo verso la soluzione piu leggera.',
+            'Se il materiale e confuso o molto grande, te lo dico senza venderti il pacchetto sbagliato.',
+            'Per ora tutto passa da richiesta diretta: niente checkout automatico, niente finta automazione.'
+          ],
+          packageLabel: 'Opzione di partenza',
+          packages: {
+            guide: 'Guida pratica — 14 EUR',
+            call: 'Call 45 minuti — 49 EUR',
+            template: 'Template DIY — 89 EUR',
+            setup: 'Setup assistito light — 349 EUR',
+            custom: 'Progetto su misura — su richiesta'
+          },
+          placeholders: {
+            guide: 'Mi interessa la guida pratica. Sto preparando...',
+            call: 'Mi interessa una call da 45 minuti. Sto preparando...',
+            template: 'Mi interessa il Template DIY. Il progetto che voglio raccontare e...',
+            setup: 'Mi interessa lo Setup assistito light. Il progetto che voglio raccontare e...',
+            custom: 'Voglio capire se ha senso un progetto su misura. Il progetto che voglio raccontare e...'
+          },
+          defaultMessage: 'Descrivimi il viaggio o il progetto, quanti giorni e materiali hai, se hai GPS e se il materiale e gia ordinato oppure no.',
           lblName: 'Nome',
           lblEmail: 'Email',
           lblMsg: 'Messaggio',
           submit: 'Invia richiesta',
-          note: 'Le richieste vengono inviate via endpoint API e recapitate via email.',
+          note: 'Le richieste vengono inviate via endpoint API e recapitate via email. Per ora non c\'e checkout automatico.',
           sending: 'Invio in corso...',
-          ok: 'Messaggio inviato correttamente. Ti risponderò appena possibile.',
+          ok: 'Messaggio inviato correttamente. Ti rispondero appena possibile.',
           err: 'Invio non riuscito. Riprova tra poco.',
           errMissingConfig: 'Invio non disponibile: configurazione email mancante sul server.',
-          errRate: 'Hai inviato troppe richieste in poco tempo. Riprova più tardi.',
+          errRate: 'Hai inviato troppe richieste in poco tempo. Riprova piu tardi.',
           valName: 'Inserisci un nome valido (max 120 caratteri).',
           valEmail: 'Inserisci un indirizzo email valido.',
           valMessage: 'Il messaggio deve contenere almeno 10 caratteri.',
-          back: '← Torna al diario'
+          back: '← Torna all\'offerta',
+          backDiary: '← Torna al diario',
+          sideTitle: 'Riferimenti rapidi',
+          sidePrices: [
+            'Guida pratica: 14 EUR',
+            'Call 45 minuti: 49 EUR',
+            'Template DIY: 89 EUR',
+            'Setup assistito light: 349 EUR',
+            'Progetto su misura: su richiesta'
+          ],
+          sideWhatTitle: 'Nel messaggio scrivimi',
+          sideWhat: [
+            'Che viaggio o progetto vuoi raccontare',
+            'Quanti giorni e quanti materiali hai circa',
+            'Se hai o non hai GPS',
+            'Se il materiale e gia ordinato o ancora sparso',
+            'Quanto vuoi fare da solo e quanto aiuto ti serve'
+          ],
+          sideWhyTitle: 'Perche faccio cosi',
+          sideWhyText: 'Preferisco filtrare bene all\'inizio: un template da solo non risolve un progetto confuso, e un progetto su misura non ha senso per tutti.'
         },
         en: {
-          eyebrow: 'Contacts',
-          h1: 'Buy the diary template',
-          sub: 'Write to me to receive details on pricing, included features, and delivery.',
-          title: 'How it works',
-          lead: 'The template replicates this site structure and can be adapted to your materials (photos, videos, tracks, and texts).',
-          bullets: ['Ready-to-use base setup', 'Multilingual content support', 'Map, timeline, and media gallery'],
+          pageTitle: 'Request an evaluation',
+          pageDesc: 'Request an evaluation for guide, call, template, setup, or a custom project linked to the interactive diary.',
+          eyebrow: 'Evaluation',
+          h1: 'Tell me what you want to document',
+          sub: 'I use this page to understand whether guide, call, template, setup, or something more complete actually makes sense for you.',
+          pills: ['Guide 14 EUR', 'Call 49 EUR', 'Template 89 EUR', 'Setup 349 EUR', 'Custom on request'],
+          langLabel: 'Language',
+          title: 'Request an evaluation',
+          lead: 'Instead of wasting your time, I prefer to understand immediately what kind of project you have and which option really holds up.',
+          bullets: [
+            'If your case is simple, I point you to the lightest option.',
+            'If the material is messy or too large, I say it instead of pushing the wrong package.',
+            'For now everything runs through direct requests: no automatic checkout, no fake automation.'
+          ],
+          packageLabel: 'Starting option',
+          packages: {
+            guide: 'Practical guide — 14 EUR',
+            call: '45-minute call — 49 EUR',
+            template: 'DIY template — 89 EUR',
+            setup: 'Light assisted setup — 349 EUR',
+            custom: 'Custom project — on request'
+          },
+          placeholders: {
+            guide: 'I am interested in the practical guide. I am preparing...',
+            call: 'I am interested in a 45-minute call. I am preparing...',
+            template: 'I am interested in the DIY template. The project I want to document is...',
+            setup: 'I am interested in the light assisted setup. The project I want to document is...',
+            custom: 'I want to understand whether a custom project makes sense. The project I want to document is...'
+          },
+          defaultMessage: 'Tell me about the trip or project, how many days and materials you have, whether GPS exists, and whether the material is already organized or not.',
           lblName: 'Name',
           lblEmail: 'Email',
           lblMsg: 'Message',
           submit: 'Send request',
-          note: 'Requests are sent via API endpoint and delivered by email.',
+          note: 'Requests are sent through the API endpoint and delivered by email. There is no automatic checkout yet.',
           sending: 'Sending...',
           ok: 'Message sent successfully. I will reply as soon as possible.',
           err: 'Sending failed. Please try again shortly.',
-          errMissingConfig: 'Sending unavailable: missing email configuration on server.',
+          errMissingConfig: 'Sending unavailable: missing email configuration on the server.',
           errRate: 'Too many requests in a short time. Please try again later.',
           valName: 'Enter a valid name (max 120 chars).',
           valEmail: 'Enter a valid email address.',
-          valMessage: 'Message must be at least 10 characters long.',
-          back: '← Back to diary'
+          valMessage: 'Message must contain at least 10 characters.',
+          back: '← Back to the offer',
+          backDiary: '← Back to the diary',
+          sideTitle: 'Quick references',
+          sidePrices: [
+            'Practical guide: 14 EUR',
+            '45-minute call: 49 EUR',
+            'DIY template: 89 EUR',
+            'Light assisted setup: 349 EUR',
+            'Custom project: on request'
+          ],
+          sideWhatTitle: 'Please include',
+          sideWhat: [
+            'What trip or project you want to document',
+            'How many days and materials you roughly have',
+            'Whether GPS exists or not',
+            'Whether the material is already organized or still scattered',
+            'How much you want to do yourself versus how much help you need'
+          ],
+          sideWhyTitle: 'Why I work like this',
+          sideWhyText: 'I prefer filtering early: a template alone does not fix a messy project, and a custom build does not make sense for everyone.'
         },
         es: {
-          eyebrow: 'Contacto',
-          h1: 'Compra la plantilla del diario',
-          sub: 'Escríbeme para recibir detalles sobre precios, contenido incluido y forma de entrega.',
-          title: 'Cómo funciona',
-          lead: 'La plantilla replica la estructura de este sitio y puede adaptarse a tus materiales (fotos, vídeos, tracks y textos).',
-          bullets: ['Configuración base lista para usar', 'Soporte para contenidos multilingües', 'Mapa, timeline y galería de medios'],
+          pageTitle: 'Solicitar una evaluacion',
+          pageDesc: 'Solicita una evaluacion para guia, llamada, template, setup o proyecto a medida ligado al diario interactivo.',
+          eyebrow: 'Evaluacion',
+          h1: 'Dime que quieres contar',
+          sub: 'Uso esta pagina para entender si para ti tiene sentido guia, llamada, template, setup o algo mas completo.',
+          pills: ['Guia 14 EUR', 'Llamada 49 EUR', 'Template 89 EUR', 'Setup 349 EUR', 'Custom a medida'],
+          langLabel: 'Idioma',
+          title: 'Solicitar una evaluacion',
+          lead: 'En vez de hacerte perder tiempo, prefiero entender enseguida que tipo de proyecto tienes y que opcion aguanta de verdad.',
+          bullets: [
+            'Si tu caso es simple, te llevo a la opcion mas ligera.',
+            'Si el material esta desordenado o es demasiado grande, te lo digo sin empujarte al paquete equivocado.',
+            'Por ahora todo pasa por solicitud directa: sin checkout automatico, sin automatizacion falsa.'
+          ],
+          packageLabel: 'Opcion de partida',
+          packages: {
+            guide: 'Guia practica — 14 EUR',
+            call: 'Llamada de 45 minutos — 49 EUR',
+            template: 'Template DIY — 89 EUR',
+            setup: 'Setup asistido light — 349 EUR',
+            custom: 'Proyecto a medida — a medida'
+          },
+          placeholders: {
+            guide: 'Me interesa la guia practica. Estoy preparando...',
+            call: 'Me interesa una llamada de 45 minutos. Estoy preparando...',
+            template: 'Me interesa el Template DIY. El proyecto que quiero contar es...',
+            setup: 'Me interesa el Setup asistido light. El proyecto que quiero contar es...',
+            custom: 'Quiero entender si tiene sentido un proyecto a medida. El proyecto que quiero contar es...'
+          },
+          defaultMessage: 'Cuéntame el viaje o proyecto, cuantos dias y materiales tienes, si hay GPS y si el material ya esta ordenado o no.',
           lblName: 'Nombre',
           lblEmail: 'Email',
           lblMsg: 'Mensaje',
           submit: 'Enviar solicitud',
-          note: 'Las solicitudes se envían por endpoint API y se entregan por correo.',
+          note: 'Las solicitudes se envian por el endpoint API y llegan por correo. Todavia no hay checkout automatico.',
           sending: 'Enviando...',
-          ok: 'Mensaje enviado correctamente. Te responderé lo antes posible.',
+          ok: 'Mensaje enviado correctamente. Te respondere lo antes posible.',
           err: 'No se pudo enviar. Vuelve a intentarlo en breve.',
-          errMissingConfig: 'Envío no disponible: falta configuración de email en el servidor.',
-          errRate: 'Has enviado demasiadas solicitudes en poco tiempo. Inténtalo más tarde.',
-          valName: 'Introduce un nombre válido (máx. 120 caracteres).',
-          valEmail: 'Introduce un email válido.',
-          valMessage: 'El mensaje debe tener al menos 10 caracteres.',
-          back: '← Volver al diario'
+          errMissingConfig: 'Envio no disponible: falta configuracion de email en el servidor.',
+          errRate: 'Has enviado demasiadas solicitudes en poco tiempo. Intentalo mas tarde.',
+          valName: 'Introduce un nombre valido (max 120 caracteres).',
+          valEmail: 'Introduce un email valido.',
+          valMessage: 'El mensaje debe contener al menos 10 caracteres.',
+          back: '← Volver a la oferta',
+          backDiary: '← Volver al diario',
+          sideTitle: 'Referencias rapidas',
+          sidePrices: [
+            'Guia practica: 14 EUR',
+            'Llamada de 45 minutos: 49 EUR',
+            'Template DIY: 89 EUR',
+            'Setup asistido light: 349 EUR',
+            'Proyecto a medida: a medida'
+          ],
+          sideWhatTitle: 'En el mensaje dime',
+          sideWhat: [
+            'Que viaje o proyecto quieres contar',
+            'Cuantos dias y materiales tienes aproximadamente',
+            'Si tienes o no GPS',
+            'Si el material ya esta ordenado o todavia disperso',
+            'Cuanto quieres hacer por tu cuenta y cuanta ayuda necesitas'
+          ],
+          sideWhyTitle: 'Por que trabajo asi',
+          sideWhyText: 'Prefiero filtrar bien al principio: un template por si solo no arregla un proyecto confuso, y un proyecto a medida no tiene sentido para todo el mundo.'
         },
         fr: {
-          eyebrow: 'Contact',
-          h1: 'Acheter le modèle du journal',
-          sub: 'Écris-moi pour recevoir les détails sur le prix, le contenu inclus et la livraison.',
-          title: 'Comment ça marche',
-          lead: 'Le modèle reproduit la structure de ce site et peut être adapté à tes contenus (photos, vidéos, traces et textes).',
-          bullets: ['Base prête à l’emploi', 'Support des contenus multilingues', 'Carte, timeline et galerie média'],
+          pageTitle: 'Demander une evaluation',
+          pageDesc: 'Demande une evaluation pour guide, appel, template, setup ou projet sur mesure lie au journal interactif.',
+          eyebrow: 'Evaluation',
+          h1: 'Dis-moi ce que tu veux raconter',
+          sub: 'J\'utilise cette page pour comprendre si guide, appel, template, setup ou quelque chose de plus complet a du sens pour toi.',
+          pills: ['Guide 14 EUR', 'Appel 49 EUR', 'Template 89 EUR', 'Setup 349 EUR', 'Custom sur demande'],
+          langLabel: 'Langue',
+          title: 'Demander une evaluation',
+          lead: 'Plutot que de te faire perdre du temps, je prefere comprendre tout de suite quel type de projet tu as et quelle option tient vraiment.',
+          bullets: [
+            'Si ton cas est simple, je te dirige vers l\'option la plus legere.',
+            'Si le materiel est desordonne ou trop lourd, je te le dis sans te pousser vers la mauvaise offre.',
+            'Pour l\'instant tout passe par une demande directe: pas de checkout automatique, pas de fausse automatisation.'
+          ],
+          packageLabel: 'Option de depart',
+          packages: {
+            guide: 'Guide pratique — 14 EUR',
+            call: 'Appel de 45 minutes — 49 EUR',
+            template: 'Template DIY — 89 EUR',
+            setup: 'Setup assiste light — 349 EUR',
+            custom: 'Projet sur mesure — sur demande'
+          },
+          placeholders: {
+            guide: 'Le guide pratique m\'interesse. Je prepare...',
+            call: 'Je suis interesse par un appel de 45 minutes. Je prepare...',
+            template: 'Le Template DIY m\'interesse. Le projet que je veux raconter est...',
+            setup: 'Le Setup assiste light m\'interesse. Le projet que je veux raconter est...',
+            custom: 'Je veux comprendre si un projet sur mesure a du sens. Le projet que je veux raconter est...'
+          },
+          defaultMessage: 'Explique-moi le voyage ou le projet, combien de jours et de materiels tu as, s\'il y a du GPS et si le materiel est deja organise ou non.',
           lblName: 'Nom',
           lblEmail: 'Email',
           lblMsg: 'Message',
           submit: 'Envoyer la demande',
-          note: 'Les demandes sont envoyées via un endpoint API et livrées par email.',
+          note: 'Les demandes sont envoyees via l\'endpoint API et livrees par email. Il n\'y a pas encore de checkout automatique.',
           sending: 'Envoi en cours...',
-          ok: 'Message envoyé avec succès. Je te répondrai dès que possible.',
-          err: 'Envoi échoué. Réessaie dans un instant.',
+          ok: 'Message envoye avec succes. Je te repondrai des que possible.',
+          err: 'Envoi echoue. Reessaie dans un instant.',
           errMissingConfig: 'Envoi indisponible: configuration email manquante sur le serveur.',
-          errRate: 'Trop de demandes en peu de temps. Réessaie plus tard.',
-          valName: 'Saisis un nom valide (max 120 caractères).',
+          errRate: 'Trop de demandes en peu de temps. Reessaie plus tard.',
+          valName: 'Saisis un nom valide (max 120 caracteres).',
           valEmail: 'Saisis une adresse email valide.',
-          valMessage: 'Le message doit contenir au moins 10 caractères.',
-          back: '← Retour au journal'
+          valMessage: 'Le message doit contenir au moins 10 caracteres.',
+          back: '← Retour a l\'offre',
+          backDiary: '← Retour au journal',
+          sideTitle: 'Repères rapides',
+          sidePrices: [
+            'Guide pratique: 14 EUR',
+            'Appel de 45 minutes: 49 EUR',
+            'Template DIY: 89 EUR',
+            'Setup assiste light: 349 EUR',
+            'Projet sur mesure: sur demande'
+          ],
+          sideWhatTitle: 'Dans ton message, indique',
+          sideWhat: [
+            'Quel voyage ou projet tu veux raconter',
+            'Combien de jours et de materiels tu as environ',
+            'Si tu as ou non du GPS',
+            'Si le materiel est deja organise ou encore disperse',
+            'Ce que tu veux faire seul et l\'aide dont tu as besoin'
+          ],
+          sideWhyTitle: 'Pourquoi je fonctionne ainsi',
+          sideWhyText: 'Je prefere filtrer tot: un template seul ne regle pas un projet confus, et un projet sur mesure n\'a pas de sens pour tout le monde.'
         }
       };
       const t = T[lang] || T.it;
+      const offerPath = `/${lang}/${offerSlug}/`;
+      const diaryPath = `/${lang}/`;
+      const canonical = `/${lang}/contatti/`;
+      const packageSelect = document.getElementById('contact-package');
+      const messageInput = document.getElementById('contact-message');
+      const status = document.getElementById('contact-status');
+      const langSelect = document.getElementById('contact-lang-select');
+      let lastAutofill = '';
+
+      const setText = (id, value) => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = value;
+      };
+
       document.documentElement.lang = lang;
-      document.getElementById('contact-eyebrow').textContent = t.eyebrow;
-      document.getElementById('contact-h1').textContent = t.h1;
-      document.getElementById('contact-sub').textContent = t.sub;
-      document.getElementById('contact-title').textContent = t.title;
-      document.getElementById('contact-lead').textContent = t.lead;
-      const ul = document.getElementById('contact-list');
-      ul.innerHTML = '';
-      t.bullets.forEach((txt) => { const li = document.createElement('li'); li.textContent = txt; ul.appendChild(li); });
-      document.getElementById('lbl-name').textContent = t.lblName;
-      document.getElementById('lbl-email').textContent = t.lblEmail;
-      document.getElementById('lbl-message').textContent = t.lblMsg;
-      document.getElementById('contact-submit').textContent = t.submit;
-      document.getElementById('contact-note').textContent = t.note;
-      const back = document.getElementById('contact-back');
-      back.textContent = t.back;
-      back.href = `/${lang}/`;
-      document.title = `${t.eyebrow} — Cammino di Santiago`;
+      document.title = `${t.pageTitle} — Cammino di Santiago`;
+      document.getElementById('meta-description').setAttribute('content', t.pageDesc);
+      document.getElementById('seo-canonical').setAttribute('href', canonical);
+      document.getElementById('seo-alt-it').setAttribute('href', '/it/contatti/');
+      document.getElementById('seo-alt-en').setAttribute('href', '/en/contatti/');
+      document.getElementById('seo-alt-es').setAttribute('href', '/es/contatti/');
+      document.getElementById('seo-alt-fr').setAttribute('href', '/fr/contatti/');
+      document.getElementById('seo-alt-default').setAttribute('href', '/it/contatti/');
+
+      setText('contact-eyebrow', t.eyebrow);
+      setText('contact-h1', t.h1);
+      setText('contact-sub', t.sub);
+      setText('contact-lang-label', t.langLabel);
+      setText('contact-title', t.title);
+      setText('contact-lead', t.lead);
+      setText('lbl-package', t.packageLabel);
+      setText('lbl-name', t.lblName);
+      setText('lbl-email', t.lblEmail);
+      setText('lbl-message', t.lblMsg);
+      setText('contact-submit', t.submit);
+      setText('contact-note', t.note);
+      setText('contact-back', t.back);
+      setText('contact-diary-back', t.backDiary);
+      setText('side-title', t.sideTitle);
+      setText('side-what-title', t.sideWhatTitle);
+      setText('side-why-title', t.sideWhyTitle);
+      setText('side-why-text', t.sideWhyText);
+      document.getElementById('contact-back').href = offerPath;
+      document.getElementById('contact-diary-back').href = diaryPath;
+
+      const pills = document.getElementById('contact-pills');
+      pills.innerHTML = '';
+      t.pills.forEach((item) => {
+        const span = document.createElement('span');
+        span.className = 'contact-pill';
+        span.textContent = item;
+        pills.appendChild(span);
+      });
+
+      const fillList = (id, items) => {
+        const el = document.getElementById(id);
+        el.innerHTML = '';
+        (items || []).forEach((item) => {
+          const li = document.createElement('li');
+          li.textContent = item;
+          el.appendChild(li);
+        });
+      };
+      fillList('contact-list', t.bullets);
+      fillList('side-prices', t.sidePrices);
+      fillList('side-what', t.sideWhat);
+
+      if (langSelect) {
+        langSelect.value = lang;
+        langSelect.addEventListener('change', () => {
+          const target = String(langSelect.value || 'it').toLowerCase();
+          const next = `/${target}/contatti/${packFromQuery ? `?pack=${encodeURIComponent(packFromQuery)}` : ''}`;
+          window.location.href = next;
+        });
+      }
+
+      const setPackageOptions = () => {
+        packageSelect.innerHTML = '';
+        PACKS.forEach((key) => {
+          const option = document.createElement('option');
+          option.value = key;
+          option.textContent = t.packages[key];
+          packageSelect.appendChild(option);
+        });
+        packageSelect.value = PACKS.includes(packFromQuery) ? packFromQuery : 'setup';
+      };
+
+      const maybeAutofillMessage = () => {
+        const key = packageSelect.value || 'setup';
+        const nextTemplate = t.placeholders[key] || t.defaultMessage;
+        const current = String(messageInput.value || '').trim();
+        if (!current || current === lastAutofill) {
+          messageInput.value = `${nextTemplate}\n\n${t.defaultMessage}`;
+          lastAutofill = String(messageInput.value || '').trim();
+        }
+      };
+
+      setPackageOptions();
+      maybeAutofillMessage();
+      packageSelect.addEventListener('change', maybeAutofillMessage);
+      messageInput.addEventListener('input', () => {
+        lastAutofill = String(messageInput.value || '').trim();
+      });
 
       const form = document.getElementById('contact-form');
-      const status = document.getElementById('contact-status');
       form.addEventListener('submit', async (ev) => {
         ev.preventDefault();
         const name = String(document.getElementById('contact-name').value || '').trim();
         const email = String(document.getElementById('contact-email').value || '').trim();
         const message = String(document.getElementById('contact-message').value || '').trim();
         const website = String(document.getElementById('contact-website').value || '').trim();
+        const selectedPackage = String(packageSelect.value || '').trim();
 
         if (!name || name.length > 120) {
           status.textContent = t.valName;
@@ -223,6 +550,8 @@
             message,
             website,
             lang,
+            package: selectedPackage,
+            source: 'contact_form'
           };
           const res = await fetch('/api/contact/send', {
             method: 'POST',
@@ -245,6 +574,8 @@
           }
           status.textContent = t.ok;
           form.reset();
+          setPackageOptions();
+          maybeAutofillMessage();
         } catch (e) {
           if (!status.textContent || status.textContent === t.sending) {
             status.textContent = t.err;

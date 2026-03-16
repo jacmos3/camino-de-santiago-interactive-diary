@@ -1,0 +1,648 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title id="page-title">Crea il tuo diario interattivo</title>
+  <meta id="page-description" name="description" content="Trasforma foto, video, tracce GPS e note sparse in un diario interattivo con mappa, media e racconto giorno per giorno." />
+  <link id="seo-canonical" rel="canonical" href="/it/crea-il-tuo-diario/" />
+  <link id="seo-alt-it" rel="alternate" hreflang="it" href="/it/crea-il-tuo-diario/" />
+  <link id="seo-alt-en" rel="alternate" hreflang="en" href="/en/crea-il-tuo-diario/" />
+  <link id="seo-alt-es" rel="alternate" hreflang="es" href="/es/crea-il-tuo-diario/" />
+  <link id="seo-alt-fr" rel="alternate" hreflang="fr" href="/fr/crea-il-tuo-diario/" />
+  <link id="seo-alt-default" rel="alternate" hreflang="x-default" href="/it/crea-il-tuo-diario/" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <meta property="og:image" content="/assets/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:type" content="image/jpeg" />
+  <meta name="twitter:image" content="/assets/og-image.jpg" />
+  <link rel="stylesheet" href="/styles.css" />
+  <style>
+    .offer-shell { max-width: 1100px; margin: 0 auto; padding: 28px 22px 72px; }
+    .offer-hero { padding: 42px 22px 28px; background-position: center 45%; }
+    .offer-hero__top { display: flex; justify-content: space-between; gap: 18px; align-items: flex-start; flex-wrap: wrap; }
+    .offer-hero__actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
+    .offer-hero__meta { display: grid; gap: 12px; min-width: 220px; }
+    .offer-lang { display: grid; gap: 6px; }
+    .offer-lang label { font-size: .92rem; font-weight: 600; color: var(--ink); }
+    .offer-lang select {
+      border: 1px solid rgba(31,26,22,.18); border-radius: 10px; padding: 10px 11px;
+      background: #fffaf2; color: var(--ink); font: inherit;
+    }
+    .offer-actions-row { display: flex; gap: 10px; flex-wrap: wrap; }
+    .offer-btn,
+    .offer-btn-secondary,
+    .offer-card__btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      border-radius: 999px; padding: 10px 16px; text-decoration: none; font-weight: 700;
+      border: 1px solid rgba(31,95,91,.35);
+    }
+    .offer-btn,
+    .offer-card__btn {
+      background: #1f5f5b; color: #fffaf2;
+    }
+    .offer-btn-secondary {
+      background: #fffaf2; color: var(--ink);
+    }
+    .offer-note { margin: 14px 0 0; color: var(--muted); max-width: 820px; }
+    .offer-grid { display: grid; gap: 18px; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 22px; }
+    .offer-card,
+    .offer-block,
+    .offer-final {
+      background: #fffaf2; border: 1px solid rgba(31,26,22,.1); border-radius: 18px;
+      box-shadow: var(--shadow);
+    }
+    .offer-card { padding: 20px; display: grid; gap: 12px; }
+    .offer-card--featured { border-color: rgba(31,95,91,.35); box-shadow: 0 14px 34px rgba(31,95,91,.14); }
+    .offer-card__kicker { font-size: .83rem; letter-spacing: .04em; text-transform: uppercase; color: #1f5f5b; font-weight: 700; }
+    .offer-card__title { margin: 0; font-size: 1.28rem; }
+    .offer-card__price { font-size: 1.8rem; font-weight: 800; color: var(--ink); }
+    .offer-card__text { margin: 0; color: var(--muted); }
+    .offer-card ul,
+    .offer-list,
+    .offer-step-list,
+    .offer-faq { margin: 0; padding-left: 18px; }
+    .offer-card li,
+    .offer-list li,
+    .offer-step-list li,
+    .offer-faq li { margin: 7px 0; }
+    .offer-section { margin-top: 24px; }
+    .offer-block { padding: 22px; }
+    .offer-block h2,
+    .offer-final h2 { margin-top: 0; }
+    .offer-block__lead,
+    .offer-final p { color: var(--muted); }
+    .offer-columns { display: grid; gap: 18px; grid-template-columns: 1.05fr .95fr; }
+    .offer-final { margin-top: 24px; padding: 24px; }
+    .offer-final__actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+    .offer-small { color: var(--muted); font-size: .92rem; }
+    @media (max-width: 980px) {
+      .offer-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 820px) {
+      .offer-columns { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 640px) {
+      .offer-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero offer-hero">
+    <div class="hero__inner">
+      <div class="offer-hero__top">
+        <div>
+          <span class="eyebrow" id="offer-eyebrow">Offerta</span>
+          <h1 id="offer-h1">Trasforma il tuo viaggio in un diario interattivo come questo</h1>
+          <p class="lead" id="offer-sub">Se hai foto, video, tracce GPS o note sparse, puoi trasformarli in un diario navigabile, ordinato e condivisibile.</p>
+          <p class="offer-note" id="offer-note">Qui non stai comprando un travel blog generico: il valore è trasformare materiale reale in una storia leggibile, con struttura, mappa e ordine.</p>
+          <div class="offer-hero__actions">
+            <a class="offer-btn" id="offer-primary-link" href="/it/contatti/?pack=setup">Richiedi una valutazione</a>
+            <a class="offer-btn-secondary" id="offer-secondary-link" href="/it/">Torna al diario</a>
+          </div>
+        </div>
+        <div class="offer-hero__meta">
+          <div class="offer-lang">
+            <label for="offer-lang-select" id="offer-lang-label">Lingua</label>
+            <select id="offer-lang-select" aria-label="Seleziona lingua">
+              <option value="it">Italiano</option>
+              <option value="en">English</option>
+              <option value="es">Espanol</option>
+              <option value="fr">Francais</option>
+            </select>
+          </div>
+          <div class="offer-small" id="offer-process-note">Per ora l'attivazione dei pacchetti passa da richiesta diretta: non c'e ancora checkout automatico.</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="offer-shell">
+    <section class="offer-section">
+      <div class="offer-block">
+        <h2 id="pricing-title">Scegli il punto di ingresso</h2>
+        <p class="offer-block__lead" id="pricing-lead">Listino pubblico aggressivo: basso attrito all'ingresso, lavoro piu strutturato solo dopo contatto.</p>
+        <div class="offer-grid" id="offer-grid"></div>
+      </div>
+    </section>
+
+    <section class="offer-section offer-columns">
+      <div class="offer-block">
+        <h2 id="fit-title">A chi serve davvero</h2>
+        <ul class="offer-list" id="fit-list"></ul>
+      </div>
+      <div class="offer-block">
+        <h2 id="how-title">Come funziona</h2>
+        <ol class="offer-step-list" id="how-list"></ol>
+      </div>
+    </section>
+
+    <section class="offer-section offer-columns">
+      <div class="offer-block">
+        <h2 id="before-title">Prima di scrivermi</h2>
+        <p class="offer-block__lead" id="before-lead">Se mi mandi queste informazioni, ti rispondo in modo piu rapido e preciso.</p>
+        <ul class="offer-list" id="before-list"></ul>
+      </div>
+      <div class="offer-block">
+        <h2 id="faq-title">Domande frequenti</h2>
+        <ul class="offer-faq" id="faq-list"></ul>
+      </div>
+    </section>
+
+    <section class="offer-final">
+      <h2 id="final-title">Non sai da dove partire?</h2>
+      <p id="final-text">Se hai dubbi sul pacchetto giusto, parti dalla richiesta di valutazione: e il modo piu semplice per capire se ha senso template, setup oppure un progetto piu completo.</p>
+      <div class="offer-final__actions">
+        <a class="offer-btn" id="final-primary-link" href="/it/contatti/?pack=custom">Richiedi una valutazione</a>
+        <a class="offer-btn-secondary" id="final-secondary-link" href="/it/">Rivedi il diario</a>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      const slug = 'crea-il-tuo-diario';
+      const path = String(window.location.pathname || '/');
+      const match = path.match(/^\/(it|en|es|fr)\//i);
+      const lang = (match ? match[1] : 'it').toLowerCase();
+      const packFromQuery = new URLSearchParams(window.location.search).get('pack') || '';
+      const T = {
+        it: {
+          pageTitle: 'Crea il tuo diario interattivo',
+          pageDesc: 'Trasforma foto, video, tracce GPS e note sparse in un diario interattivo con mappa, media e racconto giorno per giorno.',
+          eyebrow: 'Offerta',
+          h1: 'Trasforma il tuo viaggio in un diario interattivo come questo',
+          sub: 'Se hai foto, video, tracce GPS o note sparse, puoi trasformarli in un diario navigabile, ordinato e condivisibile.',
+          note: 'Qui non stai comprando un travel blog generico: il valore e trasformare materiale reale in una storia leggibile, con struttura, mappa e ordine.',
+          primary: 'Richiedi una valutazione',
+          secondary: 'Torna al diario',
+          langLabel: 'Lingua',
+          processNote: 'Per ora l\'attivazione dei pacchetti passa da richiesta diretta: non c\'e ancora checkout automatico.',
+          pricingTitle: 'Scegli il punto di ingresso',
+          pricingLead: 'Listino pubblico aggressivo: basso attrito all\'ingresso, lavoro piu strutturato solo dopo contatto.',
+          cards: [
+            {
+              key: 'guide',
+              kicker: 'Low ticket',
+              title: 'Guida pratica',
+              price: '14 EUR',
+              text: 'Per chi vuole consigli concreti sul Cammino e sulla logistica senza entrare in un progetto tecnico.',
+              bullets: ['Contenuto sintetico e pratico', 'Nessun supporto incluso', 'Buona opzione se vuoi spendere il minimo'],
+              cta: 'Chiedi la guida'
+            },
+            {
+              key: 'call',
+              kicker: 'Filtro rapido',
+              title: 'Call 45 minuti',
+              price: '49 EUR',
+              text: 'Per chi vuole confrontarsi prima di partire o prima di impostare il proprio diario.',
+              bullets: ['Confronto diretto', 'Utile per dubbi pratici o impostazione', 'Ti evita di comprare la cosa sbagliata'],
+              cta: 'Prenota una call'
+            },
+            {
+              key: 'template',
+              kicker: 'Autonomia',
+              title: 'Template DIY',
+              price: '89 EUR',
+              text: 'Per chi e tecnico e vuole partire dalla stessa base del sito, ma lavorare in autonomia.',
+              bullets: ['Struttura base del sito', 'Istruzioni essenziali', 'Supporto molto limitato'],
+              cta: 'Parti dal template'
+            },
+            {
+              key: 'setup',
+              kicker: 'Consigliato',
+              title: 'Setup assistito light',
+              price: '349 EUR',
+              text: 'Per chi vuole una base gia impostata e online, senza dover sistemare tutto da solo.',
+              bullets: ['Installazione iniziale', 'Branding base', 'Import di un piccolo campione'],
+              cta: 'Richiedi lo setup',
+              featured: true
+            },
+            {
+              key: 'custom',
+              kicker: 'Solo su richiesta',
+              title: 'Progetto su misura',
+              price: 'Su richiesta',
+              text: 'Per materiali numerosi, disordinati o per chi vuole un lavoro piu completo rispetto ai pacchetti pubblici.',
+              bullets: ['Valutazione caso per caso', 'Non e l\'opzione di ingresso', 'Ha senso solo se il progetto lo giustifica'],
+              cta: 'Valuta il mio progetto'
+            }
+          ],
+          fitTitle: 'A chi serve davvero',
+          fitItems: [
+            'Cammino di Santiago, viaggi lunghi, sabbatici e percorsi a tappe',
+            'Bikepacking, vanlife e viaggi fotografici con molto materiale',
+            'Persone che non vogliono lasciare foto e note disperse tra cloud e chat',
+            'Chi vuole raccontare un viaggio serio, non un blog generico improvvisato'
+          ],
+          howTitle: 'Come funziona',
+          howItems: [
+            'Scegli il livello di ingresso: guida, call, template o setup.',
+            'Mi scrivi cosa vuoi raccontare e quanto materiale hai davvero.',
+            'Se il progetto ha senso, ti dico in modo diretto quale opzione regge e quale no.'
+          ],
+          beforeTitle: 'Prima di scrivermi',
+          beforeLead: 'Se mi mandi queste informazioni, ti rispondo in modo piu rapido e preciso.',
+          beforeItems: [
+            'Che viaggio o progetto vuoi raccontare',
+            'Numero indicativo di giorni, foto, video e presenza o assenza di GPS',
+            'Se il materiale e gia ordinato oppure ancora sparso',
+            'Se vuoi fare da solo oppure vuoi una mano concreta',
+            'Budget orientativo, anche ampio ma onesto'
+          ],
+          faqTitle: 'Domande frequenti',
+          faqItems: [
+            'Non faccio siti travel generici a basso costo: questo formato ha senso quando esiste davvero una storia e del materiale concreto.',
+            'Il template non e supporto illimitato travestito: se vuoi aiuto operativo, lo setup e piu sensato.',
+            'Il progetto su misura non e il pacchetto da proporre a tutti: lo valuto solo se il materiale o l\'obiettivo lo giustificano.',
+            'Se parti low-ticket e poi ti serve di piu, possiamo capire dopo se ha senso salire di livello.'
+          ],
+          finalTitle: 'Non sai da dove partire?',
+          finalText: 'Se hai dubbi sul pacchetto giusto, parti dalla richiesta di valutazione: e il modo piu semplice per capire se ha senso template, setup oppure un progetto piu completo.',
+          finalPrimary: 'Richiedi una valutazione',
+          finalSecondary: 'Rivedi il diario'
+        },
+        en: {
+          pageTitle: 'Create your interactive travel diary',
+          pageDesc: 'Turn photos, videos, GPS tracks, and scattered notes into an interactive travel diary with map, media, and day-by-day storytelling.',
+          eyebrow: 'Offer',
+          h1: 'Turn your trip into an interactive diary like this one',
+          sub: 'If you have photos, videos, GPS tracks, or scattered notes, you can turn them into a navigable, structured, shareable diary.',
+          note: 'This is not a generic travel blog. The value is turning real material into a readable story with structure, map, and order.',
+          primary: 'Request an evaluation',
+          secondary: 'Back to diary',
+          langLabel: 'Language',
+          processNote: 'For now packages are activated through a direct request: there is no automatic checkout yet.',
+          pricingTitle: 'Choose your entry point',
+          pricingLead: 'Public pricing stays aggressive: low friction at entry, more structured work only after contact.',
+          cards: [
+            {
+              key: 'guide',
+              kicker: 'Low ticket',
+              title: 'Practical guide',
+              price: '14 EUR',
+              text: 'For people who want concrete Camino and logistics advice without starting a technical project.',
+              bullets: ['Concise and practical content', 'No support included', 'Best if you want the cheapest entry'],
+              cta: 'Ask for the guide'
+            },
+            {
+              key: 'call',
+              kicker: 'Quick filter',
+              title: '45-minute call',
+              price: '49 EUR',
+              text: 'For people who want a direct conversation before leaving or before setting up their own diary.',
+              bullets: ['Direct conversation', 'Useful for practical doubts or setup', 'Helps avoid buying the wrong thing'],
+              cta: 'Book a call'
+            },
+            {
+              key: 'template',
+              kicker: 'Autonomy',
+              title: 'DIY template',
+              price: '89 EUR',
+              text: 'For technical users who want to start from the same base as this site and work independently.',
+              bullets: ['Base site structure', 'Essential instructions', 'Very limited support'],
+              cta: 'Start with the template'
+            },
+            {
+              key: 'setup',
+              kicker: 'Recommended',
+              title: 'Light assisted setup',
+              price: '349 EUR',
+              text: 'For people who want an initial base already configured and online without fixing everything alone.',
+              bullets: ['Initial installation', 'Basic branding', 'Small sample import'],
+              cta: 'Request setup',
+              featured: true
+            },
+            {
+              key: 'custom',
+              kicker: 'On request only',
+              title: 'Custom project',
+              price: 'On request',
+              text: 'For larger, messy, or more ambitious projects than the public packages.',
+              bullets: ['Case-by-case evaluation', 'Not the default entry option', 'Only makes sense if the project justifies it'],
+              cta: 'Evaluate my project'
+            }
+          ],
+          fitTitle: 'Who this actually fits',
+          fitItems: [
+            'Camino de Santiago, long journeys, sabbaticals, and stage-based routes',
+            'Bikepacking, vanlife, and photo-heavy trips',
+            'People who do not want photos and notes scattered across cloud folders and chats',
+            'People who want to tell a serious journey, not improvise a generic blog'
+          ],
+          howTitle: 'How it works',
+          howItems: [
+            'Pick your entry level: guide, call, template, or setup.',
+            'Tell me what you want to document and how much material you actually have.',
+            'If the project makes sense, I tell you directly which option works and which does not.'
+          ],
+          beforeTitle: 'Before you write',
+          beforeLead: 'If you send me this information, I can answer faster and with less guessing.',
+          beforeItems: [
+            'What trip or project you want to tell',
+            'Rough number of days, photos, videos, and whether GPS exists',
+            'Whether the material is already organized or still scattered',
+            'Whether you want to do it yourself or need actual help',
+            'A realistic budget range'
+          ],
+          faqTitle: 'Common questions',
+          faqItems: [
+            'I do not build cheap generic travel blogs: this format only makes sense when there is a real story and real material.',
+            'The template is not unlimited support in disguise: if you need operational help, setup is the better fit.',
+            'The custom project is not the package to push on everyone: I only consider it when the material or goal justifies it.',
+            'If you start low-ticket and later need more, we can decide afterwards whether moving up makes sense.'
+          ],
+          finalTitle: 'Not sure where to start?',
+          finalText: 'If you are unsure which package makes sense, start from the evaluation request: it is the simplest way to understand whether template, setup, or something more complete is the right move.',
+          finalPrimary: 'Request an evaluation',
+          finalSecondary: 'See the diary again'
+        },
+        es: {
+          pageTitle: 'Crea tu diario interactivo',
+          pageDesc: 'Convierte fotos, videos, tracks GPS y notas dispersas en un diario interactivo con mapa, media y relato dia a dia.',
+          eyebrow: 'Oferta',
+          h1: 'Convierte tu viaje en un diario interactivo como este',
+          sub: 'Si tienes fotos, videos, tracks GPS o notas dispersas, puedes convertirlos en un diario navegable, ordenado y compartible.',
+          note: 'Aqui no estas comprando un blog de viajes generico: el valor esta en transformar material real en una historia legible, con estructura, mapa y orden.',
+          primary: 'Solicitar una evaluacion',
+          secondary: 'Volver al diario',
+          langLabel: 'Idioma',
+          processNote: 'Por ahora los paquetes se activan mediante solicitud directa: todavia no hay checkout automatico.',
+          pricingTitle: 'Elige tu punto de entrada',
+          pricingLead: 'Precio publico agresivo: poca friccion al entrar y trabajo mas estructurado solo despues del contacto.',
+          cards: [
+            {
+              key: 'guide',
+              kicker: 'Low ticket',
+              title: 'Guia practica',
+              price: '14 EUR',
+              text: 'Para quien quiere consejos concretos sobre el Camino y la logistica sin entrar en un proyecto tecnico.',
+              bullets: ['Contenido sintetico y practico', 'Sin soporte incluido', 'Buena opcion si quieres gastar muy poco'],
+              cta: 'Pedir la guia'
+            },
+            {
+              key: 'call',
+              kicker: 'Filtro rapido',
+              title: 'Llamada de 45 minutos',
+              price: '49 EUR',
+              text: 'Para quien quiere hablar antes de salir o antes de montar su propio diario.',
+              bullets: ['Conversacion directa', 'Util para dudas practicas o de planteamiento', 'Te evita comprar la opcion equivocada'],
+              cta: 'Reservar llamada'
+            },
+            {
+              key: 'template',
+              kicker: 'Autonomia',
+              title: 'Template DIY',
+              price: '89 EUR',
+              text: 'Para quien es tecnico y quiere partir de la misma base del sitio, trabajando por su cuenta.',
+              bullets: ['Estructura base del sitio', 'Instrucciones esenciales', 'Soporte muy limitado'],
+              cta: 'Empezar con el template'
+            },
+            {
+              key: 'setup',
+              kicker: 'Recomendado',
+              title: 'Setup asistido light',
+              price: '349 EUR',
+              text: 'Para quien quiere una base ya configurada y online sin tener que arreglarlo todo solo.',
+              bullets: ['Instalacion inicial', 'Branding basico', 'Importacion de una pequena muestra'],
+              cta: 'Solicitar setup',
+              featured: true
+            },
+            {
+              key: 'custom',
+              kicker: 'Solo a medida',
+              title: 'Proyecto a medida',
+              price: 'A medida',
+              text: 'Para materiales numerosos, desordenados o proyectos mas ambiciosos que los paquetes publicos.',
+              bullets: ['Evaluacion caso por caso', 'No es la opcion de entrada', 'Solo tiene sentido si el proyecto lo justifica'],
+              cta: 'Evaluar mi proyecto'
+            }
+          ],
+          fitTitle: 'Para quien encaja de verdad',
+          fitItems: [
+            'Camino de Santiago, viajes largos, sabaticos y rutas por etapas',
+            'Bikepacking, vanlife y viajes fotograficos con mucho material',
+            'Personas que no quieren dejar fotos y notas perdidas entre carpetas y chats',
+            'Quien quiere contar un viaje serio, no improvisar un blog generico'
+          ],
+          howTitle: 'Como funciona',
+          howItems: [
+            'Elige tu nivel de entrada: guia, llamada, template o setup.',
+            'Me cuentas que quieres narrar y cuanto material tienes de verdad.',
+            'Si el proyecto tiene sentido, te digo de forma directa que opcion aguanta y cual no.'
+          ],
+          beforeTitle: 'Antes de escribirme',
+          beforeLead: 'Si me envias esta informacion, respondo mas rapido y con menos suposiciones.',
+          beforeItems: [
+            'Que viaje o proyecto quieres contar',
+            'Numero aproximado de dias, fotos, videos y si existe GPS',
+            'Si el material ya esta ordenado o todavia disperso',
+            'Si quieres hacerlo solo o necesitas ayuda real',
+            'Un rango de presupuesto realista'
+          ],
+          faqTitle: 'Preguntas frecuentes',
+          faqItems: [
+            'No hago blogs de viaje genericos y baratos: este formato solo tiene sentido cuando hay una historia real y material concreto.',
+            'El template no es soporte ilimitado disfrazado: si necesitas ayuda operativa, el setup es mejor.',
+            'El proyecto a medida no es el paquete para empujar a todo el mundo: solo lo valoro si el objetivo o el material lo justifican.',
+            'Si empiezas con low-ticket y luego necesitas mas, despues se puede decidir si tiene sentido subir de nivel.'
+          ],
+          finalTitle: 'No sabes por donde empezar?',
+          finalText: 'Si dudas sobre el paquete correcto, empieza por la solicitud de evaluacion: es la forma mas simple de entender si tiene sentido template, setup o algo mas completo.',
+          finalPrimary: 'Solicitar una evaluacion',
+          finalSecondary: 'Volver a ver el diario'
+        },
+        fr: {
+          pageTitle: 'Cree ton journal interactif',
+          pageDesc: 'Transforme photos, videos, traces GPS et notes eparses en un journal interactif avec carte, medias et recit jour par jour.',
+          eyebrow: 'Offre',
+          h1: 'Transforme ton voyage en journal interactif comme celui-ci',
+          sub: 'Si tu as des photos, des videos, des traces GPS ou des notes eparses, tu peux les transformer en un journal navigable, ordonne et partageable.',
+          note: 'Ici tu n\'achetes pas un blog voyage generique: la valeur est de transformer du materiel reel en une histoire lisible, avec structure, carte et ordre.',
+          primary: 'Demander une evaluation',
+          secondary: 'Retour au journal',
+          langLabel: 'Langue',
+          processNote: 'Pour l\'instant les offres passent par une demande directe: il n\'y a pas encore de checkout automatique.',
+          pricingTitle: 'Choisis ton point d\'entree',
+          pricingLead: 'Tarif public agressif: peu de friction a l\'entree, travail plus structure seulement apres contact.',
+          cards: [
+            {
+              key: 'guide',
+              kicker: 'Low ticket',
+              title: 'Guide pratique',
+              price: '14 EUR',
+              text: 'Pour celles et ceux qui veulent des conseils concrets sur le Chemin et la logistique sans ouvrir un projet technique.',
+              bullets: ['Contenu synthétique et pratique', 'Aucun support inclus', 'Bonne option si tu veux depenser le minimum'],
+              cta: 'Demander le guide'
+            },
+            {
+              key: 'call',
+              kicker: 'Filtre rapide',
+              title: 'Appel de 45 minutes',
+              price: '49 EUR',
+              text: 'Pour celles et ceux qui veulent echanger avant de partir ou avant de monter leur propre journal.',
+              bullets: ['Echange direct', 'Utile pour les doutes pratiques ou de cadrage', 'Evite d\'acheter la mauvaise option'],
+              cta: 'Reserver un appel'
+            },
+            {
+              key: 'template',
+              kicker: 'Autonomie',
+              title: 'Template DIY',
+              price: '89 EUR',
+              text: 'Pour les profils techniques qui veulent partir de la meme base que ce site et travailler seuls.',
+              bullets: ['Structure de base du site', 'Instructions essentielles', 'Support tres limite'],
+              cta: 'Commencer avec le template'
+            },
+            {
+              key: 'setup',
+              kicker: 'Recommande',
+              title: 'Setup assiste light',
+              price: '349 EUR',
+              text: 'Pour celles et ceux qui veulent une base deja en ligne et configuree sans tout regler seuls.',
+              bullets: ['Installation initiale', 'Branding de base', 'Import d\'un petit echantillon'],
+              cta: 'Demander le setup',
+              featured: true
+            },
+            {
+              key: 'custom',
+              kicker: 'Sur demande',
+              title: 'Projet sur mesure',
+              price: 'Sur demande',
+              text: 'Pour des materiaux nombreux, desordonnes ou des projets plus ambitieux que les offres publiques.',
+              bullets: ['Evaluation au cas par cas', 'Ce n\'est pas l\'option d\'entree', 'Cela n\'a de sens que si le projet le justifie'],
+              cta: 'Evaluer mon projet'
+            }
+          ],
+          fitTitle: 'Pour qui c\'est vraiment adapte',
+          fitItems: [
+            'Chemin de Saint-Jacques, longs voyages, annees sabbatiques et parcours en etapes',
+            'Bikepacking, vanlife et voyages photo avec beaucoup de materiel',
+            'Personnes qui ne veulent pas laisser leurs photos et notes eparses entre dossiers et chats',
+            'Personnes qui veulent raconter un vrai voyage, pas improviser un blog generique'
+          ],
+          howTitle: 'Comment ca marche',
+          howItems: [
+            'Choisis ton niveau d\'entree: guide, appel, template ou setup.',
+            'Tu m\'expliques ce que tu veux raconter et quel volume de materiel tu as vraiment.',
+            'Si le projet tient debout, je te dis clairement quelle option tient la route et laquelle non.'
+          ],
+          beforeTitle: 'Avant de m\'ecrire',
+          beforeLead: 'Si tu m\'envoies ces informations, je peux repondre plus vite et plus clairement.',
+          beforeItems: [
+            'Quel voyage ou projet tu veux raconter',
+            'Nombre approximatif de jours, de photos, de videos et presence ou non de GPS',
+            'Si le materiel est deja organise ou encore eparpille',
+            'Si tu veux le faire seul ou si tu as besoin d\'une aide concrete',
+            'Une fourchette de budget realiste'
+          ],
+          faqTitle: 'Questions frequentes',
+          faqItems: [
+            'Je ne fais pas de blogs voyage generiques a bas prix: ce format n\'a de sens que s\'il existe une vraie histoire et un vrai materiel.',
+            'Le template n\'est pas un support illimite deguisé: si tu veux une aide operationnelle, le setup est plus pertinent.',
+            'Le projet sur mesure n\'est pas le package a proposer a tout le monde: je ne le considere que si l\'objectif ou le materiel le justifient.',
+            'Si tu commences en low-ticket et qu\'ensuite il te faut plus, on peut voir apres si monter d\'un niveau a du sens.'
+          ],
+          finalTitle: 'Tu ne sais pas par ou commencer ?',
+          finalText: 'Si tu hesites sur l\'offre adaptee, commence par la demande d\'evaluation: c\'est la facon la plus simple de comprendre si template, setup ou quelque chose de plus complet est le bon choix.',
+          finalPrimary: 'Demander une evaluation',
+          finalSecondary: 'Revoir le journal'
+        }
+      };
+      const t = T[lang] || T.it;
+
+      const setHref = (id, value) => {
+        const el = document.getElementById(id);
+        if (el) el.href = value;
+      };
+      const setText = (id, value) => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = value;
+      };
+      const contactHref = (pack) => `/${lang}/contatti/${pack ? `?pack=${encodeURIComponent(pack)}` : ''}`;
+      const diaryHref = `/${lang}/`;
+      const canonical = `/${lang}/${slug}/`;
+
+      document.documentElement.lang = lang;
+      document.title = t.pageTitle;
+      document.getElementById('page-title').textContent = t.pageTitle;
+      document.getElementById('page-description').setAttribute('content', t.pageDesc);
+      document.getElementById('seo-canonical').setAttribute('href', canonical);
+      document.getElementById('seo-alt-it').setAttribute('href', `/it/${slug}/`);
+      document.getElementById('seo-alt-en').setAttribute('href', `/en/${slug}/`);
+      document.getElementById('seo-alt-es').setAttribute('href', `/es/${slug}/`);
+      document.getElementById('seo-alt-fr').setAttribute('href', `/fr/${slug}/`);
+      document.getElementById('seo-alt-default').setAttribute('href', `/it/${slug}/`);
+
+      setText('offer-eyebrow', t.eyebrow);
+      setText('offer-h1', t.h1);
+      setText('offer-sub', t.sub);
+      setText('offer-note', t.note);
+      setText('offer-lang-label', t.langLabel);
+      setText('offer-process-note', t.processNote);
+      setText('pricing-title', t.pricingTitle);
+      setText('pricing-lead', t.pricingLead);
+      setText('fit-title', t.fitTitle);
+      setText('how-title', t.howTitle);
+      setText('before-title', t.beforeTitle);
+      setText('before-lead', t.beforeLead);
+      setText('faq-title', t.faqTitle);
+      setText('final-title', t.finalTitle);
+      setText('final-text', t.finalText);
+
+      const langSelect = document.getElementById('offer-lang-select');
+      if (langSelect) {
+        langSelect.value = lang;
+        langSelect.addEventListener('change', () => {
+          const target = String(langSelect.value || 'it').toLowerCase();
+          const next = `/${target}/${slug}/${packFromQuery ? `?pack=${encodeURIComponent(packFromQuery)}` : ''}`;
+          window.location.href = next;
+        });
+      }
+
+      setText('offer-primary-link', t.primary);
+      setText('offer-secondary-link', t.secondary);
+      setText('final-primary-link', t.finalPrimary);
+      setText('final-secondary-link', t.finalSecondary);
+      setHref('offer-primary-link', contactHref('setup'));
+      setHref('offer-secondary-link', diaryHref);
+      setHref('final-primary-link', contactHref('custom'));
+      setHref('final-secondary-link', diaryHref);
+
+      const grid = document.getElementById('offer-grid');
+      grid.innerHTML = '';
+      t.cards.forEach((card) => {
+        const article = document.createElement('article');
+        article.className = `offer-card${card.featured ? ' offer-card--featured' : ''}`;
+        const bullets = (card.bullets || []).map((item) => `<li>${item}</li>`).join('');
+        article.innerHTML = `
+          <div class="offer-card__kicker">${card.kicker}</div>
+          <h3 class="offer-card__title">${card.title}</h3>
+          <div class="offer-card__price">${card.price}</div>
+          <p class="offer-card__text">${card.text}</p>
+          <ul>${bullets}</ul>
+          <a class="offer-card__btn" href="${contactHref(card.key)}">${card.cta}</a>
+        `;
+        grid.appendChild(article);
+      });
+
+      const fillList = (id, items, ordered) => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.innerHTML = '';
+        (items || []).forEach((item) => {
+          const li = document.createElement('li');
+          li.textContent = item;
+          el.appendChild(li);
+        });
+      };
+      fillList('fit-list', t.fitItems);
+      fillList('how-list', t.howItems, true);
+      fillList('before-list', t.beforeItems);
+      fillList('faq-list', t.faqItems);
+    })();
+  </script>
+</body>
+</html>

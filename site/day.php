@@ -63,6 +63,32 @@ function day_format_display_date(string $date, string $lang): string {
   return $date;
 }
 
+function day_format_display_date_short(string $date, string $lang): string {
+  $dt = DateTimeImmutable::createFromFormat('!Y-m-d', $date, new DateTimeZone('UTC'));
+  if (!$dt) return $date;
+  $fmtLocale = [
+    'it' => 'it_IT.UTF-8',
+    'en' => 'en_US.UTF-8',
+    'es' => 'es_ES.UTF-8',
+    'fr' => 'fr_FR.UTF-8',
+  ][$lang] ?? 'it_IT.UTF-8';
+  if (class_exists('IntlDateFormatter')) {
+    $formatter = new IntlDateFormatter(
+      str_replace('.UTF-8', '', $fmtLocale),
+      IntlDateFormatter::FULL,
+      IntlDateFormatter::NONE,
+      'UTC',
+      IntlDateFormatter::GREGORIAN,
+      'd MMMM'
+    );
+    if ($formatter) {
+      $formatted = $formatter->format($dt);
+      if (is_string($formatted) && $formatted !== '') return $formatted;
+    }
+  }
+  return $date;
+}
+
 function day_truncate(string $text, int $maxLen = 160): string {
   $text = trim(preg_replace('/\s+/u', ' ', $text) ?? '');
   if ($text === '') return '';
@@ -102,6 +128,15 @@ function day_first_sentence(string $text): string {
     return trim((string)$m[1]);
   }
   return $text;
+}
+
+function day_find_day_number(array $days, string $date): ?int {
+  foreach ($days as $index => $candidate) {
+    if (substr((string)($candidate['date'] ?? ''), 0, 10) === $date) {
+      return $index + 1;
+    }
+  }
+  return null;
 }
 
 function day_media_path(array $item, string $field, string $fallbackDate = ''): string {
@@ -174,6 +209,122 @@ function day_markdown_to_html(string $markdown): string {
 
   $flushParagraph();
   return implode("\n", $html);
+}
+
+function day_track_photo_extensions(): array {
+  return ['jpg', 'jpeg', 'png', 'heic', 'heif', 'webp'];
+}
+
+function day_select_track_points(array $points): array {
+  $selected = [];
+  foreach ($points as $point) {
+    if (!is_array($point)) continue;
+    $lat = is_numeric($point['lat'] ?? null) ? (float)$point['lat'] : null;
+    $lon = is_numeric($point['lon'] ?? null) ? (float)$point['lon'] : null;
+    $time = trim((string)($point['time'] ?? ''));
+    if ($lat === null || $lon === null || $time === '') continue;
+    $ts = strtotime($time);
+    if ($ts === false) continue;
+    $file = trim((string)($point['file'] ?? ''));
+    $lower = strtolower($file);
+    if (str_contains($lower, '.')) {
+      $ext = pathinfo($lower, PATHINFO_EXTENSION);
+      if (!in_array($ext, day_track_photo_extensions(), true)) continue;
+    }
+    $selected[] = [
+      'lat' => $lat,
+      'lon' => $lon,
+      'ts' => $ts,
+      'file' => $file,
+    ];
+  }
+  if (!$selected) return [];
+  $hasRuntastic = false;
+  foreach ($selected as $point) {
+    if (str_starts_with((string)$point['file'], 'RUNTASTIC_')) {
+      $hasRuntastic = true;
+      break;
+    }
+  }
+  if ($hasRuntastic) {
+    $selected = array_values(array_filter($selected, static function (array $point): bool {
+      return str_starts_with((string)$point['file'], 'RUNTASTIC_');
+    }));
+  }
+  usort($selected, static function (array $a, array $b): int {
+    return ((int)$a['ts']) <=> ((int)$b['ts']);
+  });
+  return $selected;
+}
+
+function day_read_track_points(string $root, string $dayKey): array {
+  static $cache = [];
+  $key = substr(trim($dayKey), 0, 10);
+  if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $key)) return [];
+  if (isset($cache[$key])) return $cache[$key];
+  $payload = day_read_json("{$root}/data/tracks/day/{$key}.json", []);
+  $points = is_array($payload['points'] ?? null) ? $payload['points'] : [];
+  $cache[$key] = day_select_track_points($points);
+  return $cache[$key];
+}
+
+function day_build_stage_map_data(array $days, string $lang, string $root, string $currentDayKey, array $items): array {
+  static $summaryCache = [];
+  $overviewExcludedDates = ['2019-06-02', '2019-06-03'];
+  $cacheKey = $lang . '|' . md5(json_encode(array_map(static function ($day): string {
+    return substr((string)($day['date'] ?? ''), 0, 10);
+  }, $days)));
+  if (!isset($summaryCache[$cacheKey])) {
+    $labelPrefix = [
+      'it' => 'Giorno',
+      'en' => 'Day',
+      'es' => 'Dia',
+      'fr' => 'Jour',
+    ][$lang] ?? 'Day';
+    $summary = [];
+    foreach ($days as $index => $candidate) {
+      if (!is_array($candidate)) continue;
+      $pageDate = substr((string)($candidate['date'] ?? ''), 0, 10);
+      if (in_array($pageDate, $overviewExcludedDates, true)) continue;
+      $trackKey = substr((string)($candidate['trackDate'] ?? $pageDate), 0, 10);
+      if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $pageDate) || !preg_match('/^\d{4}-\d{2}-\d{2}$/', $trackKey)) continue;
+      $points = day_read_track_points($root, $trackKey);
+      if (!$points) continue;
+      $first = $points[0];
+      $last = $points[count($points) - 1];
+      $summary[] = [
+        'dayKey' => $trackKey,
+        'href' => "/{$lang}/day/{$pageDate}/",
+        'label' => "{$labelPrefix} " . ($index + 1),
+        'start' => ['lat' => (float)$first['lat'], 'lon' => (float)$first['lon']],
+        'end' => ['lat' => (float)$last['lat'], 'lon' => (float)$last['lon']],
+      ];
+    }
+    $summaryCache[$cacheKey] = $summary;
+  }
+
+  $mediaItems = [];
+  foreach ($items as $item) {
+    if (!is_array($item)) continue;
+    $id = trim((string)($item['id'] ?? ''));
+    $lat = is_numeric($item['lat'] ?? null) ? (float)$item['lat'] : null;
+    $lon = is_numeric($item['lon'] ?? null) ? (float)$item['lon'] : null;
+    if ($id === '' || $lat === null || $lon === null) continue;
+    $mediaItems[] = [
+      'id' => $id,
+      'lat' => $lat,
+      'lon' => $lon,
+      'type' => trim((string)($item['type'] ?? '')),
+      'time' => trim((string)($item['time'] ?? '')),
+      'place' => trim((string)($item['place'] ?? '')),
+    ];
+  }
+
+  return [
+    'currentDayKey' => $currentDayKey,
+    'stages' => $summaryCache[$cacheKey],
+    'mediaItems' => $mediaItems,
+  ];
 }
 
 function day_merge_prologue(array $days, array $prologueDates, string $trackDate): ?array {
@@ -288,12 +439,18 @@ function day_build_prologue_narrative(string $lang): string {
 $ui = [
   'it' => [
     'title_prefix' => 'Diario Cammino',
-    'default_description' => static fn(string $date): string => "Pagina diario del Cammino di Santiago per il {$date}: foto, video, GPS e note del giorno.",
+    'default_description' => static fn(string $date): string => 'Pagina diario del Cammino di Santiago con foto, video, GPS e note del giorno.',
+    'day_label_prefix' => 'Giorno',
+    'prologue_badge' => 'Prologo',
     'back_to_diary' => 'Torna al diario',
     'open_interactive_diary' => 'Apri nel diario interattivo',
     'open_map' => 'Apri mappa',
+    'mini_map' => 'Percorso del giorno',
+    'journey_overview' => 'Panoramica del Cammino',
     'day_notes' => 'Note del giorno',
     'no_notes' => 'Nessuna nota disponibile.',
+    'day_track_empty' => 'Nessun GPS per questo giorno.',
+    'day_track_loading' => 'Caricamento mappa del giorno...',
     'media_heading' => 'Media',
     'no_media' => 'Nessun media per questo giorno.',
     'comments' => 'Commenti',
@@ -312,16 +469,25 @@ $ui = [
     'comments_on_day' => 'Commenti sulla nota del giorno',
     'comments_on_media' => 'Commenti sul media',
     'recommendations' => 'Posti consigliati',
-    'prologue_label' => 'Prologo (2–3 giugno)',
+    'prologue_label' => 'Prologo · 2–3 giugno',
+    'offer_cta_title' => 'Ti piace questo formato?',
+    'offer_cta_text' => 'Se vuoi trasformare anche il tuo viaggio in un diario interattivo con mappa, media e tappe ordinate, guarda come funziona.',
+    'offer_cta_link' => 'Scopri come funziona',
   ],
   'en' => [
     'title_prefix' => 'Camino Diary',
-    'default_description' => static fn(string $date): string => "Camino de Santiago diary entry for {$date}: photos, videos, GPS and daily notes.",
+    'default_description' => static fn(string $date): string => 'Camino de Santiago diary entry with photos, videos, GPS and daily notes.',
+    'day_label_prefix' => 'Day',
+    'prologue_badge' => 'Prologue',
     'back_to_diary' => 'Back to diary',
     'open_interactive_diary' => 'Open in interactive diary',
     'open_map' => 'Open map',
+    'mini_map' => 'Daily route',
+    'journey_overview' => 'Journey overview',
     'day_notes' => 'Day notes',
     'no_notes' => 'No notes available.',
+    'day_track_empty' => 'No GPS for this day.',
+    'day_track_loading' => 'Loading day map...',
     'media_heading' => 'Media',
     'no_media' => 'No media for this day.',
     'comments' => 'Comments',
@@ -340,16 +506,25 @@ $ui = [
     'comments_on_day' => 'Comments on day note',
     'comments_on_media' => 'Comments on media',
     'recommendations' => 'Recommended places',
-    'prologue_label' => 'Prologue (June 2–3)',
+    'prologue_label' => 'Prologue · June 2–3',
+    'offer_cta_title' => 'Do you like this format?',
+    'offer_cta_text' => 'If you want to turn your own trip into an interactive diary with map, media and ordered stages, see how it works.',
+    'offer_cta_link' => 'See how it works',
   ],
   'es' => [
     'title_prefix' => 'Diario del Camino',
-    'default_description' => static fn(string $date): string => "Página del diario del Camino de Santiago para {$date}: fotos, vídeos, GPS y notas del día.",
+    'default_description' => static fn(string $date): string => 'Página del diario del Camino de Santiago con fotos, vídeos, GPS y notas del día.',
+    'day_label_prefix' => 'Dia',
+    'prologue_badge' => 'Prólogo',
     'back_to_diary' => 'Volver al diario',
     'open_interactive_diary' => 'Abrir en el diario interactivo',
     'open_map' => 'Abrir mapa',
+    'mini_map' => 'Ruta del día',
+    'journey_overview' => 'Vista general del Camino',
     'day_notes' => 'Notas del día',
     'no_notes' => 'No hay notas disponibles.',
+    'day_track_empty' => 'No hay GPS para este día.',
+    'day_track_loading' => 'Cargando mapa del día...',
     'media_heading' => 'Media',
     'no_media' => 'No hay media para este día.',
     'comments' => 'Comentarios',
@@ -368,16 +543,25 @@ $ui = [
     'comments_on_day' => 'Comentarios sobre la nota del día',
     'comments_on_media' => 'Comentarios sobre el media',
     'recommendations' => 'Lugares recomendados',
-    'prologue_label' => 'Prólogo (2–3 de junio)',
+    'prologue_label' => 'Prólogo · 2–3 de junio',
+    'offer_cta_title' => '¿Te gusta este formato?',
+    'offer_cta_text' => 'Si quieres transformar también tu viaje en un diario interactivo con mapa, media y etapas ordenadas, mira cómo funciona.',
+    'offer_cta_link' => 'Descubre cómo funciona',
   ],
   'fr' => [
     'title_prefix' => 'Journal du Chemin',
-    'default_description' => static fn(string $date): string => "Page du journal du Chemin de Saint-Jacques pour le {$date} : photos, vidéos, GPS et notes du jour.",
+    'default_description' => static fn(string $date): string => 'Page du journal du Chemin de Saint-Jacques avec photos, vidéos, GPS et notes du jour.',
+    'day_label_prefix' => 'Jour',
+    'prologue_badge' => 'Prologue',
     'back_to_diary' => 'Retour au journal',
     'open_interactive_diary' => 'Ouvrir dans le journal interactif',
     'open_map' => 'Ouvrir la carte',
+    'mini_map' => 'Parcours du jour',
+    'journey_overview' => 'Vue d\'ensemble du Chemin',
     'day_notes' => 'Notes du jour',
     'no_notes' => 'Aucune note disponible.',
+    'day_track_empty' => 'Aucun GPS pour ce jour.',
+    'day_track_loading' => 'Chargement de la carte du jour...',
     'media_heading' => 'Médias',
     'no_media' => 'Aucun média pour ce jour.',
     'comments' => 'Commentaires',
@@ -396,7 +580,10 @@ $ui = [
     'comments_on_day' => 'Commentaires sur la note du jour',
     'comments_on_media' => 'Commentaires sur le média',
     'recommendations' => 'Lieux conseillés',
-    'prologue_label' => 'Prologue (2–3 juin)',
+    'prologue_label' => 'Prologue · 2–3 juin',
+    'offer_cta_title' => 'Ce format vous plaît ?',
+    'offer_cta_text' => 'Si vous voulez transformer votre voyage en journal interactif avec carte, médias et étapes ordonnées, regardez comment cela fonctionne.',
+    'offer_cta_link' => 'Voir comment ça marche',
   ],
 ];
 
@@ -456,12 +643,18 @@ if ($isPrologue) {
 $origin = day_detect_origin();
 $uiLang = $ui[$lang] ?? $ui['it'];
 $effectiveDate = $isPrologue ? $prologueTrackDate : $date;
-$displayDate = $isPrologue ? (string)$uiLang['prologue_label'] : day_format_display_date($date, $lang);
+$displayDate = $isPrologue ? (string)$uiLang['prologue_label'] : day_format_display_date_short($date, $lang);
 $sections = day_parse_note_sections((string)($day['notes'] ?? ''));
 $seoTitleCore = trim((string)($sections[0]['body'] ?? ''));
+$dayNumber = $isPrologue ? null : day_find_day_number($days, $date);
+$dayLabel = $isPrologue
+  ? (string)$uiLang['prologue_badge']
+  : trim((string)$uiLang['day_label_prefix'] . ' ' . (string)($dayNumber ?? ''));
+$headerTitle = $seoTitleCore !== '' ? $seoTitleCore : $dayLabel;
+$headerMeta = $isPrologue ? $displayDate : trim(implode(' · ', array_filter([$dayLabel, $displayDate])));
 $seoTitle = $seoTitleCore !== ''
-  ? "{$seoTitleCore} | {$displayDate} | {$uiLang['title_prefix']}"
-  : ($isPrologue ? "{$displayDate} | {$uiLang['title_prefix']}" : "{$uiLang['title_prefix']} · {$date}");
+  ? "{$seoTitleCore} | {$dayLabel} | {$uiLang['title_prefix']}"
+  : "{$dayLabel} | {$uiLang['title_prefix']}";
 $seoDescription = day_truncate(implode(' — ', array_filter([
   trim((string)($sections[0]['body'] ?? '')),
   trim((string)($sections[1]['body'] ?? '')),
@@ -481,8 +674,25 @@ $dayNotesHtml = day_markdown_to_html((string)($day['notes'] ?? ''));
 $recommendations = is_array($day['recommendations'] ?? null) ? $day['recommendations'] : [];
 $items = is_array($day['items'] ?? null) ? $day['items'] : [];
 $interactiveDiaryHref = $isPrologue ? "/{$lang}/?day=prologue" : "/{$lang}/?day={$date}";
-$headerTitle = $isPrologue ? $displayDate : "{$displayDate} ({$date})";
+$trackDayKey = '';
+if (!$isPrologue) {
+  $trackDayKey = substr((string)($day['trackDate'] ?? $date), 0, 10);
+  if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $trackDayKey)) $trackDayKey = '';
+}
+$showTrackCard = ($trackDayKey !== '');
+$dayMapData = $showTrackCard ? day_build_stage_map_data($days, $lang, $root, $trackDayKey, $items) : null;
+$dayMapDataJson = $dayMapData ? json_encode($dayMapData, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) : 'null';
+if (!is_string($dayMapDataJson) || $dayMapDataJson === '') $dayMapDataJson = 'null';
+$dayMapDataJson = str_replace(['<', '>', '&'], ['\u003C', '\u003E', '\u0026'], $dayMapDataJson);
+$trackMapHref = $showTrackCard ? "/{$lang}/map/?day=" . rawurlencode($trackDayKey) : "/{$lang}/map/";
+$offerHref = "/{$lang}/crea-il-tuo-diario/";
 $commentTargetDate = $isPrologue ? $prologueTrackDate : $date;
+$prevDayLabel = is_array($prevDay)
+  ? trim((string)$uiLang['day_label_prefix'] . ' ' . (string)(day_find_day_number($days, substr((string)$prevDay['date'], 0, 10)) ?? ''))
+  : '';
+$nextDayLabel = is_array($nextDay)
+  ? trim((string)$uiLang['day_label_prefix'] . ' ' . (string)(day_find_day_number($days, substr((string)$nextDay['date'], 0, 10)) ?? ''))
+  : '';
 
 http_response_code(200);
 ?><!doctype html>
@@ -515,12 +725,21 @@ http_response_code(200);
   <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="icon" type="image/png" href="/favicon.png" />
   <link rel="stylesheet" href="/styles.css" />
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""
+  />
   <style>
     body{max-width:1100px;margin:0 auto;padding:24px}
     .day-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px}
+    .day-head__meta{margin:6px 0 0;color:#746a60;font-size:14px}
     .day-nav{display:flex;gap:12px;flex-wrap:wrap}
     .day-nav a,.back-link{display:inline-block;padding:8px 12px;border-radius:12px;background:#ece7df;color:#2d2823;text-decoration:none}
     .day-section{margin-top:18px;background:#fff;border-radius:16px;padding:16px}
+    .day-offer-cta{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;background:#f7f3ee;border:1px solid rgba(31,26,22,.08)}
+    .day-offer-cta p{margin:6px 0 0;color:#5a5248;max-width:700px}
     .media-grid{margin-top:16px;display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px}
     .media-card{background:#f7f3ee;border-radius:12px;padding:8px;display:flex;flex-direction:column;gap:6px}
     .media-card img{width:100%;height:180px;object-fit:cover;border-radius:10px;display:block}
@@ -554,14 +773,15 @@ http_response_code(200);
     <div>
       <p><a class="back-link" href="/<?= day_escape($lang) ?>/"><?= day_escape($uiLang['back_to_diary']) ?></a></p>
       <h1><?= day_escape($headerTitle) ?></h1>
+      <p class="day-head__meta"><?= day_escape($headerMeta) ?></p>
       <div style="display:flex;gap:8px;flex-wrap:wrap">
         <a class="back-link" href="<?= day_escape($interactiveDiaryHref) ?>"><?= day_escape($uiLang['open_interactive_diary']) ?></a>
         <a class="back-link" href="/<?= day_escape($lang) ?>/map/"><?= day_escape($uiLang['open_map']) ?></a>
       </div>
     </div>
     <nav class="day-nav">
-      <?php if (is_array($prevDay)): ?><a href="/<?= day_escape($lang) ?>/day/<?= day_escape((string)$prevDay['date']) ?>/">← <?= day_escape((string)$prevDay['date']) ?></a><?php endif; ?>
-      <?php if (is_array($nextDay)): ?><a href="/<?= day_escape($lang) ?>/day/<?= day_escape((string)$nextDay['date']) ?>/"><?= day_escape((string)$nextDay['date']) ?> →</a><?php endif; ?>
+      <?php if (is_array($prevDay)): ?><a href="/<?= day_escape($lang) ?>/day/<?= day_escape((string)$prevDay['date']) ?>/">← <?= day_escape($prevDayLabel) ?></a><?php endif; ?>
+      <?php if (is_array($nextDay)): ?><a href="/<?= day_escape($lang) ?>/day/<?= day_escape((string)$nextDay['date']) ?>/"><?= day_escape($nextDayLabel) ?> →</a><?php endif; ?>
     </nav>
   </header>
 
@@ -584,6 +804,35 @@ http_response_code(200);
   </section>
   <?php endif; ?>
 
+  <?php if ($showTrackCard): ?>
+  <section class="day-section">
+    <div
+      class="day-track day-track--canonical"
+      data-day-track-key="<?= day_escape($trackDayKey) ?>"
+      data-day-track-loading="<?= day_escape($uiLang['day_track_loading']) ?>"
+      data-day-track-empty="<?= day_escape($uiLang['day_track_empty']) ?>"
+    >
+      <div class="day-track__head">
+        <span><?= day_escape($uiLang['mini_map']) ?></span>
+        <a class="day-track__open" href="<?= day_escape($trackMapHref) ?>"><?= day_escape($uiLang['open_map']) ?></a>
+      </div>
+      <div class="day-track__body is-empty" data-day-track-body><?= day_escape($uiLang['day_track_loading']) ?></div>
+      <div class="day-track__overview-head">
+        <span><?= day_escape($uiLang['journey_overview']) ?></span>
+      </div>
+      <div class="day-track__overview is-empty" data-day-track-overview><?= day_escape($uiLang['day_track_loading']) ?></div>
+    </div>
+  </section>
+  <?php endif; ?>
+
+  <section class="day-section day-offer-cta">
+    <div>
+      <h2><?= day_escape($uiLang['offer_cta_title']) ?></h2>
+      <p><?= day_escape($uiLang['offer_cta_text']) ?></p>
+    </div>
+    <a class="back-link" href="<?= day_escape($offerHref) ?>"><?= day_escape($uiLang['offer_cta_link']) ?></a>
+  </section>
+
   <section class="day-section">
     <h2><?= day_escape($uiLang['media_heading']) ?> (<?= count($items) ?>)</h2>
     <div class="media-grid">
@@ -604,6 +853,7 @@ http_response_code(200);
       <article class="media-card">
         <a class="day-media-link"
            href="<?= day_escape($src) ?>"
+           data-media-id="<?= day_escape($mediaId) ?>"
            data-media-type="<?= $isVideo ? 'video' : 'image' ?>"
            data-media-src="<?= day_escape($src) ?>"
            data-media-poster="<?= day_escape($poster) ?>"
@@ -642,6 +892,12 @@ http_response_code(200);
     </div>
   </div>
 
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""
+  ></script>
+  <script>window.DAY_PAGE_MAP_DATA = <?= $dayMapDataJson ?>;</script>
   <script>
     (function () {
       const modal = document.getElementById('day-media-modal');
@@ -651,11 +907,20 @@ http_response_code(200);
       const backdrop = document.getElementById('day-media-backdrop');
       const prevBtn = document.getElementById('day-media-prev');
       const nextBtn = document.getElementById('day-media-next');
-      const links = Array.from(document.querySelectorAll('.day-media-link'));
+      const allLinks = Array.from(document.querySelectorAll('.day-media-link'));
+      const linkById = new Map(
+        allLinks.map((link) => [String(link.getAttribute('data-media-id') || ''), link])
+      );
+      let activeLinks = allLinks.slice();
       let activeIndex = -1;
 
-      const openModal = (index) => {
-        const link = links[index];
+      const setActiveLinks = (collection) => {
+        activeLinks = Array.isArray(collection) && collection.length ? collection : allLinks.slice();
+      };
+
+      const openModal = (index, collection = null) => {
+        if (collection) setActiveLinks(collection);
+        const link = activeLinks[index];
         if (!link) return;
         activeIndex = index;
         const type = link.getAttribute('data-media-type') || 'image';
@@ -688,23 +953,35 @@ http_response_code(200);
         modal.classList.remove('is-open');
         modal.setAttribute('aria-hidden', 'true');
         body.innerHTML = '';
+        setActiveLinks(allLinks);
         activeIndex = -1;
       };
 
       const openByOffset = (offset) => {
-        if (!links.length) return;
+        if (!activeLinks.length) return;
         const base = activeIndex < 0 ? 0 : activeIndex;
-        const next = (base + offset + links.length) % links.length;
+        const next = (base + offset + activeLinks.length) % activeLinks.length;
         openModal(next);
       };
 
-      links.forEach((link, idx) => {
+      allLinks.forEach((link, idx) => {
         link.addEventListener('click', (event) => {
           if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button === 1) return;
           event.preventDefault();
+          setActiveLinks(allLinks);
           openModal(idx);
         });
       });
+
+      window.dayPageMediaApi = {
+        openGroup(ids) {
+          const subset = (Array.isArray(ids) ? ids : [])
+            .map((id) => linkById.get(String(id || '')))
+            .filter(Boolean);
+          if (!subset.length) return;
+          openModal(0, subset);
+        }
+      };
 
       closeBtn.addEventListener('click', closeModal);
       backdrop.addEventListener('click', closeModal);
@@ -820,5 +1097,6 @@ http_response_code(200);
       }
     })();
   </script>
+  <script src="/day-page-map.js"></script>
 </body>
 </html>

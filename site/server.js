@@ -45,6 +45,7 @@ const PROLOGUE_PAGE_PATH_RE = /^\/(it|en|es|fr)\/prologue\/?$/i;
 const MAP_PAGE_PATH_RE = /^\/(it|en|es|fr)\/map\/?$/i;
 const PEOPLE_PAGE_PATH_RE = /^\/(it|en|es|fr)\/people\/?$/i;
 const CONTACT_PAGE_PATH_RE = /^\/(it|en|es|fr)\/contatti\/?$/i;
+const OFFER_PAGE_PATH_RE = /^\/(it|en|es|fr)\/crea-il-tuo-diario\/?$/i;
 
 function loadDotEnv(rootDir) {
   try {
@@ -216,13 +217,14 @@ function firstSentence(text) {
   return match ? String(match[1] || '').trim() : value;
 }
 
-function buildDaySeoTitle(day, lang, ui) {
+function buildDaySeoTitle(day, lang, ui, options = {}) {
   const date = String(day && day.date ? day.date : '');
-  const displayDate = formatDisplayDate(date, lang);
   const sections = parseNoteSections(day && day.notes ? day.notes : '');
   const title = String((sections[0] && sections[0].body) || '').trim();
-  if (title) return `${title} | ${displayDate} | ${ui.titlePrefix}`;
-  return `${ui.titlePrefix} · ${date}`;
+  const stageLabel = String(options.stageLabel || '').trim()
+    || `${String(ui.dayLabelPrefix || 'Day').trim()} ${String(options.dayNumber || '').trim()}`.trim();
+  if (title) return `${title} | ${stageLabel} | ${ui.titlePrefix}`;
+  return `${stageLabel} | ${ui.titlePrefix}`;
 }
 
 function buildDaySeoDescription(day, lang, ui) {
@@ -437,6 +439,107 @@ function buildVideoDurationLabel(seconds) {
   return `${String(mm).padStart(2, '0')}:${String(ss).padStart(2, '0')}`;
 }
 
+const TRACK_PHOTO_EXTENSIONS = new Set(['jpg', 'jpeg', 'png', 'heic', 'heif', 'webp']);
+const trackDayPointsCache = new Map();
+const canonicalStageSummaryCache = new Map();
+
+function selectTrackPointsForMap(points) {
+  const raw = (Array.isArray(points) ? points : [])
+    .map((point) => {
+      const lat = Number(point && point.lat);
+      const lon = Number(point && point.lon);
+      const ts = Date.parse(String(point && point.time ? point.time : ''));
+      if (!Number.isFinite(lat) || !Number.isFinite(lon) || Number.isNaN(ts)) return null;
+      const file = String(point && point.file ? point.file : '').trim();
+      const lower = file.toLowerCase();
+      if (lower.includes('.')) {
+        const ext = lower.split('.').pop();
+        if (!TRACK_PHOTO_EXTENSIONS.has(ext)) return null;
+      }
+      return { lat, lon, ts, file };
+    })
+    .filter(Boolean);
+  if (!raw.length) return [];
+  const hasRuntastic = raw.some((point) => String(point.file || '').startsWith('RUNTASTIC_'));
+  const source = hasRuntastic
+    ? raw.filter((point) => String(point.file || '').startsWith('RUNTASTIC_'))
+    : raw;
+  source.sort((a, b) => a.ts - b.ts);
+  return source;
+}
+
+async function readTrackDayPointsForMap(dayKey) {
+  const key = String(dayKey || '').slice(0, 10);
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(key)) return [];
+  if (trackDayPointsCache.has(key)) return trackDayPointsCache.get(key);
+  const promise = readJson(path.join(ROOT, 'data', 'tracks', 'day', `${key}.json`), null)
+    .then((payload) => selectTrackPointsForMap(payload && payload.points))
+    .catch(() => []);
+  trackDayPointsCache.set(key, promise);
+  return promise;
+}
+
+async function buildCanonicalStageSummary(days, lang) {
+  const list = Array.isArray(days) ? days : [];
+  const cacheKey = `${lang}|${list.map((day) => String(day && day.date ? day.date : '').slice(0, 10)).join(',')}`;
+  if (canonicalStageSummaryCache.has(cacheKey)) return canonicalStageSummaryCache.get(cacheKey);
+  const labelPrefix = ({
+    it: 'Giorno',
+    en: 'Day',
+    es: 'Dia',
+    fr: 'Jour'
+  })[lang] || 'Day';
+  const promise = (async () => {
+    const summary = [];
+    for (let index = 0; index < list.length; index += 1) {
+      const day = list[index];
+      const pageDate = String(day && day.date ? day.date : '').slice(0, 10);
+      if (PROLOGUE_DATES.includes(pageDate)) continue;
+      const trackKey = String(day && day.trackDate ? day.trackDate : pageDate).slice(0, 10);
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(pageDate) || !/^\d{4}-\d{2}-\d{2}$/.test(trackKey)) continue;
+      const points = await readTrackDayPointsForMap(trackKey);
+      if (!points.length) continue;
+      const first = points[0];
+      const last = points[points.length - 1];
+      summary.push({
+        dayKey: trackKey,
+        href: `/${lang}/day/${pageDate}/`,
+        label: `${labelPrefix} ${index + 1}`,
+        start: { lat: Number(first.lat), lon: Number(first.lon) },
+        end: { lat: Number(last.lat), lon: Number(last.lon) }
+      });
+    }
+    return summary;
+  })();
+  canonicalStageSummaryCache.set(cacheKey, promise);
+  return promise;
+}
+
+async function buildCanonicalDayMapData(days, lang, currentDayKey, items) {
+  const stages = await buildCanonicalStageSummary(days, lang);
+  const mediaItems = (Array.isArray(items) ? items : [])
+    .map((item) => {
+      const id = String(item && item.id ? item.id : '').trim();
+      const lat = Number(item && item.lat);
+      const lon = Number(item && item.lon);
+      if (!id || !Number.isFinite(lat) || !Number.isFinite(lon)) return null;
+      return {
+        id,
+        lat,
+        lon,
+        type: String(item && item.type ? item.type : '').trim(),
+        time: String(item && item.time ? item.time : '').trim(),
+        place: String(item && item.place ? item.place : '').trim()
+      };
+    })
+    .filter(Boolean);
+  return {
+    currentDayKey: String(currentDayKey || '').slice(0, 10),
+    stages,
+    mediaItems
+  };
+}
+
 function localizeMapHtml(rawHtml, locale, req) {
   const lang = SUPPORTED_LANGS.has(String(locale || '').toLowerCase())
     ? String(locale).toLowerCase()
@@ -621,6 +724,40 @@ function formatDisplayDate(dateValue, lang) {
   }
 }
 
+function formatDisplayDateShort(dateValue, lang) {
+  const [y, m, d] = String(dateValue || '').split('-').map((v) => Number(v));
+  if (!y || !m || !d) return String(dateValue || '');
+  const dt = new Date(Date.UTC(y, m - 1, d));
+  try {
+    const localeMap = {
+      it: 'it-IT',
+      en: 'en-US',
+      es: 'es-ES',
+      fr: 'fr-FR'
+    };
+    return dt.toLocaleDateString(localeMap[lang] || 'it-IT', {
+      month: 'long',
+      day: 'numeric',
+      timeZone: 'UTC'
+    });
+  } catch {
+    return String(dateValue || '');
+  }
+}
+
+function buildDayLabel(lang, dayNumber) {
+  const prefixByLang = {
+    it: 'Giorno',
+    en: 'Day',
+    es: 'Dia',
+    fr: 'Jour'
+  };
+  const prefix = prefixByLang[lang] || prefixByLang.it;
+  const num = Number(dayNumber);
+  if (!Number.isFinite(num) || num <= 0) return prefix;
+  return `${prefix} ${num}`;
+}
+
 function renderRecommendations(recommendations) {
   const list = Array.isArray(recommendations) ? recommendations : [];
   if (!list.length) return '';
@@ -645,14 +782,20 @@ function buildDayPageHtml({ origin, lang, day, prevDay, nextDay, dayOgOverrides,
   const DAY_UI = {
     it: {
       titlePrefix: 'Diario Cammino',
-      defaultDescription: (date) => `Pagina diario del Cammino di Santiago per il ${date}: foto, video, GPS e note del giorno.`,
+      defaultDescription: () => 'Pagina diario del Cammino di Santiago con foto, video, GPS e note del giorno.',
+      dayLabelPrefix: 'Giorno',
+      prologueBadge: 'Prologo',
       noMetadata: 'Nessun metadato',
       comments: 'Commenti',
       backToDiary: 'Torna al diario',
       openInteractiveDiary: 'Apri nel diario interattivo',
       openMap: 'Apri mappa',
+      miniMap: 'Percorso del giorno',
+      journeyOverview: 'Panoramica del Cammino',
       dayNotes: 'Note del giorno',
       noNotes: 'Nessuna nota disponibile.',
+      dayTrackEmpty: 'Nessun GPS per questo giorno.',
+      dayTrackLoading: 'Caricamento mappa del giorno...',
       mediaHeading: 'Media',
       noMedia: 'Nessun media per questo giorno.',
       close: 'Chiudi',
@@ -669,18 +812,27 @@ function buildDayPageHtml({ origin, lang, day, prevDay, nextDay, dayOgOverrides,
       commentsLoading: 'Caricamento commenti...',
       commentsLoadError: 'Errore nel caricamento commenti',
       commentsSaveError: 'Errore durante il salvataggio commento',
-      recommendations: 'Posti consigliati'
+      recommendations: 'Posti consigliati',
+      offerCtaTitle: 'Ti piace questo formato?',
+      offerCtaText: 'Se vuoi trasformare anche il tuo viaggio in un diario interattivo con mappa, media e tappe ordinate, guarda come funziona.',
+      offerCtaLink: 'Scopri come funziona'
     },
     en: {
       titlePrefix: 'Camino Diary',
-      defaultDescription: (date) => `Camino de Santiago diary entry for ${date}: photos, videos, GPS and daily notes.`,
+      defaultDescription: () => 'Camino de Santiago diary entry with photos, videos, GPS and daily notes.',
+      dayLabelPrefix: 'Day',
+      prologueBadge: 'Prologue',
       noMetadata: 'No metadata',
       comments: 'Comments',
       backToDiary: 'Back to diary',
       openInteractiveDiary: 'Open in interactive diary',
       openMap: 'Open map',
+      miniMap: 'Daily route',
+      journeyOverview: 'Journey overview',
       dayNotes: 'Day Notes',
       noNotes: 'No notes available.',
+      dayTrackEmpty: 'No GPS for this day.',
+      dayTrackLoading: 'Loading day map...',
       mediaHeading: 'Media',
       noMedia: 'No media for this day.',
       close: 'Close',
@@ -697,18 +849,27 @@ function buildDayPageHtml({ origin, lang, day, prevDay, nextDay, dayOgOverrides,
       commentsLoading: 'Loading comments...',
       commentsLoadError: 'Failed to load comments',
       commentsSaveError: 'Failed to save comment',
-      recommendations: 'Recommended places'
+      recommendations: 'Recommended places',
+      offerCtaTitle: 'Do you like this format?',
+      offerCtaText: 'If you want to turn your own trip into an interactive diary with map, media and ordered stages, see how it works.',
+      offerCtaLink: 'See how it works'
     },
     es: {
       titlePrefix: 'Diario del Camino',
-      defaultDescription: (date) => `Página del diario del Camino de Santiago para ${date}: fotos, vídeos, GPS y notas del día.`,
+      defaultDescription: () => 'Página del diario del Camino de Santiago con fotos, vídeos, GPS y notas del día.',
+      dayLabelPrefix: 'Dia',
+      prologueBadge: 'Prólogo',
       noMetadata: 'Sin metadatos',
       comments: 'Comentarios',
       backToDiary: 'Volver al diario',
       openInteractiveDiary: 'Abrir en el diario interactivo',
       openMap: 'Abrir mapa',
+      miniMap: 'Ruta del día',
+      journeyOverview: 'Vista general del Camino',
       dayNotes: 'Notas del día',
       noNotes: 'No hay notas disponibles.',
+      dayTrackEmpty: 'No hay GPS para este día.',
+      dayTrackLoading: 'Cargando mapa del día...',
       mediaHeading: 'Media',
       noMedia: 'No hay media para este día.',
       close: 'Cerrar',
@@ -725,18 +886,27 @@ function buildDayPageHtml({ origin, lang, day, prevDay, nextDay, dayOgOverrides,
       commentsLoading: 'Cargando comentarios...',
       commentsLoadError: 'Error al cargar comentarios',
       commentsSaveError: 'Error al guardar el comentario',
-      recommendations: 'Lugares recomendados'
+      recommendations: 'Lugares recomendados',
+      offerCtaTitle: '¿Te gusta este formato?',
+      offerCtaText: 'Si quieres transformar también tu viaje en un diario interactivo con mapa, media y etapas ordenadas, mira cómo funciona.',
+      offerCtaLink: 'Descubre cómo funciona'
     },
     fr: {
       titlePrefix: 'Journal du Chemin',
-      defaultDescription: (date) => `Page du journal du Chemin de Saint-Jacques pour le ${date} : photos, vidéos, GPS et notes du jour.`,
+      defaultDescription: () => 'Page du journal du Chemin de Saint-Jacques avec photos, vidéos, GPS et notes du jour.',
+      dayLabelPrefix: 'Jour',
+      prologueBadge: 'Prologue',
       noMetadata: 'Aucune métadonnée',
       comments: 'Commentaires',
       backToDiary: 'Retour au journal',
       openInteractiveDiary: 'Ouvrir dans le journal interactif',
       openMap: 'Ouvrir la carte',
+      miniMap: 'Parcours du jour',
+      journeyOverview: 'Vue d\'ensemble du Chemin',
       dayNotes: 'Notes du jour',
       noNotes: 'Aucune note disponible.',
+      dayTrackEmpty: 'Aucun GPS pour ce jour.',
+      dayTrackLoading: 'Chargement de la carte du jour...',
       mediaHeading: 'Médias',
       noMedia: 'Aucun média pour ce jour.',
       close: 'Fermer',
@@ -753,12 +923,15 @@ function buildDayPageHtml({ origin, lang, day, prevDay, nextDay, dayOgOverrides,
       commentsLoading: 'Chargement des commentaires...',
       commentsLoadError: 'Erreur de chargement des commentaires',
       commentsSaveError: 'Erreur lors de l’enregistrement du commentaire',
-      recommendations: 'Lieux conseillés'
+      recommendations: 'Lieux conseillés',
+      offerCtaTitle: 'Ce format vous plaît ?',
+      offerCtaText: 'Si vous voulez transformer votre voyage en journal interactif avec carte, médias et étapes ordonnées, regardez comment cela fonctionne.',
+      offerCtaLink: 'Voir comment ça marche'
     }
   };
   const ui = DAY_UI[lang] || DAY_UI.it;
   const date = String(day && day.date ? day.date : '');
-  const displayDate = String(options.displayDate || formatDisplayDate(date, lang));
+  const displayDate = String(options.displayDate || formatDisplayDateShort(date, lang));
   const canonicalPath = String(options.canonicalPath || `/${lang}/day/${date}/`);
   const canonicalUrl = buildAbsoluteUrl(origin, canonicalPath);
   const altPaths = options.altPaths || {
@@ -771,19 +944,52 @@ function buildDayPageHtml({ origin, lang, day, prevDay, nextDay, dayOgOverrides,
   const altEnUrl = buildAbsoluteUrl(origin, String(altPaths.en || `/en/day/${date}/`));
   const altEsUrl = buildAbsoluteUrl(origin, String(altPaths.es || `/es/day/${date}/`));
   const altFrUrl = buildAbsoluteUrl(origin, String(altPaths.fr || `/fr/day/${date}/`));
+  const noteSections = parseNoteSections(day && day.notes ? day.notes : '');
+  const noteTitle = String((noteSections[0] && noteSections[0].body) || '').trim();
+  const dayNumber = Number.isInteger(options.dayNumber) ? options.dayNumber : null;
+  const stageLabel = String(options.stageLabel || (dayNumber ? buildDayLabel(lang, dayNumber) : ui.prologueBadge || ''));
   const diaryPath = String(options.diaryPath || `/${lang}/?day=${encodeURIComponent(date)}`);
   const diaryUrl = buildAbsoluteUrl(origin, diaryPath);
-  const pageTitle = String(options.pageTitle || buildDaySeoTitle(day, lang, ui));
+  const trackDayKey = String(options.trackDayKey || (day && day.trackDate ? day.trackDate : date)).slice(0, 10);
+  const showTrackCard = options.showTrackCard === undefined ? Boolean(trackDayKey) : Boolean(options.showTrackCard);
+  const trackMapPath = String(options.trackMapPath || (trackDayKey ? `/${lang}/map/?day=${encodeURIComponent(trackDayKey)}` : `/${lang}/map/`));
+  const dayMapData = options.dayMapData && typeof options.dayMapData === 'object' ? options.dayMapData : null;
+  const dayMapDataJson = JSON.stringify(dayMapData || null).replace(/</g, '\\u003c');
+  const offerPath = String(options.offerPath || `/${lang}/crea-il-tuo-diario/`);
+  const pageTitle = String(options.pageTitle || buildDaySeoTitle(day, lang, ui, { stageLabel, dayNumber }));
   const description = String(options.description || buildDaySeoDescription(day, lang, ui));
   const commentTargetDate = String(options.commentTargetDate || date);
   const interactiveMediaBase = `${origin}${String(options.interactiveMediaBase || `/${lang}/?day=${encodeURIComponent(date)}&target=`)}`;
-  const headerTitle = String(options.headerTitle || `${displayDate} (${date})`);
+  const headerTitle = String(options.headerTitle || noteTitle || stageLabel);
+  const defaultHeaderMeta = stageLabel === String(ui.prologueBadge || '')
+    ? displayDate
+    : [stageLabel, displayDate].filter(Boolean).join(' · ');
+  const headerMeta = String(options.headerMeta || defaultHeaderMeta);
   const items = Array.isArray(day && day.items) ? day.items : [];
   const ogImagePath = resolveDayOgImagePath(day, dayOgOverrides || {});
   const ogImageUrl = ogImagePath ? buildAbsoluteUrl(origin, `/${String(ogImagePath).replace(/^\/+/, '')}`) : '';
   const noteHtml = markdownToSafeHtml(day && day.notes ? day.notes : '');
   const recommendationsHtml = renderRecommendations(day && day.recommendations)
     .replace('__RECOMMENDATIONS_HEADING__', escapeHtml(ui.recommendations));
+  const dayTrackHtml = showTrackCard ? `
+  <section class="day-section">
+    <div
+      class="day-track day-track--canonical"
+      data-day-track-key="${escapeHtml(trackDayKey)}"
+      data-day-track-loading="${escapeHtml(ui.dayTrackLoading)}"
+      data-day-track-empty="${escapeHtml(ui.dayTrackEmpty)}"
+    >
+      <div class="day-track__head">
+        <span>${escapeHtml(ui.miniMap)}</span>
+        <a class="day-track__open" href="${escapeHtml(trackMapPath)}">${escapeHtml(ui.openMap)}</a>
+      </div>
+      <div class="day-track__body is-empty" data-day-track-body>${escapeHtml(ui.dayTrackLoading)}</div>
+      <div class="day-track__overview-head">
+        <span>${escapeHtml(ui.journeyOverview)}</span>
+      </div>
+      <div class="day-track__overview is-empty" data-day-track-overview>${escapeHtml(ui.dayTrackLoading)}</div>
+    </div>
+  </section>` : '';
   const mediaCards = items.slice(0, 32).map((item) => {
     const isVideo = String(item.type || '') === 'video';
     const mediaImg = mediaPath(item, 'thumb', date) || mediaPath(item, 'poster', date) || mediaPath(item, 'src', date);
@@ -806,12 +1012,13 @@ function buildDayPageHtml({ origin, lang, day, prevDay, nextDay, dayOgOverrides,
           class="day-media-link"
           href="${escapeHtml(interactiveHref)}"
           aria-label="media ${id}"
+          data-media-id="${id}"
           data-media-type="${isVideo ? 'video' : 'image'}"
           data-media-src="${escapeHtml(mediaSrc)}"
           data-media-poster="${escapeHtml(mediaPoster)}"
           data-media-meta="${escapeHtml(meta || ui.noMetadata)}"
         >
-          ${mediaUrl ? `<img loading="lazy" src="${mediaUrl}" alt="${escapeHtml(`${displayDate} ${meta}`)}" />` : '<div class="media-fallback"></div>'}
+          ${mediaUrl ? `<img loading="lazy" src="${mediaUrl}" alt="${escapeHtml(`${headerTitle} ${meta}`)}" />` : '<div class="media-fallback"></div>'}
         </a>
         ${commentTarget ? `<button type="button" class="day-comment-btn day-comment-btn--media" data-comment-target="${escapeHtml(commentTarget)}">${ui.comments}</button>` : ''}
         <div class="media-card__meta">${escapeHtml(meta || ui.noMetadata)}${duration ? ` · video ${escapeHtml(duration)}` : ''}</div>
@@ -860,8 +1067,8 @@ function buildDayPageHtml({ origin, lang, day, prevDay, nextDay, dayOgOverrides,
 
   const prevHref = options.prevHref === null ? '' : String(options.prevHref || (prevDay ? `/${lang}/day/${prevDay.date}/` : ''));
   const nextHref = options.nextHref === null ? '' : String(options.nextHref || (nextDay ? `/${lang}/day/${nextDay.date}/` : ''));
-  const prevLabel = String(options.prevLabel || (prevDay ? prevDay.date : ''));
-  const nextLabel = String(options.nextLabel || (nextDay ? nextDay.date : ''));
+  const prevLabel = String(options.prevLabel || '');
+  const nextLabel = String(options.nextLabel || '');
   const navPrev = prevHref ? `<a href="${escapeHtml(prevHref)}">← ${escapeHtml(prevLabel)}</a>` : '';
   const navNext = nextHref ? `<a href="${escapeHtml(nextHref)}">${escapeHtml(nextLabel)} →</a>` : '';
 
@@ -895,12 +1102,21 @@ function buildDayPageHtml({ origin, lang, day, prevDay, nextDay, dayOgOverrides,
   <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="icon" type="image/png" href="/favicon.png" />
   <link rel="stylesheet" href="/styles.css" />
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""
+  />
   <style>
     body{max-width:1100px;margin:0 auto;padding:24px}
     .day-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px}
+    .day-head__meta{margin:6px 0 0;color:#746a60;font-size:14px}
     .day-nav{display:flex;gap:12px;flex-wrap:wrap}
     .day-nav a,.back-link{display:inline-block;padding:8px 12px;border-radius:12px;background:#ece7df;color:#2d2823;text-decoration:none}
     .day-section{margin-top:18px;background:#fff;border-radius:16px;padding:16px}
+    .day-offer-cta{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;background:#f7f3ee;border:1px solid rgba(31,26,22,.08)}
+    .day-offer-cta p{margin:6px 0 0;color:#5a5248;max-width:700px}
     .media-grid{margin-top:16px;display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px}
     .media-grid > .media-card{background:#f7f3ee;border-radius:12px;padding:8px;display:flex !important;flex-direction:column !important;align-items:stretch !important;justify-content:flex-start !important;gap:6px;min-height:0;overflow:visible}
     .media-grid > .media-card > a{display:block !important;width:100% !important;flex:0 0 auto !important}
@@ -952,6 +1168,7 @@ function buildDayPageHtml({ origin, lang, day, prevDay, nextDay, dayOgOverrides,
     <div>
       <p><a class="back-link" href="/${lang}/">${ui.backToDiary}</a></p>
       <h1>${escapeHtml(headerTitle)}</h1>
+      <p class="day-head__meta">${escapeHtml(headerMeta)}</p>
       <div class="hero-links">
         <a class="back-link" href="${escapeHtml(diaryUrl)}">${ui.openInteractiveDiary}</a>
         <a class="back-link" href="/${lang}/map/">${ui.openMap}</a>
@@ -967,6 +1184,14 @@ function buildDayPageHtml({ origin, lang, day, prevDay, nextDay, dayOgOverrides,
     ${noteHtml || `<p>${ui.noNotes}</p>`}
   </section>
   ${recommendationsHtml}
+  ${dayTrackHtml}
+  <section class="day-section day-offer-cta">
+    <div>
+      <h2>${escapeHtml(ui.offerCtaTitle)}</h2>
+      <p>${escapeHtml(ui.offerCtaText)}</p>
+    </div>
+    <a class="back-link" href="${escapeHtml(offerPath)}">${escapeHtml(ui.offerCtaLink)}</a>
+  </section>
   <section class="day-section">
     <h2>${ui.mediaHeading} (${items.length})</h2>
     <div class="media-grid">
@@ -1000,6 +1225,12 @@ function buildDayPageHtml({ origin, lang, day, prevDay, nextDay, dayOgOverrides,
       </form>
     </div>
   </div>
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""
+  ></script>
+  <script>window.DAY_PAGE_MAP_DATA = ${dayMapDataJson};</script>
   <script>
     (function () {
       const modal = document.getElementById('day-media-modal');
@@ -1013,9 +1244,17 @@ function buildDayPageHtml({ origin, lang, day, prevDay, nextDay, dayOgOverrides,
       const zoomOutBtn = document.getElementById('day-media-zoom-out');
       const zoomInBtn = document.getElementById('day-media-zoom-in');
       if (!modal || !body || !meta || !closeBtn || !backdrop || !prevBtn || !nextBtn || !zoomControls || !zoomOutBtn || !zoomInBtn) return;
-      const links = Array.from(document.querySelectorAll('.day-media-link'));
+      const allLinks = Array.from(document.querySelectorAll('.day-media-link'));
+      const linkById = new Map(
+        allLinks.map((link) => [String(link.getAttribute('data-media-id') || ''), link])
+      );
+      let activeLinks = allLinks.slice();
       let activeIndex = -1;
       let zoomCleanup = null;
+
+      const setActiveLinks = (collection) => {
+        activeLinks = Array.isArray(collection) && collection.length ? collection : allLinks.slice();
+      };
 
       const attachZoom = (imgEl) => {
         if (!imgEl) return () => {};
@@ -1088,8 +1327,9 @@ function buildDayPageHtml({ origin, lang, day, prevDay, nextDay, dayOgOverrides,
         };
       };
 
-      const openModal = (index) => {
-        const link = links[index];
+      const openModal = (index, collection = null) => {
+        if (collection) setActiveLinks(collection);
+        const link = activeLinks[index];
         if (!link) return;
         activeIndex = index;
         const type = link.getAttribute('data-media-type') || 'image';
@@ -1125,16 +1365,16 @@ function buildDayPageHtml({ origin, lang, day, prevDay, nextDay, dayOgOverrides,
           zoomCleanup = attachZoom(img);
         }
         meta.textContent = metaText || '';
-        prevBtn.disabled = links.length <= 1;
-        nextBtn.disabled = links.length <= 1;
+        prevBtn.disabled = activeLinks.length <= 1;
+        nextBtn.disabled = activeLinks.length <= 1;
         modal.classList.add('is-open');
         modal.setAttribute('aria-hidden', 'false');
       };
 
       const openByOffset = (offset) => {
-        if (!links.length) return;
+        if (!activeLinks.length) return;
         const base = activeIndex < 0 ? 0 : activeIndex;
-        const next = (base + offset + links.length) % links.length;
+        const next = (base + offset + activeLinks.length) % activeLinks.length;
         openModal(next);
       };
 
@@ -1146,16 +1386,28 @@ function buildDayPageHtml({ origin, lang, day, prevDay, nextDay, dayOgOverrides,
           zoomCleanup();
           zoomCleanup = null;
         }
+        setActiveLinks(allLinks);
         activeIndex = -1;
       };
 
-      links.forEach((link, idx) => {
+      allLinks.forEach((link, idx) => {
         link.addEventListener('click', (event) => {
           if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button === 1) return;
           event.preventDefault();
+          setActiveLinks(allLinks);
           openModal(idx);
         });
       });
+
+      window.dayPageMediaApi = {
+        openGroup(ids) {
+          const subset = (Array.isArray(ids) ? ids : [])
+            .map((id) => linkById.get(String(id || '')))
+            .filter(Boolean);
+          if (!subset.length) return;
+          openModal(0, subset);
+        }
+      };
 
       closeBtn.addEventListener('click', closeModal);
       backdrop.addEventListener('click', closeModal);
@@ -1271,6 +1523,7 @@ function buildDayPageHtml({ origin, lang, day, prevDay, nextDay, dayOgOverrides,
       }
     })();
   </script>
+  <script src="/day-page-map.js"></script>
 </body>
 </html>`;
 }
@@ -1342,6 +1595,12 @@ async function buildSitemapXmlForOrigin(origin) {
   const mapAlt = { it: '/it/map/', en: '/en/map/', es: '/es/map/', fr: '/fr/map/' };
   const peopleAlt = { it: '/it/people/', en: '/en/people/', es: '/es/people/', fr: '/fr/people/' };
   const contactAlt = { it: '/it/contatti/', en: '/en/contatti/', es: '/es/contatti/', fr: '/fr/contatti/' };
+  const offerAlt = {
+    it: '/it/crea-il-tuo-diario/',
+    en: '/en/crea-il-tuo-diario/',
+    es: '/es/crea-il-tuo-diario/',
+    fr: '/fr/crea-il-tuo-diario/'
+  };
   push('/it/', generatedDate, '1.0', 'daily', [], homeAlt);
   push('/en/', generatedDate, '0.9', 'daily', [], homeAlt);
   push('/es/', generatedDate, '0.9', 'daily', [], homeAlt);
@@ -1358,6 +1617,10 @@ async function buildSitemapXmlForOrigin(origin) {
   push('/en/contatti/', null, '0.5', 'monthly', [], contactAlt);
   push('/es/contatti/', null, '0.5', 'monthly', [], contactAlt);
   push('/fr/contatti/', null, '0.5', 'monthly', [], contactAlt);
+  push('/it/crea-il-tuo-diario/', generatedDate, '0.6', 'monthly', [], offerAlt);
+  push('/en/crea-il-tuo-diario/', generatedDate, '0.6', 'monthly', [], offerAlt);
+  push('/es/crea-il-tuo-diario/', generatedDate, '0.6', 'monthly', [], offerAlt);
+  push('/fr/crea-il-tuo-diario/', generatedDate, '0.6', 'monthly', [], offerAlt);
   const prologueDays = days.filter((day) => PROLOGUE_DATES.has(String(day && day.date ? day.date : '').trim()));
   if (prologueDays.length) {
     const byLoc = new Map();
@@ -1420,13 +1683,23 @@ async function generateStaticDayPages({ outputRoot, origin }) {
       if (!date) continue;
       const prevDay = index > 0 ? days[index - 1] : null;
       const nextDay = index < days.length - 1 ? days[index + 1] : null;
+      const dayNumber = index + 1;
+      const trackDayKey = String(day && day.trackDate ? day.trackDate : date).slice(0, 10);
+      const dayMapData = await buildCanonicalDayMapData(days, lang, trackDayKey, day && day.items);
       const html = buildDayPageHtml({
         origin: siteOrigin,
         lang,
         day,
         prevDay,
         nextDay,
-        dayOgOverrides
+        dayOgOverrides,
+        options: {
+          dayMapData,
+          trackDayKey,
+          dayNumber,
+          prevLabel: prevDay ? buildDayLabel(lang, index) : '',
+          nextLabel: nextDay ? buildDayLabel(lang, index + 2) : ''
+        }
       });
       const dayDir = path.join(targetRoot, lang, 'day', date);
       await fs.mkdir(dayDir, { recursive: true });
@@ -2215,13 +2488,23 @@ async function serveDayPage(req, res, lang, date) {
     const day = days[index];
     const prevDay = index > 0 ? days[index - 1] : null;
     const nextDay = index < days.length - 1 ? days[index + 1] : null;
+    const dayNumber = index + 1;
+    const trackDayKey = String(day && day.trackDate ? day.trackDate : date).slice(0, 10);
+    const dayMapData = await buildCanonicalDayMapData(days, lang, trackDayKey, day && day.items);
     const html = buildDayPageHtml({
       origin: getRequestOrigin(req),
       lang,
       day,
       prevDay,
       nextDay,
-      dayOgOverrides
+      dayOgOverrides,
+      options: {
+        dayMapData,
+        trackDayKey,
+        dayNumber,
+        prevLabel: prevDay ? buildDayLabel(lang, index) : '',
+        nextLabel: nextDay ? buildDayLabel(lang, index + 2) : ''
+      }
     });
     res.writeHead(200, {
       'Content-Type': 'text/html; charset=utf-8',
@@ -2247,10 +2530,10 @@ async function serveProloguePage(req, res, lang) {
     }
     const nextDay = days.find((day) => !PROLOGUE_DATES.includes(String(day && day.date ? day.date : '').slice(0, 10))) || null;
     const prologueLabelByLang = {
-      it: 'Prologo (2–3 giugno)',
-      en: 'Prologue (June 2–3)',
-      es: 'Prólogo (2–3 de junio)',
-      fr: 'Prologue (2–3 juin)'
+      it: 'Prologo · 2–3 giugno',
+      en: 'Prologue · June 2–3',
+      es: 'Prólogo · 2–3 de junio',
+      fr: 'Prologue · 2–3 juin'
     };
     const prologueSeoPrefixByLang = {
       it: 'Prologo',
@@ -2260,6 +2543,9 @@ async function serveProloguePage(req, res, lang) {
     };
     const displayLabel = prologueLabelByLang[lang] || prologueLabelByLang.it;
     const seoPrefix = prologueSeoPrefixByLang[lang] || prologueSeoPrefixByLang.it;
+    const nextDayNumber = nextDay
+      ? (days.findIndex((day) => String(day && day.date ? day.date : '').slice(0, 10) === String(nextDay && nextDay.date ? nextDay.date : '').slice(0, 10)) + 1)
+      : 0;
     const html = buildDayPageHtml({
       origin: getRequestOrigin(req),
       lang,
@@ -2278,10 +2564,11 @@ async function serveProloguePage(req, res, lang) {
         diaryPath: `/${lang}/?day=prologue`,
         interactiveMediaBase: `/${lang}/?day=prologue&target=`,
         commentTargetDate: PROLOGUE_TRACK_DATE,
+        showTrackCard: false,
+        stageLabel: seoPrefix,
         displayDate: displayLabel,
-        headerTitle: displayLabel,
-        pageTitle: `${seoPrefix} | ${displayLabel} | ${(SEO_BY_LANG[lang] || SEO_BY_LANG.it).title}`,
-        prevHref: null
+        prevHref: null,
+        nextLabel: nextDayNumber > 0 ? buildDayLabel(lang, nextDayNumber) : ''
       }
     });
     res.writeHead(200, {
@@ -2460,6 +2747,18 @@ const server = http.createServer(async (req, res) => {
       return;
     }
     await serveStatic(req, res, `/contatti.html${urlObj.search || ''}`, lang);
+    return;
+  }
+
+  const offerMatch = urlObj.pathname.match(OFFER_PAGE_PATH_RE);
+  if (offerMatch) {
+    const lang = String(offerMatch[1]).toLowerCase();
+    if (urlObj.pathname !== `/${lang}/crea-il-tuo-diario/`) {
+      res.writeHead(301, { Location: `/${lang}/crea-il-tuo-diario/${urlObj.search || ''}` });
+      res.end();
+      return;
+    }
+    await serveStatic(req, res, `/crea-il-tuo-diario.html${urlObj.search || ''}`, lang);
     return;
   }
 

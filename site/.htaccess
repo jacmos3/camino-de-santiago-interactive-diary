@@ -22,6 +22,7 @@ RewriteRule ^(it|en|es|fr)/prologue/?$ /day.php?lang=$1&date=prologue [L,NC,QSA]
 RewriteRule ^(it|en|es|fr)/map/?$ /map.html [L,NC]
 RewriteRule ^(it|en|es|fr)/people/?$ /people.html [L,NC]
 RewriteRule ^(it|en|es|fr)/contatti/?$ /contatti.html [L,NC]
+RewriteRule ^(it|en|es|fr)/crea-il-tuo-diario/?$ /crea-il-tuo-diario.html [L,NC]
 
 # SPA fallback for localized diary/map routes
 RewriteRule ^(it|en|es|fr)(/.*)?$ /index.html [L]

@@ -12,17 +12,16 @@ const I18N = {
     loading: 'Sto preparando il diario…',
     day_label: 'Giorno',
     prologue_label: 'Prologo',
-    prologue_title: 'Prologo (2–3 giugno)',
+    prologue_title: 'Prologo · 2–3 giugno',
     items_label: 'contenuti',
     photo_tag: 'Foto',
     video_tag: 'Video',
     footer_note:
       'Il sito è stato creato successivamente rispetto all’esperienza vissuta, ma ricostruisce il mio cammino in modo molto fedele: unisce il tracciamento registrato sul momento tramite app, i metadati (incluse le coordinate GPS) estratti da foto e video, e i testi su eventi e stati d’animo recuperati da vecchie note, messaggi, chat WhatsApp, audio, contenuti social e ricordi. Molti dettagli, però, sono rimasti fuori: il cammino è qualcosa che ogni persona attraversa in modo unico, e una parte di ciò che si vive resta sempre impossibile da tradurre del tutto in parole, immagini o coordinate.\n\nIl mio consiglio è di partire da soli, per vivere davvero l’esperienza fino in fondo, senza paura di non avere nessuno con cui parlare o di sbagliare strada: sul Cammino Francese è praticamente impossibile. È un’esperienza che consiglio a tutti e non richiede allenamenti speciali né una preparazione fisica particolare: la preparazione più importante è mentale. Ho visto più persone fermarsi per preconcetti e limiti mentali che per veri limiti fisici. Se senti che vuoi farlo, non riempirti di dubbi: prendi un biglietto, prepara lo zaino e parti, peregrino. Ultreya!',
     footer_cta_prefix:
-      'Realizzare questo sito è stato un lavoro mastodontico di raccolta, selezione dati, recupero e filtraggio delle informazioni, oltre a una lunga ricostruzione narrativa giorno per giorno.',
-    footer_cta_link: 'Contattami qui',
-    footer_cta_suffix:
-      ' per acquistare il template che ho realizzato e ricreare la stessa struttura con i tuoi contenuti.',
+      'Vuoi trasformare anche il tuo viaggio in un diario interattivo con mappa, media e tappe ordinate?',
+    footer_cta_link: 'Scopri qui come funziona',
+    footer_cta_suffix: '',
     view_diary: 'Diario',
     notes_label: 'Note del giorno',
     empty_note: 'Aggiungi un ricordo personale qui.',
@@ -33,6 +32,7 @@ const I18N = {
     mini_map_cumulative: 'Percorso cumulativo',
     open_map: 'Apri la mappa',
     open_map_hero: 'Apri la mappa del percorso',
+    offer_link_hero: 'Vuoi creare anche tu un diario simile? Scopri come funziona',
     open_short: 'Apri Mappa',
     goto_day: 'Vai al giorno',
     close: 'Chiudi',
@@ -107,17 +107,16 @@ const I18N = {
     loading: 'Preparing the diary…',
     day_label: 'Day',
     prologue_label: 'Prologue',
-    prologue_title: 'Prologue (June 2–3)',
+    prologue_title: 'Prologue · June 2–3',
     items_label: 'items',
     photo_tag: 'Photo',
     video_tag: 'Video',
     footer_note:
       'This site was created after the experience itself, but it reconstructs my Camino very faithfully: it combines tracking recorded at the time via app, metadata (including GPS coordinates) extracted from photos and videos, and texts about events and states of mind recovered from old notes, messages, WhatsApp chats, audio, social content, and memories. Many details, however, were left out: the Camino is something each person goes through in a unique way, and part of what you live always remains impossible to fully translate into words, images, or coordinates.\n\nMy advice is to start alone, to truly live the experience all the way, without being afraid of having no one to talk to or taking a wrong path: on the French Way it is practically impossible. It is an experience I recommend to everyone, and it does not require special training or particular physical preparation: the most important preparation is mental. I have seen more people stop because of preconceptions and mental limits than because of real physical limits. If you feel you want to do it, do not fill yourself with doubts: buy a ticket, pack your backpack, and go, pilgrim. Ultreya!',
     footer_cta_prefix:
-      'Building this site was a huge effort of collection, data selection, source recovery and information filtering, plus a long day-by-day narrative reconstruction.',
-    footer_cta_link: 'Contact me here',
-    footer_cta_suffix:
-      ' to buy the template I built and recreate the same structure with your own content.',
+      'Do you want to turn your trip into an interactive diary with map, media, and ordered stages?',
+    footer_cta_link: 'See how it works here',
+    footer_cta_suffix: '',
     view_diary: 'Diary',
     notes_label: 'Day notes',
     empty_note: 'Add a personal memory here.',
@@ -128,6 +127,7 @@ const I18N = {
     mini_map_cumulative: 'Cumulative route',
     open_map: 'Open map',
     open_map_hero: 'Open route map',
+    offer_link_hero: 'Do you want to build a diary like this one? See how it works',
     open_short: 'Open Map',
     goto_day: 'Jump to day',
     close: 'Close',
@@ -202,17 +202,16 @@ const I18N = {
     loading: 'Preparando el diario…',
     day_label: 'Día',
     prologue_label: 'Prólogo',
-    prologue_title: 'Prólogo (2–3 de junio)',
+    prologue_title: 'Prólogo · 2–3 de junio',
     items_label: 'contenidos',
     photo_tag: 'Foto',
     video_tag: 'Vídeo',
     footer_note:
       'El sitio se creó después de la experiencia vivida, pero reconstruye mi Camino de forma muy fiel: une el seguimiento registrado en su momento mediante app, los metadatos (incluidas las coordenadas GPS) extraídos de fotos y vídeos, y los textos sobre eventos y estados de ánimo recuperados de notas antiguas, mensajes, chats de WhatsApp, audios, contenidos sociales y recuerdos. Muchos detalles, sin embargo, se han quedado fuera: el Camino es algo que cada persona atraviesa de forma única, y una parte de lo que se vive siempre es imposible de traducir del todo en palabras, imágenes o coordenadas.\n\nMi consejo es salir solo, para vivir de verdad la experiencia hasta el fondo, sin miedo a no tener con quién hablar o a equivocarte de camino: en el Camino Francés es prácticamente imposible. Es una experiencia que recomiendo a todos y no requiere entrenamientos especiales ni una preparación física particular: la preparación más importante es mental. He visto a más personas pararse por prejuicios y límites mentales que por límites físicos reales. Si sientes que quieres hacerlo, no te llenes de dudas: compra un billete, prepara la mochila y sal, peregrino. ¡Ultreya!',
     footer_cta_prefix:
-      'Crear este sitio fue un trabajo enorme de recopilación, selección de datos, recuperación y filtrado de información, además de una larga reconstrucción narrativa día a día.',
-    footer_cta_link: 'Contáctame aquí',
-    footer_cta_suffix:
-      ' para comprar la plantilla que he creado y recrear la misma estructura con tus contenidos.',
+      'Quieres transformar tu viaje en un diario interactivo con mapa, media y etapas ordenadas?',
+    footer_cta_link: 'Mira aqui como funciona',
+    footer_cta_suffix: '',
     view_diary: 'Diario',
     notes_label: 'Notas del día',
     empty_note: 'Añade aquí un recuerdo personal.',
@@ -223,6 +222,7 @@ const I18N = {
     mini_map_cumulative: 'Ruta acumulada',
     open_map: 'Abrir mapa',
     open_map_hero: 'Abrir el mapa del recorrido',
+    offer_link_hero: 'Quieres crear un diario parecido? Mira como funciona',
     open_short: 'Abrir mapa',
     goto_day: 'Ir al día',
     close: 'Cerrar',
@@ -297,17 +297,16 @@ const I18N = {
     loading: 'Préparation du journal…',
     day_label: 'Jour',
     prologue_label: 'Prologue',
-    prologue_title: 'Prologue (2–3 juin)',
+    prologue_title: 'Prologue · 2–3 juin',
     items_label: 'contenus',
     photo_tag: 'Photo',
     video_tag: 'Vidéo',
     footer_note:
       'Le site a été créé après l’expérience vécue, mais il reconstruit mon chemin de manière très fidèle: il réunit le suivi enregistré sur le moment via app, les métadonnées (y compris les coordonnées GPS) extraites des photos et des vidéos, et les textes sur les événements et les états d’âme récupérés à partir d’anciennes notes, messages, chats WhatsApp, audios, contenus sociaux et souvenirs. Beaucoup de détails, cependant, sont restés en dehors: le chemin est quelque chose que chacun traverse de façon unique, et une partie de ce que l’on vit reste toujours impossible à traduire entièrement en mots, images ou coordonnées.\n\nMon conseil est de partir seul, pour vivre vraiment l’expérience jusqu’au bout, sans peur de n’avoir personne à qui parler ni de se tromper de route: sur le Camino Francés, c’est pratiquement impossible. C’est une expérience que je recommande à tous, et elle ne demande ni entraînement spécial ni préparation physique particulière: la préparation la plus importante est mentale. J’ai vu plus de personnes s’arrêter à cause de préjugés et de limites mentales qu’à cause de vraies limites physiques. Si tu sens que tu veux le faire, ne te remplis pas de doutes: prends un billet, prépare ton sac, et pars, pèlerin. Ultreya!',
     footer_cta_prefix:
-      'Créer ce site a été un travail colossal de collecte, sélection des données, récupération et filtrage des informations, ainsi qu’une longue reconstruction narrative jour après jour.',
-    footer_cta_link: 'Contacte-moi ici',
-    footer_cta_suffix:
-      ' pour acheter le modèle que j’ai réalisé et recréer la même structure avec tes contenus.',
+      'Tu veux transformer ton voyage en journal interactif avec carte, medias et etapes ordonnees ?',
+    footer_cta_link: 'Regarde ici comment ca marche',
+    footer_cta_suffix: '',
     view_diary: 'Journal',
     notes_label: 'Notes du jour',
     empty_note: 'Ajoute ici un souvenir personnel.',
@@ -318,6 +317,7 @@ const I18N = {
     mini_map_cumulative: 'Parcours cumulé',
     open_map: 'Ouvrir la carte',
     open_map_hero: 'Ouvrir la carte du parcours',
+    offer_link_hero: 'Tu veux creer un journal comme celui-ci ? Regarde comment ca marche',
     open_short: 'Ouvrir carte',
     goto_day: 'Aller au jour',
     close: 'Fermer',
@@ -441,6 +441,11 @@ const buildLocalizedMapPath = (lang, params = null) => {
 const buildLocalizedContactPath = (lang) => {
   const targetLang = normalizeLang(lang) || 'it';
   return `/${targetLang}/contatti/`;
+};
+
+const buildLocalizedOfferPath = (lang) => {
+  const targetLang = normalizeLang(lang) || 'it';
+  return `/${targetLang}/crea-il-tuo-diario/`;
 };
 
 const buildLocalizedPeoplePath = (lang) => {
@@ -584,6 +589,9 @@ const setLang = (lang, options = {}) => {
   });
   document.querySelectorAll('[data-contact-link]').forEach((el) => {
     if (el && el.tagName === 'A') el.href = buildLocalizedContactPath(normalized);
+  });
+  document.querySelectorAll('[data-offer-link]').forEach((el) => {
+    if (el && el.tagName === 'A') el.href = buildLocalizedOfferPath(normalized);
   });
   document.querySelectorAll('[data-people-link]').forEach((el) => {
     if (el && el.tagName === 'A') el.href = buildLocalizedPeoplePath(normalized);
@@ -1293,23 +1301,14 @@ const formatDate = (dateStr) => {
   const [y, m, d] = dateStr.split('-').map(Number);
   const date = new Date(y, m - 1, d);
   const fmt = new Intl.DateTimeFormat(currentLang, {
-    weekday: 'long',
-    day: '2-digit',
-    month: 'long',
-    year: 'numeric'
+    day: 'numeric',
+    month: 'long'
   });
   return fmt.format(date);
 };
 
 const formatDateNoWeekday = (dateStr) => {
-  const [y, m, d] = dateStr.split('-').map(Number);
-  const date = new Date(y, m - 1, d);
-  const fmt = new Intl.DateTimeFormat(currentLang, {
-    day: '2-digit',
-    month: 'long',
-    year: 'numeric'
-  });
-  return fmt.format(date);
+  return formatDate(dateStr);
 };
 
 const formatTimelineChipDate = (dateStr) => {
@@ -1351,9 +1350,15 @@ const getDayCommentTargetKey = (day) => {
   return String(day && day.date ? day.date : '').slice(0, 10);
 };
 
+const buildDayHeadingText = (dateStr) => {
+  const label = getDayLabelText({ date: dateStr });
+  const displayDate = formatDate(String(dateStr || ''));
+  return displayDate ? `${label} · ${displayDate}` : label;
+};
+
 const getDayTitle = (day) => {
   if (isPrologueDay(day)) return I18N[currentLang].prologue_title;
-  return formatDate(String(day && day.date ? day.date : ''));
+  return buildDayHeadingText(String(day && day.date ? day.date : ''));
 };
 
 const getDayLabelText = (day) => {
@@ -1478,7 +1483,7 @@ const renderDates = () => {
     if (el.getAttribute('data-prologue-title') === '1') {
       el.textContent = I18N[currentLang].prologue_title;
     } else {
-      el.textContent = formatDate(dateStr);
+      el.textContent = buildDayHeadingText(dateStr);
     }
   });
   document.querySelectorAll('[data-items-count]').forEach((el) => {
@@ -3453,12 +3458,6 @@ const buildDay = (day, idx) => {
   if (isPrologueDay(day)) title.setAttribute('data-prologue-title', '1');
   title.textContent = getDayTitle(day);
 
-  const meta = document.createElement('div');
-  meta.className = 'day__meta';
-  meta.setAttribute('data-day-label', day.date);
-  if (isPrologueDay(day)) meta.setAttribute('data-prologue-label', '1');
-  meta.textContent = getDayLabelText(day);
-
   const count = document.createElement('div');
   count.className = 'day__meta';
   count.setAttribute('data-items-count', day.items.length);
@@ -3477,7 +3476,6 @@ const buildDay = (day, idx) => {
 
   const chips = document.createElement('div');
   chips.className = 'day__chips';
-  chips.appendChild(meta);
   chips.appendChild(count);
   chips.appendChild(distance);
   const stravaLinks = getStravaLinks(day);
