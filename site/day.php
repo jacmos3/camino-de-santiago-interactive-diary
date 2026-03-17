@@ -470,8 +470,8 @@ $ui = [
     'comments_on_media' => 'Commenti sul media',
     'recommendations' => 'Posti consigliati',
     'prologue_label' => 'Prologo · 2–3 giugno',
-    'offer_cta_title' => 'Ti piace questo formato?',
-    'offer_cta_text' => 'Se vuoi trasformare anche il tuo viaggio in un diario interattivo con mappa, media e tappe ordinate, guarda come funziona.',
+    'offer_cta_title' => 'Stai pianificando anche tu un cammino?',
+    'offer_cta_text' => 'Se vuoi trasformare il tuo viaggio in un diario interattivo con mappa, media e tappe ordinate, qui trovi come funziona.',
     'offer_cta_link' => 'Scopri come funziona',
   ],
   'en' => [
@@ -650,8 +650,10 @@ $dayNumber = $isPrologue ? null : day_find_day_number($days, $date);
 $dayLabel = $isPrologue
   ? (string)$uiLang['prologue_badge']
   : trim((string)$uiLang['day_label_prefix'] . ' ' . (string)($dayNumber ?? ''));
-$headerTitle = $seoTitleCore !== '' ? $seoTitleCore : $dayLabel;
-$headerMeta = $isPrologue ? $displayDate : trim(implode(' · ', array_filter([$dayLabel, $displayDate])));
+$headerTitle = $isPrologue
+  ? ($seoTitleCore !== '' ? $seoTitleCore : $dayLabel)
+  : ($seoTitleCore !== '' ? "{$dayLabel} - {$seoTitleCore}" : $dayLabel);
+$headerMeta = $displayDate;
 $seoTitle = $seoTitleCore !== ''
   ? "{$seoTitleCore} | {$dayLabel} | {$uiLang['title_prefix']}"
   : "{$dayLabel} | {$uiLang['title_prefix']}";
@@ -735,7 +737,11 @@ http_response_code(200);
     body{max-width:1100px;margin:0 auto;padding:24px}
     .day-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px}
     .day-head__meta{margin:6px 0 0;color:#746a60;font-size:14px}
+    .day-head__actions{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:10px}
+    .day-head__actions-left{display:flex;gap:8px;flex-wrap:wrap}
     .day-nav{display:flex;gap:12px;flex-wrap:wrap}
+    .day-nav--top{justify-content:flex-end}
+    .day-nav--below-media{margin-top:10px;justify-content:flex-end}
     .day-nav a,.back-link{display:inline-block;padding:8px 12px;border-radius:12px;background:#ece7df;color:#2d2823;text-decoration:none}
     .day-section{margin-top:18px;background:#fff;border-radius:16px;padding:16px}
     .day-offer-cta{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;background:#f7f3ee;border:1px solid rgba(31,26,22,.08)}
@@ -770,19 +776,21 @@ http_response_code(200);
 </head>
 <body>
   <header class="day-head">
-    <div>
+    <div style="width: 100%">
       <p><a class="back-link" href="/<?= day_escape($lang) ?>/"><?= day_escape($uiLang['back_to_diary']) ?></a></p>
       <h1><?= day_escape($headerTitle) ?></h1>
       <p class="day-head__meta"><?= day_escape($headerMeta) ?></p>
-      <div style="display:flex;gap:8px;flex-wrap:wrap">
-        <a class="back-link" href="<?= day_escape($interactiveDiaryHref) ?>"><?= day_escape($uiLang['open_interactive_diary']) ?></a>
-        <a class="back-link" href="/<?= day_escape($lang) ?>/map/"><?= day_escape($uiLang['open_map']) ?></a>
+      <div class="day-head__actions">
+        <div class="day-head__actions-left">
+          <a class="back-link" href="<?= day_escape($interactiveDiaryHref) ?>"><?= day_escape($uiLang['open_interactive_diary']) ?></a>
+          <a class="back-link" href="/<?= day_escape($lang) ?>/map/"><?= day_escape($uiLang['open_map']) ?></a>
+        </div>
+        <nav class="day-nav day-nav--top">
+          <?php if (is_array($prevDay)): ?><a href="/<?= day_escape($lang) ?>/day/<?= day_escape((string)$prevDay['date']) ?>/">← <?= day_escape($prevDayLabel) ?></a><?php endif; ?>
+          <?php if (is_array($nextDay)): ?><a href="/<?= day_escape($lang) ?>/day/<?= day_escape((string)$nextDay['date']) ?>/"><?= day_escape($nextDayLabel) ?> →</a><?php endif; ?>
+        </nav>
       </div>
     </div>
-    <nav class="day-nav">
-      <?php if (is_array($prevDay)): ?><a href="/<?= day_escape($lang) ?>/day/<?= day_escape((string)$prevDay['date']) ?>/">← <?= day_escape($prevDayLabel) ?></a><?php endif; ?>
-      <?php if (is_array($nextDay)): ?><a href="/<?= day_escape($lang) ?>/day/<?= day_escape((string)$nextDay['date']) ?>/"><?= day_escape($nextDayLabel) ?> →</a><?php endif; ?>
-    </nav>
   </header>
 
   <section class="day-section">
@@ -825,14 +833,6 @@ http_response_code(200);
   </section>
   <?php endif; ?>
 
-  <section class="day-section day-offer-cta">
-    <div>
-      <h2><?= day_escape($uiLang['offer_cta_title']) ?></h2>
-      <p><?= day_escape($uiLang['offer_cta_text']) ?></p>
-    </div>
-    <a class="back-link" href="<?= day_escape($offerHref) ?>"><?= day_escape($uiLang['offer_cta_link']) ?></a>
-  </section>
-
   <section class="day-section">
     <h2><?= day_escape($uiLang['media_heading']) ?> (<?= count($items) ?>)</h2>
     <div class="media-grid">
@@ -849,6 +849,10 @@ http_response_code(200);
         $src = day_media_path($item, 'src', $date) ?: $preview;
         $poster = day_media_path($item, 'poster', $date) ?: $preview;
         $meta = implode(' · ', array_filter([(string)($item['time'] ?? ''), (string)($item['place'] ?? '')]));
+        $lat = is_numeric($item['lat'] ?? null) ? (float)$item['lat'] : null;
+        $lon = is_numeric($item['lon'] ?? null) ? (float)$item['lon'] : null;
+        $hasCoords = $lat !== null && $lon !== null;
+        $mapsUrl = $hasCoords ? ('https://www.google.com/maps?q=' . rawurlencode((string)$lat) . ',' . rawurlencode((string)$lon)) : '';
       ?>
       <article class="media-card">
         <a class="day-media-link"
@@ -861,10 +865,40 @@ http_response_code(200);
           <img src="<?= day_escape($preview) ?>" alt="<?= day_escape($mediaId) ?>" loading="lazy" />
         </a>
         <button type="button" class="day-comment-btn day-comment-btn--media" data-comment-target="media-<?= day_escape($mediaId) ?>"><?= day_escape($uiLang['comments']) ?></button>
-        <div class="media-card__meta"><?= day_escape($meta) ?></div>
+        <div class="media-card__meta">
+          <?php
+          $time = trim((string)($item['time'] ?? ''));
+          $place = trim((string)($item['place'] ?? ''));
+          if ($time !== '') {
+            echo day_escape($time);
+            if ($place !== '') echo ' · ';
+          }
+          if ($place !== '') {
+            if ($mapsUrl !== '') {
+              echo '<a href="' . day_escape($mapsUrl) . '" target="_blank" rel="noopener noreferrer">' . day_escape($place) . '</a>';
+            } else {
+              echo day_escape($place);
+            }
+          }
+          ?>
+        </div>
       </article>
       <?php endforeach; ?>
     </div>
+  </section>
+  <?php if (is_array($prevDay) || is_array($nextDay)): ?>
+  <nav class="day-nav day-nav--below-media">
+    <?php if (is_array($prevDay)): ?><a href="/<?= day_escape($lang) ?>/day/<?= day_escape((string)$prevDay['date']) ?>/">← <?= day_escape($prevDayLabel) ?></a><?php endif; ?>
+    <?php if (is_array($nextDay)): ?><a href="/<?= day_escape($lang) ?>/day/<?= day_escape((string)$nextDay['date']) ?>/"><?= day_escape($nextDayLabel) ?> →</a><?php endif; ?>
+  </nav>
+  <?php endif; ?>
+
+  <section class="day-section day-offer-cta">
+    <div>
+      <h2><?= day_escape($uiLang['offer_cta_title']) ?></h2>
+      <p><?= day_escape($uiLang['offer_cta_text']) ?></p>
+    </div>
+    <a class="back-link" href="<?= day_escape($offerHref) ?>"><?= day_escape($uiLang['offer_cta_link']) ?></a>
   </section>
 
   <div class="day-modal" id="day-media-modal" aria-hidden="true">

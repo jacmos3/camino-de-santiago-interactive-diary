@@ -379,6 +379,7 @@
           bounds = bounds ? bounds.extend(endMarker.getLatLng()) : window.L.latLngBounds([endMarker.getLatLng()]);
         }
         if (isFocus && stage && stage.label && stage.href) {
+          if (isCurrent) return;
           const className = isCurrent
             ? 'map-stage-label__pill map-stage-label__pill--current'
             : 'map-stage-label__pill';
@@ -397,7 +398,7 @@
 
     if (bounds && bounds.isValid()) {
       map.fitBounds(bounds, { padding: [4, 4], animate: false });
-      nudgeMapZoomIn(map, 1);
+      nudgeMapZoomIn(map, 0);
     }
     window.setTimeout(() => map.invalidateSize(), 0);
   };

@@ -813,8 +813,8 @@ function buildDayPageHtml({ origin, lang, day, prevDay, nextDay, dayOgOverrides,
       commentsLoadError: 'Errore nel caricamento commenti',
       commentsSaveError: 'Errore durante il salvataggio commento',
       recommendations: 'Posti consigliati',
-      offerCtaTitle: 'Ti piace questo formato?',
-      offerCtaText: 'Se vuoi trasformare anche il tuo viaggio in un diario interattivo con mappa, media e tappe ordinate, guarda come funziona.',
+      offerCtaTitle: 'Stai pianificando anche tu un cammino?',
+      offerCtaText: 'Se vuoi trasformare il tuo viaggio in un diario interattivo con mappa, media e tappe ordinate, qui trovi come funziona.',
       offerCtaLink: 'Scopri come funziona'
     },
     en: {
@@ -960,10 +960,13 @@ function buildDayPageHtml({ origin, lang, day, prevDay, nextDay, dayOgOverrides,
   const description = String(options.description || buildDaySeoDescription(day, lang, ui));
   const commentTargetDate = String(options.commentTargetDate || date);
   const interactiveMediaBase = `${origin}${String(options.interactiveMediaBase || `/${lang}/?day=${encodeURIComponent(date)}&target=`)}`;
-  const headerTitle = String(options.headerTitle || noteTitle || stageLabel);
+  const defaultHeaderTitle = stageLabel === String(ui.prologueBadge || '')
+    ? (noteTitle || stageLabel)
+    : (noteTitle ? `${stageLabel} - ${noteTitle}` : stageLabel);
+  const headerTitle = String(options.headerTitle || defaultHeaderTitle);
   const defaultHeaderMeta = stageLabel === String(ui.prologueBadge || '')
     ? displayDate
-    : [stageLabel, displayDate].filter(Boolean).join(' · ');
+    : displayDate;
   const headerMeta = String(options.headerMeta || defaultHeaderMeta);
   const items = Array.isArray(day && day.items) ? day.items : [];
   const ogImagePath = resolveDayOgImagePath(day, dayOgOverrides || {});
@@ -996,12 +999,20 @@ function buildDayPageHtml({ origin, lang, day, prevDay, nextDay, dayOgOverrides,
     const mediaUrl = buildAbsoluteUrl(origin, `/${String(mediaImg || '').replace(/^\/+/, '')}`);
     const mediaSrc = buildAbsoluteUrl(origin, `/${String(mediaPath(item, 'src', date) || mediaImg || '').replace(/^\/+/, '')}`);
     const mediaPoster = buildAbsoluteUrl(origin, `/${String(mediaPath(item, 'poster', date) || mediaImg || '').replace(/^\/+/, '')}`);
-    const labelTime = escapeHtml(String(item.time || ''));
-    const place = escapeHtml(String(item.place || ''));
+    const labelTimeRaw = String(item.time || '');
+    const placeRaw = String(item.place || '');
+    const labelTime = escapeHtml(labelTimeRaw);
+    const place = escapeHtml(placeRaw);
     const id = escapeHtml(String(item.id || ''));
     const rawId = String(item.id || '').trim();
     const duration = isVideo ? buildVideoDurationLabel(item.durationSec) : '';
     const meta = [labelTime, place].filter(Boolean).join(' · ');
+    const lat = Number.isFinite(Number(item && item.lat)) ? Number(item.lat) : null;
+    const lon = Number.isFinite(Number(item && item.lon)) ? Number(item.lon) : null;
+    const hasCoords = lat !== null && lon !== null;
+    const mapsUrl = hasCoords
+      ? `https://www.google.com/maps?q=${encodeURIComponent(String(lat))},${encodeURIComponent(String(lon))}`
+      : '';
     const commentTarget = rawId ? `media-${rawId}` : '';
     const interactiveHref = rawId
       ? `${interactiveMediaBase}${encodeURIComponent(`media-${rawId}`)}`
@@ -1021,7 +1032,16 @@ function buildDayPageHtml({ origin, lang, day, prevDay, nextDay, dayOgOverrides,
           ${mediaUrl ? `<img loading="lazy" src="${mediaUrl}" alt="${escapeHtml(`${headerTitle} ${meta}`)}" />` : '<div class="media-fallback"></div>'}
         </a>
         ${commentTarget ? `<button type="button" class="day-comment-btn day-comment-btn--media" data-comment-target="${escapeHtml(commentTarget)}">${ui.comments}</button>` : ''}
-        <div class="media-card__meta">${escapeHtml(meta || ui.noMetadata)}${duration ? ` · video ${escapeHtml(duration)}` : ''}</div>
+        <div class="media-card__meta">
+          ${labelTimeRaw ? escapeHtml(labelTimeRaw) : ''}
+          ${labelTimeRaw && placeRaw ? ' · ' : ''}
+          ${placeRaw
+            ? (mapsUrl
+              ? `<a href="${escapeHtml(mapsUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(placeRaw)}</a>`
+              : escapeHtml(placeRaw))
+            : ''}
+          ${duration ? ` · video ${escapeHtml(duration)}` : ''}
+        </div>
       </article>
     `;
   }).join('\n');
@@ -1113,6 +1133,8 @@ function buildDayPageHtml({ origin, lang, day, prevDay, nextDay, dayOgOverrides,
     .day-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px}
     .day-head__meta{margin:6px 0 0;color:#746a60;font-size:14px}
     .day-nav{display:flex;gap:12px;flex-wrap:wrap}
+    .day-nav--top{justify-content:flex-end}
+    .day-nav--below-media{margin-top:10px;justify-content:flex-end}
     .day-nav a,.back-link{display:inline-block;padding:8px 12px;border-radius:12px;background:#ece7df;color:#2d2823;text-decoration:none}
     .day-section{margin-top:18px;background:#fff;border-radius:16px;padding:16px}
     .day-offer-cta{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;background:#f7f3ee;border:1px solid rgba(31,26,22,.08)}
@@ -1123,7 +1145,7 @@ function buildDayPageHtml({ origin, lang, day, prevDay, nextDay, dayOgOverrides,
     .media-grid > .media-card > a > img{width:100%;height:180px;object-fit:cover;border-radius:10px;display:block}
     .media-grid > .media-card > .media-card__meta{display:block !important;width:100% !important;font-size:12px;line-height:1.35;color:#5a5248;word-break:break-word;white-space:normal}
     .media-fallback{height:160px;border-radius:10px;background:#ddd}
-    .hero-links{display:flex;gap:8px;flex-wrap:wrap}
+    .hero-links{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-top:10px;width:100%}
     .day-modal{position:fixed;inset:0;display:none;z-index:9999}
     .day-modal.is-open{display:block}
     .day-modal__backdrop{position:absolute;inset:0;background:rgba(13,11,10,.7)}
@@ -1172,9 +1194,9 @@ function buildDayPageHtml({ origin, lang, day, prevDay, nextDay, dayOgOverrides,
       <div class="hero-links">
         <a class="back-link" href="${escapeHtml(diaryUrl)}">${ui.openInteractiveDiary}</a>
         <a class="back-link" href="/${lang}/map/">${ui.openMap}</a>
+        <nav class="day-nav day-nav--top">${navPrev}${navNext}</nav>
       </div>
     </div>
-    <nav class="day-nav">${navPrev}${navNext}</nav>
   </header>
   <section class="day-section">
     <div class="day-comments-head">
@@ -1185,18 +1207,19 @@ function buildDayPageHtml({ origin, lang, day, prevDay, nextDay, dayOgOverrides,
   </section>
   ${recommendationsHtml}
   ${dayTrackHtml}
+  <section class="day-section">
+    <h2>${ui.mediaHeading} (${items.length})</h2>
+    <div class="media-grid">
+      ${mediaCards || `<p>${ui.noMedia}</p>`}
+    </div>
+  </section>
+  ${(navPrev || navNext) ? `<nav class="day-nav day-nav--below-media">${navPrev}${navNext}</nav>` : ''}
   <section class="day-section day-offer-cta">
     <div>
       <h2>${escapeHtml(ui.offerCtaTitle)}</h2>
       <p>${escapeHtml(ui.offerCtaText)}</p>
     </div>
     <a class="back-link" href="${escapeHtml(offerPath)}">${escapeHtml(ui.offerCtaLink)}</a>
-  </section>
-  <section class="day-section">
-    <h2>${ui.mediaHeading} (${items.length})</h2>
-    <div class="media-grid">
-      ${mediaCards || `<p>${ui.noMedia}</p>`}
-    </div>
   </section>
   <div class="day-modal" id="day-media-modal" aria-hidden="true">
     <div class="day-modal__backdrop" id="day-media-backdrop"></div>
