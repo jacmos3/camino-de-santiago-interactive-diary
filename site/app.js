@@ -4055,6 +4055,67 @@ const refreshDayTrackCardForDay = (dayKey) => {
   }
 };
 
+const ARRIVAL_PLACE_BY_DATE = {
+  '2019-06-02': 'Bergamo',
+  '2019-06-03': 'Lourdes',
+  '2019-06-04': 'Asson',
+  '2019-06-05': 'Arudy',
+  '2019-06-06': 'Oloron-Sainte-Marie',
+  '2019-06-07': 'Hopital-Saint-Blaise',
+  '2019-06-08': 'Garaibie',
+  '2019-06-09': 'Saint-Jean-Pied-de-Port',
+  '2019-06-10': 'Orisson',
+  '2019-06-11': 'Roncisvalle',
+  '2019-06-12': 'Zabaldika',
+  '2019-06-13': 'Pamplona',
+  '2019-06-14': 'Puente la Reina',
+  '2019-06-15': 'Estella',
+  '2019-06-16': 'Los Arcos',
+  '2019-06-17': 'Viana',
+  '2019-06-18': 'Navarrete',
+  '2019-06-19': 'Ciruena',
+  '2019-06-20': 'Viloria de Rioja',
+  '2019-06-21': 'Atapuerca',
+  '2019-06-22': 'Burgos',
+  '2019-06-23': 'Burgos',
+  '2019-06-24': 'Burgos',
+  '2019-06-25': 'San Bol',
+  '2019-06-26': 'San Nicolas',
+  '2019-06-27': 'Villalcazar de Sirga',
+  '2019-06-28': 'Cervatos de la Cueza',
+  '2019-06-29': 'Sahagun',
+  '2019-06-30': 'El Burgo Ranero',
+  '2019-07-01': 'Leon',
+  '2019-07-02': 'Leon',
+  '2019-07-03': 'Leon',
+  '2019-07-04': 'Villar de Mazarife',
+  '2019-07-05': 'Astorga',
+  '2019-07-06': 'Rabanal del Camino',
+  '2019-07-07': 'Molinaseca',
+  '2019-07-08': 'Cacabelos',
+  '2019-07-09': 'O Cebreiro',
+  '2019-07-10': 'O Poio',
+  '2019-07-11': 'Sarria',
+  '2019-07-12': 'Portomarin',
+  '2019-07-13': 'Palas de Rei',
+  '2019-07-14': 'Arzua',
+  '2019-07-15': 'Santiago',
+  '2019-07-16': 'Finisterre',
+  '2019-07-17': 'Santiago',
+  '2019-07-18': 'Santiago',
+  '2019-07-19': 'Vilaserio',
+  '2019-07-20': 'Muxia',
+  '2019-07-21': 'Muxia',
+  '2019-07-22': 'Finisterre',
+  '2019-07-23': 'Santiago',
+  '2019-07-24': 'Aeroporto di Santiago'
+};
+
+const getTimelineArrivalPlace = (day) => {
+  const date = String(day && day.date ? day.date : '').slice(0, 10);
+  return String(ARRIVAL_PLACE_BY_DATE[date] || '').trim();
+};
+
 const buildTimelineNav = (days) => {
   const nav = document.getElementById('timeline-nav');
   nav.innerHTML = '';
@@ -4065,8 +4126,8 @@ const buildTimelineNav = (days) => {
       btn.textContent = I18N[currentLang].prologue_label;
     } else {
       const num = getCamminoDayNumber(day.date);
-      const primary = formatTimelineChipDate(day.date);
-      const secondary = num ? `${I18N[currentLang].day_label} ${num}` : '';
+      const primary = num ? `${I18N[currentLang].day_label} ${num}` : formatTimelineChipDate(day.date);
+      const secondary = getTimelineArrivalPlace(day) || formatTimelineChipDate(day.date);
       btn.innerHTML = `
         <span class="timeline-nav__primary">${escapeHtml(primary)}</span>
         ${secondary ? `<span class="timeline-nav__secondary">${escapeHtml(secondary)}</span>` : ''}

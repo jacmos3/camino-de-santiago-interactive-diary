@@ -486,16 +486,18 @@ h1, h2, h3 {
   border: 1px solid rgba(31, 26, 22, 0.1);
   background: #fffaf2;
   color: var(--ink);
-  padding: 8px 12px;
+  padding: 9px 16px;
   border-radius: 999px;
   cursor: pointer;
   white-space: nowrap;
   display: inline-flex;
+  flex: 0 0 auto;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 1px;
-  min-width: 74px;
+  min-width: 84px;
+  max-width: 168px;
   line-height: 1.05;
 }
 
@@ -2346,7 +2348,8 @@ h1, h2, h3 {
   }
   .timeline-nav__inner button {
     min-width: 78px;
-    padding: 9px 12px;
+    max-width: 150px;
+    padding: 9px 14px;
   }
   .timeline-nav__primary {
     font-size: 0.92rem;
