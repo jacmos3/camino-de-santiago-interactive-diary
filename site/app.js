@@ -3304,7 +3304,10 @@ const buildMediaCard = (groupItems) => {
     const itemIdx = item.id ? modalIndexById.get(item.id) : -1;
     const durationBadge = document.createElement('div');
     durationBadge.className = 'media-duration';
-    durationBadge.textContent = 'video --:--';
+    const staticDuration = Number(item.durationSec);
+    durationBadge.textContent = Number.isFinite(staticDuration) && staticDuration > 0
+      ? `video ${formatDuration(staticDuration)}`
+      : 'video --:--';
     card.appendChild(durationBadge);
     const posterImg = document.createElement('img');
     posterImg.loading = 'lazy';
@@ -3338,29 +3341,6 @@ const buildMediaCard = (groupItems) => {
       openVideoModal(item, itemIdx);
     });
     card.appendChild(posterImg);
-
-    const probe = document.createElement('video');
-    probe.preload = 'metadata';
-    const videoCandidates = getVideoSourceCandidates(item);
-    let videoCandidateIndex = 0;
-    probe.src = videoCandidates[0] || '';
-    probe.addEventListener('loadedmetadata', () => {
-      durationBadge.textContent = `video ${formatDuration(probe.duration)}`;
-    }, { once: true });
-    const onProbeError = () => {
-      videoCandidateIndex += 1;
-      if (videoCandidateIndex < videoCandidates.length) {
-        probe.src = videoCandidates[videoCandidateIndex];
-        probe.load();
-        return;
-      }
-      durationBadge.textContent = 'video --:--';
-      probe.removeEventListener('error', onProbeError);
-    };
-    probe.addEventListener('error', onProbeError);
-    if (!item.src) {
-      durationBadge.textContent = 'video --:--';
-    }
   }
 
   if (item.type === 'video') {
