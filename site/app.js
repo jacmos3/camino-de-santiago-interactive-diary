@@ -382,6 +382,9 @@ const I18N = {
 };
 
 let currentLang = 'it';
+const BOOTSTRAP_PREVIEW_DATA = (typeof window !== 'undefined' && window.__CAMMINO_BOOTSTRAP_DATA__ && typeof window.__CAMMINO_BOOTSTRAP_DATA__ === 'object')
+  ? window.__CAMMINO_BOOTSTRAP_DATA__
+  : null;
 const SUPPORTED_LANGS = new Set(['it', 'en', 'es', 'fr']);
 const SEO_META = {
   it: {
@@ -408,6 +411,9 @@ const normalizeLang = (value) => {
 };
 
 const getEntriesDataPath = (lang = currentLang) => {
+  if (BOOTSTRAP_PREVIEW_DATA && typeof BOOTSTRAP_PREVIEW_DATA.entriesPath === 'string' && BOOTSTRAP_PREVIEW_DATA.entriesPath.trim() !== '') {
+    return BOOTSTRAP_PREVIEW_DATA.entriesPath.trim();
+  }
   const normalized = normalizeLang(lang) || 'it';
   return `/data/entries.${normalized}.json`;
 };
@@ -665,40 +671,6 @@ const MINI_MAP_COLLAPSED_KEY = 'cammino_minimap_collapsed_v1';
 const dayDistanceKmByDate = new Map();
 const dayDistanceCumKmByDate = new Map();
 const nonTrackedDayKeys = new Set();
-
-const PEOPLE_CATALOG = [
-  { id: 'maria', name: 'Maria', aliases: ['Maria'] },
-  { id: 'thomas', name: 'Thomas', aliases: ['Thomas', 'Tomà', 'Toma'] },
-  { id: 'talia', name: 'Talia', aliases: ['Talia'] },
-  { id: 'alicia', name: 'Alicia', aliases: ['Alicia'] },
-  { id: 'ananda', name: 'Ananda', aliases: ['Ananda'] },
-  { id: 'beatrice', name: 'Beatrice', aliases: ['Beatrice'] },
-  { id: 'catherine', name: 'Catherine', aliases: ['Catherine'] },
-  { id: 'charles', name: 'Charles', aliases: ['Charles'] },
-  { id: 'francesco', name: 'Francesco', aliases: ['Francesco'] },
-  { id: 'hongsuan', name: 'Hongsuan', aliases: ['Hongsuan', 'Ocean'] },
-  { id: 'andrius', name: 'Andrius', aliases: ['Andrius'] },
-  { id: 'giselle', name: 'Giselle', aliases: ['Giselle'] },
-  { id: 'judith', name: 'Judith', aliases: ['Judith'] },
-  { id: 'lucia', name: 'Lucia', aliases: ['Lucia', 'Lucía'] },
-  { id: 'mark', name: 'Mark', aliases: ['Mark'] },
-  { id: 'pamela', name: 'Pamela', aliases: ['Pamela', 'Pam'] },
-  { id: 'chris', name: 'Chris', aliases: ['Chris'] },
-  { id: 'jessica', name: 'Jessica', aliases: ['Jessica'] },
-  { id: 'danielle', name: 'Danielle', aliases: ['Danielle'] },
-  { id: 'ginger', name: 'Ginger', aliases: ['Ginger'] },
-  { id: 'carla', name: 'Carla', aliases: ['Carla'] },
-  { id: 'anita', name: 'Anita', aliases: ['Anita'] },
-  { id: 'isabel', name: 'Isabel', aliases: ['Isabel'] },
-  { id: 'sara', name: 'Sara', aliases: ['Sara'] },
-  { id: 'renato', name: 'Renato', aliases: ['Renato'] },
-  { id: 'laura', name: 'Laura', aliases: ['Laura'] },
-  { id: 'juan', name: 'Juan', aliases: ['Juan', 'Juean', 'Joan'] },
-  { id: 'matteo', name: 'Matteo', aliases: ['Matteo'] },
-  { id: 'stefano', name: 'Stefano', aliases: ['Stefano'] },
-  { id: 'maddalena', name: 'Maddalena', aliases: ['Maddalena'] },
-  { id: 'antonella', name: 'Antonella', aliases: ['Antonella'] }
-];
 
 const applyFooterTemplateCtaVisibility = () => {
   const footerCta = document.querySelector('.footer__cta');
@@ -2859,6 +2831,13 @@ const stripNoteMarkup = (text) => String(text || '')
 
 const buildPersonRegex = (aliases) => new RegExp(`(?<![\\p{L}\\p{N}_])(?:${aliases.map(escapeRegExp).join('|')})(?![\\p{L}\\p{N}_])`, 'giu');
 
+const slugifyPersonId = (value) => String(value || '')
+  .normalize('NFD')
+  .replace(/[\u0300-\u036f]/g, '')
+  .toLowerCase()
+  .replace(/[^a-z0-9]+/g, '-')
+  .replace(/^-+|-+$/g, '') || 'person';
+
 const buildExcerptAroundMatch = (text, matchIndex, matchLength) => {
   const normalized = stripNoteMarkup(text);
   if (!normalized) return '';
@@ -2889,7 +2868,24 @@ const scrollToDay = (dayKey, behavior = 'smooth') => {
 };
 
 const analyzePeopleFromDays = (days) => {
-  const people = PEOPLE_CATALOG.map((person) => ({
+  const peopleCatalog = [];
+  const seenPeople = new Set();
+  (days || []).forEach((day) => {
+    const dayPeople = Array.isArray(day && day.people) ? day.people : [];
+    dayPeople.forEach((name) => {
+      const clean = String(name || '').trim();
+      if (!clean) return;
+      const key = clean.toLocaleLowerCase();
+      if (seenPeople.has(key)) return;
+      seenPeople.add(key);
+      peopleCatalog.push({
+        id: slugifyPersonId(clean),
+        name: clean,
+        aliases: [clean]
+      });
+    });
+  });
+  const people = peopleCatalog.map((person) => ({
     ...person,
     regex: buildPersonRegex(person.aliases),
     mentions: 0,
@@ -2902,23 +2898,30 @@ const analyzePeopleFromDays = (days) => {
 
   (days || []).forEach((day) => {
     const noteText = stripNoteMarkup(getNote(day));
-    if (!noteText) return;
+    const explicitNames = Array.isArray(day && day.people) ? day.people.map((value) => String(value || '').trim()).filter(Boolean) : [];
+    if (!noteText && !explicitNames.length) return;
     const present = [];
-    people.forEach((person) => {
+    explicitNames.forEach((name) => {
+      const person = people.find((candidate) => candidate.name === name);
+      if (!person) return;
       person.regex.lastIndex = 0;
-      const matches = [...noteText.matchAll(person.regex)];
-      if (!matches.length) return;
-      person.mentions += matches.length;
+      const matches = noteText ? [...noteText.matchAll(person.regex)] : [];
+      person.mentions += matches.length || 1;
       const dayEntry = {
         date: day.date,
         title: getDayTitle(day),
         label: getDayLabelText(day),
         index: renderedDayOrder.indexOf(getDayUiKey(day))
       };
-      person.days.push(dayEntry);
-      if (!person.excerpt) {
+      if (!person.days.some((entry) => String(entry.date) === String(day.date))) {
+        person.days.push(dayEntry);
+      }
+      if (!person.excerpt && matches.length) {
         const first = matches[0];
         person.excerpt = buildExcerptAroundMatch(noteText, first.index || 0, first[0].length);
+      }
+      if (!person.excerpt && noteText) {
+        person.excerpt = noteText.slice(0, 168).trim();
       }
       present.push(person.id);
     });
@@ -4733,7 +4736,9 @@ const renderView = () => {
   list.forEach((day, idx) => {
     content.appendChild(buildDay(day, idx));
   });
-  content.appendChild(buildAfterCaminoSection());
+  if (!BOOTSTRAP_PREVIEW_DATA) {
+    content.appendChild(buildAfterCaminoSection());
+  }
 
   buildTimelineNav(list);
   renderPeopleStrip(list);
@@ -4763,18 +4768,29 @@ const init = async () => {
     }
   };
   try {
-    const res = await fetch(withStaticDataVersion(getEntriesDataPath()));
-    if (!res.ok) {
-      const raw = await res.text();
-      throw new Error(raw || `HTTP ${res.status}`);
+    let data = null;
+    if (BOOTSTRAP_PREVIEW_DATA && BOOTSTRAP_PREVIEW_DATA.entriesData && typeof BOOTSTRAP_PREVIEW_DATA.entriesData === 'object') {
+      data = BOOTSTRAP_PREVIEW_DATA.entriesData;
+    } else {
+      const res = await fetch(withStaticDataVersion(getEntriesDataPath()));
+      if (!res.ok) {
+        const raw = await res.text();
+        throw new Error(raw || `HTTP ${res.status}`);
+      }
+      data = await res.json();
     }
-    const data = await res.json();
     if (token !== initRequestToken) return;
     dataCache = normalizeEntriesAssetPaths(data);
     refreshStats();
 
     // Render notes and day structure immediately without waiting for heavy GPS enrichment.
     renderView();
+
+    if (BOOTSTRAP_PREVIEW_DATA) {
+      trackSplitEnabled = false;
+      trackDataFetchDone = true;
+      return;
+    }
 
     // Load track data in split mode first (day-by-day files), fallback to legacy monolithic JSON.
     fetch(withStaticDataVersion('/data/tracks/index.json'))
