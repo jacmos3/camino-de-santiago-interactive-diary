@@ -382,9 +382,6 @@ const I18N = {
 };
 
 let currentLang = 'it';
-const BOOTSTRAP_PREVIEW_DATA = (typeof window !== 'undefined' && window.__CAMMINO_BOOTSTRAP_DATA__ && typeof window.__CAMMINO_BOOTSTRAP_DATA__ === 'object')
-  ? window.__CAMMINO_BOOTSTRAP_DATA__
-  : null;
 const SUPPORTED_LANGS = new Set(['it', 'en', 'es', 'fr']);
 const SEO_META = {
   it: {
@@ -411,9 +408,6 @@ const normalizeLang = (value) => {
 };
 
 const getEntriesDataPath = (lang = currentLang) => {
-  if (BOOTSTRAP_PREVIEW_DATA && typeof BOOTSTRAP_PREVIEW_DATA.entriesPath === 'string' && BOOTSTRAP_PREVIEW_DATA.entriesPath.trim() !== '') {
-    return BOOTSTRAP_PREVIEW_DATA.entriesPath.trim();
-  }
   const normalized = normalizeLang(lang) || 'it';
   return `/data/entries.${normalized}.json`;
 };
@@ -4736,9 +4730,7 @@ const renderView = () => {
   list.forEach((day, idx) => {
     content.appendChild(buildDay(day, idx));
   });
-  if (!BOOTSTRAP_PREVIEW_DATA) {
-    content.appendChild(buildAfterCaminoSection());
-  }
+  content.appendChild(buildAfterCaminoSection());
 
   buildTimelineNav(list);
   renderPeopleStrip(list);
@@ -4768,29 +4760,18 @@ const init = async () => {
     }
   };
   try {
-    let data = null;
-    if (BOOTSTRAP_PREVIEW_DATA && BOOTSTRAP_PREVIEW_DATA.entriesData && typeof BOOTSTRAP_PREVIEW_DATA.entriesData === 'object') {
-      data = BOOTSTRAP_PREVIEW_DATA.entriesData;
-    } else {
-      const res = await fetch(withStaticDataVersion(getEntriesDataPath()));
-      if (!res.ok) {
-        const raw = await res.text();
-        throw new Error(raw || `HTTP ${res.status}`);
-      }
-      data = await res.json();
+    const res = await fetch(withStaticDataVersion(getEntriesDataPath()));
+    if (!res.ok) {
+      const raw = await res.text();
+      throw new Error(raw || `HTTP ${res.status}`);
     }
+    const data = await res.json();
     if (token !== initRequestToken) return;
     dataCache = normalizeEntriesAssetPaths(data);
     refreshStats();
 
     // Render notes and day structure immediately without waiting for heavy GPS enrichment.
     renderView();
-
-    if (BOOTSTRAP_PREVIEW_DATA) {
-      trackSplitEnabled = false;
-      trackDataFetchDone = true;
-      return;
-    }
 
     // Load track data in split mode first (day-by-day files), fallback to legacy monolithic JSON.
     fetch(withStaticDataVersion('/data/tracks/index.json'))
