@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title id="page-title">Crea il tuo diario interattivo</title>
-  <meta id="page-description" name="description" content="Trasforma foto, video, tracce GPS e note sparse in un diario interattivo con mappa, media e racconto giorno per giorno." />
+  <meta id="page-description" name="description" content="Trasforma foto, video e appunti in un diario interattivo del tuo viaggio: guida gratuita, guida pratica, call valutativa, builder DIY o servizio avanzato completo." />
   <link id="seo-canonical" rel="canonical" href="/it/crea-il-tuo-diario/" />
   <link id="seo-alt-it" rel="alternate" hreflang="it" href="/it/crea-il-tuo-diario/" />
   <link id="seo-alt-en" rel="alternate" hreflang="en" href="/en/crea-il-tuo-diario/" />
@@ -23,14 +23,17 @@
   <style>
     .offer-shell { max-width: 1100px; margin: 0 auto; padding: 28px 22px 72px; }
     .offer-hero { padding: 42px 22px 28px; background-position: center 45%; }
+    .offer-hero h1 { color: #fff8ef; }
+    .offer-hero .lead { color: #f2e8dc; max-width: 780px; }
+    .offer-hero .offer-note { color: #f2e8dc; }
     .offer-hero__top { display: flex; justify-content: space-between; gap: 18px; align-items: flex-start; flex-wrap: wrap; }
     .offer-hero__actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
     .offer-hero__meta { display: grid; gap: 12px; min-width: 220px; }
     .offer-lang { display: grid; gap: 6px; }
-    .offer-lang label { font-size: .92rem; font-weight: 600; color: var(--ink); }
+    .offer-lang label { font-size: .92rem; font-weight: 600; color: #fff3e3; }
     .offer-lang select {
       border: 1px solid rgba(31,26,22,.18); border-radius: 10px; padding: 10px 11px;
-      background: #fffaf2; color: var(--ink); font: inherit;
+      background: rgba(255, 250, 242, 0.96); color: var(--ink); font: inherit;
     }
     .offer-actions-row { display: flex; gap: 10px; flex-wrap: wrap; }
     .offer-btn,
@@ -44,18 +47,33 @@
     .offer-card__btn {
       background: #1f5f5b; color: #fffaf2;
     }
+    .offer-card__btn { margin-top: auto; align-self: flex-start; }
     .offer-btn-secondary {
       background: #fffaf2; color: var(--ink);
     }
     .offer-note { margin: 14px 0 0; color: var(--muted); max-width: 820px; }
-    .offer-grid { display: grid; gap: 18px; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 22px; }
+    .offer-free {
+      margin-top: 24px;
+      padding: 22px;
+      border-radius: 18px;
+      border: 1px solid rgba(31,95,91,.18);
+      background: linear-gradient(135deg, rgba(31,95,91,0.12), rgba(176,108,54,0.12));
+      box-shadow: var(--shadow);
+      display: grid;
+      gap: 12px;
+    }
+    .offer-free__title { margin: 0; }
+    .offer-free__text { margin: 0; color: var(--muted); max-width: 760px; }
+    .offer-free__actions { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+    .offer-free__hint { color: var(--muted); font-size: .92rem; }
+    .offer-grid { display: grid; gap: 18px; grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 22px; align-items: stretch; }
     .offer-card,
     .offer-block,
     .offer-final {
       background: #fffaf2; border: 1px solid rgba(31,26,22,.1); border-radius: 18px;
       box-shadow: var(--shadow);
     }
-    .offer-card { padding: 20px; display: grid; gap: 12px; }
+    .offer-card { padding: 20px; display: flex; flex-direction: column; gap: 12px; height: 100%; }
     .offer-card--featured { border-color: rgba(31,95,91,.35); box-shadow: 0 14px 34px rgba(31,95,91,.14); }
     .offer-card__kicker { font-size: .83rem; letter-spacing: .04em; text-transform: uppercase; color: #1f5f5b; font-weight: 700; }
     .offer-card__title { margin: 0; font-size: 1.28rem; }
@@ -79,9 +97,6 @@
     .offer-final { margin-top: 24px; padding: 24px; }
     .offer-final__actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
     .offer-small { color: var(--muted); font-size: .92rem; }
-    @media (max-width: 980px) {
-      .offer-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    }
     @media (max-width: 820px) {
       .offer-columns { grid-template-columns: 1fr; }
     }
@@ -96,11 +111,11 @@
       <div class="offer-hero__top">
         <div>
           <span class="eyebrow" id="offer-eyebrow">Offerta</span>
-          <h1 id="offer-h1">Trasforma il tuo viaggio in un diario interattivo come questo</h1>
-          <p class="lead" id="offer-sub">Se hai foto, video, tracce GPS o note sparse, puoi trasformarli in un diario navigabile, ordinato e condivisibile.</p>
-          <p class="offer-note" id="offer-note">Qui non stai comprando un travel blog generico: il valore è trasformare materiale reale in una storia leggibile, con struttura, mappa e ordine.</p>
+          <h1 id="offer-h1">Trasforma foto, video e appunti in un diario interattivo del tuo viaggio</h1>
+          <p class="lead" id="offer-sub">Puoi scaricare gratis una guida introduttiva, acquistare la guida pratica, prenotare una call valutativa iniziale, costruire il diario da solo con il builder, oppure affidarmi direttamente materiali e struttura del racconto.</p>
+          <p class="offer-note" id="offer-note">Questo formato funziona bene per viaggi a tappe, Cammino di Santiago, trekking lunghi, bikepacking, sabbatici e progetti in cui vuoi un racconto ordinato giorno per giorno.</p>
           <div class="offer-hero__actions">
-            <a class="offer-btn" id="offer-primary-link" href="/it/contatti/?pack=setup">Richiedi una valutazione</a>
+            <a class="offer-btn" id="offer-primary-link" href="#free-guide-box">Scarica la guida gratuita</a>
             <a class="offer-btn-secondary" id="offer-secondary-link" href="/it/">Torna al diario</a>
           </div>
         </div>
@@ -110,21 +125,30 @@
             <select id="offer-lang-select" aria-label="Seleziona lingua">
               <option value="it">Italiano</option>
               <option value="en">English</option>
-              <option value="es">Espanol</option>
-              <option value="fr">Francais</option>
+              <option value="es">Español</option>
+              <option value="fr">Français</option>
             </select>
           </div>
-          <div class="offer-small" id="offer-process-note">Per ora l'attivazione dei pacchetti passa da richiesta diretta: non c'e ancora checkout automatico.</div>
+          <div class="offer-small" id="offer-process-note">Nel pacchetto DIY la pubblicazione sul tuo hosting va impostata da subito; nel servizio avanzato consegno anche un pacchetto offline e, se vuoi, posso pubblicarlo online a 120 EUR/anno con dominio e hosting inclusi.</div>
         </div>
       </div>
     </div>
   </header>
 
   <main class="offer-shell">
+    <section class="offer-free" id="free-guide-box">
+      <h2 class="offer-free__title" id="free-guide-title">Guida gratuita</h2>
+      <p class="offer-free__text" id="free-guide-text">Download gratuito via Gumroad in cambio di email. È il modo più leggero per capire se questo formato fa davvero per te prima di passare alla guida pratica, alla call valutativa o al builder.</p>
+      <div class="offer-free__actions">
+        <a class="offer-btn" id="free-guide-link" href="#">Download gratuito via Gumroad</a>
+        <span class="offer-free__hint" id="free-guide-hint">Link Gumroad in arrivo</span>
+      </div>
+    </section>
+
     <section class="offer-section">
       <div class="offer-block">
         <h2 id="pricing-title">Scegli il punto di ingresso</h2>
-        <p class="offer-block__lead" id="pricing-lead">Listino pubblico aggressivo: basso attrito all'ingresso, lavoro piu strutturato solo dopo contatto.</p>
+        <p class="offer-block__lead" id="pricing-lead">Quattro offerte chiare: guida pratica, call valutativa iniziale, builder DIY per fare da solo, oppure servizio avanzato se vuoi delegare anche ordine, storytelling e preparazione tecnica.</p>
         <div class="offer-grid" id="offer-grid"></div>
       </div>
     </section>
@@ -143,7 +167,7 @@
     <section class="offer-section offer-columns">
       <div class="offer-block">
         <h2 id="before-title">Prima di scrivermi</h2>
-        <p class="offer-block__lead" id="before-lead">Se mi mandi queste informazioni, ti rispondo in modo piu rapido e preciso.</p>
+        <p class="offer-block__lead" id="before-lead">Se mi mandi queste informazioni, ti rispondo in modo più rapido e preciso.</p>
         <ul class="offer-list" id="before-list"></ul>
       </div>
       <div class="offer-block">
@@ -154,9 +178,9 @@
 
     <section class="offer-final">
       <h2 id="final-title">Non sai da dove partire?</h2>
-      <p id="final-text">Se hai dubbi sul pacchetto giusto, parti dalla richiesta di valutazione: e il modo piu semplice per capire se ha senso template, setup oppure un progetto piu completo.</p>
+      <p id="final-text">Se hai foto e video sparsi, testi ancora nei tuoi appunti o nel diario cartaceo e non vuoi costruire tu il racconto giorno per giorno, il punto giusto di partenza è la call valutativa del servizio avanzato.</p>
       <div class="offer-final__actions">
-        <a class="offer-btn" id="final-primary-link" href="/it/contatti/?pack=custom">Richiedi una valutazione</a>
+        <a class="offer-btn" id="final-primary-link" href="/it/contatti/?pack=call">Richiedi la call valutativa</a>
         <a class="offer-btn-secondary" id="final-secondary-link" href="/it/">Rivedi il diario</a>
       </div>
     </section>
@@ -172,97 +196,100 @@
       const T = {
         it: {
           pageTitle: 'Crea il tuo diario interattivo',
-          pageDesc: 'Trasforma foto, video, tracce GPS e note sparse in un diario interattivo con mappa, media e racconto giorno per giorno.',
+          pageDesc: 'Trasforma foto, video e appunti in un diario interattivo del tuo viaggio: guida gratuita, guida pratica, call valutativa, builder DIY o servizio avanzato completo.',
           eyebrow: 'Offerta',
-          h1: 'Trasforma il tuo viaggio in un diario interattivo come questo',
-          sub: 'Se hai foto, video, tracce GPS o note sparse, puoi trasformarli in un diario navigabile, ordinato e condivisibile.',
-          note: 'Qui non stai comprando un travel blog generico: il valore e trasformare materiale reale in una storia leggibile, con struttura, mappa e ordine.',
-          primary: 'Richiedi una valutazione',
+          h1: 'Trasforma foto, video e appunti in un diario interattivo del tuo viaggio',
+          sub: 'Puoi scaricare gratis una guida introduttiva, acquistare la guida pratica, prenotare una call valutativa iniziale, costruire il diario da solo con il builder, oppure affidarmi direttamente materiali e struttura del racconto.',
+          note: 'Questo formato funziona bene per viaggi a tappe, Cammino di Santiago, trekking lunghi, bikepacking, sabbatici e progetti in cui vuoi un racconto ordinato giorno per giorno.',
+          primary: 'Scarica la guida gratuita',
           secondary: 'Torna al diario',
           langLabel: 'Lingua',
-          processNote: 'Per ora l\'attivazione dei pacchetti passa da richiesta diretta: non c\'e ancora checkout automatico.',
-          pricingTitle: 'Scegli il punto di ingresso',
-          pricingLead: 'Listino pubblico aggressivo: basso attrito all\'ingresso, lavoro piu strutturato solo dopo contatto.',
+          processNote: 'Nel pacchetto DIY la pubblicazione sul tuo hosting va impostata da subito; nel servizio avanzato consegno anche un pacchetto offline e, se vuoi, posso pubblicarlo online a 120 EUR/anno con dominio e hosting inclusi.',
+          pricingTitle: 'Scegli la modalità giusta',
+          pricingLead: 'Quattro offerte chiare: guida pratica, call valutativa iniziale, builder DIY per fare da solo, oppure servizio avanzato se vuoi delegare anche ordine, storytelling e preparazione tecnica.',
+          freeGuideTitle: 'Guida gratuita',
+          freeGuideText: 'Download gratuito via Gumroad in cambio di email. È il modo più leggero per capire se questo formato fa davvero per te prima di passare alla guida pratica, alla call valutativa o al builder.',
+          freeGuideHint: 'Link Gumroad in arrivo',
+          freeGuideCta: 'Download gratuito via Gumroad',
+          finalPack: 'call',
           cards: [
             {
               key: 'guide',
-              kicker: 'Low ticket',
+              kicker: 'Entry level',
               title: 'Guida pratica',
               price: '14 EUR',
-              text: 'Per chi vuole consigli concreti sul Cammino e sulla logistica senza entrare in un progetto tecnico.',
-              bullets: ['Contenuto sintetico e pratico', 'Nessun supporto incluso', 'Buona opzione se vuoi spendere il minimo'],
-              cta: 'Chiedi la guida'
+              text: 'Una guida più operativa per preparare bene il materiale e capire come impostare un diario ordinato giorno per giorno.',
+              bullets: ['Indicazioni concrete su testi, foto, video, ordine e materiali utili', 'Perfetta se vuoi partire con poca spesa ma con una traccia seria', 'Inclusa gratuitamente nel Template Base + Builder DIY'],
+              cta: 'Guida su Gumroad (link in arrivo)'
             },
             {
               key: 'call',
-              kicker: 'Filtro rapido',
-              title: 'Call 45 minuti',
-              price: '49 EUR',
-              text: 'Per chi vuole confrontarsi prima di partire o prima di impostare il proprio diario.',
-              bullets: ['Confronto diretto', 'Utile per dubbi pratici o impostazione', 'Ti evita di comprare la cosa sbagliata'],
-              cta: 'Prenota una call'
+              kicker: 'Filtro iniziale',
+              title: 'Call valutativa iniziale',
+              price: '59 EUR',
+              text: 'Un confronto iniziale di 45 minuti per capire se il tuo materiale è sufficiente, quale percorso ha senso e se ti basta il builder oppure serve il pacchetto completo.',
+              bullets: ['Durata: 45 minuti', 'Ti evita di partire dal pacchetto sbagliato', 'Se poi procedi con il servizio avanzato, l\'importo della call viene scalato dal totale'],
+              cta: 'Richiedi la call'
             },
             {
-              key: 'template',
-              kicker: 'Autonomia',
-              title: 'Template DIY',
-              price: '89 EUR',
-              text: 'Per chi e tecnico e vuole partire dalla stessa base del sito, ma lavorare in autonomia.',
-              bullets: ['Struttura base del sito', 'Istruzioni essenziali', 'Supporto molto limitato'],
-              cta: 'Parti dal template'
-            },
-            {
-              key: 'setup',
+              key: 'builder',
               kicker: 'Consigliato',
-              title: 'Setup assistito light',
-              price: '349 EUR',
-              text: 'Per chi vuole una base gia impostata e online, senza dover sistemare tutto da solo.',
-              bullets: ['Installazione iniziale', 'Branding base', 'Import di un piccolo campione'],
-              cta: 'Richiedi lo setup',
+              title: 'Template Base + Builder DIY',
+              price: '99 EUR',
+              text: 'Include la guida pratica da 14 EUR, la struttura del diario già pronta e l\'accesso al builder. Puoi creare dinamicamente ogni singolo giorno: tu devi inserire i contenuti, non costruire la struttura da zero.',
+              bullets: ['Ottieni la struttura completa del diario già pronta, con il builder per creare e compilare ogni singolo giorno', 'Inserisci tu testi, foto, video e, opzionalmente, coordinate GPS, link Strava e altri materiali giorno per giorno', 'La pubblicazione sul tuo hosting è a carico tuo e va impostata prima di iniziare a inserire i contenuti', 'Puoi usare anche un hosting gratuito come AlterVista, che al momento parte da 3 GB di spazio e 30 GB di traffico mensile, oppure un tuo hosting personale', 'Se vuoi, posso darti assistenza per la configurazione iniziale a 20 EUR'],
+              cta: 'Richiedi il Builder DIY',
               featured: true
             },
             {
-              key: 'custom',
-              kicker: 'Solo su richiesta',
-              title: 'Progetto su misura',
-              price: 'Su richiesta',
-              text: 'Per materiali numerosi, disordinati o per chi vuole un lavoro piu completo rispetto ai pacchetti pubblici.',
-              bullets: ['Valutazione caso per caso', 'Non e l\'opzione di ingresso', 'Ha senso solo se il progetto lo giustifica'],
-              cta: 'Valuta il mio progetto'
+              key: 'advanced',
+              kicker: 'Servizio completo',
+              title: 'Servizio avanzato',
+              price: 'Da 990 EUR',
+              text: 'Include tutto il Builder DIY e in più il servizio di organizzazione, digitalizzazione, scrittura e preparazione tecnica del materiale.',
+              bullets: ['Call valutativa iniziale di 45 minuti: paghi 59 EUR per il primo confronto. Se ci sono i presupposti, se hai materiale sufficiente e se decidi di procedere, la call viene scalata dall\'importo finale e paghi solo la differenza', 'Tu mi invii foto, video e testi giorno per giorno, anche fotografati da diario cartaceo, taccuino o note scritte a mano', 'Io li digitalizzo, li trasformo in testo leggibile e costruisco uno storytelling sensato e lineare', 'Mi occupo anche di resize media, estrazione metadata e, opzionalmente, coordinate disponibili per la mappa interattiva', 'Ti consegno un prodotto finito utilizzabile anche offline come diario personale su chiavetta, SSD o DVD', 'Se vuoi, posso anche pubblicarlo online a 120 EUR/anno con dominio e hosting inclusi', 'GPX, link Strava e altri tracciati sono opzionali, ma più materiale hai e più il risultato sarà completo'],
+              cta: 'Richiedi la call valutativa'
             }
           ],
           fitTitle: 'A chi serve davvero',
           fitItems: [
-            'Cammino di Santiago, viaggi lunghi, sabbatici e percorsi a tappe',
-            'Bikepacking, vanlife e viaggi fotografici con molto materiale',
-            'Persone che non vogliono lasciare foto e note disperse tra cloud e chat',
-            'Chi vuole raccontare un viaggio serio, non un blog generico improvvisato'
+            'A chi sta vivendo o ha vissuto un viaggio a tappe, come il Cammino di Santiago, un trekking lungo, un sabbatico o un percorso diviso giorno per giorno, e vuole trasformarlo in un racconto ordinato invece di lasciarlo sparso.',
+            'A chi torna con molto materiale, per esempio da bikepacking, vanlife o viaggi fotografici, e ha bisogno di una struttura chiara per non perdersi tra centinaia di foto, video, tracce e appunti.',
+            'A chi non vuole lasciare ricordi, note, immagini e testi dispersi tra cloud, chat, telefono, hard disk e quaderni, ma vuole ricomporli in un diario leggibile e coerente.',
+            'A chi vuole raccontare un viaggio in modo serio, personale e ben costruito, con una sequenza narrativa chiara, invece di improvvisare un blog generico senza ordine.'
           ],
           howTitle: 'Come funziona',
           howItems: [
-            'Scegli il livello di ingresso: guida, call, template o setup.',
-            'Mi scrivi cosa vuoi raccontare e quanto materiale hai davvero.',
-            'Se il progetto ha senso, ti dico in modo diretto quale opzione regge e quale no.'
+            'Se vuoi solo orientarti, puoi partire dalla guida gratuita, dalla guida pratica da 14 EUR oppure dalla call valutativa iniziale da 59 EUR.',
+            'Se scegli il Builder DIY, ricevi anche la guida pratica, una struttura del diario già pronta e il builder con cui creare ogni singolo giorno; tu inserisci i contenuti e imposti la pubblicazione sul tuo hosting prima di iniziare a caricare il materiale.',
+            'Se scegli il servizio avanzato, partiamo da una call valutativa da 45 minuti per capire volume, ordine e qualità del materiale.',
+            'Se il progetto regge, mi invii tutto quello che hai: foto, video, testi, pagine di diario fotografate, note sparse e, opzionalmente, tracce GPX o altri dati di tracking se esistono.',
+            'Da lì in poi mi occupo io di digitalizzazione, storytelling, ottimizzazione media, metadata e preparazione della mappa interattiva.'
           ],
           beforeTitle: 'Prima di scrivermi',
-          beforeLead: 'Se mi mandi queste informazioni, ti rispondo in modo piu rapido e preciso.',
+          beforeLead: 'Se mi mandi queste informazioni, ti rispondo in modo più rapido e preciso.',
           beforeItems: [
             'Che viaggio o progetto vuoi raccontare',
             'Numero indicativo di giorni, foto, video e presenza o assenza di GPS',
-            'Se il materiale e gia ordinato oppure ancora sparso',
-            'Se vuoi fare da solo oppure vuoi una mano concreta',
-            'Budget orientativo, anche ampio ma onesto'
+            'Se il materiale è già organizzato in cartelle per ogni giorno, città o tappa, oppure se è ancora tutto sparso in un\'unica cartella',
+            'Se il materiale è sparso, meglio se è ancora in formato originale: così si possono recuperare giorno e luogo dai metadati, e nel pacchetto completo posso aiutarti io a rimetterlo in ordine',
+            'Se vuoi fare da solo con il builder, passare prima da una call valutativa, oppure delegare il lavoro',
+            'Se hai, anche opzionalmente, GPX, link Strava o altri dati di tracking'
           ],
           faqTitle: 'Domande frequenti',
           faqItems: [
-            'Non faccio siti travel generici a basso costo: questo formato ha senso quando esiste davvero una storia e del materiale concreto.',
-            'Il template non e supporto illimitato travestito: se vuoi aiuto operativo, lo setup e piu sensato.',
-            'Il progetto su misura non e il pacchetto da proporre a tutti: lo valuto solo se il materiale o l\'obiettivo lo giustificano.',
-            'Se parti low-ticket e poi ti serve di piu, possiamo capire dopo se ha senso salire di livello.'
+            'Il Builder DIY include anche la guida pratica da 14 EUR e la struttura del diario già pronta, ma l\'inserimento di testi, foto, video e coordinate resta a carico tuo.',
+            'Con il Builder DIY la pubblicazione sul tuo hosting web è a carico tuo e va impostata prima di iniziare a inserire i contenuti.',
+            'Puoi usare un hosting gratuito come AlterVista, che al momento parte da 3 GB di spazio e 30 GB di traffico mensile, oppure un tuo hosting personale.',
+            'Se vuoi, posso darti assistenza per la configurazione iniziale a 20 EUR.',
+            'Il servizio avanzato include il Builder DIY e in più il servizio di organizzazione, scrittura e preparazione tecnica del materiale.',
+            'Nel servizio avanzato posso partire anche da appunti scritti a mano o note fotografate, che poi digitalizzo e trasformo in testo leggibile e lineare.',
+            'Nel servizio avanzato ti consegno un prodotto finito utilizzabile anche offline come diario personale su chiavetta, SSD o DVD.',
+            'Se vuoi, nel servizio avanzato posso anche pubblicarlo online a 120 EUR/anno con dominio e hosting inclusi.'
           ],
           finalTitle: 'Non sai da dove partire?',
-          finalText: 'Se hai dubbi sul pacchetto giusto, parti dalla richiesta di valutazione: e il modo piu semplice per capire se ha senso template, setup oppure un progetto piu completo.',
-          finalPrimary: 'Richiedi una valutazione',
+          finalText: 'Se hai foto e video sparsi, testi ancora nei tuoi appunti o nel diario cartaceo e non vuoi costruire tu il racconto giorno per giorno, il punto giusto di partenza è la call valutativa del servizio avanzato.',
+          finalPrimary: 'Richiedi la call valutativa',
           finalSecondary: 'Rivedi il diario'
         },
         en: {
@@ -562,6 +589,8 @@
         if (el) el.textContent = value;
       };
       const contactHref = (pack) => `/${lang}/contatti/${pack ? `?pack=${encodeURIComponent(pack)}` : ''}`;
+      const gumroadFreeHref = '#';
+      const gumroadGuideHref = '#';
       const diaryHref = `/${lang}/`;
       const canonical = `/${lang}/${slug}/`;
 
@@ -582,6 +611,10 @@
       setText('offer-note', t.note);
       setText('offer-lang-label', t.langLabel);
       setText('offer-process-note', t.processNote);
+      setText('free-guide-title', t.freeGuideTitle || 'Guida gratuita');
+      setText('free-guide-text', t.freeGuideText || '');
+      setText('free-guide-hint', t.freeGuideHint || '');
+      setText('free-guide-link', t.freeGuideCta || 'Download gratuito via Gumroad');
       setText('pricing-title', t.pricingTitle);
       setText('pricing-lead', t.pricingLead);
       setText('fit-title', t.fitTitle);
@@ -606,9 +639,10 @@
       setText('offer-secondary-link', t.secondary);
       setText('final-primary-link', t.finalPrimary);
       setText('final-secondary-link', t.finalSecondary);
-      setHref('offer-primary-link', contactHref('setup'));
+      setHref('offer-primary-link', '#free-guide-box');
+      setHref('free-guide-link', gumroadFreeHref);
       setHref('offer-secondary-link', diaryHref);
-      setHref('final-primary-link', contactHref('custom'));
+      setHref('final-primary-link', contactHref(t.finalPack || 'advanced'));
       setHref('final-secondary-link', diaryHref);
 
       const grid = document.getElementById('offer-grid');
@@ -623,7 +657,7 @@
           <div class="offer-card__price">${card.price}</div>
           <p class="offer-card__text">${card.text}</p>
           <ul>${bullets}</ul>
-          <a class="offer-card__btn" href="${contactHref(card.key)}">${card.cta}</a>
+          <a class="offer-card__btn" href="${card.key === 'guide' ? gumroadGuideHref : contactHref(card.key)}">${card.cta}</a>
         `;
         grid.appendChild(article);
       });

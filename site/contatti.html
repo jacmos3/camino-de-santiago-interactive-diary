@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Richiedi una valutazione — Cammino di Santiago</title>
-  <meta id="meta-description" name="description" content="Richiedi una valutazione per guida, call, template, setup o progetto su misura collegato al diario interattivo." />
+  <title>Richiedi informazioni — Cammino di Santiago</title>
+  <meta id="meta-description" name="description" content="Richiedi la guida pratica, la call valutativa, il builder DIY o il servizio avanzato per trasformare il tuo viaggio in un diario interattivo." />
   <link id="seo-canonical" rel="canonical" href="/it/contatti/" />
   <link id="seo-alt-it" rel="alternate" hreflang="it" href="/it/contatti/" />
   <link id="seo-alt-en" rel="alternate" hreflang="en" href="/en/contatti/" />
@@ -46,14 +46,20 @@
     .contact-status { margin-top: 6px; min-height: 1.2em; color: var(--muted); font-size: .92rem; }
     .contact-links { margin-top: 18px; display: flex; gap: 14px; flex-wrap: wrap; }
     .contact-back { color: var(--accent-2); }
+    .contact-hero h1 { color: #fff8ef; }
+    .contact-hero .lead { color: #f2e8dc; max-width: 760px; }
     .contact-hero-top { display: flex; justify-content: space-between; gap: 18px; align-items: flex-start; flex-wrap: wrap; }
     .contact-lang { display: grid; gap: 6px; min-width: 220px; }
-    .contact-lang label { font-size: .92rem; font-weight: 600; color: var(--ink); }
-    .contact-lang select { background: #fffaf2; }
+    .contact-lang label { font-size: .92rem; font-weight: 600; color: #fff3e3; }
+    .contact-lang select {
+      background: rgba(255, 250, 242, 0.96);
+      border-color: rgba(255, 243, 227, 0.28);
+    }
     .contact-pills { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
     .contact-pill {
       display: inline-flex; align-items: center; border-radius: 999px; padding: 8px 12px;
-      background: rgba(31,95,91,.08); color: #1f5f5b; font-weight: 700; font-size: .92rem;
+      background: rgba(255, 248, 239, 0.14); color: #fff3e3; font-weight: 700; font-size: .92rem;
+      border: 1px solid rgba(255, 248, 239, 0.16);
     }
     .contact-note { margin: 10px 0 0; color: var(--muted); font-size: .92rem; }
     .contact-side h2 { margin-top: 0; }
@@ -65,13 +71,13 @@
   </style>
 </head>
 <body>
-  <header class="hero" style="padding:42px 22px 26px; background-position:center 45%;">
+  <header class="hero contact-hero" style="padding:42px 22px 26px; background-position:center 45%;">
     <div class="hero__inner">
       <div class="contact-hero-top">
         <div>
-          <span class="eyebrow" id="contact-eyebrow">Valutazione</span>
+          <span class="eyebrow" id="contact-eyebrow">Contatto</span>
           <h1 style="margin-bottom:8px;" id="contact-h1">Dimmi cosa vuoi raccontare</h1>
-          <p class="lead" id="contact-sub">Uso questa pagina per capire se per te ha senso guida, call, template, setup oppure un progetto piu completo.</p>
+          <p class="lead" id="contact-sub">Scrivimi per capire se ti basta la guida pratica, se ha senso partire da una call valutativa iniziale, se puoi lavorare bene in autonomia con il Builder DIY oppure se ti conviene il servizio avanzato.</p>
           <div class="contact-pills" id="contact-pills"></div>
         </div>
         <div class="contact-lang">
@@ -79,10 +85,10 @@
           <select id="contact-lang-select" aria-label="Seleziona lingua">
             <option value="it">Italiano</option>
             <option value="en">English</option>
-            <option value="es">Espanol</option>
-            <option value="fr">Francais</option>
-          </select>
-        </div>
+              <option value="es">Español</option>
+              <option value="fr">Français</option>
+            </select>
+          </div>
       </div>
     </div>
   </header>
@@ -90,8 +96,8 @@
   <main class="contact-wrap">
     <div class="contact-grid">
       <section class="contact-card">
-        <h2 class="contact-title" id="contact-title">Richiedi una valutazione</h2>
-        <p class="contact-lead" id="contact-lead">Piuttosto che farti perdere tempo, preferisco capire subito che tipo di progetto hai e quale opzione regge davvero.</p>
+        <h2 class="contact-title" id="contact-title">Richiedi informazioni</h2>
+        <p class="contact-lead" id="contact-lead">Se mi descrivi bene materiale, ordine, hosting e obiettivo del progetto, ti dico subito se ti basta la guida pratica, se conviene partire da una call valutativa, se puoi lavorare bene col builder oppure se ha senso il servizio avanzato.</p>
         <ul class="contact-list" id="contact-list"></ul>
         <form class="contact-form" id="contact-form">
           <div>
@@ -117,7 +123,7 @@
           <button type="submit" class="contact-submit" id="contact-submit">Invia richiesta</button>
           <div class="contact-status" id="contact-status"></div>
         </form>
-        <p class="contact-note" id="contact-note">Le richieste vengono inviate via endpoint API e recapitate via email. Per ora non c'e checkout automatico.</p>
+        <p class="contact-note" id="contact-note">Le richieste arrivano via email. Se scegli il servizio avanzato, il primo passo è fissare la call valutativa.</p>
         <div class="contact-links">
           <a class="contact-back" id="contact-back" href="/it/crea-il-tuo-diario/">← Torna all'offerta</a>
           <a class="contact-back" id="contact-diary-back" href="/it/">← Torna al diario</a>
@@ -134,8 +140,8 @@
           <ul class="contact-mini-list" id="side-what"></ul>
         </div>
         <div class="contact-side__block">
-          <h2 id="side-why-title">Perche faccio cosi</h2>
-          <p class="contact-note" id="side-why-text">Preferisco filtrare bene all'inizio: un template da solo non risolve un progetto confuso, e un progetto su misura non ha senso per tutti.</p>
+          <h2 id="side-why-title">Come valuto il progetto</h2>
+          <p class="contact-note" id="side-why-text">Il servizio avanzato ha senso solo se il materiale giustifica davvero il lavoro editoriale e tecnico. Più materiale mi mandi, meglio riesco a ricostruire il racconto e a usare metadata, coordinate e tracce nel modo giusto.</p>
         </div>
       </aside>
     </div>
@@ -149,49 +155,48 @@
       const lang = (m ? m[1] : 'it').toLowerCase();
       const params = new URLSearchParams(window.location.search);
       const packFromQuery = String(params.get('pack') || '').trim().toLowerCase();
-      const PACKS = ['guide', 'call', 'template', 'setup', 'custom'];
       const T = {
         it: {
-          pageTitle: 'Richiedi una valutazione',
-          pageDesc: 'Richiedi una valutazione per guida, call, template, setup o progetto su misura collegato al diario interattivo.',
-          eyebrow: 'Valutazione',
+          pageTitle: 'Richiedi informazioni',
+          pageDesc: 'Richiedi la guida pratica, la call valutativa, il builder DIY o il servizio avanzato per trasformare il tuo viaggio in un diario interattivo.',
+          eyebrow: 'Contatto',
           h1: 'Dimmi cosa vuoi raccontare',
-          sub: 'Uso questa pagina per capire se per te ha senso guida, call, template, setup oppure un progetto piu completo.',
-          pills: ['Guida 14 EUR', 'Call 49 EUR', 'Template 89 EUR', 'Setup 349 EUR', 'Custom su richiesta'],
+          sub: 'Scrivimi per capire se ti basta la guida pratica, se ha senso partire da una call valutativa iniziale, se puoi lavorare bene in autonomia con il Builder DIY oppure se ti conviene il servizio avanzato.',
+          pills: ['Guida pratica 14 EUR', 'Call valutativa 59 EUR', 'Builder DIY 99 EUR', 'Servizio avanzato da 990 EUR'],
           langLabel: 'Lingua',
-          title: 'Richiedi una valutazione',
-          lead: 'Piuttosto che farti perdere tempo, preferisco capire subito che tipo di progetto hai e quale opzione regge davvero.',
+          title: 'Richiedi informazioni',
+          lead: 'Se mi descrivi bene materiale, ordine, hosting e obiettivo del progetto, ti dico subito se ti basta la guida pratica, se conviene partire da una call valutativa, se puoi lavorare bene con il builder oppure se ha senso il servizio avanzato.',
           bullets: [
-            'Se il tuo caso e semplice, ti indirizzo verso la soluzione piu leggera.',
-            'Se il materiale e confuso o molto grande, te lo dico senza venderti il pacchetto sbagliato.',
-            'Per ora tutto passa da richiesta diretta: niente checkout automatico, niente finta automazione.'
+            'Se vuoi partire leggero, ti indico se ti basta la guida pratica da 14 EUR oppure se ha più senso una call valutativa iniziale.',
+            'Se vuoi fare da solo, ti dico se il Builder DIY è la scelta giusta e ti chiarisco cosa dovrai inserire tu giorno per giorno e come impostare l\'hosting.',
+            'Se hai materiale disordinato o vuoi delegare, ti dico se ha senso il servizio avanzato e quanto materiale serve davvero per farlo bene.'
           ],
-          packageLabel: 'Opzione di partenza',
+          packageLabel: 'Cosa ti interessa',
+          packOrder: ['guide', 'call', 'builder', 'advanced'],
+          defaultPack: 'builder',
           packages: {
             guide: 'Guida pratica — 14 EUR',
-            call: 'Call 45 minuti — 49 EUR',
-            template: 'Template DIY — 89 EUR',
-            setup: 'Setup assistito light — 349 EUR',
-            custom: 'Progetto su misura — su richiesta'
+            call: 'Call valutativa iniziale — 59 EUR',
+            builder: 'Template Base + Builder DIY — 99 EUR',
+            advanced: 'Servizio avanzato — da 990 EUR'
           },
           placeholders: {
-            guide: 'Mi interessa la guida pratica. Sto preparando...',
-            call: 'Mi interessa una call da 45 minuti. Sto preparando...',
-            template: 'Mi interessa il Template DIY. Il progetto che voglio raccontare e...',
-            setup: 'Mi interessa lo Setup assistito light. Il progetto che voglio raccontare e...',
-            custom: 'Voglio capire se ha senso un progetto su misura. Il progetto che voglio raccontare e...'
+            guide: 'Mi interessa la guida pratica da 14 EUR. Il viaggio o progetto che sto preparando è...',
+            call: 'Mi interessa la call valutativa iniziale da 45 minuti. Vorrei capire se il materiale che ho è sufficiente e quale soluzione ha davvero senso per me. Il progetto che sto preparando è...',
+            builder: 'Mi interessa il Template Base + Builder DIY. Riceverò la struttura già pronta del diario e creerò io i singoli giorni nel builder, inserendo testi, foto, video e, opzionalmente, coordinate GPS, link e altri materiali giorno per giorno. Userò un mio hosting oppure una soluzione gratuita tipo AlterVista. Il progetto che voglio costruire è...',
+            advanced: 'Mi interessa il servizio avanzato. Vorrei fissare la call valutativa da 45 minuti. Ho foto, video e testi giorno per giorno, anche da diario cartaceo, appunti o note fotografate. Il materiale che ho è...'
           },
-          defaultMessage: 'Descrivimi il viaggio o il progetto, quanti giorni e materiali hai, se hai GPS e se il materiale e gia ordinato oppure no.',
+          defaultMessage: 'Descrivimi il viaggio o il progetto, quanti giorni e materiali hai, se hai GPS, se il materiale è già organizzato in cartelle per ogni giorno o città oppure se è tutto sparso in un\'unica cartella, se i testi sono già digitali oppure solo fotografati da diario o note, se hai anche opzionalmente GPX, link Strava o altre app di tracking, se vuoi fare da solo o delegare il lavoro e se hai già un hosting oppure no. Se hai il materiale sparso, meglio ancora se è in formato originale: così si possono recuperare giorno e luogo dai metadati.',
           lblName: 'Nome',
           lblEmail: 'Email',
           lblMsg: 'Messaggio',
           submit: 'Invia richiesta',
-          note: 'Le richieste vengono inviate via endpoint API e recapitate via email. Per ora non c\'e checkout automatico.',
+          note: 'Le richieste arrivano via email. Se scegli il servizio avanzato, il primo passo è fissare la call valutativa.',
           sending: 'Invio in corso...',
-          ok: 'Messaggio inviato correttamente. Ti rispondero appena possibile.',
+          ok: 'Messaggio inviato correttamente. Ti risponderò appena possibile.',
           err: 'Invio non riuscito. Riprova tra poco.',
           errMissingConfig: 'Invio non disponibile: configurazione email mancante sul server.',
-          errRate: 'Hai inviato troppe richieste in poco tempo. Riprova piu tardi.',
+          errRate: 'Hai inviato troppe richieste in poco tempo. Riprova più tardi.',
           valName: 'Inserisci un nome valido (max 120 caratteri).',
           valEmail: 'Inserisci un indirizzo email valido.',
           valMessage: 'Il messaggio deve contenere almeno 10 caratteri.',
@@ -200,21 +205,26 @@
           sideTitle: 'Riferimenti rapidi',
           sidePrices: [
             'Guida pratica: 14 EUR',
-            'Call 45 minuti: 49 EUR',
-            'Template DIY: 89 EUR',
-            'Setup assistito light: 349 EUR',
-            'Progetto su misura: su richiesta'
+            'Call valutativa iniziale: 59 EUR / 45 minuti, scalata se si procede',
+            'Template Base + Builder DIY: 99 EUR, guida pratica inclusa',
+            'Assistenza configurazione iniziale hosting: 20 EUR',
+            'Servizio avanzato: da 990 EUR, Builder DIY incluso',
+            'Pubblicazione online opzionale: da 120 EUR/anno oltre a dominio e hosting'
           ],
           sideWhatTitle: 'Nel messaggio scrivimi',
           sideWhat: [
             'Che viaggio o progetto vuoi raccontare',
             'Quanti giorni e quanti materiali hai circa',
+            'Se i testi sono già digitali oppure ancora su diario cartaceo o note fotografate',
+            'Se hai già un hosting tuo oppure vuoi usare anche una soluzione gratuita come AlterVista',
             'Se hai o non hai GPS',
-            'Se il materiale e gia ordinato o ancora sparso',
-            'Quanto vuoi fare da solo e quanto aiuto ti serve'
+            'Se il materiale è già organizzato in cartelle per ogni giorno, città o tappa, oppure se è ancora tutto sparso in un\'unica cartella',
+            'Se è sparso, se i file sono ancora in formato originale: così si possono recuperare giorno e luogo dai metadati',
+            'Se hai, anche opzionalmente, GPX, link Strava o altri dati di tracking',
+            'Se vuoi solo il pacchetto finale offline oppure anche la pubblicazione online'
           ],
-          sideWhyTitle: 'Perche faccio cosi',
-          sideWhyText: 'Preferisco filtrare bene all\'inizio: un template da solo non risolve un progetto confuso, e un progetto su misura non ha senso per tutti.'
+          sideWhyTitle: 'Come valuto il progetto',
+          sideWhyText: 'Nel Builder DIY valuto anche se hai le condizioni minime per gestire pubblicazione e inserimento contenuti in autonomia. Nel servizio avanzato, invece, se il materiale è ancora sparso posso aiutarti io a rimetterlo in ordine: più materiale mi mandi, anche se solo in parte, più riesco a ricostruire il racconto e a usare metadata, coordinate e tracciati nel modo giusto.'
         },
         en: {
           pageTitle: 'Request an evaluation',
@@ -490,18 +500,19 @@
       }
 
       const setPackageOptions = () => {
+        const packKeys = t.packOrder || Object.keys(t.packages || {});
         packageSelect.innerHTML = '';
-        PACKS.forEach((key) => {
+        packKeys.forEach((key) => {
           const option = document.createElement('option');
           option.value = key;
           option.textContent = t.packages[key];
           packageSelect.appendChild(option);
         });
-        packageSelect.value = PACKS.includes(packFromQuery) ? packFromQuery : 'setup';
+        packageSelect.value = packKeys.includes(packFromQuery) ? packFromQuery : (t.defaultPack || packKeys[0] || '');
       };
 
       const maybeAutofillMessage = () => {
-        const key = packageSelect.value || 'setup';
+        const key = packageSelect.value || t.defaultPack || 'builder';
         const nextTemplate = t.placeholders[key] || t.defaultMessage;
         const current = String(messageInput.value || '').trim();
         if (!current || current === lastAutofill) {
