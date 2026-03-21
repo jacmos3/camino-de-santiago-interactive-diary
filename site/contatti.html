@@ -38,6 +38,31 @@
       background: #fff; color: var(--ink); font: inherit;
     }
     .contact-form textarea { min-height: 170px; resize: vertical; }
+    .contact-consent {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: rgba(31,95,91,.06);
+      border: 1px solid rgba(31,95,91,.14);
+    }
+    .contact-consent input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      margin-top: 2px;
+      flex: 0 0 auto;
+    }
+    .contact-consent__text {
+      font-size: .94rem;
+      line-height: 1.5;
+      color: var(--ink);
+      font-weight: 500;
+    }
+    .contact-consent__text a {
+      color: #1f5f5b;
+      text-underline-offset: 2px;
+    }
     .contact-submit {
       justify-self: start; border: 1px solid rgba(31,95,91,.35); background:#1f5f5b; color:#fffaf2;
       border-radius:999px; padding:9px 14px; text-decoration:none; font-weight:700; cursor: pointer;
@@ -62,6 +87,7 @@
       border: 1px solid rgba(255, 248, 239, 0.16);
     }
     .contact-note { margin: 10px 0 0; color: var(--muted); font-size: .92rem; }
+    .contact-note a { color: #1f5f5b; text-underline-offset: 2px; }
     .contact-side h2 { margin-top: 0; }
     .contact-side__price { font-weight: 800; color: var(--ink); }
     .contact-side__block + .contact-side__block { margin-top: 18px; }
@@ -120,10 +146,15 @@
             <label for="contact-website">Website</label>
             <input id="contact-website" name="website" autocomplete="off" tabindex="-1" />
           </div>
+          <label class="contact-consent" for="contact-privacy-consent">
+            <input id="contact-privacy-consent" name="privacy_consent" type="checkbox" required />
+            <span class="contact-consent__text" id="contact-privacy-consent-text">Ho letto la <a href="/privacy-policy/" target="_blank" rel="noopener noreferrer">Privacy Policy</a> e acconsento al trattamento dei miei dati per ricevere risposta alla richiesta inviata.</span>
+          </label>
           <button type="submit" class="contact-submit" id="contact-submit">Invia richiesta</button>
           <div class="contact-status" id="contact-status"></div>
         </form>
         <p class="contact-note" id="contact-note">Le richieste arrivano via email. Se scegli il servizio avanzato, il primo passo è fissare la call valutativa.</p>
+        <p class="contact-note">Prima di inviare il modulo, leggi <a href="/privacy-policy/">Privacy Policy</a>, <a href="/cookie-policy/">Cookie Policy</a> e <a href="/termini-e-condizioni/">Termini e condizioni</a>.</p>
         <div class="contact-links">
           <a class="contact-back" id="contact-back" href="/it/crea-il-tuo-diario/">← Torna all'offerta</a>
           <a class="contact-back" id="contact-diary-back" href="/it/">← Torna al diario</a>
@@ -190,6 +221,7 @@
           lblName: 'Nome',
           lblEmail: 'Email',
           lblMsg: 'Messaggio',
+          privacyConsentHtml: 'Ho letto la <a href="/privacy-policy/" target="_blank" rel="noopener noreferrer">Privacy Policy</a> e acconsento al trattamento dei miei dati per ricevere risposta alla richiesta inviata.',
           submit: 'Invia richiesta',
           note: 'Le richieste arrivano via email. Se scegli il servizio avanzato, il primo passo è fissare la call valutativa.',
           sending: 'Invio in corso...',
@@ -200,6 +232,7 @@
           valName: 'Inserisci un nome valido (max 120 caratteri).',
           valEmail: 'Inserisci un indirizzo email valido.',
           valMessage: 'Il messaggio deve contenere almeno 10 caratteri.',
+          valPrivacy: 'Devi accettare la Privacy Policy prima di inviare la richiesta.',
           back: '← Torna all\'offerta',
           backDiary: '← Torna al diario',
           sideTitle: 'Riferimenti rapidi',
@@ -260,6 +293,7 @@
           lblName: 'Name',
           lblEmail: 'Email',
           lblMsg: 'Message',
+          privacyConsentHtml: 'I have read the <a href="/privacy-policy/" target="_blank" rel="noopener noreferrer">Privacy Policy</a> and I consent to the processing of my data in order to receive a reply to my request.',
           submit: 'Send request',
           note: 'Requests are sent through the API endpoint and delivered by email. There is no automatic checkout yet.',
           sending: 'Sending...',
@@ -270,6 +304,7 @@
           valName: 'Enter a valid name (max 120 chars).',
           valEmail: 'Enter a valid email address.',
           valMessage: 'Message must contain at least 10 characters.',
+          valPrivacy: 'You must accept the Privacy Policy before sending the request.',
           back: '← Back to the offer',
           backDiary: '← Back to the diary',
           sideTitle: 'Quick references',
@@ -325,6 +360,7 @@
           lblName: 'Nombre',
           lblEmail: 'Email',
           lblMsg: 'Mensaje',
+          privacyConsentHtml: 'He leído la <a href="/privacy-policy/" target="_blank" rel="noopener noreferrer">Privacy Policy</a> y consiento el tratamiento de mis datos para recibir respuesta a mi solicitud.',
           submit: 'Enviar solicitud',
           note: 'Las solicitudes se envian por el endpoint API y llegan por correo. Todavia no hay checkout automatico.',
           sending: 'Enviando...',
@@ -335,6 +371,7 @@
           valName: 'Introduce un nombre valido (max 120 caracteres).',
           valEmail: 'Introduce un email valido.',
           valMessage: 'El mensaje debe contener al menos 10 caracteres.',
+          valPrivacy: 'Debes aceptar la Privacy Policy antes de enviar la solicitud.',
           back: '← Volver a la oferta',
           backDiary: '← Volver al diario',
           sideTitle: 'Referencias rapidas',
@@ -390,6 +427,7 @@
           lblName: 'Nom',
           lblEmail: 'Email',
           lblMsg: 'Message',
+          privacyConsentHtml: 'J’ai lu la <a href="/privacy-policy/" target="_blank" rel="noopener noreferrer">Privacy Policy</a> et j’accepte le traitement de mes données afin de recevoir une réponse à ma demande.',
           submit: 'Envoyer la demande',
           note: 'Les demandes sont envoyees via l\'endpoint API et livrees par email. Il n\'y a pas encore de checkout automatique.',
           sending: 'Envoi en cours...',
@@ -400,6 +438,7 @@
           valName: 'Saisis un nom valide (max 120 caracteres).',
           valEmail: 'Saisis une adresse email valide.',
           valMessage: 'Le message doit contenir au moins 10 caracteres.',
+          valPrivacy: 'Tu dois accepter la Privacy Policy avant d’envoyer la demande.',
           back: '← Retour a l\'offre',
           backDiary: '← Retour au journal',
           sideTitle: 'Repères rapides',
@@ -457,6 +496,8 @@
       setText('lbl-name', t.lblName);
       setText('lbl-email', t.lblEmail);
       setText('lbl-message', t.lblMsg);
+      const privacyConsentText = document.getElementById('contact-privacy-consent-text');
+      if (privacyConsentText) privacyConsentText.innerHTML = t.privacyConsentHtml;
       setText('contact-submit', t.submit);
       setText('contact-note', t.note);
       setText('contact-back', t.back);
@@ -535,6 +576,7 @@
         const email = String(document.getElementById('contact-email').value || '').trim();
         const message = String(document.getElementById('contact-message').value || '').trim();
         const website = String(document.getElementById('contact-website').value || '').trim();
+        const privacyConsent = Boolean(document.getElementById('contact-privacy-consent').checked);
         const selectedPackage = String(packageSelect.value || '').trim();
 
         if (!name || name.length > 120) {
@@ -550,6 +592,10 @@
           status.textContent = t.valMessage;
           return;
         }
+        if (!privacyConsent) {
+          status.textContent = t.valPrivacy;
+          return;
+        }
 
         status.textContent = t.sending;
         const submit = document.getElementById('contact-submit');
@@ -560,6 +606,7 @@
             email,
             message,
             website,
+            privacy_consent: privacyConsent,
             lang,
             package: selectedPackage,
             source: 'contact_form'

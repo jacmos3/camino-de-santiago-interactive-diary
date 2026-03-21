@@ -46,6 +46,9 @@ const MAP_PAGE_PATH_RE = /^\/(it|en|es|fr)\/map\/?$/i;
 const PEOPLE_PAGE_PATH_RE = /^\/(it|en|es|fr)\/people\/?$/i;
 const CONTACT_PAGE_PATH_RE = /^\/(it|en|es|fr)\/contatti\/?$/i;
 const OFFER_PAGE_PATH_RE = /^\/(it|en|es|fr)\/crea-il-tuo-diario\/?$/i;
+const PRIVACY_PAGE_PATH_RE = /^\/privacy-policy\/?$/i;
+const COOKIE_POLICY_PATH_RE = /^\/cookie-policy\/?$/i;
+const TERMS_PAGE_PATH_RE = /^\/termini-e-condizioni\/?$/i;
 
 function loadDotEnv(rootDir) {
   try {
@@ -1139,6 +1142,8 @@ function buildDayPageHtml({ origin, lang, day, prevDay, nextDay, dayOgOverrides,
     .day-section{margin-top:18px;background:#fff;border-radius:16px;padding:16px}
     .day-offer-cta{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;background:#f7f3ee;border:1px solid rgba(31,26,22,.08)}
     .day-offer-cta p{margin:6px 0 0;color:#5a5248;max-width:700px}
+    .day-legal-links{display:flex;flex-wrap:wrap;gap:10px 16px;margin-top:14px}
+    .day-legal-links a{color:#1f5f5b;text-decoration:underline;text-underline-offset:2px}
     .media-grid{margin-top:16px;display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px}
     .media-grid > .media-card{background:#f7f3ee;border-radius:12px;padding:8px;display:flex !important;flex-direction:column !important;align-items:stretch !important;justify-content:flex-start !important;gap:6px;min-height:0;overflow:visible}
     .media-grid > .media-card > a{display:block !important;width:100% !important;flex:0 0 auto !important}
@@ -1218,6 +1223,11 @@ function buildDayPageHtml({ origin, lang, day, prevDay, nextDay, dayOgOverrides,
     <div>
       <h2>${escapeHtml(ui.offerCtaTitle)}</h2>
       <p>${escapeHtml(ui.offerCtaText)}</p>
+      <div class="day-legal-links">
+        <a href="/privacy-policy/">Privacy Policy</a>
+        <a href="/cookie-policy/">Cookie Policy</a>
+        <a href="/termini-e-condizioni/">Termini e condizioni</a>
+      </div>
     </div>
     <a class="back-link" href="${escapeHtml(offerPath)}">${escapeHtml(ui.offerCtaLink)}</a>
   </section>
@@ -1624,6 +1634,9 @@ async function buildSitemapXmlForOrigin(origin) {
     es: '/es/crea-il-tuo-diario/',
     fr: '/fr/crea-il-tuo-diario/'
   };
+  push('/privacy-policy/', generatedDate, '0.2', 'yearly');
+  push('/cookie-policy/', generatedDate, '0.2', 'yearly');
+  push('/termini-e-condizioni/', generatedDate, '0.3', 'yearly');
   push('/it/', generatedDate, '1.0', 'daily', [], homeAlt);
   push('/en/', generatedDate, '0.9', 'daily', [], homeAlt);
   push('/es/', generatedDate, '0.9', 'daily', [], homeAlt);
@@ -2782,6 +2795,36 @@ const server = http.createServer(async (req, res) => {
       return;
     }
     await serveStatic(req, res, `/crea-il-tuo-diario.html${urlObj.search || ''}`, lang);
+    return;
+  }
+
+  if (PRIVACY_PAGE_PATH_RE.test(urlObj.pathname)) {
+    if (urlObj.pathname !== '/privacy-policy/') {
+      res.writeHead(301, { Location: `/privacy-policy/${urlObj.search || ''}` });
+      res.end();
+      return;
+    }
+    await serveStatic(req, res, `/privacy-policy.html${urlObj.search || ''}`);
+    return;
+  }
+
+  if (COOKIE_POLICY_PATH_RE.test(urlObj.pathname)) {
+    if (urlObj.pathname !== '/cookie-policy/') {
+      res.writeHead(301, { Location: `/cookie-policy/${urlObj.search || ''}` });
+      res.end();
+      return;
+    }
+    await serveStatic(req, res, `/cookie-policy.html${urlObj.search || ''}`);
+    return;
+  }
+
+  if (TERMS_PAGE_PATH_RE.test(urlObj.pathname)) {
+    if (urlObj.pathname !== '/termini-e-condizioni/') {
+      res.writeHead(301, { Location: `/termini-e-condizioni/${urlObj.search || ''}` });
+      res.end();
+      return;
+    }
+    await serveStatic(req, res, `/termini-e-condizioni.html${urlObj.search || ''}`);
     return;
   }
 

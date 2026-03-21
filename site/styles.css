@@ -1459,6 +1459,23 @@ h1, h2, h3 {
   max-width: 980px;
 }
 
+.footer__legal-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 16px;
+  margin-top: 10px;
+}
+
+.footer__legal-link {
+  color: #5a5148;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.footer__legal-link:hover {
+  color: #1f5f5b;
+}
+
 .footer__cta {
   font-size: 0.95rem;
   line-height: 1.45;

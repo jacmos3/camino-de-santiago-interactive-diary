@@ -746,6 +746,8 @@ http_response_code(200);
     .day-section{margin-top:18px;background:#fff;border-radius:16px;padding:16px}
     .day-offer-cta{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;background:#f7f3ee;border:1px solid rgba(31,26,22,.08)}
     .day-offer-cta p{margin:6px 0 0;color:#5a5248;max-width:700px}
+    .day-legal-links{display:flex;flex-wrap:wrap;gap:10px 16px;margin-top:14px}
+    .day-legal-links a{color:#1f5f5b;text-decoration:underline;text-underline-offset:2px}
     .media-grid{margin-top:16px;display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px}
     .media-card{background:#f7f3ee;border-radius:12px;padding:8px;display:flex;flex-direction:column;gap:6px}
     .media-card img{width:100%;height:180px;object-fit:cover;border-radius:10px;display:block}
@@ -897,6 +899,11 @@ http_response_code(200);
     <div>
       <h2><?= day_escape($uiLang['offer_cta_title']) ?></h2>
       <p><?= day_escape($uiLang['offer_cta_text']) ?></p>
+      <div class="day-legal-links">
+        <a href="/privacy-policy/">Privacy Policy</a>
+        <a href="/cookie-policy/">Cookie Policy</a>
+        <a href="/termini-e-condizioni/">Termini e condizioni</a>
+      </div>
     </div>
     <a class="back-link" href="<?= day_escape($offerHref) ?>"><?= day_escape($uiLang['offer_cta_link']) ?></a>
   </section>

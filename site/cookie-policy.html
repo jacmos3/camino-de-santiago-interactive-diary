@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cookie Policy — Cammino di Santiago</title>
+  <meta name="description" content="Cookie Policy del sito Cammino di Santiago: cookie, localStorage, sessionStorage e altri strumenti di tracciamento usati dal sito." />
+  <link rel="canonical" href="/cookie-policy/" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="stylesheet" href="/styles.css" />
+  <style>
+    .legal-shell { max-width: 1080px; margin: 0 auto; padding: 28px 22px 72px; }
+    .legal-hero { padding: 42px 22px 28px; background-position: center 45%; }
+    .legal-hero h1 { color: #fff8ef; }
+    .legal-hero .lead { color: #f2e8dc; max-width: 780px; }
+    .legal-links { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
+    .legal-btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      border-radius: 999px; padding: 10px 16px; text-decoration: none; font-weight: 700;
+      border: 1px solid rgba(31,95,91,.35); background: #1f5f5b; color: #fffaf2;
+    }
+    .legal-btn--secondary { background: #fffaf2; color: var(--ink); }
+    .legal-card {
+      background: #fffaf2; border: 1px solid rgba(31,26,22,.1); border-radius: 18px;
+      box-shadow: var(--shadow); padding: 22px; margin-top: 18px;
+    }
+    .legal-card h2 { margin-top: 0; }
+    .legal-card p,
+    .legal-card li,
+    .legal-card td { color: var(--muted); line-height: 1.6; }
+    .legal-card ul { margin: 0; padding-left: 18px; }
+    .legal-table-wrap { overflow-x: auto; }
+    .legal-table { width: 100%; border-collapse: collapse; min-width: 920px; }
+    .legal-table th,
+    .legal-table td {
+      border-bottom: 1px solid rgba(31,26,22,.08);
+      padding: 10px 12px;
+      vertical-align: top;
+      text-align: left;
+    }
+    .legal-table th { color: var(--ink); font-size: .95rem; }
+    .legal-badge {
+      display: inline-flex; align-items: center;
+      padding: 2px 8px; border-radius: 999px; font-size: .85rem; font-weight: 700;
+      background: rgba(31,95,91,.12); color: #1f5f5b;
+    }
+    .legal-badge--warn { background: rgba(176,108,54,.16); color: #7b4e1e; }
+  </style>
+</head>
+<body>
+  <header class="hero legal-hero">
+    <div class="hero__inner">
+      <span class="eyebrow">Trasparenza</span>
+      <h1>Cookie Policy</h1>
+      <p class="lead">Qui trovi l’elenco pratico dei cookie e degli altri strumenti locali rilevati nel sito: cookie HTTP, localStorage, sessionStorage e identificatori usati per funzionalità, commenti, admin e misurazione del traffico.</p>
+      <div class="legal-links">
+        <a class="legal-btn" href="/it/">Torna al diario</a>
+        <a class="legal-btn legal-btn--secondary" href="/privacy-policy/">Privacy Policy</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="legal-shell">
+    <section class="legal-card">
+      <h2>1. Cosa si intende qui per cookie e strumenti simili</h2>
+      <p>Oltre ai cookie HTTP tradizionali, il sito usa anche strumenti equivalenti lato browser, come <code>localStorage</code> e <code>sessionStorage</code>. Dal punto di vista della trasparenza verso l’utente, vanno descritti comunque: cambiano i dettagli tecnici, non il fatto che servano per memorizzare informazioni o identificatori sul dispositivo.</p>
+    </section>
+
+    <section class="legal-card">
+      <h2>2. Elenco degli strumenti rilevati nel codice attuale</h2>
+      <div class="legal-table-wrap">
+        <table class="legal-table">
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Tipo</th>
+              <th>Proprietario</th>
+              <th>Finalità</th>
+              <th>Durata</th>
+              <th>Categoria</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>PHPSESSID</code> o cookie di sessione PHP equivalente</td>
+              <td>Cookie</td>
+              <td>Prima parte</td>
+              <td>Gestione sessione PHP per le API del sito</td>
+              <td>Sessione browser</td>
+              <td><span class="legal-badge">Tecnico</span></td>
+            </tr>
+            <tr>
+              <td><code>cammino_admin_session</code></td>
+              <td>Cookie</td>
+              <td>Prima parte</td>
+              <td>Autenticazione area admin protetta</td>
+              <td>8 ore</td>
+              <td><span class="legal-badge">Tecnico</span></td>
+            </tr>
+            <tr>
+              <td><code>cammino_lang</code></td>
+              <td>localStorage</td>
+              <td>Prima parte</td>
+              <td>Memorizza la lingua scelta dall’utente</td>
+              <td>Finché non viene cancellato</td>
+              <td><span class="legal-badge">Funzionale</span></td>
+            </tr>
+            <tr>
+              <td><code>cammino_comment_author_v1</code></td>
+              <td>localStorage</td>
+              <td>Prima parte</td>
+              <td>Ricorda il nome usato dall’utente nei commenti</td>
+              <td>Finché non viene cancellato</td>
+              <td><span class="legal-badge">Funzionale</span></td>
+            </tr>
+            <tr>
+              <td><code>cammino_minimap_collapsed_v1</code></td>
+              <td>localStorage</td>
+              <td>Prima parte</td>
+              <td>Ricorda lo stato aperto/chiuso della mini-mappa</td>
+              <td>Finché non viene cancellato</td>
+              <td><span class="legal-badge">Funzionale</span></td>
+            </tr>
+            <tr>
+              <td><code>cammino_tracking_cid_v1</code></td>
+              <td>localStorage</td>
+              <td>Prima parte</td>
+              <td>Identificatore pseudonimo persistente per statistiche ed eventi analytics</td>
+              <td>Finché non viene cancellato</td>
+              <td><span class="legal-badge legal-badge--warn">Analytics / tracciamento</span></td>
+            </tr>
+            <tr>
+              <td><code>cammino_tracking_sid_v1</code></td>
+              <td>sessionStorage</td>
+              <td>Prima parte</td>
+              <td>Identificatore di sessione per misurare visite e interazioni nello stesso accesso</td>
+              <td>Sessione browser</td>
+              <td><span class="legal-badge legal-badge--warn">Analytics / tracciamento</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="legal-card">
+      <h2>3. Cosa fa il sito con questi strumenti</h2>
+      <ul>
+        <li>Strumenti tecnici e funzionali: servono a far funzionare il sito, mantenere la sessione admin, ricordare la lingua o evitare di reinserire sempre il nome nei commenti.</li>
+        <li>Strumenti analytics e di tracciamento: il codice del sito registra eventi come page view, apertura media, click di condivisione, apertura commenti o interazioni con la mappa, associandoli a identificatori pseudonimi lato browser.</li>
+        <li>Non risultano nel codice attuale strumenti pubblicitari di terze parti, pixel social o cookie di profilazione per advertising personalizzato.</li>
+      </ul>
+    </section>
+
+    <section class="legal-card">
+      <h2>4. Punto importante: analytics non vuol dire automaticamente “tecnico”</h2>
+      <p>Se uno strumento analytics è davvero limitato a statistiche aggregate del titolare, con dati minimizzati e senza effetti ulteriori, può in certi casi essere assimilato ai tecnici. Se invece la configurazione concreta va oltre, serve una gestione del consenso coerente con la normativa cookie. Questa pagina documenta gli strumenti usati; non sostituisce una valutazione tecnica e legale della loro configurazione effettiva.</p>
+    </section>
+
+    <section class="legal-card">
+      <h2>5. Strumenti esterni attivati solo se clicchi tu</h2>
+      <ul>
+        <li><strong>Google Maps</strong>: alcuni link del diario aprono una località direttamente su Google Maps. Il trattamento successivo avviene secondo le policy di Google.</li>
+        <li><strong>Gumroad</strong>: i PDF gratuiti o a pagamento vengono scaricati tramite Gumroad. Se scegli di proseguire verso Gumroad, si applicano anche i cookie e le policy della piattaforma esterna.</li>
+      </ul>
+    </section>
+
+    <section class="legal-card">
+      <h2>6. Come puoi gestire o cancellare questi strumenti</h2>
+      <ul>
+        <li>Puoi cancellare cookie, dati di sito, localStorage e sessionStorage dalle impostazioni del browser.</li>
+        <li>Puoi bloccare i cookie o limitarli con le impostazioni privacy del browser, tenendo conto che alcune funzioni del sito potrebbero smettere di funzionare correttamente.</li>
+        <li>Se vuoi esercitare diritti sui dati personali collegati a questi strumenti, consulta anche la <a href="/privacy-policy/">Privacy Policy</a>.</li>
+      </ul>
+    </section>
+
+    <section class="legal-card">
+      <h2>7. Aggiornamenti</h2>
+      <p>Questa Cookie Policy va aggiornata ogni volta che cambiano strumenti di tracciamento, provider esterni o modalità di raccolta statistiche. Ultimo aggiornamento: 21 marzo 2026.</p>
+    </section>
+  </main>
+</body>
+</html>

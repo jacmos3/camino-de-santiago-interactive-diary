@@ -674,6 +674,8 @@ if ($path === '/contact/send') {
   $lang = trim((string)($payload['lang'] ?? ''));
   $package = trim((string)($payload['package'] ?? ''));
   $source = trim((string)($payload['source'] ?? ''));
+  $privacyConsentRaw = $payload['privacy_consent'] ?? null;
+  $privacyConsent = $privacyConsentRaw === true || $privacyConsentRaw === 1 || $privacyConsentRaw === '1' || $privacyConsentRaw === 'true' || $privacyConsentRaw === 'on';
 
   if ($website !== '') {
     respond(200, ['ok' => true]);
@@ -687,6 +689,9 @@ if ($path === '/contact/send') {
   }
   if ($message === '' || mb_strlen($message) < 10 || mb_strlen($message) > 5000) {
     respond(400, ['error' => 'Messaggio non valido: il testo deve essere tra 10 e 5000 caratteri.']);
+  }
+  if (!$privacyConsent) {
+    respond(400, ['error' => 'Consenso privacy mancante: devi accettare la Privacy Policy prima di inviare la richiesta.']);
   }
   if ($package !== '' && mb_strlen($package) > 80) {
     respond(400, ['error' => 'Pacchetto non valido.']);
@@ -719,6 +724,7 @@ if ($path === '/contact/send') {
     'Lingua: ' . $lang,
     'Pacchetto: ' . ($safePackage !== '' ? $safePackage : '-'),
     'Sorgente: ' . ($safeSource !== '' ? $safeSource : '-'),
+    'Consenso privacy: sì',
     'IP: ' . $ip,
     'User-Agent: ' . (string)($_SERVER['HTTP_USER_AGENT'] ?? ''),
     'URL: ' . (string)($_SERVER['HTTP_REFERER'] ?? ''),
