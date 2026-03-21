@@ -665,6 +665,39 @@ const MINI_MAP_COLLAPSED_KEY = 'cammino_minimap_collapsed_v1';
 const dayDistanceKmByDate = new Map();
 const dayDistanceCumKmByDate = new Map();
 const nonTrackedDayKeys = new Set();
+const LEGACY_PEOPLE_CATALOG = [
+  { id: 'maria', name: 'Maria', aliases: ['Maria'] },
+  { id: 'thomas', name: 'Thomas', aliases: ['Thomas', 'Tomà', 'Toma'] },
+  { id: 'talia', name: 'Talia', aliases: ['Talia'] },
+  { id: 'alicia', name: 'Alicia', aliases: ['Alicia'] },
+  { id: 'ananda', name: 'Ananda', aliases: ['Ananda'] },
+  { id: 'beatrice', name: 'Beatrice', aliases: ['Beatrice'] },
+  { id: 'catherine', name: 'Catherine', aliases: ['Catherine'] },
+  { id: 'charles', name: 'Charles', aliases: ['Charles'] },
+  { id: 'francesco', name: 'Francesco', aliases: ['Francesco'] },
+  { id: 'hongsuan', name: 'Hongsuan', aliases: ['Hongsuan', 'Ocean'] },
+  { id: 'andrius', name: 'Andrius', aliases: ['Andrius'] },
+  { id: 'giselle', name: 'Giselle', aliases: ['Giselle'] },
+  { id: 'judith', name: 'Judith', aliases: ['Judith'] },
+  { id: 'lucia', name: 'Lucia', aliases: ['Lucia', 'Lucía'] },
+  { id: 'mark', name: 'Mark', aliases: ['Mark'] },
+  { id: 'pamela', name: 'Pamela', aliases: ['Pamela', 'Pam'] },
+  { id: 'chris', name: 'Chris', aliases: ['Chris'] },
+  { id: 'jessica', name: 'Jessica', aliases: ['Jessica'] },
+  { id: 'danielle', name: 'Danielle', aliases: ['Danielle'] },
+  { id: 'ginger', name: 'Ginger', aliases: ['Ginger'] },
+  { id: 'carla', name: 'Carla', aliases: ['Carla'] },
+  { id: 'anita', name: 'Anita', aliases: ['Anita'] },
+  { id: 'isabel', name: 'Isabel', aliases: ['Isabel'] },
+  { id: 'sara', name: 'Sara', aliases: ['Sara'] },
+  { id: 'renato', name: 'Renato', aliases: ['Renato'] },
+  { id: 'laura', name: 'Laura', aliases: ['Laura'] },
+  { id: 'juan', name: 'Juan', aliases: ['Juan', 'Juean', 'Joan'] },
+  { id: 'matteo', name: 'Matteo', aliases: ['Matteo'] },
+  { id: 'stefano', name: 'Stefano', aliases: ['Stefano'] },
+  { id: 'maddalena', name: 'Maddalena', aliases: ['Maddalena'] },
+  { id: 'antonella', name: 'Antonella', aliases: ['Antonella'] }
+];
 
 const applyFooterTemplateCtaVisibility = () => {
   const footerCta = document.querySelector('.footer__cta');
@@ -2862,23 +2895,26 @@ const scrollToDay = (dayKey, behavior = 'smooth') => {
 };
 
 const analyzePeopleFromDays = (days) => {
-  const peopleCatalog = [];
+  const explicitPeopleCatalog = [];
   const seenPeople = new Set();
+  let hasExplicitPeople = false;
   (days || []).forEach((day) => {
     const dayPeople = Array.isArray(day && day.people) ? day.people : [];
+    if (dayPeople.length) hasExplicitPeople = true;
     dayPeople.forEach((name) => {
       const clean = String(name || '').trim();
       if (!clean) return;
       const key = clean.toLocaleLowerCase();
       if (seenPeople.has(key)) return;
       seenPeople.add(key);
-      peopleCatalog.push({
+      explicitPeopleCatalog.push({
         id: slugifyPersonId(clean),
         name: clean,
         aliases: [clean]
       });
     });
   });
+  const peopleCatalog = hasExplicitPeople ? explicitPeopleCatalog : LEGACY_PEOPLE_CATALOG;
   const people = peopleCatalog.map((person) => ({
     ...person,
     regex: buildPersonRegex(person.aliases),
@@ -2895,30 +2931,53 @@ const analyzePeopleFromDays = (days) => {
     const explicitNames = Array.isArray(day && day.people) ? day.people.map((value) => String(value || '').trim()).filter(Boolean) : [];
     if (!noteText && !explicitNames.length) return;
     const present = [];
-    explicitNames.forEach((name) => {
-      const person = people.find((candidate) => candidate.name === name);
-      if (!person) return;
-      person.regex.lastIndex = 0;
-      const matches = noteText ? [...noteText.matchAll(person.regex)] : [];
-      person.mentions += matches.length || 1;
-      const dayEntry = {
-        date: day.date,
-        title: getDayTitle(day),
-        label: getDayLabelText(day),
-        index: renderedDayOrder.indexOf(getDayUiKey(day))
-      };
-      if (!person.days.some((entry) => String(entry.date) === String(day.date))) {
-        person.days.push(dayEntry);
-      }
-      if (!person.excerpt && matches.length) {
-        const first = matches[0];
-        person.excerpt = buildExcerptAroundMatch(noteText, first.index || 0, first[0].length);
-      }
-      if (!person.excerpt && noteText) {
-        person.excerpt = noteText.slice(0, 168).trim();
-      }
-      present.push(person.id);
-    });
+    if (hasExplicitPeople) {
+      explicitNames.forEach((name) => {
+        const person = people.find((candidate) => candidate.name === name);
+        if (!person) return;
+        person.regex.lastIndex = 0;
+        const matches = noteText ? [...noteText.matchAll(person.regex)] : [];
+        person.mentions += matches.length || 1;
+        const dayEntry = {
+          date: day.date,
+          title: getDayTitle(day),
+          label: getDayLabelText(day),
+          index: renderedDayOrder.indexOf(getDayUiKey(day))
+        };
+        if (!person.days.some((entry) => String(entry.date) === String(day.date))) {
+          person.days.push(dayEntry);
+        }
+        if (!person.excerpt && matches.length) {
+          const first = matches[0];
+          person.excerpt = buildExcerptAroundMatch(noteText, first.index || 0, first[0].length);
+        }
+        if (!person.excerpt && noteText) {
+          person.excerpt = noteText.slice(0, 168).trim();
+        }
+        present.push(person.id);
+      });
+    } else {
+      people.forEach((person) => {
+        person.regex.lastIndex = 0;
+        const matches = noteText ? [...noteText.matchAll(person.regex)] : [];
+        if (!matches.length) return;
+        person.mentions += matches.length;
+        const dayEntry = {
+          date: day.date,
+          title: getDayTitle(day),
+          label: getDayLabelText(day),
+          index: renderedDayOrder.indexOf(getDayUiKey(day))
+        };
+        if (!person.days.some((entry) => String(entry.date) === String(day.date))) {
+          person.days.push(dayEntry);
+        }
+        if (!person.excerpt) {
+          const first = matches[0];
+          person.excerpt = buildExcerptAroundMatch(noteText, first.index || 0, first[0].length);
+        }
+        present.push(person.id);
+      });
+    }
     for (let i = 0; i < present.length; i += 1) {
       for (let j = i + 1; j < present.length; j += 1) {
         const pairKey = [present[i], present[j]].sort().join('::');
