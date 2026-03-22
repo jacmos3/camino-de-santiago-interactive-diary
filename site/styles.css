@@ -692,6 +692,14 @@ h1, h2, h3 {
   padding-bottom: 14px;
 }
 
+.day__heavy {
+  display: block;
+}
+
+.day__heavy[data-virtualized="1"] {
+  contain: layout;
+}
+
 .day__title {
   font-size: 1.4rem;
   margin: 0;

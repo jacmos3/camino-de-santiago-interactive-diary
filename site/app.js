@@ -17,7 +17,7 @@ const I18N = {
     photo_tag: 'Foto',
     video_tag: 'Video',
     footer_note:
-      'Il sito è stato creato successivamente rispetto all’esperienza vissuta, ma ricostruisce il mio cammino in modo molto fedele: unisce il tracciamento registrato sul momento tramite app, i metadati (incluse le coordinate GPS) estratti da foto e video, e i testi su eventi e stati d’animo recuperati da vecchie note, messaggi, chat WhatsApp, audio, contenuti social e ricordi. Molti dettagli, però, sono rimasti fuori: il cammino è qualcosa che ogni persona attraversa in modo unico, e una parte di ciò che si vive resta sempre impossibile da tradurre del tutto in parole, immagini o coordinate.\n\nIl mio consiglio è di partire da soli, per vivere davvero l’esperienza fino in fondo, senza paura di non avere nessuno con cui parlare o di sbagliare strada: sul Cammino Francese è praticamente impossibile. È un’esperienza che consiglio a tutti e non richiede allenamenti speciali né una preparazione fisica particolare: la preparazione più importante è mentale. Ho visto più persone fermarsi per preconcetti e limiti mentali che per veri limiti fisici. Se senti che vuoi farlo, non riempirti di dubbi: prendi un biglietto, prepara lo zaino e parti, peregrino. Ultreya!',
+      'Questo sito è nato dopo il Cammino, ma prova a ricostruirlo nel modo più fedele possibile: unendo tracciati registrati sul momento, metadati estratti da foto e video, e testi recuperati da note, messaggi e ricordi. Molto, però, è rimasto fuori. Una parte di ciò che si vive lungo il Cammino resta impossibile da tradurre davvero in parole, immagini o coordinate.\n\nSe senti che vuoi partire, il mio consiglio è semplice: fallo. Sul Cammino Francese è difficile sentirsi davvero persi, e molta della preparazione necessaria non è fisica ma mentale. Parti leggero, con lo zaino giusto e la testa aperta. Ultreya!',
     footer_cta_prefix:
       'Vuoi trasformare anche il tuo viaggio in un diario interattivo con mappa, media e tappe ordinate?',
     footer_cta_link: 'Scopri qui come funziona',
@@ -112,7 +112,7 @@ const I18N = {
     photo_tag: 'Photo',
     video_tag: 'Video',
     footer_note:
-      'This site was created after the experience itself, but it reconstructs my Camino very faithfully: it combines tracking recorded at the time via app, metadata (including GPS coordinates) extracted from photos and videos, and texts about events and states of mind recovered from old notes, messages, WhatsApp chats, audio, social content, and memories. Many details, however, were left out: the Camino is something each person goes through in a unique way, and part of what you live always remains impossible to fully translate into words, images, or coordinates.\n\nMy advice is to start alone, to truly live the experience all the way, without being afraid of having no one to talk to or taking a wrong path: on the French Way it is practically impossible. It is an experience I recommend to everyone, and it does not require special training or particular physical preparation: the most important preparation is mental. I have seen more people stop because of preconceptions and mental limits than because of real physical limits. If you feel you want to do it, do not fill yourself with doubts: buy a ticket, pack your backpack, and go, pilgrim. Ultreya!',
+      'This site was built after the Camino, but it tries to reconstruct it as faithfully as possible: by combining tracks recorded at the time, metadata extracted from photos and videos, and texts recovered from notes, messages, and memories. A lot, however, was left out. Part of what you live on the Camino remains impossible to truly translate into words, images, or coordinates.\n\nIf you feel you want to go, my advice is simple: do it. On the French Way it is hard to feel truly lost, and much of the preparation you need is not physical, but mental. Travel light, with the right backpack and an open mind. Ultreya!',
     footer_cta_prefix:
       'If you want to turn your trip into an interactive diary with map, media, and ordered stages,',
     footer_cta_link: 'see here how to do it',
@@ -207,7 +207,7 @@ const I18N = {
     photo_tag: 'Foto',
     video_tag: 'Vídeo',
     footer_note:
-      'El sitio se creó después de la experiencia vivida, pero reconstruye mi Camino de forma muy fiel: une el seguimiento registrado en su momento mediante app, los metadatos (incluidas las coordenadas GPS) extraídos de fotos y vídeos, y los textos sobre eventos y estados de ánimo recuperados de notas antiguas, mensajes, chats de WhatsApp, audios, contenidos sociales y recuerdos. Muchos detalles, sin embargo, se han quedado fuera: el Camino es algo que cada persona atraviesa de forma única, y una parte de lo que se vive siempre es imposible de traducir del todo en palabras, imágenes o coordenadas.\n\nMi consejo es salir solo, para vivir de verdad la experiencia hasta el fondo, sin miedo a no tener con quién hablar o a equivocarte de camino: en el Camino Francés es prácticamente imposible. Es una experiencia que recomiendo a todos y no requiere entrenamientos especiales ni una preparación física particular: la preparación más importante es mental. He visto a más personas pararse por prejuicios y límites mentales que por límites físicos reales. Si sientes que quieres hacerlo, no te llenes de dudas: compra un billete, prepara la mochila y sal, peregrino. ¡Ultreya!',
+      'Este sitio nació después del Camino, pero intenta reconstruirlo de la forma más fiel posible: uniendo trazados registrados en el momento, metadatos extraídos de fotos y vídeos, y textos recuperados de notas, mensajes y recuerdos. Mucho, sin embargo, se ha quedado fuera. Una parte de lo que se vive en el Camino sigue siendo imposible de traducir de verdad en palabras, imágenes o coordenadas.\n\nSi sientes que quieres hacerlo, mi consejo es simple: hazlo. En el Camino Francés es difícil sentirse de verdad perdido, y buena parte de la preparación necesaria no es física, sino mental. Sal ligero, con la mochila adecuada y la cabeza abierta. ¡Ultreya!',
     footer_cta_prefix:
       'Si quieres transformar tu viaje en un diario interactivo con mapa, media y etapas ordenadas,',
     footer_cta_link: 'descubre aquí cómo hacerlo',
@@ -302,7 +302,7 @@ const I18N = {
     photo_tag: 'Photo',
     video_tag: 'Vidéo',
     footer_note:
-      'Le site a été créé après l’expérience vécue, mais il reconstruit mon chemin de manière très fidèle: il réunit le suivi enregistré sur le moment via app, les métadonnées (y compris les coordonnées GPS) extraites des photos et des vidéos, et les textes sur les événements et les états d’âme récupérés à partir d’anciennes notes, messages, chats WhatsApp, audios, contenus sociaux et souvenirs. Beaucoup de détails, cependant, sont restés en dehors: le chemin est quelque chose que chacun traverse de façon unique, et une partie de ce que l’on vit reste toujours impossible à traduire entièrement en mots, images ou coordonnées.\n\nMon conseil est de partir seul, pour vivre vraiment l’expérience jusqu’au bout, sans peur de n’avoir personne à qui parler ni de se tromper de route: sur le Camino Francés, c’est pratiquement impossible. C’est une expérience que je recommande à tous, et elle ne demande ni entraînement spécial ni préparation physique particulière: la préparation la plus importante est mentale. J’ai vu plus de personnes s’arrêter à cause de préjugés et de limites mentales qu’à cause de vraies limites physiques. Si tu sens que tu veux le faire, ne te remplis pas de doutes: prends un billet, prépare ton sac, et pars, pèlerin. Ultreya!',
+      'Ce site est né après le Chemin, mais il essaie de le reconstruire de la manière la plus fidèle possible : en réunissant des traces enregistrées sur le moment, des métadonnées extraites des photos et des vidéos, et des textes retrouvés dans des notes, des messages et des souvenirs. Beaucoup de choses, pourtant, sont restées dehors. Une partie de ce que l’on vit sur le Chemin reste impossible à traduire vraiment en mots, en images ou en coordonnées.\n\nSi tu sens que tu veux partir, mon conseil est simple : fais-le. Sur le Camino Francés, il est difficile de se sentir vraiment perdu, et une bonne partie de la préparation nécessaire n’est pas physique, mais mentale. Pars léger, avec le bon sac et l’esprit ouvert. Ultreya !',
     footer_cta_prefix:
       'Si tu veux transformer toi aussi ton voyage en journal interactif avec carte, médias et étapes ordonnées,',
     footer_cta_link: 'découvre ici comment faire',
@@ -647,6 +647,8 @@ let timelineWheelBound = false;
 let renderedDayOrder = [];
 let modalZoomCleanup = null;
 let lazyMediaObserver = null;
+let dayHeavyEntries = [];
+let dayHeavySyncRaf = 0;
 let deleteInFlight = false;
 let trackDataFetchDone = false;
 const selectedIds = new Set();
@@ -662,6 +664,9 @@ let publicUiSettings = { show_footer_template_cta: true };
 let peopleIndexCache = [];
 let activeDayKeyForPeople = '';
 const MINI_MAP_COLLAPSED_KEY = 'cammino_minimap_collapsed_v1';
+const DAY_HEAVY_MOUNT_MARGIN = 1400;
+const DAY_HEAVY_UNMOUNT_MARGIN = 2400;
+const DAY_HEAVY_MIN_HEIGHT = 220;
 const dayDistanceKmByDate = new Map();
 const dayDistanceCumKmByDate = new Map();
 const nonTrackedDayKeys = new Set();
@@ -1698,6 +1703,55 @@ const recoverVisibleLazyMedia = () => {
   });
 };
 
+const unregisterLazyMediaWithin = (root) => {
+  if (!root || !lazyMediaObserver) return;
+  root.querySelectorAll('img[data-src], video[data-src]').forEach((el) => {
+    try {
+      lazyMediaObserver.unobserve(el);
+    } catch {
+      // no-op
+    }
+  });
+};
+
+const clearDayHeavyRegistry = () => {
+  if (dayHeavySyncRaf) {
+    window.cancelAnimationFrame(dayHeavySyncRaf);
+    dayHeavySyncRaf = 0;
+  }
+  dayHeavyEntries = [];
+};
+
+const syncDayHeavyWindow = () => {
+  dayHeavySyncRaf = 0;
+  dayHeavyEntries.forEach((entry) => {
+    if (!entry || !entry.section || !entry.heavyEl) return;
+    if (isNearViewport(entry.section, DAY_HEAVY_MOUNT_MARGIN)) {
+      if (!entry.mounted) mountDayHeavyEntry(entry);
+      return;
+    }
+    if (entry.mounted && !isNearViewport(entry.section, DAY_HEAVY_UNMOUNT_MARGIN)) {
+      unmountDayHeavyEntry(entry);
+    }
+  });
+};
+
+const scheduleDayHeavySync = () => {
+  if (dayHeavySyncRaf) return;
+  dayHeavySyncRaf = window.requestAnimationFrame(syncDayHeavyWindow);
+};
+
+const ensureDayHeavyMountedByKey = (dayKey, includeNeighbors = false) => {
+  const key = normalizeDayUiKey(dayKey);
+  if (!key || !dayHeavyEntries.length) return;
+  const idx = dayHeavyEntries.findIndex((entry) => entry && entry.dayKey === key);
+  if (idx < 0) return;
+  mountDayHeavyEntry(dayHeavyEntries[idx]);
+  if (!includeNeighbors) return;
+  if (dayHeavyEntries[idx - 1]) mountDayHeavyEntry(dayHeavyEntries[idx - 1]);
+  if (dayHeavyEntries[idx + 1]) mountDayHeavyEntry(dayHeavyEntries[idx + 1]);
+};
+
 const modal = document.getElementById('live-modal');
 const modalBody = document.getElementById('live-modal-body');
 const modalClose = document.getElementById('live-modal-close');
@@ -2537,6 +2591,7 @@ const findMediaItemById = (id) => {
 const updateDaySectionHydration = (dayKey) => {
   const key = normalizeDayUiKey(dayKey);
   if (!key) return;
+  ensureDayHeavyMountedByKey(key, true);
   const section = document.getElementById(`day-${key}`);
   if (!section) return;
   const unlockBtn = section.querySelector('.day-lock__btn');
@@ -2554,6 +2609,7 @@ const focusHashAnchor = (hashValue, attempts = 6) => {
   if (mediaMatch) {
     const itemId = String(mediaMatch[1] || '').trim();
     const dayKey = findDayKeyByItemId(itemId);
+    if (dayKey) ensureDayHeavyMountedByKey(dayKey, true);
     if (dayKey && !unlockedDayKeys.has(dayKey)) {
       unlockedDayKeys.add(dayKey);
       updateDaySectionHydration(dayKey);
@@ -2890,7 +2946,10 @@ const scrollElementWithStickyOffset = (el, behavior = 'smooth') => {
 };
 
 const scrollToDay = (dayKey, behavior = 'smooth') => {
-  const section = document.getElementById(`day-${normalizeDayUiKey(dayKey)}`);
+  const normalized = normalizeDayUiKey(dayKey);
+  if (!normalized) return;
+  ensureDayHeavyMountedByKey(normalized, true);
+  const section = document.getElementById(`day-${normalized}`);
   if (section) scrollElementWithStickyOffset(section, behavior);
 };
 
@@ -3477,6 +3536,52 @@ const buildMediaCard = (groupItems) => {
   return card;
 };
 
+const buildDayHeavy = (day, dayUiKey) => {
+  const heavy = document.createElement('div');
+  heavy.className = 'day__heavy';
+  const hasMedia = Array.isArray(day.uiGroups) && day.uiGroups.length > 0;
+  const dayTrackCard = isPrologueDay(day) ? null : buildDayTrackCard(day.trackDate || day.date);
+
+  const grid = document.createElement('div');
+  grid.className = 'grid';
+  const lockPanel = document.createElement('div');
+  lockPanel.className = 'day-lock';
+  const lockMsg = document.createElement('div');
+  lockMsg.className = 'day-lock__msg';
+  lockMsg.setAttribute('data-day-lock-msg', '1');
+  lockMsg.textContent = I18N[currentLang].day_locked;
+  const unlockBtn = document.createElement('button');
+  unlockBtn.type = 'button';
+  unlockBtn.className = 'day-lock__btn';
+  unlockBtn.setAttribute('data-day-unlock-btn', '1');
+  unlockBtn.textContent = I18N[currentLang].unlock_day;
+  lockPanel.appendChild(lockMsg);
+  lockPanel.appendChild(unlockBtn);
+
+  const fillGrid = () => {
+    if (grid.childElementCount > 0) return;
+    (day.uiGroups || []).forEach((group) => {
+      const card = buildMediaCard(group);
+      grid.appendChild(card);
+    });
+  };
+
+  if (hasMedia && unlockedDayKeys.has(dayUiKey)) {
+    fillGrid();
+  } else if (hasMedia) {
+    unlockBtn.addEventListener('click', () => {
+      unlockedDayKeys.add(dayUiKey);
+      fillGrid();
+      lockPanel.remove();
+    });
+  }
+
+  if (dayTrackCard) heavy.appendChild(dayTrackCard);
+  if (hasMedia && !unlockedDayKeys.has(dayUiKey)) heavy.appendChild(lockPanel);
+  if (hasMedia) heavy.appendChild(grid);
+  return heavy;
+};
+
 const buildDay = (day, idx) => {
   const dayUiKey = getDayUiKey(day);
   const commentTargetDayKey = getDayCommentTargetKey(day);
@@ -3532,8 +3637,6 @@ const buildDay = (day, idx) => {
   header.appendChild(title);
   header.appendChild(chips);
   
-  const dayTrackCard = isPrologueDay(day) ? null : buildDayTrackCard(day.trackDate || day.date);
-
   const notesText = getNote(day);
   const notes = document.createElement('div');
   notes.className = 'notes';
@@ -3593,49 +3696,75 @@ const buildDay = (day, idx) => {
     recommendations.appendChild(recommendationsBody);
   }
 
-  const grid = document.createElement('div');
-  grid.className = 'grid';
-  const lockPanel = document.createElement('div');
-  lockPanel.className = 'day-lock';
-  const lockMsg = document.createElement('div');
-  lockMsg.className = 'day-lock__msg';
-  lockMsg.setAttribute('data-day-lock-msg', '1');
-  lockMsg.textContent = I18N[currentLang].day_locked;
-  const unlockBtn = document.createElement('button');
-  unlockBtn.type = 'button';
-  unlockBtn.className = 'day-lock__btn';
-  unlockBtn.setAttribute('data-day-unlock-btn', '1');
-  unlockBtn.textContent = I18N[currentLang].unlock_day;
-  lockPanel.appendChild(lockMsg);
-  lockPanel.appendChild(unlockBtn);
-
-  const fillGrid = () => {
-    if (grid.childElementCount > 0) return;
-    (day.uiGroups || []).forEach((group) => {
-      const card = buildMediaCard(group);
-      grid.appendChild(card);
-    });
-  };
-  const dayKey = dayUiKey;
-  if (hasMedia && unlockedDayKeys.has(dayKey)) {
-    fillGrid();
-  } else if (hasMedia) {
-    unlockBtn.addEventListener('click', () => {
-      unlockedDayKeys.add(dayKey);
-      fillGrid();
-      lockPanel.remove();
-    });
-  }
+  const heavy = buildDayHeavy(day, dayUiKey);
 
   section.appendChild(header);
   section.appendChild(notes);
   if (recommendations) section.appendChild(recommendations);
-  if (dayTrackCard) section.appendChild(dayTrackCard);
-  if (hasMedia && !unlockedDayKeys.has(dayKey)) {
-    section.appendChild(lockPanel);
-  }
-  if (hasMedia) section.appendChild(grid);
+  if (heavy && heavy.childElementCount > 0) section.appendChild(heavy);
   return section;
+};
+
+const mountDayHeavyEntry = (entry) => {
+  if (!entry || !entry.section) return;
+  if (!entry.heavyEl) {
+    const heavy = buildDayHeavy(entry.day, entry.dayKey);
+    if (!heavy || !heavy.childElementCount) return;
+    entry.section.appendChild(heavy);
+    entry.heavyEl = heavy;
+    entry.mounted = true;
+    entry.heavyHeight = Math.max(entry.heavyHeight || 0, Math.ceil(heavy.offsetHeight));
+    hardenExternalAnchors(heavy);
+    return;
+  }
+  if (entry.mounted) {
+    entry.heavyHeight = Math.max(entry.heavyHeight || 0, Math.ceil(entry.heavyEl.offsetHeight));
+    return;
+  }
+  const rebuilt = buildDayHeavy(entry.day, entry.dayKey);
+  entry.heavyEl.innerHTML = '';
+  entry.heavyEl.className = 'day__heavy';
+  entry.heavyEl.removeAttribute('data-virtualized');
+  entry.heavyEl.style.minHeight = '';
+  if (rebuilt && rebuilt.childNodes.length) {
+    while (rebuilt.firstChild) entry.heavyEl.appendChild(rebuilt.firstChild);
+  }
+  entry.mounted = true;
+  entry.heavyHeight = Math.max(entry.heavyHeight || 0, Math.ceil(entry.heavyEl.offsetHeight));
+  hardenExternalAnchors(entry.heavyEl);
+};
+
+const unmountDayHeavyEntry = (entry) => {
+  if (!entry || !entry.heavyEl || !entry.mounted) return;
+  entry.heavyHeight = Math.max(entry.heavyHeight || 0, Math.ceil(entry.heavyEl.offsetHeight));
+  unregisterLazyMediaWithin(entry.heavyEl);
+  clearDayMapForKey(entry.trackKey);
+  entry.heavyEl.innerHTML = '';
+  entry.heavyEl.setAttribute('data-virtualized', '1');
+  entry.heavyEl.style.minHeight = `${Math.max(entry.heavyHeight || 0, DAY_HEAVY_MIN_HEIGHT)}px`;
+  entry.mounted = false;
+};
+
+const registerDayHeavyEntries = (days) => {
+  clearDayHeavyRegistry();
+  dayHeavyEntries = (days || []).map((day, idx) => {
+    const dayKey = getDayUiKey(day);
+    const section = document.getElementById(`day-${dayKey}`);
+    if (!section) return null;
+    const heavyEl = section.querySelector('.day__heavy');
+    if (!heavyEl) return null;
+    return {
+      day,
+      idx,
+      dayKey,
+      trackKey: String(day && (day.trackDate || day.date) || '').slice(0, 10),
+      section,
+      heavyEl,
+      mounted: heavyEl.childElementCount > 0,
+      heavyHeight: Math.ceil(heavyEl.offsetHeight || 0)
+    };
+  }).filter(Boolean);
+  scheduleDayHeavySync();
 };
 
 const toRad = (deg) => (Number(deg) * Math.PI) / 180;
@@ -3896,6 +4025,19 @@ const clearDayMapRegistry = () => {
     }
   });
   dayMapRegistry = new Map();
+};
+
+const clearDayMapForKey = (dayKey) => {
+  const key = String(dayKey || '').slice(0, 10);
+  if (!key) return;
+  const entry = dayMapRegistry.get(key);
+  if (!entry || !entry.map) return;
+  try {
+    entry.map.remove();
+  } catch {
+    // no-op
+  }
+  dayMapRegistry.delete(key);
 };
 
 const buildDayTrackCard = (dayKey) => {
@@ -4190,9 +4332,7 @@ const buildTimelineNav = (days) => {
       `;
     }
     btn.addEventListener('click', () => {
-      const targetKey = getDayUiKey(day);
-      const target = document.getElementById(`day-${targetKey}`);
-      scrollElementWithStickyOffset(target, 'smooth');
+      scrollToDay(getDayUiKey(day), 'smooth');
     });
     if (idx === 0) btn.classList.add('active');
     nav.appendChild(btn);
@@ -4250,8 +4390,7 @@ const buildDayPicker = (days) => {
     btn.textContent = getDayTitle(day);
     btn.addEventListener('click', () => {
       closeDayPicker();
-      const section = document.getElementById(`day-${getDayUiKey(day)}`);
-      if (section) scrollElementWithStickyOffset(section, 'smooth');
+      scrollToDay(getDayUiKey(day), 'smooth');
     });
     list.appendChild(btn);
   });
@@ -4641,6 +4780,7 @@ const observeSections = () => {
       ticking = true;
       window.requestAnimationFrame(syncFromScroll);
     }
+    scheduleDayHeavySync();
     window.requestAnimationFrame(recoverVisibleLazyMedia);
     window.requestAnimationFrame(ensureVisibleDayTrackMaps);
     scheduleIdleUnlock();
@@ -4658,6 +4798,7 @@ const observeSections = () => {
   }
   onScroll();
   scheduleIdleUnlock();
+  scheduleDayHeavySync();
   recoverVisibleLazyMedia();
   ensureVisibleDayTrackMaps();
 
@@ -4683,6 +4824,7 @@ const observeSections = () => {
 
 const renderView = () => {
   clearDayMapRegistry();
+  clearDayHeavyRegistry();
   disconnectLazyMediaObserver();
   firefoxHydrationQueue.length = 0;
   if (firefoxHydrationDrainTimer) {
@@ -4793,6 +4935,7 @@ const renderView = () => {
 
   buildTimelineNav(list);
   renderPeopleStrip(list);
+  registerDayHeavyEntries(list);
   observeSections();
   renderDates();
   renderManageTools();
