@@ -32,7 +32,7 @@ const I18N = {
     mini_map_cumulative: 'Percorso cumulativo',
     open_map: 'Apri la mappa',
     open_map_hero: 'Apri la mappa del percorso',
-    offer_link_hero: 'Vuoi creare anche tu un diario simile? Scopri come funziona',
+    offer_link_hero: 'Se vuoi creare anche tu un diario simile, scopri come fare',
     open_short: 'Apri Mappa',
     goto_day: 'Vai al giorno',
     close: 'Chiudi',
@@ -92,7 +92,7 @@ const I18N = {
     people_summary_template: '{count} persone emerse dalle note',
     after_camino_title: 'Dopo il Cammino',
     after_camino_text:
-      'Qualche mese dopo il cammino ho fatto un viaggio negli Stati Uniti per correre la maratona di New York, ma l’ho trasformato in un itinerante di circa 50 giorni: proprio questo mi ha dato modo di reincontrare alcune persone conosciute sul Cammino. In quel viaggio ho rivisto Mark a New York insieme alla sua fidanzata (poi diventata sua moglie), la figlia di Pam a Philadelphia con suo marito, Danielle a San Francisco, Marcia a casa sua vicino a San Francisco, e anche Chris e Jessica, a cui ho finalmente restituito la torcia che mi avevano prestato per attraversare le mesetas. Mi è dispiaciuto non riuscire a reincontrare Ginger e Giselle: purtroppo il Texas non era fattibile in quel giro. Carla invece l’ho rivista quando è venuta in Italia, ad Assisi, in visita con sua mamma.\n\nCatherine l’ho invece reincontrata qualche anno più tardi, durante un altro viaggio itinerante: ero a Basilea e ho comprato una bici con cui mi sono spostato fino a Monaco, dove ho incontrato un amico con cui poi sono andato a Berlino per correre la maratona. Dopo Berlino sono volato a Dublino e infine a Bruxelles per incontrare un altro mio amico portoghese, che era lì in vacanza per festeggiare il compleanno. In quell’occasione ho scritto a Catherine, senza preavviso, per dirle che ero a Bruxelles: ci siamo visti una sera per un saluto. Mi piacerebbe un giorno reincontrare anche Andrius e Francesco, oltre a Juan e Laura, con cui avevo condiviso molti momenti lungo il cammino. Ma questi sono altri viaggi che saranno raccontati in altri diari.'
+      'Una delle cose più belle del Cammino è che, anche quando finisce, in realtà non finisce del tutto. Alcune persone incontrate lungo la strada sono riapparse mesi o anni dopo, in altri viaggi e in contesti completamente diversi.\n\nQualche mese dopo Santiago, durante un lungo viaggio negli Stati Uniti, ho avuto modo di rivedere alcune persone conosciute sul Cammino. Non me lo aspettavo, ed è stato strano e bello ritrovarle così lontano da lì, come se quel filo non si fosse mai spezzato davvero. Carla l’ho rivista invece in Italia, durante un suo viaggio, quando è passata a visitare una città non lontana da casa mia. Qualche anno dopo mi è successo di nuovo anche con Catherine, incontrata a Bruxelles quasi per caso durante un altro viaggio itinerante.\n\nMi è rimasta addosso proprio questa sensazione: il Cammino non si era chiuso con l’arrivo. Alcuni incontri erano rimasti vivi, pronti a riemergere altrove. E forse è anche per questo che certi viaggi non restano solo ricordi, ma continuano a muoversi dentro la vita anche molto tempo dopo.'
   },
   en: {
     language_label: 'Language',
@@ -114,8 +114,8 @@ const I18N = {
     footer_note:
       'This site was created after the experience itself, but it reconstructs my Camino very faithfully: it combines tracking recorded at the time via app, metadata (including GPS coordinates) extracted from photos and videos, and texts about events and states of mind recovered from old notes, messages, WhatsApp chats, audio, social content, and memories. Many details, however, were left out: the Camino is something each person goes through in a unique way, and part of what you live always remains impossible to fully translate into words, images, or coordinates.\n\nMy advice is to start alone, to truly live the experience all the way, without being afraid of having no one to talk to or taking a wrong path: on the French Way it is practically impossible. It is an experience I recommend to everyone, and it does not require special training or particular physical preparation: the most important preparation is mental. I have seen more people stop because of preconceptions and mental limits than because of real physical limits. If you feel you want to do it, do not fill yourself with doubts: buy a ticket, pack your backpack, and go, pilgrim. Ultreya!',
     footer_cta_prefix:
-      'Do you want to turn your trip into an interactive diary with map, media, and ordered stages?',
-    footer_cta_link: 'See how it works here',
+      'If you want to turn your trip into an interactive diary with map, media, and ordered stages,',
+    footer_cta_link: 'see here how to do it',
     footer_cta_suffix: '',
     view_diary: 'Diary',
     notes_label: 'Day notes',
@@ -127,7 +127,7 @@ const I18N = {
     mini_map_cumulative: 'Cumulative route',
     open_map: 'Open map',
     open_map_hero: 'Open route map',
-    offer_link_hero: 'Do you want to build a diary like this one? See how it works',
+    offer_link_hero: 'If you want to create a diary like this too, discover how to do it',
     open_short: 'Open Map',
     goto_day: 'Jump to day',
     close: 'Close',
@@ -187,7 +187,7 @@ const I18N = {
     people_summary_template: '{count} people surfaced from the notes',
     after_camino_title: 'After the Camino',
     after_camino_text:
-      'A few months after the Camino, I took a trip to the United States to run the New York City Marathon, but I turned it into an itinerant journey of about 50 days: that is exactly what gave me the chance to meet again some people I had met on the Camino. During that trip I saw Mark again in New York with his girlfriend (later his wife), Pam’s daughter in Philadelphia with her husband, Danielle in San Francisco, Marcia at her home near San Francisco, and also Chris and Jessica, to whom I was finally able to return the headlamp they had lent me to cross the mesetas. I was sorry I could not meet Ginger and Giselle again: Texas was not feasible on that route. I saw Carla again when she came to Italy, to Assisi, visiting with her mother.\n\nI met Catherine again a few years later, during another itinerant trip: I was in Basel and bought a bike that I used to move toward Munich, where I met a friend and then went with him to Berlin to run the marathon. After Berlin I flew to Dublin and finally to Brussels to meet another Portuguese friend of mine, who was there on holiday to celebrate a birthday. On that occasion I wrote to Catherine, without any notice, to tell her I was in Brussels: we met one evening just to say hello. I would also like to meet Andrius and Francesco again someday, as well as Juan and Laura, with whom I had shared many moments along the Camino. But those are other journeys that will be told in other diaries.'
+      'One of the nicest things about the Camino is that, even when it ends, it does not really end completely. Some of the people I met along the way came back into my life months or years later, during other trips and in completely different settings.\n\nA few months after Santiago, during a long trip across the United States, I had the chance to meet again some people I had known on the Camino. I was not expecting it, and it felt strange and beautiful to see them again so far from there, as if that thread had never really broken. I saw Carla again in Italy, during one of her trips, when she came to visit a town not far from where I live. A few years later it happened again with Catherine, whom I met in Brussels almost by chance during another itinerant trip.\n\nThat is the feeling that stayed with me most: the Camino had not really closed with the arrival. Some encounters had remained alive, ready to resurface somewhere else. Maybe that is also why some journeys do not remain just memories, but keep moving inside your life long after they are over.'
   },
   es: {
     language_label: 'Idioma',
@@ -209,8 +209,8 @@ const I18N = {
     footer_note:
       'El sitio se creó después de la experiencia vivida, pero reconstruye mi Camino de forma muy fiel: une el seguimiento registrado en su momento mediante app, los metadatos (incluidas las coordenadas GPS) extraídos de fotos y vídeos, y los textos sobre eventos y estados de ánimo recuperados de notas antiguas, mensajes, chats de WhatsApp, audios, contenidos sociales y recuerdos. Muchos detalles, sin embargo, se han quedado fuera: el Camino es algo que cada persona atraviesa de forma única, y una parte de lo que se vive siempre es imposible de traducir del todo en palabras, imágenes o coordenadas.\n\nMi consejo es salir solo, para vivir de verdad la experiencia hasta el fondo, sin miedo a no tener con quién hablar o a equivocarte de camino: en el Camino Francés es prácticamente imposible. Es una experiencia que recomiendo a todos y no requiere entrenamientos especiales ni una preparación física particular: la preparación más importante es mental. He visto a más personas pararse por prejuicios y límites mentales que por límites físicos reales. Si sientes que quieres hacerlo, no te llenes de dudas: compra un billete, prepara la mochila y sal, peregrino. ¡Ultreya!',
     footer_cta_prefix:
-      'Quieres transformar tu viaje en un diario interactivo con mapa, media y etapas ordenadas?',
-    footer_cta_link: 'Mira aqui como funciona',
+      'Si quieres transformar tu viaje en un diario interactivo con mapa, media y etapas ordenadas,',
+    footer_cta_link: 'descubre aquí cómo hacerlo',
     footer_cta_suffix: '',
     view_diary: 'Diario',
     notes_label: 'Notas del día',
@@ -222,7 +222,7 @@ const I18N = {
     mini_map_cumulative: 'Ruta acumulada',
     open_map: 'Abrir mapa',
     open_map_hero: 'Abrir el mapa del recorrido',
-    offer_link_hero: 'Quieres crear un diario parecido? Mira como funciona',
+    offer_link_hero: 'Si quieres crear también un diario parecido, descubre cómo hacerlo',
     open_short: 'Abrir mapa',
     goto_day: 'Ir al día',
     close: 'Cerrar',
@@ -282,7 +282,7 @@ const I18N = {
     people_summary_template: '{count} personas surgidas de las notas',
     after_camino_title: 'Después del Camino',
     after_camino_text:
-      'Unos meses después del Camino hice un viaje a Estados Unidos para correr la maratón de Nueva York, pero lo convertí en un itinerante de unos 50 días: precisamente eso me permitió reencontrar a algunas personas conocidas en el Camino. En ese viaje volví a ver a Mark en Nueva York con su novia (luego su esposa), a la hija de Pam en Filadelfia con su marido, a Danielle en San Francisco, a Marcia en su casa cerca de San Francisco, y también a Chris y Jessica, a quienes por fin devolví la frontal que me habían prestado para cruzar las mesetas. Me dio pena no poder reencontrar a Ginger y Giselle: Texas no era viable en ese itinerario. A Carla, en cambio, la volví a ver cuando vino a Italia, a Asís, de visita con su madre.\n\nA Catherine la reencontré algunos años más tarde, durante otro viaje itinerante: estaba en Basilea y compré una bici con la que me moví hasta Múnich, donde me encontré con un amigo con el que luego fui a Berlín para correr la maratón. Después de Berlín volé a Dublín y finalmente a Bruselas para encontrarme con otro amigo portugués, que estaba allí de vacaciones para celebrar un cumpleaños. En esa ocasión le escribí a Catherine, sin aviso previo, para decirle que estaba en Bruselas: nos vimos una noche para saludarnos. También me gustaría reencontrarme algún día con Andrius y Francesco, además de con Juan y Laura, con quienes había compartido muchos momentos a lo largo del Camino. Pero esos son otros viajes que se contarán en otros diarios.'
+      'Una de las cosas más bonitas del Camino es que, incluso cuando termina, en realidad no termina del todo. Algunas personas que conocí durante el recorrido reaparecieron meses o años después, en otros viajes y en contextos completamente distintos.\n\nUnos meses después de Santiago, durante un largo viaje por Estados Unidos, tuve la oportunidad de reencontrarme con algunas personas que había conocido en el Camino. No me lo esperaba, y fue raro y bonito volver a verlas tan lejos de allí, como si ese hilo no se hubiera roto nunca de verdad. A Carla la volví a ver en Italia, durante uno de sus viajes, cuando pasó a visitar una ciudad no muy lejos de donde vivo. Años después me pasó otra vez con Catherine, a quien encontré en Bruselas casi por casualidad durante otro viaje itinerante.\n\nLa sensación que se me quedó es precisamente esa: el Camino no se había cerrado con la llegada. Algunos encuentros seguían vivos, listos para reaparecer en otro lugar. Y quizá por eso ciertos viajes no se quedan solo en el recuerdo, sino que siguen moviéndose dentro de la vida mucho tiempo después.'
   },
   fr: {
     language_label: 'Langue',
@@ -304,8 +304,8 @@ const I18N = {
     footer_note:
       'Le site a été créé après l’expérience vécue, mais il reconstruit mon chemin de manière très fidèle: il réunit le suivi enregistré sur le moment via app, les métadonnées (y compris les coordonnées GPS) extraites des photos et des vidéos, et les textes sur les événements et les états d’âme récupérés à partir d’anciennes notes, messages, chats WhatsApp, audios, contenus sociaux et souvenirs. Beaucoup de détails, cependant, sont restés en dehors: le chemin est quelque chose que chacun traverse de façon unique, et une partie de ce que l’on vit reste toujours impossible à traduire entièrement en mots, images ou coordonnées.\n\nMon conseil est de partir seul, pour vivre vraiment l’expérience jusqu’au bout, sans peur de n’avoir personne à qui parler ni de se tromper de route: sur le Camino Francés, c’est pratiquement impossible. C’est une expérience que je recommande à tous, et elle ne demande ni entraînement spécial ni préparation physique particulière: la préparation la plus importante est mentale. J’ai vu plus de personnes s’arrêter à cause de préjugés et de limites mentales qu’à cause de vraies limites physiques. Si tu sens que tu veux le faire, ne te remplis pas de doutes: prends un billet, prépare ton sac, et pars, pèlerin. Ultreya!',
     footer_cta_prefix:
-      'Tu veux transformer ton voyage en journal interactif avec carte, medias et etapes ordonnees ?',
-    footer_cta_link: 'Regarde ici comment ca marche',
+      'Si tu veux transformer toi aussi ton voyage en journal interactif avec carte, médias et étapes ordonnées,',
+    footer_cta_link: 'découvre ici comment faire',
     footer_cta_suffix: '',
     view_diary: 'Journal',
     notes_label: 'Notes du jour',
@@ -317,7 +317,7 @@ const I18N = {
     mini_map_cumulative: 'Parcours cumulé',
     open_map: 'Ouvrir la carte',
     open_map_hero: 'Ouvrir la carte du parcours',
-    offer_link_hero: 'Tu veux creer un journal comme celui-ci ? Regarde comment ca marche',
+    offer_link_hero: 'Si toi aussi tu veux créer un journal comme celui-ci, découvre comment faire',
     open_short: 'Ouvrir carte',
     goto_day: 'Aller au jour',
     close: 'Fermer',
@@ -377,7 +377,7 @@ const I18N = {
     people_summary_template: '{count} personnes ressortent des notes',
     after_camino_title: 'Après le Chemin',
     after_camino_text:
-      'Quelques mois après le Chemin, j’ai fait un voyage aux États-Unis pour courir le marathon de New York, mais je l’ai transformé en itinérance d’environ 50 jours : c’est précisément ce qui m’a permis de revoir certaines personnes rencontrées sur le Chemin. Pendant ce voyage, j’ai revu Mark à New York avec sa petite amie (devenue ensuite sa femme), la fille de Pam à Philadelphie avec son mari, Danielle à San Francisco, Marcia chez elle près de San Francisco, et aussi Chris et Jessica, à qui j’ai enfin rendu la lampe frontale qu’ils m’avaient prêtée pour traverser les mesetas. J’ai regretté de ne pas pouvoir revoir Ginger et Giselle : le Texas n’était pas faisable sur cet itinéraire. J’ai revu Carla, en revanche, quand elle est venue en Italie, à Assise, en visite avec sa mère.\n\nJ’ai revu Catherine quelques années plus tard, pendant un autre voyage itinérant : j’étais à Bâle et j’ai acheté un vélo avec lequel je me suis déplacé jusqu’à Munich, où j’ai retrouvé un ami avec qui je suis ensuite allé à Berlin pour courir le marathon. Après Berlin, j’ai pris un vol pour Dublin puis pour Bruxelles afin de retrouver un autre ami portugais, qui était là en vacances pour fêter un anniversaire. À cette occasion, j’ai écrit à Catherine, sans prévenir, pour lui dire que j’étais à Bruxelles : nous nous sommes vus un soir pour un salut. J’aimerais aussi revoir un jour Andrius et Francesco, ainsi que Juan et Laura, avec qui j’avais partagé de nombreux moments tout au long du Chemin. Mais ce sont d’autres voyages qui seront racontés dans d’autres journaux.'
+      'L’une des plus belles choses du Chemin, c’est que même lorsqu’il se termine, en réalité il ne se termine pas tout à fait. Certaines personnes rencontrées en route sont réapparues des mois ou des années plus tard, au cours d’autres voyages et dans des contextes complètement différents.\n\nQuelques mois après Santiago, pendant un long voyage aux États-Unis, j’ai eu l’occasion de revoir certaines personnes connues sur le Chemin. Je ne m’y attendais pas, et c’était à la fois étrange et beau de les retrouver si loin de là, comme si ce fil ne s’était jamais vraiment rompu. J’ai revu Carla en Italie, pendant l’un de ses voyages, lorsqu’elle est passée visiter une ville non loin de chez moi. Quelques années plus tard, cela m’est arrivé de nouveau avec Catherine, rencontrée à Bruxelles presque par hasard pendant un autre voyage itinérant.\n\nC’est surtout cette sensation qui m’est restée : le Chemin ne s’était pas vraiment refermé avec l’arrivée. Certains liens étaient restés vivants, prêts à refaire surface ailleurs. Et c’est peut-être aussi pour cela que certains voyages ne restent pas seulement des souvenirs, mais continuent à bouger à l’intérieur de la vie longtemps après.'
   }
 };
 

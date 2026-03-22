@@ -105,6 +105,16 @@ Se ti servono i media mentre sei su `main`, copia/sincronizza le cartelle `asset
 - Commenti non visibili: verifica permessi scrittura su `data/comments.json` (o DB se usi backend SQL).
 - Mappa giorno vuota: verifica `data/tracks/index.json` e i file in `data/tracks/day/`.
 
+## TODO
+
+- Refactor URL pubblici del diario per non esporre l'anno/data del viaggio:
+  mantenere la `date` come chiave interna stabile nei dati e nel mapping media/GPS,
+  ma introdurre URL pubblici basati sul numero giorno (`/day/1/`, `/day/2/`) e `/day/prologo/`.
+- Gestire redirect `301` dagli URL attuali basati sulla data verso i nuovi URL pubblici numerici.
+- Valutare alias anche per la mappa (`?day=4`, `?day=prologo`) risolti internamente alla data reale.
+- Sostituire i placeholder legali/fiscali nelle pagine `privacy-policy`, `cookie-policy` e `termini-e-condizioni` con i dati reali:
+  nome o ragione sociale, Partita IVA, indirizzo/domicilio professionale, email, PEC, eventuale REA e regime prezzi/IVA.
+
 ## Licenza contenuti
 
 Codice e struttura sono riusabili secondo le tue policy di progetto.
