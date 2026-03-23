@@ -1,4 +1,6 @@
+Options -MultiViews
 RewriteEngine On
+RewriteBase /
 
 # Serve real files/directories as-is
 RewriteCond %{REQUEST_FILENAME} -f [OR]
@@ -11,22 +13,24 @@ RewriteRule ^sitemap\.xml$ - [L,NC]
 RewriteRule ^favicon\.ico$ - [L,NC]
 
 # API routes (PHP router)
-RewriteRule ^api/?$ /api/index.php [L,NC,QSA]
-RewriteRule ^api/(.*)$ /api/index.php [L,NC,QSA]
+RewriteRule ^api/?$ api/index.php [L,NC,QSA]
+RewriteRule ^api/(.*)$ api/index.php [L,NC,QSA]
 
 # Localized day route -> dynamic PHP day page
-RewriteRule ^(it|en|es|fr)/day/(\d{4}-\d{2}-\d{2})/?$ /day.php?lang=$1&date=$2 [L,NC,QSA]
+RewriteRule ^(it|en|es|fr)/day/(\d{4}-\d{2}-\d{2})/?$ day.php?lang=$1&date=$2 [L,NC,QSA]
+RewriteRule ^(it|en|es|fr)/prologue/?$ day.php?lang=$1&date=prologue [L,NC,QSA]
 
 # Localized map route -> static map page
-RewriteRule ^(it|en|es|fr)/map/?$ /map.html [L,NC]
-RewriteRule ^(it|en|es|fr)/people/?$ /people.html [L,NC]
-RewriteRule ^(it|en|es|fr)/contatti/?$ /contatti.html [L,NC]
+RewriteRule ^(it|en|es|fr)/map/?$ map.html [L,NC]
+RewriteRule ^(it|en|es|fr)/people/?$ people.html [L,NC]
+RewriteRule ^(it|en|es|fr)/contatti/?$ contatti.html [L,NC]
+RewriteRule ^(it|en|es|fr)/crea-il-tuo-diario/?$ crea-il-tuo-diario.html [L,NC]
 
-# SPA fallback for localized diary/map routes
-RewriteRule ^(it|en|es|fr)(/.*)?$ /index.html [L]
+# Localized home
+RewriteRule ^(it|en|es|fr)/?$ index.html [L,NC]
 
 # Optional root fallback
-RewriteRule ^$ /index.html [L]
+RewriteRule ^$ index.html [L]
 
 # Video delivery hardening (avoid HTTP/2 protocol issues on some hosts/CDNs)
 <IfModule mod_mime.c>

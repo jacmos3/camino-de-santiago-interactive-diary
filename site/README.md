@@ -46,12 +46,71 @@ Apri:
 
 ## Deploy su hosting PHP (senza Node)
 
-Pubblica la cartella `deploy-runtime/` sul server.
+La cartella `deploy-runtime/` va rigenerata ogni volta prima di pubblicare.
 
-Elementi essenziali:
+### Comando da usare
+
+```bash
+cd /Volumes/HardDisk/Cammino\ di\ Santiago/site
+node scripts/build-deploy-runtime.js
+```
+
+Questo comando:
+- cancella la vecchia `deploy-runtime/`
+- la ricrea da zero
+- copia dentro i file pubblici aggiornati
+- copia `api/`, `data/` e `assets/`
+- include `.htaccess`, `robots.txt` e `sitemap.xml`
+
+### Procedura corretta passo passo
+
+1. Aggiorna il codice locale:
+
+```bash
+cd /Volumes/HardDisk/Cammino\ di\ Santiago/site
+git checkout main
+git pull origin main
+```
+
+2. Assicurati di avere anche gli asset pesanti in locale.
+   Se ti servono immagini, thumb, poster e video, sincronizza prima i contenuti dal branch `codex/assets-media`.
+
+3. Rigenera il pacchetto di deploy:
+
+```bash
+node scripts/build-deploy-runtime.js
+```
+
+4. Controlla che la cartella `deploy-runtime/` contenga almeno:
+- file pubblici: `index.html`, `map.html`, `app.js`, `map.js`, `people.js`, `styles.css`
+- pagine pubbliche: `contatti.html`, `crea-il-tuo-diario.html`, `privacy-policy.html`, `cookie-policy.html`, `termini-e-condizioni.html`
+- runtime PHP: `api/`, `day.php`, `.htaccess`
+- dati: `data/`
+- media: `assets/`
+
+5. Verifica il file `.env` dentro `deploy-runtime/`.
+   Se esiste, controlla che sia adatto all'hosting reale e non solo al tuo ambiente locale.
+
+6. Carica sul server il contenuto di `deploy-runtime/`.
+   Se la root pubblica del dominio e la document root del sito, carica direttamente il contenuto interno di `deploy-runtime/` li dentro.
+
+7. Dopo il deploy, controlla almeno questi URL:
+- `https://mycamino.it/it/`
+- `https://mycamino.it/it/day/2019-06-04/`
+- `https://mycamino.it/sitemap.xml`
+- `https://mycamino.it/robots.txt`
+
+### Nota importante
+
+La sitemap non crea redirect.
+I redirect del vecchio dominio verso `mycamino.it` vanno gestiti a livello HTTP:
+- lato server
+- oppure in Cloudflare
+
+Elementi essenziali del deploy:
 - static: `index.html`, `map.html`, `app.js`, `map.js`, `styles.css`, favicon, sitemap, robots
-- data: `entries.*.json`, `tracks/*`, `comments.json`, `ui_flags.json`
-- media: `assets/img`, `assets/thumb`, `assets/poster`, `assets/video_resized`
+- data: `entries.*.json`, `tracks/*`, `comments.json`, `day_og_overrides.json`
+- media: `assets/img`, `assets/thumb`, `assets/poster`, `assets/video_resized`, eventuale `assets/audio`
 - API: `api/index.php` (+ eventuale `.env` lato server)
 - rewrite: `.htaccess`
 
@@ -62,6 +121,8 @@ Variabili comuni in `.env`:
 - `CONTACT_TO_EMAIL`
 - `CONTACT_FROM_EMAIL`
 - `ANALYTICS_ENABLED`
+- `SITE_PRIMARY_HOST` (esempio: `mycamino.it`)
+- `LEGACY_SITE_HOSTS` (opzionale, lista separata da virgole dei vecchi host da redirigere)
 - `ANALYTICS_MYSQL_HOST`, `ANALYTICS_MYSQL_PORT`
 - `ANALYTICS_MYSQL_DB`, `ANALYTICS_MYSQL_USER`, `ANALYTICS_MYSQL_PASSWORD`
 

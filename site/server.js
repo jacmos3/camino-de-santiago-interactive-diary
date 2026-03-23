@@ -8,6 +8,13 @@ const crypto = require('crypto');
 const ROOT = path.resolve(__dirname);
 const PORT = Number(process.env.PORT || 4173);
 const HOST = process.env.HOST || '127.0.0.1';
+const PRIMARY_SITE_HOST = String(process.env.SITE_PRIMARY_HOST || 'mycamino.it').trim().toLowerCase();
+const LEGACY_SITE_HOSTS = new Set(
+  String(process.env.LEGACY_SITE_HOSTS || '')
+    .split(',')
+    .map((value) => String(value || '').trim().toLowerCase())
+    .filter(Boolean)
+);
 const SUPPORTED_LANGS = new Set(['it', 'en', 'es', 'fr']);
 const ENTRY_LANGS = ['it', 'en'];
 const ENTRIES_PATH_BY_LANG = {
@@ -1707,7 +1714,7 @@ async function buildSitemapXml(req) {
 
 async function generateStaticDayPages({ outputRoot, origin }) {
   const targetRoot = path.resolve(String(outputRoot || '').trim() || ROOT);
-  const siteOrigin = String(origin || '').trim().replace(/\/+$/, '') || 'https://mycamino.semproxlab.it';
+  const siteOrigin = String(origin || '').trim().replace(/\/+$/, '') || 'https://mycamino.it';
   const langs = ['it', 'en', 'es', 'fr'];
   const dayOgOverrides = await readDayOgOverrides();
   for (const lang of langs) {
@@ -1744,9 +1751,33 @@ async function generateStaticDayPages({ outputRoot, origin }) {
   }
 }
 
+function getRequestProto(req) {
+  return String(req.headers['x-forwarded-proto'] || '').split(',')[0].trim();
+}
+
+function getRequestHostHeader(req) {
+  return String(req.headers['x-forwarded-host'] || req.headers.host || '').split(',')[0].trim();
+}
+
+function normalizeHostName(hostValue) {
+  return String(hostValue || '').trim().toLowerCase().replace(/:\d+$/, '');
+}
+
+function isLocalHostName(hostName) {
+  return hostName === 'localhost' || hostName === '127.0.0.1' || hostName === '[::1]' || hostName.endsWith('.local');
+}
+
+function shouldRedirectToPrimaryHost(hostName) {
+  if (!hostName || !PRIMARY_SITE_HOST) return false;
+  if (hostName === PRIMARY_SITE_HOST) return false;
+  if (isLocalHostName(hostName)) return false;
+  if (LEGACY_SITE_HOSTS.size > 0) return LEGACY_SITE_HOSTS.has(hostName);
+  return true;
+}
+
 function getRequestOrigin(req) {
-  const protoHeader = String(req.headers['x-forwarded-proto'] || '').split(',')[0].trim();
-  const hostHeader = String(req.headers['x-forwarded-host'] || req.headers.host || '').split(',')[0].trim();
+  const protoHeader = getRequestProto(req);
+  const hostHeader = getRequestHostHeader(req);
   const proto = protoHeader || (ADMIN_COOKIE_SECURE ? 'https' : 'http');
   const host = hostHeader || `${HOST}:${PORT}`;
   return `${proto}://${host}`;
@@ -2622,6 +2653,18 @@ const server = http.createServer(async (req, res) => {
   if (!req.url) {
     res.writeHead(400);
     res.end('Bad request');
+    return;
+  }
+
+  const requestHostHeader = getRequestHostHeader(req);
+  const requestHostName = normalizeHostName(requestHostHeader);
+  if (shouldRedirectToPrimaryHost(requestHostName)) {
+    const targetUrl = `https://${PRIMARY_SITE_HOST}${req.url || '/'}`;
+    res.writeHead(req.method === 'GET' || req.method === 'HEAD' ? 301 : 308, {
+      Location: targetUrl,
+      'Cache-Control': 'public, max-age=3600'
+    });
+    res.end();
     return;
   }
 
