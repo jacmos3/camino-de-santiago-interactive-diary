@@ -72,6 +72,14 @@ const I18N = {
     admin_token_prompt: 'Inserisci token admin per operazione protetta:',
     admin_auth_failed: 'Autenticazione admin fallita.',
     admin_auth_failed_with_reason: 'Autenticazione admin fallita: {reason}',
+    tracking_consent_title: 'Cookie e misurazione',
+    tracking_consent_text:
+      'Uso analytics interni per capire come viene usato il diario e migliorarlo. Restano disattivati finché non li accetti. Il diario funziona anche se rifiuti.',
+    tracking_consent_accept: 'Accetta analytics',
+    tracking_consent_reject: 'Solo essenziali',
+    tracking_consent_manage: 'Privacy',
+    tracking_consent_policy: 'Cookie Policy',
+    tracking_consent_change: 'Puoi cambiare questa scelta in qualunque momento.',
     delete_single_item: 'Cancella questo elemento',
     reload_day_content: 'Ricarica contenuti giorno',
     reload_content: 'Ricarica contenuti',
@@ -167,6 +175,14 @@ const I18N = {
     admin_token_prompt: 'Enter admin token for protected operation:',
     admin_auth_failed: 'Admin authentication failed.',
     admin_auth_failed_with_reason: 'Admin authentication failed: {reason}',
+    tracking_consent_title: 'Cookies and analytics',
+    tracking_consent_text:
+      'I use first-party analytics to understand how the diary is used and improve it. They stay off unless you accept. The diary still works if you refuse.',
+    tracking_consent_accept: 'Accept analytics',
+    tracking_consent_reject: 'Essentials only',
+    tracking_consent_manage: 'Privacy',
+    tracking_consent_policy: 'Cookie Policy',
+    tracking_consent_change: 'You can change this choice at any time.',
     delete_single_item: 'Delete this item',
     reload_day_content: 'Reload day content',
     reload_content: 'Reload content',
@@ -262,6 +278,14 @@ const I18N = {
     admin_token_prompt: 'Introduce el token de admin para la operación protegida:',
     admin_auth_failed: 'Falló la autenticación de admin.',
     admin_auth_failed_with_reason: 'Falló la autenticación de admin: {reason}',
+    tracking_consent_title: 'Cookies y analítica',
+    tracking_consent_text:
+      'Utilizo analítica propia para entender cómo se usa el diario y mejorarlo. Permanece desactivada salvo que la aceptes. El diario sigue funcionando aunque la rechaces.',
+    tracking_consent_accept: 'Aceptar analítica',
+    tracking_consent_reject: 'Solo lo esencial',
+    tracking_consent_manage: 'Privacidad',
+    tracking_consent_policy: 'Política de cookies',
+    tracking_consent_change: 'Puedes cambiar esta elección en cualquier momento.',
     delete_single_item: 'Eliminar este elemento',
     reload_day_content: 'Recargar contenidos del día',
     reload_content: 'Recargar contenidos',
@@ -357,6 +381,14 @@ const I18N = {
     admin_token_prompt: 'Saisis le token admin pour l’opération protégée :',
     admin_auth_failed: 'Authentification admin échouée.',
     admin_auth_failed_with_reason: 'Authentification admin échouée : {reason}',
+    tracking_consent_title: 'Cookies et mesure d’audience',
+    tracking_consent_text:
+      'J’utilise une mesure d’audience interne pour comprendre comment le journal est utilisé et l’améliorer. Elle reste désactivée tant que tu ne l’acceptes pas. Le journal fonctionne aussi si tu refuses.',
+    tracking_consent_accept: 'Accepter la mesure',
+    tracking_consent_reject: 'Essentiel seulement',
+    tracking_consent_manage: 'Confidentialité',
+    tracking_consent_policy: 'Politique cookies',
+    tracking_consent_change: 'Tu peux modifier ce choix à tout moment.',
     delete_single_item: 'Supprimer cet élément',
     reload_day_content: 'Recharger les contenus du jour',
     reload_content: 'Recharger contenus',
@@ -624,6 +656,11 @@ const setLang = (lang, options = {}) => {
     const submit = commentsForm.querySelector('button[type="submit"]');
     if (submit) submit.textContent = I18N[normalized].comments_send;
   }
+  const consentToggle = document.getElementById('tracking-consent-toggle');
+  if (consentToggle) consentToggle.textContent = I18N[normalized].tracking_consent_manage;
+  if (document.getElementById('tracking-consent-banner')) {
+    renderTrackingConsentBanner(true);
+  }
   applyFooterTemplateCtaVisibility();
   if (dataCache && renderExisting) {
     renderView();
@@ -885,6 +922,9 @@ const isCommentsApiEnabled = () => {
 
 const COMMENTS_API_ENABLED = isCommentsApiEnabled();
 const TRACKING_ENABLED = true;
+const TRACKING_CONSENT_KEY = 'cammino_tracking_consent_v1';
+const TRACKING_CONSENT_ACCEPTED = 'accepted';
+const TRACKING_CONSENT_REJECTED = 'rejected';
 const TRACKING_CID_KEY = 'cammino_tracking_cid_v1';
 const TRACKING_SESSION_KEY = 'cammino_tracking_sid_v1';
 const TRACKING_QUEUE_MAX = 20;
@@ -894,6 +934,19 @@ let trackingSessionId = '';
 let trackingQueue = [];
 let trackingFlushTimer = null;
 let trackingInitialized = false;
+let trackingLifecycleBound = false;
+
+const getTrackingConsentState = () => {
+  try {
+    const value = String(window.localStorage.getItem(TRACKING_CONSENT_KEY) || '').trim().toLowerCase();
+    if (value === TRACKING_CONSENT_ACCEPTED || value === TRACKING_CONSENT_REJECTED) return value;
+  } catch {
+    // ignore
+  }
+  return '';
+};
+
+const hasTrackingConsent = () => getTrackingConsentState() === TRACKING_CONSENT_ACCEPTED;
 
 const randomId = () => {
   try {
@@ -945,6 +998,122 @@ const getTrackingSessionId = () => {
   return trackingSessionId;
 };
 
+const resetTrackingState = () => {
+  trackingCid = '';
+  trackingSessionId = '';
+  trackingQueue = [];
+  trackingInitialized = false;
+  if (trackingFlushTimer) {
+    window.clearTimeout(trackingFlushTimer);
+    trackingFlushTimer = null;
+  }
+  try {
+    window.localStorage.removeItem(TRACKING_CID_KEY);
+  } catch {
+    // ignore
+  }
+  try {
+    window.sessionStorage.removeItem(TRACKING_SESSION_KEY);
+  } catch {
+    // ignore
+  }
+};
+
+const setTrackingConsentState = (value) => {
+  const normalized = String(value || '').trim().toLowerCase();
+  try {
+    if (normalized === TRACKING_CONSENT_ACCEPTED || normalized === TRACKING_CONSENT_REJECTED) {
+      window.localStorage.setItem(TRACKING_CONSENT_KEY, normalized);
+    } else {
+      window.localStorage.removeItem(TRACKING_CONSENT_KEY);
+    }
+  } catch {
+    // ignore
+  }
+  if (normalized !== TRACKING_CONSENT_ACCEPTED) resetTrackingState();
+};
+
+const removeTrackingConsentBanner = () => {
+  document.getElementById('tracking-consent-banner')?.remove();
+};
+
+const renderTrackingConsentControl = () => {
+  if (!TRACKING_ENABLED) return;
+  let btn = document.getElementById('tracking-consent-toggle');
+  if (!btn) {
+    btn = document.createElement('button');
+    btn.type = 'button';
+    btn.id = 'tracking-consent-toggle';
+    btn.className = 'tracking-consent-toggle';
+    btn.addEventListener('click', () => renderTrackingConsentBanner(true));
+    document.body.appendChild(btn);
+  }
+  btn.textContent = I18N[currentLang].tracking_consent_manage;
+};
+
+const initializeTracking = () => {
+  if (!TRACKING_ENABLED || !hasTrackingConsent() || trackingInitialized) return;
+  trackingInitialized = true;
+  trackEvent('page_view', {
+    day_key: detectDayKeyFromLocation(),
+    meta: { view: 'diary' }
+  });
+};
+
+const ensureTrackingLifecycleBindings = () => {
+  if (trackingLifecycleBound) return;
+  trackingLifecycleBound = true;
+  window.addEventListener('pagehide', () => {
+    flushTrackingQueue(true).catch(() => {});
+  });
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'hidden') {
+      flushTrackingQueue(true).catch(() => {});
+    }
+  });
+};
+
+const renderTrackingConsentBanner = (force = false) => {
+  if (!TRACKING_ENABLED) return;
+  removeTrackingConsentBanner();
+  const state = getTrackingConsentState();
+  if (state && !force) return;
+
+  const wrapper = document.createElement('aside');
+  wrapper.id = 'tracking-consent-banner';
+  wrapper.className = 'tracking-consent-banner';
+  wrapper.setAttribute('role', 'dialog');
+  wrapper.setAttribute('aria-live', 'polite');
+
+  const note = state ? `<p class="tracking-consent-banner__note">${I18N[currentLang].tracking_consent_change}</p>` : '';
+  wrapper.innerHTML = `
+    <div class="tracking-consent-banner__card">
+      <div class="tracking-consent-banner__copy">
+        <h2>${I18N[currentLang].tracking_consent_title}</h2>
+        <p>${I18N[currentLang].tracking_consent_text}</p>
+        ${note}
+      </div>
+      <div class="tracking-consent-banner__actions">
+        <button type="button" class="tracking-consent-banner__btn tracking-consent-banner__btn--primary" data-consent="accept">${I18N[currentLang].tracking_consent_accept}</button>
+        <button type="button" class="tracking-consent-banner__btn tracking-consent-banner__btn--secondary" data-consent="reject">${I18N[currentLang].tracking_consent_reject}</button>
+        <a class="tracking-consent-banner__link" href="/cookie-policy/">${I18N[currentLang].tracking_consent_policy}</a>
+      </div>
+    </div>
+  `;
+
+  wrapper.querySelector('[data-consent="accept"]')?.addEventListener('click', () => {
+    setTrackingConsentState(TRACKING_CONSENT_ACCEPTED);
+    removeTrackingConsentBanner();
+    initializeTracking();
+  });
+  wrapper.querySelector('[data-consent="reject"]')?.addEventListener('click', () => {
+    setTrackingConsentState(TRACKING_CONSENT_REJECTED);
+    removeTrackingConsentBanner();
+  });
+
+  document.body.appendChild(wrapper);
+};
+
 const detectDayKeyFromLocation = () => {
   if (isProloguePathname(window.location.pathname)) return PROLOGUE_UI_KEY;
   const dayFromPath = getDayFromPathname(window.location.pathname);
@@ -958,7 +1127,10 @@ const detectDayKeyFromLocation = () => {
 };
 
 const flushTrackingQueue = async (useBeacon = false) => {
-  if (!TRACKING_ENABLED) return;
+  if (!TRACKING_ENABLED || !hasTrackingConsent()) {
+    trackingQueue = [];
+    return;
+  }
   if (!trackingQueue.length) return;
   const events = trackingQueue.splice(0, trackingQueue.length);
   const payload = {
@@ -998,7 +1170,7 @@ const scheduleTrackingFlush = () => {
 };
 
 const trackEvent = (eventType, data = {}) => {
-  if (!TRACKING_ENABLED) return;
+  if (!TRACKING_ENABLED || !hasTrackingConsent()) return;
   const type = String(eventType || '').trim().toLowerCase();
   if (!type) return;
   const event = {
@@ -5027,19 +5199,10 @@ const init = async () => {
 
 window.addEventListener('DOMContentLoaded', () => {
   try {
-    trackingInitialized = true;
-    trackEvent('page_view', {
-      day_key: detectDayKeyFromLocation(),
-      meta: { view: 'diary' }
-    });
-    window.addEventListener('pagehide', () => {
-      flushTrackingQueue(true).catch(() => {});
-    });
-    document.addEventListener('visibilitychange', () => {
-      if (document.visibilityState === 'hidden') {
-        flushTrackingQueue(true).catch(() => {});
-      }
-    });
+    ensureTrackingLifecycleBindings();
+    renderTrackingConsentControl();
+    if (hasTrackingConsent()) initializeTracking();
+    else renderTrackingConsentBanner(false);
     const toggleSelectBtn = document.getElementById('toggle-select');
     const deleteSelectedBtn = document.getElementById('delete-selected');
     const timelineActions = document.getElementById('timeline-nav-actions');
