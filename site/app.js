@@ -5,7 +5,7 @@ const I18N = {
     title: 'Cammino di Santiago',
     subtitle: 'Un recap giorno per giorno del mio cammino in solitaria, tra foto, video e ricordi di strada.',
     hero_intro:
-      'Questo diario racconta il mio Cammino Francese di Santiago, iniziato a Lourdes e concluso a Santiago, proseguendo poi fino a Finisterre e Muxia. È stato il capitolo più intenso del mio 2019 sabbatico, dopo essermi dimesso da un contratto a tempo indeterminato come informatico. L’ho vissuto in modalità relax: non avevo nessuno che mi correva dietro e il tempo era l’unica cosa che non mi mancava.\n\nIl 2019 è stato anche l’anno della mezza maratona sulla Muraglia Cinese e della maratona di New York, ma queste sono altre storie e le racconterò in un altro diario.\n\nGodetevi ora foto, video e racconti del mio cammino giorno per giorno, tra ricordi, emozioni e dettagli concreti del percorso. Piccola chicca: ogni contenuto mostra in basso orario e luogo di scatto, e cliccando sulla località si apre Google Maps esattamente nel punto in cui quella foto o quel video è stato registrato.\n\nSe vi va, lasciatemi un commento: potete farlo su ogni foto oppure direttamente nella nota del giorno.\n\nSe sei arrivato qui perché stai pianificando il tuo cammino, spero troverai spunti e informazioni utili per goderti al meglio il viaggio. Buen Camino, peregrino!',
+      'Ciao, sono Jacopo. Questo diario racconta il mio Cammino di Santiago, iniziato a Lourdes e proseguito fino a Santiago, Finisterre e Muxia. È stato il momento più intenso del mio anno sabbatico, arrivato subito dopo essermi dimesso da un lavoro a tempo indeterminato come informatico. In quel periodo avevo una cosa rara: tempo vero. Per questo ho vissuto il Cammino senza fretta, lasciando che fosse la strada, le mie sensazioni e il mio corpo a decidere il ritmo.\n\nSe sei arrivato fin qui, tanto vale mettersi in cammino.',
     days: 'Giorni',
     photos: 'Foto',
     videos: 'Video',
@@ -18,10 +18,10 @@ const I18N = {
     video_tag: 'Video',
     footer_note:
       'Questo sito è nato dopo il Cammino, ma prova a ricostruirlo nel modo più fedele possibile: unendo tracciati registrati sul momento, metadati estratti da foto e video, e testi recuperati da note, messaggi e ricordi. Molto, però, è rimasto fuori. Una parte di ciò che si vive lungo il Cammino resta impossibile da tradurre davvero in parole, immagini o coordinate.\n\nSe senti che vuoi partire, il mio consiglio è semplice: fallo. Sul Cammino Francese è difficile sentirsi davvero persi, e molta della preparazione necessaria non è fisica ma mentale. Parti leggero, con lo zaino giusto e la testa aperta. Ultreya!',
-    footer_cta_prefix:
-      'Vuoi trasformare anche il tuo viaggio in un diario interattivo con mappa, media e tappe ordinate?',
-    footer_cta_link: 'Scopri qui come funziona',
-    footer_cta_suffix: '',
+    footer_cta_title: 'Da viaggio a diario',
+    footer_cta_text:
+      'Questo progetto nasce da foto, video, tracce GPS e appunti rimessi insieme dopo il viaggio. Se vuoi costruire qualcosa di simile per il tuo cammino, qui trovi guide, builder e supporto.',
+    footer_cta_link: 'Scopri le opzioni',
     view_diary: 'Diario',
     notes_label: 'Note del giorno',
     empty_note: 'Aggiungi un ricordo personale qui.',
@@ -31,9 +31,11 @@ const I18N = {
     mini_map: 'Percorso del giorno',
     mini_map_cumulative: 'Percorso cumulativo',
     open_map: 'Apri la mappa',
-    open_map_hero: 'Apri la mappa del percorso',
-    offer_link_hero: 'Se vuoi creare anche tu un diario simile, scopri come fare',
-    open_short: 'Apri Mappa',
+    hero_offer_title: 'Da viaggio a diario',
+    hero_offer_text:
+      'Questo progetto nasce da foto, video, tracce GPS e appunti rimessi insieme dopo il viaggio. Se vuoi costruire qualcosa di simile per il tuo cammino, qui trovi guide, builder e supporto.',
+    hero_offer_link: 'Scopri le opzioni',
+    open_short: 'Mappa completa',
     goto_day: 'Vai al giorno',
     close: 'Chiudi',
     mini_map_minimize: 'Minimizza mappa',
@@ -72,10 +74,10 @@ const I18N = {
     admin_token_prompt: 'Inserisci token admin per operazione protetta:',
     admin_auth_failed: 'Autenticazione admin fallita.',
     admin_auth_failed_with_reason: 'Autenticazione admin fallita: {reason}',
-    tracking_consent_title: 'Cookie e misurazione',
+    tracking_consent_title: 'Cookie',
     tracking_consent_text:
       'Uso analytics interni per capire come viene usato il diario e migliorarlo. Restano disattivati finché non li accetti. Il diario funziona anche se rifiuti.',
-    tracking_consent_accept: 'Accetta analytics',
+    tracking_consent_accept: 'Accetta',
     tracking_consent_reject: 'Solo essenziali',
     tracking_consent_manage: 'Privacy',
     tracking_consent_policy: 'Cookie Policy',
@@ -108,7 +110,7 @@ const I18N = {
     title: 'Camino de Santiago',
     subtitle: 'A day-by-day recap of my solo Camino, through photos, videos, and memories from the road.',
     hero_intro:
-      'This diary tells my Camino Francés, which began in Lourdes and ended in Santiago, then continued to Finisterre and Muxia. It was the most intense chapter of my 2019 sabbatical, after resigning from a permanent job as a software engineer. I lived it in a relaxed mode: no one was chasing me, and time was the one thing I had in abundance.\n\n2019 was also the year of the Great Wall of China Half Marathon and the New York City Marathon, but those are different stories and I will tell them in another diary.\n\nNow enjoy photos, videos, and day-by-day stories from my Camino, between memories, emotions, and concrete route details. A small extra: each item shows capture time and place at the bottom, and clicking the location opens Google Maps exactly at the point where that photo or video was recorded.\n\nIf you like, leave me a comment: you can do it on each photo or directly in the day note.\n\nIf you came here because you are planning your own Camino, I hope you will find useful ideas and information to enjoy your journey at its best. Buen Camino, peregrino!',
+      'Hi, I’m Jacopo. This diary tells the story of my Camino de Santiago, which began in Lourdes and continued to Santiago, Finisterre, and Muxia. It was the most intense moment of my sabbatical year, coming right after I had left a permanent job as a software engineer. In that period I had something rare: real time. That is why I lived the Camino without rushing, letting the road, my sensations, and my body decide the pace.\n\nIf you’ve made it this far, you might as well start walking.',
     days: 'Days',
     photos: 'Photos',
     videos: 'Videos',
@@ -121,10 +123,10 @@ const I18N = {
     video_tag: 'Video',
     footer_note:
       'This site was built after the Camino, but it tries to reconstruct it as faithfully as possible: by combining tracks recorded at the time, metadata extracted from photos and videos, and texts recovered from notes, messages, and memories. A lot, however, was left out. Part of what you live on the Camino remains impossible to truly translate into words, images, or coordinates.\n\nIf you feel you want to go, my advice is simple: do it. On the French Way it is hard to feel truly lost, and much of the preparation you need is not physical, but mental. Travel light, with the right backpack and an open mind. Ultreya!',
-    footer_cta_prefix:
-      'If you want to turn your trip into an interactive diary with map, media, and ordered stages,',
-    footer_cta_link: 'see here how to do it',
-    footer_cta_suffix: '',
+    footer_cta_title: 'From trip to diary',
+    footer_cta_text:
+      'This project comes from photos, videos, GPS tracks, and notes brought back together after the trip. If you want to build something similar for your own Camino, you can start here.',
+    footer_cta_link: 'Explore the options',
     view_diary: 'Diary',
     notes_label: 'Day notes',
     empty_note: 'Add a personal memory here.',
@@ -134,9 +136,11 @@ const I18N = {
     mini_map: 'Daily route',
     mini_map_cumulative: 'Cumulative route',
     open_map: 'Open map',
-    open_map_hero: 'Open route map',
-    offer_link_hero: 'If you want to create a diary like this too, discover how to do it',
-    open_short: 'Open Map',
+    hero_offer_title: 'From trip to diary',
+    hero_offer_text:
+      'This project comes from photos, videos, GPS tracks, and notes brought back together after the trip. If you want to build something similar for your own Camino, you can start here.',
+    hero_offer_link: 'Explore the options',
+    open_short: 'Full map',
     goto_day: 'Jump to day',
     close: 'Close',
     mini_map_minimize: 'Minimize map',
@@ -175,10 +179,10 @@ const I18N = {
     admin_token_prompt: 'Enter admin token for protected operation:',
     admin_auth_failed: 'Admin authentication failed.',
     admin_auth_failed_with_reason: 'Admin authentication failed: {reason}',
-    tracking_consent_title: 'Cookies and analytics',
+    tracking_consent_title: 'Cookies',
     tracking_consent_text:
       'I use first-party analytics to understand how the diary is used and improve it. They stay off unless you accept. The diary still works if you refuse.',
-    tracking_consent_accept: 'Accept analytics',
+    tracking_consent_accept: 'Accept',
     tracking_consent_reject: 'Essentials only',
     tracking_consent_manage: 'Privacy',
     tracking_consent_policy: 'Cookie Policy',
@@ -211,7 +215,7 @@ const I18N = {
     title: 'Camino de Santiago',
     subtitle: 'Un resumen día a día de mi camino en solitario, entre fotos, vídeos y recuerdos del camino.',
     hero_intro:
-      'Este diario cuenta mi Camino Francés de Santiago, empezado en Lourdes y terminado en Santiago, y luego prolongado hasta Finisterre y Muxia. Fue el capítulo más intenso de mi 2019 sabático, después de dejar un contrato indefinido como informático. Lo viví en modo relax: no tenía a nadie persiguiéndome y el tiempo era lo único que no me faltaba.\n\n2019 también fue el año de la media maratón de la Muralla China y de la maratón de Nueva York, pero esas son otras historias y las contaré en otro diario.\n\nAhora disfrutad fotos, vídeos y relatos de mi camino día a día, entre recuerdos, emociones y detalles concretos del recorrido. Pequeño extra: cada contenido muestra abajo la hora y el lugar de captura, y al hacer clic en la localidad se abre Google Maps exactamente en el punto donde se registró esa foto o ese vídeo.\n\nSi os apetece, dejadme un comentario: podéis hacerlo en cada foto o directamente en la nota del día.\n\nSi has llegado aquí porque estás planificando tu camino, espero que encuentres ideas e información útiles para disfrutar al máximo de tu viaje. Buen Camino, peregrino!',
+      'Hola, soy Jacopo. Este diario cuenta mi Camino de Santiago, iniciado en Lourdes y continuado hasta Santiago, Finisterre y Muxia. Fue el momento más intenso de mi año sabático, justo después de haber dejado un trabajo fijo como informático. En aquel periodo tenía algo raro: tiempo de verdad. Por eso viví el Camino sin prisa, dejando que fueran el camino, mis sensaciones y mi cuerpo quienes marcaran el ritmo.\n\nSi has llegado hasta aquí, tanto vale ponerse en camino.',
     days: 'Días',
     photos: 'Fotos',
     videos: 'Vídeos',
@@ -224,10 +228,10 @@ const I18N = {
     video_tag: 'Vídeo',
     footer_note:
       'Este sitio nació después del Camino, pero intenta reconstruirlo de la forma más fiel posible: uniendo trazados registrados en el momento, metadatos extraídos de fotos y vídeos, y textos recuperados de notas, mensajes y recuerdos. Mucho, sin embargo, se ha quedado fuera. Una parte de lo que se vive en el Camino sigue siendo imposible de traducir de verdad en palabras, imágenes o coordenadas.\n\nSi sientes que quieres hacerlo, mi consejo es simple: hazlo. En el Camino Francés es difícil sentirse de verdad perdido, y buena parte de la preparación necesaria no es física, sino mental. Sal ligero, con la mochila adecuada y la cabeza abierta. ¡Ultreya!',
-    footer_cta_prefix:
-      'Si quieres transformar tu viaje en un diario interactivo con mapa, media y etapas ordenadas,',
-    footer_cta_link: 'descubre aquí cómo hacerlo',
-    footer_cta_suffix: '',
+    footer_cta_title: 'Del viaje al diario',
+    footer_cta_text:
+      'Este proyecto nace de fotos, vídeos, trazas GPS y notas reunidas después del viaje. Si quieres construir algo parecido para tu propio Camino, aquí tienes un punto de partida claro.',
+    footer_cta_link: 'Descubre las opciones',
     view_diary: 'Diario',
     notes_label: 'Notas del día',
     empty_note: 'Añade aquí un recuerdo personal.',
@@ -237,9 +241,11 @@ const I18N = {
     mini_map: 'Ruta del día',
     mini_map_cumulative: 'Ruta acumulada',
     open_map: 'Abrir mapa',
-    open_map_hero: 'Abrir el mapa del recorrido',
-    offer_link_hero: 'Si quieres crear también un diario parecido, descubre cómo hacerlo',
-    open_short: 'Abrir mapa',
+    hero_offer_title: 'Del viaje al diario',
+    hero_offer_text:
+      'Este proyecto nace de fotos, vídeos, trazas GPS y notas reunidas después del viaje. Si quieres construir algo parecido para tu propio Camino, aquí tienes un punto de partida claro.',
+    hero_offer_link: 'Descubre las opciones',
+    open_short: 'Mapa completo',
     goto_day: 'Ir al día',
     close: 'Cerrar',
     mini_map_minimize: 'Minimizar mapa',
@@ -278,10 +284,10 @@ const I18N = {
     admin_token_prompt: 'Introduce el token de admin para la operación protegida:',
     admin_auth_failed: 'Falló la autenticación de admin.',
     admin_auth_failed_with_reason: 'Falló la autenticación de admin: {reason}',
-    tracking_consent_title: 'Cookies y analítica',
+    tracking_consent_title: 'Cookies',
     tracking_consent_text:
       'Utilizo analítica propia para entender cómo se usa el diario y mejorarlo. Permanece desactivada salvo que la aceptes. El diario sigue funcionando aunque la rechaces.',
-    tracking_consent_accept: 'Aceptar analítica',
+    tracking_consent_accept: 'Aceptar',
     tracking_consent_reject: 'Solo lo esencial',
     tracking_consent_manage: 'Privacidad',
     tracking_consent_policy: 'Política de cookies',
@@ -314,7 +320,7 @@ const I18N = {
     title: 'Chemin de Saint-Jacques',
     subtitle: 'Un récit jour par jour de mon chemin en solitaire, entre photos, vidéos et souvenirs de route.',
     hero_intro:
-      'Ce journal raconte mon Camino Francés, commencé à Lourdes et terminé à Santiago, puis prolongé jusqu’à Finisterre et Muxia. Cela a été le chapitre le plus intense de mon année sabbatique 2019, après avoir quitté un CDI comme informaticien. Je l’ai vécu en mode relax: personne ne me courait après, et le temps était la seule chose qui ne me manquait pas.\n\n2019 a aussi été l’année du semi-marathon de la Muraille de Chine et du marathon de New York, mais ce sont d’autres histoires que je raconterai dans un autre journal.\n\nProfitez maintenant des photos, vidéos et récits de mon chemin jour après jour, entre souvenirs, émotions et détails concrets du parcours. Petite cerise: chaque contenu affiche en bas l’heure et le lieu de prise, et en cliquant sur la localité, Google Maps s’ouvre exactement au point où cette photo ou cette vidéo a été enregistrée.\n\nSi vous voulez, laissez-moi un commentaire: vous pouvez le faire sur chaque photo ou directement dans la note du jour.\n\nSi vous êtes arrivé ici parce que vous préparez votre chemin, j’espère que vous y trouverez des idées et des informations utiles pour profiter au mieux de votre voyage. Buen Camino, peregrino!',
+      'Bonjour, moi c’est Jacopo. Ce journal raconte mon Chemin de Saint-Jacques, commencé à Lourdes et poursuivi jusqu’à Santiago, Finisterre et Muxia. Cela a été le moment le plus intense de mon année sabbatique, juste après avoir quitté un emploi stable comme informaticien. À cette époque, j’avais quelque chose de rare : du vrai temps. C’est pour cela que j’ai vécu le Chemin sans me presser, en laissant la route, mes sensations et mon corps décider du rythme.\n\nSi tu es arrivé jusque-là, autant te mettre en route.',
     days: 'Jours',
     photos: 'Photos',
     videos: 'Vidéos',
@@ -327,10 +333,10 @@ const I18N = {
     video_tag: 'Vidéo',
     footer_note:
       'Ce site est né après le Chemin, mais il essaie de le reconstruire de la manière la plus fidèle possible : en réunissant des traces enregistrées sur le moment, des métadonnées extraites des photos et des vidéos, et des textes retrouvés dans des notes, des messages et des souvenirs. Beaucoup de choses, pourtant, sont restées dehors. Une partie de ce que l’on vit sur le Chemin reste impossible à traduire vraiment en mots, en images ou en coordonnées.\n\nSi tu sens que tu veux partir, mon conseil est simple : fais-le. Sur le Camino Francés, il est difficile de se sentir vraiment perdu, et une bonne partie de la préparation nécessaire n’est pas physique, mais mentale. Pars léger, avec le bon sac et l’esprit ouvert. Ultreya !',
-    footer_cta_prefix:
-      'Si tu veux transformer toi aussi ton voyage en journal interactif avec carte, médias et étapes ordonnées,',
-    footer_cta_link: 'découvre ici comment faire',
-    footer_cta_suffix: '',
+    footer_cta_title: 'Du voyage au journal',
+    footer_cta_text:
+      'Ce projet naît de photos, vidéos, traces GPS et notes rassemblées après le voyage. Si tu veux construire quelque chose de similaire pour ton propre chemin, tu peux commencer ici.',
+    footer_cta_link: 'Découvrir les options',
     view_diary: 'Journal',
     notes_label: 'Notes du jour',
     empty_note: 'Ajoute ici un souvenir personnel.',
@@ -340,9 +346,11 @@ const I18N = {
     mini_map: 'Parcours du jour',
     mini_map_cumulative: 'Parcours cumulé',
     open_map: 'Ouvrir la carte',
-    open_map_hero: 'Ouvrir la carte du parcours',
-    offer_link_hero: 'Si toi aussi tu veux créer un journal comme celui-ci, découvre comment faire',
-    open_short: 'Ouvrir carte',
+    hero_offer_title: 'Du voyage au journal',
+    hero_offer_text:
+      'Ce projet naît de photos, vidéos, traces GPS et notes rassemblées après le voyage. Si tu veux construire quelque chose de similaire pour ton propre chemin, tu peux commencer ici.',
+    hero_offer_link: 'Découvrir les options',
+    open_short: 'Carte complète',
     goto_day: 'Aller au jour',
     close: 'Fermer',
     mini_map_minimize: 'Réduire la carte',
@@ -381,10 +389,10 @@ const I18N = {
     admin_token_prompt: 'Saisis le token admin pour l’opération protégée :',
     admin_auth_failed: 'Authentification admin échouée.',
     admin_auth_failed_with_reason: 'Authentification admin échouée : {reason}',
-    tracking_consent_title: 'Cookies et mesure d’audience',
+    tracking_consent_title: 'Cookies',
     tracking_consent_text:
       'J’utilise une mesure d’audience interne pour comprendre comment le journal est utilisé et l’améliorer. Elle reste désactivée tant que tu ne l’acceptes pas. Le journal fonctionne aussi si tu refuses.',
-    tracking_consent_accept: 'Accepter la mesure',
+    tracking_consent_accept: 'Accepter',
     tracking_consent_reject: 'Essentiel seulement',
     tracking_consent_manage: 'Confidentialité',
     tracking_consent_policy: 'Politique cookies',
@@ -616,7 +624,7 @@ const setLang = (lang, options = {}) => {
       el.textContent = I18N[normalized][key];
     }
   });
-  document.querySelectorAll('.map-link').forEach((el) => {
+  document.querySelectorAll('[data-map-link]').forEach((el) => {
     if (el && el.tagName === 'A') el.href = buildLocalizedMapPath(normalized);
   });
   document.querySelectorAll('[data-contact-link]').forEach((el) => {
@@ -2888,9 +2896,12 @@ const getCamminoDaysTotal = () => {
 const refreshStats = () => {
   if (!dataCache) return;
   const camminoDaysTotal = getCamminoDaysTotal();
-  document.getElementById('stat-days').textContent = camminoDaysTotal > 0 ? camminoDaysTotal : dataCache.days.length;
-  document.getElementById('stat-photos').textContent = dataCache.counts.images;
-  document.getElementById('stat-videos').textContent = dataCache.counts.videos;
+  const statDays = document.getElementById('stat-days');
+  const statPhotos = document.getElementById('stat-photos');
+  const statVideos = document.getElementById('stat-videos');
+  if (statDays) statDays.textContent = camminoDaysTotal > 0 ? camminoDaysTotal : dataCache.days.length;
+  if (statPhotos) statPhotos.textContent = dataCache.counts.images;
+  if (statVideos) statVideos.textContent = dataCache.counts.videos;
 };
 
 const toggleSelectionById = (itemId, card, selectBtn) => {

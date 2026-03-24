@@ -44,8 +44,11 @@
           <p class="hero__intro" data-i18n="hero_intro">
             Questo diario racconta il mio Cammino di Santiago, iniziato a Lourdes e concluso a Santiago, proseguendo poi fino a Finisterre e Muxia. È stato il capitolo più intenso del mio 2019 sabbatico, dopo essermi dimesso da un contratto a tempo indeterminato come informatico. L’ho vissuto in modalità relax: non avevo nessuno che mi correva dietro e il tempo era l’unica cosa che non mi mancava.
           </p>
-          <p class="lead"><a class="map-link" href="/it/map/" data-i18n="open_map_hero">Apri la mappa del percorso</a></p>
-          <p class="lead"><a class="map-link" data-offer-link href="/it/crea-il-tuo-diario/" data-i18n="offer_link_hero">Vuoi creare anche tu un diario simile? Scopri come funziona</a></p>
+          <div class="hero__offer">
+            <div class="hero__offer-title" data-i18n="hero_offer_title">Da viaggio a diario</div>
+            <p class="hero__offer-text" data-i18n="hero_offer_text">Questo progetto nasce da foto, video, tracce GPS e appunti rimessi insieme dopo il viaggio. Se vuoi costruire qualcosa di simile per il tuo cammino, qui trovi guide, builder e supporto.</p>
+            <a class="hero__offer-link" data-offer-link href="/it/crea-il-tuo-diario/" data-i18n="hero_offer_link">Scopri le opzioni</a>
+          </div>
         </div>
         <div class="controls">
           <div class="lang-select">
@@ -62,20 +65,6 @@
               Cancella selezionati
             </button>
           </div>
-        </div>
-      </div>
-      <div class="hero__stats">
-        <div class="stat">
-          <div class="stat__value" id="stat-days">–</div>
-          <div class="stat__label" data-i18n="days">Giorni</div>
-        </div>
-        <div class="stat">
-          <div class="stat__value" id="stat-photos">–</div>
-          <div class="stat__label" data-i18n="photos">Foto</div>
-        </div>
-        <div class="stat">
-          <div class="stat__value" id="stat-videos">–</div>
-          <div class="stat__label" data-i18n="videos">Video</div>
         </div>
       </div>
     </div>
@@ -112,7 +101,7 @@
     <div class="mini-map__title">
       <span class="mini-map__date" id="mini-map-date"></span>
       <div class="mini-map__actions">
-        <a class="mini-map__open" href="/it/map/" data-i18n="open_short">Apri Mappa</a>
+        <a class="mini-map__open" data-map-link href="/it/map/" data-i18n="open_short">Mappa completa</a>
         <button class="mini-map__toggle" id="mini-map-toggle" type="button" aria-label="Minimizza mappa">–</button>
       </div>
     </div>
@@ -125,9 +114,9 @@
         Il sito è stato creato nel 2026, a distanza di anni dall’esperienza vissuta, ma è stato ricostruito in modo fedele unendo il tracciamento registrato sul momento tramite app di tracking, i metadata (incluse le coordinate GPS) estratti da foto e video, e i testi su stati d’animo ed eventi recuperati da vecchie note, messaggi, chat WhatsApp, audio, contenuti social e ricordi.
       </div>
       <div class="footer__cta">
-        <span data-i18n="footer_cta_prefix">Realizzare questo sito è stato un lavoro mastodontico di raccolta, selezione dati, recupero e filtraggio delle informazioni, oltre a una lunga ricostruzione narrativa giorno per giorno.</span>
-        <a class="footer__cta-link" data-offer-link href="/it/crea-il-tuo-diario/" data-i18n="footer_cta_link">Scopri qui come funziona</a>
-        <span data-i18n="footer_cta_suffix"></span>
+        <div class="footer__cta-title" data-i18n="footer_cta_title">Da viaggio a diario</div>
+        <div class="footer__cta-text" data-i18n="footer_cta_text">Questo progetto nasce da foto, video, tracce GPS e appunti rimessi insieme dopo il viaggio. Se vuoi costruire qualcosa di simile per il tuo cammino, qui trovi guide, builder e supporto.</div>
+        <a class="footer__cta-link" data-offer-link href="/it/crea-il-tuo-diario/" data-i18n="footer_cta_link">Scopri le opzioni</a>
       </div>
       <div class="footer__legal">
         <span data-i18n="legal_notice">© Tutti i diritti riservati. Foto, video e testi di questo sito non possono essere copiati, riutilizzati, ripubblicati o redistribuiti senza autorizzazione scritta dell’autore.</span>

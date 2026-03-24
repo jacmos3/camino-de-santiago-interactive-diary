@@ -13,6 +13,7 @@ const ROOT_FILES = [
   'cookie-policy.html',
   'crea-il-tuo-diario.html',
   'day-page-map.js',
+  'debug-headers.php',
   'day.php',
   'favicon.ico',
   'favicon.png',
