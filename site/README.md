@@ -107,6 +107,19 @@ I redirect del vecchio dominio verso `mycamino.it` vanno gestiti a livello HTTP:
 - lato server
 - oppure in Cloudflare
 
+Nel setup attuale il server deve vedere davvero l'host richiesto dal browser:
+- `mycamino.it` deve arrivare al backend come `Host: mycamino.it`
+- `mycamino.semproxlab.it` deve arrivare al backend come `Host: mycamino.semproxlab.it`
+
+Se Cloudflare o un proxy fa host override verso il sottodominio tecnico, il backend non puo distinguere i due casi e il redirect SEO del legacy host smette di essere affidabile.
+
+Se mantieni `mycamino.semproxlab.it` come origine tecnica dietro Cloudflare, usa il Worker in:
+- `cloudflare/mycamino-worker.js`
+
+Il Worker aggiunge `X-Canonical-Host: mycamino.it`, che il backend usa per:
+- servire normalmente le richieste del dominio pubblico
+- fare redirect `301` solo sugli accessi diretti al sottodominio tecnico
+
 Elementi essenziali del deploy:
 - static: `index.html`, `map.html`, `app.js`, `map.js`, `styles.css`, favicon, sitemap, robots
 - data: `entries.*.json`, `tracks/*`, `comments.json`, `day_og_overrides.json`

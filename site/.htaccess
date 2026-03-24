@@ -2,6 +2,12 @@ Options -MultiViews
 RewriteEngine On
 RewriteBase /
 
+# Canonical host: redirect the legacy host only when the request did not
+# arrive through the Cloudflare Worker for the public domain.
+RewriteCond %{HTTP_HOST} ^(www\.)?mycamino\.semproxlab\.it$ [NC]
+RewriteCond %{HTTP:X-Canonical-Host} !^mycamino\.it$ [NC]
+RewriteRule ^ https://mycamino.it%{REQUEST_URI} [R=301,L,NE]
+
 # Serve real files/directories as-is
 RewriteCond %{REQUEST_FILENAME} -f [OR]
 RewriteCond %{REQUEST_FILENAME} -d

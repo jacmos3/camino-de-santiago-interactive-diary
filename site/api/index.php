@@ -392,7 +392,7 @@ function contact_to_email(): string {
 function contact_from_email(): string {
   $v = env_value('CONTACT_FROM_EMAIL');
   if ($v !== null && trim($v) !== '') return trim($v);
-  $host = (string)($_SERVER['HTTP_HOST'] ?? 'localhost');
+  $host = (string)($_SERVER['HTTP_X_CANONICAL_HOST'] ?? ($_SERVER['HTTP_HOST'] ?? ($_SERVER['HTTP_X_FORWARDED_HOST'] ?? 'localhost')));
   $host = preg_replace('/:\d+$/', '', $host) ?: 'localhost';
   return 'noreply@' . $host;
 }

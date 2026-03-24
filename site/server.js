@@ -10,7 +10,7 @@ const PORT = Number(process.env.PORT || 4173);
 const HOST = process.env.HOST || '127.0.0.1';
 const PRIMARY_SITE_HOST = String(process.env.SITE_PRIMARY_HOST || 'mycamino.it').trim().toLowerCase();
 const LEGACY_SITE_HOSTS = new Set(
-  String(process.env.LEGACY_SITE_HOSTS || '')
+  String(process.env.LEGACY_SITE_HOSTS || 'mycamino.semproxlab.it')
     .split(',')
     .map((value) => String(value || '').trim().toLowerCase())
     .filter(Boolean)
@@ -1756,7 +1756,7 @@ function getRequestProto(req) {
 }
 
 function getRequestHostHeader(req) {
-  return String(req.headers['x-forwarded-host'] || req.headers.host || '').split(',')[0].trim();
+  return String(req.headers['x-canonical-host'] || req.headers.host || req.headers['x-forwarded-host'] || '').split(',')[0].trim();
 }
 
 function normalizeHostName(hostValue) {

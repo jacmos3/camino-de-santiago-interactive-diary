@@ -20,7 +20,7 @@ function day_read_json(string $path, $fallback = null) {
 
 function day_detect_origin(): string {
   $proto = $_SERVER['HTTP_X_FORWARDED_PROTO'] ?? '';
-  $host = $_SERVER['HTTP_X_FORWARDED_HOST'] ?? ($_SERVER['HTTP_HOST'] ?? 'localhost');
+  $host = $_SERVER['HTTP_X_CANONICAL_HOST'] ?? ($_SERVER['HTTP_HOST'] ?? ($_SERVER['HTTP_X_FORWARDED_HOST'] ?? 'localhost'));
   $proto = trim(explode(',', (string)$proto)[0] ?? '');
   $host = trim(explode(',', (string)$host)[0] ?? '');
   if ($proto === '') {
