@@ -112,6 +112,79 @@ function admin_token(): string {
   return '';
 }
 
+function admin_auth_store_path(): string {
+  return dirname(__DIR__) . '/data/admin_auth.json';
+}
+
+function load_admin_auth_store(): array {
+  $path = admin_auth_store_path();
+  if (!is_file($path)) return [];
+  $raw = file_get_contents($path);
+  if ($raw === false || trim($raw) === '') return [];
+  $decoded = json_decode($raw, true);
+  return is_array($decoded) ? $decoded : [];
+}
+
+function save_admin_auth_store(array $payload): void {
+  $path = admin_auth_store_path();
+  $dir = dirname($path);
+  if (!is_dir($dir)) {
+    if (!mkdir($dir, 0775, true) && !is_dir($dir)) {
+      throw new RuntimeException('Cannot create data directory');
+    }
+  }
+  $json = json_encode($payload, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+  if ($json === false) {
+    throw new RuntimeException('Cannot encode admin auth payload');
+  }
+  $tmp = $path . '.tmp';
+  if (file_put_contents($tmp, $json . PHP_EOL, LOCK_EX) === false) {
+    throw new RuntimeException('Cannot write temporary admin auth file');
+  }
+  if (!rename($tmp, $path)) {
+    @unlink($tmp);
+    throw new RuntimeException('Cannot persist admin auth file');
+  }
+}
+
+function admin_password_hash(): string {
+  $store = load_admin_auth_store();
+  $hash = trim((string)($store['password_hash'] ?? ''));
+  return $hash;
+}
+
+function admin_build_password_hash(string $secret): string {
+  $salt = bin2hex(random_bytes(16));
+  $iterations = 120000;
+  $derived = hash_pbkdf2('sha256', $secret, $salt, $iterations, 32, false);
+  return "pbkdf2_sha256:{$iterations}:{$salt}:{$derived}";
+}
+
+function admin_verify_password_hash(string $secret, string $hash): bool {
+  $raw = trim($hash);
+  if ($raw === '') return false;
+  if (str_starts_with($raw, 'pbkdf2_sha256:')) {
+    $parts = explode(':', $raw, 4);
+    if (count($parts) !== 4) return false;
+    [, $iterationsRaw, $salt, $expected] = $parts;
+    $iterations = max(1, (int)$iterationsRaw);
+    $computed = hash_pbkdf2('sha256', $secret, $salt, $iterations, 32, false);
+    return hash_equals($expected, $computed);
+  }
+  return password_verify($secret, $raw);
+}
+
+function verify_admin_secret(string $secret): bool {
+  $secret = trim($secret);
+  if ($secret === '') return false;
+  $hash = admin_password_hash();
+  if ($hash !== '') {
+    return admin_verify_password_hash($secret, $hash);
+  }
+  $fallback = admin_token();
+  return $fallback !== '' && hash_equals($fallback, $secret);
+}
+
 function is_admin_authenticated(): bool {
   return !empty($_SESSION['cammino_admin_authenticated']) && $_SESSION['cammino_admin_authenticated'] === true;
 }
@@ -486,11 +559,10 @@ if ($path === '/admin/session') {
   if ($method === 'POST') {
     $payload = read_json_body();
     $token = trim((string)($payload['token'] ?? ''));
-    $configured = admin_token();
-    if ($configured === '') {
+    if (admin_password_hash() === '' && admin_token() === '') {
       respond(500, ['authenticated' => false, 'error' => 'Admin token non configurato']);
     }
-    if ($token !== '' && hash_equals($configured, $token)) {
+    if (verify_admin_secret($token)) {
       $_SESSION['cammino_admin_authenticated'] = true;
       $_SESSION['cammino_admin_login_at'] = gmdate('c');
       respond(200, ['authenticated' => true]);
@@ -499,6 +571,33 @@ if ($path === '/admin/session') {
     respond(401, ['authenticated' => false, 'error' => 'Token non valido']);
   }
   respond(405, ['error' => 'Method not allowed']);
+}
+
+if ($path === '/admin/password') {
+  if ($method !== 'POST') respond(405, ['error' => 'Method not allowed']);
+  require_admin_auth();
+  $payload = read_json_body();
+  $current = trim((string)($payload['current_password'] ?? ''));
+  $next = trim((string)($payload['new_password'] ?? ''));
+  if (!verify_admin_secret($current)) {
+    respond(401, ['ok' => false, 'error' => 'Password attuale non valida']);
+  }
+  if (mb_strlen($next) < 8) {
+    respond(422, ['ok' => false, 'error' => 'La nuova password deve avere almeno 8 caratteri']);
+  }
+  if (mb_strlen($next) > 200) {
+    respond(422, ['ok' => false, 'error' => 'La nuova password e troppo lunga']);
+  }
+  try {
+    save_admin_auth_store([
+      'password_hash' => admin_build_password_hash($next),
+      'updated_at' => gmdate('c'),
+    ]);
+    respond(200, ['ok' => true]);
+  } catch (Throwable $e) {
+    api_log_error('admin/password', $e);
+    respond(500, ['ok' => false, 'error' => 'Impossibile salvare la nuova password']);
+  }
 }
 
 if ($path === '/admin/logout') {
@@ -915,6 +1014,110 @@ if ($path === '/admin/analytics/overview') {
     ");
     $events = $eventStmt->fetchAll(PDO::FETCH_ASSOC) ?: [];
 
+    $dailyActivityStmt = $pdo->query("
+      SELECT
+        DATE(created_at) AS day,
+        COUNT(*) AS total_events,
+        COUNT(DISTINCT cid) AS unique_visitors,
+        SUM(CASE WHEN event_type = 'page_view' THEN 1 ELSE 0 END) AS page_views,
+        SUM(CASE WHEN event_type = 'day_view' THEN 1 ELSE 0 END) AS day_views,
+        SUM(CASE WHEN event_type = 'media_open' THEN 1 ELSE 0 END) AS media_opens,
+        SUM(CASE WHEN event_type = 'comments_open' THEN 1 ELSE 0 END) AS comments_open,
+        SUM(CASE WHEN event_type = 'comment_submit' THEN 1 ELSE 0 END) AS comment_submit,
+        SUM(CASE WHEN event_type = 'share_click' THEN 1 ELSE 0 END) AS share_click,
+        SUM(CASE WHEN event_type = 'scroll_depth' THEN 1 ELSE 0 END) AS scroll_events
+      FROM analytics_events
+      WHERE created_at >= DATE_SUB(UTC_TIMESTAMP(), INTERVAL {$period} DAY)
+      GROUP BY DATE(created_at)
+      ORDER BY day DESC
+      LIMIT 60
+    ");
+    $dailyActivity = $dailyActivityStmt->fetchAll(PDO::FETCH_ASSOC) ?: [];
+
+    $topPathsStmt = $pdo->query("
+      SELECT
+        path,
+        COUNT(*) AS page_views,
+        COUNT(DISTINCT cid) AS unique_visitors
+      FROM analytics_events
+      WHERE created_at >= DATE_SUB(UTC_TIMESTAMP(), INTERVAL {$period} DAY)
+        AND event_type = 'page_view'
+        AND path IS NOT NULL
+        AND path <> ''
+      GROUP BY path
+      ORDER BY unique_visitors DESC, page_views DESC, path ASC
+      LIMIT 20
+    ");
+    $topPaths = $topPathsStmt->fetchAll(PDO::FETCH_ASSOC) ?: [];
+
+    $dayBreakdownStmt = $pdo->query("
+      SELECT
+        day_key,
+        COUNT(DISTINCT cid) AS unique_readers,
+        SUM(CASE WHEN event_type = 'day_view' THEN 1 ELSE 0 END) AS day_views,
+        SUM(CASE WHEN event_type = 'media_open' THEN 1 ELSE 0 END) AS media_opens,
+        SUM(CASE WHEN event_type = 'comments_open' THEN 1 ELSE 0 END) AS comments_open,
+        SUM(CASE WHEN event_type = 'comment_submit' THEN 1 ELSE 0 END) AS comment_submit,
+        SUM(CASE WHEN event_type = 'share_click' THEN 1 ELSE 0 END) AS share_click,
+        MAX(CASE
+          WHEN event_type = 'scroll_depth'
+            THEN CAST(JSON_UNQUOTE(JSON_EXTRACT(metadata_json, '$.bucket')) AS UNSIGNED)
+          ELSE NULL
+        END) AS max_scroll_bucket
+      FROM analytics_events
+      WHERE created_at >= DATE_SUB(UTC_TIMESTAMP(), INTERVAL {$period} DAY)
+        AND day_key IS NOT NULL
+        AND day_key <> ''
+      GROUP BY day_key
+      HAVING day_views > 0
+         OR media_opens > 0
+         OR comments_open > 0
+         OR comment_submit > 0
+         OR share_click > 0
+         OR max_scroll_bucket IS NOT NULL
+      ORDER BY unique_readers DESC, day_views DESC, day_key DESC
+      LIMIT 30
+    ");
+    $dayBreakdown = $dayBreakdownStmt->fetchAll(PDO::FETCH_ASSOC) ?: [];
+
+    $scrollBucketsStmt = $pdo->query("
+      SELECT
+        CAST(JSON_UNQUOTE(JSON_EXTRACT(metadata_json, '$.bucket')) AS UNSIGNED) AS bucket,
+        COUNT(*) AS n
+      FROM analytics_events
+      WHERE created_at >= DATE_SUB(UTC_TIMESTAMP(), INTERVAL {$period} DAY)
+        AND event_type = 'scroll_depth'
+      GROUP BY bucket
+      ORDER BY bucket ASC
+    ");
+    $scrollBuckets = $scrollBucketsStmt->fetchAll(PDO::FETCH_ASSOC) ?: [];
+
+    $pathEngagementStmt = $pdo->query("
+      SELECT
+        path,
+        COUNT(DISTINCT cid) AS unique_visitors,
+        SUM(CASE WHEN event_type = 'page_view' THEN 1 ELSE 0 END) AS page_views,
+        MAX(CASE
+          WHEN event_type = 'scroll_depth'
+            THEN CAST(JSON_UNQUOTE(JSON_EXTRACT(metadata_json, '$.bucket')) AS UNSIGNED)
+          ELSE NULL
+        END) AS max_scroll_bucket,
+        ROUND(AVG(CASE
+          WHEN event_type = 'scroll_depth'
+            THEN CAST(JSON_UNQUOTE(JSON_EXTRACT(metadata_json, '$.bucket')) AS UNSIGNED)
+          ELSE NULL
+        END), 1) AS avg_scroll_bucket
+      FROM analytics_events
+      WHERE created_at >= DATE_SUB(UTC_TIMESTAMP(), INTERVAL {$period} DAY)
+        AND path IS NOT NULL
+        AND path <> ''
+        AND event_type IN ('page_view', 'scroll_depth')
+      GROUP BY path
+      ORDER BY unique_visitors DESC, page_views DESC, path ASC
+      LIMIT 20
+    ");
+    $pathEngagement = $pathEngagementStmt->fetchAll(PDO::FETCH_ASSOC) ?: [];
+
     respond(200, [
       'period_days' => $periodDays,
       'totals' => [
@@ -929,6 +1132,11 @@ if ($path === '/admin/analytics/overview') {
       'top_media' => $topMedia,
       'langs' => $langs,
       'events_by_type' => $events,
+      'daily_activity' => $dailyActivity,
+      'top_paths' => $topPaths,
+      'day_breakdown' => $dayBreakdown,
+      'scroll_buckets' => $scrollBuckets,
+      'path_engagement' => $pathEngagement,
     ]);
   } catch (Throwable $e) {
     api_log_error('analytics/overview', $e, ['period_days' => $periodDays ?? null]);

@@ -101,6 +101,8 @@ const MIME = {
 let deleteInFlight = false;
 const COMMENTS_PATH = path.join(ROOT, 'data', 'comments.json');
 const DAY_OG_OVERRIDES_PATH = path.join(ROOT, 'data', 'day_og_overrides.json');
+const UI_FLAGS_PATH = path.join(ROOT, 'data', 'ui_flags.json');
+const ADMIN_AUTH_PATH = path.join(ROOT, 'data', 'admin_auth.json');
 const COMMENTS_MAX_TEXT = 1200;
 const COMMENTS_MAX_AUTHOR = 80;
 const ADMIN_TOKEN = String(process.env.ADMIN_TOKEN || process.env.COMMENTS_ADMIN_TOKEN || 'CHANGE_ME');
@@ -160,6 +162,12 @@ function escapeHtml(value) {
     .replaceAll('>', '&gt;')
     .replaceAll('"', '&quot;')
     .replaceAll("'", '&#39;');
+}
+
+function defaultUiFlags() {
+  return {
+    show_footer_template_cta: true
+  };
 }
 
 function buildAbsoluteUrl(origin, pathValue) {
@@ -1889,6 +1897,28 @@ async function writeJson(filePath, value) {
   await fs.writeFile(filePath, `${JSON.stringify(value, null, 2)}\n`, 'utf8');
 }
 
+async function readUiFlags() {
+  const raw = await readJson(UI_FLAGS_PATH, defaultUiFlags());
+  if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return defaultUiFlags();
+  return {
+    show_footer_template_cta: raw.show_footer_template_cta !== false
+  };
+}
+
+async function writeUiFlags(flags) {
+  const normalized = {
+    show_footer_template_cta: !!(flags && flags.show_footer_template_cta !== false)
+  };
+  await writeJson(UI_FLAGS_PATH, normalized);
+  return normalized;
+}
+
+async function readAdminAuthStore() {
+  const raw = await readJson(ADMIN_AUTH_PATH, {});
+  if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return {};
+  return raw;
+}
+
 async function safeUnlink(filePath) {
   try {
     await fs.unlink(filePath);
@@ -2012,6 +2042,40 @@ function isValidAdminToken(token) {
   return t === ADMIN_TOKEN;
 }
 
+function buildAdminPasswordHash(secret) {
+  const iterations = 120000;
+  const salt = crypto.randomBytes(16).toString('hex');
+  const derived = crypto.pbkdf2Sync(String(secret), salt, iterations, 32, 'sha256').toString('hex');
+  return `pbkdf2_sha256:${iterations}:${salt}:${derived}`;
+}
+
+function verifyAdminPasswordHash(secret, storedHash) {
+  const raw = String(storedHash || '').trim();
+  if (!raw) return false;
+  if (!raw.startsWith('pbkdf2_sha256:')) return false;
+  const parts = raw.split(':');
+  if (parts.length !== 4) return false;
+  const iterations = Math.max(1, Number(parts[1] || 0));
+  const salt = String(parts[2] || '');
+  const expected = String(parts[3] || '');
+  if (!iterations || !salt || !expected) return false;
+  const derived = crypto.pbkdf2Sync(String(secret), salt, iterations, 32, 'sha256').toString('hex');
+  try {
+    return crypto.timingSafeEqual(Buffer.from(derived, 'utf8'), Buffer.from(expected, 'utf8'));
+  } catch {
+    return false;
+  }
+}
+
+async function verifyAdminSecret(secret) {
+  const value = String(secret || '').trim();
+  if (!value) return false;
+  const store = await readAdminAuthStore();
+  const passwordHash = String(store && store.password_hash ? store.password_hash : '').trim();
+  if (passwordHash) return verifyAdminPasswordHash(value, passwordHash);
+  return isValidAdminToken(value);
+}
+
 function buildAdminCookie(sessionId, maxAgeSeconds) {
   const parts = [
     `${ADMIN_SESSION_COOKIE}=${encodeURIComponent(sessionId)}`,
@@ -2035,10 +2099,10 @@ function clearAdminSession(res) {
   return buildAdminCookie('', 0);
 }
 
-function ensureAdmin(req, res, urlObj) {
+async function ensureAdmin(req, res, urlObj) {
   if (hasValidAdminSession(req)) return true;
   const token = getAdminTokenFromRequest(req, urlObj);
-  if (!isValidAdminToken(token)) {
+  if (!(await verifyAdminSecret(token))) {
     sendJson(res, 401, { error: 'Unauthorized' });
     return false;
   }
@@ -2053,7 +2117,7 @@ async function handleAdminSessionLogin(req, res) {
   try {
     const payload = await parseJsonBody(req, 64 * 1024);
     const token = String(payload && payload.token ? payload.token : '').trim();
-    if (!isValidAdminToken(token)) {
+    if (!(await verifyAdminSecret(token))) {
       sendJson(res, 401, { error: 'Invalid admin token' });
       return;
     }
@@ -2066,6 +2130,70 @@ async function handleAdminSessionLogin(req, res) {
     );
   } catch (err) {
     sendJson(res, 500, { error: err.message || String(err) });
+  }
+}
+
+async function handleAdminGetSettings(req, res) {
+  try {
+    const urlObj = new URL(req.url || '/', `http://${HOST}:${PORT}`);
+    if (!(await ensureAdmin(req, res, urlObj))) return;
+    const settings = await readUiFlags();
+    sendJson(res, 200, { settings });
+  } catch (err) {
+    sendJson(res, 500, { error: err.message || String(err) });
+  }
+}
+
+async function handleAdminSaveSettings(req, res) {
+  try {
+    const urlObj = new URL(req.url || '/', `http://${HOST}:${PORT}`);
+    if (!(await ensureAdmin(req, res, urlObj))) return;
+    const payload = await parseJsonBody(req, 64 * 1024);
+    const incoming = payload && payload.settings && typeof payload.settings === 'object' && !Array.isArray(payload.settings)
+      ? payload.settings
+      : payload;
+    const settings = await writeUiFlags(incoming || {});
+    sendJson(res, 200, { ok: true, settings });
+  } catch (err) {
+    sendJson(res, 500, { error: err.message || String(err) });
+  }
+}
+
+async function handlePublicSettings(req, res) {
+  try {
+    const settings = await readUiFlags();
+    sendJson(res, 200, { settings });
+  } catch (err) {
+    sendJson(res, 500, { error: err.message || String(err) });
+  }
+}
+
+async function handleAdminChangePassword(req, res) {
+  try {
+    const urlObj = new URL(req.url || '/', `http://${HOST}:${PORT}`);
+    if (!(await ensureAdmin(req, res, urlObj))) return;
+    const payload = await parseJsonBody(req, 64 * 1024);
+    const currentPassword = String(payload && payload.current_password ? payload.current_password : '').trim();
+    const newPassword = String(payload && payload.new_password ? payload.new_password : '').trim();
+    if (!(await verifyAdminSecret(currentPassword))) {
+      sendJson(res, 401, { ok: false, error: 'Password attuale non valida' });
+      return;
+    }
+    if (newPassword.length < 8) {
+      sendJson(res, 422, { ok: false, error: 'La nuova password deve avere almeno 8 caratteri' });
+      return;
+    }
+    if (newPassword.length > 200) {
+      sendJson(res, 422, { ok: false, error: 'La nuova password e troppo lunga' });
+      return;
+    }
+    await writeJson(ADMIN_AUTH_PATH, {
+      password_hash: buildAdminPasswordHash(newPassword),
+      updated_at: new Date().toISOString()
+    });
+    sendJson(res, 200, { ok: true });
+  } catch (err) {
+    sendJson(res, 500, { ok: false, error: err.message || String(err) });
   }
 }
 
@@ -2171,7 +2299,7 @@ async function handleCreateComment(req, res) {
 async function handleAdminListComments(req, res) {
   try {
     const urlObj = new URL(req.url || '/', `http://${HOST}:${PORT}`);
-    if (!ensureAdmin(req, res, urlObj)) return;
+    if (!(await ensureAdmin(req, res, urlObj))) return;
     const target = normalizeCommentTarget(urlObj.searchParams.get('target'));
     const q = String(urlObj.searchParams.get('q') || '').trim().toLowerCase();
     const limitRaw = Number(urlObj.searchParams.get('limit') || 500);
@@ -2210,7 +2338,7 @@ async function handleAdminListComments(req, res) {
 async function handleAdminDeleteComment(req, res) {
   try {
     const urlObj = new URL(req.url || '/', `http://${HOST}:${PORT}`);
-    if (!ensureAdmin(req, res, urlObj)) return;
+    if (!(await ensureAdmin(req, res, urlObj))) return;
     const payload = await parseJsonBody(req, 128 * 1024);
     const id = String(payload && payload.id ? payload.id : '').trim();
     if (!id) {
@@ -2235,7 +2363,7 @@ async function handleAdminDeleteComment(req, res) {
 async function handleAdminGetDayOgOverrides(req, res) {
   try {
     const urlObj = new URL(req.url || '/', `http://${HOST}:${PORT}`);
-    if (!ensureAdmin(req, res, urlObj)) return;
+    if (!(await ensureAdmin(req, res, urlObj))) return;
     const overrides = await readDayOgOverrides();
     sendJson(res, 200, { overrides });
   } catch (err) {
@@ -2246,7 +2374,7 @@ async function handleAdminGetDayOgOverrides(req, res) {
 async function handleAdminSaveDayOgOverrides(req, res) {
   try {
     const urlObj = new URL(req.url || '/', `http://${HOST}:${PORT}`);
-    if (!ensureAdmin(req, res, urlObj)) return;
+    if (!(await ensureAdmin(req, res, urlObj))) return;
     const payload = await parseJsonBody(req, 256 * 1024);
     let overrides = {};
     if (payload && payload.overrides && typeof payload.overrides === 'object' && !Array.isArray(payload.overrides)) {
@@ -2321,7 +2449,7 @@ function rebuildTrackGeoJson(trackPoints) {
 
 async function handleDelete(req, res) {
   const urlObj = new URL(req.url || '/', `http://${HOST}:${PORT}`);
-  if (!ensureAdmin(req, res, urlObj)) return;
+  if (!(await ensureAdmin(req, res, urlObj))) return;
   if (deleteInFlight) {
     sendJson(res, 409, { error: 'Delete already in progress' });
     return;
@@ -2692,6 +2820,22 @@ const server = http.createServer(async (req, res) => {
   }
   if (req.method === 'POST' && req.url.split('?')[0] === '/api/admin/logout') {
     await handleAdminSessionLogout(req, res);
+    return;
+  }
+  if (req.method === 'POST' && req.url.split('?')[0] === '/api/admin/password') {
+    await handleAdminChangePassword(req, res);
+    return;
+  }
+  if (req.method === 'GET' && req.url.split('?')[0] === '/api/admin/settings') {
+    await handleAdminGetSettings(req, res);
+    return;
+  }
+  if (req.method === 'POST' && req.url.split('?')[0] === '/api/admin/settings') {
+    await handleAdminSaveSettings(req, res);
+    return;
+  }
+  if (req.method === 'GET' && req.url.split('?')[0] === '/api/public/settings') {
+    await handlePublicSettings(req, res);
     return;
   }
   if (req.method === 'GET' && req.url.split('?')[0] === '/api/comments') {

@@ -78,6 +78,55 @@
       color: var(--muted);
       font-size: 0.9rem;
     }
+    .analytics-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 12px;
+    }
+    .analytics-panel {
+      border: 1px solid rgba(31, 26, 22, 0.08);
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.65);
+      padding: 10px;
+    }
+    .analytics-panel h4 {
+      margin: 0 0 8px;
+      font-size: 0.95rem;
+    }
+    .analytics-note {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 0.84rem;
+      line-height: 1.45;
+    }
+    .analytics-list {
+      display: grid;
+      gap: 6px;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+    .analytics-table-wrap {
+      overflow: auto;
+    }
+    .analytics-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.86rem;
+    }
+    .analytics-table th,
+    .analytics-table td {
+      padding: 7px 6px;
+      border-bottom: 1px solid rgba(31, 26, 22, 0.08);
+      vertical-align: top;
+      text-align: left;
+    }
+    .analytics-table th {
+      font-size: 0.74rem;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      color: var(--muted);
+    }
     table {
       width: 100%;
       border-collapse: collapse;
@@ -131,6 +180,9 @@
       font-size: 0.9rem;
       margin-top: 6px;
       min-height: 1.2em;
+    }
+    [hidden] {
+      display: none !important;
     }
     .og-controls {
       display: flex;
@@ -190,6 +242,9 @@
       .controls {
         grid-template-columns: 1fr;
       }
+      .analytics-grid {
+        grid-template-columns: 1fr;
+      }
       .comment-text {
         max-width: 260px;
       }
@@ -211,90 +266,117 @@
 
     <div class="card">
       <div class="controls">
-        <input id="admin-token" type="password" placeholder="Token admin" />
+        <input id="admin-token" type="password" placeholder="Password admin" />
         <button id="login-btn" class="btn-primary">Accedi</button>
-        <input id="search-q" type="text" placeholder="Cerca in autore/testo/target" />
-        <select id="target-filter">
-          <option value="">Tutti i target</option>
-        </select>
-        <button id="refresh-btn" class="btn-primary">Aggiorna</button>
-        <button id="clear-btn">Reset filtri</button>
-        <button id="logout-btn">Logout</button>
       </div>
       <div id="status" class="status"></div>
     </div>
 
-    <div class="card">
-      <h3 style="margin:0 0 10px;">Impostazioni visibilità</h3>
-      <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
-        <label style="display:flex;gap:8px;align-items:center;">
-          <input id="setting-show-footer-template-cta" type="checkbox" />
-          Mostra CTA footer "crea il tuo diario"
-        </label>
-        <button id="save-settings-btn" class="btn-primary" type="button">Salva impostazioni</button>
-        <span id="settings-status" style="font-size:0.9rem;color:#6f6156;"></span>
+    <div id="admin-shell" hidden>
+      <div class="card">
+        <div class="controls" style="grid-template-columns:1.3fr 1fr auto auto auto;">
+          <input id="search-q" type="text" placeholder="Cerca in autore/testo/target" />
+          <select id="target-filter">
+            <option value="">Tutti i target</option>
+          </select>
+          <button id="refresh-btn" class="btn-primary">Aggiorna</button>
+          <button id="clear-btn">Reset filtri</button>
+          <button id="logout-btn">Logout</button>
+        </div>
       </div>
-    </div>
 
-    <div class="card">
-      <h3 style="margin:0 0 10px;">OG image pagine giorno</h3>
-      <div class="og-controls">
-        <select id="day-og-day-select">
-          <option value="">Seleziona un giorno</option>
-        </select>
-        <button id="save-day-og-btn" class="btn-primary" type="button">Salva immagine</button>
-        <button id="reset-day-og-btn" type="button">Ripristina default home</button>
-        <span id="day-og-status" style="font-size:0.9rem;color:#6f6156;"></span>
+      <div class="card">
+        <h3 style="margin:0 0 10px;">Cambio password admin</h3>
+        <div class="controls" style="grid-template-columns:1fr 1fr 1fr auto;align-items:end;">
+          <input id="current-password" type="password" placeholder="Password attuale" />
+          <input id="new-password" type="password" placeholder="Nuova password" />
+          <input id="confirm-password" type="password" placeholder="Ripeti nuova password" />
+          <button id="change-password-btn" class="btn-primary" type="button">Cambia password</button>
+        </div>
+        <div id="password-status" class="status"></div>
       </div>
-      <div id="day-og-grid" class="og-grid"></div>
-    </div>
 
-    <div class="card">
-      <div id="stats" class="stats"></div>
-      <div style="overflow:auto;">
-        <table>
-          <thead>
-            <tr>
-              <th>Data</th>
-              <th>Autore</th>
-              <th>Target</th>
-              <th>Commento</th>
-              <th>Azioni</th>
-            </tr>
-          </thead>
-          <tbody id="rows"></tbody>
-        </table>
+      <div class="card">
+        <h3 style="margin:0 0 10px;">Impostazioni visibilità</h3>
+        <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+          <label style="display:flex;gap:8px;align-items:center;">
+            <input id="setting-show-footer-template-cta" type="checkbox" />
+            Mostra CTA footer "crea il tuo diario"
+          </label>
+          <button id="save-settings-btn" class="btn-primary" type="button">Salva impostazioni</button>
+          <span id="settings-status" style="font-size:0.9rem;color:#6f6156;"></span>
+        </div>
       </div>
-    </div>
 
-    <div class="card">
-      <h3 style="margin:0 0 8px;">Statistiche accessi</h3>
-      <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px;">
-        <button id="analytics-health-btn" class="btn-primary" type="button">Test connessione DB</button>
-        <span id="analytics-health-status" style="font-size:0.9rem;color:#6f6156;"></span>
+      <div class="card">
+        <h3 style="margin:0 0 10px;">OG image pagine giorno</h3>
+        <div class="og-controls">
+          <select id="day-og-day-select">
+            <option value="">Seleziona un giorno</option>
+          </select>
+          <button id="save-day-og-btn" class="btn-primary" type="button">Salva immagine</button>
+          <button id="reset-day-og-btn" type="button">Ripristina default home</button>
+          <span id="day-og-status" style="font-size:0.9rem;color:#6f6156;"></span>
+        </div>
+        <div id="day-og-grid" class="og-grid"></div>
       </div>
-      <div id="analytics-kpi" class="stats"></div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px;">
-        <div>
-          <div style="font-weight:600;margin-bottom:6px;">Top giorni</div>
-          <div id="analytics-top-days" style="font-size:0.9rem;color:#6f6156;"></div>
-        </div>
-        <div>
-          <div style="font-weight:600;margin-bottom:6px;">Top media</div>
-          <div id="analytics-top-media" style="font-size:0.9rem;color:#6f6156;"></div>
-        </div>
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px;">
-        <div>
-          <div style="font-weight:600;margin-bottom:6px;">Lingue</div>
-          <div id="analytics-langs" style="font-size:0.9rem;color:#6f6156;"></div>
-        </div>
-        <div>
-          <div style="font-weight:600;margin-bottom:6px;">Eventi</div>
-          <div id="analytics-events" style="font-size:0.9rem;color:#6f6156;"></div>
+
+      <div class="card">
+        <div id="stats" class="stats"></div>
+        <div style="overflow:auto;">
+          <table>
+            <thead>
+              <tr>
+                <th>Data</th>
+                <th>Autore</th>
+                <th>Target</th>
+                <th>Commento</th>
+                <th>Azioni</th>
+              </tr>
+            </thead>
+            <tbody id="rows"></tbody>
+          </table>
         </div>
       </div>
-      <div id="analytics-health-details" style="margin-top:10px;font-size:0.86rem;color:#6f6156;white-space:pre-wrap;"></div>
+
+      <div class="card">
+        <h3 style="margin:0 0 8px;">Statistiche accessi</h3>
+        <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px;">
+          <button id="analytics-health-btn" class="btn-primary" type="button">Test connessione DB</button>
+          <span id="analytics-health-status" style="font-size:0.9rem;color:#6f6156;"></span>
+        </div>
+        <div id="analytics-kpi" class="stats"></div>
+        <p class="analytics-note">Qui devi capire se il diario viene davvero letto, dove si ferma la gente e quali sezioni attirano attenzione. I contatori grezzi da soli non bastano.</p>
+        <div class="analytics-grid">
+          <div class="analytics-panel">
+            <h4>Attività giorno per giorno</h4>
+            <div id="analytics-daily-activity"></div>
+          </div>
+          <div class="analytics-panel">
+            <h4>Pagine visitate</h4>
+            <div id="analytics-top-paths"></div>
+          </div>
+          <div class="analytics-panel">
+            <h4>Giorni del diario letti</h4>
+            <div id="analytics-day-breakdown"></div>
+          </div>
+          <div class="analytics-panel">
+            <h4>Profondità e distribuzione lettura</h4>
+            <div id="analytics-scroll-buckets" class="analytics-list"></div>
+            <div id="analytics-path-engagement" style="margin-top:10px;"></div>
+          </div>
+          <div class="analytics-panel">
+            <h4>Top media</h4>
+            <div id="analytics-top-media" class="analytics-list"></div>
+          </div>
+          <div class="analytics-panel">
+            <h4>Lingue ed eventi</h4>
+            <div id="analytics-langs" class="analytics-list"></div>
+            <div id="analytics-events" class="analytics-list" style="margin-top:10px;"></div>
+          </div>
+        </div>
+        <div id="analytics-health-details" style="margin-top:10px;font-size:0.86rem;color:#6f6156;white-space:pre-wrap;"></div>
+      </div>
     </div>
   </div>
 
@@ -306,11 +388,21 @@
     const refreshBtn = document.getElementById('refresh-btn');
     const clearBtn = document.getElementById('clear-btn');
     const logoutBtn = document.getElementById('logout-btn');
+    const currentPasswordInput = document.getElementById('current-password');
+    const newPasswordInput = document.getElementById('new-password');
+    const confirmPasswordInput = document.getElementById('confirm-password');
+    const changePasswordBtn = document.getElementById('change-password-btn');
+    const passwordStatusEl = document.getElementById('password-status');
     const statusEl = document.getElementById('status');
+    const adminShell = document.getElementById('admin-shell');
     const rowsEl = document.getElementById('rows');
     const statsEl = document.getElementById('stats');
     const analyticsKpiEl = document.getElementById('analytics-kpi');
-    const analyticsTopDaysEl = document.getElementById('analytics-top-days');
+    const analyticsDailyActivityEl = document.getElementById('analytics-daily-activity');
+    const analyticsTopPathsEl = document.getElementById('analytics-top-paths');
+    const analyticsDayBreakdownEl = document.getElementById('analytics-day-breakdown');
+    const analyticsScrollBucketsEl = document.getElementById('analytics-scroll-buckets');
+    const analyticsPathEngagementEl = document.getElementById('analytics-path-engagement');
     const analyticsTopMediaEl = document.getElementById('analytics-top-media');
     const analyticsLangsEl = document.getElementById('analytics-langs');
     const analyticsEventsEl = document.getElementById('analytics-events');
@@ -355,6 +447,14 @@
     const setStatus = (msg, isError = false) => {
       statusEl.textContent = msg || '';
       statusEl.style.color = isError ? '#9f1b1b' : '#6f6156';
+    };
+    const setPasswordStatus = (msg, isError = false) => {
+      if (!passwordStatusEl) return;
+      passwordStatusEl.textContent = msg || '';
+      passwordStatusEl.style.color = isError ? '#9f1b1b' : '#6f6156';
+    };
+    const setAuthenticatedUi = (authenticated) => {
+      if (adminShell) adminShell.hidden = !authenticated;
     };
     const setSettingsStatus = (msg, isError = false) => {
       if (!settingsStatusEl) return;
@@ -518,7 +618,7 @@
     const login = async () => {
       const token = getToken();
       if (!token) {
-        setStatus('Inserisci il token admin.', true);
+        setStatus('Inserisci la password admin.', true);
         return false;
       }
       const response = await fetch('/api/admin/session', {
@@ -539,13 +639,52 @@
       setStatus('Sessione admin chiusa.');
     };
 
+    const changePassword = async () => {
+      const currentPassword = String(currentPasswordInput && currentPasswordInput.value ? currentPasswordInput.value : '').trim();
+      const newPassword = String(newPasswordInput && newPasswordInput.value ? newPasswordInput.value : '').trim();
+      const confirmPassword = String(confirmPasswordInput && confirmPasswordInput.value ? confirmPasswordInput.value : '').trim();
+      if (!currentPassword) {
+        setPasswordStatus('Inserisci la password attuale.', true);
+        return;
+      }
+      if (newPassword.length < 8) {
+        setPasswordStatus('La nuova password deve avere almeno 8 caratteri.', true);
+        return;
+      }
+      if (newPassword !== confirmPassword) {
+        setPasswordStatus('Le due password nuove non coincidono.', true);
+        return;
+      }
+      setPasswordStatus('Salvataggio nuova password...');
+      const response = await fetch('/api/admin/password', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          current_password: currentPassword,
+          new_password: newPassword,
+        }),
+      });
+      if (!response.ok) {
+        const text = await response.text();
+        throw new Error(text || `HTTP ${response.status}`);
+      }
+      tokenInput.value = newPassword;
+      window.localStorage.setItem(STORAGE_KEY, newPassword);
+      if (currentPasswordInput) currentPasswordInput.value = '';
+      if (newPasswordInput) newPasswordInput.value = '';
+      if (confirmPasswordInput) confirmPasswordInput.value = '';
+      setPasswordStatus('Password aggiornata.');
+    };
+
     const fetchAdminComments = async () => {
       const authenticated = await checkSession();
       if (!authenticated) {
+        setAuthenticatedUi(false);
         setStatus('Non autenticato. Premi Accedi.', true);
         rowsEl.innerHTML = '';
         return null;
       }
+      setAuthenticatedUi(true);
       const params = new URLSearchParams();
       const target = String(targetFilter.value || '').trim();
       const q = String(searchInput.value || '').trim();
@@ -664,6 +803,31 @@
       el.innerHTML = list.map((row) => `<div>${mapFn(row)}</div>`).join('');
     };
 
+    const renderAnalyticsTable = (el, columns, rows) => {
+      if (!el) return;
+      const list = Array.isArray(rows) ? rows : [];
+      if (!list.length) {
+        el.innerHTML = '<div class="analytics-note">Nessun dato.</div>';
+        return;
+      }
+      const head = columns.map((col) => `<th>${escapeHtml(col.label)}</th>`).join('');
+      const body = list.map((row) => {
+        const cells = columns.map((col) => {
+          const value = typeof col.render === 'function' ? col.render(row) : row[col.key];
+          return `<td>${value}</td>`;
+        }).join('');
+        return `<tr>${cells}</tr>`;
+      }).join('');
+      el.innerHTML = `
+        <div class="analytics-table-wrap">
+          <table class="analytics-table">
+            <thead><tr>${head}</tr></thead>
+            <tbody>${body}</tbody>
+          </table>
+        </div>
+      `;
+    };
+
     const refreshAnalytics = async () => {
       try {
         const response = await fetch('/api/admin/analytics/overview?days=30', { cache: 'no-store' });
@@ -687,7 +851,33 @@
             <span>Unici 30gg: <strong>${Number(totals.unique_cid_30d || 0)}</strong></span>
           `;
         }
-        renderSimpleList(analyticsTopDaysEl, payload.top_days, (row) => `${escapeHtml(row.day_key)}: <strong>${Number(row.n || 0)}</strong>`);
+        renderAnalyticsTable(analyticsDailyActivityEl, [
+          { label: 'Giorno', render: (row) => escapeHtml(row.day || '-') },
+          { label: 'Unici', render: (row) => `<strong>${Number(row.unique_visitors || 0)}</strong>` },
+          { label: 'Visite', render: (row) => Number(row.page_views || 0) },
+          { label: 'Tappe', render: (row) => Number(row.day_views || 0) },
+          { label: 'Media', render: (row) => Number(row.media_opens || 0) },
+          { label: 'Scroll', render: (row) => Number(row.scroll_events || 0) }
+        ], payload.daily_activity);
+        renderAnalyticsTable(analyticsTopPathsEl, [
+          { label: 'Pagina', render: (row) => `<span class="target">${escapeHtml(row.path || '-')}</span>` },
+          { label: 'Unici', render: (row) => `<strong>${Number(row.unique_visitors || 0)}</strong>` },
+          { label: 'View', render: (row) => Number(row.page_views || 0) }
+        ], payload.top_paths);
+        renderAnalyticsTable(analyticsDayBreakdownEl, [
+          { label: 'Tappa', render: (row) => `<span class="target">${escapeHtml(row.day_key || '-')}</span>` },
+          { label: 'Lettori', render: (row) => `<strong>${Number(row.unique_readers || 0)}</strong>` },
+          { label: 'View', render: (row) => Number(row.day_views || 0) },
+          { label: 'Media', render: (row) => Number(row.media_opens || 0) },
+          { label: 'Max scroll', render: (row) => row.max_scroll_bucket ? `${Number(row.max_scroll_bucket)}%` : '-' }
+        ], payload.day_breakdown);
+        renderSimpleList(analyticsScrollBucketsEl, payload.scroll_buckets, (row) => `${Number(row.bucket || 0)}%: <strong>${Number(row.n || 0)}</strong>`);
+        renderAnalyticsTable(analyticsPathEngagementEl, [
+          { label: 'Pagina', render: (row) => `<span class="target">${escapeHtml(row.path || '-')}</span>` },
+          { label: 'Unici', render: (row) => `<strong>${Number(row.unique_visitors || 0)}</strong>` },
+          { label: 'Avg scroll', render: (row) => row.avg_scroll_bucket ? `${escapeHtml(row.avg_scroll_bucket)}%` : '-' },
+          { label: 'Max scroll', render: (row) => row.max_scroll_bucket ? `${Number(row.max_scroll_bucket)}%` : '-' }
+        ], payload.path_engagement);
         renderSimpleList(analyticsTopMediaEl, payload.top_media, (row) => `${escapeHtml(row.media_id)}: <strong>${Number(row.n || 0)}</strong>`);
         renderSimpleList(analyticsLangsEl, payload.langs, (row) => `${escapeHtml(row.lang || '-')}: <strong>${Number(row.n || 0)}</strong>`);
         renderSimpleList(analyticsEventsEl, payload.events_by_type, (row) => `${escapeHtml(row.event_type || '-')}: <strong>${Number(row.n || 0)}</strong>`);
@@ -758,15 +948,30 @@
     loginBtn.addEventListener('click', async () => {
       try {
         await login();
+        setAuthenticatedUi(true);
         setStatus('Autenticazione admin effettuata.');
         await refresh();
       } catch (err) {
+        setAuthenticatedUi(false);
         setStatus(`Login fallito: ${err.message || err}`, true);
       }
     });
     logoutBtn.addEventListener('click', async () => {
       try {
         await logout();
+        setAuthenticatedUi(false);
+        rowsEl.innerHTML = '';
+        setPasswordStatus('');
+        if (analyticsKpiEl) analyticsKpiEl.innerHTML = '';
+        if (analyticsDailyActivityEl) analyticsDailyActivityEl.innerHTML = '';
+        if (analyticsTopPathsEl) analyticsTopPathsEl.innerHTML = '';
+        if (analyticsDayBreakdownEl) analyticsDayBreakdownEl.innerHTML = '';
+        if (analyticsScrollBucketsEl) analyticsScrollBucketsEl.innerHTML = '';
+        if (analyticsPathEngagementEl) analyticsPathEngagementEl.innerHTML = '';
+        if (analyticsTopMediaEl) analyticsTopMediaEl.innerHTML = '';
+        if (analyticsLangsEl) analyticsLangsEl.innerHTML = '';
+        if (analyticsEventsEl) analyticsEventsEl.innerHTML = '';
+        setStatus('Sessione admin chiusa.');
       } catch (err) {
         setStatus(`Logout fallito: ${err.message || err}`, true);
       }
@@ -776,6 +981,15 @@
       targetFilter.value = '';
       refresh().catch(() => {});
     });
+    if (changePasswordBtn) {
+      changePasswordBtn.addEventListener('click', async () => {
+        try {
+          await changePassword();
+        } catch (err) {
+          setPasswordStatus(`Cambio password fallito: ${err.message || err}`, true);
+        }
+      });
+    }
     if (analyticsHealthBtn) {
       analyticsHealthBtn.addEventListener('click', () => {
         testAnalyticsHealth().catch(() => {});
@@ -824,16 +1038,31 @@
       if (event.key === 'Enter') refresh().catch(() => {});
     });
     tokenInput.addEventListener('keydown', (event) => {
-      if (event.key === 'Enter') refresh().catch(() => {});
+      if (event.key === 'Enter') {
+        loginBtn.click();
+      }
+    });
+    [currentPasswordInput, newPasswordInput, confirmPasswordInput].forEach((input) => {
+      if (!input) return;
+      input.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+          changePassword().catch((err) => {
+            setPasswordStatus(`Cambio password fallito: ${err.message || err}`, true);
+          });
+        }
+      });
     });
 
     const savedToken = window.localStorage.getItem(STORAGE_KEY) || '';
     if (savedToken) tokenInput.value = savedToken;
+    setAuthenticatedUi(false);
     checkSession().then((ok) => {
       if (ok) {
+        setAuthenticatedUi(true);
         setStatus('Sessione admin attiva.');
         refresh().catch(() => {});
       } else if (savedToken) {
+        setAuthenticatedUi(false);
         setStatus('Sessione non attiva. Premi Accedi per autenticarti.');
       }
     }).catch(() => {});

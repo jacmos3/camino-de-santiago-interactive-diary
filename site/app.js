@@ -943,6 +943,9 @@ let trackingQueue = [];
 let trackingFlushTimer = null;
 let trackingInitialized = false;
 let trackingLifecycleBound = false;
+let trackedDayViews = new Set();
+let trackedScrollMilestones = new Set();
+const TRACKING_SCROLL_BUCKETS = [25, 50, 75, 90];
 
 const getTrackingConsentState = () => {
   try {
@@ -1011,6 +1014,8 @@ const resetTrackingState = () => {
   trackingSessionId = '';
   trackingQueue = [];
   trackingInitialized = false;
+  trackedDayViews = new Set();
+  trackedScrollMilestones = new Set();
   if (trackingFlushTimer) {
     window.clearTimeout(trackingFlushTimer);
     trackingFlushTimer = null;
@@ -1065,6 +1070,45 @@ const initializeTracking = () => {
   trackEvent('page_view', {
     day_key: detectDayKeyFromLocation(),
     meta: { view: 'diary' }
+  });
+};
+
+const trackDayViewOnce = (dayKey, meta = {}) => {
+  if (!TRACKING_ENABLED || !hasTrackingConsent()) return;
+  const normalizedDayKey = String(dayKey || '').trim();
+  if (!normalizedDayKey) return;
+  if (trackedDayViews.has(normalizedDayKey)) return;
+  trackedDayViews.add(normalizedDayKey);
+  trackEvent('day_view', {
+    day_key: normalizedDayKey,
+    meta
+  });
+};
+
+const trackScrollMilestones = (dayKey = '', meta = {}) => {
+  if (!TRACKING_ENABLED || !hasTrackingConsent()) return;
+  const scrollHeight = Math.max(
+    document.documentElement ? document.documentElement.scrollHeight : 0,
+    document.body ? document.body.scrollHeight : 0
+  );
+  const viewportHeight = Math.max(window.innerHeight || 0, 1);
+  const scrollableHeight = Math.max(1, scrollHeight - viewportHeight);
+  const rawDepth = ((window.scrollY || 0) + viewportHeight) / scrollHeight;
+  const depthPercent = Math.max(0, Math.min(100, Math.round(rawDepth * 100)));
+  TRACKING_SCROLL_BUCKETS.forEach((bucket) => {
+    if (depthPercent < bucket) return;
+    const key = `${window.location.pathname || '/'}|${String(dayKey || '')}|${bucket}`;
+    if (trackedScrollMilestones.has(key)) return;
+    trackedScrollMilestones.add(key);
+    trackEvent('scroll_depth', {
+      day_key: String(dayKey || ''),
+      meta: {
+        bucket,
+        depth_percent: depthPercent,
+        scrollable_height: scrollableHeight,
+        ...meta
+      }
+    });
   });
 };
 
@@ -4895,6 +4939,11 @@ const observeSections = () => {
     updatePeopleStripActiveState(peopleKey);
     const isPrologue = dayKey === PROLOGUE_UI_KEY;
     setMiniMapHidden(isPrologue);
+    trackDayViewOnce(dayKey, {
+      source: 'scroll',
+      index: idx,
+      zone: isPrologue ? 'prologue' : 'day'
+    });
     if (!isPrologue) {
       renderMiniMap(dayKey, idx);
       scheduleDayUrlUpdate(dayKey);
@@ -4963,6 +5012,12 @@ const observeSections = () => {
       ticking = true;
       window.requestAnimationFrame(syncFromScroll);
     }
+    const activeSection = sections[Math.max(0, activeIndex)] || null;
+    const activeDayKey = activeSection ? activeSection.id.replace('day-', '') : '';
+    trackScrollMilestones(activeDayKey, {
+      source: 'diary_scroll',
+      zone: activeSpecialZone || 'day'
+    });
     scheduleDayHeavySync();
     window.requestAnimationFrame(recoverVisibleLazyMedia);
     window.requestAnimationFrame(ensureVisibleDayTrackMaps);

@@ -130,7 +130,7 @@ Elementi essenziali del deploy:
 ## Configurazione
 
 Variabili comuni in `.env`:
-- `ADMIN_PASSWORD`
+- `COMMENTS_ADMIN_TOKEN` oppure `CAMMINO_ADMIN_TOKEN` oppure `ADMIN_TOKEN`
 - `CONTACT_TO_EMAIL`
 - `CONTACT_FROM_EMAIL`
 - `ANALYTICS_ENABLED`
@@ -138,6 +138,8 @@ Variabili comuni in `.env`:
 - `LEGACY_SITE_HOSTS` (opzionale, lista separata da virgole dei vecchi host da redirigere)
 - `ANALYTICS_MYSQL_HOST`, `ANALYTICS_MYSQL_PORT`
 - `ANALYTICS_MYSQL_DB`, `ANALYTICS_MYSQL_USER`, `ANALYTICS_MYSQL_PASSWORD`
+
+La password admin iniziale puo vivere in `.env` tramite uno dei token sopra. Se poi la cambi dal pannello admin, il nuovo hash viene salvato in `data/admin_auth.json` e ha precedenza sul valore di `.env`.
 
 Se analytics e abilitato ma il DB non e raggiungibile, il sito resta operativo: fallisce solo la parte analytics.
 
