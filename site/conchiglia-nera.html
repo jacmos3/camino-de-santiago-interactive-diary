@@ -3,7 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Conchiglia Nera · Admin Commenti</title>
+  <title>Conchiglia Nera · Admin</title>
+  <meta name="robots" content="noindex,nofollow,noarchive,nosnippet,noimageindex,max-image-preview:none" />
   <style>
     :root {
       --bg: #f4efe7;
@@ -77,6 +78,120 @@
       flex-wrap: wrap;
       color: var(--muted);
       font-size: 0.9rem;
+    }
+    .stats strong {
+      color: var(--ink);
+    }
+    .analytics-toolbar {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .analytics-field {
+      display: grid;
+      gap: 5px;
+    }
+    .analytics-field label {
+      font-size: 0.76rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+    .analytics-toolbar__actions {
+      display: flex;
+      gap: 8px;
+      align-items: end;
+      flex-wrap: wrap;
+    }
+    .analytics-summary {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.45;
+    }
+    .analytics-chart-panel {
+      border: 1px solid rgba(31, 26, 22, 0.08);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.78);
+      padding: 12px;
+      margin-top: 12px;
+    }
+    .analytics-metric-tabs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+    .analytics-metric-btn {
+      border-radius: 999px;
+      background: #fff;
+      border: 1px solid rgba(31, 26, 22, 0.14);
+      color: var(--muted);
+      padding: 7px 12px;
+      font-size: 0.88rem;
+      font-weight: 600;
+    }
+    .analytics-metric-btn.is-active {
+      background: rgba(31, 95, 91, 0.1);
+      border-color: rgba(31, 95, 91, 0.35);
+      color: var(--accent);
+    }
+    .analytics-chart-summary {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: baseline;
+      margin-bottom: 10px;
+    }
+    .analytics-chart-summary strong {
+      font-size: 1.25rem;
+      color: var(--ink);
+    }
+    .analytics-chart-scroll {
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding-bottom: 6px;
+    }
+    .analytics-chart-scroll svg {
+      display: block;
+      min-width: 100%;
+      height: 280px;
+    }
+    .analytics-chart__bar {
+      fill: rgba(31, 95, 91, 0.18);
+      cursor: pointer;
+      transition: fill 0.12s ease;
+    }
+    .analytics-chart__bar:hover,
+    .analytics-chart__bar.is-active {
+      fill: rgba(31, 95, 91, 0.38);
+    }
+    .analytics-chart__line {
+      fill: none;
+      stroke-width: 2.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .analytics-chart__point {
+      cursor: pointer;
+    }
+    .analytics-chart__point circle {
+      fill: #fffaf2;
+      stroke-width: 2.5;
+    }
+    .analytics-chart__grid line {
+      stroke: rgba(31, 26, 22, 0.08);
+      stroke-width: 1;
+    }
+    .analytics-chart__axis text {
+      fill: var(--muted);
+      font-size: 11px;
+    }
+    .analytics-empty {
+      color: var(--muted);
+      font-size: 0.9rem;
+      padding: 10px 0;
     }
     .analytics-grid {
       display: grid;
@@ -242,6 +357,9 @@
       .controls {
         grid-template-columns: 1fr;
       }
+      .analytics-toolbar {
+        grid-template-columns: 1fr;
+      }
       .analytics-grid {
         grid-template-columns: 1fr;
       }
@@ -259,7 +377,7 @@
     <div class="head">
       <div>
         <h1>Conchiglia Nera</h1>
-        <div class="subtitle">Pannello admin per monitorare e cancellare i commenti</div>
+        <div class="subtitle">Pannello admin per commenti, configurazione e analytics leggibili</div>
       </div>
       <a href="index.html">Torna al sito</a>
     </div>
@@ -345,11 +463,68 @@
           <button id="analytics-health-btn" class="btn-primary" type="button">Test connessione DB</button>
           <span id="analytics-health-status" style="font-size:0.9rem;color:#6f6156;"></span>
         </div>
+        <div class="analytics-toolbar">
+          <div class="analytics-field">
+            <label for="analytics-period">Periodo</label>
+            <select id="analytics-period">
+              <option value="7">Ultimi 7 giorni</option>
+              <option value="30" selected>Ultimi 30 giorni</option>
+              <option value="90">Ultimi 90 giorni</option>
+              <option value="180">Ultimi 180 giorni</option>
+              <option value="365">Ultimi 365 giorni</option>
+              <option value="custom">Intervallo personalizzato</option>
+            </select>
+          </div>
+          <div class="analytics-field">
+            <label for="analytics-from">Da</label>
+            <input id="analytics-from" type="date" />
+          </div>
+          <div class="analytics-field">
+            <label for="analytics-to">A</label>
+            <input id="analytics-to" type="date" />
+          </div>
+          <div class="analytics-field">
+            <label for="analytics-group-by">Raggruppa</label>
+            <select id="analytics-group-by">
+              <option value="day" selected>Giorno</option>
+              <option value="month">Mese</option>
+            </select>
+          </div>
+          <div class="analytics-field">
+            <label for="analytics-lang-filter">Lingua</label>
+            <select id="analytics-lang-filter">
+              <option value="">Tutte</option>
+            </select>
+          </div>
+          <div class="analytics-field">
+            <label for="analytics-page-filter">Pagina</label>
+            <select id="analytics-page-filter">
+              <option value="">Tutte le pagine</option>
+            </select>
+          </div>
+          <div class="analytics-field">
+            <label for="analytics-day-filter">Tappa letta</label>
+            <select id="analytics-day-filter">
+              <option value="">Tutte le tappe</option>
+            </select>
+          </div>
+          <div class="analytics-toolbar__actions">
+            <button id="analytics-apply-btn" class="btn-primary" type="button">Applica filtri</button>
+            <button id="analytics-reset-btn" type="button">Reset analytics</button>
+          </div>
+        </div>
+        <div id="analytics-filter-summary" class="analytics-summary"></div>
         <div id="analytics-kpi" class="stats"></div>
-        <p class="analytics-note">Qui devi capire se il diario viene davvero letto, dove si ferma la gente e quali sezioni attirano attenzione. I contatori grezzi da soli non bastano.</p>
+        <div class="analytics-chart-panel">
+          <div class="analytics-metric-tabs" id="analytics-metric-tabs"></div>
+          <div id="analytics-chart-summary" class="analytics-chart-summary"></div>
+          <div class="analytics-chart-scroll">
+            <div id="analytics-chart"></div>
+          </div>
+        </div>
         <div class="analytics-grid">
           <div class="analytics-panel">
-            <h4>Attività giorno per giorno</h4>
+            <h4>Serie temporale</h4>
             <div id="analytics-daily-activity"></div>
           </div>
           <div class="analytics-panel">
@@ -357,11 +532,11 @@
             <div id="analytics-top-paths"></div>
           </div>
           <div class="analytics-panel">
-            <h4>Giorni del diario letti</h4>
+            <h4>Tappe del diario lette</h4>
             <div id="analytics-day-breakdown"></div>
           </div>
           <div class="analytics-panel">
-            <h4>Profondità e distribuzione lettura</h4>
+            <h4>Profondità di scroll</h4>
             <div id="analytics-scroll-buckets" class="analytics-list"></div>
             <div id="analytics-path-engagement" style="margin-top:10px;"></div>
           </div>
@@ -398,6 +573,10 @@
     const rowsEl = document.getElementById('rows');
     const statsEl = document.getElementById('stats');
     const analyticsKpiEl = document.getElementById('analytics-kpi');
+    const analyticsFilterSummaryEl = document.getElementById('analytics-filter-summary');
+    const analyticsMetricTabsEl = document.getElementById('analytics-metric-tabs');
+    const analyticsChartSummaryEl = document.getElementById('analytics-chart-summary');
+    const analyticsChartEl = document.getElementById('analytics-chart');
     const analyticsDailyActivityEl = document.getElementById('analytics-daily-activity');
     const analyticsTopPathsEl = document.getElementById('analytics-top-paths');
     const analyticsDayBreakdownEl = document.getElementById('analytics-day-breakdown');
@@ -409,6 +588,15 @@
     const analyticsHealthBtn = document.getElementById('analytics-health-btn');
     const analyticsHealthStatusEl = document.getElementById('analytics-health-status');
     const analyticsHealthDetailsEl = document.getElementById('analytics-health-details');
+    const analyticsPeriodEl = document.getElementById('analytics-period');
+    const analyticsFromEl = document.getElementById('analytics-from');
+    const analyticsToEl = document.getElementById('analytics-to');
+    const analyticsGroupByEl = document.getElementById('analytics-group-by');
+    const analyticsLangFilterEl = document.getElementById('analytics-lang-filter');
+    const analyticsPageFilterEl = document.getElementById('analytics-page-filter');
+    const analyticsDayFilterEl = document.getElementById('analytics-day-filter');
+    const analyticsApplyBtn = document.getElementById('analytics-apply-btn');
+    const analyticsResetBtn = document.getElementById('analytics-reset-btn');
     const settingShowFooterTemplateCta = document.getElementById('setting-show-footer-template-cta');
     const saveSettingsBtn = document.getElementById('save-settings-btn');
     const settingsStatusEl = document.getElementById('settings-status');
@@ -424,6 +612,21 @@
     let dayOgOverrides = {};
     let selectedDayOgId = '';
     let selectedDayOgDate = '';
+    const ANALYTICS_METRICS = {
+      unique_visitors: { label: 'Visitatori unici', color: '#1f5f5b' },
+      unique_sessions: { label: 'Sessioni', color: '#8a5a2b' },
+      page_views: { label: 'Page view', color: '#2f6ca8' },
+      day_views: { label: 'Tappe lette', color: '#b06c36' },
+      media_opens: { label: 'Media aperti', color: '#7d5fb2' },
+      comment_submit: { label: 'Commenti inviati', color: '#9f1b1b' },
+      share_click: { label: 'Condivisioni', color: '#5f6c46' },
+      scroll_events: { label: 'Eventi scroll', color: '#6d5a4d' },
+    };
+    const analyticsState = {
+      metric: 'unique_visitors',
+      payload: null,
+      pinnedBucket: '',
+    };
 
     const escapeHtml = (value) => String(value || '')
       .replace(/&/g, '&amp;')
@@ -442,6 +645,28 @@
         hour: '2-digit',
         minute: '2-digit'
       }).format(new Date(ts));
+    };
+
+    const formatNumber = (value) => new Intl.NumberFormat('it-IT').format(Number(value || 0));
+
+    const formatBucketLabel = (iso, groupBy = 'day') => {
+      const value = String(iso || '').trim();
+      if (!value) return '-';
+      const fullIso = groupBy === 'month' ? `${value.slice(0, 7)}-01T12:00:00Z` : `${value.slice(0, 10)}T12:00:00Z`;
+      const ts = Date.parse(fullIso);
+      if (Number.isNaN(ts)) return escapeHtml(value);
+      return new Intl.DateTimeFormat('it-IT', groupBy === 'month'
+        ? { month: 'short', year: 'numeric', timeZone: 'UTC' }
+        : { day: '2-digit', month: 'short', year: 'numeric', timeZone: 'UTC' }
+      ).format(new Date(ts));
+    };
+
+    const todayInputValue = () => {
+      const now = new Date();
+      const year = now.getFullYear();
+      const month = String(now.getMonth() + 1).padStart(2, '0');
+      const day = String(now.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
     };
 
     const setStatus = (msg, isError = false) => {
@@ -797,7 +1022,7 @@
       if (!el) return;
       const list = Array.isArray(rows) ? rows : [];
       if (!list.length) {
-        el.innerHTML = '<div>Nessun dato.</div>';
+        el.innerHTML = '<div class="analytics-empty">Nessun dato.</div>';
         return;
       }
       el.innerHTML = list.map((row) => `<div>${mapFn(row)}</div>`).join('');
@@ -807,7 +1032,7 @@
       if (!el) return;
       const list = Array.isArray(rows) ? rows : [];
       if (!list.length) {
-        el.innerHTML = '<div class="analytics-note">Nessun dato.</div>';
+        el.innerHTML = '<div class="analytics-empty">Nessun dato.</div>';
         return;
       }
       const head = columns.map((col) => `<th>${escapeHtml(col.label)}</th>`).join('');
@@ -828,61 +1053,330 @@
       `;
     };
 
+    const applyAnalyticsPeriodDates = (force = false) => {
+      if (!analyticsPeriodEl || !analyticsFromEl || !analyticsToEl) return;
+      const isCustom = analyticsPeriodEl.value === 'custom';
+      analyticsFromEl.disabled = !isCustom;
+      analyticsToEl.disabled = !isCustom;
+      if (isCustom && !force) return;
+      const days = Math.max(1, Number(analyticsPeriodEl.value || 30));
+      const end = new Date();
+      const start = new Date(end);
+      start.setDate(end.getDate() - (days - 1));
+      const toInput = (date) => {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+      };
+      analyticsFromEl.value = toInput(start);
+      analyticsToEl.value = toInput(end);
+    };
+
+    const populateAnalyticsSelect = (el, rows, key, emptyLabel, formatLabel) => {
+      if (!el) return;
+      const current = String(el.value || '');
+      const list = Array.isArray(rows) ? rows : [];
+      const options = [`<option value="">${escapeHtml(emptyLabel)}</option>`];
+      list.forEach((row) => {
+        const value = String(row && row[key] ? row[key] : '').trim();
+        if (!value) return;
+        const label = typeof formatLabel === 'function' ? formatLabel(row) : value;
+        const selected = current === value ? ' selected' : '';
+        options.push(`<option value="${escapeHtml(value)}"${selected}>${escapeHtml(label)}</option>`);
+      });
+      el.innerHTML = options.join('');
+      if (current && list.some((row) => String(row && row[key] ? row[key] : '').trim() === current)) {
+        el.value = current;
+      }
+    };
+
+    const getAnalyticsQuery = () => {
+      const params = new URLSearchParams();
+      const period = String(analyticsPeriodEl && analyticsPeriodEl.value ? analyticsPeriodEl.value : '30');
+      if (period === 'custom') {
+        const from = String(analyticsFromEl && analyticsFromEl.value ? analyticsFromEl.value : '').trim();
+        const to = String(analyticsToEl && analyticsToEl.value ? analyticsToEl.value : '').trim();
+        if (from) params.set('from', from);
+        if (to) params.set('to', to);
+      } else {
+        params.set('days', period);
+      }
+      const groupBy = String(analyticsGroupByEl && analyticsGroupByEl.value ? analyticsGroupByEl.value : 'day');
+      params.set('group_by', groupBy);
+      const lang = String(analyticsLangFilterEl && analyticsLangFilterEl.value ? analyticsLangFilterEl.value : '').trim();
+      const path = String(analyticsPageFilterEl && analyticsPageFilterEl.value ? analyticsPageFilterEl.value : '').trim();
+      const dayKey = String(analyticsDayFilterEl && analyticsDayFilterEl.value ? analyticsDayFilterEl.value : '').trim();
+      if (lang) params.set('lang', lang);
+      if (path) params.set('path', path);
+      if (dayKey) params.set('day_key', dayKey);
+      return params;
+    };
+
+    const renderAnalyticsMetricTabs = () => {
+      if (!analyticsMetricTabsEl) return;
+      analyticsMetricTabsEl.innerHTML = Object.entries(ANALYTICS_METRICS).map(([key, meta]) => `
+        <button class="analytics-metric-btn${analyticsState.metric === key ? ' is-active' : ''}" type="button" data-metric="${escapeHtml(key)}">
+          ${escapeHtml(meta.label)}
+        </button>
+      `).join('');
+    };
+
+    const updateAnalyticsChartSummary = (point, payload) => {
+      if (!analyticsChartSummaryEl) return;
+      if (!point) {
+        analyticsChartSummaryEl.innerHTML = '<span class="analytics-empty">Nessun dato nel periodo selezionato.</span>';
+        return;
+      }
+      const metricKey = analyticsState.metric;
+      const metricMeta = ANALYTICS_METRICS[metricKey] || ANALYTICS_METRICS.unique_visitors;
+      const filters = payload && payload.filters ? payload.filters : {};
+      analyticsChartSummaryEl.innerHTML = `
+        <span>${escapeHtml(formatBucketLabel(point.bucket_start, filters.group_by || 'day'))}</span>
+        <strong>${formatNumber(point[metricKey] || 0)}</strong>
+        <span>${escapeHtml(metricMeta.label)}</span>
+        <span>Visitatori: <strong>${formatNumber(point.unique_visitors || 0)}</strong></span>
+        <span>Page view: <strong>${formatNumber(point.page_views || 0)}</strong></span>
+        <span>Tappe lette: <strong>${formatNumber(point.day_views || 0)}</strong></span>
+        <span>Scroll medio: <strong>${point.avg_scroll_bucket ? `${escapeHtml(point.avg_scroll_bucket)}%` : '—'}</strong></span>
+      `;
+    };
+
+    const renderAnalyticsChart = (payload) => {
+      if (!analyticsChartEl) return;
+      const series = Array.isArray(payload && payload.series) ? payload.series : [];
+      const filters = payload && payload.filters ? payload.filters : {};
+      if (!series.length) {
+        analyticsChartEl.innerHTML = '<div class="analytics-empty">Nessun dato nel range selezionato.</div>';
+        updateAnalyticsChartSummary(null, payload);
+        return;
+      }
+      const metricKey = analyticsState.metric in ANALYTICS_METRICS ? analyticsState.metric : 'unique_visitors';
+      const metricMeta = ANALYTICS_METRICS[metricKey];
+      const values = series.map((row) => Number(row && row[metricKey] ? row[metricKey] : 0));
+      const maxValue = Math.max(1, ...values);
+      const width = Math.max(720, series.length * 46);
+      const height = 280;
+      const pad = { top: 20, right: 18, bottom: 42, left: 46 };
+      const plotWidth = width - pad.left - pad.right;
+      const plotHeight = height - pad.top - pad.bottom;
+      const step = plotWidth / Math.max(1, series.length);
+      const barWidth = Math.max(14, step * 0.58);
+      const labelEvery = Math.max(1, Math.ceil(series.length / 8));
+      const points = series.map((row, index) => {
+        const value = Number(row && row[metricKey] ? row[metricKey] : 0);
+        const x = pad.left + (step * index) + (step / 2);
+        const y = pad.top + plotHeight - ((value / maxValue) * plotHeight);
+        return { row, index, value, x, y };
+      });
+      const linePath = points.map((point, index) => `${index === 0 ? 'M' : 'L'} ${point.x} ${point.y}`).join(' ');
+      const pinned = analyticsState.pinnedBucket && series.find((row) => String(row.bucket_start || '') === analyticsState.pinnedBucket)
+        ? series.find((row) => String(row.bucket_start || '') === analyticsState.pinnedBucket)
+        : series[series.length - 1];
+      analyticsState.pinnedBucket = String(pinned && pinned.bucket_start ? pinned.bucket_start : '');
+
+      const gridLines = Array.from({ length: 5 }, (_, idx) => {
+        const ratio = idx / 4;
+        const y = pad.top + (plotHeight * ratio);
+        const value = Math.round(maxValue * (1 - ratio));
+        return `
+          <line x1="${pad.left}" y1="${y}" x2="${width - pad.right}" y2="${y}"></line>
+          <text x="${pad.left - 8}" y="${y + 4}" text-anchor="end">${escapeHtml(formatNumber(value))}</text>
+        `;
+      }).join('');
+
+      const bars = points.map((point) => {
+        const rectHeight = Math.max(2, plotHeight - (point.y - pad.top));
+        const isActive = String(point.row.bucket_start || '') === analyticsState.pinnedBucket;
+        const label = formatBucketLabel(point.row.bucket_start, filters.group_by || 'day');
+        return `
+          <g class="analytics-chart__point-group" data-bucket="${escapeHtml(point.row.bucket_start || '')}">
+            <rect
+              class="analytics-chart__bar${isActive ? ' is-active' : ''}"
+              x="${point.x - (barWidth / 2)}"
+              y="${point.y}"
+              width="${barWidth}"
+              height="${rectHeight}"
+              rx="6"
+              data-bucket="${escapeHtml(point.row.bucket_start || '')}"
+            >
+              <title>${escapeHtml(label)} · ${escapeHtml(metricMeta.label)}: ${escapeHtml(formatNumber(point.value))}</title>
+            </rect>
+            <circle
+              class="analytics-chart__point"
+              cx="${point.x}"
+              cy="${point.y}"
+              r="4.5"
+              data-bucket="${escapeHtml(point.row.bucket_start || '')}"
+            >
+              <title>${escapeHtml(label)} · ${escapeHtml(metricMeta.label)}: ${escapeHtml(formatNumber(point.value))}</title>
+            </circle>
+          </g>
+        `;
+      }).join('');
+
+      const xLabels = points.map((point, index) => {
+        if (index % labelEvery !== 0 && index !== points.length - 1) return '';
+        return `<text x="${point.x}" y="${height - 12}" text-anchor="middle">${escapeHtml(formatBucketLabel(point.row.bucket_start, filters.group_by || 'day'))}</text>`;
+      }).join('');
+
+      analyticsChartEl.innerHTML = `
+        <svg viewBox="0 0 ${width} ${height}" role="img" aria-label="Grafico analytics ${escapeHtml(metricMeta.label)}">
+          <g class="analytics-chart__grid">${gridLines}</g>
+          <g class="analytics-chart__axis">${xLabels}</g>
+          <path class="analytics-chart__line" d="${linePath}" stroke="${metricMeta.color}"></path>
+          <g class="analytics-chart__bars">${bars}</g>
+        </svg>
+      `;
+
+      updateAnalyticsChartSummary(pinned, payload);
+      analyticsChartEl.querySelectorAll('[data-bucket]').forEach((node) => {
+        node.addEventListener('mouseenter', () => {
+          const bucket = String(node.getAttribute('data-bucket') || '');
+          const row = series.find((item) => String(item.bucket_start || '') === bucket);
+          if (row) updateAnalyticsChartSummary(row, payload);
+        });
+        node.addEventListener('mouseleave', () => {
+          const row = series.find((item) => String(item.bucket_start || '') === analyticsState.pinnedBucket) || series[series.length - 1];
+          updateAnalyticsChartSummary(row, payload);
+        });
+        node.addEventListener('click', () => {
+          analyticsState.pinnedBucket = String(node.getAttribute('data-bucket') || '');
+          renderAnalyticsChart(payload);
+        });
+      });
+    };
+
+    const renderAnalyticsFilterSummary = (payload) => {
+      if (!analyticsFilterSummaryEl) return;
+      const filters = payload && payload.filters ? payload.filters : {};
+      const totals = payload && payload.totals ? payload.totals : {};
+      const parts = [
+        `Periodo: ${escapeHtml(filters.from || '—')} → ${escapeHtml(filters.to || '—')} (${formatNumber(filters.period_days || 0)} giorni)`,
+        `Raggruppamento: ${filters.group_by === 'month' ? 'mese' : 'giorno'}`,
+      ];
+      if (filters.lang) parts.push(`Lingua: ${escapeHtml(filters.lang)}`);
+      if (filters.path) parts.push(`Pagina: ${escapeHtml(filters.path)}`);
+      if (filters.day_key) parts.push(`Tappa: ${escapeHtml(filters.day_key)}`);
+      parts.push(`Visitatori unici: <strong>${formatNumber(totals.unique_visitors || 0)}</strong>`);
+      parts.push(`Sessioni: <strong>${formatNumber(totals.unique_sessions || 0)}</strong>`);
+      analyticsFilterSummaryEl.innerHTML = parts.join(' · ');
+    };
+
+    const renderAnalyticsPayload = (payload) => {
+      analyticsState.payload = payload;
+      const totals = payload && payload.totals ? payload.totals : {};
+      const filters = payload && payload.filters ? payload.filters : {};
+      const options = payload && payload.filter_options ? payload.filter_options : {};
+
+      renderAnalyticsMetricTabs();
+      renderAnalyticsFilterSummary(payload);
+
+      if (analyticsKpiEl) {
+        analyticsKpiEl.innerHTML = `
+          <span>Visitatori unici: <strong>${formatNumber(totals.unique_visitors || 0)}</strong></span>
+          <span>Sessioni: <strong>${formatNumber(totals.unique_sessions || 0)}</strong></span>
+          <span>Page view: <strong>${formatNumber(totals.page_views || 0)}</strong></span>
+          <span>Tappe lette: <strong>${formatNumber(totals.day_views || 0)}</strong></span>
+          <span>Media aperti: <strong>${formatNumber(totals.media_opens || 0)}</strong></span>
+          <span>Commenti inviati: <strong>${formatNumber(totals.comment_submit || 0)}</strong></span>
+          <span>Scroll medio: <strong>${totals.avg_scroll_bucket ? `${escapeHtml(totals.avg_scroll_bucket)}%` : '—'}</strong></span>
+        `;
+      }
+
+      if (analyticsLangFilterEl) analyticsLangFilterEl.value = String(filters.lang || '');
+      populateAnalyticsSelect(analyticsLangFilterEl, options.langs, 'lang', 'Tutte', (row) => `${String(row.lang || '-')} (${formatNumber(row.n || 0)})`);
+      populateAnalyticsSelect(analyticsPageFilterEl, options.paths, 'path', 'Tutte le pagine', (row) => `${String(row.path || '-')} (${formatNumber(row.n || 0)})`);
+      populateAnalyticsSelect(analyticsDayFilterEl, options.day_keys, 'day_key', 'Tutte le tappe', (row) => `${String(row.day_key || '-')} (${formatNumber(row.n || 0)})`);
+      if (analyticsLangFilterEl && filters.lang) analyticsLangFilterEl.value = String(filters.lang);
+      if (analyticsPageFilterEl && filters.path) analyticsPageFilterEl.value = String(filters.path);
+      if (analyticsDayFilterEl && filters.day_key) analyticsDayFilterEl.value = String(filters.day_key);
+
+      renderAnalyticsChart(payload);
+
+      renderAnalyticsTable(analyticsDailyActivityEl, [
+        { label: filters.group_by === 'month' ? 'Mese' : 'Giorno', render: (row) => `<strong>${escapeHtml(formatBucketLabel(row.bucket_start || '-', filters.group_by || 'day'))}</strong>` },
+        { label: 'Visitatori', render: (row) => formatNumber(row.unique_visitors || 0) },
+        { label: 'Sessioni', render: (row) => formatNumber(row.unique_sessions || 0) },
+        { label: 'Page view', render: (row) => formatNumber(row.page_views || 0) },
+        { label: 'Tappe', render: (row) => formatNumber(row.day_views || 0) },
+        { label: 'Media', render: (row) => formatNumber(row.media_opens || 0) },
+        { label: 'Scroll medio', render: (row) => row.avg_scroll_bucket ? `${escapeHtml(row.avg_scroll_bucket)}%` : '—' },
+      ], (payload.series || []).slice().reverse());
+
+      renderAnalyticsTable(analyticsTopPathsEl, [
+        { label: 'Pagina', render: (row) => `<span class="target">${escapeHtml(row.path || '-')}</span>` },
+        { label: 'Visitatori', render: (row) => `<strong>${formatNumber(row.unique_visitors || 0)}</strong>` },
+        { label: 'Sessioni', render: (row) => formatNumber(row.unique_sessions || 0) },
+        { label: 'View', render: (row) => formatNumber(row.page_views || 0) },
+        { label: 'Ultima vista', render: (row) => escapeHtml(formatDate(row.last_seen || '')) || '—' },
+      ], payload.top_paths);
+
+      renderAnalyticsTable(analyticsDayBreakdownEl, [
+        { label: 'Tappa', render: (row) => `<span class="target">${escapeHtml(row.day_key || '-')}</span>` },
+        { label: 'Lettori', render: (row) => `<strong>${formatNumber(row.unique_readers || 0)}</strong>` },
+        { label: 'View', render: (row) => formatNumber(row.day_views || 0) },
+        { label: 'Media', render: (row) => formatNumber(row.media_opens || 0) },
+        { label: 'Scroll medio', render: (row) => row.avg_scroll_bucket ? `${escapeHtml(row.avg_scroll_bucket)}%` : '—' },
+        { label: 'Max', render: (row) => row.max_scroll_bucket ? `${formatNumber(row.max_scroll_bucket)}%` : '—' },
+      ], payload.day_breakdown);
+
+      renderSimpleList(analyticsScrollBucketsEl, payload.scroll_buckets, (row) => `${formatNumber(row.bucket || 0)}% · <strong>${formatNumber(row.n || 0)}</strong> eventi`);
+
+      renderAnalyticsTable(analyticsPathEngagementEl, [
+        { label: 'Pagina', render: (row) => `<span class="target">${escapeHtml(row.path || '-')}</span>` },
+        { label: 'Visitatori', render: (row) => `<strong>${formatNumber(row.unique_visitors || 0)}</strong>` },
+        { label: 'Page view', render: (row) => formatNumber(row.page_views || 0) },
+        { label: 'Scroll medio', render: (row) => row.avg_scroll_bucket ? `${escapeHtml(row.avg_scroll_bucket)}%` : '—' },
+        { label: 'Max', render: (row) => row.max_scroll_bucket ? `${formatNumber(row.max_scroll_bucket)}%` : '—' },
+      ], payload.path_engagement);
+
+      renderSimpleList(analyticsTopMediaEl, payload.top_media, (row) => `
+        <span class="target">${escapeHtml(row.media_id || '-')}</span>
+        <span> · aperture <strong>${formatNumber(row.n || 0)}</strong></span>
+        <span> · visitatori <strong>${formatNumber(row.unique_visitors || 0)}</strong></span>
+      `);
+
+      renderSimpleList(analyticsLangsEl, payload.langs, (row) => `${escapeHtml(row.lang || '-')} · <strong>${formatNumber(row.n || 0)}</strong> eventi`);
+      renderSimpleList(analyticsEventsEl, payload.events_by_type, (row) => `${escapeHtml(row.event_type || '-')} · <strong>${formatNumber(row.n || 0)}</strong>`);
+    };
+
+    const resetAnalyticsState = () => {
+      analyticsState.metric = 'unique_visitors';
+      analyticsState.payload = null;
+      analyticsState.pinnedBucket = '';
+      if (analyticsPeriodEl) analyticsPeriodEl.value = '30';
+      if (analyticsGroupByEl) analyticsGroupByEl.value = 'day';
+      if (analyticsLangFilterEl) analyticsLangFilterEl.value = '';
+      if (analyticsPageFilterEl) analyticsPageFilterEl.value = '';
+      if (analyticsDayFilterEl) analyticsDayFilterEl.value = '';
+      applyAnalyticsPeriodDates(true);
+      renderAnalyticsMetricTabs();
+    };
+
     const refreshAnalytics = async () => {
       try {
-        const response = await fetch('/api/admin/analytics/overview?days=30', { cache: 'no-store' });
+        const params = getAnalyticsQuery();
+        const response = await fetch(`/api/admin/analytics/overview?${params.toString()}`, { cache: 'no-store' });
         if (!response.ok) {
-          if (response.status === 404) return;
-          throw new Error(`HTTP ${response.status}`);
+          if (response.status === 404) {
+            if (analyticsKpiEl) analyticsKpiEl.innerHTML = '<span>Analytics non disponibili nel runtime locale Node. Qui li vedi solo sul backend PHP/MySQL.</span>';
+            if (analyticsChartEl) analyticsChartEl.innerHTML = '<div class="analytics-empty">Endpoint analytics non disponibile in questo runtime.</div>';
+            return;
+          }
+          const text = await response.text();
+          throw new Error(text || `HTTP ${response.status}`);
         }
         const payload = await response.json();
         if (payload && payload.disabled) {
           if (analyticsKpiEl) analyticsKpiEl.innerHTML = '<span>Tracking disabilitato</span>';
+          if (analyticsChartEl) analyticsChartEl.innerHTML = '<div class="analytics-empty">Tracking disabilitato.</div>';
           return;
         }
-        const totals = payload && payload.totals ? payload.totals : {};
-        if (analyticsKpiEl) {
-          analyticsKpiEl.innerHTML = `
-            <span>Eventi 24h: <strong>${Number(totals.events_24h || 0)}</strong></span>
-            <span>Eventi 7gg: <strong>${Number(totals.events_7d || 0)}</strong></span>
-            <span>Eventi 30gg: <strong>${Number(totals.events_30d || 0)}</strong></span>
-            <span>Unici 24h: <strong>${Number(totals.unique_cid_24h || 0)}</strong></span>
-            <span>Unici 7gg: <strong>${Number(totals.unique_cid_7d || 0)}</strong></span>
-            <span>Unici 30gg: <strong>${Number(totals.unique_cid_30d || 0)}</strong></span>
-          `;
-        }
-        renderAnalyticsTable(analyticsDailyActivityEl, [
-          { label: 'Giorno', render: (row) => escapeHtml(row.day || '-') },
-          { label: 'Unici', render: (row) => `<strong>${Number(row.unique_visitors || 0)}</strong>` },
-          { label: 'Visite', render: (row) => Number(row.page_views || 0) },
-          { label: 'Tappe', render: (row) => Number(row.day_views || 0) },
-          { label: 'Media', render: (row) => Number(row.media_opens || 0) },
-          { label: 'Scroll', render: (row) => Number(row.scroll_events || 0) }
-        ], payload.daily_activity);
-        renderAnalyticsTable(analyticsTopPathsEl, [
-          { label: 'Pagina', render: (row) => `<span class="target">${escapeHtml(row.path || '-')}</span>` },
-          { label: 'Unici', render: (row) => `<strong>${Number(row.unique_visitors || 0)}</strong>` },
-          { label: 'View', render: (row) => Number(row.page_views || 0) }
-        ], payload.top_paths);
-        renderAnalyticsTable(analyticsDayBreakdownEl, [
-          { label: 'Tappa', render: (row) => `<span class="target">${escapeHtml(row.day_key || '-')}</span>` },
-          { label: 'Lettori', render: (row) => `<strong>${Number(row.unique_readers || 0)}</strong>` },
-          { label: 'View', render: (row) => Number(row.day_views || 0) },
-          { label: 'Media', render: (row) => Number(row.media_opens || 0) },
-          { label: 'Max scroll', render: (row) => row.max_scroll_bucket ? `${Number(row.max_scroll_bucket)}%` : '-' }
-        ], payload.day_breakdown);
-        renderSimpleList(analyticsScrollBucketsEl, payload.scroll_buckets, (row) => `${Number(row.bucket || 0)}%: <strong>${Number(row.n || 0)}</strong>`);
-        renderAnalyticsTable(analyticsPathEngagementEl, [
-          { label: 'Pagina', render: (row) => `<span class="target">${escapeHtml(row.path || '-')}</span>` },
-          { label: 'Unici', render: (row) => `<strong>${Number(row.unique_visitors || 0)}</strong>` },
-          { label: 'Avg scroll', render: (row) => row.avg_scroll_bucket ? `${escapeHtml(row.avg_scroll_bucket)}%` : '-' },
-          { label: 'Max scroll', render: (row) => row.max_scroll_bucket ? `${Number(row.max_scroll_bucket)}%` : '-' }
-        ], payload.path_engagement);
-        renderSimpleList(analyticsTopMediaEl, payload.top_media, (row) => `${escapeHtml(row.media_id)}: <strong>${Number(row.n || 0)}</strong>`);
-        renderSimpleList(analyticsLangsEl, payload.langs, (row) => `${escapeHtml(row.lang || '-')}: <strong>${Number(row.n || 0)}</strong>`);
-        renderSimpleList(analyticsEventsEl, payload.events_by_type, (row) => `${escapeHtml(row.event_type || '-')}: <strong>${Number(row.n || 0)}</strong>`);
+        renderAnalyticsPayload(payload || {});
       } catch (err) {
         if (analyticsKpiEl) analyticsKpiEl.innerHTML = `<span style="color:#9f1b1b;">Errore analytics: ${escapeHtml(err.message || err)}</span>`;
+        if (analyticsChartEl) analyticsChartEl.innerHTML = '<div class="analytics-empty" style="color:#9f1b1b;">Impossibile caricare il grafico.</div>';
       }
     };
 
@@ -963,6 +1457,9 @@
         rowsEl.innerHTML = '';
         setPasswordStatus('');
         if (analyticsKpiEl) analyticsKpiEl.innerHTML = '';
+        if (analyticsFilterSummaryEl) analyticsFilterSummaryEl.innerHTML = '';
+        if (analyticsChartSummaryEl) analyticsChartSummaryEl.innerHTML = '';
+        if (analyticsChartEl) analyticsChartEl.innerHTML = '';
         if (analyticsDailyActivityEl) analyticsDailyActivityEl.innerHTML = '';
         if (analyticsTopPathsEl) analyticsTopPathsEl.innerHTML = '';
         if (analyticsDayBreakdownEl) analyticsDayBreakdownEl.innerHTML = '';
@@ -971,6 +1468,7 @@
         if (analyticsTopMediaEl) analyticsTopMediaEl.innerHTML = '';
         if (analyticsLangsEl) analyticsLangsEl.innerHTML = '';
         if (analyticsEventsEl) analyticsEventsEl.innerHTML = '';
+        resetAnalyticsState();
         setStatus('Sessione admin chiusa.');
       } catch (err) {
         setStatus(`Logout fallito: ${err.message || err}`, true);
@@ -995,6 +1493,49 @@
         testAnalyticsHealth().catch(() => {});
       });
     }
+    if (analyticsPeriodEl) {
+      analyticsPeriodEl.addEventListener('change', () => {
+        applyAnalyticsPeriodDates();
+      });
+    }
+    if (analyticsApplyBtn) {
+      analyticsApplyBtn.addEventListener('click', () => {
+        refreshAnalytics().catch(() => {});
+      });
+    }
+    if (analyticsResetBtn) {
+      analyticsResetBtn.addEventListener('click', () => {
+        resetAnalyticsState();
+        refreshAnalytics().catch(() => {});
+      });
+    }
+    if (analyticsMetricTabsEl) {
+      analyticsMetricTabsEl.addEventListener('click', (event) => {
+        const btn = event.target.closest('[data-metric]');
+        if (!btn) return;
+        const metric = String(btn.getAttribute('data-metric') || '').trim();
+        if (!metric || !(metric in ANALYTICS_METRICS)) return;
+        analyticsState.metric = metric;
+        renderAnalyticsMetricTabs();
+        if (analyticsState.payload) {
+          renderAnalyticsChart(analyticsState.payload);
+        }
+      });
+    }
+    [analyticsLangFilterEl, analyticsPageFilterEl, analyticsDayFilterEl, analyticsGroupByEl].forEach((el) => {
+      if (!el) return;
+      el.addEventListener('change', () => {
+        refreshAnalytics().catch(() => {});
+      });
+    });
+    [analyticsFromEl, analyticsToEl].forEach((el) => {
+      if (!el) return;
+      el.addEventListener('change', () => {
+        if (analyticsPeriodEl) analyticsPeriodEl.value = 'custom';
+        applyAnalyticsPeriodDates();
+        refreshAnalytics().catch(() => {});
+      });
+    });
     if (saveSettingsBtn) {
       saveSettingsBtn.addEventListener('click', async () => {
         try {
@@ -1055,6 +1596,7 @@
 
     const savedToken = window.localStorage.getItem(STORAGE_KEY) || '';
     if (savedToken) tokenInput.value = savedToken;
+    resetAnalyticsState();
     setAuthenticatedUi(false);
     checkSession().then((ok) => {
       if (ok) {

@@ -418,6 +418,120 @@ function analytics_normalize_event_type(mixed $value): string {
   return preg_match('/^[a-z0-9._:-]{2,60}$/i', $v) ? strtolower($v) : '';
 }
 
+function analytics_normalize_lang(mixed $value): string {
+  $v = analytics_string($value, 8);
+  return preg_match('/^[a-z]{2,8}$/i', $v) ? strtolower($v) : '';
+}
+
+function analytics_normalize_group_by(mixed $value): string {
+  $v = strtolower(analytics_string($value, 16));
+  return $v === 'month' ? 'month' : 'day';
+}
+
+function analytics_normalize_date(mixed $value): string {
+  $v = analytics_string($value, 10);
+  return preg_match('/^\d{4}-\d{2}-\d{2}$/', $v) ? $v : '';
+}
+
+function analytics_parse_overview_filters(): array {
+  $utc = new DateTimeZone('UTC');
+  $days = max(1, min(365, (int)($_GET['days'] ?? 30)));
+  $fromRaw = analytics_normalize_date($_GET['from'] ?? '');
+  $toRaw = analytics_normalize_date($_GET['to'] ?? '');
+  $today = new DateTimeImmutable('today', $utc);
+
+  $fromDate = $fromRaw !== '' ? new DateTimeImmutable($fromRaw, $utc) : null;
+  $toDate = $toRaw !== '' ? new DateTimeImmutable($toRaw, $utc) : null;
+
+  if (!$fromDate && !$toDate) {
+    $toDate = $today;
+    $fromDate = $today->sub(new DateInterval('P' . max(0, $days - 1) . 'D'));
+  } elseif ($fromDate && !$toDate) {
+    $toDate = $fromDate->add(new DateInterval('P' . max(0, $days - 1) . 'D'));
+  } elseif (!$fromDate && $toDate) {
+    $fromDate = $toDate->sub(new DateInterval('P' . max(0, $days - 1) . 'D'));
+  }
+
+  if (!$fromDate || !$toDate) {
+    $toDate = $today;
+    $fromDate = $today->sub(new DateInterval('P29D'));
+  }
+
+  if ($fromDate > $toDate) {
+    [$fromDate, $toDate] = [$toDate, $fromDate];
+  }
+
+  $periodDays = ((int)$fromDate->diff($toDate)->format('%a')) + 1;
+
+  return [
+    'days' => $days,
+    'from' => $fromDate->format('Y-m-d'),
+    'to' => $toDate->format('Y-m-d'),
+    'from_ts' => $fromDate->format('Y-m-d 00:00:00'),
+    'to_ts' => $toDate->add(new DateInterval('P1D'))->format('Y-m-d 00:00:00'),
+    'period_days' => $periodDays,
+    'group_by' => analytics_normalize_group_by($_GET['group_by'] ?? ''),
+    'lang' => analytics_normalize_lang($_GET['lang'] ?? ''),
+    'path' => analytics_string($_GET['path'] ?? '', 300),
+    'day_key' => analytics_normalize_day_key($_GET['day_key'] ?? ''),
+  ];
+}
+
+function analytics_build_where(array $filters, array &$params, bool $includePath = true, bool $includeDayKey = true): string {
+  $clauses = [
+    'created_at >= :from_ts',
+    'created_at < :to_ts',
+  ];
+  $params[':from_ts'] = (string)$filters['from_ts'];
+  $params[':to_ts'] = (string)$filters['to_ts'];
+
+  $lang = (string)($filters['lang'] ?? '');
+  if ($lang !== '') {
+    $clauses[] = 'lang = :lang';
+    $params[':lang'] = $lang;
+  }
+
+  if ($includePath) {
+    $path = (string)($filters['path'] ?? '');
+    if ($path !== '') {
+      $clauses[] = 'path = :path';
+      $params[':path'] = $path;
+    }
+  }
+
+  if ($includeDayKey) {
+    $dayKey = (string)($filters['day_key'] ?? '');
+    if ($dayKey !== '') {
+      $clauses[] = 'day_key = :day_key';
+      $params[':day_key'] = $dayKey;
+    }
+  }
+
+  return implode(' AND ', $clauses);
+}
+
+function analytics_query_all(PDO $pdo, string $sql, array $params = []): array {
+  $stmt = $pdo->prepare($sql);
+  foreach ($params as $key => $value) {
+    if ($value === null) {
+      $stmt->bindValue($key, null, PDO::PARAM_NULL);
+      continue;
+    }
+    if (is_int($value)) {
+      $stmt->bindValue($key, $value, PDO::PARAM_INT);
+      continue;
+    }
+    $stmt->bindValue($key, (string)$value, PDO::PARAM_STR);
+  }
+  $stmt->execute();
+  return $stmt->fetchAll(PDO::FETCH_ASSOC) ?: [];
+}
+
+function analytics_query_row(PDO $pdo, string $sql, array $params = []): array {
+  $rows = analytics_query_all($pdo, $sql, $params);
+  return $rows[0] ?? [];
+}
+
 function load_store(): array {
   $path = comments_store_path();
   if (!is_file($path)) {
@@ -943,129 +1057,111 @@ if ($path === '/admin/analytics/overview') {
   if (!analytics_enabled()) respond(200, ['disabled' => true]);
   try {
     $pdo = analytics_pdo();
-    $periodDays = max(1, min(365, (int)($_GET['days'] ?? 30)));
+    $filters = analytics_parse_overview_filters();
+    $params = [];
+    $whereSql = analytics_build_where($filters, $params);
+    $optionParams = [];
+    $optionWhereSql = analytics_build_where($filters, $optionParams, false, false);
+    $bucketSql = $filters['group_by'] === 'month'
+      ? "DATE_FORMAT(created_at, '%Y-%m-01')"
+      : "DATE(created_at)";
 
-    $countSince = static function (PDO $pdo, int $days): int {
-      $days = max(1, min(3650, $days));
-      $sql = "SELECT COUNT(*) FROM analytics_events WHERE created_at >= DATE_SUB(UTC_TIMESTAMP(), INTERVAL {$days} DAY)";
-      $stmt = $pdo->query($sql);
-      return (int)$stmt->fetchColumn();
-    };
-    $uniqueSince = static function (PDO $pdo, int $days): int {
-      $days = max(1, min(3650, $days));
-      $sql = "SELECT COUNT(DISTINCT cid) FROM analytics_events WHERE created_at >= DATE_SUB(UTC_TIMESTAMP(), INTERVAL {$days} DAY)";
-      $stmt = $pdo->query($sql);
-      return (int)$stmt->fetchColumn();
-    };
-
-    $tot24 = $countSince($pdo, 1);
-    $tot7 = $countSince($pdo, 7);
-    $tot30 = $countSince($pdo, 30);
-    $uniq24 = $uniqueSince($pdo, 1);
-    $uniq7 = $uniqueSince($pdo, 7);
-    $uniq30 = $uniqueSince($pdo, 30);
-    $period = max(1, min(365, $periodDays));
-
-    $topDaysStmt = $pdo->query("
-      SELECT day_key, COUNT(*) AS n
-      FROM analytics_events
-      WHERE created_at >= DATE_SUB(UTC_TIMESTAMP(), INTERVAL {$period} DAY)
-        AND event_type IN ('day_view', 'page_view')
-        AND day_key IS NOT NULL
-        AND day_key <> ''
-      GROUP BY day_key
-      ORDER BY n DESC
-      LIMIT 12
-    ");
-    $topDays = $topDaysStmt->fetchAll(PDO::FETCH_ASSOC) ?: [];
-
-    $topMediaStmt = $pdo->query("
-      SELECT media_id, COUNT(*) AS n
-      FROM analytics_events
-      WHERE created_at >= DATE_SUB(UTC_TIMESTAMP(), INTERVAL {$period} DAY)
-        AND event_type = 'media_open'
-        AND media_id IS NOT NULL
-        AND media_id <> ''
-      GROUP BY media_id
-      ORDER BY n DESC
-      LIMIT 12
-    ");
-    $topMedia = $topMediaStmt->fetchAll(PDO::FETCH_ASSOC) ?: [];
-
-    $langStmt = $pdo->query("
-      SELECT lang, COUNT(*) AS n
-      FROM analytics_events
-      WHERE created_at >= DATE_SUB(UTC_TIMESTAMP(), INTERVAL {$period} DAY)
-        AND lang IS NOT NULL
-        AND lang <> ''
-      GROUP BY lang
-      ORDER BY n DESC
-      LIMIT 12
-    ");
-    $langs = $langStmt->fetchAll(PDO::FETCH_ASSOC) ?: [];
-
-    $eventStmt = $pdo->query("
-      SELECT event_type, COUNT(*) AS n
-      FROM analytics_events
-      WHERE created_at >= DATE_SUB(UTC_TIMESTAMP(), INTERVAL {$period} DAY)
-      GROUP BY event_type
-      ORDER BY n DESC
-      LIMIT 20
-    ");
-    $events = $eventStmt->fetchAll(PDO::FETCH_ASSOC) ?: [];
-
-    $dailyActivityStmt = $pdo->query("
+    $totals = analytics_query_row($pdo, "
       SELECT
-        DATE(created_at) AS day,
         COUNT(*) AS total_events,
         COUNT(DISTINCT cid) AS unique_visitors,
+        COUNT(DISTINCT session_id) AS unique_sessions,
         SUM(CASE WHEN event_type = 'page_view' THEN 1 ELSE 0 END) AS page_views,
         SUM(CASE WHEN event_type = 'day_view' THEN 1 ELSE 0 END) AS day_views,
         SUM(CASE WHEN event_type = 'media_open' THEN 1 ELSE 0 END) AS media_opens,
         SUM(CASE WHEN event_type = 'comments_open' THEN 1 ELSE 0 END) AS comments_open,
         SUM(CASE WHEN event_type = 'comment_submit' THEN 1 ELSE 0 END) AS comment_submit,
         SUM(CASE WHEN event_type = 'share_click' THEN 1 ELSE 0 END) AS share_click,
-        SUM(CASE WHEN event_type = 'scroll_depth' THEN 1 ELSE 0 END) AS scroll_events
-      FROM analytics_events
-      WHERE created_at >= DATE_SUB(UTC_TIMESTAMP(), INTERVAL {$period} DAY)
-      GROUP BY DATE(created_at)
-      ORDER BY day DESC
-      LIMIT 60
-    ");
-    $dailyActivity = $dailyActivityStmt->fetchAll(PDO::FETCH_ASSOC) ?: [];
-
-    $topPathsStmt = $pdo->query("
-      SELECT
-        path,
-        COUNT(*) AS page_views,
-        COUNT(DISTINCT cid) AS unique_visitors
-      FROM analytics_events
-      WHERE created_at >= DATE_SUB(UTC_TIMESTAMP(), INTERVAL {$period} DAY)
-        AND event_type = 'page_view'
-        AND path IS NOT NULL
-        AND path <> ''
-      GROUP BY path
-      ORDER BY unique_visitors DESC, page_views DESC, path ASC
-      LIMIT 20
-    ");
-    $topPaths = $topPathsStmt->fetchAll(PDO::FETCH_ASSOC) ?: [];
-
-    $dayBreakdownStmt = $pdo->query("
-      SELECT
-        day_key,
-        COUNT(DISTINCT cid) AS unique_readers,
-        SUM(CASE WHEN event_type = 'day_view' THEN 1 ELSE 0 END) AS day_views,
-        SUM(CASE WHEN event_type = 'media_open' THEN 1 ELSE 0 END) AS media_opens,
-        SUM(CASE WHEN event_type = 'comments_open' THEN 1 ELSE 0 END) AS comments_open,
-        SUM(CASE WHEN event_type = 'comment_submit' THEN 1 ELSE 0 END) AS comment_submit,
-        SUM(CASE WHEN event_type = 'share_click' THEN 1 ELSE 0 END) AS share_click,
+        SUM(CASE WHEN event_type = 'scroll_depth' THEN 1 ELSE 0 END) AS scroll_events,
+        ROUND(AVG(CASE
+          WHEN event_type = 'scroll_depth'
+            THEN CAST(JSON_UNQUOTE(JSON_EXTRACT(metadata_json, '$.bucket')) AS UNSIGNED)
+          ELSE NULL
+        END), 1) AS avg_scroll_bucket,
         MAX(CASE
           WHEN event_type = 'scroll_depth'
             THEN CAST(JSON_UNQUOTE(JSON_EXTRACT(metadata_json, '$.bucket')) AS UNSIGNED)
           ELSE NULL
         END) AS max_scroll_bucket
       FROM analytics_events
-      WHERE created_at >= DATE_SUB(UTC_TIMESTAMP(), INTERVAL {$period} DAY)
+      WHERE {$whereSql}
+    ", $params);
+
+    $series = analytics_query_all($pdo, "
+      SELECT
+        {$bucketSql} AS bucket_start,
+        COUNT(*) AS total_events,
+        COUNT(DISTINCT cid) AS unique_visitors,
+        COUNT(DISTINCT session_id) AS unique_sessions,
+        SUM(CASE WHEN event_type = 'page_view' THEN 1 ELSE 0 END) AS page_views,
+        SUM(CASE WHEN event_type = 'day_view' THEN 1 ELSE 0 END) AS day_views,
+        SUM(CASE WHEN event_type = 'media_open' THEN 1 ELSE 0 END) AS media_opens,
+        SUM(CASE WHEN event_type = 'comments_open' THEN 1 ELSE 0 END) AS comments_open,
+        SUM(CASE WHEN event_type = 'comment_submit' THEN 1 ELSE 0 END) AS comment_submit,
+        SUM(CASE WHEN event_type = 'share_click' THEN 1 ELSE 0 END) AS share_click,
+        SUM(CASE WHEN event_type = 'scroll_depth' THEN 1 ELSE 0 END) AS scroll_events,
+        ROUND(AVG(CASE
+          WHEN event_type = 'scroll_depth'
+            THEN CAST(JSON_UNQUOTE(JSON_EXTRACT(metadata_json, '$.bucket')) AS UNSIGNED)
+          ELSE NULL
+        END), 1) AS avg_scroll_bucket,
+        MAX(CASE
+          WHEN event_type = 'scroll_depth'
+            THEN CAST(JSON_UNQUOTE(JSON_EXTRACT(metadata_json, '$.bucket')) AS UNSIGNED)
+          ELSE NULL
+        END) AS max_scroll_bucket
+      FROM analytics_events
+      WHERE {$whereSql}
+      GROUP BY bucket_start
+      ORDER BY bucket_start ASC
+      LIMIT 400
+    ", $params);
+
+    $topPaths = analytics_query_all($pdo, "
+      SELECT
+        path,
+        COUNT(*) AS page_views,
+        COUNT(DISTINCT cid) AS unique_visitors,
+        COUNT(DISTINCT session_id) AS unique_sessions,
+        MAX(created_at) AS last_seen
+      FROM analytics_events
+      WHERE {$whereSql}
+        AND event_type = 'page_view'
+        AND path IS NOT NULL
+        AND path <> ''
+      GROUP BY path
+      ORDER BY unique_visitors DESC, page_views DESC, path ASC
+      LIMIT 40
+    ", $params);
+
+    $dayBreakdown = analytics_query_all($pdo, "
+      SELECT
+        day_key,
+        COUNT(DISTINCT cid) AS unique_readers,
+        COUNT(DISTINCT session_id) AS unique_sessions,
+        SUM(CASE WHEN event_type = 'day_view' THEN 1 ELSE 0 END) AS day_views,
+        SUM(CASE WHEN event_type = 'media_open' THEN 1 ELSE 0 END) AS media_opens,
+        SUM(CASE WHEN event_type = 'comments_open' THEN 1 ELSE 0 END) AS comments_open,
+        SUM(CASE WHEN event_type = 'comment_submit' THEN 1 ELSE 0 END) AS comment_submit,
+        SUM(CASE WHEN event_type = 'share_click' THEN 1 ELSE 0 END) AS share_click,
+        ROUND(AVG(CASE
+          WHEN event_type = 'scroll_depth'
+            THEN CAST(JSON_UNQUOTE(JSON_EXTRACT(metadata_json, '$.bucket')) AS UNSIGNED)
+          ELSE NULL
+        END), 1) AS avg_scroll_bucket,
+        MAX(CASE
+          WHEN event_type = 'scroll_depth'
+            THEN CAST(JSON_UNQUOTE(JSON_EXTRACT(metadata_json, '$.bucket')) AS UNSIGNED)
+          ELSE NULL
+        END) AS max_scroll_bucket,
+        MAX(created_at) AS last_seen
+      FROM analytics_events
+      WHERE {$whereSql}
         AND day_key IS NOT NULL
         AND day_key <> ''
       GROUP BY day_key
@@ -1074,72 +1170,148 @@ if ($path === '/admin/analytics/overview') {
          OR comments_open > 0
          OR comment_submit > 0
          OR share_click > 0
-         OR max_scroll_bucket IS NOT NULL
-      ORDER BY unique_readers DESC, day_views DESC, day_key DESC
-      LIMIT 30
-    ");
-    $dayBreakdown = $dayBreakdownStmt->fetchAll(PDO::FETCH_ASSOC) ?: [];
+         OR avg_scroll_bucket IS NOT NULL
+      ORDER BY day_key DESC, unique_readers DESC, day_views DESC
+      LIMIT 80
+    ", $params);
 
-    $scrollBucketsStmt = $pdo->query("
+    $scrollBuckets = analytics_query_all($pdo, "
       SELECT
         CAST(JSON_UNQUOTE(JSON_EXTRACT(metadata_json, '$.bucket')) AS UNSIGNED) AS bucket,
         COUNT(*) AS n
       FROM analytics_events
-      WHERE created_at >= DATE_SUB(UTC_TIMESTAMP(), INTERVAL {$period} DAY)
+      WHERE {$whereSql}
         AND event_type = 'scroll_depth'
       GROUP BY bucket
       ORDER BY bucket ASC
-    ");
-    $scrollBuckets = $scrollBucketsStmt->fetchAll(PDO::FETCH_ASSOC) ?: [];
+    ", $params);
 
-    $pathEngagementStmt = $pdo->query("
+    $pathEngagement = analytics_query_all($pdo, "
       SELECT
         path,
         COUNT(DISTINCT cid) AS unique_visitors,
+        COUNT(DISTINCT session_id) AS unique_sessions,
         SUM(CASE WHEN event_type = 'page_view' THEN 1 ELSE 0 END) AS page_views,
+        ROUND(AVG(CASE
+          WHEN event_type = 'scroll_depth'
+            THEN CAST(JSON_UNQUOTE(JSON_EXTRACT(metadata_json, '$.bucket')) AS UNSIGNED)
+          ELSE NULL
+        END), 1) AS avg_scroll_bucket,
         MAX(CASE
           WHEN event_type = 'scroll_depth'
             THEN CAST(JSON_UNQUOTE(JSON_EXTRACT(metadata_json, '$.bucket')) AS UNSIGNED)
           ELSE NULL
         END) AS max_scroll_bucket,
-        ROUND(AVG(CASE
-          WHEN event_type = 'scroll_depth'
-            THEN CAST(JSON_UNQUOTE(JSON_EXTRACT(metadata_json, '$.bucket')) AS UNSIGNED)
-          ELSE NULL
-        END), 1) AS avg_scroll_bucket
+        MAX(created_at) AS last_seen
       FROM analytics_events
-      WHERE created_at >= DATE_SUB(UTC_TIMESTAMP(), INTERVAL {$period} DAY)
+      WHERE {$whereSql}
         AND path IS NOT NULL
         AND path <> ''
         AND event_type IN ('page_view', 'scroll_depth')
       GROUP BY path
       ORDER BY unique_visitors DESC, page_views DESC, path ASC
-      LIMIT 20
-    ");
-    $pathEngagement = $pathEngagementStmt->fetchAll(PDO::FETCH_ASSOC) ?: [];
+      LIMIT 40
+    ", $params);
+
+    $topMedia = analytics_query_all($pdo, "
+      SELECT
+        media_id,
+        COUNT(*) AS n,
+        COUNT(DISTINCT cid) AS unique_visitors
+      FROM analytics_events
+      WHERE {$whereSql}
+        AND event_type = 'media_open'
+        AND media_id IS NOT NULL
+        AND media_id <> ''
+      GROUP BY media_id
+      ORDER BY n DESC, unique_visitors DESC, media_id ASC
+      LIMIT 30
+    ", $params);
+
+    $langs = analytics_query_all($pdo, "
+      SELECT lang, COUNT(*) AS n
+      FROM analytics_events
+      WHERE {$optionWhereSql}
+        AND lang IS NOT NULL
+        AND lang <> ''
+      GROUP BY lang
+      ORDER BY n DESC, lang ASC
+      LIMIT 12
+    ", $optionParams);
+
+    $events = analytics_query_all($pdo, "
+      SELECT event_type, COUNT(*) AS n
+      FROM analytics_events
+      WHERE {$whereSql}
+      GROUP BY event_type
+      ORDER BY n DESC, event_type ASC
+      LIMIT 30
+    ", $params);
+
+    $pathOptions = analytics_query_all($pdo, "
+      SELECT path, COUNT(*) AS n
+      FROM analytics_events
+      WHERE {$optionWhereSql}
+        AND event_type = 'page_view'
+        AND path IS NOT NULL
+        AND path <> ''
+      GROUP BY path
+      ORDER BY n DESC, path ASC
+      LIMIT 80
+    ", $optionParams);
+
+    $dayOptions = analytics_query_all($pdo, "
+      SELECT day_key, COUNT(*) AS n
+      FROM analytics_events
+      WHERE {$optionWhereSql}
+        AND day_key IS NOT NULL
+        AND day_key <> ''
+      GROUP BY day_key
+      ORDER BY day_key DESC
+      LIMIT 120
+    ", $optionParams);
 
     respond(200, [
-      'period_days' => $periodDays,
-      'totals' => [
-        'events_24h' => $tot24,
-        'events_7d' => $tot7,
-        'events_30d' => $tot30,
-        'unique_cid_24h' => $uniq24,
-        'unique_cid_7d' => $uniq7,
-        'unique_cid_30d' => $uniq30,
+      'filters' => [
+        'days' => $filters['days'],
+        'from' => $filters['from'],
+        'to' => $filters['to'],
+        'period_days' => $filters['period_days'],
+        'group_by' => $filters['group_by'],
+        'lang' => $filters['lang'],
+        'path' => $filters['path'],
+        'day_key' => $filters['day_key'],
       ],
-      'top_days' => $topDays,
-      'top_media' => $topMedia,
-      'langs' => $langs,
-      'events_by_type' => $events,
-      'daily_activity' => $dailyActivity,
+      'totals' => [
+        'total_events' => (int)($totals['total_events'] ?? 0),
+        'unique_visitors' => (int)($totals['unique_visitors'] ?? 0),
+        'unique_sessions' => (int)($totals['unique_sessions'] ?? 0),
+        'page_views' => (int)($totals['page_views'] ?? 0),
+        'day_views' => (int)($totals['day_views'] ?? 0),
+        'media_opens' => (int)($totals['media_opens'] ?? 0),
+        'comments_open' => (int)($totals['comments_open'] ?? 0),
+        'comment_submit' => (int)($totals['comment_submit'] ?? 0),
+        'share_click' => (int)($totals['share_click'] ?? 0),
+        'scroll_events' => (int)($totals['scroll_events'] ?? 0),
+        'avg_scroll_bucket' => $totals['avg_scroll_bucket'] === null ? null : (float)$totals['avg_scroll_bucket'],
+        'max_scroll_bucket' => $totals['max_scroll_bucket'] === null ? null : (int)$totals['max_scroll_bucket'],
+      ],
+      'series' => $series,
       'top_paths' => $topPaths,
       'day_breakdown' => $dayBreakdown,
       'scroll_buckets' => $scrollBuckets,
       'path_engagement' => $pathEngagement,
+      'top_media' => $topMedia,
+      'langs' => $langs,
+      'events_by_type' => $events,
+      'filter_options' => [
+        'langs' => $langs,
+        'paths' => $pathOptions,
+        'day_keys' => $dayOptions,
+      ],
     ]);
   } catch (Throwable $e) {
-    api_log_error('analytics/overview', $e, ['period_days' => $periodDays ?? null]);
+    api_log_error('analytics/overview', $e, ['filters' => $filters ?? null]);
     respond(500, ['error' => 'Cannot read analytics overview', 'detail' => api_debug_enabled() ? $e->getMessage() : null]);
   }
 }

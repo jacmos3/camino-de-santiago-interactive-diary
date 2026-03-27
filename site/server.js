@@ -47,6 +47,7 @@ const OG_IMAGE_HEIGHT = 630;
 const OG_IMAGE_TYPE = 'image/jpeg';
 const PROLOGUE_DATES = ['2019-06-02', '2019-06-03'];
 const PROLOGUE_TRACK_DATE = '2019-06-03';
+const CAMMINO_DAY_ONE_DATE = '2019-06-04';
 const DAY_PAGE_PATH_RE = /^\/(it|en|es|fr)\/day\/(\d{4}-\d{2}-\d{2})\/?$/i;
 const PROLOGUE_PAGE_PATH_RE = /^\/(it|en|es|fr)\/prologue\/?$/i;
 const MAP_PAGE_PATH_RE = /^\/(it|en|es|fr)\/map\/?$/i;
@@ -54,7 +55,7 @@ const PEOPLE_PAGE_PATH_RE = /^\/(it|en|es|fr)\/people\/?$/i;
 const CONTACT_PAGE_PATH_RE = /^\/(it|en|es|fr)\/contatti\/?$/i;
 const OFFER_PAGE_PATH_RE = /^\/(it|en|es|fr)\/crea-il-tuo-diario\/?$/i;
 const FREE_GUIDE_SLUG_BY_LANG = {
-  it: 'guida-gratuita',
+  it: 'guida-gratuita-al-cammino-di-santiago-francese',
   en: 'free-guide',
   es: 'guia-gratuita',
   fr: 'guide-gratuite'
@@ -62,9 +63,21 @@ const FREE_GUIDE_SLUG_BY_LANG = {
 const FREE_GUIDE_PATH_BY_LANG = Object.fromEntries(
   Object.entries(FREE_GUIDE_SLUG_BY_LANG).map(([lang, slug]) => [lang, `/${lang}/${slug}/`])
 );
+const LEGACY_FREE_GUIDE_PATHS = {
+  it: ['/it/guida-gratuita', '/it/guida-gratuita/']
+};
 const PRIVACY_PAGE_PATH_RE = /^\/privacy-policy\/?$/i;
 const COOKIE_POLICY_PATH_RE = /^\/cookie-policy\/?$/i;
 const TERMS_PAGE_PATH_RE = /^\/termini-e-condizioni\/?$/i;
+const DENIED_PUBLIC_PATHS = new Set([
+  '/readme.md',
+  '/server.js',
+  '/debug-headers.php',
+  '/data/admin_auth.json',
+  '/data/comments.json',
+  '/data/day_og_overrides.json',
+  '/data/ui_flags.json'
+]);
 
 function loadDotEnv(rootDir) {
   try {
@@ -188,6 +201,14 @@ function buildAbsoluteUrl(origin, pathValue) {
 function normalizePathname(pathname = '/') {
   const value = String(pathname || '/').replace(/\/+$/, '');
   return value || '/';
+}
+
+function isDeniedPublicPath(urlPath = '/') {
+  const pathname = normalizePathname(String(urlPath || '').split('?')[0].split('#')[0]).toLowerCase();
+  if (DENIED_PUBLIC_PATHS.has(pathname)) return true;
+  if (/^\/api\/logs(?:\/|$)/i.test(pathname)) return true;
+  if (/(^|\/)\.(?!well-known(?:\/|$))/i.test(pathname)) return true;
+  return false;
 }
 
 function matchLocalizedStaticPath(pathname, localizedPathByLang) {
@@ -798,6 +819,42 @@ function buildDayLabel(lang, dayNumber) {
   return `${prefix} ${num}`;
 }
 
+function isPrologueSourceDate(dateValue) {
+  return PROLOGUE_DATES.includes(String(dateValue || '').slice(0, 10));
+}
+
+function getCamminoDayNumber(dateValue) {
+  const dateKey = String(dateValue || '').slice(0, 10);
+  if (!dateKey || isPrologueSourceDate(dateKey)) return null;
+  const start = Date.parse(`${CAMMINO_DAY_ONE_DATE}T00:00:00Z`);
+  const current = Date.parse(`${dateKey}T00:00:00Z`);
+  if (Number.isNaN(start) || Number.isNaN(current)) return null;
+  const deltaDays = Math.round((current - start) / (24 * 60 * 60 * 1000));
+  return deltaDays >= 0 ? deltaDays + 1 : null;
+}
+
+function buildDayNavMeta(lang, day) {
+  const date = String(day && day.date ? day.date : '').slice(0, 10);
+  if (!date) return { href: '', label: '' };
+  if (isPrologueSourceDate(date)) {
+    const badgeByLang = {
+      it: 'Prologo',
+      en: 'Prologue',
+      es: 'Prólogo',
+      fr: 'Prologue'
+    };
+    return {
+      href: `/${lang}/prologue/`,
+      label: badgeByLang[lang] || badgeByLang.it
+    };
+  }
+  const number = getCamminoDayNumber(date);
+  return {
+    href: `/${lang}/day/${date}/`,
+    label: buildDayLabel(lang, number)
+  };
+}
+
 function renderRecommendations(recommendations) {
   const list = Array.isArray(recommendations) ? recommendations : [];
   if (!list.length) return '';
@@ -853,9 +910,10 @@ function buildDayPageHtml({ origin, lang, day, prevDay, nextDay, dayOgOverrides,
       commentsLoadError: 'Errore nel caricamento commenti',
       commentsSaveError: 'Errore durante il salvataggio commento',
       recommendations: 'Posti consigliati',
-      offerCtaTitle: 'Stai pianificando anche tu un cammino?',
-      offerCtaText: 'Se vuoi trasformare il tuo viaggio in un diario interattivo con mappa, media e tappe ordinate, qui trovi come funziona.',
-      offerCtaLink: 'Scopri come funziona'
+      offerCtaTitle: 'Stai pensando anche tu al Cammino?',
+      offerCtaText: 'Se leggendo questo diario senti che il Cammino ti sta chiamando, ma hai ancora bisogno di chiarirti un po’ le idee, inizia dalla guida gratuita.',
+      offerCtaLink: 'Scarica la guida gratuita',
+      offerCtaSecondary: 'Hai già fatto il Cammino? Vedi come trasformare anche tu il tuo viaggio in un diario memorabile!'
     },
     en: {
       titlePrefix: 'Camino Diary',
@@ -890,9 +948,10 @@ function buildDayPageHtml({ origin, lang, day, prevDay, nextDay, dayOgOverrides,
       commentsLoadError: 'Failed to load comments',
       commentsSaveError: 'Failed to save comment',
       recommendations: 'Recommended places',
-      offerCtaTitle: 'Do you like this format?',
-      offerCtaText: 'If you want to turn your own trip into an interactive diary with map, media and ordered stages, see how it works.',
-      offerCtaLink: 'See how it works'
+      offerCtaTitle: 'Thinking about the Camino too?',
+      offerCtaText: 'If reading this diary makes you feel the Camino might be calling you, but you still need to clarify a few things, start with the free guide.',
+      offerCtaLink: 'Download the free guide',
+      offerCtaSecondary: 'Already done the Camino? See how you can turn your trip into a memorable diary too!'
     },
     es: {
       titlePrefix: 'Diario del Camino',
@@ -927,9 +986,10 @@ function buildDayPageHtml({ origin, lang, day, prevDay, nextDay, dayOgOverrides,
       commentsLoadError: 'Error al cargar comentarios',
       commentsSaveError: 'Error al guardar el comentario',
       recommendations: 'Lugares recomendados',
-      offerCtaTitle: '¿Te gusta este formato?',
-      offerCtaText: 'Si quieres transformar también tu viaje en un diario interactivo con mapa, media y etapas ordenadas, mira cómo funciona.',
-      offerCtaLink: 'Descubre cómo funciona'
+      offerCtaTitle: '¿También estás pensando en el Camino?',
+      offerCtaText: 'Si al leer este diario sientes que el Camino te está llamando, pero todavía necesitas aclararte un poco, empieza por la guía gratuita.',
+      offerCtaLink: 'Descarga la guía gratuita',
+      offerCtaSecondary: '¿Ya has hecho el Camino? Mira cómo tú también puedes transformar tu viaje en un diario memorable'
     },
     fr: {
       titlePrefix: 'Journal du Chemin',
@@ -964,9 +1024,10 @@ function buildDayPageHtml({ origin, lang, day, prevDay, nextDay, dayOgOverrides,
       commentsLoadError: 'Erreur de chargement des commentaires',
       commentsSaveError: 'Erreur lors de l’enregistrement du commentaire',
       recommendations: 'Lieux conseillés',
-      offerCtaTitle: 'Ce format vous plaît ?',
-      offerCtaText: 'Si vous voulez transformer votre voyage en journal interactif avec carte, médias et étapes ordonnées, regardez comment cela fonctionne.',
-      offerCtaLink: 'Voir comment ça marche'
+      offerCtaTitle: 'Vous pensez vous aussi au Camino ?',
+      offerCtaText: 'Si la lecture de ce journal vous donne le sentiment que le Camino vous appelle, mais que vous avez encore besoin d’y voir un peu plus clair, commencez par le guide gratuit.',
+      offerCtaLink: 'Télécharger le guide gratuit',
+      offerCtaSecondary: 'Vous avez déjà fait le Camino ? Voyez comment, vous aussi, transformer votre voyage en un journal mémorable !'
     }
   };
   const ui = DAY_UI[lang] || DAY_UI.it;
@@ -995,7 +1056,14 @@ function buildDayPageHtml({ origin, lang, day, prevDay, nextDay, dayOgOverrides,
   const trackMapPath = String(options.trackMapPath || (trackDayKey ? `/${lang}/map/?day=${encodeURIComponent(trackDayKey)}` : `/${lang}/map/`));
   const dayMapData = options.dayMapData && typeof options.dayMapData === 'object' ? options.dayMapData : null;
   const dayMapDataJson = JSON.stringify(dayMapData || null).replace(/</g, '\\u003c');
-  const offerPath = String(options.offerPath || `/${lang}/crea-il-tuo-diario/`);
+  const freeGuideSlugs = {
+    it: 'guida-gratuita-al-cammino-di-santiago-francese',
+    en: 'free-guide',
+    es: 'guia-gratuita',
+    fr: 'guide-gratuite'
+  };
+  const offerPath = String(options.offerPath || `/${lang}/${freeGuideSlugs[lang] || freeGuideSlugs.it}/`);
+  const builderPath = String(options.builderPath || `/${lang}/crea-il-tuo-diario/`);
   const pageTitle = String(options.pageTitle || buildDaySeoTitle(day, lang, ui, { stageLabel, dayNumber }));
   const description = String(options.description || buildDaySeoDescription(day, lang, ui));
   const commentTargetDate = String(options.commentTargetDate || date);
@@ -1177,9 +1245,96 @@ function buildDayPageHtml({ origin, lang, day, prevDay, nextDay, dayOgOverrides,
     .day-nav--below-media{margin-top:10px;justify-content:flex-end}
     .day-nav a,.back-link{display:inline-block;padding:8px 12px;border-radius:12px;background:#ece7df;color:#2d2823;text-decoration:none}
     .day-section{margin-top:18px;background:#fff;border-radius:16px;padding:16px}
-    .day-offer-cta{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;background:#f7f3ee;border:1px solid rgba(31,26,22,.08)}
-    .day-offer-cta p{margin:6px 0 0;color:#5a5248;max-width:700px}
-    .day-legal-links{display:flex;flex-wrap:wrap;gap:10px 16px;margin-top:14px}
+    .day-offer-cta{
+      position:relative;
+      overflow:hidden;
+      display:grid;
+      grid-template-columns:minmax(0,1.35fr) minmax(250px,320px);
+      gap:22px 26px;
+      align-items:stretch;
+      padding:26px;
+      border-radius:24px;
+      background:linear-gradient(180deg, rgba(255,250,242,.98), rgba(240,231,220,.96));
+      border:1px solid rgba(31,26,22,.08);
+      box-shadow:0 20px 48px rgba(31,26,22,.08);
+    }
+    .day-offer-cta::before{
+      content:"";
+      position:absolute;
+      left:-42px;
+      bottom:-58px;
+      width:180px;
+      height:180px;
+      border-radius:50%;
+      background:rgba(176,108,54,.08);
+      z-index:0;
+    }
+    .day-offer-cta::after{
+      content:"";
+      position:absolute;
+      right:-34px;
+      top:-46px;
+      width:150px;
+      height:150px;
+      border-radius:50%;
+      background:rgba(31,95,91,.08);
+      z-index:0;
+    }
+    .day-offer-cta__content{
+      position:relative;
+      z-index:1;
+      align-self:center;
+    }
+    .day-offer-cta__content h2{
+      margin:0;
+      color:#1f2b29;
+      font-size:clamp(1.3rem,2vw,1.6rem);
+    }
+    .day-offer-cta__content p{
+      margin:12px 0 0;
+      color:#5a5248;
+      max-width:700px;
+      line-height:1.62;
+      font-size:1rem;
+    }
+    .day-offer-cta__actions{
+      position:relative;
+      z-index:1;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:stretch;
+      gap:12px;
+      padding:18px;
+      border-radius:18px;
+      background:rgba(255,255,255,.82);
+      border:1px solid rgba(31,26,22,.07);
+      box-shadow:0 12px 30px rgba(31,26,22,.06);
+    }
+    .day-offer-cta__primary{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width:100%;
+      min-height:48px;
+      padding:12px 18px;
+      border-radius:999px;
+      background:linear-gradient(135deg, #1f5f5b, #25504d);
+      color:#fffaf2;
+      text-decoration:none;
+      font-weight:700;
+      box-shadow:0 10px 20px rgba(31,95,91,.18);
+    }
+    .day-offer-cta__primary:hover{filter:brightness(1.04)}
+    .day-offer-cta__secondary{
+      color:#5a5248;
+      text-decoration:underline;
+      text-underline-offset:2px;
+      font-size:14px;
+      text-align:center;
+    }
+    .day-page-footer{margin-top:18px;padding-top:16px;border-top:1px dashed rgba(31,26,22,.12)}
+    .day-legal-links{display:flex;flex-wrap:wrap;gap:10px 16px;color:#746a60;font-size:13px;justify-content:center}
     .day-legal-links a{color:#1f5f5b;text-decoration:underline;text-underline-offset:2px}
     .media-grid{margin-top:16px;display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px}
     .media-grid > .media-card{background:#f7f3ee;border-radius:12px;padding:8px;display:flex !important;flex-direction:column !important;align-items:stretch !important;justify-content:flex-start !important;gap:6px;min-height:0;overflow:visible}
@@ -1205,7 +1360,12 @@ function buildDayPageHtml({ origin, lang, day, prevDay, nextDay, dayOgOverrides,
     .day-modal__zoom-image.is-dragging{cursor:grabbing}
     .day-modal__zoom-controls{position:absolute;right:14px;top:50px;z-index:3;display:flex;flex-direction:column;gap:6px}
     .day-modal__zoom-btn{width:32px;height:32px;border-radius:8px;border:1px solid rgba(255,250,242,.78);background:rgba(31,26,22,.72);color:#fffaf2;font-size:20px;line-height:1;cursor:pointer}
-    @media (max-width: 720px){.day-modal__dialog{width:95vw;max-height:92vh;padding:10px}}
+    @media (max-width: 860px){
+      .day-modal__dialog{width:95vw;max-height:92vh;padding:10px}
+      .day-offer-cta{grid-template-columns:1fr;padding:18px}
+      .day-offer-cta__actions{padding:14px}
+      .day-offer-cta__secondary{text-align:left}
+    }
     .day-comments-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
     .day-comment-btn{border:1px solid rgba(31,26,22,.2);background:#fffaf2;color:#2d2823;border-radius:8px;padding:6px 10px;font-size:12px;cursor:pointer}
     .day-comment-btn--media{align-self:flex-end}
@@ -1257,17 +1417,22 @@ function buildDayPageHtml({ origin, lang, day, prevDay, nextDay, dayOgOverrides,
   </section>
   ${(navPrev || navNext) ? `<nav class="day-nav day-nav--below-media">${navPrev}${navNext}</nav>` : ''}
   <section class="day-section day-offer-cta">
-    <div>
+    <div class="day-offer-cta__content">
       <h2>${escapeHtml(ui.offerCtaTitle)}</h2>
       <p>${escapeHtml(ui.offerCtaText)}</p>
-      <div class="day-legal-links">
-        <a href="/privacy-policy/">Privacy Policy</a>
-        <a href="/cookie-policy/">Cookie Policy</a>
-        <a href="/termini-e-condizioni/">Termini e condizioni</a>
-      </div>
     </div>
-    <a class="back-link" href="${escapeHtml(offerPath)}">${escapeHtml(ui.offerCtaLink)}</a>
+    <div class="day-offer-cta__actions">
+      <a class="day-offer-cta__primary" href="${escapeHtml(offerPath)}">${escapeHtml(ui.offerCtaLink)}</a>
+      <a class="day-offer-cta__secondary" href="${escapeHtml(builderPath)}">${escapeHtml(ui.offerCtaSecondary || '')}</a>
+    </div>
   </section>
+  <footer class="day-page-footer">
+    <div class="day-legal-links">
+      <a href="/privacy-policy/">Privacy Policy</a>
+      <a href="/cookie-policy/">Cookie Policy</a>
+      <a href="/termini-e-condizioni/">Termini e condizioni</a>
+    </div>
+  </footer>
   <div class="day-modal" id="day-media-modal" aria-hidden="true">
     <div class="day-modal__backdrop" id="day-media-backdrop"></div>
     <div class="day-modal__dialog" role="dialog" aria-modal="true" aria-label="Media">
@@ -1661,10 +1826,6 @@ async function buildSitemapXmlForOrigin(origin) {
     urls.push(`<url>${tags.join('')}</url>`);
   };
   const generatedDate = itEntries && itEntries.generated_at ? String(itEntries.generated_at).slice(0, 10) : null;
-  const homeAlt = { it: '/it/', en: '/en/', es: '/es/', fr: '/fr/' };
-  const mapAlt = { it: '/it/map/', en: '/en/map/', es: '/es/map/', fr: '/fr/map/' };
-  const peopleAlt = { it: '/it/people/', en: '/en/people/', es: '/es/people/', fr: '/fr/people/' };
-  const contactAlt = { it: '/it/contatti/', en: '/en/contatti/', es: '/es/contatti/', fr: '/fr/contatti/' };
   const freeGuideAlt = { ...FREE_GUIDE_PATH_BY_LANG };
   const offerAlt = {
     it: '/it/crea-il-tuo-diario/',
@@ -1672,33 +1833,14 @@ async function buildSitemapXmlForOrigin(origin) {
     es: '/es/crea-il-tuo-diario/',
     fr: '/fr/crea-il-tuo-diario/'
   };
-  push('/privacy-policy/', generatedDate, '0.2', 'yearly');
-  push('/cookie-policy/', generatedDate, '0.2', 'yearly');
-  push('/termini-e-condizioni/', generatedDate, '0.3', 'yearly');
-  push('/it/', generatedDate, '1.0', 'daily', [], homeAlt);
-  push('/en/', generatedDate, '0.9', 'daily', [], homeAlt);
-  push('/es/', generatedDate, '0.9', 'daily', [], homeAlt);
-  push('/fr/', generatedDate, '0.9', 'daily', [], homeAlt);
-  push('/it/map/', null, '0.8', 'weekly', [], mapAlt);
-  push('/en/map/', null, '0.8', 'weekly', [], mapAlt);
-  push('/es/map/', null, '0.8', 'weekly', [], mapAlt);
-  push('/fr/map/', null, '0.8', 'weekly', [], mapAlt);
-  push('/it/people/', null, '0.7', 'weekly', [], peopleAlt);
-  push('/en/people/', null, '0.7', 'weekly', [], peopleAlt);
-  push('/es/people/', null, '0.7', 'weekly', [], peopleAlt);
-  push('/fr/people/', null, '0.7', 'weekly', [], peopleAlt);
-  push('/it/contatti/', null, '0.5', 'monthly', [], contactAlt);
-  push('/en/contatti/', null, '0.5', 'monthly', [], contactAlt);
-  push('/es/contatti/', null, '0.5', 'monthly', [], contactAlt);
-  push('/fr/contatti/', null, '0.5', 'monthly', [], contactAlt);
-  push(FREE_GUIDE_PATH_BY_LANG.it, generatedDate, '0.7', 'monthly', [], freeGuideAlt);
-  push(FREE_GUIDE_PATH_BY_LANG.en, generatedDate, '0.7', 'monthly', [], freeGuideAlt);
-  push(FREE_GUIDE_PATH_BY_LANG.es, generatedDate, '0.6', 'monthly', [], freeGuideAlt);
-  push(FREE_GUIDE_PATH_BY_LANG.fr, generatedDate, '0.6', 'monthly', [], freeGuideAlt);
-  push('/it/crea-il-tuo-diario/', generatedDate, '0.6', 'monthly', [], offerAlt);
-  push('/en/crea-il-tuo-diario/', generatedDate, '0.6', 'monthly', [], offerAlt);
-  push('/es/crea-il-tuo-diario/', generatedDate, '0.6', 'monthly', [], offerAlt);
-  push('/fr/crea-il-tuo-diario/', generatedDate, '0.6', 'monthly', [], offerAlt);
+  push(FREE_GUIDE_PATH_BY_LANG.it, generatedDate, '0.8', 'monthly', [], freeGuideAlt);
+  push(FREE_GUIDE_PATH_BY_LANG.en, generatedDate, '0.8', 'monthly', [], freeGuideAlt);
+  push(FREE_GUIDE_PATH_BY_LANG.es, generatedDate, '0.8', 'monthly', [], freeGuideAlt);
+  push(FREE_GUIDE_PATH_BY_LANG.fr, generatedDate, '0.8', 'monthly', [], freeGuideAlt);
+  push('/it/crea-il-tuo-diario/', generatedDate, '0.7', 'monthly', [], offerAlt);
+  push('/en/crea-il-tuo-diario/', generatedDate, '0.7', 'monthly', [], offerAlt);
+  push('/es/crea-il-tuo-diario/', generatedDate, '0.7', 'monthly', [], offerAlt);
+  push('/fr/crea-il-tuo-diario/', generatedDate, '0.7', 'monthly', [], offerAlt);
   const prologueDays = days.filter((day) => PROLOGUE_DATES.has(String(day && day.date ? day.date : '').trim()));
   if (prologueDays.length) {
     const byLoc = new Map();
@@ -1755,13 +1897,50 @@ async function generateStaticDayPages({ outputRoot, origin }) {
   for (const lang of langs) {
     const entries = await readEntriesByLang(lang);
     const days = Array.isArray(entries && entries.days) ? entries.days : [];
+    const mergedPrologue = mergePrologueDay(days, lang);
+    if (mergedPrologue) {
+      const nextDay = days.find((day) => !isPrologueSourceDate(String(day && day.date ? day.date : '').slice(0, 10))) || null;
+      const nextNav = buildDayNavMeta(lang, nextDay);
+      const prologueHtml = buildDayPageHtml({
+        origin: siteOrigin,
+        lang,
+        day: mergedPrologue,
+        prevDay: null,
+        nextDay,
+        dayOgOverrides,
+        options: {
+          canonicalPath: `/${lang}/prologue/`,
+          altPaths: {
+            it: '/it/prologue/',
+            en: '/en/prologue/',
+            es: '/es/prologue/',
+            fr: '/fr/prologue/'
+          },
+          diaryPath: `/${lang}/?day=prologue`,
+          interactiveMediaBase: `/${lang}/?day=prologue&target=`,
+          commentTargetDate: PROLOGUE_TRACK_DATE,
+          showTrackCard: false,
+          stageLabel: (lang === 'it' ? 'Prologo' : lang === 'en' ? 'Prologue' : lang === 'es' ? 'Prólogo' : 'Prologue'),
+          displayDate: (lang === 'it' ? 'Prologo · 2–3 giugno' : lang === 'en' ? 'Prologue · June 2–3' : lang === 'es' ? 'Prólogo · 2–3 de junio' : 'Prologue · 2–3 juin'),
+          prevHref: null,
+          nextHref: nextNav.href,
+          nextLabel: nextNav.label
+        }
+      });
+      const prologueDir = path.join(targetRoot, lang, 'prologue');
+      await fs.mkdir(prologueDir, { recursive: true });
+      await fs.writeFile(path.join(prologueDir, 'index.html'), prologueHtml, 'utf8');
+    }
     for (let index = 0; index < days.length; index += 1) {
       const day = days[index];
       const date = String(day && day.date ? day.date : '').trim();
       if (!date) continue;
+      if (isPrologueSourceDate(date)) continue;
       const prevDay = index > 0 ? days[index - 1] : null;
       const nextDay = index < days.length - 1 ? days[index + 1] : null;
-      const dayNumber = index + 1;
+      const dayNumber = getCamminoDayNumber(date);
+      const prevNav = buildDayNavMeta(lang, prevDay);
+      const nextNav = buildDayNavMeta(lang, nextDay);
       const trackDayKey = String(day && day.trackDate ? day.trackDate : date).slice(0, 10);
       const dayMapData = await buildCanonicalDayMapData(days, lang, trackDayKey, day && day.items);
       const html = buildDayPageHtml({
@@ -1775,8 +1954,10 @@ async function generateStaticDayPages({ outputRoot, origin }) {
           dayMapData,
           trackDayKey,
           dayNumber,
-          prevLabel: prevDay ? buildDayLabel(lang, index) : '',
-          nextLabel: nextDay ? buildDayLabel(lang, index + 2) : ''
+          prevHref: prevNav.href,
+          prevLabel: prevNav.label,
+          nextHref: nextNav.href,
+          nextLabel: nextNav.label
         }
       });
       const dayDir = path.join(targetRoot, lang, 'day', date);
@@ -2590,6 +2771,14 @@ async function handleDelete(req, res) {
 
 async function serveStatic(req, res, requestPath = null, locale = '') {
   const requested = requestPath || req.url || '/';
+  if (isDeniedPublicPath(requested)) {
+    res.writeHead(404, {
+      'Content-Type': 'text/plain; charset=utf-8',
+      'Cache-Control': 'no-store'
+    });
+    res.end('Not found');
+    return;
+  }
   let fsPath = toFsPath(requested);
   if (!fsPath) {
     res.writeHead(403);
@@ -2685,10 +2874,18 @@ async function serveStatic(req, res, requestPath = null, locale = '') {
     }
   }
 
-  res.writeHead(200, {
+  const isConchigliaNera = finalPath === path.join(ROOT, 'conchiglia-nera.html');
+  const responseHeaders = {
     'Content-Type': type,
-    'Cache-Control': noCacheExt.has(ext) ? 'no-cache' : 'public, max-age=3600'
-  });
+    'Cache-Control': isConchigliaNera
+      ? 'no-store'
+      : (noCacheExt.has(ext) ? 'no-cache' : 'public, max-age=3600')
+  };
+  if (isConchigliaNera) {
+    responseHeaders['X-Robots-Tag'] = 'noindex, nofollow, noarchive, nosnippet, noimageindex';
+  }
+
+  res.writeHead(200, responseHeaders);
   if (req.method === 'HEAD') {
     res.end();
     return;
@@ -2698,6 +2895,12 @@ async function serveStatic(req, res, requestPath = null, locale = '') {
 
 async function serveDayPage(req, res, lang, date) {
   try {
+    if (isPrologueSourceDate(date)) {
+      const search = new URL(req.url || '/', 'http://localhost').search || '';
+      res.writeHead(301, { Location: `/${lang}/prologue/${search}` });
+      res.end();
+      return;
+    }
     const entries = await readEntriesByLang(lang);
     const dayOgOverrides = await readDayOgOverrides();
     const days = Array.isArray(entries && entries.days) ? entries.days : [];
@@ -2710,7 +2913,9 @@ async function serveDayPage(req, res, lang, date) {
     const day = days[index];
     const prevDay = index > 0 ? days[index - 1] : null;
     const nextDay = index < days.length - 1 ? days[index + 1] : null;
-    const dayNumber = index + 1;
+    const dayNumber = getCamminoDayNumber(date);
+    const prevNav = buildDayNavMeta(lang, prevDay);
+    const nextNav = buildDayNavMeta(lang, nextDay);
     const trackDayKey = String(day && day.trackDate ? day.trackDate : date).slice(0, 10);
     const dayMapData = await buildCanonicalDayMapData(days, lang, trackDayKey, day && day.items);
     const html = buildDayPageHtml({
@@ -2724,8 +2929,10 @@ async function serveDayPage(req, res, lang, date) {
         dayMapData,
         trackDayKey,
         dayNumber,
-        prevLabel: prevDay ? buildDayLabel(lang, index) : '',
-        nextLabel: nextDay ? buildDayLabel(lang, index + 2) : ''
+        prevHref: prevNav.href,
+        prevLabel: prevNav.label,
+        nextHref: nextNav.href,
+        nextLabel: nextNav.label
       }
     });
     res.writeHead(200, {
@@ -2765,9 +2972,7 @@ async function serveProloguePage(req, res, lang) {
     };
     const displayLabel = prologueLabelByLang[lang] || prologueLabelByLang.it;
     const seoPrefix = prologueSeoPrefixByLang[lang] || prologueSeoPrefixByLang.it;
-    const nextDayNumber = nextDay
-      ? (days.findIndex((day) => String(day && day.date ? day.date : '').slice(0, 10) === String(nextDay && nextDay.date ? nextDay.date : '').slice(0, 10)) + 1)
-      : 0;
+    const nextNav = buildDayNavMeta(lang, nextDay);
     const html = buildDayPageHtml({
       origin: getRequestOrigin(req),
       lang,
@@ -2790,7 +2995,8 @@ async function serveProloguePage(req, res, lang) {
         stageLabel: seoPrefix,
         displayDate: displayLabel,
         prevHref: null,
-        nextLabel: nextDayNumber > 0 ? buildDayLabel(lang, nextDayNumber) : ''
+        nextHref: nextNav.href,
+        nextLabel: nextNav.label
       }
     });
     res.writeHead(200, {
@@ -3001,6 +3207,17 @@ const server = http.createServer(async (req, res) => {
   }
 
   const freeGuideLang = matchLocalizedStaticPath(urlObj.pathname, FREE_GUIDE_PATH_BY_LANG);
+  if (!freeGuideLang) {
+    const normalizedPath = normalizePathname(urlObj.pathname);
+    for (const [lang, legacyPaths] of Object.entries(LEGACY_FREE_GUIDE_PATHS)) {
+      if (Array.isArray(legacyPaths) && legacyPaths.includes(normalizedPath)) {
+        const canonicalPath = FREE_GUIDE_PATH_BY_LANG[lang];
+        res.writeHead(301, { Location: `${canonicalPath}${urlObj.search || ''}` });
+        res.end();
+        return;
+      }
+    }
+  }
   if (freeGuideLang) {
     const canonicalPath = FREE_GUIDE_PATH_BY_LANG[freeGuideLang];
     if (urlObj.pathname !== canonicalPath) {

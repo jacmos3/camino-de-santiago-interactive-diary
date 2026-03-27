@@ -5,6 +5,7 @@ $root = __DIR__;
 $supportedLangs = ['it', 'en', 'es', 'fr'];
 $prologueDates = ['2019-06-02', '2019-06-03'];
 $prologueTrackDate = '2019-06-03';
+$camminoDayOneDate = '2019-06-04';
 
 function day_escape(string $value): string {
   return htmlspecialchars($value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
@@ -130,13 +131,37 @@ function day_first_sentence(string $text): string {
   return $text;
 }
 
+function day_is_prologue_source_date(string $date): bool {
+  return in_array(substr($date, 0, 10), ['2019-06-02', '2019-06-03'], true);
+}
+
 function day_find_day_number(array $days, string $date): ?int {
-  foreach ($days as $index => $candidate) {
-    if (substr((string)($candidate['date'] ?? ''), 0, 10) === $date) {
-      return $index + 1;
-    }
+  $date = substr($date, 0, 10);
+  if ($date === '' || day_is_prologue_source_date($date)) return null;
+  $start = strtotime('2019-06-04 00:00:00 UTC');
+  $current = strtotime($date . ' 00:00:00 UTC');
+  if ($start === false || $current === false) return null;
+  $deltaDays = (int)round(($current - $start) / 86400);
+  return $deltaDays >= 0 ? ($deltaDays + 1) : null;
+}
+
+function day_build_nav_target(array $uiLang, string $lang, ?array $day): array {
+  if (!is_array($day)) return ['href' => '', 'label' => ''];
+  $date = substr((string)($day['date'] ?? ''), 0, 10);
+  if ($date === '') return ['href' => '', 'label' => ''];
+  if (day_is_prologue_source_date($date)) {
+    return [
+      'href' => "/{$lang}/prologue/",
+      'label' => (string)($uiLang['prologue_badge'] ?? ''),
+    ];
   }
-  return null;
+  $number = day_find_day_number([], $date);
+  return [
+    'href' => "/{$lang}/day/{$date}/",
+    'label' => $number !== null
+      ? trim((string)($uiLang['day_label_prefix'] ?? '') . ' ' . (string)$number)
+      : trim((string)($uiLang['day_label_prefix'] ?? '')),
+  ];
 }
 
 function day_media_path(array $item, string $field, string $fallbackDate = ''): string {
@@ -470,10 +495,10 @@ $ui = [
     'comments_on_media' => 'Commenti sul media',
     'recommendations' => 'Posti consigliati',
     'prologue_label' => 'Prologo · 2–3 giugno',
-    'offer_cta_title' => 'Stai pensando anche tu di partire?',
-    'offer_cta_text' => 'Se vuoi capire se il Cammino ti chiama davvero e partire con più lucidità, il primo passo giusto è la guida gratuita.',
-    'offer_cta_link' => 'Inizia da qui',
-    'offer_cta_secondary' => 'Hai già fatto il Cammino? Scopri come trasformarlo in diario',
+    'offer_cta_title' => 'Stai pensando anche tu al Cammino?',
+    'offer_cta_text' => 'Se leggendo questo diario senti che il Cammino ti sta chiamando, ma hai ancora bisogno di chiarirti un po’ le idee, inizia dalla guida gratuita.',
+    'offer_cta_link' => 'Scarica la guida gratuita',
+    'offer_cta_secondary' => 'Hai già fatto il Cammino? Vedi come trasformare anche tu il tuo viaggio in un diario memorabile!',
   ],
   'en' => [
     'title_prefix' => 'Camino Diary',
@@ -508,10 +533,10 @@ $ui = [
     'comments_on_media' => 'Comments on media',
     'recommendations' => 'Recommended places',
     'prologue_label' => 'Prologue · June 2–3',
-    'offer_cta_title' => 'Thinking about leaving too?',
-    'offer_cta_text' => 'If you want to understand whether the Camino is really calling you and start with more clarity, the right first step is the free guide.',
-    'offer_cta_link' => 'Start here',
-    'offer_cta_secondary' => 'Already done the Camino? See how to turn it into a diary',
+    'offer_cta_title' => 'Thinking about the Camino too?',
+    'offer_cta_text' => 'If reading this diary makes you feel the Camino might be calling you, but you still need to clarify a few things, start with the free guide.',
+    'offer_cta_link' => 'Download the free guide',
+    'offer_cta_secondary' => 'Already done the Camino? See how you can turn your trip into a memorable diary too!',
   ],
   'es' => [
     'title_prefix' => 'Diario del Camino',
@@ -546,10 +571,10 @@ $ui = [
     'comments_on_media' => 'Comentarios sobre el media',
     'recommendations' => 'Lugares recomendados',
     'prologue_label' => 'Prólogo · 2–3 de junio',
-    'offer_cta_title' => '¿También estás pensando en partir?',
-    'offer_cta_text' => 'Si quieres entender si el Camino de verdad te llama y empezar con más claridad, el primer paso correcto es la guía gratuita.',
-    'offer_cta_link' => 'Empieza aquí',
-    'offer_cta_secondary' => '¿Ya has hecho el Camino? Descubre cómo convertirlo en diario',
+    'offer_cta_title' => '¿También estás pensando en el Camino?',
+    'offer_cta_text' => 'Si al leer este diario sientes que el Camino te está llamando, pero todavía necesitas aclararte un poco, empieza por la guía gratuita.',
+    'offer_cta_link' => 'Descarga la guía gratuita',
+    'offer_cta_secondary' => '¿Ya has hecho el Camino? Mira cómo tú también puedes transformar tu viaje en un diario memorable',
   ],
   'fr' => [
     'title_prefix' => 'Journal du Chemin',
@@ -584,10 +609,10 @@ $ui = [
     'comments_on_media' => 'Commentaires sur le média',
     'recommendations' => 'Lieux conseillés',
     'prologue_label' => 'Prologue · 2–3 juin',
-    'offer_cta_title' => 'Vous pensez vous aussi à partir ?',
-    'offer_cta_text' => 'Si vous voulez comprendre si le Camino vous appelle vraiment et partir avec plus de clarté, le bon premier pas est le guide gratuit.',
-    'offer_cta_link' => 'Commence ici',
-    'offer_cta_secondary' => 'Vous avez déjà fait le Camino ? Découvrez comment en faire un journal',
+    'offer_cta_title' => 'Vous pensez vous aussi au Camino ?',
+    'offer_cta_text' => 'Si la lecture de ce journal vous donne le sentiment que le Camino vous appelle, mais que vous avez encore besoin d’y voir un peu plus clair, commencez par le guide gratuit.',
+    'offer_cta_link' => 'Télécharger le guide gratuit',
+    'offer_cta_secondary' => 'Vous avez déjà fait le Camino ? Voyez comment, vous aussi, transformer votre voyage en un journal mémorable !',
   ],
 ];
 
@@ -599,6 +624,10 @@ $isPrologue = ($date === 'prologue');
 if (!$isPrologue && !preg_match('/^\d{4}-\d{2}-\d{2}$/', $date)) {
   http_response_code(404);
   echo 'Not found';
+  exit;
+}
+if (!$isPrologue && day_is_prologue_source_date($date)) {
+  header('Location: /' . $lang . '/prologue/', true, 301);
   exit;
 }
 
@@ -692,7 +721,7 @@ if (!is_string($dayMapDataJson) || $dayMapDataJson === '') $dayMapDataJson = 'nu
 $dayMapDataJson = str_replace(['<', '>', '&'], ['\u003C', '\u003E', '\u0026'], $dayMapDataJson);
 $trackMapHref = $showTrackCard ? "/{$lang}/map/?day=" . rawurlencode($trackDayKey) : "/{$lang}/map/";
 $offerSlugByLang = [
-  'it' => 'guida-gratuita',
+  'it' => 'guida-gratuita-al-cammino-di-santiago-francese',
   'en' => 'free-guide',
   'es' => 'guia-gratuita',
   'fr' => 'guide-gratuite',
@@ -700,12 +729,8 @@ $offerSlugByLang = [
 $offerHref = "/{$lang}/" . ($offerSlugByLang[$lang] ?? $offerSlugByLang['it']) . "/";
 $builderHref = "/{$lang}/crea-il-tuo-diario/";
 $commentTargetDate = $isPrologue ? $prologueTrackDate : $date;
-$prevDayLabel = is_array($prevDay)
-  ? trim((string)$uiLang['day_label_prefix'] . ' ' . (string)(day_find_day_number($days, substr((string)$prevDay['date'], 0, 10)) ?? ''))
-  : '';
-$nextDayLabel = is_array($nextDay)
-  ? trim((string)$uiLang['day_label_prefix'] . ' ' . (string)(day_find_day_number($days, substr((string)$nextDay['date'], 0, 10)) ?? ''))
-  : '';
+$prevDayNav = day_build_nav_target($uiLang, $lang, $prevDay);
+$nextDayNav = day_build_nav_target($uiLang, $lang, $nextDay);
 
 http_response_code(200);
 ?><!doctype html>
@@ -755,11 +780,96 @@ http_response_code(200);
     .day-nav--below-media{margin-top:10px;justify-content:flex-end}
     .day-nav a,.back-link{display:inline-block;padding:8px 12px;border-radius:12px;background:#ece7df;color:#2d2823;text-decoration:none}
     .day-section{margin-top:18px;background:#fff;border-radius:16px;padding:16px}
-    .day-offer-cta{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;background:#f7f3ee;border:1px solid rgba(31,26,22,.08)}
-    .day-offer-cta p{margin:6px 0 0;color:#5a5248;max-width:700px}
-    .day-offer-cta__actions{display:flex;flex-direction:column;align-items:flex-end;gap:10px}
-    .day-offer-cta__secondary{color:#5a5248;text-decoration:underline;text-underline-offset:2px;font-size:14px;text-align:right}
-    .day-legal-links{display:flex;flex-wrap:wrap;gap:10px 16px;margin-top:14px}
+    .day-offer-cta{
+      position:relative;
+      overflow:hidden;
+      display:grid;
+      grid-template-columns:minmax(0,1.35fr) minmax(250px,320px);
+      gap:22px 26px;
+      align-items:stretch;
+      padding:26px;
+      border-radius:24px;
+      background:linear-gradient(180deg, rgba(255,250,242,.98), rgba(240,231,220,.96));
+      border:1px solid rgba(31,26,22,.08);
+      box-shadow:0 20px 48px rgba(31,26,22,.08);
+    }
+    .day-offer-cta::before{
+      content:"";
+      position:absolute;
+      left:-42px;
+      bottom:-58px;
+      width:180px;
+      height:180px;
+      border-radius:50%;
+      background:rgba(176,108,54,.08);
+      z-index:0;
+    }
+    .day-offer-cta::after{
+      content:"";
+      position:absolute;
+      right:-34px;
+      top:-46px;
+      width:150px;
+      height:150px;
+      border-radius:50%;
+      background:rgba(31,95,91,.08);
+      z-index:0;
+    }
+    .day-offer-cta__content{
+      position:relative;
+      z-index:1;
+      align-self:center;
+    }
+    .day-offer-cta__content h2{
+      margin:0;
+      color:#1f2b29;
+      font-size:clamp(1.3rem,2vw,1.6rem);
+    }
+    .day-offer-cta__content p{
+      margin:12px 0 0;
+      color:#5a5248;
+      max-width:700px;
+      line-height:1.62;
+      font-size:1rem;
+    }
+    .day-offer-cta__actions{
+      position:relative;
+      z-index:1;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:stretch;
+      gap:12px;
+      padding:18px;
+      border-radius:18px;
+      background:rgba(255,255,255,.82);
+      border:1px solid rgba(31,26,22,.07);
+      box-shadow:0 12px 30px rgba(31,26,22,.06);
+    }
+    .day-offer-cta__primary{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width:100%;
+      min-height:48px;
+      padding:12px 18px;
+      border-radius:999px;
+      background:linear-gradient(135deg, #1f5f5b, #25504d);
+      color:#fffaf2;
+      text-decoration:none;
+      font-weight:700;
+      box-shadow:0 10px 20px rgba(31,95,91,.18);
+    }
+    .day-offer-cta__primary:hover{filter:brightness(1.04)}
+    .day-offer-cta__secondary{
+      color:#5a5248;
+      text-decoration:underline;
+      text-underline-offset:2px;
+      font-size:14px;
+      text-align:center;
+    }
+    .day-page-footer{margin-top:18px;padding-top:16px;border-top:1px dashed rgba(31,26,22,.12)}
+    .day-legal-links{display:flex;flex-wrap:wrap;gap:10px 16px;color:#746a60;font-size:13px;justify-content:center}
     .day-legal-links a{color:#1f5f5b;text-decoration:underline;text-underline-offset:2px}
     .media-grid{margin-top:16px;display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px}
     .media-card{background:#f7f3ee;border-radius:12px;padding:8px;display:flex;flex-direction:column;gap:6px}
@@ -787,6 +897,11 @@ http_response_code(200);
     .day-comments-form textarea{min-height:84px;resize:vertical}
     .day-comments-form button{align-self:flex-end;border:1px solid rgba(31,26,22,.2);background:#2d2823;color:#fffaf2;border-radius:8px;padding:8px 12px;cursor:pointer}
     .day-comments-state{color:#746a60;font-size:13px}
+    @media (max-width: 860px){
+      .day-offer-cta{grid-template-columns:1fr;padding:18px}
+      .day-offer-cta__actions{padding:14px}
+      .day-offer-cta__secondary{text-align:left}
+    }
   </style>
 </head>
 <body>
@@ -801,8 +916,8 @@ http_response_code(200);
           <a class="back-link" href="/<?= day_escape($lang) ?>/map/"><?= day_escape($uiLang['open_map']) ?></a>
         </div>
         <nav class="day-nav day-nav--top">
-          <?php if (is_array($prevDay)): ?><a href="/<?= day_escape($lang) ?>/day/<?= day_escape((string)$prevDay['date']) ?>/">← <?= day_escape($prevDayLabel) ?></a><?php endif; ?>
-          <?php if (is_array($nextDay)): ?><a href="/<?= day_escape($lang) ?>/day/<?= day_escape((string)$nextDay['date']) ?>/"><?= day_escape($nextDayLabel) ?> →</a><?php endif; ?>
+          <?php if ($prevDayNav['href'] !== '' && $prevDayNav['label'] !== ''): ?><a href="<?= day_escape($prevDayNav['href']) ?>">← <?= day_escape($prevDayNav['label']) ?></a><?php endif; ?>
+          <?php if ($nextDayNav['href'] !== '' && $nextDayNav['label'] !== ''): ?><a href="<?= day_escape($nextDayNav['href']) ?>"><?= day_escape($nextDayNav['label']) ?> →</a><?php endif; ?>
         </nav>
       </div>
     </div>
@@ -903,26 +1018,29 @@ http_response_code(200);
   </section>
   <?php if (is_array($prevDay) || is_array($nextDay)): ?>
   <nav class="day-nav day-nav--below-media">
-    <?php if (is_array($prevDay)): ?><a href="/<?= day_escape($lang) ?>/day/<?= day_escape((string)$prevDay['date']) ?>/">← <?= day_escape($prevDayLabel) ?></a><?php endif; ?>
-    <?php if (is_array($nextDay)): ?><a href="/<?= day_escape($lang) ?>/day/<?= day_escape((string)$nextDay['date']) ?>/"><?= day_escape($nextDayLabel) ?> →</a><?php endif; ?>
+    <?php if ($prevDayNav['href'] !== '' && $prevDayNav['label'] !== ''): ?><a href="<?= day_escape($prevDayNav['href']) ?>">← <?= day_escape($prevDayNav['label']) ?></a><?php endif; ?>
+    <?php if ($nextDayNav['href'] !== '' && $nextDayNav['label'] !== ''): ?><a href="<?= day_escape($nextDayNav['href']) ?>"><?= day_escape($nextDayNav['label']) ?> →</a><?php endif; ?>
   </nav>
   <?php endif; ?>
 
   <section class="day-section day-offer-cta">
-    <div>
+    <div class="day-offer-cta__content">
       <h2><?= day_escape($uiLang['offer_cta_title']) ?></h2>
       <p><?= day_escape($uiLang['offer_cta_text']) ?></p>
-      <div class="day-legal-links">
-        <a href="/privacy-policy/">Privacy Policy</a>
-        <a href="/cookie-policy/">Cookie Policy</a>
-        <a href="/termini-e-condizioni/">Termini e condizioni</a>
-      </div>
     </div>
     <div class="day-offer-cta__actions">
-      <a class="back-link" href="<?= day_escape($offerHref) ?>"><?= day_escape($uiLang['offer_cta_link']) ?></a>
+      <a class="day-offer-cta__primary" href="<?= day_escape($offerHref) ?>"><?= day_escape($uiLang['offer_cta_link']) ?></a>
       <a class="day-offer-cta__secondary" href="<?= day_escape($builderHref) ?>"><?= day_escape($uiLang['offer_cta_secondary']) ?></a>
     </div>
   </section>
+
+  <footer class="day-page-footer">
+    <div class="day-legal-links">
+      <a href="/privacy-policy/">Privacy Policy</a>
+      <a href="/cookie-policy/">Cookie Policy</a>
+      <a href="/termini-e-condizioni/">Termini e condizioni</a>
+    </div>
+  </footer>
 
   <div class="day-modal" id="day-media-modal" aria-hidden="true">
     <div class="day-modal__backdrop" id="day-media-backdrop"></div>

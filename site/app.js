@@ -510,7 +510,7 @@ const buildLocalizedContactPath = (lang) => {
 const buildLocalizedOfferPath = (lang) => {
   const targetLang = normalizeLang(lang) || 'it';
   const slugs = {
-    it: 'guida-gratuita',
+    it: 'guida-gratuita-al-cammino-di-santiago-francese',
     en: 'free-guide',
     es: 'guia-gratuita',
     fr: 'guide-gratuite'
@@ -732,6 +732,14 @@ let modalZoomCleanup = null;
 let lazyMediaObserver = null;
 let dayHeavyEntries = [];
 let dayHeavySyncRaf = 0;
+let lazyMediaRecoveryRaf = 0;
+let lazyMediaRecoveryTimer = 0;
+let lastLazyMediaRecoveryTs = 0;
+let dayTrackEnsureRaf = 0;
+let dayTrackEnsureTimer = 0;
+let lastDayTrackEnsureTs = 0;
+let scrollMilestoneTimer = 0;
+let pendingScrollMilestonePayload = null;
 let deleteInFlight = false;
 let trackDataFetchDone = false;
 const selectedIds = new Set();
@@ -750,6 +758,9 @@ const MINI_MAP_COLLAPSED_KEY = 'cammino_minimap_collapsed_v1';
 const DAY_HEAVY_MOUNT_MARGIN = 1400;
 const DAY_HEAVY_UNMOUNT_MARGIN = 2400;
 const DAY_HEAVY_MIN_HEIGHT = 220;
+const SCROLL_LAZY_MEDIA_MIN_INTERVAL_MS = 140;
+const SCROLL_DAY_TRACK_MIN_INTERVAL_MS = 180;
+const SCROLL_MILESTONE_INTERVAL_MS = 160;
 const dayDistanceKmByDate = new Map();
 const dayDistanceCumKmByDate = new Map();
 const nonTrackedDayKeys = new Set();
@@ -1148,6 +1159,31 @@ const trackScrollMilestones = (dayKey = '', meta = {}) => {
       }
     });
   });
+};
+
+const scheduleScrollMilestonesTracking = (dayKey = '', meta = {}, force = false) => {
+  if (!TRACKING_ENABLED || !hasTrackingConsent()) return;
+  pendingScrollMilestonePayload = {
+    dayKey: String(dayKey || ''),
+    meta: { ...meta }
+  };
+  if (scrollMilestoneTimer && !force) return;
+  if (scrollMilestoneTimer) {
+    window.clearTimeout(scrollMilestoneTimer);
+    scrollMilestoneTimer = 0;
+  }
+  const flush = () => {
+    scrollMilestoneTimer = 0;
+    if (!pendingScrollMilestonePayload) return;
+    const payload = pendingScrollMilestonePayload;
+    pendingScrollMilestonePayload = null;
+    trackScrollMilestones(payload.dayKey, payload.meta);
+  };
+  if (force) {
+    flush();
+    return;
+  }
+  scrollMilestoneTimer = window.setTimeout(flush, SCROLL_MILESTONE_INTERVAL_MS);
 };
 
 const ensureTrackingLifecycleBindings = () => {
@@ -1963,6 +1999,32 @@ const recoverVisibleLazyMedia = () => {
     else hydrateLazyMedia(el);
     hydrated += 1;
   });
+};
+
+const queueVisibleLazyMediaRecovery = (force = false) => {
+  if (lazyMediaRecoveryRaf) return;
+  if (lazyMediaRecoveryTimer) {
+    if (!force) return;
+    window.clearTimeout(lazyMediaRecoveryTimer);
+    lazyMediaRecoveryTimer = 0;
+  }
+  const now = Date.now();
+  const elapsed = now - lastLazyMediaRecoveryTs;
+  const delay = force ? 0 : Math.max(0, SCROLL_LAZY_MEDIA_MIN_INTERVAL_MS - elapsed);
+  const run = () => {
+    lazyMediaRecoveryTimer = 0;
+    if (lazyMediaRecoveryRaf) return;
+    lazyMediaRecoveryRaf = window.requestAnimationFrame(() => {
+      lazyMediaRecoveryRaf = 0;
+      lastLazyMediaRecoveryTs = Date.now();
+      recoverVisibleLazyMedia();
+    });
+  };
+  if (delay === 0) {
+    run();
+    return;
+  }
+  lazyMediaRecoveryTimer = window.setTimeout(run, delay);
 };
 
 const unregisterLazyMediaWithin = (root) => {
@@ -4480,6 +4542,32 @@ const ensureVisibleDayTrackMaps = () => {
   });
 };
 
+const queueVisibleDayTrackMapsEnsure = (force = false) => {
+  if (dayTrackEnsureRaf) return;
+  if (dayTrackEnsureTimer) {
+    if (!force) return;
+    window.clearTimeout(dayTrackEnsureTimer);
+    dayTrackEnsureTimer = 0;
+  }
+  const now = Date.now();
+  const elapsed = now - lastDayTrackEnsureTs;
+  const delay = force ? 0 : Math.max(0, SCROLL_DAY_TRACK_MIN_INTERVAL_MS - elapsed);
+  const run = () => {
+    dayTrackEnsureTimer = 0;
+    if (dayTrackEnsureRaf) return;
+    dayTrackEnsureRaf = window.requestAnimationFrame(() => {
+      dayTrackEnsureRaf = 0;
+      lastDayTrackEnsureTs = Date.now();
+      ensureVisibleDayTrackMaps();
+    });
+  };
+  if (delay === 0) {
+    run();
+    return;
+  }
+  dayTrackEnsureTimer = window.setTimeout(run, delay);
+};
+
 const refreshDayTrackCards = () => {
   clearDayMapRegistry();
   document.querySelectorAll('.day').forEach((section) => {
@@ -5052,13 +5140,13 @@ const observeSections = () => {
     }
     const activeSection = sections[Math.max(0, activeIndex)] || null;
     const activeDayKey = activeSection ? activeSection.id.replace('day-', '') : '';
-    trackScrollMilestones(activeDayKey, {
+    scheduleScrollMilestonesTracking(activeDayKey, {
       source: 'diary_scroll',
       zone: activeSpecialZone || 'day'
     });
     scheduleDayHeavySync();
-    window.requestAnimationFrame(recoverVisibleLazyMedia);
-    window.requestAnimationFrame(ensureVisibleDayTrackMaps);
+    queueVisibleLazyMediaRecovery();
+    queueVisibleDayTrackMapsEnsure();
     scheduleIdleUnlock();
   };
 
@@ -5075,8 +5163,14 @@ const observeSections = () => {
   onScroll();
   scheduleIdleUnlock();
   scheduleDayHeavySync();
-  recoverVisibleLazyMedia();
-  ensureVisibleDayTrackMaps();
+  const bootstrapSection = sections[Math.max(0, activeIndex)] || null;
+  const bootstrapDayKey = bootstrapSection ? bootstrapSection.id.replace('day-', '') : '';
+  scheduleScrollMilestonesTracking(bootstrapDayKey, {
+    source: 'diary_scroll',
+    zone: activeSpecialZone || 'bootstrap'
+  }, true);
+  queueVisibleLazyMediaRecovery(true);
+  queueVisibleDayTrackMapsEnsure(true);
 
   cleanupSectionSync = () => {
     window.removeEventListener('scroll', onScroll);
@@ -5085,6 +5179,27 @@ const observeSections = () => {
       window.clearTimeout(scrollIdleTimer);
       scrollIdleTimer = null;
     }
+    if (lazyMediaRecoveryTimer) {
+      window.clearTimeout(lazyMediaRecoveryTimer);
+      lazyMediaRecoveryTimer = 0;
+    }
+    if (lazyMediaRecoveryRaf) {
+      window.cancelAnimationFrame(lazyMediaRecoveryRaf);
+      lazyMediaRecoveryRaf = 0;
+    }
+    if (dayTrackEnsureTimer) {
+      window.clearTimeout(dayTrackEnsureTimer);
+      dayTrackEnsureTimer = 0;
+    }
+    if (dayTrackEnsureRaf) {
+      window.cancelAnimationFrame(dayTrackEnsureRaf);
+      dayTrackEnsureRaf = 0;
+    }
+    if (scrollMilestoneTimer) {
+      window.clearTimeout(scrollMilestoneTimer);
+      scrollMilestoneTimer = 0;
+    }
+    pendingScrollMilestonePayload = null;
     if (unlockDrainTimer) {
       window.clearTimeout(unlockDrainTimer);
       unlockDrainTimer = null;

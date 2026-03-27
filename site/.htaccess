@@ -8,6 +8,12 @@ RewriteCond %{HTTP_HOST} ^(www\.)?mycamino\.semproxlab\.it$ [NC]
 RewriteCond %{HTTP:X-Canonical-Host} !^mycamino\.it$ [NC]
 RewriteRule ^ https://mycamino.it%{REQUEST_URI} [R=301,L,NE]
 
+# Never expose dotfiles or internal source/debug files
+RewriteRule "(^|/)\.(?!well-known/)" - [R=404,L,NC]
+RewriteRule ^(?:README\.md|server\.js|debug-headers\.php)$ - [R=404,L,NC]
+RewriteRule ^api/logs(?:/|$) - [R=404,L,NC]
+RewriteRule ^data/(?:admin_auth|comments|day_og_overrides|ui_flags)\.json$ - [R=404,L,NC]
+
 # Serve real files/directories as-is
 RewriteCond %{REQUEST_FILENAME} -f [OR]
 RewriteCond %{REQUEST_FILENAME} -d
@@ -31,7 +37,8 @@ RewriteRule ^(it|en|es|fr)/map/?$ map.html [L,NC]
 RewriteRule ^(it|en|es|fr)/people/?$ people.html [L,NC]
 RewriteRule ^(it|en|es|fr)/contatti/?$ contatti.html [L,NC]
 RewriteRule ^(it|en|es|fr)/crea-il-tuo-diario/?$ crea-il-tuo-diario.html [L,NC]
-RewriteRule ^it/guida-gratuita/?$ guida-gratuita.html [L,NC]
+RewriteRule ^it/guida-gratuita/?$ /it/guida-gratuita-al-cammino-di-santiago-francese/ [R=301,L,NC]
+RewriteRule ^it/guida-gratuita-al-cammino-di-santiago-francese/?$ guida-gratuita.html [L,NC]
 RewriteRule ^en/free-guide/?$ guida-gratuita.html [L,NC]
 RewriteRule ^es/guia-gratuita/?$ guida-gratuita.html [L,NC]
 RewriteRule ^fr/guide-gratuite/?$ guida-gratuita.html [L,NC]
@@ -53,6 +60,10 @@ RewriteRule ^$ index.html [L]
 </IfModule>
 
 <IfModule mod_headers.c>
+  <Files "conchiglia-nera.html">
+    Header set X-Robots-Tag "noindex, nofollow, noarchive, nosnippet, noimageindex"
+  </Files>
+
   <FilesMatch "\\.(mp4|mov)$">
     Header set Accept-Ranges "bytes"
     Header unset Content-Encoding
