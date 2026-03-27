@@ -53,6 +53,15 @@ const MAP_PAGE_PATH_RE = /^\/(it|en|es|fr)\/map\/?$/i;
 const PEOPLE_PAGE_PATH_RE = /^\/(it|en|es|fr)\/people\/?$/i;
 const CONTACT_PAGE_PATH_RE = /^\/(it|en|es|fr)\/contatti\/?$/i;
 const OFFER_PAGE_PATH_RE = /^\/(it|en|es|fr)\/crea-il-tuo-diario\/?$/i;
+const FREE_GUIDE_SLUG_BY_LANG = {
+  it: 'guida-gratuita',
+  en: 'free-guide',
+  es: 'guia-gratuita',
+  fr: 'guide-gratuite'
+};
+const FREE_GUIDE_PATH_BY_LANG = Object.fromEntries(
+  Object.entries(FREE_GUIDE_SLUG_BY_LANG).map(([lang, slug]) => [lang, `/${lang}/${slug}/`])
+);
 const PRIVACY_PAGE_PATH_RE = /^\/privacy-policy\/?$/i;
 const COOKIE_POLICY_PATH_RE = /^\/cookie-policy\/?$/i;
 const TERMS_PAGE_PATH_RE = /^\/termini-e-condizioni\/?$/i;
@@ -174,6 +183,19 @@ function buildAbsoluteUrl(origin, pathValue) {
   const base = String(origin || '').replace(/\/+$/, '');
   const pathPart = String(pathValue || '/').startsWith('/') ? String(pathValue || '/') : `/${String(pathValue || '/')}`;
   return `${base}${pathPart}`;
+}
+
+function normalizePathname(pathname = '/') {
+  const value = String(pathname || '/').replace(/\/+$/, '');
+  return value || '/';
+}
+
+function matchLocalizedStaticPath(pathname, localizedPathByLang) {
+  const normalizedPath = normalizePathname(pathname);
+  for (const [lang, targetPath] of Object.entries(localizedPathByLang || {})) {
+    if (normalizedPath === normalizePathname(targetPath)) return String(lang || '').toLowerCase();
+  }
+  return '';
 }
 
 function markdownToSafeHtml(markdown) {
@@ -1643,6 +1665,7 @@ async function buildSitemapXmlForOrigin(origin) {
   const mapAlt = { it: '/it/map/', en: '/en/map/', es: '/es/map/', fr: '/fr/map/' };
   const peopleAlt = { it: '/it/people/', en: '/en/people/', es: '/es/people/', fr: '/fr/people/' };
   const contactAlt = { it: '/it/contatti/', en: '/en/contatti/', es: '/es/contatti/', fr: '/fr/contatti/' };
+  const freeGuideAlt = { ...FREE_GUIDE_PATH_BY_LANG };
   const offerAlt = {
     it: '/it/crea-il-tuo-diario/',
     en: '/en/crea-il-tuo-diario/',
@@ -1668,6 +1691,10 @@ async function buildSitemapXmlForOrigin(origin) {
   push('/en/contatti/', null, '0.5', 'monthly', [], contactAlt);
   push('/es/contatti/', null, '0.5', 'monthly', [], contactAlt);
   push('/fr/contatti/', null, '0.5', 'monthly', [], contactAlt);
+  push(FREE_GUIDE_PATH_BY_LANG.it, generatedDate, '0.7', 'monthly', [], freeGuideAlt);
+  push(FREE_GUIDE_PATH_BY_LANG.en, generatedDate, '0.7', 'monthly', [], freeGuideAlt);
+  push(FREE_GUIDE_PATH_BY_LANG.es, generatedDate, '0.6', 'monthly', [], freeGuideAlt);
+  push(FREE_GUIDE_PATH_BY_LANG.fr, generatedDate, '0.6', 'monthly', [], freeGuideAlt);
   push('/it/crea-il-tuo-diario/', generatedDate, '0.6', 'monthly', [], offerAlt);
   push('/en/crea-il-tuo-diario/', generatedDate, '0.6', 'monthly', [], offerAlt);
   push('/es/crea-il-tuo-diario/', generatedDate, '0.6', 'monthly', [], offerAlt);
@@ -2970,6 +2997,18 @@ const server = http.createServer(async (req, res) => {
       return;
     }
     await serveStatic(req, res, `/contatti.html${urlObj.search || ''}`, lang);
+    return;
+  }
+
+  const freeGuideLang = matchLocalizedStaticPath(urlObj.pathname, FREE_GUIDE_PATH_BY_LANG);
+  if (freeGuideLang) {
+    const canonicalPath = FREE_GUIDE_PATH_BY_LANG[freeGuideLang];
+    if (urlObj.pathname !== canonicalPath) {
+      res.writeHead(301, { Location: `${canonicalPath}${urlObj.search || ''}` });
+      res.end();
+      return;
+    }
+    await serveStatic(req, res, `/guida-gratuita.html${urlObj.search || ''}`, freeGuideLang);
     return;
   }
 

@@ -18,6 +18,7 @@ const ROOT_FILES = [
   'favicon.ico',
   'favicon.png',
   'favicon.svg',
+  'guida-gratuita.html',
   'index.html',
   'map.html',
   'map.js',
@@ -38,7 +39,16 @@ const LOCALIZED_STATIC_ALIASES = [
   { source: 'map.html', slug: 'map' },
   { source: 'people.html', slug: 'people' },
   { source: 'contatti.html', slug: 'contatti' },
-  { source: 'crea-il-tuo-diario.html', slug: 'crea-il-tuo-diario' }
+  { source: 'crea-il-tuo-diario.html', slug: 'crea-il-tuo-diario' },
+  {
+    source: 'guida-gratuita.html',
+    slugByLang: {
+      it: 'guida-gratuita',
+      en: 'free-guide',
+      es: 'guia-gratuita',
+      fr: 'guide-gratuite'
+    }
+  }
 ];
 const ROOT_ALIAS_PAGES = [
   { source: 'privacy-policy.html', slug: 'privacy-policy' },
@@ -92,8 +102,11 @@ async function createAliasIndex(targetDir, sourceRelativePath) {
 async function buildStaticAliasDirectories() {
   for (const lang of LANGS) {
     for (const entry of LOCALIZED_STATIC_ALIASES) {
-      const targetDir = entry.slug
-        ? path.join(OUTPUT_DIR, lang, entry.slug)
+      const localizedSlug = typeof entry.slugByLang === 'object'
+        ? entry.slugByLang[lang]
+        : entry.slug;
+      const targetDir = localizedSlug
+        ? path.join(OUTPUT_DIR, lang, localizedSlug)
         : path.join(OUTPUT_DIR, lang);
       await createAliasIndex(targetDir, entry.source);
     }

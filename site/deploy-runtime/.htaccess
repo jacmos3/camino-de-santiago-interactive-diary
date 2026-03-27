@@ -31,6 +31,10 @@ RewriteRule ^(it|en|es|fr)/map/?$ map.html [L,NC]
 RewriteRule ^(it|en|es|fr)/people/?$ people.html [L,NC]
 RewriteRule ^(it|en|es|fr)/contatti/?$ contatti.html [L,NC]
 RewriteRule ^(it|en|es|fr)/crea-il-tuo-diario/?$ crea-il-tuo-diario.html [L,NC]
+RewriteRule ^it/guida-gratuita/?$ guida-gratuita.html [L,NC]
+RewriteRule ^en/free-guide/?$ guida-gratuita.html [L,NC]
+RewriteRule ^es/guia-gratuita/?$ guida-gratuita.html [L,NC]
+RewriteRule ^fr/guide-gratuite/?$ guida-gratuita.html [L,NC]
 
 # Localized home
 RewriteRule ^(it|en|es|fr)/?$ index.html [L,NC]

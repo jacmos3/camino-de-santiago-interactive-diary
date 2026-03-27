@@ -96,6 +96,25 @@ h1, h2, h3 {
   line-height: 1.45;
 }
 
+.hero__bridge {
+  margin: 0;
+  max-width: 100%;
+  color: #efe3d3;
+  font-size: 0.98rem;
+  line-height: 1.55;
+}
+
+.hero__bridge-link {
+  color: #fff4e6;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.hero__bridge-link:hover {
+  color: #ffffff;
+}
+
 .map-link {
   color: #ffd7b0;
   text-decoration: none;
@@ -130,6 +149,12 @@ h1, h2, h3 {
   line-height: 1.5;
 }
 
+.hero__offer-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
 .hero__offer-link {
   display: inline-flex;
   align-items: center;
@@ -137,6 +162,7 @@ h1, h2, h3 {
   padding: 10px 14px;
   border-radius: 999px;
   text-decoration: none;
+  border: 1px solid rgba(255, 244, 230, 0.22);
   background: #fff4e6;
   color: #1f1a16;
   font-weight: 700;
@@ -145,6 +171,16 @@ h1, h2, h3 {
 
 .hero__offer-link:hover {
   background: #fffaf2;
+}
+
+.hero__offer-link--secondary {
+  background: rgba(255, 250, 242, 0.12);
+  color: #fff8ef;
+  box-shadow: none;
+}
+
+.hero__offer-link--secondary:hover {
+  background: rgba(255, 250, 242, 0.2);
 }
 
 .view-btn {
@@ -1522,15 +1558,38 @@ h1, h2, h3 {
   margin-bottom: 10px;
 }
 
+.footer__cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
 .footer__cta-link {
-  color: #1f5f5b;
-  text-decoration: underline;
-  text-underline-offset: 2px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(31, 95, 91, 0.18);
+  background: #1f5f5b;
+  color: #fffaf2;
+  text-decoration: none;
   font-weight: 700;
+  box-shadow: 0 10px 24px rgba(31, 95, 91, 0.12);
 }
 
 .footer__cta-link:hover {
-  filter: brightness(0.9);
+  filter: brightness(1.03);
+}
+
+.footer__cta-link--secondary {
+  background: #fffaf2;
+  color: #1f5f5b;
+  box-shadow: none;
+}
+
+.footer__cta-link--secondary:hover {
+  background: #ffffff;
 }
 
 .mini-map {
@@ -2385,6 +2444,15 @@ h1, h2, h3 {
   .hero { padding: 40px 16px 28px; }
   .hero__top { flex-direction: column; }
   .controls { align-items: flex-start; }
+  .hero__offer-actions,
+  .footer__cta-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .hero__offer-link,
+  .footer__cta-link {
+    width: 100%;
+  }
   .people-hub__head { flex-direction: column; }
   .content { padding: 20px 12px 90px; }
   .after-camino__inner { padding: 22px 16px 24px; }

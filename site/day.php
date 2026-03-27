@@ -470,9 +470,10 @@ $ui = [
     'comments_on_media' => 'Commenti sul media',
     'recommendations' => 'Posti consigliati',
     'prologue_label' => 'Prologo · 2–3 giugno',
-    'offer_cta_title' => 'Stai pianificando anche tu un cammino?',
-    'offer_cta_text' => 'Se vuoi trasformare il tuo viaggio in un diario interattivo con mappa, media e tappe ordinate, qui trovi come funziona.',
-    'offer_cta_link' => 'Scopri come funziona',
+    'offer_cta_title' => 'Stai pensando anche tu di partire?',
+    'offer_cta_text' => 'Se vuoi capire se il Cammino ti chiama davvero e partire con più lucidità, il primo passo giusto è la guida gratuita.',
+    'offer_cta_link' => 'Inizia da qui',
+    'offer_cta_secondary' => 'Hai già fatto il Cammino? Scopri come trasformarlo in diario',
   ],
   'en' => [
     'title_prefix' => 'Camino Diary',
@@ -507,9 +508,10 @@ $ui = [
     'comments_on_media' => 'Comments on media',
     'recommendations' => 'Recommended places',
     'prologue_label' => 'Prologue · June 2–3',
-    'offer_cta_title' => 'Do you like this format?',
-    'offer_cta_text' => 'If you want to turn your own trip into an interactive diary with map, media and ordered stages, see how it works.',
-    'offer_cta_link' => 'See how it works',
+    'offer_cta_title' => 'Thinking about leaving too?',
+    'offer_cta_text' => 'If you want to understand whether the Camino is really calling you and start with more clarity, the right first step is the free guide.',
+    'offer_cta_link' => 'Start here',
+    'offer_cta_secondary' => 'Already done the Camino? See how to turn it into a diary',
   ],
   'es' => [
     'title_prefix' => 'Diario del Camino',
@@ -544,9 +546,10 @@ $ui = [
     'comments_on_media' => 'Comentarios sobre el media',
     'recommendations' => 'Lugares recomendados',
     'prologue_label' => 'Prólogo · 2–3 de junio',
-    'offer_cta_title' => '¿Te gusta este formato?',
-    'offer_cta_text' => 'Si quieres transformar también tu viaje en un diario interactivo con mapa, media y etapas ordenadas, mira cómo funciona.',
-    'offer_cta_link' => 'Descubre cómo funciona',
+    'offer_cta_title' => '¿También estás pensando en partir?',
+    'offer_cta_text' => 'Si quieres entender si el Camino de verdad te llama y empezar con más claridad, el primer paso correcto es la guía gratuita.',
+    'offer_cta_link' => 'Empieza aquí',
+    'offer_cta_secondary' => '¿Ya has hecho el Camino? Descubre cómo convertirlo en diario',
   ],
   'fr' => [
     'title_prefix' => 'Journal du Chemin',
@@ -581,9 +584,10 @@ $ui = [
     'comments_on_media' => 'Commentaires sur le média',
     'recommendations' => 'Lieux conseillés',
     'prologue_label' => 'Prologue · 2–3 juin',
-    'offer_cta_title' => 'Ce format vous plaît ?',
-    'offer_cta_text' => 'Si vous voulez transformer votre voyage en journal interactif avec carte, médias et étapes ordonnées, regardez comment cela fonctionne.',
-    'offer_cta_link' => 'Voir comment ça marche',
+    'offer_cta_title' => 'Vous pensez vous aussi à partir ?',
+    'offer_cta_text' => 'Si vous voulez comprendre si le Camino vous appelle vraiment et partir avec plus de clarté, le bon premier pas est le guide gratuit.',
+    'offer_cta_link' => 'Commence ici',
+    'offer_cta_secondary' => 'Vous avez déjà fait le Camino ? Découvrez comment en faire un journal',
   ],
 ];
 
@@ -687,7 +691,14 @@ $dayMapDataJson = $dayMapData ? json_encode($dayMapData, JSON_UNESCAPED_UNICODE 
 if (!is_string($dayMapDataJson) || $dayMapDataJson === '') $dayMapDataJson = 'null';
 $dayMapDataJson = str_replace(['<', '>', '&'], ['\u003C', '\u003E', '\u0026'], $dayMapDataJson);
 $trackMapHref = $showTrackCard ? "/{$lang}/map/?day=" . rawurlencode($trackDayKey) : "/{$lang}/map/";
-$offerHref = "/{$lang}/crea-il-tuo-diario/";
+$offerSlugByLang = [
+  'it' => 'guida-gratuita',
+  'en' => 'free-guide',
+  'es' => 'guia-gratuita',
+  'fr' => 'guide-gratuite',
+];
+$offerHref = "/{$lang}/" . ($offerSlugByLang[$lang] ?? $offerSlugByLang['it']) . "/";
+$builderHref = "/{$lang}/crea-il-tuo-diario/";
 $commentTargetDate = $isPrologue ? $prologueTrackDate : $date;
 $prevDayLabel = is_array($prevDay)
   ? trim((string)$uiLang['day_label_prefix'] . ' ' . (string)(day_find_day_number($days, substr((string)$prevDay['date'], 0, 10)) ?? ''))
@@ -746,6 +757,8 @@ http_response_code(200);
     .day-section{margin-top:18px;background:#fff;border-radius:16px;padding:16px}
     .day-offer-cta{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;background:#f7f3ee;border:1px solid rgba(31,26,22,.08)}
     .day-offer-cta p{margin:6px 0 0;color:#5a5248;max-width:700px}
+    .day-offer-cta__actions{display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+    .day-offer-cta__secondary{color:#5a5248;text-decoration:underline;text-underline-offset:2px;font-size:14px;text-align:right}
     .day-legal-links{display:flex;flex-wrap:wrap;gap:10px 16px;margin-top:14px}
     .day-legal-links a{color:#1f5f5b;text-decoration:underline;text-underline-offset:2px}
     .media-grid{margin-top:16px;display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px}
@@ -905,7 +918,10 @@ http_response_code(200);
         <a href="/termini-e-condizioni/">Termini e condizioni</a>
       </div>
     </div>
-    <a class="back-link" href="<?= day_escape($offerHref) ?>"><?= day_escape($uiLang['offer_cta_link']) ?></a>
+    <div class="day-offer-cta__actions">
+      <a class="back-link" href="<?= day_escape($offerHref) ?>"><?= day_escape($uiLang['offer_cta_link']) ?></a>
+      <a class="day-offer-cta__secondary" href="<?= day_escape($builderHref) ?>"><?= day_escape($uiLang['offer_cta_secondary']) ?></a>
+    </div>
   </section>
 
   <div class="day-modal" id="day-media-modal" aria-hidden="true">

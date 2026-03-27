@@ -1,0 +1,552 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title id="page-title">Guida gratuita al Cammino di Santiago</title>
+  <meta id="page-description" name="description" content="Una guida gratuita per capire se partire davvero e fare ordine tra dubbi, paure e motivazioni prima del Cammino di Santiago." />
+  <link id="seo-canonical" rel="canonical" href="/it/guida-gratuita/" />
+  <link id="seo-alt-it" rel="alternate" hreflang="it" href="/it/guida-gratuita/" />
+  <link id="seo-alt-en" rel="alternate" hreflang="en" href="/en/free-guide/" />
+  <link id="seo-alt-es" rel="alternate" hreflang="es" href="/es/guia-gratuita/" />
+  <link id="seo-alt-fr" rel="alternate" hreflang="fr" href="/fr/guide-gratuite/" />
+  <link id="seo-alt-default" rel="alternate" hreflang="x-default" href="/it/guida-gratuita/" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="stylesheet" href="/styles.css" />
+  <style>
+    .free-shell { max-width: 1120px; margin: 0 auto; padding: 28px 22px 70px; }
+    .free-hero { padding: 42px 22px 30px; background-position: center 42%; }
+    .free-hero .hero__inner { position: relative; }
+    .free-hero__top { display: block; }
+    .free-hero__title { max-width: 760px; padding-right: 210px; }
+    .free-hero .controls { position: absolute; top: 0; right: 0; z-index: 2; }
+    .free-hero h1 { color: #fff8ef; }
+    .free-hero .lead,
+    .free-hero .free-hero__subtle-link { color: #f2e8dc; }
+    .free-hero__content {
+      display: grid;
+      gap: 14px;
+      margin-top: 22px;
+      max-width: 720px;
+    }
+    .free-preview {
+      margin-top: 24px;
+      padding: 22px;
+      border-radius: 18px;
+      border: 1px solid rgba(31,95,91,.18);
+      background: linear-gradient(135deg, rgba(31,95,91,0.12), rgba(176,108,54,0.12));
+      box-shadow: var(--shadow);
+    }
+    .free-preview__layout {
+      display: grid;
+      grid-template-columns: minmax(260px, 320px) minmax(0, 1fr);
+      gap: 24px;
+      align-items: start;
+    }
+    .free-preview__media {
+      display: block;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 18px 36px rgba(31,26,22,.22);
+      background: rgba(255,250,242,.3);
+      text-decoration: none;
+    }
+    .free-preview__media img { display: block; width: 100%; height: auto; }
+    .free-preview__body { display: grid; gap: 12px; align-content: start; }
+    .free-preview__eyebrow {
+      display: inline-flex;
+      width: fit-content;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 11px;
+      border-radius: 999px;
+      background: rgba(31,95,91,.12);
+      color: #1f5f5b;
+      font-size: .82rem;
+      font-weight: 800;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+    }
+    .free-preview__title { margin: 0; }
+    .free-preview__text {
+      margin: 0;
+      color: var(--ink);
+      font-size: 1rem;
+      line-height: 1.6;
+      max-width: 680px;
+    }
+    .free-hero__actions { display: flex; gap: 10px; flex-wrap: wrap; }
+    .free-btn,
+    .free-btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 700;
+      border: 1px solid rgba(31,95,91,.35);
+    }
+    .free-btn { background: #1f5f5b; color: #fffaf2; }
+    .free-btn-secondary { background: #fffaf2; color: var(--ink); }
+    .free-hero__subtle-link {
+      width: fit-content;
+      font-size: .94rem;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      opacity: .92;
+    }
+    .free-grid {
+      display: grid;
+      gap: 18px;
+      grid-template-columns: 1fr 1fr;
+      margin-top: 24px;
+    }
+    .free-block,
+    .free-next,
+    .free-final {
+      background: #fffaf2;
+      border: 1px solid rgba(31,26,22,.1);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+    }
+    .free-block,
+    .free-final { padding: 22px; }
+    .free-block h2,
+    .free-next h2,
+    .free-final h2 { margin-top: 0; }
+    .free-list,
+    .free-next__list { margin: 0; padding-left: 18px; }
+    .free-list li,
+    .free-next__list li { margin: 8px 0; color: var(--muted); }
+    .free-next {
+      margin-top: 24px;
+      padding: 22px;
+    }
+    .free-next__lead,
+    .free-final p { margin: 0; color: var(--muted); }
+    .free-next__cards {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      margin-top: 18px;
+    }
+    .free-next__card {
+      border: 1px solid rgba(31,26,22,.08);
+      border-radius: 16px;
+      background: #fff;
+      padding: 18px;
+      display: grid;
+      gap: 8px;
+      align-content: start;
+    }
+    .free-next__step {
+      font-size: .82rem;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      color: #1f5f5b;
+      font-weight: 800;
+    }
+    .free-next__card h3 { margin: 0; font-size: 1.15rem; }
+    .free-next__card p { margin: 0; color: var(--muted); }
+    .free-final {
+      margin-top: 24px;
+      display: grid;
+      gap: 14px;
+    }
+    .free-preview__actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 4px;
+    }
+    .free-final__actions { display: flex; gap: 10px; flex-wrap: wrap; }
+    @media (max-width: 920px) {
+      .free-next__cards { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 820px) {
+      .free-hero .controls {
+        position: static;
+        width: 100%;
+        justify-content: flex-start;
+        margin-top: 14px;
+      }
+      .free-hero__title { padding-right: 0; }
+      .free-hero .lang-select { align-items: flex-start; }
+      .free-preview__layout,
+      .free-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero free-hero">
+    <div class="hero__inner">
+      <div class="free-hero__top">
+        <div class="hero__title free-hero__title">
+          <span class="eyebrow" id="guide-eyebrow">Primo passo</span>
+          <h1 id="guide-h1">Capire se il Cammino ti chiama davvero</h1>
+          <p class="lead" id="guide-sub">Prima di pensare a zaino, scarpe e tappe, serve chiarezza. Questa guida gratuita ti aiuta a fare ordine tra dubbi, paure e motivazioni e a capire se ha senso partire adesso.</p>
+        </div>
+        <div class="controls">
+          <div class="lang-select">
+            <label for="guide-lang-select" class="lang-select__label" id="guide-lang-label">Lingua</label>
+            <select id="guide-lang-select" class="lang-select__input" aria-label="Seleziona lingua">
+              <option value="it">🇮🇹 Italiano</option>
+              <option value="en">🇬🇧 English</option>
+              <option value="es">🇪🇸 Español</option>
+              <option value="fr">🇫🇷 Français</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="free-hero__content">
+        <div class="free-hero__actions">
+          <a class="free-btn" id="guide-download-link" href="#">Download gratuito</a>
+        </div>
+        <a class="free-hero__subtle-link" id="guide-hub-link" href="/it/crea-il-tuo-diario/">Hai già fatto il Cammino? Scopri come trasformarlo in un diario da conservare</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="free-shell">
+    <section class="free-preview">
+      <div class="free-preview__layout">
+        <a class="free-preview__media" id="guide-primary-link" href="#">
+          <img id="guide-cover" src="/assets/guides/free-guide-it.png" alt="Copertina della guida gratuita" loading="lazy" />
+        </a>
+        <div class="free-preview__body">
+          <div class="free-preview__eyebrow" id="preview-eyebrow">Download gratuito</div>
+          <h2 class="free-preview__title" id="preview-title">Questa è la guida che scarichi</h2>
+          <p class="free-preview__text" id="preview-text">Una guida breve ma concreta, pensata per aiutarti a fare chiarezza prima ancora di occuparti della parte pratica del Cammino.</p>
+          <ul class="free-list" id="inside-list"></ul>
+          <div class="free-preview__actions">
+            <a class="free-btn" id="preview-download-link" href="#">Download gratuito</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="free-grid">
+      <article class="free-block">
+        <h2 id="fit-title">Questa guida ti serve se</h2>
+        <ul class="free-list" id="fit-list"></ul>
+      </article>
+      <article class="free-block">
+        <h2 id="inside-title">Perché partire da qui</h2>
+        <ul class="free-list" id="why-list"></ul>
+      </article>
+    </section>
+
+    <section class="free-next">
+      <h2 id="next-title">Dopo la guida, i passi successivi</h2>
+      <p class="free-next__lead" id="next-lead">Se questa guida ti aiuta davvero a fare chiarezza, da lì diventa molto più semplice capire quale passo successivo abbia senso per te. Le opzioni successive sono queste.</p>
+      <div class="free-next__cards" id="next-cards"></div>
+    </section>
+
+    <section class="free-final">
+      <h2 id="final-title">Non devi scegliere tutto oggi</h2>
+      <p id="final-text">Se questa guida ti chiarisce davvero le idee, il resto viene dopo con più logica: guida pratica, builder o servizio avanzato. Prima però serve capire se partire ha senso per te.</p>
+      <div class="free-final__actions">
+        <a class="free-btn" id="final-download-link" href="#">Download gratuito</a>
+        <a class="free-btn-secondary" id="final-diary-link" href="/it/">Torna al diario</a>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      const path = String(window.location.pathname || '/');
+      const LANG_SLUGS = {
+        it: 'guida-gratuita',
+        en: 'free-guide',
+        es: 'guia-gratuita',
+        fr: 'guide-gratuite'
+      };
+      const HUB_PATH_BY_LANG = {
+        it: '/it/crea-il-tuo-diario/',
+        en: '/en/crea-il-tuo-diario/',
+        es: '/es/crea-il-tuo-diario/',
+        fr: '/fr/crea-il-tuo-diario/'
+      };
+      const GUMROAD_BY_LANG = {
+        it: 'https://mycaminonew.gumroad.com/l/guida-gratuita-cammino-santiago',
+        en: 'https://mycaminonew.gumroad.com/l/Free-guide-to-the-camino-de-santiago',
+        es: 'https://mycaminonew.gumroad.com/l/Free-guide-to-the-camino-de-santiago',
+        fr: 'https://mycaminonew.gumroad.com/l/Free-guide-to-the-camino-de-santiago'
+      };
+      const COVER_BY_LANG = {
+        it: '/assets/guides/free-guide-it.png',
+        en: '/assets/guides/free-guide-en.png',
+        es: '/assets/guides/free-guide-en.png',
+        fr: '/assets/guides/free-guide-en.png'
+      };
+      const ALT_BY_LANG = {
+        it: 'Copertina della guida gratuita al Cammino di Santiago',
+        en: 'Cover of the free guide to the Camino de Santiago',
+        es: 'Portada de la guía gratuita del Camino de Santiago',
+        fr: 'Couverture du guide gratuit du Camino de Santiago'
+      };
+      const pathLang = path.match(/^\/(it|en|es|fr)\//i);
+      const lang = (pathLang ? pathLang[1] : 'it').toLowerCase();
+      const T = {
+        it: {
+          pageTitle: 'Guida gratuita al Cammino di Santiago',
+          pageDesc: 'Una guida gratuita per capire se partire davvero e fare ordine tra dubbi, paure e motivazioni prima del Cammino di Santiago.',
+          eyebrow: 'Primo passo',
+          h1: 'Capire se il Cammino ti chiama davvero',
+          sub: 'Prima di pensare a zaino, scarpe e tappe, serve chiarezza. Questa guida gratuita ti aiuta a fare ordine tra dubbi, paure e motivazioni e a capire se ha senso partire adesso.',
+          langLabel: 'Lingua',
+          primary: 'Download gratuito',
+          secondary: 'Hai già fatto il Cammino? Scopri come trasformarlo in un diario da conservare',
+          previewEyebrow: 'Download gratuito',
+          previewTitle: 'Questa è la guida che scarichi',
+          previewText: 'Una guida breve ma concreta, pensata per aiutarti a fare chiarezza prima ancora di occuparti della parte pratica del Cammino.',
+          fitTitle: 'Questa guida ti serve se',
+          fitItems: [
+            'Senti che il Cammino ti attira, ma non hai ancora capito se è davvero il momento giusto.',
+            'Sei bloccato da dubbi, paure o immagini troppo romantiche e vuoi fare chiarezza prima di organizzarti.',
+            'Vuoi capire se questa idea ha senso per te prima di spendere energie su zaino, scarpe, tappe e logistica.'
+          ],
+          insideTitle: 'Dentro trovi',
+          insideItems: [
+            'Un modo semplice per distinguere i dubbi reali dalle paure inutili che ti tengono fermo.',
+            'Una lettura più lucida di cosa sia davvero il Cammino, al di là dei miti e dei contenuti ripetitivi.',
+            'Il punto in cui ha senso passare dalla domanda iniziale alla preparazione pratica.'
+          ],
+          whyTitle: 'Perché partire da qui',
+          whyItems: [
+            'Perché ti aiuta a non buttarti subito sulla preparazione pratica senza aver capito se questa partenza ha davvero senso per te.',
+            'Perché ti evita di confondere paure normali, dubbi veri e semplice rumore mentale.',
+            'Perché ti mette nel punto giusto per decidere se fermarti qui oppure passare alla guida pratica.'
+          ],
+          nextTitle: 'Dopo la guida, i passi successivi',
+          nextLead: 'Se questa guida ti aiuta davvero a fare chiarezza, da lì diventa molto più semplice capire quale passo successivo abbia senso per te. Le opzioni successive sono queste.',
+          nextCards: [
+            { step: '1. Se decidi di partire', title: 'Guida pratica', text: 'La versione operativa per prepararti bene e non perdere materiale utile durante il viaggio.' },
+            { step: '2. Se vuoi documentare bene il viaggio', title: 'Builder Base', text: 'Ti aiuta a partire già sapendo come raccogliere bene foto, video, note e tracce.' },
+            { step: '3. Se vuoi un diario finito', title: 'Servizio avanzato', text: 'Quando preferisci delegare ordine, storytelling e preparazione tecnica del materiale.' }
+          ],
+          finalTitle: 'Non devi scegliere tutto oggi',
+          finalText: 'Se questa guida ti chiarisce davvero le idee, il resto viene dopo con più logica: guida pratica, builder o servizio avanzato. Prima però serve capire se partire ha senso per te.',
+          finalDiary: 'Torna al diario'
+        },
+        en: {
+          pageTitle: 'Free Guide to the Camino de Santiago',
+          pageDesc: 'A free guide to understand whether you really want to go and to bring order to doubts, fears, and motivations before the Camino.',
+          eyebrow: 'First step',
+          h1: 'Understand whether the Camino is really calling you',
+          sub: 'Before thinking about backpack, shoes, and stages, you need clarity. This free guide helps you sort out doubts, fears, and motivations and understand whether leaving now makes sense for you.',
+          langLabel: 'Language',
+          primary: 'Free download',
+          secondary: 'Already done the Camino? See how to turn it into a diary worth keeping',
+          previewEyebrow: 'Free download',
+          previewTitle: 'This is the guide you download',
+          previewText: 'A short but concrete guide, designed to help you gain clarity before even dealing with the practical side of the Camino.',
+          fitTitle: 'This guide is for you if',
+          fitItems: [
+            'You feel drawn to the Camino, but you still do not know whether now is really the right moment.',
+            'You are stuck between doubts, fears, or over-romanticized ideas and want clarity before organizing anything.',
+            'You want to understand whether this idea makes sense for you before spending energy on gear, stages, and logistics.'
+          ],
+          insideTitle: 'Inside you will find',
+          insideItems: [
+            'A simple way to separate real doubts from useless fears that keep you still.',
+            'A clearer understanding of what the Camino really is, beyond myths and repetitive content.',
+            'The point where it actually makes sense to move from the initial question to practical preparation.'
+          ],
+          whyTitle: 'Why start here',
+          whyItems: [
+            'Because it helps you avoid rushing into practical preparation before understanding whether this departure really makes sense for you.',
+            'Because it helps you separate normal fears, real doubts, and simple mental noise.',
+            'Because it puts you in the right place to decide whether to stop here or move on to the practical guide.'
+          ],
+          nextTitle: 'After the guide, the next steps',
+          nextLead: 'If this guide genuinely helps you gain clarity, it becomes much easier to understand which next step actually makes sense for you. These are the next options.',
+          nextCards: [
+            { step: '1. If you decide to go', title: 'Practical guide', text: 'The operational version to prepare properly and avoid losing useful material during the trip.' },
+            { step: '2. If you want to document the trip well', title: 'Builder Base', text: 'It helps you start already knowing how to collect photos, videos, notes, and tracks properly.' },
+            { step: '3. If you want a finished diary', title: 'Advanced service', text: 'For when you prefer to delegate structure, storytelling, and technical preparation of the material.' }
+          ],
+          finalTitle: 'You do not need to choose everything today',
+          finalText: 'If this guide really helps you gain clarity, the rest comes later with more logic: practical guide, builder, or advanced service. First, though, you need to understand whether going actually makes sense for you.',
+          finalDiary: 'Back to the diary'
+        },
+        es: {
+          pageTitle: 'Guía gratuita del Camino de Santiago',
+          pageDesc: 'Una guía gratuita para entender si de verdad quieres partir y poner orden entre dudas, miedos y motivaciones antes del Camino.',
+          eyebrow: 'Primer paso',
+          h1: 'Entender si el Camino de verdad te llama',
+          sub: 'Antes de pensar en mochila, calzado y etapas, hace falta claridad. Esta guía gratuita te ayuda a ordenar dudas, miedos y motivaciones y a entender si tiene sentido partir ahora.',
+          langLabel: 'Idioma',
+          primary: 'Descargar guía',
+          secondary: '¿Ya has hecho el Camino? Descubre cómo convertirlo en un diario para conservar',
+          previewEyebrow: 'Descarga directa',
+          previewTitle: 'Esta es la guía que descargas',
+          previewText: 'Una guía breve pero concreta, pensada para ayudarte a aclararte incluso antes de ocuparte de la parte práctica del Camino.',
+          fitTitle: 'Esta guía te sirve si',
+          fitItems: [
+            'Sientes que el Camino te atrae, pero todavía no sabes si este es realmente el momento adecuado.',
+            'Estás bloqueado entre dudas, miedos o imágenes demasiado románticas y quieres aclararte antes de organizarte.',
+            'Quieres entender si esta idea tiene sentido para ti antes de gastar energía en equipo, etapas y logística.'
+          ],
+          insideTitle: 'Dentro encontrarás',
+          insideItems: [
+            'Una forma simple de distinguir las dudas reales de los miedos inútiles que te dejan parado.',
+            'Una lectura más lúcida de lo que es realmente el Camino, más allá de mitos y contenidos repetitivos.',
+            'El punto en el que tiene sentido pasar de la pregunta inicial a la preparación práctica.'
+          ],
+          whyTitle: 'Por qué empezar por aquí',
+          whyItems: [
+            'Porque te ayuda a no lanzarte enseguida a la preparación práctica sin haber entendido antes si esta salida tiene sentido para ti.',
+            'Porque evita que confundas miedos normales, dudas reales y simple ruido mental.',
+            'Porque te deja en el punto correcto para decidir si parar aquí o pasar a la guía práctica.'
+          ],
+          nextTitle: 'Después de la guía, los pasos siguientes',
+          nextLead: 'Si esta guía de verdad te ayuda a aclararte, a partir de ahí resulta mucho más fácil entender qué paso siguiente tiene sentido para ti. Estas son las opciones siguientes.',
+          nextCards: [
+            { step: '1. Si decides partir', title: 'Guía práctica', text: 'La versión operativa para prepararte bien y no perder material útil durante el viaje.' },
+            { step: '2. Si quieres documentar bien el viaje', title: 'Builder Base', text: 'Te ayuda a partir sabiendo ya cómo guardar bien fotos, vídeos, notas y trazas.' },
+            { step: '3. Si quieres un diario terminado', title: 'Servicio avanzado', text: 'Cuando prefieres delegar orden, storytelling y preparación técnica del material.' }
+          ],
+          finalTitle: 'No tienes que decidirlo todo hoy',
+          finalText: 'Si esta guía de verdad te aclara las ideas, lo demás llega después con más lógica: guía práctica, builder o servicio avanzado. Pero antes necesitas entender si tiene sentido partir.',
+          finalDiary: 'Volver al diario'
+        },
+        fr: {
+          pageTitle: 'Guide gratuite du Camino de Santiago',
+          pageDesc: 'Un guide gratuit pour comprendre si vous voulez vraiment partir et remettre de l’ordre dans vos doutes, peurs et motivations avant le Camino.',
+          eyebrow: 'Premier pas',
+          h1: 'Comprendre si le Camino vous appelle vraiment',
+          sub: 'Avant de penser sac à dos, chaussures et étapes, il faut de la clarté. Ce guide gratuit vous aide à remettre de l’ordre dans vos doutes, vos peurs et vos motivations pour comprendre si partir maintenant a du sens.',
+          langLabel: 'Langue',
+          primary: 'Télécharger le guide',
+          secondary: 'Vous avez déjà fait le Camino ? Découvrez comment en faire un journal à conserver',
+          previewEyebrow: 'Téléchargement direct',
+          previewTitle: 'Voici le guide que vous téléchargez',
+          previewText: 'Un guide court mais concret, conçu pour vous aider à y voir clair avant même de vous occuper de la partie pratique du Camino.',
+          fitTitle: 'Ce guide vous sert si',
+          fitItems: [
+            'Vous sentez que le Camino vous attire, mais vous ne savez pas encore si c’est vraiment le bon moment.',
+            'Vous êtes bloqué entre doutes, peurs ou images trop romantiques et vous voulez y voir clair avant de vous organiser.',
+            'Vous voulez comprendre si cette idée a du sens pour vous avant de dépenser de l’énergie sur l’équipement, les étapes et la logistique.'
+          ],
+          insideTitle: 'À l’intérieur, vous trouverez',
+          insideItems: [
+            'Une façon simple de distinguer les vrais doutes des peurs inutiles qui vous immobilisent.',
+            'Une lecture plus lucide de ce qu’est vraiment le Camino, au-delà des mythes et des contenus répétitifs.',
+            'Le moment où il devient logique de passer de la question initiale à la préparation pratique.'
+          ],
+          whyTitle: 'Pourquoi commencer ici',
+          whyItems: [
+            'Parce qu’il vous aide à ne pas vous jeter tout de suite dans la préparation pratique sans avoir compris si ce départ a vraiment du sens pour vous.',
+            'Parce qu’il évite de confondre peurs normales, vrais doutes et simple bruit mental.',
+            'Parce qu’il vous met au bon endroit pour décider si vous vous arrêtez là ou si vous passez au guide pratique.'
+          ],
+          nextTitle: 'Après le guide, les étapes suivantes',
+          nextLead: 'Si ce guide vous aide vraiment à y voir clair, il devient ensuite beaucoup plus simple de comprendre quelle étape suivante a réellement du sens pour vous. Voici les options suivantes.',
+          nextCards: [
+            { step: '1. Si vous décidez de partir', title: 'Guide pratique', text: 'La version opérationnelle pour bien vous préparer et ne pas perdre du matériel utile pendant le voyage.' },
+            { step: '2. Si vous voulez bien documenter le voyage', title: 'Builder Base', text: 'Il vous aide à partir en sachant déjà comment conserver correctement photos, vidéos, notes et traces.' },
+            { step: '3. Si vous voulez un journal fini', title: 'Service avancé', text: 'Quand vous préférez déléguer l’ordre, le storytelling et la préparation technique du matériel.' }
+          ],
+          finalTitle: 'Vous n’avez pas besoin de tout choisir aujourd’hui',
+          finalText: 'Si ce guide vous aide vraiment à y voir clair, le reste viendra ensuite de façon plus logique : guide pratique, builder ou service avancé. Mais d’abord, il faut comprendre si partir a du sens pour vous.',
+          finalDiary: 'Retour au journal'
+        }
+      };
+
+      const t = T[lang] || T.it;
+      const canonical = `/${lang}/${LANG_SLUGS[lang]}/`;
+      const setText = (id, value) => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = value;
+      };
+      const fillList = (id, items) => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.innerHTML = '';
+        (items || []).forEach((item) => {
+          const li = document.createElement('li');
+          li.textContent = item;
+          el.appendChild(li);
+        });
+      };
+
+      document.documentElement.lang = lang;
+      document.title = t.pageTitle;
+      document.getElementById('page-title').textContent = t.pageTitle;
+      document.getElementById('page-description').setAttribute('content', t.pageDesc);
+      document.getElementById('seo-canonical').setAttribute('href', canonical);
+      document.getElementById('seo-alt-it').setAttribute('href', `/${'it'}/${LANG_SLUGS.it}/`);
+      document.getElementById('seo-alt-en').setAttribute('href', `/${'en'}/${LANG_SLUGS.en}/`);
+      document.getElementById('seo-alt-es').setAttribute('href', `/${'es'}/${LANG_SLUGS.es}/`);
+      document.getElementById('seo-alt-fr').setAttribute('href', `/${'fr'}/${LANG_SLUGS.fr}/`);
+      document.getElementById('seo-alt-default').setAttribute('href', `/${'it'}/${LANG_SLUGS.it}/`);
+
+      setText('guide-eyebrow', t.eyebrow);
+      setText('guide-h1', t.h1);
+      setText('guide-sub', t.sub);
+      setText('guide-lang-label', t.langLabel);
+      setText('guide-download-link', t.primary);
+      setText('preview-download-link', t.primary);
+      setText('guide-hub-link', t.secondary);
+      setText('preview-eyebrow', t.previewEyebrow);
+      setText('preview-title', t.previewTitle);
+      setText('preview-text', t.previewText);
+      setText('fit-title', t.fitTitle);
+      setText('inside-title', t.whyTitle);
+      setText('next-title', t.nextTitle);
+      setText('next-lead', t.nextLead);
+      setText('final-title', t.finalTitle);
+      setText('final-text', t.finalText);
+      setText('final-download-link', t.primary);
+      setText('final-diary-link', t.finalDiary);
+
+      fillList('fit-list', t.fitItems);
+      fillList('inside-list', t.insideItems);
+      fillList('why-list', t.whyItems);
+
+      const nextCards = document.getElementById('next-cards');
+      nextCards.innerHTML = '';
+      (t.nextCards || []).forEach((card) => {
+        const article = document.createElement('article');
+        article.className = 'free-next__card';
+        article.innerHTML = `<div class="free-next__step">${card.step}</div><h3>${card.title}</h3><p>${card.text}</p>`;
+        nextCards.appendChild(article);
+      });
+
+      const cover = document.getElementById('guide-cover');
+      cover.src = COVER_BY_LANG[lang] || COVER_BY_LANG.it;
+      cover.alt = ALT_BY_LANG[lang] || ALT_BY_LANG.it;
+
+      const gumroad = GUMROAD_BY_LANG[lang] || GUMROAD_BY_LANG.it;
+      const hubPath = HUB_PATH_BY_LANG[lang] || HUB_PATH_BY_LANG.it;
+      const diaryPath = `/${lang}/`;
+      document.getElementById('guide-primary-link').href = gumroad;
+      document.getElementById('guide-primary-link').target = '_blank';
+      document.getElementById('guide-primary-link').rel = 'noopener noreferrer';
+      document.getElementById('guide-download-link').href = gumroad;
+      document.getElementById('guide-download-link').target = '_blank';
+      document.getElementById('guide-download-link').rel = 'noopener noreferrer';
+      document.getElementById('preview-download-link').href = gumroad;
+      document.getElementById('preview-download-link').target = '_blank';
+      document.getElementById('preview-download-link').rel = 'noopener noreferrer';
+      document.getElementById('final-download-link').href = gumroad;
+      document.getElementById('final-download-link').target = '_blank';
+      document.getElementById('final-download-link').rel = 'noopener noreferrer';
+      document.getElementById('guide-hub-link').href = hubPath;
+      document.getElementById('final-diary-link').href = diaryPath;
+
+      const langSelect = document.getElementById('guide-lang-select');
+      langSelect.value = lang;
+      langSelect.addEventListener('change', () => {
+        const target = String(langSelect.value || 'it').toLowerCase();
+        window.location.href = `/${target}/${LANG_SLUGS[target]}/`;
+      });
+    })();
+  </script>
+</body>
+</html>

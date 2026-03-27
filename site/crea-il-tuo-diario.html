@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title id="page-title">Crea il tuo diario interattivo</title>
-  <meta id="page-description" name="description" content="Guida gratuita per capire se partire, guida pratica per preparare il Cammino, call valutativa, Builder Base o servizio avanzato per trasformare il viaggio in un diario interattivo." />
+  <title id="page-title">Percorso completo: dal Cammino al diario</title>
+  <meta id="page-description" name="description" content="Guida pratica, Builder Base e servizio avanzato per passare dal primo dubbio al diario finale del tuo viaggio." />
   <link id="seo-canonical" rel="canonical" href="/it/crea-il-tuo-diario/" />
   <link id="seo-alt-it" rel="alternate" hreflang="it" href="/it/crea-il-tuo-diario/" />
   <link id="seo-alt-en" rel="alternate" hreflang="en" href="/en/crea-il-tuo-diario/" />
@@ -23,18 +23,24 @@
   <style>
     .offer-shell { max-width: 1100px; margin: 0 auto; padding: 28px 22px 72px; }
     .offer-hero { padding: 42px 22px 28px; background-position: center 45%; }
+    .offer-hero .hero__inner { position: relative; }
     .offer-hero h1 { color: #fff8ef; }
     .offer-hero .lead { color: #f2e8dc; max-width: 780px; }
     .offer-hero .offer-note { color: #f2e8dc; }
-    .offer-hero__top { display: flex; justify-content: space-between; gap: 18px; align-items: flex-start; flex-wrap: wrap; }
-    .offer-hero__actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
-    .offer-hero__meta { display: grid; gap: 12px; min-width: 220px; }
-    .offer-lang { display: grid; gap: 6px; }
-    .offer-lang label { font-size: .92rem; font-weight: 600; color: #fff3e3; }
-    .offer-lang select {
-      border: 1px solid rgba(31,26,22,.18); border-radius: 10px; padding: 10px 11px;
-      background: rgba(255, 250, 242, 0.96); color: var(--ink); font: inherit;
+    .offer-hero__top { display: block; }
+    .offer-hero__title {
+      min-width: 0;
+      max-width: 760px;
+      padding-right: 210px;
     }
+    .offer-hero .controls {
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 2;
+    }
+    .offer-hero__actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
+    .offer-process-note { margin: 16px 0 0; color: #f2e8dc; max-width: 820px; font-size: .92rem; line-height: 1.5; }
     .offer-actions-row { display: flex; gap: 10px; flex-wrap: wrap; }
     .offer-btn,
     .offer-btn-secondary,
@@ -59,11 +65,53 @@
       border: 1px solid rgba(31,95,91,.18);
       background: linear-gradient(135deg, rgba(31,95,91,0.12), rgba(176,108,54,0.12));
       box-shadow: var(--shadow);
+    }
+    .offer-free__layout {
+      display: grid;
+      grid-template-columns: minmax(260px, 320px) minmax(0, 1fr);
+      gap: 22px;
+      align-items: start;
+    }
+    .offer-free__media {
+      display: block;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #d5c6ae;
+      box-shadow: 0 12px 28px rgba(31,26,22,.16);
+      text-decoration: none;
+    }
+    .offer-free__media img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    .offer-free__body {
       display: grid;
       gap: 12px;
+      align-content: start;
+    }
+    .offer-free__eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      width: fit-content;
+      border-radius: 999px;
+      padding: 7px 11px;
+      background: rgba(31,95,91,.12);
+      color: #1f5f5b;
+      font-size: .82rem;
+      font-weight: 800;
+      letter-spacing: .05em;
+      text-transform: uppercase;
     }
     .offer-free__title { margin: 0; }
-    .offer-free__text { margin: 0; color: var(--muted); max-width: 760px; }
+    .offer-free__text { margin: 0; color: var(--ink); font-size: 1.05rem; line-height: 1.55; max-width: 760px; }
+    .offer-free__points {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+    }
+    .offer-free__points li { margin: 7px 0; }
     .offer-free__actions { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
     .offer-free__hint { color: var(--muted); font-size: .92rem; }
     .offer-grid { display: grid; gap: 18px; grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 22px; align-items: stretch; }
@@ -109,6 +157,15 @@
     }
     @media (max-width: 820px) {
       .offer-columns { grid-template-columns: 1fr; }
+      .offer-hero .controls {
+        position: static;
+        width: 100%;
+        justify-content: flex-start;
+        margin-top: 14px;
+      }
+      .offer-hero__title { padding-right: 0; }
+      .offer-hero .lang-select { align-items: flex-start; }
+      .offer-free__layout { grid-template-columns: 1fr; }
     }
     @media (max-width: 640px) {
       .offer-grid { grid-template-columns: 1fr; }
@@ -119,46 +176,39 @@
   <header class="hero offer-hero">
     <div class="hero__inner">
       <div class="offer-hero__top">
-        <div>
-          <span class="eyebrow" id="offer-eyebrow">Offerta</span>
-          <h1 id="offer-h1">Dal Cammino al diario: parti bene, poi raccontalo davvero</h1>
-          <p class="lead" id="offer-sub">Prima puoi orientarti con una guida gratuita e una guida pratica per preparare il Cammino. Dopo il viaggio puoi scegliere call, Builder Base o servizio avanzato per trasformare materiali e ricordi in un diario ordinato.</p>
-          <p class="offer-note" id="offer-note">Le guide servono prima di partire. Builder Base e servizio avanzato servono dopo, quando vuoi dare forma al viaggio e non lasciare tutto disperso.</p>
-          <div class="offer-hero__actions">
-            <a class="offer-btn" id="offer-primary-link" href="#free-guide-box">Scarica la guida gratuita</a>
-            <a class="offer-btn-secondary" id="offer-secondary-link" href="/it/">Torna al diario</a>
-          </div>
+        <div class="hero__title offer-hero__title">
+          <span class="eyebrow" id="offer-eyebrow">Percorso completo</span>
+          <h1 id="offer-h1">Dal primo dubbio al diario finale</h1>
+          <p class="lead" id="offer-sub">La guida gratuita è la porta d’ingresso. Questa pagina serve invece a capire cosa viene dopo: guida pratica, Builder Base o servizio avanzato.</p>
         </div>
-        <div class="offer-hero__meta">
-          <div class="offer-lang">
-            <label for="offer-lang-select" id="offer-lang-label">Lingua</label>
-            <select id="offer-lang-select" aria-label="Seleziona lingua">
-              <option value="it">Italiano</option>
-              <option value="en">English</option>
-              <option value="es">Español</option>
-              <option value="fr">Français</option>
+        <div class="controls">
+          <div class="lang-select">
+            <label for="offer-lang-select" class="lang-select__label" id="offer-lang-label">Lingua</label>
+            <select id="offer-lang-select" class="lang-select__input" aria-label="Seleziona lingua">
+              <option value="it">🇮🇹 Italiano</option>
+              <option value="en">🇬🇧 English</option>
+              <option value="es">🇪🇸 Español</option>
+              <option value="fr">🇫🇷 Français</option>
             </select>
           </div>
-          <div class="offer-small" id="offer-process-note">Con il Builder Base la pubblicazione sul tuo hosting va impostata da subito; nel servizio avanzato consegno anche un pacchetto offline e, opzionalmente, è possibile pubblicarlo online al prezzo di 120 EUR/anno, con dominio (esempio tuonome.it) e hosting inclusi.</div>
         </div>
+      </div>
+      <div class="offer-hero__content">
+          <p class="offer-note" id="offer-note">Non tutte le opzioni servono subito. Qui sotto trovi il percorso completo, nel suo ordine più logico.</p>
+          <div class="offer-hero__actions">
+            <a class="offer-btn" id="offer-primary-link" href="/it/guida-gratuita/">Parti dalla guida gratuita</a>
+            <a class="offer-btn-secondary" id="offer-secondary-link" href="/it/">Torna al diario</a>
+          </div>
+          <p class="offer-process-note" id="offer-process-note">La guida pratica serve prima di partire. Il Builder Base può essere impostato già prima del viaggio, così sai come raccogliere bene foto, video, note e tracce. Il servizio avanzato ha senso quando vuoi delegare la trasformazione finale in diario.</p>
       </div>
     </div>
   </header>
 
   <main class="offer-shell">
-    <section class="offer-free" id="free-guide-box">
-      <h2 class="offer-free__title" id="free-guide-title">Guida gratuita</h2>
-      <p class="offer-free__text" id="free-guide-text">Download gratuito via Gumroad in cambio di email. Ti aiuta a capire se il Cammino fa davvero per te, quali dubbi contano davvero e quando ha senso passare alla guida pratica.</p>
-      <div class="offer-free__actions">
-        <a class="offer-btn" id="free-guide-link" href="#">Download gratuito via Gumroad</a>
-        <span class="offer-free__hint" id="free-guide-hint">Link Gumroad in arrivo</span>
-      </div>
-    </section>
-
     <section class="offer-section">
       <div class="offer-block">
-        <h2 id="pricing-title">Scegli il punto di ingresso</h2>
-        <p class="offer-block__lead" id="pricing-lead">Quattro offerte chiare: guida pratica, call valutativa, Builder Base per fare da solo, oppure servizio avanzato se vuoi delegare anche ordine, storytelling e preparazione tecnica.</p>
+        <h2 id="pricing-title">Le opzioni successive</h2>
+        <p class="offer-block__lead" id="pricing-lead">Se il primo dubbio lo hai già chiarito, qui sotto trovi i passaggi successivi: guida pratica, Builder Base e servizio avanzato.</p>
         <div class="offer-grid" id="offer-grid"></div>
       </div>
     </section>
@@ -187,10 +237,10 @@
     </section>
 
     <section class="offer-final">
-      <h2 id="final-title">Non sai da dove partire?</h2>
-      <p id="final-text">Se hai foto e video sparsi, testi ancora nei tuoi appunti o nel diario cartaceo e non vuoi costruire tu il racconto giorno per giorno, il punto giusto di partenza è la call valutativa del servizio avanzato.</p>
+      <h2 id="final-title">Hai già capito che vuoi andare avanti?</h2>
+      <p id="final-text">Se ti serve solo prepararti bene, parti dalla guida pratica. Se vuoi anche impostare bene la raccolta di foto, video, note e tracce, valuta il Builder Base. Se invece vuoi un diario finito, scrivimi per il servizio avanzato.</p>
       <div class="offer-final__actions">
-        <a class="offer-btn" id="final-primary-link" href="/it/contatti/?pack=call">Richiedi la call valutativa</a>
+        <a class="offer-btn" id="final-primary-link" href="/it/contatti/?pack=call">Richiedi informazioni</a>
         <a class="offer-btn-secondary" id="final-secondary-link" href="/it/">Rivedi il diario</a>
       </div>
       <p class="offer-legal">Prima di acquistare o richiedere un servizio, leggi anche <a href="/privacy-policy/">Privacy Policy</a>, <a href="/cookie-policy/">Cookie Policy</a> e <a href="/termini-e-condizioni/">Termini e condizioni</a>.</p>
@@ -206,22 +256,28 @@
       const packFromQuery = new URLSearchParams(window.location.search).get('pack') || '';
       const T = {
         it: {
-          pageTitle: 'Crea il tuo diario interattivo',
-          pageDesc: 'Guida gratuita per capire se partire, guida pratica per preparare il Cammino, call valutativa, Builder Base o servizio avanzato per trasformare il viaggio in un diario interattivo.',
-          eyebrow: 'Offerta',
-          h1: 'Dal Cammino al diario: parti bene, poi raccontalo davvero',
-          sub: 'Prima puoi orientarti con una guida gratuita e una guida pratica per preparare il Cammino. Dopo il viaggio puoi scegliere call, Builder Base o servizio avanzato per trasformare materiali e ricordi in un diario ordinato.',
-          note: 'Le guide servono prima di partire. Builder Base e servizio avanzato servono dopo, quando vuoi dare forma al viaggio e non lasciare tutto disperso.',
-          primary: 'Scarica la guida gratuita',
+          pageTitle: 'Percorso completo: dal Cammino al diario',
+          pageDesc: 'Guida pratica, Builder Base e servizio avanzato per passare dal primo dubbio al diario finale del tuo viaggio.',
+          eyebrow: 'Percorso completo',
+          h1: 'Dal primo dubbio al diario finale',
+          sub: 'La guida gratuita è la porta d’ingresso. Questa pagina serve invece a capire cosa viene dopo: guida pratica, Builder Base o servizio avanzato.',
+          note: 'Non tutte le opzioni servono subito. Qui sotto trovi il percorso completo, nel suo ordine più logico.',
+          primary: 'Parti dalla guida gratuita',
           secondary: 'Torna al diario',
           langLabel: 'Lingua',
-          processNote: 'Con il Builder Base la pubblicazione sul tuo hosting va impostata da subito; nel servizio avanzato consegno anche un pacchetto offline e, opzionalmente, è possibile pubblicarlo online al prezzo di 120 EUR/anno, con dominio (esempio tuonome.it) e hosting inclusi.',
-          pricingTitle: 'Scegli la modalità giusta',
-          pricingLead: 'Prima di partire hai due guide chiare. Dopo il viaggio puoi scegliere call valutativa, Builder Base o servizio avanzato per trasformare il materiale in un diario interattivo.',
+          processNote: 'La guida pratica serve prima di partire. Il Builder Base può essere impostato già prima del viaggio, così sai come raccogliere bene foto, video, note e tracce. Il servizio avanzato ha senso quando vuoi delegare la trasformazione finale in diario.',
+          pricingTitle: 'Le opzioni successive',
+          pricingLead: 'Se il primo dubbio lo hai già chiarito, qui sotto trovi i passaggi successivi: guida pratica, Builder Base e servizio avanzato.',
+          freeGuideEyebrow: 'Il primo passo',
           freeGuideTitle: 'Guida gratuita',
-          freeGuideText: 'Download gratuito via Gumroad in cambio di email. Ti aiuta a capire se il Cammino fa davvero per te, quali dubbi contano davvero e quando ha senso passare alla guida pratica.',
-          freeGuideHint: 'Link Gumroad in arrivo',
-          freeGuideCta: 'Download gratuito via Gumroad',
+          freeGuideText: 'Se sei ancora fermo tra voglia di partire, dubbi e paure inutili, questa è la guida giusta da leggere prima ancora di pensare a zaino, scarpe o tappe.',
+          freeGuidePoints: [
+            'Ti aiuta a capire se il Cammino ti chiama davvero oppure no',
+            'Ti fa distinguere i dubbi reali dalle paure inutili che ti tengono fermo',
+            'Ti porta alla guida pratica solo quando ha davvero senso farlo'
+          ],
+          freeGuideHint: '',
+          freeGuideCta: 'Download gratuito',
           finalPack: 'call',
           cards: [
             {
@@ -299,28 +355,34 @@
             'Nel servizio avanzato ti consegno un prodotto finito utilizzabile anche offline come diario personale su chiavetta, SSD o DVD.',
             'Nel servizio avanzato, opzionalmente, è possibile pubblicarlo online al prezzo di 120 EUR/anno, con dominio (esempio tuonome.it) e hosting inclusi.'
           ],
-          finalTitle: 'Non sai da dove partire?',
-          finalText: 'Se hai foto e video sparsi, testi ancora nei tuoi appunti o nel diario cartaceo e non vuoi costruire tu il racconto giorno per giorno, il punto giusto di partenza è la call valutativa del servizio avanzato.',
-          finalPrimary: 'Richiedi la call valutativa',
+          finalTitle: 'Hai già capito che vuoi andare avanti?',
+          finalText: 'Se ti serve solo prepararti bene, parti dalla guida pratica. Se vuoi anche impostare bene la raccolta di foto, video, note e tracce, valuta il Builder Base. Se invece vuoi un diario finito, scrivimi per il servizio avanzato.',
+          finalPrimary: 'Richiedi informazioni',
           finalSecondary: 'Rivedi il diario'
         },
         en: {
-          pageTitle: 'Create your interactive travel diary',
-          pageDesc: 'Free guide to understand whether to leave, practical guide to prepare the Camino properly, plus discovery call, Builder Base, or advanced service to turn the trip into an interactive diary.',
-          eyebrow: 'Offer',
-          h1: 'From Camino to diary: prepare it well, then tell it properly',
-          sub: 'First you can use a free guide and a practical guide to prepare the Camino. After the trip, you can choose a discovery call, Builder Base, or the advanced service to turn your material into a structured diary.',
-          note: 'The two guides are for before departure. Builder Base and the advanced service are for after the trip, when you want to turn the journey into something ordered and readable.',
-          primary: 'Download the free guide',
+          pageTitle: 'Full path: from the Camino to the diary',
+          pageDesc: 'Practical guide, Builder Base, and advanced service to move from the first doubt to the final diary of your trip.',
+          eyebrow: 'Full path',
+          h1: 'From the first doubt to the final diary',
+          sub: 'The free guide is the front door. This page is for understanding what comes next: practical guide, Builder Base, or advanced service.',
+          note: 'Not every option is needed immediately. Below you will find the full path, in its most logical order.',
+          primary: 'Start from the free guide',
           secondary: 'Back to diary',
           langLabel: 'Language',
-          processNote: 'With Builder Base, publishing on your hosting must be configured from the start; with the advanced service I also deliver an offline package and, optionally, it can be published online for 120 EUR/year, with domain and hosting included.',
-          pricingTitle: 'Choose the right format',
-          pricingLead: 'Before departure you have two clear guides. After the trip, you can choose a discovery call, Builder Base, or the advanced service to turn the material into an interactive diary.',
+          processNote: 'The practical guide is for before leaving. Builder Base can already be set up before the trip, so you know how to collect photos, videos, notes, and tracks properly. The advanced service makes sense when you want to delegate the final transformation into a diary.',
+          pricingTitle: 'The next options',
+          pricingLead: 'If the first doubt is already clear, below you will find the next steps: practical guide, Builder Base, and advanced service.',
+          freeGuideEyebrow: 'The first step',
           freeGuideTitle: 'Free guide',
-          freeGuideText: 'Free Gumroad download in exchange for your email. It helps you understand whether the Camino really fits you, which doubts actually matter, and when it makes sense to move on to the practical guide.',
-          freeGuideHint: 'Gumroad link pending',
-          freeGuideCta: 'Free download on Gumroad',
+          freeGuideText: 'If you are stuck between the urge to leave, doubts, and unnecessary fears, this is the right guide to read before you even start thinking about gear, shoes, or stages.',
+          freeGuidePoints: [
+            'It helps you understand whether the Camino is really calling you',
+            'It separates real doubts from the fears that are only keeping you stuck',
+            'It leads you to the practical guide only when it actually makes sense'
+          ],
+          freeGuideHint: '',
+          freeGuideCta: 'Free download',
           finalPack: 'call',
           cards: [
             {
@@ -424,28 +486,34 @@
             'With the advanced service I deliver a finished product that can also be used offline as a personal diary on USB, SSD, or DVD.',
             'Optionally, it can also be published online for 120 EUR/year, with domain and hosting included.'
           ],
-          finalTitle: 'Not sure where to start?',
-          finalText: 'If you have scattered photos and videos, texts still sitting in your notes or in a paper diary, and you do not want to build the narrative day by day yourself, the right starting point is the discovery call for the advanced service.',
-          finalPrimary: 'Request the discovery call',
+          finalTitle: 'Already know you want to go further?',
+          finalText: 'If you only need to prepare well, start with the practical guide. If you also want to set up the collection of photos, videos, notes, and tracks properly, consider Builder Base. If instead you want a finished diary, contact me for the advanced service.',
+          finalPrimary: 'Request information',
           finalSecondary: 'See the diary again'
         },
         es: {
-          pageTitle: 'Crea tu diario interactivo',
-          pageDesc: 'Guía gratuita para entender si quieres salir, guía práctica para preparar bien el Camino y, después del viaje, llamada de valoración, Builder Base o servicio avanzado para transformarlo en un diario interactivo.',
-          eyebrow: 'Oferta',
-          h1: 'Del Camino al diario: prepáralo bien y luego cuéntalo de verdad',
-          sub: 'Primero puedes orientarte con una guía gratuita y una guía práctica para preparar el Camino. Después del viaje puedes elegir llamada, Builder Base o servicio avanzado para transformar materiales y recuerdos en un diario ordenado.',
-          note: 'Las guías sirven antes de salir. Builder Base y servicio avanzado sirven después, cuando quieres dar forma al viaje y no dejarlo todo disperso.',
-          primary: 'Descargar la guía gratuita',
+          pageTitle: 'Recorrido completo: del Camino al diario',
+          pageDesc: 'Guía práctica, Builder Base y servicio avanzado para pasar de la primera duda al diario final de tu viaje.',
+          eyebrow: 'Recorrido completo',
+          h1: 'De la primera duda al diario final',
+          sub: 'La guía gratuita es la puerta de entrada. Esta página sirve para entender qué viene después: guía práctica, Builder Base o servicio avanzado.',
+          note: 'No todas las opciones hacen falta enseguida. Aquí debajo tienes el recorrido completo, en su orden más lógico.',
+          primary: 'Empieza por la guía gratuita',
           secondary: 'Volver al diario',
           langLabel: 'Idioma',
-          processNote: 'Con el Builder Base, la publicación en tu hosting debe configurarse desde el principio; en el servicio avanzado también entrego un paquete offline y, opcionalmente, es posible publicarlo online por 120 EUR/año, con dominio (por ejemplo tunombre.es) y hosting incluidos.',
-          pricingTitle: 'Elige la modalidad adecuada',
-          pricingLead: 'Antes de salir tienes dos guías claras. Después del viaje puedes elegir llamada de valoración, Builder Base o servicio avanzado para transformar el material en un diario interactivo.',
+          processNote: 'La guía práctica sirve antes de partir. Builder Base puede configurarse ya antes del viaje, para que sepas cómo recoger bien fotos, vídeos, notas y trazas. El servicio avanzado tiene sentido cuando quieres delegar la transformación final en diario.',
+          pricingTitle: 'Las opciones siguientes',
+          pricingLead: 'Si la primera duda ya la tienes clara, aquí debajo encuentras los pasos siguientes: guía práctica, Builder Base y servicio avanzado.',
+          freeGuideEyebrow: 'El primer paso',
           freeGuideTitle: 'Guía gratuita',
-          freeGuideText: 'Descarga gratuita a través de Gumroad a cambio del email. Te ayuda a entender si el Camino realmente encaja contigo, qué dudas importan de verdad y cuándo tiene sentido pasar a la guía práctica.',
-          freeGuideHint: 'Enlace de Gumroad pendiente',
-          freeGuideCta: 'Descarga gratuita en Gumroad',
+          freeGuideText: 'Si todavía estás parado entre las ganas de salir, las dudas y los miedos inútiles, esta es la guía correcta para leer incluso antes de pensar en mochila, zapatos o etapas.',
+          freeGuidePoints: [
+            'Te ayuda a entender si el Camino realmente te está llamando',
+            'Te hace separar las dudas reales de los miedos inútiles que te frenan',
+            'Te lleva a la guía práctica solo cuando de verdad tiene sentido'
+          ],
+          freeGuideHint: '',
+          freeGuideCta: 'Descarga gratuita',
           finalPack: 'call',
           cards: [
             {
@@ -523,28 +591,34 @@
             'En el servicio avanzado te entrego un producto terminado que también puedes usar offline como diario personal en USB, SSD o DVD.',
             'En el servicio avanzado, opcionalmente, también es posible publicarlo online por 120 EUR/año, con dominio y hosting incluidos.'
           ],
-          finalTitle: '¿No sabes por dónde empezar?',
-          finalText: 'Si tienes fotos y vídeos dispersos, textos todavía en tus apuntes o en un diario en papel y no quieres construir tú mismo el relato día por día, el punto de partida correcto es la llamada de valoración del servicio avanzado.',
-          finalPrimary: 'Solicitar la llamada de valoración',
+          finalTitle: '¿Ya sabes que quieres seguir adelante?',
+          finalText: 'Si solo necesitas prepararte bien, empieza por la guía práctica. Si además quieres preparar bien la recogida de fotos, vídeos, notas y trazas, valora Builder Base. Y si quieres un diario terminado, escríbeme para el servicio avanzado.',
+          finalPrimary: 'Solicitar información',
           finalSecondary: 'Volver a ver el diario'
         },
         fr: {
-          pageTitle: 'Crée ton journal interactif',
-          pageDesc: 'Guide gratuit pour comprendre si tu veux partir, guide pratique pour bien préparer le Camino, puis appel, Builder Base ou service avancé pour transformer le voyage en journal interactif.',
-          eyebrow: 'Offre',
-          h1: 'Du Camino au journal : prépare-le bien, puis raconte-le vraiment',
-          sub: 'Tu peux d’abord t’orienter avec un guide gratuit et un guide pratique pour préparer le Camino. Après le voyage, tu peux choisir l’appel, le Builder Base ou le service avancé pour transformer ton matériel en journal structuré.',
-          note: 'Les guides servent avant le départ. Le Builder Base et le service avancé servent après le voyage, quand tu veux donner une vraie forme au récit.',
-          primary: 'Télécharger le guide gratuit',
+          pageTitle: 'Parcours complet : du Camino au journal',
+          pageDesc: 'Guide pratique, Builder Base et service avancé pour passer du premier doute au journal final de votre voyage.',
+          eyebrow: 'Parcours complet',
+          h1: 'Du premier doute au journal final',
+          sub: 'Le guide gratuit est la porte d’entrée. Cette page sert à comprendre ce qui vient ensuite : guide pratique, Builder Base ou service avancé.',
+          note: 'Toutes les options ne servent pas tout de suite. Ci-dessous, vous avez le parcours complet dans son ordre le plus logique.',
+          primary: 'Commence par le guide gratuit',
           secondary: 'Retour au journal',
           langLabel: 'Langue',
-          processNote: 'Avec le Builder Base, la publication sur ton hébergement doit être configurée dès le départ ; avec le service avancé, je livre aussi un pack hors ligne et, en option, il est possible de le publier en ligne pour 120 EUR/an, avec domaine et hébergement inclus.',
-          pricingTitle: 'Choisis le bon point de départ',
-          pricingLead: 'Avant le départ, tu as deux guides clairs. Après le voyage, tu peux choisir l’appel, le Builder Base ou le service avancé pour transformer le matériel en journal interactif.',
+          processNote: 'Le guide pratique sert avant le départ. Builder Base peut déjà être configuré avant le voyage, pour que vous sachiez comment conserver correctement photos, vidéos, notes et traces. Le service avancé a du sens quand vous voulez déléguer la transformation finale en journal.',
+          pricingTitle: 'Les options suivantes',
+          pricingLead: 'Si le premier doute est déjà clarifié, vous trouverez ci-dessous les étapes suivantes : guide pratique, Builder Base et service avancé.',
+          freeGuideEyebrow: 'Le premier pas',
           freeGuideTitle: 'Guide gratuit',
-          freeGuideText: 'Téléchargement gratuit via Gumroad en échange de ton email. Il t’aide à comprendre si le Camino te correspond vraiment, quels doutes comptent vraiment et quand il est temps de passer au guide pratique.',
-          freeGuideHint: 'Lien Gumroad à venir',
-          freeGuideCta: 'Téléchargement gratuit sur Gumroad',
+          freeGuideText: 'Si tu es encore bloqué entre l’envie de partir, les doutes et les peurs inutiles, c’est le bon guide à lire avant même de penser au sac, aux chaussures ou aux étapes.',
+          freeGuidePoints: [
+            'Il t’aide à comprendre si le Camino t’appelle vraiment',
+            'Il t’aide à distinguer les vrais doutes des peurs inutiles qui te bloquent',
+            'Il t’amène vers le guide pratique seulement quand cela a vraiment du sens'
+          ],
+          freeGuideHint: '',
+          freeGuideCta: 'Téléchargement gratuit',
           cards: [
             {
               key: 'guide',
@@ -634,9 +708,9 @@
             'Dans le service avancé, je te livre un produit fini utilisable aussi hors ligne comme journal personnel sur clé USB, SSD ou DVD.',
             'De façon optionnelle, il est aussi possible de le publier en ligne pour 120 EUR/an, avec domaine et hébergement inclus.'
           ],
-          finalTitle: 'Tu ne sais pas par où commencer ?',
-          finalText: 'Si tu as des photos et vidéos dispersées, des textes encore dans tes notes ou dans un journal papier, et que tu ne veux pas construire toi-même le récit jour après jour, le bon point de départ est l’appel de cadrage du service avancé.',
-          finalPrimary: 'Demander l’appel de cadrage',
+          finalTitle: 'Vous savez déjà que vous voulez aller plus loin ?',
+          finalText: 'Si vous avez seulement besoin de bien vous préparer, commencez par le guide pratique. Si vous voulez aussi bien préparer la collecte de photos, vidéos, notes et traces, regardez Builder Base. Et si vous voulez un journal fini, écrivez-moi pour le service avancé.',
+          finalPrimary: 'Demander des informations',
           finalSecondary: 'Revoir le journal'
         }
       };
@@ -646,14 +720,32 @@
         const el = document.getElementById(id);
         if (el) el.href = value;
       };
+      const setLinkBehavior = (id, href, external) => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.href = href;
+        if (external) {
+          el.target = '_blank';
+          el.rel = 'noopener noreferrer';
+        } else {
+          el.removeAttribute('target');
+          el.removeAttribute('rel');
+        }
+      };
       const setText = (id, value) => {
         const el = document.getElementById(id);
         if (el) el.textContent = value;
       };
       const contactHref = (pack) => `/${lang}/contatti/${pack ? `?pack=${encodeURIComponent(pack)}` : ''}`;
-      const gumroadFreeHref = '#';
+      const freeGuideLandingSlugByLang = {
+        it: 'guida-gratuita',
+        en: 'free-guide',
+        es: 'guia-gratuita',
+        fr: 'guide-gratuite'
+      };
       const gumroadGuideHref = '#';
       const diaryHref = `/${lang}/`;
+      const freeGuideLandingHref = `/${lang}/${freeGuideLandingSlugByLang[lang] || freeGuideLandingSlugByLang.it}/`;
       const canonical = `/${lang}/${slug}/`;
 
       document.documentElement.lang = lang;
@@ -673,10 +765,6 @@
       setText('offer-note', t.note);
       setText('offer-lang-label', t.langLabel);
       setText('offer-process-note', t.processNote);
-      setText('free-guide-title', t.freeGuideTitle || 'Guida gratuita');
-      setText('free-guide-text', t.freeGuideText || '');
-      setText('free-guide-hint', t.freeGuideHint || '');
-      setText('free-guide-link', t.freeGuideCta || 'Download gratuito via Gumroad');
       setText('pricing-title', t.pricingTitle);
       setText('pricing-lead', t.pricingLead);
       setText('fit-title', t.fitTitle);
@@ -701,8 +789,7 @@
       setText('offer-secondary-link', t.secondary);
       setText('final-primary-link', t.finalPrimary);
       setText('final-secondary-link', t.finalSecondary);
-      setHref('offer-primary-link', '#free-guide-box');
-      setHref('free-guide-link', gumroadFreeHref);
+      setLinkBehavior('offer-primary-link', freeGuideLandingHref, false);
       setHref('offer-secondary-link', diaryHref);
       setHref('final-primary-link', contactHref(t.finalPack || 'advanced'));
       setHref('final-secondary-link', diaryHref);

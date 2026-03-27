@@ -6,6 +6,10 @@ const I18N = {
     subtitle: 'Un recap giorno per giorno del mio cammino in solitaria, tra foto, video e ricordi di strada.',
     hero_intro:
       'Ciao, sono Jacopo. Questo diario racconta il mio Cammino di Santiago, iniziato a Lourdes e proseguito fino a Santiago, Finisterre e Muxia. È stato il momento più intenso del mio anno sabbatico, arrivato subito dopo essermi dimesso da un lavoro a tempo indeterminato come informatico. In quel periodo avevo una cosa rara: tempo vero. Per questo ho vissuto il Cammino senza fretta, lasciando che fosse la strada, le mie sensazioni e il mio corpo a decidere il ritmo.\n\nSe sei arrivato fin qui, tanto vale mettersi in cammino.',
+    hero_bridge_intro: 'Qui puoi semplicemente leggere il mio diario. Ma se stai pensando di partire e vuoi fare un po’ di chiarezza,',
+    hero_bridge_link_primary: 'puoi scaricare la guida gratuita',
+    hero_bridge_middle: 'Se invece il Cammino lo hai già fatto e ti interessa trasformare il tuo viaggio in un diario personale e interattivo,',
+    hero_bridge_link_secondary: 'qui trovi tutte le opzioni',
     days: 'Giorni',
     photos: 'Foto',
     videos: 'Video',
@@ -18,10 +22,11 @@ const I18N = {
     video_tag: 'Video',
     footer_note:
       'Questo sito è nato dopo il Cammino, ma prova a ricostruirlo nel modo più fedele possibile: unendo tracciati registrati sul momento, metadati estratti da foto e video, e testi recuperati da note, messaggi e ricordi. Molto, però, è rimasto fuori. Una parte di ciò che si vive lungo il Cammino resta impossibile da tradurre davvero in parole, immagini o coordinate.\n\nSe senti che vuoi partire, il mio consiglio è semplice: fallo. Sul Cammino Francese è difficile sentirsi davvero persi, e molta della preparazione necessaria non è fisica ma mentale. Parti leggero, con lo zaino giusto e la testa aperta. Ultreya!',
-    footer_cta_title: 'Da viaggio a diario',
+    footer_cta_title: 'Ora tocca a te',
     footer_cta_text:
-      'Questo progetto nasce da foto, video, tracce GPS e appunti rimessi insieme dopo il viaggio. Se vuoi costruire qualcosa di simile per il tuo cammino, qui trovi guide, builder e supporto.',
-    footer_cta_link: 'Scopri le opzioni',
+      'Grazie per aver letto fino a qui. Ora tocca a te: se stai ancora cercando di capire se partire davvero, inizia dalla guida gratuita. Se invece il Cammino lo hai già fatto, scopri come trasformare quello che hai vissuto in un diario da conservare.',
+    footer_cta_link_primary: 'Voglio fare chiarezza',
+    footer_cta_link_secondary: 'Voglio trasformarlo in diario',
     view_diary: 'Diario',
     notes_label: 'Note del giorno',
     empty_note: 'Aggiungi un ricordo personale qui.',
@@ -31,10 +36,11 @@ const I18N = {
     mini_map: 'Percorso del giorno',
     mini_map_cumulative: 'Percorso cumulativo',
     open_map: 'Apri la mappa',
-    hero_offer_title: 'Da viaggio a diario',
+    hero_offer_title: 'Prima o dopo il Cammino',
     hero_offer_text:
-      'Questo progetto nasce da foto, video, tracce GPS e appunti rimessi insieme dopo il viaggio. Se vuoi costruire qualcosa di simile per il tuo cammino, qui trovi guide, builder e supporto.',
-    hero_offer_link: 'Scopri le opzioni',
+      'Se stai ancora cercando di capire se partire davvero, inizia dalla guida gratuita. Se invece il Cammino lo hai già fatto, scopri come trasformare quello che hai vissuto in un diario da conservare.',
+    hero_offer_link_primary: 'Voglio fare chiarezza',
+    hero_offer_link_secondary: 'Voglio trasformarlo in diario',
     open_short: 'Mappa completa',
     goto_day: 'Vai al giorno',
     close: 'Chiudi',
@@ -111,6 +117,10 @@ const I18N = {
     subtitle: 'A day-by-day recap of my solo Camino, through photos, videos, and memories from the road.',
     hero_intro:
       'Hi, I’m Jacopo. This diary tells the story of my Camino de Santiago, which began in Lourdes and continued to Santiago, Finisterre, and Muxia. It was the most intense moment of my sabbatical year, coming right after I had left a permanent job as a software engineer. In that period I had something rare: real time. That is why I lived the Camino without rushing, letting the road, my sensations, and my body decide the pace.\n\nIf you’ve made it this far, you might as well start walking.',
+    hero_bridge_intro: 'Here you can simply read my diary. But if you are thinking about leaving and want a bit more clarity,',
+    hero_bridge_link_primary: 'you can download the free guide',
+    hero_bridge_middle: 'If instead you have already done the Camino and are interested in turning your journey into a personal and interactive diary,',
+    hero_bridge_link_secondary: 'here you will find all the options',
     days: 'Days',
     photos: 'Photos',
     videos: 'Videos',
@@ -123,10 +133,11 @@ const I18N = {
     video_tag: 'Video',
     footer_note:
       'This site was built after the Camino, but it tries to reconstruct it as faithfully as possible: by combining tracks recorded at the time, metadata extracted from photos and videos, and texts recovered from notes, messages, and memories. A lot, however, was left out. Part of what you live on the Camino remains impossible to truly translate into words, images, or coordinates.\n\nIf you feel you want to go, my advice is simple: do it. On the French Way it is hard to feel truly lost, and much of the preparation you need is not physical, but mental. Travel light, with the right backpack and an open mind. Ultreya!',
-    footer_cta_title: 'From trip to diary',
+    footer_cta_title: 'Now it is your turn',
     footer_cta_text:
-      'This project comes from photos, videos, GPS tracks, and notes brought back together after the trip. If you want to build something similar for your own Camino, you can start here.',
-    footer_cta_link: 'Explore the options',
+      'Thanks for reading this far. Now it is your turn: if you are still trying to understand whether you really want to go, start with the free guide. If you have already done the Camino, see how to turn what you lived into a diary worth keeping.',
+    footer_cta_link_primary: 'I want clarity first',
+    footer_cta_link_secondary: 'I want to turn it into a diary',
     view_diary: 'Diary',
     notes_label: 'Day notes',
     empty_note: 'Add a personal memory here.',
@@ -136,10 +147,11 @@ const I18N = {
     mini_map: 'Daily route',
     mini_map_cumulative: 'Cumulative route',
     open_map: 'Open map',
-    hero_offer_title: 'From trip to diary',
+    hero_offer_title: 'Before or after the Camino',
     hero_offer_text:
-      'This project comes from photos, videos, GPS tracks, and notes brought back together after the trip. If you want to build something similar for your own Camino, you can start here.',
-    hero_offer_link: 'Explore the options',
+      'If you are still trying to understand whether you really want to go, start with the free guide. If you have already done the Camino, see how to turn what you lived into a diary worth keeping.',
+    hero_offer_link_primary: 'I want clarity first',
+    hero_offer_link_secondary: 'I want to turn it into a diary',
     open_short: 'Full map',
     goto_day: 'Jump to day',
     close: 'Close',
@@ -216,6 +228,10 @@ const I18N = {
     subtitle: 'Un resumen día a día de mi camino en solitario, entre fotos, vídeos y recuerdos del camino.',
     hero_intro:
       'Hola, soy Jacopo. Este diario cuenta mi Camino de Santiago, iniciado en Lourdes y continuado hasta Santiago, Finisterre y Muxia. Fue el momento más intenso de mi año sabático, justo después de haber dejado un trabajo fijo como informático. En aquel periodo tenía algo raro: tiempo de verdad. Por eso viví el Camino sin prisa, dejando que fueran el camino, mis sensaciones y mi cuerpo quienes marcaran el ritmo.\n\nSi has llegado hasta aquí, tanto vale ponerse en camino.',
+    hero_bridge_intro: 'Aquí puedes simplemente leer mi diario. Pero si estás pensando en partir y quieres aclararte un poco,',
+    hero_bridge_link_primary: 'puedes descargar la guía gratuita',
+    hero_bridge_middle: 'Si en cambio ya has hecho el Camino y te interesa transformar tu viaje en un diario personal e interactivo,',
+    hero_bridge_link_secondary: 'aquí encontrarás todas las opciones',
     days: 'Días',
     photos: 'Fotos',
     videos: 'Vídeos',
@@ -228,10 +244,11 @@ const I18N = {
     video_tag: 'Vídeo',
     footer_note:
       'Este sitio nació después del Camino, pero intenta reconstruirlo de la forma más fiel posible: uniendo trazados registrados en el momento, metadatos extraídos de fotos y vídeos, y textos recuperados de notas, mensajes y recuerdos. Mucho, sin embargo, se ha quedado fuera. Una parte de lo que se vive en el Camino sigue siendo imposible de traducir de verdad en palabras, imágenes o coordenadas.\n\nSi sientes que quieres hacerlo, mi consejo es simple: hazlo. En el Camino Francés es difícil sentirse de verdad perdido, y buena parte de la preparación necesaria no es física, sino mental. Sal ligero, con la mochila adecuada y la cabeza abierta. ¡Ultreya!',
-    footer_cta_title: 'Del viaje al diario',
+    footer_cta_title: 'Ahora te toca a ti',
     footer_cta_text:
-      'Este proyecto nace de fotos, vídeos, trazas GPS y notas reunidas después del viaje. Si quieres construir algo parecido para tu propio Camino, aquí tienes un punto de partida claro.',
-    footer_cta_link: 'Descubre las opciones',
+      'Gracias por haber leído hasta aquí. Ahora te toca a ti: si todavía estás intentando entender si de verdad quieres partir, empieza por la guía gratuita. Si en cambio ya has hecho el Camino, descubre cómo transformar lo que has vivido en un diario para conservar.',
+    footer_cta_link_primary: 'Quiero aclararme',
+    footer_cta_link_secondary: 'Quiero convertirlo en diario',
     view_diary: 'Diario',
     notes_label: 'Notas del día',
     empty_note: 'Añade aquí un recuerdo personal.',
@@ -241,10 +258,11 @@ const I18N = {
     mini_map: 'Ruta del día',
     mini_map_cumulative: 'Ruta acumulada',
     open_map: 'Abrir mapa',
-    hero_offer_title: 'Del viaje al diario',
+    hero_offer_title: 'Antes o después del Camino',
     hero_offer_text:
-      'Este proyecto nace de fotos, vídeos, trazas GPS y notas reunidas después del viaje. Si quieres construir algo parecido para tu propio Camino, aquí tienes un punto de partida claro.',
-    hero_offer_link: 'Descubre las opciones',
+      'Si todavía estás intentando entender si de verdad quieres partir, empieza por la guía gratuita. Si en cambio ya has hecho el Camino, descubre cómo transformar lo que has vivido en un diario para conservar.',
+    hero_offer_link_primary: 'Quiero aclararme',
+    hero_offer_link_secondary: 'Quiero convertirlo en diario',
     open_short: 'Mapa completo',
     goto_day: 'Ir al día',
     close: 'Cerrar',
@@ -321,6 +339,10 @@ const I18N = {
     subtitle: 'Un récit jour par jour de mon chemin en solitaire, entre photos, vidéos et souvenirs de route.',
     hero_intro:
       'Bonjour, moi c’est Jacopo. Ce journal raconte mon Chemin de Saint-Jacques, commencé à Lourdes et poursuivi jusqu’à Santiago, Finisterre et Muxia. Cela a été le moment le plus intense de mon année sabbatique, juste après avoir quitté un emploi stable comme informaticien. À cette époque, j’avais quelque chose de rare : du vrai temps. C’est pour cela que j’ai vécu le Chemin sans me presser, en laissant la route, mes sensations et mon corps décider du rythme.\n\nSi tu es arrivé jusque-là, autant te mettre en route.',
+    hero_bridge_intro: 'Ici, tu peux simplement lire mon journal. Mais si tu penses à partir et que tu veux y voir un peu plus clair,',
+    hero_bridge_link_primary: 'tu peux télécharger le guide gratuit',
+    hero_bridge_middle: 'Si au contraire tu as déjà fait le Camino et que tu veux transformer ton voyage en un journal personnel et interactif,',
+    hero_bridge_link_secondary: 'tu trouveras ici toutes les options',
     days: 'Jours',
     photos: 'Photos',
     videos: 'Vidéos',
@@ -333,10 +355,11 @@ const I18N = {
     video_tag: 'Vidéo',
     footer_note:
       'Ce site est né après le Chemin, mais il essaie de le reconstruire de la manière la plus fidèle possible : en réunissant des traces enregistrées sur le moment, des métadonnées extraites des photos et des vidéos, et des textes retrouvés dans des notes, des messages et des souvenirs. Beaucoup de choses, pourtant, sont restées dehors. Une partie de ce que l’on vit sur le Chemin reste impossible à traduire vraiment en mots, en images ou en coordonnées.\n\nSi tu sens que tu veux partir, mon conseil est simple : fais-le. Sur le Camino Francés, il est difficile de se sentir vraiment perdu, et une bonne partie de la préparation nécessaire n’est pas physique, mais mentale. Pars léger, avec le bon sac et l’esprit ouvert. Ultreya !',
-    footer_cta_title: 'Du voyage au journal',
+    footer_cta_title: 'À toi maintenant',
     footer_cta_text:
-      'Ce projet naît de photos, vidéos, traces GPS et notes rassemblées après le voyage. Si tu veux construire quelque chose de similaire pour ton propre chemin, tu peux commencer ici.',
-    footer_cta_link: 'Découvrir les options',
+      'Merci d’avoir lu jusqu’ici. À toi maintenant : si tu es encore en train de comprendre si tu veux vraiment partir, commence par le guide gratuit. Si au contraire tu as déjà fait le Camino, découvre comment transformer ce que tu as vécu en un journal à conserver.',
+    footer_cta_link_primary: 'Je veux y voir plus clair',
+    footer_cta_link_secondary: 'Je veux en faire un journal',
     view_diary: 'Journal',
     notes_label: 'Notes du jour',
     empty_note: 'Ajoute ici un souvenir personnel.',
@@ -346,10 +369,11 @@ const I18N = {
     mini_map: 'Parcours du jour',
     mini_map_cumulative: 'Parcours cumulé',
     open_map: 'Ouvrir la carte',
-    hero_offer_title: 'Du voyage au journal',
+    hero_offer_title: 'Avant ou après le Camino',
     hero_offer_text:
-      'Ce projet naît de photos, vidéos, traces GPS et notes rassemblées après le voyage. Si tu veux construire quelque chose de similaire pour ton propre chemin, tu peux commencer ici.',
-    hero_offer_link: 'Découvrir les options',
+      'Si tu es encore en train de comprendre si tu veux vraiment partir, commence par le guide gratuit. Si au contraire tu as déjà fait le Camino, découvre comment transformer ce que tu as vécu en un journal à conserver.',
+    hero_offer_link_primary: 'Je veux y voir plus clair',
+    hero_offer_link_secondary: 'Je veux en faire un journal',
     open_short: 'Carte complète',
     goto_day: 'Aller au jour',
     close: 'Fermer',
@@ -484,6 +508,17 @@ const buildLocalizedContactPath = (lang) => {
 };
 
 const buildLocalizedOfferPath = (lang) => {
+  const targetLang = normalizeLang(lang) || 'it';
+  const slugs = {
+    it: 'guida-gratuita',
+    en: 'free-guide',
+    es: 'guia-gratuita',
+    fr: 'guide-gratuite'
+  };
+  return `/${targetLang}/${slugs[targetLang] || slugs.it}/`;
+};
+
+const buildLocalizedBuilderPath = (lang) => {
   const targetLang = normalizeLang(lang) || 'it';
   return `/${targetLang}/crea-il-tuo-diario/`;
 };
@@ -632,6 +667,9 @@ const setLang = (lang, options = {}) => {
   });
   document.querySelectorAll('[data-offer-link]').forEach((el) => {
     if (el && el.tagName === 'A') el.href = buildLocalizedOfferPath(normalized);
+  });
+  document.querySelectorAll('[data-builder-link]').forEach((el) => {
+    if (el && el.tagName === 'A') el.href = buildLocalizedBuilderPath(normalized);
   });
   document.querySelectorAll('[data-people-link]').forEach((el) => {
     if (el && el.tagName === 'A') el.href = buildLocalizedPeoplePath(normalized);
