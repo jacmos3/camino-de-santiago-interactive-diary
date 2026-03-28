@@ -1,6 +1,10 @@
 const fs = require('fs/promises');
 const fsSync = require('fs');
 const path = require('path');
+const { execFile } = require('child_process');
+const { promisify } = require('util');
+
+const execFileAsync = promisify(execFile);
 
 const ROOT = path.resolve(__dirname, '..');
 const OUTPUT_DIR = path.join(ROOT, 'deploy-runtime');
@@ -8,6 +12,8 @@ const OUTPUT_DIR = path.join(ROOT, 'deploy-runtime');
 const ROOT_FILES = [
   '.htaccess',
   'app.js',
+  'renderer-core.js',
+  'renderer-day-utils.js',
   'conchiglia-nera.html',
   'contatti.html',
   'cookie-policy.html',
@@ -25,6 +31,7 @@ const ROOT_FILES = [
   'people.js',
   'privacy-policy.html',
   'robots.txt',
+  'renderer-env.js',
   'sitemap.xml',
   'styles.css',
   'termini-e-condizioni.html'
@@ -188,15 +195,41 @@ function shouldSkipPath(srcPath) {
   return false;
 }
 
+async function pruneCopiedJunk(targetPath) {
+  if (!fsSync.existsSync(targetPath)) return;
+  const stats = await fs.lstat(targetPath);
+  if (!stats.isDirectory()) {
+    if (shouldSkipPath(targetPath)) {
+      await fs.rm(targetPath, { force: true });
+    }
+    return;
+  }
+  const entries = await fs.readdir(targetPath, { withFileTypes: true });
+  for (const entry of entries) {
+    const nextPath = path.join(targetPath, entry.name);
+    if (shouldSkipPath(nextPath)) {
+      await fs.rm(nextPath, { recursive: true, force: true });
+      continue;
+    }
+    if (entry.isDirectory()) {
+      await pruneCopiedJunk(nextPath);
+    }
+  }
+}
+
 async function copyEntry(relativePath) {
   const src = path.join(ROOT, relativePath);
   const dst = path.join(OUTPUT_DIR, relativePath);
   if (!fsSync.existsSync(src)) return;
-  await fs.cp(src, dst, {
-    recursive: true,
-    force: true,
-    filter: (srcPath) => !shouldSkipPath(srcPath)
-  });
+  const stats = await fs.lstat(src);
+  if (!stats.isDirectory()) {
+    await fs.mkdir(path.dirname(dst), { recursive: true });
+    await fs.copyFile(src, dst);
+    return;
+  }
+  await fs.mkdir(path.dirname(dst), { recursive: true });
+  await execFileAsync('/bin/cp', ['-R', src, dst]);
+  await pruneCopiedJunk(dst);
 }
 
 function applyLocalizedSeo(rawHtml, sourceRelativePath, lang) {

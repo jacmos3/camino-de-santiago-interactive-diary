@@ -96,6 +96,30 @@ h1, h2, h3 {
   line-height: 1.45;
 }
 
+.hero__stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 32px;
+}
+
+.stat {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  box-shadow: var(--shadow);
+}
+
+.stat__value {
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.stat__label {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
 .hero__bridge {
   margin: 0;
   max-width: 100%;
@@ -113,6 +137,18 @@ h1, h2, h3 {
 
 .hero__bridge-link:hover {
   color: #ffffff;
+}
+
+.renderer-theme--builder .hero {
+  background:
+    radial-gradient(1200px 520px at 15% 20%, rgba(176, 108, 54, 0.32), rgba(176, 108, 54, 0) 65%),
+    radial-gradient(900px 460px at 85% 0%, rgba(31, 95, 91, 0.28), rgba(31, 95, 91, 0) 68%),
+    linear-gradient(140deg, rgba(18, 14, 11, 0.96), rgba(36, 26, 19, 0.88));
+}
+
+.renderer-theme--builder .hero__bridge,
+.renderer-theme--builder .hero__offer {
+  display: none;
 }
 
 .map-link {
@@ -1592,6 +1628,37 @@ h1, h2, h3 {
   background: #ffffff;
 }
 
+.renderer-theme--builder .footer__cta {
+  background: transparent;
+  border: 0;
+  padding: 0;
+}
+
+.renderer-theme--builder .footer__cta-title,
+.renderer-theme--builder .footer__cta-text,
+.renderer-theme--builder .footer__cta-actions {
+  display: none;
+}
+
+.renderer-theme--builder .footer__cta-link,
+.renderer-theme--builder .footer__cta-link--secondary {
+  display: inline;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #1f5f5b;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  box-shadow: none;
+}
+
+.renderer-theme--builder .footer__cta-link:hover,
+.renderer-theme--builder .footer__cta-link--secondary:hover {
+  background: transparent;
+  color: #174845;
+  filter: none;
+}
+
 .mini-map {
   position: fixed;
   right: 24px;
@@ -2444,6 +2511,7 @@ h1, h2, h3 {
   .hero { padding: 40px 16px 28px; }
   .hero__top { flex-direction: column; }
   .controls { align-items: flex-start; }
+  .hero__stats { grid-template-columns: 1fr; }
   .hero__offer-actions,
   .footer__cta-actions {
     flex-direction: column;

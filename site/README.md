@@ -12,7 +12,7 @@ L'obiettivo non e solo mostrare media, ma ricostruire il cammino in modo leggibi
 
 - `index.html`: diario interattivo principale
 - `map.html`: mappa completa del percorso
-- `app.js`, `map.js`, `styles.css`: logica UI e rendering
+- `renderer-core.js`, `renderer-env.js`, `renderer-day-utils.js`, `app.js`, `map.js`, `styles.css`: core renderer, adapter shell, utilità giorno/prologo e logica UI
 - `data/entries.{it,en,es,fr}.json`: note e media per lingua
 - `data/tracks/index.json` + `data/tracks/day/*.json`: punti GPS per giorno
 - `data/comments.json`: storage commenti (fallback file)
@@ -82,7 +82,7 @@ node scripts/build-deploy-runtime.js
 ```
 
 4. Controlla che la cartella `deploy-runtime/` contenga almeno:
-- file pubblici: `index.html`, `map.html`, `app.js`, `map.js`, `people.js`, `styles.css`
+- file pubblici: `index.html`, `map.html`, `renderer-env.js`, `renderer-day-utils.js`, `renderer-core.js`, `app.js`, `map.js`, `people.js`, `styles.css`
 - pagine pubbliche: `contatti.html`, `crea-il-tuo-diario.html`, `privacy-policy.html`, `cookie-policy.html`, `termini-e-condizioni.html`
 - runtime PHP: `api/`, `day.php`, `.htaccess`
 - dati: `data/`
@@ -121,7 +121,7 @@ Il Worker aggiunge `X-Canonical-Host: mycamino.it`, che il backend usa per:
 - fare redirect `301` solo sugli accessi diretti al sottodominio tecnico
 
 Elementi essenziali del deploy:
-- static: `index.html`, `map.html`, `app.js`, `map.js`, `styles.css`, favicon, sitemap, robots
+- static: `index.html`, `map.html`, `renderer-env.js`, `renderer-day-utils.js`, `renderer-core.js`, `app.js`, `map.js`, `styles.css`, favicon, sitemap, robots
 - data: `entries.*.json`, `tracks/*`, `comments.json`, `day_og_overrides.json`
 - media: `assets/img`, `assets/thumb`, `assets/poster`, `assets/video_resized`, eventuale `assets/audio`
 - API: `api/index.php` (+ eventuale `.env` lato server)
