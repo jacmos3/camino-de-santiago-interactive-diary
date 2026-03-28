@@ -287,7 +287,7 @@
               price: '14 EUR',
               text: 'Una guida operativa per preparare il Cammino senza errori inutili: zaino, ritmo, logistica, budget, appunti e conservazione corretta di foto, video e tracce.',
               bullets: ['Indicazioni concrete su preparazione, equipaggiamento, margine, logistica e organizzazione realistica del viaggio', 'Include anche una sezione su come conservare bene note, foto, video e tracce se poi vorrai trasformare il viaggio in diario', 'Inclusa gratuitamente in tutti gli altri pacchetti'],
-              cta: 'Guida su Gumroad (link in arrivo)'
+              cta: 'Acquista la guida pratica'
             },
             {
               key: 'call',
@@ -396,7 +396,7 @@
                 'It also includes a section on how to preserve notes, photos, videos, and tracks if you later want to turn the trip into a diary',
                 'Included for free in all the other packages'
               ],
-              cta: 'Guide on Gumroad (link pending)'
+              cta: 'Get the practical guide'
             },
             {
               key: 'call',
@@ -523,7 +523,7 @@
               price: '14 EUR',
               text: 'Una guía operativa para preparar el Camino sin errores inútiles: mochila, ritmo, logística, presupuesto, apuntes y conservación correcta de fotos, vídeos y trazados.',
               bullets: ['Indicaciones concretas sobre preparación, equipamiento, margen, logística y organización realista del viaje', 'Incluye también una sección sobre cómo conservar bien notas, fotos, vídeos y trazados si luego quieres transformar el viaje en diario', 'Incluida gratuitamente en todos los demás paquetes'],
-              cta: 'Guía en Gumroad (enlace pendiente)'
+              cta: 'Versión inglesa en Gumroad'
             },
             {
               key: 'call',
@@ -627,7 +627,7 @@
               price: '14 EUR',
               text: 'Un guide opérationnel pour préparer le Camino sans erreurs inutiles : sac, rythme, logistique, budget, notes et bonne conservation des photos, vidéos et traces.',
               bullets: ['Des indications concrètes sur la préparation, l’équipement, la marge, la logistique et l’organisation réaliste du voyage', 'Inclut aussi une partie sur la bonne conservation des notes, photos, vidéos et traces si tu veux ensuite transformer le voyage en journal', 'Incluse gratuitement dans tous les autres packs'],
-              cta: 'Obtenir le guide'
+              cta: 'Version anglaise sur Gumroad'
             },
             {
               key: 'call',
@@ -743,7 +743,13 @@
         es: 'guia-gratuita',
         fr: 'guide-gratuite'
       };
-      const gumroadGuideHref = '#';
+      const gumroadGuideHrefByLang = {
+        it: 'https://mycaminonew.gumroad.com/l/guida-pratica-cammino-francese-di-santiago',
+        en: 'https://mycaminonew.gumroad.com/l/practical-guide-to-the-french-way-camino-frances',
+        es: 'https://mycaminonew.gumroad.com/l/practical-guide-to-the-french-way-camino-frances',
+        fr: 'https://mycaminonew.gumroad.com/l/practical-guide-to-the-french-way-camino-frances'
+      };
+      const gumroadGuideHref = gumroadGuideHrefByLang[lang] || gumroadGuideHrefByLang.it;
       const diaryHref = `/${lang}/`;
       const freeGuideLandingHref = `/${lang}/${freeGuideLandingSlugByLang[lang] || freeGuideLandingSlugByLang.it}/`;
       const canonical = `/${lang}/${slug}/`;
@@ -800,13 +806,15 @@
         const article = document.createElement('article');
         article.className = `offer-card${card.featured ? ' offer-card--featured' : ''}`;
         const bullets = (card.bullets || []).map((item) => `<li>${item}</li>`).join('');
+        const cardHref = card.key === 'guide' ? gumroadGuideHref : contactHref(card.key);
+        const cardTargetAttrs = card.key === 'guide' ? ' target="_blank" rel="noopener noreferrer"' : '';
         article.innerHTML = `
           <div class="offer-card__kicker">${card.kicker}</div>
           <h3 class="offer-card__title">${card.title}</h3>
           <div class="offer-card__price">${card.price}</div>
           <p class="offer-card__text">${card.text}</p>
           <ul>${bullets}</ul>
-          <a class="offer-card__btn" href="${card.key === 'guide' ? gumroadGuideHref : contactHref(card.key)}">${card.cta}</a>
+          <a class="offer-card__btn" href="${cardHref}"${cardTargetAttrs}>${card.cta}</a>
         `;
         grid.appendChild(article);
       });
