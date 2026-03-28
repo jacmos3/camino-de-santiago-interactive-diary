@@ -517,6 +517,21 @@ const getEntriesDataPath = (lang = currentLang) => {
   return `/data/entries.${normalized}.json`;
 };
 
+const getTrackIndexPath = (lang = currentLang) => {
+  const targetLang = normalizeLang(lang) || 'it';
+  const envUrl = rendererEnvBuildUrl('track-index', targetLang);
+  if (envUrl) return envUrl;
+  return '/data/tracks/index.json';
+};
+
+const getTrackDayPath = (dayKey, lang = currentLang) => {
+  const targetLang = normalizeLang(lang) || 'it';
+  const key = String(dayKey || '').slice(0, 10);
+  const envUrl = rendererEnvBuildUrl('track-day', targetLang, { day: key });
+  if (envUrl) return envUrl;
+  return `/data/tracks/day/${key}.json`;
+};
+
 const getLangFromPathname = (pathnameValue = '') => {
   const match = String(pathnameValue || '').match(/^\/(it|en|es|fr)(?:\/|$)/i);
   return match ? normalizeLang(match[1]) : '';
@@ -4180,7 +4195,7 @@ const ensureTrackDayLoaded = async (dayKey) => {
   if (!key || !trackSplitEnabled || !hasTrackDataForDay(key)) return false;
   if (isTrackDayLoaded(key)) return true;
   if (trackDayLoadPromises.has(key)) return trackDayLoadPromises.get(key);
-  const promise = fetch(withStaticDataVersion(`/data/tracks/day/${key}.json`))
+  const promise = fetch(withStaticDataVersion(getTrackDayPath(key)))
     .then((res) => (res.ok ? res.json() : null))
     .then((payload) => {
       const points = Array.isArray(payload && payload.points) ? payload.points : [];
@@ -5371,7 +5386,7 @@ const init = async () => {
     renderView();
 
     // Load track data in split mode first (day-by-day files), fallback to legacy monolithic JSON.
-    fetch(withStaticDataVersion('/data/tracks/index.json'))
+    fetch(withStaticDataVersion(getTrackIndexPath()))
       .then((res) => (res.ok ? res.json() : null))
       .then((indexJson) => {
         if (token !== initRequestToken) return;
