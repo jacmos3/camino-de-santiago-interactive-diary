@@ -3202,6 +3202,14 @@ const getNote = (day) => {
   return '';
 };
 
+const getProjectTextField = (field) => {
+  const project = dataCache && dataCache.project && typeof dataCache.project === 'object'
+    ? dataCache.project
+    : null;
+  const value = project && typeof project[field] === 'string' ? project[field].trim() : '';
+  return value;
+};
+
 const buildAfterCaminoSection = () => {
   const section = document.createElement('section');
   section.className = 'after-camino';
@@ -3212,11 +3220,11 @@ const buildAfterCaminoSection = () => {
 
   const title = document.createElement('h2');
   title.className = 'after-camino__title';
-  title.textContent = I18N[currentLang].after_camino_title;
+  title.textContent = getProjectTextField('after_journey_title') || I18N[currentLang].after_camino_title;
 
   const text = document.createElement('p');
   text.className = 'after-camino__text';
-  text.textContent = I18N[currentLang].after_camino_text;
+  text.textContent = getProjectTextField('after_journey_text') || I18N[currentLang].after_camino_text;
 
   inner.appendChild(title);
   inner.appendChild(text);
